@@ -18,3 +18,6 @@
 # divergence.
 /blueprint/src/masterdefs.tex
 /blueprint/src/content.tex
+
+# plasTeX auxiliary build artifact (regenerated every build)
+/blueprint/src/web.paux
