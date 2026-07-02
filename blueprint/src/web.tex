@@ -1,0 +1,34 @@
+% This file makes a web version of the blueprint
+% It should include all the \usepackage needed for this version.
+% The template includes standard AMS packages.
+% It is otherwise a very minimal preamble (you should probably at least
+% add cleveref and tikz-cd).
+
+\documentclass{article}
+
+\usepackage{amssymb, amsthm, amsmath}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[showmore, dep_graph]{blueprint}
+
+
+% NOTE: these are top-level symlinks to macros/common.tex and macros/web.tex.
+% plasTeX (without a TeX installation) cannot resolve \input paths containing
+% a subdirectory; the symlinks keep the standard leanblueprint file layout.
+\input{macros-common}
+\input{macros-web}
+% masterdefs.tex is auto-generated from Octonionic_RH_master.tex (macros,
+% theorem environments, \title, \date). See scripts/extract_blueprint_content.py.
+\input{masterdefs}
+
+\home{}
+\github{}
+\dochome{}
+
+\author{Jesse Paul}
+
+\begin{document}
+% \maketitle is not called here: the content body (extracted verbatim from the
+% master) issues its own \maketitle.
+\input{content}
+\end{document}

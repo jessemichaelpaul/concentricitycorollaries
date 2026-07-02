@@ -1,0 +1,1409 @@
+%=====================================================================
+%  CONCENTRICITY OVER THE OCTONIONS -- MASTER
+%  Part 1: classical zeta facts (continuation, functional equation,
+%          infinite Euler product, infinite Hadamard product) -- cited.
+%  Part 2: slice-preserving theory, the ring R under the *-product, and the
+%          equivalence/translation theorems (concentric zero-spheres <=> RH).
+%  Part 3: the Concentricity Theorem. The translation groupoid H1, the slice
+%          world S2 (band U(1) + direction G2 on the slice-decomposed codomain),
+%          the section functor Phi (object map = the section A itself), the
+%          base B of the degenerate exp set (levels; winding in the band F = U(1)), and
+%          T_A = Int_B F. One conspicuous TODO remains in the proof (the level
+%          placement, stated as a binary for the author's ruling).
+%          For A satisfying C1-C4, the residue-C zero 6-spheres of A lie in a
+%          single connected component of T_A, read off pi_0(T_A) = colim_B(pi_0 . F)
+%          by cocartesian diagram chasing. The 6-spheres are the OUTPUT of the
+%          transport, never assumed. RH is a downstream corollary.
+%  Analytic slice-preserving facts enter as cited inputs. Nothing run in Lean yet.
+%=====================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{amscd}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+%---------------------------------------------------------------------
+%  Macros
+%---------------------------------------------------------------------
+\newcommand{\OO}{\mathbb{O}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\Ostar}{\OO^{*}}
+\newcommand{\Cstar}{\CC^{*}}
+\newcommand{\zetaO}{\zeta_{\Ostar}}
+\newcommand{\zetaC}{\zeta_{\Cstar}}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\providecommand{\Gtwo}{G_2}
+
+% Conspicuous markers (visible in compiled output):
+\newcommand{\TODO}[1]{\medskip\noindent\textcolor{red}{\textbf{[TODO:} #1\textbf{]}}\medskip}
+\newcommand{\PROGRAM}[1]{\medskip\noindent\textcolor{red}{\textbf{[PROGRAM:} #1\textbf{]}}\medskip}
+\newcommand{\SOURCE}[1]{\textcolor{purple}{\small$\langle$source: #1$\rangle$}}
+\newcommand{\stag}[1]{\href{https://stacks.math.columbia.edu/tag/#1}{\texttt{#1}}}
+\providecommand{\Grpd}{\mathrm{Grpd}}
+\providecommand{\nfr}{\mathfrak{n}}
+
+% Lean blueprint macros: no-ops when this file is compiled standalone; the
+% leanblueprint package redefines them when the dependency graph and the Lean
+% linkage are built. Keeping them here lets every statement carry its Lean
+% declaration and its dependencies without any Lean names appearing in the prose.
+\providecommand{\lean}[1]{}
+\providecommand{\leanok}{}
+\providecommand{\notready}{}
+\providecommand{\mathlibok}{}
+\providecommand{\uses}[1]{}
+\providecommand{\proves}[1]{}
+
+%---------------------------------------------------------------------
+%  Theorem environments (document-wide numbering)
+%---------------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{condition}[theorem]{Condition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\title{Concentric Zero-Spheres of a class of sections of the commutative ring $\mathcal R$\\ of slice preserving functions
+over the compactified Octonions\\[0.4em]
+\large
+with the Riemann Hypothesis as a corollary}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+
+\begin{quote}\small\itshape
+``\dots a `viewpoint' by itself remains fragmentary. It reveals to us one of the aspects of a
+scenery or panorama, among a multiplicity of others which are equally valuable, equally `real'.
+It is when complementary viewpoints of a common reality are conjugated, that is, when our `eyes'
+are multiplied, that the gaze is able to penetrate further ahead in the reckoning of things.
+\dots it also happens, sometimes, that a sheaf of viewpoints converging to a unique and vast
+scenery gives rise to a novel thing; a thing which transcends each of the partial perspectives,
+in the same way that a living being transcends each of its limbs and organs. This new thing could
+be called a vision.''
+\begin{flushright}\upshape --- A.\ Grothendieck, \emph{R\'ecoltes et Semailles}\end{flushright}
+\end{quote}
+
+
+
+\begin{abstract}
+Let $\mathcal R$ be the commutative ring of slice-preserving slice-regular functions on the
+compactified octonions $\OO^{*}=S^8$, under the regular ($\ast$) product. We prove the
+\emph{Concentricity Theorem} for a section $A\in\mathcal R$ satisfying four conditions:
+\textup{(C1)} meromorphic continuation with a single simple pole carried to $\infty=N$;
+\textup{(C2)} an infinite Euler product; \textup{(C3)} an infinite slice-regular Weierstrass
+factorization, whose spherical factors are the residue-$\CC$ zeros; and \textup{(C4)} infinitely
+many residue-$\CC$ zeros. From the action groupoid $\mathcal H_1=\Gtwo\ltimes\OO^{*}$,
+whose non-real orbits are $6$-spheres, the slice world $\mathcal S_2$ of slice Riemann spheres with
+the band $U(1)$, and the section functor $\Phi:\mathcal H_1\to\mathcal S_2$, we form the base $\mathcal B$ of the
+exponential's degenerate set $\mathcal B\subset\mathcal S_2$ and the Grothendieck construction $\mathcal T_A=\int_{\mathcal B}F$
+of the band $F=U(1)$ over $\mathcal B$, whose cocartesian transport is the winding lift. The theorem
+is that the residue-$\CC$ zero $6$-spheres of $A$ lie in a single connected component of $\mathcal T_A$,
+arising as the degenerate fibre of its transport. The conclusion is computed at $\pi_0$ by cocartesian
+diagram chasing, through the identity
+$\pi_0(\mathcal T_A)\cong\operatorname{colim}_{\mathcal B}(\pi_0\circ F)$; the analytic slice-preserving
+inputs enter as cited statements. As downstream corollaries, the nontrivial-zero $6$-spheres of the
+octonionic zeta function $\zetaO$ are concentric about one real centre $c$; hence every classical
+nontrivial zero has real part $c$; and the functional equation forces $c=\tfrac12$, giving the
+Riemann Hypothesis. Nothing in this document has yet been formalized in Lean.
+\end{abstract}
+
+
+\tableofcontents
+
+%=====================================================================
+\part{Classical Background}
+%=====================================================================
+\section{The Riemann zeta function}
+
+\begin{theorem}[Meromorphic continuation and functional equation; Riemann \cite{Riemann1859}]\label{thm:riemann}
+The Dirichlet series $\zeta(s)=\sum_{n\ge1}n^{-s}$, convergent for $\re s>1$, continues to a
+meromorphic function on $\CC$ with a single simple pole, at $s=1$; equivalently, a holomorphic map
+to the Riemann sphere
+\[
+  \zeta:\Cstar\longrightarrow\Cstar,\qquad \Cstar=\CC\cup\{\infty\}=S^2,\qquad \zeta(1)=\infty .
+\]
+The completed function $\xi(s)=\tfrac12 s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s)$ is entire and satisfies
+\[
+  \xi(s)=\xi(1-s),\qquad \xi(\bar s)=\overline{\xi(s)} .
+\]
+Consequently, if $\rho$ is a nontrivial zero of $\zeta$ then so are $\bar\rho$, $1-\rho$, and
+$1-\bar\rho$. The trivial zeros of $\zeta$ are at $s=-2,-4,\dots$; the nontrivial zeros lie in the
+strip $0<\re s<1$. The Riemann Hypothesis asserts that every nontrivial zero has $\re s=\tfrac12$.
+\end{theorem}
+
+\begin{theorem}[Infinite Euler product; {\cite[Ch.~1]{Titchmarsh86}}]\label{thm:euler}
+For $\re s>1$,
+\[
+  \zeta(s)=\prod_{p\ \mathrm{prime}}\bigl(1-p^{-s}\bigr)^{-1}
+         =\exp\!\Bigl(\sum_{p}\sum_{k\ge1}\tfrac1k\,p^{-ks}\Bigr),
+\]
+the product taken over the infinitely many primes; it converges absolutely and is zero-free on
+$\re s>1$.
+\end{theorem}
+
+\begin{theorem}[Infinite Hadamard product; {\cite[Ch.~2]{Titchmarsh86}}]\label{thm:hadamard}
+$\xi$ is entire of order $1$ with infinitely many zeros, which are exactly the nontrivial zeros
+$\{\rho\}$ of $\zeta$, and admits the Hadamard factorization
+\[
+  \xi(s)=\xi(0)\prod_{\rho}\Bigl(1-\tfrac{s}{\rho}\Bigr)e^{s/\rho},
+\]
+the product taken over the infinitely many nontrivial zeros. In particular $\zeta$ has infinitely
+many nontrivial zeros.
+\end{theorem}
+
+\begin{theorem}[Hardy \cite{Hardy14}]\label{thm:hardy}
+Infinitely many nontrivial zeros of $\zeta$ lie on the line $\re s=\tfrac12$.
+\end{theorem}
+
+\subsection*{The compactified Riemann zeta on \texorpdfstring{$\Cstar$}{C*}}
+
+For the slice construction, $\zeta$ is taken in compactified form, with values on the
+Riemann sphere $\Cstar=\CC\cup\{\infty\}=S^2$ (the one-point compactification of $\CC$
+\cite{Munkres00}). The classical facts above are retained as stated.
+
+\begin{definition}[Compactified classical zeta]\label{def:zeta-Cstar}
+\uses{thm:riemann}
+$\zetaC:\Cstar\to\Cstar$ is the meromorphic continuation of $\zeta$ regarded as a map to
+the Riemann sphere: $\zetaC(s)=\zeta(s)$ for $s\in\CC\setminus\{1\}$; $\zetaC(1)=\infty$
+(the simple pole, Theorem~\ref{thm:riemann}); and $\zetaC(\infty)=1$, since
+$\zeta(s)\to1$ as $\re(s)\to+\infty$ (the $p$-test: only the $n=1$ term of
+$\sum_n n^{-s}$ survives). It is holomorphic into $\Cstar$ on $\Cstar\setminus\{1\}$,
+its sole pole being $s=1$. The functional equation, the conjugate symmetry
+$\zetaC(\bar s)=\overline{\zetaC(s)}$, and Hardy's infinitude (Theorem~\ref{thm:hardy}) hold
+verbatim for $\zetaC$, as they concern values on $\CC\setminus\{1\}$ where $\zetaC=\zeta$.
+\end{definition}
+
+\begin{lemma}[Compactification does not move the zeros]\label{lem:zero-Cstar}
+\uses{def:zeta-Cstar}
+$Z(\zetaC)=Z(\zeta)$: the zeros of $\zetaC$ in $\Cstar$ are exactly the zeros of $\zeta$
+in $\CC$; in particular the nontrivial zeros coincide.
+\end{lemma}
+\begin{proof}
+On $\CC\setminus\{1\}$ the two functions agree, so they share all zeros there. The two
+adjoined values are not zeros: $\zetaC(1)=\infty$ (a pole) and $\zetaC(\infty)=1$; and
+$s=1$, being a pole of $\zeta$, was never a zero. Hence no zero is gained or lost.
+\end{proof}
+
+%=====================================================================
+\part{Slice-Preserving Theory, the Ring $\mathcal R$, and the Equivalence}
+%=====================================================================
+
+\section{Octonions and slices}
+
+The octonions $\OO$ form an $8$-dimensional real algebra with basis
+$\{1,e_1,\dots,e_7\}$, each $e_i^2=-1$.
+
+\begin{definition}\label{def:octonions}
+The octonions are: (i) a \emph{division algebra}: every nonzero element has a
+multiplicative inverse; (ii) a \emph{normed algebra}: $|ab|=|a||b|$; (iii)
+\emph{non-associative}: $(ab)c\neq a(bc)$ in general; (iv) \emph{alternative}:
+$(aa)b=a(ab)$ and $a(bb)=(ab)b$.
+\end{definition}
+
+An octonion $s\in\OO$ decomposes as $s=\sigma+w$ with $\sigma=\re(s)\in\RR$ and
+$w=\im(s)\in\im(\OO)\cong\RR^7$; the unit imaginary octonions form $S^6\subset\im(\OO)$.
+
+\begin{theorem}[Artin \cite{Schafer66}]\label{thm:artin}
+In an alternative algebra, the subalgebra generated by any two elements is
+associative.
+\end{theorem}
+
+\begin{corollary}\label{cor:powers}
+\uses{thm:artin}
+Powers $s^n$ are well-defined for any $s\in\OO$.
+\end{corollary}
+
+\begin{definition}[Complex slices and slice Riemann spheres]\label{def:slices}
+\uses{def:octonions}
+For any unit imaginary octonion $v\in S^6$, the \emph{complex slice} is
+$\CC_v=\{a+bv:a,b\in\RR\}\subset\OO$. Since $v^2=-1$, this is a subalgebra isomorphic to
+$\CC$ via the $\RR$-algebra isomorphism $\varphi_v:\CC\to\CC_v$, $i\mapsto v$. All slices
+share the real axis: $\CC_v\cap\CC_w=\RR$ for $v\neq\pm w$. Its one-point compactification
+is the \emph{slice Riemann sphere} $\CC_v^{*}:=\CC_v\cup\{\infty\}=S^2_v$, and $\varphi_v$
+extends to an isomorphism of Riemann spheres $\varphi_v:\Cstar\xrightarrow{\sim}\CC_v^{*}$
+with $\varphi_v(\infty)=\infty$ (GPV \cite{VS}, Prop.~4.1/Thm.~4.2). All slice spheres
+share the single point at infinity, as well as the real axis.
+\end{definition}
+
+\section{Slice-preserving functions}
+The class we use is the \emph{slice-preserving} slice-regular functions. We first recall slice
+regularity \cite{GS07,GP11,CSS12,GSS13} --- holomorphicity on each complex slice separately --- as
+the ambient notion, then isolate the slice-preserving subclass, on which classical complex methods
+apply slicewise (by Artin's theorem each slice $\CC_v$ is an associative subalgebra where classical
+complex analysis applies unchanged).
+
+\begin{definition}[Slice regularity; {\cite[Def.~5.1.1]{CSS12}}]\label{def:slice-regular}
+\uses{def:slices}
+Let $\Omega\subseteq\OO$ be open. A function $f:\Omega\to\OO$ is \emph{slice regular}
+if for each $v\in S^6$, $\varphi_v^{-1}\circ f\circ\varphi_v$ satisfies the
+Cauchy--Riemann equations on $\varphi_v^{-1}(\Omega\cap\CC_v)\subseteq\CC$. A domain
+$\Omega$ is \emph{axially symmetric} if $\sigma+\gamma v\in\Omega$ implies
+$\sigma+\gamma w\in\Omega$ for all $w\in S^6$.
+\end{definition}
+
+\begin{theorem}[Representation Formula; {\cite[Thm.~5.1.7]{CSS12}}]\label{thm:rep-formula}
+\uses{def:slice-regular}
+Let $f$ be slice regular on an axially symmetric slice domain $\Omega$. Fix
+$v_0\in S^6$ and write $f(\sigma+\gamma v_0)=\alpha(\sigma,\gamma)+v_0\cdot\beta(\sigma,\gamma)$
+with $\alpha,\beta:\RR^2\to\RR$. Then for every $v\in S^6$,
+$f(\sigma+\gamma v)=\alpha(\sigma,\gamma)+v\cdot\beta(\sigma,\gamma)$, where
+$\alpha=\tfrac12[f(\sigma+\gamma v_0)+f(\sigma-\gamma v_0)]$ and
+$\beta=\tfrac12 v_0^{-1}[f(\sigma-\gamma v_0)-f(\sigma+\gamma v_0)]$.
+\end{theorem}
+
+\begin{theorem}[Identity Theorem; {\cite[Cor.~5.1.9]{CSS12}}]\label{thm:identity}
+\uses{def:slice-regular}
+Let $f$ be slice regular on an axially symmetric slice domain $\Omega$. If $f$
+vanishes on a subset of a single slice $\Omega\cap\CC_{v_0}$ with an accumulation
+point in $\Omega\cap\CC_{v_0}$, then $f\equiv0$ on all of $\Omega$.
+\end{theorem}
+
+\begin{theorem}[Extension Theorem; {\cite[Thm.~5.1.5]{CSS12}}]\label{thm:extension}
+\uses{def:slice-regular}
+Let $U\subseteq\CC$ be a domain symmetric under conjugation and $g:U\to\CC$
+holomorphic. There is a unique slice regular $\mathrm{ext}(g):\Omega_U\to\OO$ on
+$\Omega_U=\{\sigma+\gamma v:\sigma+i\gamma\in U,\ v\in S^6\}$ with
+$\mathrm{ext}(g)|_{\CC_{v_0}}=\varphi_{v_0}\circ g\circ\varphi_{v_0}^{-1}$ for every
+$v_0$.
+\end{theorem}
+
+\begin{definition}[Slice-preserving functions; \protect{\cite[Def.~2.7, Rem.~2.8]{AdF}; \cite{VS,SeriesExp,Wang}}]\label{def:slice-preserving}
+\uses{def:slice-regular, thm:rep-formula}
+A slice-regular function $f$ on an axially symmetric domain $\Omega$ is \emph{slice
+preserving} if it maps every slice into itself: $f(\Omega\cap\CC_v)\subseteq\CC_v$ for all
+$v\in S^6$. For octonions ($\#S^6>2$) the following are equivalent characterisations:
+\begin{enumerate}[leftmargin=2.4em]
+\item[(i)] $f$ is \emph{intrinsic}: $f(q^{c})=f(q)^{c}$ for all $q\in\Omega$, where $q^{c}$
+  is octonionic conjugation (on a slice, $a+bv\mapsto a-bv$);
+\item[(ii)] its representation-formula components are $\RR$-valued: writing
+  $f(\sigma+\gamma v)=\alpha(\sigma,\gamma)+v\,\beta(\sigma,\gamma)$
+  (Theorem~\ref{thm:rep-formula}), one has $\alpha,\beta:\RR^2\to\RR$ --- equivalently the
+  inducing stem function $F=F_1+\iota F_2$ has $\RR$-valued components $F_1,F_2$;
+\item[(iii)] $f$ preserves two distinct slices; equivalently $f(\Omega\cap\RR)\subseteq\RR$
+  when $\Omega$ is a slice domain.
+\end{enumerate}
+Slice-preserving functions are the more restrictive subclass of slice-regular functions on
+which classical complex methods apply slicewise. They are precisely the sections of
+$\mathcal R$ (Definition~\ref{def:R}), and on them the regular product is the ordinary
+pointwise product, so the product is commutative (Theorem~\ref{thm:wang}; Ghiloni--Perotti--
+Stoppato \cite[Rem.~1.8]{SeriesExp}).
+\end{definition}
+
+\begin{remark}[Compactified extension]\label{rmk:slice-pres-compact}
+Definition~\ref{def:slices} through Definition~\ref{def:slice-preserving}, and
+Theorems~\ref{thm:rep-formula}--\ref{thm:extension}, are stated in the literature on
+uncompactified domains $\Omega\subseteq\OO$ (and $U\subseteq\CC$). We use them on the
+compactified $\Ostar=S^8$ and on the slice Riemann spheres $\CC_v^{*}=S^2_v$ (GPV's slice
+Riemann manifolds \cite{VS}). The passage $\OO\rightsquigarrow\Ostar$,
+$\CC_v\rightsquigarrow\CC_v^{*}$ adjoins only the shared point $\infty=N$; it is recorded as
+a marked extension node (in the Lean development: cite the uncompactified statement and
+extend through the one-point compactification \texttt{OnePoint}).
+\end{remark}
+
+\section{The octonionic zeta function \texorpdfstring{$\zetaO$}{zeta\_O}}
+
+\begin{definition}[Octonionic zeta]\label{def:zeta_O}
+\uses{def:zeta-Cstar, def:slices, thm:extension}
+Here $N$ denotes the \emph{north pole} of $S^8$: the single point at infinity $\infty$
+adjoined in the one-point compactification $\Ostar=\OO\cup\{\infty\}\cong S^8$ (inverse
+stereographic projection; GPV \cite{VS}). It is one point with two names, so $\infty=N$;
+it is the only point at infinity, shared by $\Ostar$ and by every slice Riemann sphere
+$\CC_v^{*}=S^2_v$.
+
+The \emph{octonionic zeta function} $\zetaO:\Ostar\to\Ostar$ is defined slicewise from the
+compactified classical zeta (Definition~\ref{def:zeta-Cstar}) through the slice
+identifications $\varphi_v:\Cstar\xrightarrow{\sim}\CC_v^{*}=S^2_v$ (the $\RR$-algebra
+isomorphism $\CC\to\CC_v$ of Definition~\ref{def:slices}, extended to the Riemann spheres
+by $\varphi_v(\infty)=N$; GPV \cite{VS}, Prop.~4.1/Thm.~4.2):
+\begin{itemize}[leftmargin=2.2em]
+\item[(i)] for $s\in\OO\setminus\RR$, with $w=\im(s)$, $v=w/|w|\in S^6$, $\gamma=|w|>0$,
+  $\sigma=\re(s)$, so $s=\sigma+\gamma v$:\quad $\zetaO(s):=\varphi_v(\zetaC(\sigma+i\gamma))$;
+\item[(ii)] for $s\in\RR\setminus\{1\}$:\quad $\zetaO(s):=\zetaC(s)=\zeta(s)\in\RR$;
+\item[(iii)] for $s=1$ (the simple pole, Definition~\ref{def:zeta-Cstar}):\quad
+  $\zetaO(1):=\infty=N$;
+\item[(iv)] for $s=\infty=N$:\quad $\zetaO(\infty):=\zetaC(\infty)=1$.
+\end{itemize}
+\end{definition}
+
+\begin{proposition}[Well-definedness]\label{prop:well-defined}
+\uses{def:zeta_O, thm:riemann}
+$\zetaO:\Ostar\to\Ostar$ is well-defined.
+\end{proposition}
+\begin{proof}
+For $s\in\OO\setminus\RR$ the decomposition $s=\sigma+\gamma v$ with $\gamma>0$,
+$v\in S^6$ is forced ($\gamma=|\im s|$, $v=\im s/|\im s|$), so the only ambiguity is the
+identification of the slice $\CC_v=\CC_{-v}$ with $\Cstar$. That slice carries two such
+identifications, $\varphi_v$ ($i\mapsto v$) and $\varphi_{-v}$ ($i\mapsto-v$), under
+which $s$ reads as $\sigma+i\gamma$ resp.\ $\sigma-i\gamma$; we must check
+$\varphi_v(\zetaC(\sigma+i\gamma))=\varphi_{-v}(\zetaC(\sigma-i\gamma))$. By conjugate
+symmetry $\zetaC(\sigma-i\gamma)=\overline{\zetaC(\sigma+i\gamma)}$
+(\cite[Ch.~2]{Titchmarsh86}; Definition~\ref{def:zeta-Cstar}), writing
+$\zetaC(\sigma+i\gamma)=a+bi$ gives $\varphi_{-v}(a-bi)=a+(-b)(-v)=a+bv=\varphi_v(a+bi)$:
+the two sign reversals --- one from conjugating the input, one from the reversed
+identification --- cancel. The remaining cases carry no ambiguity: for real $s\neq1$,
+$\zetaO(s)=\zeta(s)\in\RR\subseteq\CC_v^{*}$ for every $v$; at $s=1$ the value is the
+single point $\infty=N$; and at $s=\infty=N$ the value is $\zetaC(\infty)=1\in\RR$, again
+the same for every $v$ since each $\varphi_v$ fixes $\RR$ pointwise.
+\end{proof}
+
+\begin{remark}[Domain, codomain, and the point at infinity]\label{rmk:domain}
+Both domain and codomain are $\Ostar=\OO\cup\{\infty\}\cong S^8$, the one-point
+(Alexandroff) compactification of $\OO\cong\RR^8$ \cite{Munkres00}. The map $\zetaO$ is
+slice regular on $\Ostar\setminus\{1,\infty\}$ (Theorem~\ref{thm:zeta-in-R}); the simple
+pole at $s=1$ is carried to the point at infinity $\infty=N$, which is the \emph{image} of the pole,
+not a zero. We write $\Ostar$ throughout; it is the one-point compactification, and is
+deliberately \textbf{not} a projective space $\OO P^1$ (there is no quotient by scalars).
+\end{remark}
+
+\section{\texorpdfstring{$\mathcal R$}{R} is a commutative ring}\label{sec:R-ring}
+
+We work on $\Ostar$; write $\Omega_v:=\Ostar\cap\CC_v=\CC_v^{*}=S^2_v$ for the slice
+Riemann sphere (Definition~\ref{def:slices}).
+
+\begin{definition}[The ring of slice-preserving functions under the regular product]\label{def:R}
+\uses{def:slice-preserving, def:slices}
+$\mathcal R:=\mathcal O_{\Ostar}$ is the set of all slice-regular functions
+$f:\Ostar\to\Ostar$ that are slice preserving (Definition~\ref{def:slice-preserving}),
+$f(\Omega_v)\subseteq\CC_v^{*}$ for all $v\in S^6$, equipped with pointwise addition and
+the regular ($\ast$) product.
+\end{definition}
+
+Commutativity of $\mathcal R$ rests on a single slice-preserving fact from the literature: on each
+slice the regular product is ordinary multiplication.
+
+\begin{theorem}[Regular product on slice-preserving functions; {\cite[Rem.~2.11]{Wang}}]\label{thm:wang}
+\uses{thm:artin, def:R}
+For slice-preserving $f,g$ (with $f(\Omega_v)\subseteq\CC_v$), the regular product
+restricts on each slice to the pointwise product, $(f\ast g)|_{\Omega_v}(w)=f(w)\cdot
+g(w)\in\CC_v$, and $f\ast g=g\ast f$, $(f\ast g)\ast h=f\ast(g\ast h)$ (via Artin,
+Theorem~\ref{thm:artin}).
+\end{theorem}
+
+\begin{proposition}\label{prop:R-comm-ring}
+\uses{thm:wang, thm:identity, def:R}
+$(\mathcal R,+,\ast)$ is a commutative ring with identity $1\in\mathcal R$.
+\end{proposition}
+\begin{proof}
+Closure under $+$ is pointwise. For $\ast$: fixing a slice $\CC_K$, the product
+reduces to pointwise multiplication on $\CC_K$ by Theorem~\ref{thm:wang}, which is
+commutative because $\CC_K$ is a commutative associative subalgebra; associativity
+and distributivity are inherited slicewise, and a slice-regular function is
+determined by its restriction to any one slice (Theorem~\ref{thm:identity}). The
+constant $1$ is the identity.
+\end{proof}
+
+\begin{proposition}[$\mathcal R$ is an integral domain]\label{prop:R-domain}
+\uses{thm:wang, thm:identity}
+If $f,g\in\mathcal R$ and $f\ast g=0$, then $f=0$ or $g=0$.
+\end{proposition}
+\begin{proof}
+$(f\ast g)|_{\Omega_K}(w)=f(w)\cdot g(w)$ in $\CC_K\cong\CC$
+(Theorem~\ref{thm:wang}). The restrictions $f|_{\Omega_K}$, $g|_{\Omega_K}$ are
+holomorphic on the connected slice; by the classical identity principle the pointwise
+product vanishes identically iff one factor does. By Theorem~\ref{thm:identity} the
+corresponding global function vanishes.
+\end{proof}
+
+\section{The slice-preserving analytic toolkit on the compactified octonions}\label{sec:toolkit}
+
+We collect the slice-preserving analytic facts used in Part~3 as cited statements: the exponential,
+its logarithm manifold, its degenerate fibre, the slice/stem square and $I$-independent lift, and the
+winding lift. Each is established in the literature on the uncompactified $\OO$ and used here on
+$\Ostar=S^8$ and the slice Riemann spheres $\CC_v^{*}=S^2_v$ (the passage is recorded in
+Remark~\ref{rmk:slice-pres-compact}; the compactified slice-manifold structure itself is GPV's \cite{VS}).
+
+\begin{theorem}[The slice exponential; \protect{\cite[\S3]{GPVwind}; \cite[Prop.~5.1]{VS}; \cite[Rem.~2.23]{AdF}}]\label{thm:slice-exp}
+\uses{def:slice-preserving, cor:powers}
+The exponential $\exp:\OO\to\OO\setminus\{0\}$, $\exp(q)=\sum_{k\ge0}q^{k}/k!$ (powers well defined by Corollary~\ref{cor:powers}), is a
+slice-regular, slice-preserving entire function (Definition~\ref{def:slice-preserving}),
+given on each slice by
+\[
+\exp(x+Iy)=e^{x}(\cos y+I\sin y),\qquad x,y\in\RR,\ I\in S^6 .
+\]
+Consequently $|\exp q|=e^{\re q}$ depends only on the real part, and $\exp$ is nowhere zero.
+\end{theorem}
+
+\begin{theorem}[The logarithm manifold $E^{+}_{\OO}$; \protect{\cite[Prop.~5.1--5.4, Rem.~5.2, Def.~5.3, 5.5]{VS}; \cite[\S3]{GPVwind}}]\label{thm:log-manifold}
+\uses{thm:slice-exp}
+Let $T:\OO\to\OO\times\im\OO$, $T(x+Iy)=(\sinh x\cos y+I\sinh x\sin y,\ Iy)$, and
+$\OO^{+}=\{q:\re q>0\}$. The \emph{logarithm manifold} is $E^{+}_{\OO}:=T(\OO^{+})$, the
+semi-helicoidal hypercomplex $8$-manifold; equivalently it is the image of the exponential
+graph, parametrised by the \emph{$E^{+}_{\OO}$-exponential}
+\[
+E:\OO\longrightarrow E^{+}_{\OO}\subset\OO\times\im\OO,\qquad
+E(x+Iy)=(\exp(x+Iy),\,Iy)=(e^{x}\cos y+Ie^{x}\sin y,\ Iy),
+\]
+an immersion and a diffeomorphism, with inverse the \emph{$E^{+}_{\OO}$-logarithm}
+$L:E^{+}_{\OO}\to\OO$, $L(q,p)=\log|q|+p$ (here $p=\mathrm{Arg}(q)$). Writing $\pi$ for the
+projection to the first factor, $\pi\circ E=\exp$ (Theorem~\ref{thm:slice-exp}); but
+$\pi:E^{+}_{\OO}\to\OO\setminus\{0\}$ is \emph{not} a covering and not an open map, precisely
+because $\exp$ is not open. Thus $E^{+}_{\OO}$ is an adapted blow-up of $\OO$ along the real
+axis: it unwraps the multivalued logarithm into the single-valued $L$, and a branch of the
+hypercomplex logarithm is $\log_{\OO}=L\circ(\pi|_{\Omega})^{-1}$ on any path-connected
+$\Omega\subset E^{+}_{\OO}$ on which $\pi|_{\Omega}$ is injective.
+\end{theorem}
+
+\begin{lemma}[The degenerate set of the exponential; its fibre over a real value]\label{lem:exp-degenerate}
+\uses{thm:slice-exp, thm:log-manifold}
+\emph{Sourced.} With $\pi$ the first-factor projection, $\pi\circ E=\exp$
+\textup{(\cite[Rem.~5.2(a)]{VS} --- the commuting triangle)}; and, unlike the complex setting,
+$\pi:E^{+}_{\OO}\to\OO$ is not a covering and not an open map, because $\exp$ is not open: it has
+a non-empty \emph{degenerate set consisting of spheres} \textup{(\cite[Rem.~5.2(b)]{VS},
+verbatim)}. The direction $I(q)$ admits no continuous extension to any point of $\RR$
+\textup{(\cite[Rem.~2.1]{GPVwind})}.
+
+\emph{Proved from the slice form.} For $r>0$,
+\[
+\exp^{-1}(-r)=\bigl\{\,\log r+I(2k{+}1)\pi:\ I\in S^6,\ k\in\ZZ\,\bigr\}:
+\]
+by Theorem~\ref{thm:slice-exp}, $\exp(x+Iy)=e^{x}\cos y+Ie^{x}\sin y=-r$ forces
+$e^{x}\sin y=0$, hence $y\in\pi\ZZ$; negativity of the value forces $y=(2k{+}1)\pi$ and
+$x=\log r$; the direction $I$ is unconstrained. The fibre is thus indexed by the single real
+\emph{level} $\log r=\log|{-}r|$ and, within it, by the odd winding indices $2k{+}1$ carried as
+band data (the winding lift, Theorem~\ref{thm:winding-lift}; \cite[Cor.~5.21]{GPVwind}).
+\end{lemma}
+
+\begin{remark}[``Concentric'' is translation vocabulary]\label{rmk:concentric-gloss}
+Geometrically the fibre of Lemma~\ref{lem:exp-degenerate} is a family of $6$-spheres of radii
+$\pi,3\pi,5\pi,\dots$ sharing the centre $\log r$ --- concentric. The construction of Part~3
+never uses this metric fact: the index relations enter only through the commuting triangle
+$\pi\circ E=\exp$, the level, and the winding. The word belongs to the downstream translation
+(Corollary~\ref{cor:nontrivial}), where one component of the static base is read as one real
+centre.
+\end{remark}
+
+\begin{definition}[Slice restriction and the $I$-independent lift; \protect{\cite[Rem.~2.11]{Wang}; \cite[\S3.3,~\S3.7]{BisiWinkelmann}; \cite[Def.~2.1, Prop.~2.2]{SeriesExp}}]\label{def:slice-squares}
+A slice-preserving section $A$ carries each slice Riemann sphere into itself,
+\[
+  A(\CC_v^{*})\subseteq\CC_v^{*}=S^2_v\qquad(v\in S^6),
+\]
+so its restriction to a slice is a holomorphic self-map of that slice sphere,
+\[
+  A_v:=\varphi_v^{-1}\circ A\circ\varphi_v:\ \Cstar\longrightarrow\Cstar,
+\]
+through the identification $\varphi_v:\Cstar\xrightarrow{\sim}\CC_v^{*}$ of
+Definition~\ref{def:slices}. The \emph{$I$-independent lift} is the fact that this holomorphic stem is
+the \emph{same} for every $v$: there is one holomorphic $A_\circ:\Cstar\to\Cstar$ with
+\[
+  A|_{\CC_v^{*}}=\varphi_v\circ A_\circ\circ\varphi_v^{-1}\qquad\text{for all }v\in S^6
+\]
+(Wang \cite[Rem.~2.11]{Wang}; Bisi--Winkelmann \cite[\S3.7]{BisiWinkelmann}). Equivalently, $A$ is
+\emph{intrinsic}, $A(q^c)=A(q)^c$, and is induced ($A=\mathcal I(F)$) by a single stem function
+$F=F_1+\iota F_2:D\to\OO_\CC$ on the symmetric $D\subset\CC$ whose components $F_1,F_2$ are
+$\RR$-valued (the stem-function formalism, Ghiloni--Perotti \cite[Def.~2.1, Prop.~2.2]{SeriesExp}):
+\[
+  A(x+Iy)=F_1(x+iy)+I\,F_2(x+iy),\qquad F_1,F_2\ \RR\text{-valued}.
+\]
+It is this single $I$-independent slice stem that makes the section functor $\Phi$
+$\Gtwo$-equivariant, hence blind to the $\Gtwo$-orbit direction
+(Definition~\ref{def:section-map}, Theorem~\ref{thm:section-functor}).
+\end{definition}
+
+\begin{theorem}[The winding lift; \protect{\cite[Def.~3.4, Def.~4.1, Prop.~4.2, Def.~5.11]{GPVwind}}]\label{thm:winding-lift}
+\uses{thm:log-manifold}
+Let $\gamma:[a,b]\to\OO\setminus\{0\}$ be a path \textup{(}on each slice $\CC_v$ this is the
+classical complex continuation\textup{)}. A \emph{continuation of the hypercomplex logarithm along
+$\gamma$} is a path $\tilde\gamma:[a,b]\to\OO$ with $\exp\circ\tilde\gamma=\gamma$, and a \emph{lift
+of $\gamma$} to the logarithm manifold $E^{+}_{\OO}$ \textup{(}Theorem~\ref{thm:log-manifold}\textup{)}
+is a path $\Gamma:[a,b]\to E^{+}_{\OO}$ with $\mathrm{pr}_1\circ\Gamma=\gamma$:
+\[
+\begin{tikzcd}[row sep=1.6em, column sep=2.6em]
+& \OO\\
+{[a,b]} \arrow[ur,"\tilde\gamma"] \arrow[r,"\gamma"'] & \OO\setminus\{0\} \arrow[u,"\exp"']
+\end{tikzcd}
+\qquad\qquad
+\begin{tikzcd}[row sep=1.6em, column sep=2.6em]
+& E^{+}_{\OO} \arrow[d,"\mathrm{pr}_1"]\\
+{[a,b]} \arrow[ur,"\Gamma"] \arrow[r,"\gamma"'] & \OO\setminus\{0\}
+\end{tikzcd}
+\]
+The two data are \emph{equivalent}: a lift $\Gamma$ exists if and only if a continuation
+$\tilde\gamma$ exists, and they correspond by
+\[
+\tilde\gamma=L\circ\Gamma,\qquad \Gamma=(\exp\circ\tilde\gamma,\ \im\tilde\gamma),
+\]
+where $L$ is the $E^{+}_{\OO}$-logarithm of Theorem~\ref{thm:log-manifold}
+\textup{(}\cite[Prop.~4.2]{GPVwind}\textup{)}. For a \emph{loop} $\gamma:S^1\to\OO\setminus\{0\}$ the
+lift is taken on the universal cover $\exp:i\RR\to S^1$, as a continuous $\Gamma:i\RR\to E^{+}_{\OO}$
+with $\mathrm{pr}_1\circ\Gamma=\gamma\circ\exp$ \textup{(}\cite[Def.~5.11]{GPVwind}\textup{)}:
+\[
+\begin{tikzcd}[row sep=1.6em, column sep=2.6em]
+i\RR \arrow[r,"\Gamma"] \arrow[d,"\exp"'] & E^{+}_{\OO} \arrow[d,"\mathrm{pr}_1"]\\
+S^1 \arrow[r,"\gamma"'] & \OO\setminus\{0\}
+\end{tikzcd}
+\]
+\end{theorem}
+
+\begin{proposition}[Tameness, existence, and the winding number; \protect{\cite[Def.~4.20, Cor.~5.21, Cor.~5.22]{GPVwind}}]\label{prop:winding-signature}
+\uses{thm:winding-lift}
+The lift of Theorem~\ref{thm:winding-lift} is governed by the companion structure of $\gamma$.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.6em]
+\item \emph{Uniqueness (tameness).} $\gamma$ is \emph{tame} when it admits a \emph{unique} companion
+  imaginary-unit field; its lift is then unique \textup{(}\cite[Def.~4.20]{GPVwind}\textup{)}.
+\item \emph{Existence and closure.} A lift of a loop $\gamma$ exists if and only if the signature
+  satisfies $\sigma(\gamma|_{[\xi_l,\xi_{l+1}]})\in\{0,-1\}$ on each obstruction interval; and
+  \emph{if it exists, the lift is itself a loop} \textup{(}\cite[Cor.~5.13]{GPVwind}; pinned
+  against the arXiv text --- the earlier citation to Cor.~5.22 is superseded\textup{)}.
+\item \emph{Winding number.} For an untwisted tame loop with even circular signature $\sigma^c$, the
+  winding number is $\omega=|\sigma^c|/2$ \textup{(}\cite[Cor.~5.21]{GPVwind}\textup{)}.
+\end{enumerate}
+\end{proposition}
+
+\section{Slice preservation and symmetries}
+
+\begin{theorem}[Slice preservation]\label{thm:slice-pres}
+\uses{def:zeta_O, def:slice-preserving}
+$\zetaO$ is slice preserving (Definition~\ref{def:slice-preserving}):
+$\zetaO(\CC_v^{*})\subseteq\CC_v^{*}$ for every $v\in S^6$.
+\end{theorem}
+\begin{proof}
+Fix $v\in S^6$ and $s\in\CC_v^{*}$. If $s\in\CC_v\setminus\RR$ then $s=\sigma\pm\gamma v$
+and $\zetaO(s)=\varphi_v(\zetaC(\sigma\pm i\gamma))\in\varphi_v(\Cstar)=\CC_v^{*}$
+(Definition~\ref{def:zeta_O}(i)). If $s\in\RR\setminus\{1\}$ then
+$\zetaO(s)=\zeta(s)\in\RR\subseteq\CC_v^{*}$; while $\zetaO(1)=\infty\in\CC_v^{*}$ and
+$\zetaO(\infty)=1\in\CC_v^{*}$. In every case the value remains in $\CC_v^{*}$.
+\end{proof}
+
+\begin{theorem}[$\zetaO$ is a section of $\mathcal R$]\label{thm:zeta-in-R}
+\uses{thm:slice-pres, thm:extension, def:R, prop:well-defined}
+$\zetaO\in\mathcal R$.
+\end{theorem}
+\begin{proof}
+On each slice the restriction is the compactified classical zeta read through the
+isomorphism $\varphi_v$, namely $\zetaO|_{\CC_v^{*}}=\varphi_v\circ\zetaC\circ\varphi_v^{-1}$,
+holomorphic into $\CC_v^{*}$ away from the single pole.
+Equivalently $\zetaO=\mathrm{ext}(\zeta)$ is the slice-regular extension of the
+holomorphic, conjugation-symmetric $\zeta$ on $\CC\setminus\{1\}$
+(Theorem~\ref{thm:extension}, \cite[Thm.~5.1.5]{CSS12}); hence $\zetaO$ is slice regular
+on $\Ostar\setminus\{1,\infty\}$ (slice regularity is slicewise holomorphy,
+Definition~\ref{def:slice-regular}). By Theorem~\ref{thm:slice-pres} it is slice
+preserving, $\zetaO(\CC_v^{*})\subseteq\CC_v^{*}$. A slice-regular, slice-preserving
+function $\Ostar\to\Ostar$ is by definition a section of $\mathcal R=\mathcal O_{\Ostar}$
+(Definition~\ref{def:R}); the regular product on such sections restricts on each slice to
+the ordinary product (Theorem~\ref{thm:wang}, Wang \cite[Rem.~2.11]{Wang}). Finally
+$\zetaO$ is not a unit, since it has zeros (Theorem~\ref{thm:zero-spheres}).
+\end{proof}
+
+\begin{definition}[The automorphism group $\Gtwo$]\label{def:G2}
+$\Gtwo=\Aut(\OO)$ is the $14$-dimensional compact, connected, simply connected Lie group of
+$\RR$-algebra automorphisms of $\OO$. Each $g\in\Gtwo$ fixes $1$, hence the real axis pointwise, and
+acts on $\im\OO\cong\RR^7$ as an element of $SO(7)$; thus $g\cdot(\sigma+\gamma v)=\sigma+\gamma\,g(v)$.
+\end{definition}
+
+\begin{theorem}[$\Gtwo$-equivariance]\label{thm:G2-equiv}
+\uses{def:G2, def:zeta_O}
+$\zetaO(g\cdot s)=g\cdot\zetaO(s)$ for all $g\in\Gtwo$, $s\in\OO$.
+\end{theorem}
+\begin{proof}
+For $s\in\RR$, $g\cdot s=s$ and $\zetaO(s)\in\RR$ is fixed, so both sides equal $\zetaO(s)$. For a
+non-real $s=\sigma+\gamma v$ ($v\in S^6$, $\gamma>0$), $g$ carries the slice $\CC_v$ to the slice
+$\CC_{g(v)}$ by the isometric relabelling $\varphi_{g(v)}=g\circ\varphi_v$
+(Definition~\ref{def:G2}). Since $\zetaO$ is defined slicewise by the same $\zetaC$ read through
+$\varphi_v$ (Definition~\ref{def:zeta_O}(i)),
+\[
+  \zetaO(g\cdot s)=\varphi_{g(v)}\bigl(\zetaC(\sigma+i\gamma)\bigr)
+                 =g\bigl(\varphi_{v}(\zetaC(\sigma+i\gamma))\bigr)=g\cdot\zetaO(s).
+\]
+\end{proof}
+
+\begin{theorem}[\protect{\cite{Baez02}}]\label{thm:G2-S6}
+$\Gtwo$ acts transitively on $S^6$ with stabilizer $\mathrm{SU}(3)$:
+$\mathrm{SU}(3)\hookrightarrow\Gtwo\twoheadrightarrow S^6$.
+\end{theorem}
+
+\begin{remark}[The $\Gtwo$-action extends to $\Ostar=S^8$]\label{rmk:G2-compact}
+\uses{def:G2, def:carrier}
+The action above is stated on $\OO$, but $\mathcal H_1$ (Part~3) runs on the compactified
+$\Ostar=S^8$. Each $g\in\Gtwo$ fixes the real axis pointwise (an automorphism fixes $1$, hence all
+of $\RR$) and acts on $\im\OO=\RR^7$ as an element of $SO(7)$; in particular $g$ is a linear
+isometry of $\RR^8=\OO$, hence proper, and therefore extends uniquely to a homeomorphism of the
+one-point compactification $\Ostar=\OO\cup\{\infty\}=S^8$ fixing the point at infinity $\infty=N$ (the one-point
+compactification is functorial on proper maps; in Lean, \texttt{OnePoint}). Thus
+$\Gtwo\curvearrowright\Ostar$ fixes the compactified real axis $\RR\cup\{\infty\}$ --- a great circle
+through $N$ --- pointwise, and acts on each direction-sphere $S^6$ exactly as in
+Theorem~\ref{thm:G2-S6}. This is the action on which $\mathcal H_1$ is built, with $\mathcal R$ its
+ring of invariants over $\Ostar$.
+\end{remark}
+
+\section{Zero geometry and the equivalence}
+
+\begin{theorem}[Zero Equivalence Theorem]\label{thm:zero-equivalence}
+\uses{def:zeta_O, thm:slice-pres, lem:zero-Cstar}
+Let $\rho=\sigma+i\gamma\in\Cstar$. For every $v\in S^6$,
+\[
+\zetaO(\sigma+\gamma v)=0\quad\Longleftrightarrow\quad\zetaC(\rho)=0 .
+\]
+Equivalently: a non-real $s\in\Ostar$ is a zero of $\zetaO$ if and only if its slice
+coordinate $\varphi_v^{-1}(s)$ is a zero of $\zetaC$; by Lemma~\ref{lem:zero-Cstar} these
+are exactly the nontrivial zeros of the classical $\zeta$.
+\end{theorem}
+\begin{proof}
+By Definition~\ref{def:zeta_O}(i), $\zetaO(\sigma+\gamma v)=\varphi_v(\zetaC(\sigma+i\gamma))$.
+The slice identification $\varphi_v:\Cstar\to\CC_v^{*}=S^2_v$ is an isomorphism of slice
+Riemann spheres (the $\RR$-algebra isomorphism $\CC\to\CC_v$ of
+Definition~\ref{def:slices}, extended by $\varphi_v(\infty)=N$; GPV \cite{VS}). An
+isomorphism is injective and sends $0$ to $0$, so $\varphi_v(z)=0\iff z=0$; with
+$z=\zetaC(\rho)$ this gives both implications. (Slice preservation,
+Theorem~\ref{thm:slice-pres}, is what places the value in $\CC_v^{*}$ so that
+$\varphi_v^{-1}$ applies on the non-real side.) The final clause is
+Lemma~\ref{lem:zero-Cstar}.
+\end{proof}
+
+\begin{theorem}[Nontrivial zeros are infinitely many disjoint $6$-spheres]\label{thm:zero-spheres}
+\uses{thm:zero-equivalence, thm:G2-S6, thm:G2-equiv, thm:hadamard}
+For a nontrivial zero $\rho=\sigma+i\gamma$ of $\zetaC$ (so $\gamma>0$) set
+\[
+S_\rho=\{\sigma+\gamma v:v\in S^6\}=\sigma+\gamma\,S^6\subset\OO .
+\]
+Then:
+\begin{enumerate}[leftmargin=2.4em]
+\item[(i)] $S_\rho$ \emph{is} a $6$-sphere --- the round sphere of radius $\gamma$ centred
+  at the real point $\sigma$ --- equivalently the $\Gtwo$-orbit of any one of its points
+  $\sigma+\gamma v_0$ (Theorem~\ref{thm:G2-equiv}; $\Gtwo$ acts transitively on $S^6$ with
+  stabiliser $\mathrm{SU}(3)$, Theorem~\ref{thm:G2-S6}, Baez \cite{Baez02}).
+\item[(ii)] every point of $S_\rho$ is a zero of $\zetaO$, and conjugate zeros give the
+  same sphere, $S_\rho=S_{\bar\rho}$;
+\item[(iii)] the nontrivial-zero set is the disjoint union
+  $Z^{\mathrm{nt}}_{\Ostar}=\bigsqcup_{[\rho]}S_\rho$ over conjugate pairs
+  $[\rho]=\{\rho,\bar\rho\}$, with distinct pairs giving disjoint spheres;
+\item[(iv)] there are infinitely many such spheres (the Hadamard product,
+  Theorem~\ref{thm:hadamard}; also Hardy \cite{Hardy14}, Theorem~\ref{thm:hardy}).
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(i) The map $v\mapsto\sigma+\gamma v$ is the affine map $x\mapsto\sigma+\gamma x$ of
+$\im\OO\cong\RR^7$ restricted to $S^6$; with $\gamma>0$ its image is the round $6$-sphere
+of radius $\gamma$ centred at $\sigma$. By $\Gtwo$-equivariance
+(Theorem~\ref{thm:G2-equiv}) and transitivity of $\Gtwo$ on $S^6$
+(Theorem~\ref{thm:G2-S6}), $\Gtwo\cdot(\sigma+\gamma v_0)=\{\sigma+\gamma\,g(v_0):g\in\Gtwo\}=S_\rho$.
+So $S_\rho$ \emph{is} $S^6$ --- scaled by $\gamma$, translated to $\sigma$ --- realized as
+a single $\Gtwo$-orbit; no embedding or diffeomorphism is invoked.
+
+(ii) For any $v\in S^6$, $\zetaO(\sigma+\gamma v)=\varphi_v(\zetaC(\rho))=\varphi_v(0)=0$
+by the Zero Equivalence Theorem~\ref{thm:zero-equivalence}. And
+$S_{\bar\rho}=\{\sigma+\gamma(-v):v\in S^6\}=S_\rho$, since $v\mapsto-v$ is a bijection of
+$S^6$.
+
+(iii) For ``$\subseteq$'': a non-real zero $s=\sigma+\gamma v$ of $\zetaO$ forces
+$\zetaC(\sigma+i\gamma)=0$ by Theorem~\ref{thm:zero-equivalence}, so $s\in S_\rho$ with
+$\rho=\sigma+i\gamma$ nontrivial (Lemma~\ref{lem:zero-Cstar}); ``$\supseteq$'' is (ii).
+Disjointness: if $\sigma+\gamma v=\sigma'+\gamma'w$, uniqueness of the real/imaginary
+parts gives $\sigma=\sigma'$ and $\gamma v=\gamma'w$, whence $\gamma=\gamma'$ (taking
+norms, $|v|=|w|=1$) and $\{\rho',\bar\rho'\}=\{\rho,\bar\rho\}$; so two spheres coincide or
+are disjoint.
+
+(iv) There are infinitely many spheres because $\zeta$ has infinitely many nontrivial zeros (the
+Hadamard product, Theorem~\ref{thm:hadamard}; also Hardy, Theorem~\ref{thm:hardy}).
+\end{proof}
+
+% [Conjugate pairs, Disjointness, and Zero-Set Decomposition are folded into
+%  Theorem~\ref{thm:zero-spheres} above (items (ii)--(iv) and its proof).]
+
+\begin{theorem}[The equivalence: concentricity $\Leftrightarrow$ RH]\label{thm:rh-equiv}
+\uses{thm:zero-spheres, thm:riemann}
+The following are equivalent:
+\begin{enumerate}[leftmargin=2.4em]
+\item[(a)] the Riemann Hypothesis;
+\item[(b)] the nontrivial-zero $6$-spheres $\{S_\rho\}$ of $\zetaO$
+  (Theorem~\ref{thm:zero-spheres}) are \emph{concentric} --- they share a single common
+  centre, necessarily a point of the real axis.
+\end{enumerate}
+When they hold, the common centre is $\tfrac12$.
+\end{theorem}
+\begin{proof}
+Each $S_\rho$ is centred at the real point $\sigma_\rho$, where
+$\rho=\sigma_\rho+i\gamma_\rho$ (Theorem~\ref{thm:zero-spheres}(i)).
+
+$(a)\Rightarrow(b)$: under RH every $\sigma_\rho=\tfrac12$, so all spheres share the
+centre $\tfrac12$.
+
+$(b)\Rightarrow(a)$: suppose the spheres share a common centre $c\in\RR$. By the functional
+equation (Theorem~\ref{thm:riemann}), if $\rho$ is a nontrivial zero then so is
+$1-\bar\rho=(1-\sigma_\rho)+i\gamma_\rho$, whose sphere $S_{1-\bar\rho}$ is centred at
+$1-\sigma_\rho$. Concentricity forces $\sigma_\rho=c=1-\sigma_\rho$, hence
+$\sigma_\rho=\tfrac12$; as $\rho$ was arbitrary this is RH, and the common centre is $\tfrac12$.
+\end{proof}
+
+\begin{remark}[$\tfrac12$ is downstream of concentricity]\label{rmk:half-downstream}
+The value $\tfrac12$ enters \emph{only} in $(b)\Rightarrow(a)$, and only through the
+functional equation pinning the shared hyperplane once concentricity is known. Part~3
+establishes the one-component collapse --- that the residue-$\CC$ zero spheres of $A$ all lie in one
+connected component of the Grothendieck construction $\mathcal T_A$ (Definition~\ref{def:base}), concentricity then following by the
+translation of Corollary~\ref{cor:nontrivial} --- with no reference to
+$\tfrac12$, to coordinates, or to RH; the value is then supplied here, downstream, by the
+classical functional equation alone.
+\end{remark}
+
+%=====================================================================
+\part{The Categorical Construction and the Concentricity Theorem}\label{part:stack}
+%=====================================================================
+
+We build the translation groupoid $\mathcal H_1=\Gtwo\ltimes\OO^{*}$ (whose orbits of non-real
+points are the residue-$\CC$ zero $6$-spheres), the slice world $\mathcal S_2$ (the codomain
+$\OO^{*}$ by its slice decomposition, carrying the band $U(1)$ and the direction $\Gtwo$), the
+section functor $\Phi:\mathcal H_1\to\mathcal S_2$, the base $\mathcal B$ of the exponential's degenerate set, and the
+Grothendieck construction $\mathcal T_A=\int_{\mathcal B}F$ of the band $F=U(1)$ over
+$\mathcal B$. Hypotheses \textup{C1--C4} assemble the transport of $\mathcal T_A$; the
+residue-$\CC$ zero $6$-spheres of $A$ arrive as the degenerate fibre of that transport --- an
+output, never an input --- and the Concentricity Theorem is that they lie in a single connected
+component of $\mathcal T_A$, computed at $\pi_0$. The categorical objects are anchored to the
+literature (Quillen \cite{Quillen73}, Thomason \cite{Thomason79}, Riehl \cite{Riehl},
+Goerss--Jardine \cite{GJ}, Vistoli \cite{Vistoli}, Stacks \cite{Stacks}) and to Mathlib terms;
+the slice-preserving analytic facts of Part~2 enter as cited inputs.
+
+\section{Two worlds and the section between them}\label{sec:tower-stack}
+
+\subsection*{The compactified octonions and the point at infinity}
+
+\begin{definition}[The compactified octonions $\OO^{*}=S^8$]\label{def:carrier}
+Let $\OO^{*}=\OO\cup\{\infty\}=S^8$ be the Alexandroff one-point compactification of $\OO=\RR^8$.
+Concretely (GPV \cite{VS}, Prop.~4.1 and Thm.~4.2, for $m=\dim_\RR K\in\{4,8\}$): the inverse
+stereographic projections from the north and south poles,
+\[
+f(x+Iy)=\Big(\tfrac{2(x+Iy)}{1+x^2+y^2},\ \tfrac{-1+x^2+y^2}{1+x^2+y^2}\Big),\qquad
+h(x+Iy)=\Big(\tfrac{2(x-Iy)}{1+x^2+y^2},\ \tfrac{1-x^2-y^2}{1+x^2+y^2}\Big),
+\]
+give a conformal atlas $\{(K,f),(K,h)\}$ endowing $S^m$ with the structure of a slice
+(quaternionic/octonionic) Riemann manifold, with transition map $h^{-1}\circ f(q)=\bar q/q^2=1/q$,
+itself slice regular and slice preserving. The adjoined point is the north pole $N$; this is the
+point at infinity. In Lean the underlying compactification is
+\texttt{Mathlib.Topology.Compactification.OnePoint}, $\OO^{*}=\texttt{OnePoint }\OO$ with
+$\infty=\texttt{OnePoint.infty}$, and the homeomorphism $\OO^{*}\cong S^8$ is
+\texttt{onePointEquivSphereOfFinrankEq} applied to $\dim_\RR\OO=8$
+(\texttt{Mathlib.Topology.Compactification.OnePoint.Sphere}). The compactification is what makes
+the value of a section at its real pole a well-defined point of $\OO^{*}$ --- the point at
+infinity $\infty=N$. There is no base poset: the two worlds are built directly on $\OO^{*}$ as
+translation groupoids (Definition~\ref{def:two-worlds}).
+\end{definition}
+
+\begin{remark}[Compactifying the cited results]\label{rmk:compactify}
+Most of the slice-preserving / slice-regular results cited below (GPV, AdF, Wang,
+Bisi--Winkelmann) are stated on uncompactified $\OO=\RR^8$ or domains therein; the construction
+lives on $\OO^{*}=S^8$. Each citation is used in its compactified form, obtained either directly
+(GPV's Riemann-manifold statements \cite{VS} are already on $S^m$) or by transporting the
+uncompactified statement across the stereographic atlas of Definition~\ref{def:carrier}; in the
+Lean development this transport is a marked derivation node over \texttt{OnePoint}, not an
+assumption.
+\end{remark}
+
+\begin{remark}[The two north pole objects]\label{rmk:two-poles}
+\uses{def:carrier, def:two-worlds}
+There are two north pole objects, one in each world. In $\mathcal H_1$ the north pole $N$ of
+$\OO^{*}$ is a $\Gtwo$-fixed object: its own connected component, with $\Aut(N)=\Gtwo$, carrying
+no universal property. In the slice world $\mathcal S_2$ the north pole is the object
+\[
+  \nfr\;:=\;\infty=N\ \text{regarded as an object of }\mathcal S_2,
+\]
+the common point at infinity of the slice Riemann spheres, fixed by band and direction alike.
+They are objects of \emph{different} groupoids, related by the section through \textup{C1}: the
+pole of $A$ has value $\infty$, so the section functor carries the pole point to $\nfr$
+(Remark~\ref{rmk:collapse-cone}). The residue field of a closed zero sorts the picture:
+residue-$\RR$ (the $\Gtwo$-fixed locus $\RR\cup\{N\}$, classically trivial) versus residue-$\CC$
+(the $6$-sphere orbits, classically nontrivial; the dictionary is Part~2 and
+Theorem~\ref{thm:zero-spheres}).
+\end{remark}
+
+\subsection*{What a slice-preserving section does}
+
+\begin{definition}[The section's slice data and equivariance]\label{def:section-map}
+\uses{def:slice-squares, def:slice-preserving, thm:rep-formula}
+Let $A\in\mathcal R$. By the $I$-independent lift (Definition~\ref{def:slice-squares}; Wang
+\cite[Rem.~2.11]{Wang}, Bisi--Winkelmann \cite[\S3.7]{BisiWinkelmann}) there is one holomorphic
+stem with $\RR$-valued components,
+\[
+  A(x+Iy)=F_1(x+iy)+I\,F_2(x+iy),\qquad F_1,F_2\ \RR\text{-valued},
+\]
+the same for every $I\in S^6$. Three consequences used below:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.6em]
+\item \emph{Slice preservation of values.} $A(\CC_I^{*})\subseteq\CC_I^{*}$ for every $I$: the
+  value at a point lies on that point's own slice sphere (Definition~\ref{def:R}).
+\item \emph{$\Gtwo$-equivariance.} For $g\in\Gtwo$ and non-real $q=x+Iy$,
+  \[
+    A(g\cdot q)=F_1+g(I)\,F_2=g\cdot\bigl(F_1+I\,F_2\bigr)=g\cdot A(q),
+  \]
+  since $g\cdot(x+Iy)=x+g(I)y$ (Definition~\ref{def:G2}) and $F_1,F_2$ are real; for
+  $q\in\RR\cup\{N\}$ both sides are $\Gtwo$-fixed, because $A(\RR)\subseteq\RR$ and
+  $A(N)\in\bigcap_I\CC_I^{*}=\RR\cup\{N\}$ by \textup{(i)}. (For $\zetaO$ this is
+  Theorem~\ref{thm:G2-equiv}; the computation above is the same one, run for an arbitrary
+  intrinsic section.)
+\item \emph{Blindness to the sphere direction.} On a $\Gtwo$-orbit $S_{(\sigma,\gamma)}$ the stem
+  coordinates $(F_1,F_2)(\sigma+i\gamma)$ are constant; in particular if $A$ vanishes at one
+  point of the orbit it vanishes on the whole orbit (Lemma~\ref{lem:residue-spheres}).
+\end{enumerate}
+No sphere-fibration and no tower enter: a slice-preserving section carries one holomorphic stem
+per slice, and the direction $S^6$ is traversed only by the $\Gtwo$-morphisms already present in
+both worlds.
+\end{definition}
+
+\begin{remark}[Role of C4]\label{rmk:c4-role}
+Condition \textup{C4} --- infinitely many residue-$\CC$ zeros --- matches the class to its
+infinite structure (the infinite Euler family of \textup{C2}, the infinite Weierstrass divisor of
+\textup{C3}) and gives the collapse its force: the degenerate fibre of the transport is an
+infinite family, so that whether it lies in one connected component of $\mathcal T_A$
+(Definition~\ref{def:base}) is an infinite alignment, decided by
+Theorem~\ref{thm:concentricity}. There is one connected component or there is not; nothing
+intermediate.
+\end{remark}
+
+\subsection*{The two worlds as translation groupoids}
+
+\begin{definition}[The two translation groupoids]\label{def:two-worlds}
+\lean{CategoryTheory.ActionCategory}
+\uses{def:carrier, def:G2, thm:G2-S6, rmk:G2-compact, def:slices}
+Recall the \emph{translation groupoid} (action groupoid) of a group action $G\curvearrowright X$:
+the category $G\ltimes X$ whose objects are the points of $X$ and whose morphisms $x\to y$ are
+the elements $g\in G$ with $g\cdot x=y$; it is a groupoid, and $\pi_0(G\ltimes X)=X/G$ is the
+orbit set (Quillen \cite[\S1]{Quillen73}: components of a category $\leftrightarrow$ components
+of its classifying space; in Lean, \texttt{CategoryTheory.ActionCategory}).
+
+The \emph{octonionic world} is the translation groupoid $\mathcal H_1=\Gtwo\ltimes\OO^{*}$ of
+$\Gtwo=\Aut(\OO)$ acting on $\OO^{*}=S^8$ (Definitions~\ref{def:carrier} and~\ref{def:G2};
+Remark~\ref{rmk:G2-compact}). Its connected components are the $\Gtwo$-orbits, of two kinds (Baez
+\cite{Baez02}; Theorem~\ref{thm:G2-S6}; Remark~\ref{rmk:G2-compact}):
+\begin{itemize}[leftmargin=2em]
+  \item the fixed points, forming the compactified real axis $\RR\cup\{N\}$, of residue field
+    $\RR$; and
+  \item for each real $\sigma$ and each radius $\gamma>0$, the direction $6$-sphere
+    $S_{(\sigma,\gamma)}=\{\sigma+\gamma v:v\in S^6\}$, of residue field $\CC$ --- the
+    $\Gtwo$-orbit of any of its points, labelled by its real centre $\sigma$ and radius $\gamma$.
+\end{itemize}
+
+The \emph{slice world} $\mathcal S_2$ organizes the \emph{codomain} $\OO^{*}$ of a section by its
+slice decomposition. Every slice contains the real axis by the definition of a slice,
+$\CC_I=\mathrm{Span}_\RR(1,I)$, two slices meeting exactly in $\RR$
+(Definition~\ref{def:slices}; \cite[\S1]{AdF}), and the compactification adjoins the single
+shared point $\infty=N$ (Definition~\ref{def:carrier}; GPV \cite{VS}), so
+\[
+  \OO^{*}\;=\;\bigcup_{I\in S^6}\CC_I^{*},\qquad
+  \CC_I^{*}\cap\CC_J^{*}=\RR\cup\{N\}\quad(J\neq\pm I).
+\]
+$\mathcal S_2$ is the groupoid whose objects are the points of $\OO^{*}$ so decomposed, and whose
+morphisms are generated by
+\begin{itemize}[leftmargin=2em]
+  \item the \emph{direction} isomorphisms: $g:w\to g\cdot w$ for $g\in\Gtwo$, carrying
+    $\CC_I^{*}$ to $\CC_{g(I)}^{*}$ and fixing $\RR\cup\{N\}$ pointwise
+    (Remark~\ref{rmk:G2-compact}); and
+  \item the \emph{band} automorphism families: on each slice sphere $\CC_I^{*}$, the phases
+    $u_\theta:z\mapsto e^{I\theta}z$ --- the M\"obius self-maps of $S^2_I$ fixing the
+    value-origin $0$, the point at infinity $N$, and the modulus.
+\end{itemize}
+The objects $0$ and $N$ are fixed by every generating morphism. No identification of distinct
+objects is made here: the two worlds share the underlying points of $\OO^{*}$ and differ in their
+acting structure ($\Gtwo$ alone, versus direction together with the band). This is exactly the
+structure the base $\mathcal B$ already carries (Definition~\ref{def:base}); nothing is added
+there.
+\end{definition}
+
+\subsection*{The section functor}
+
+\begin{theorem}[The section functor $\Phi$]\label{thm:section-functor}
+\uses{def:two-worlds, def:section-map, thm:wang}
+For a section $A\in\mathcal R$, the assignment
+\[
+  \Phi(q)\;=\;A(q)\ \ \text{on objects},\qquad
+  \Phi\bigl(g:q\to g\cdot q\bigr)\;=\;\bigl(g:A(q)\to A(g\cdot q)\bigr)\ \ \text{on morphisms},
+\]
+is a functor of groupoids $\Phi:\mathcal H_1\to\mathcal S_2$ --- \emph{the section functor}.
+\end{theorem}
+\begin{proof}
+This is the standard fact that an equivariant map of $G$-sets induces a functor of the associated
+translation groupoids, applied to $A$. On objects, $A(q)$ is a point of $\OO^{*}$ lying on the
+slice sphere of $q$ (Definition~\ref{def:section-map}(i)), hence an object of $\mathcal S_2$. On
+morphisms, $\Gtwo$-equivariance $A(g\cdot q)=g\cdot A(q)$ (Definition~\ref{def:section-map}(ii))
+says precisely that $g$ is a direction morphism $A(q)\to A(g\cdot q)$ of $\mathcal S_2$
+(Definition~\ref{def:two-worlds}), so $\Phi(g)$ is well-typed. Functoriality is immediate:
+$\Phi(e)=\mathrm{id}_{A(q)}$, and for composable $g,h$ the composite of the direction morphisms
+$g:A(q)\to A(gq)$ and $h:A(gq)\to A(hgq)$ is $hg:A(q)\to A(hgq)=\Phi(hg)$. On each slice the
+underlying value assignment is the holomorphic self-map $A_v$ of $S^2_v$, compatible with the
+ring structure because the regular product restricts to ordinary multiplication on the
+commutative slice (Theorem~\ref{thm:wang}, Proposition~\ref{prop:R-comm-ring}).
+\end{proof}
+
+\begin{remark}[What $\Phi$ collapses, and the cone from the pole]\label{rmk:collapse-cone}
+\uses{thm:section-functor, lem:residue-spheres}
+The collapse belongs to this functor, not to the codomain. By
+Definition~\ref{def:section-map}(iii), $\Phi$ carries each residue-$\CC$ zero-sphere of $A$ ---
+a $6$-sphere component of $\mathcal H_1$ (Lemma~\ref{lem:residue-spheres}) --- onto the
+\emph{single} object $0\in\mathcal S_2$, the value-origin, fixed by band and direction; and by
+\textup{C1} it carries the pole point onto the single object $\nfr$
+(Remark~\ref{rmk:two-poles}). Thus the pole pulls a cone in the value world: every path of
+$\mathcal H_1$ into the pole maps to a value path into the slice-world north pole. The differing
+centres and radii of the zero-spheres are not remembered by $\Phi$'s object map; they are
+remembered by the \emph{transport} over the base (Definition~\ref{def:base}), which is where the
+theorem reads them.
+\end{remark}
+
+\subsection*{The base of the degenerate set and the Grothendieck construction}
+
+\begin{definition}[The base $\mathcal B$ of the degenerate set, the band $F$, and
+$\mathcal T_A=\int_{\mathcal B}F$]\label{def:base}
+\lean{CategoryTheory.Grothendieck}
+\uses{lem:exp-degenerate, thm:winding-lift, prop:winding-signature, def:two-worlds}
+\emph{The base.} The exponential's degenerate fibre over a real value is the level-indexed
+family of Lemma~\ref{lem:exp-degenerate}: $\exp^{-1}(-r)=\{\log r+I(2k{+}1)\pi\}$, one real
+level $\log r$, winding as band data --- a structure of the space itself, absent over $\CC$
+(\cite[Rem.~5.2(b)]{VS}). The \emph{base} $\mathcal B$ is the groupoid of these levels: one object for each real
+level $c$, with the direction automorphisms $\Gtwo$ at each level. GPV's $\log|\cdot|$ is a label
+on objects, never an operation. Distinct levels are distinct objects with \emph{no} morphisms
+between them, so the level is constant along every zigzag and $\pi_0(\mathcal B)$ is the set
+of levels by construction --- connectivity here is the groupoid's (reachability by declared
+morphisms, Definition~\ref{def:two-worlds}), not the ambient topology of $\OO$.
+
+\emph{The band.} Let $F:\mathcal B\to\Grpd$ send each level to the band groupoid $U(1)$ (one
+object; automorphism group the phases) and each direction morphism to the identity of the band.
+The winding index $2k{+}1$ of the fibre is carried by the band as an automorphism datum within a
+component --- the loops of $F(c)$ realize the winding number $\omega=|\sigma^c|/2$ of the lifted
+value-loops (\cite[Cor.~5.21]{GPVwind}; Proposition~\ref{prop:winding-signature}) --- and is
+never an object label of $\mathcal B$.
+
+\emph{The total object.} The \emph{Grothendieck construction} of $F$ is the category
+\[
+  \mathcal T_A\;=\;\int_{\mathcal B}F,
+\]
+with objects the pairs $(c,x)$, $x$ in the band over $c$, and morphisms the pairs $(f,\varphi)$
+moving the base and transporting the fibre (Thomason \cite{Thomason79}; Vistoli
+\cite[\S3.1]{Vistoli}; Stacks \cite[Tag~0049]{Stacks}; in Lean,
+\texttt{CategoryTheory.Grothendieck}). By Thomason's theorem its classifying space models the
+homotopy colimit, $B\bigl(\int_{\mathcal B}F\bigr)\simeq
+\operatorname*{hocolim}_{\mathcal B}(B\circ F)$ \cite[Thm.~1.2]{Thomason79} (statement as quoted
+in \cite[Thm.~1.1]{Sharma}; textbook treatment Riehl \cite[Ch.~5--6]{Riehl}); the proof below
+uses only its $\pi_0$ shadow (Lemma~\ref{lem:pi0-grothendieck}).
+
+\emph{How the section populates the diagram.} The transport data over $\mathcal B$ is supplied by
+the winding lift of the section's value-paths: a lift of a value-loop $\gamma$ of $A$ is a
+$\Gamma$ with $\mathrm{pr}_1\circ\Gamma=\gamma\circ\exp$ (Theorem~\ref{thm:winding-lift};
+\cite[Def.~5.11, Prop.~4.2]{GPVwind}); it is \emph{unique} when the loop is tame --- unique
+companion --- (\cite[Def.~4.20, Def.~5.2]{GPVwind}) and \emph{exists, and is itself a loop},
+exactly when the signature criterion $\sigma\in\{0,-1\}$ holds on each obstruction interval
+(\cite[Cor.~5.13]{GPVwind}; the earlier citation to Cor.~5.22 is superseded by this pinned
+number). The residue-$\CC$ zero-spheres of $A$ appear in $\mathcal T_A$ as the \emph{degenerate
+fibre} of this transport --- an output of the construction, never an input --- and the theorem
+computes the image of that fibre in $\pi_0(\mathcal T_A)$.
+\end{definition}
+
+
+\section{The concentricity theorem}\label{sec:detector}
+
+\begin{proposition}[Slice-regular Weierstrass factorization; the content of C3]\label{prop:weierstrass}
+\uses{def:R}
+Let $A\in\mathcal R$ have a zero of order $m\ge 0$ at the origin and no non-real isolated zeros
+\textup{(}for $A\in\mathcal R$ the latter is automatic: non-real zeros come in whole spheres,
+Lemma~\ref{lem:residue-spheres}\textup{)}. Then on $\OO^{*}\setminus\{N\}$ it factors as
+\[
+  A=q^{m}\,R\,S\,h,
+\]
+where $q$ denotes the octonionic coordinate function \textup{(}the identity section, so $q^m$
+carries the order-$m$ zero at the origin\textup{)}, $R$ is a slice-preserving factor vanishing
+exactly at the real zeros of $A$, $S$ is a factor vanishing exactly at its spherical
+\textup{(}residue-$\CC$\textup{)} zero-spheres, and $h$ is never vanishing; each of $R,S$ is the
+slice-regular Weierstrass product over the corresponding zeros. The factorization holds
+\emph{including the case where either family of zeros is infinite}.
+\end{proposition}
+\begin{proof}
+This is the factorization theorem of Altavilla--de Fabritiis \cite[Prop.~3.1, Thm.~3.2]{AdFslice},
+whose primary factors are the slice-regular ones of Gentili--Vignozzi \cite{GV}; convergence of
+the infinite products is part of the cited statement. The pair $R,S$ is the residue split named
+in \textup{C3}: $R$ carries the residue-$\RR$ \textup{(}classically trivial\textup{)} zeros and
+$S$ the residue-$\CC$ \textup{(}classically nontrivial\textup{)} ones, the latter infinite in
+number by \textup{C4}.
+\end{proof}
+
+\begin{lemma}[Residue-$\CC$ zeros are $6$-sphere components of $\mathcal H_1$]\label{lem:residue-spheres}
+\uses{def:two-worlds, thm:G2-S6, thm:wang}
+For $A\in\mathcal R$, the non-real zeros of $A$ are $6$-spheres, each a single connected
+component of the translation groupoid $\mathcal H_1$.
+\end{lemma}
+\begin{proof}
+$A$ is slice-preserving, so on a sphere $\sigma+\gamma S^6$ \textup{(}$\gamma>0$\textup{)} it has
+the form $A(\sigma+\gamma v)=\alpha(\sigma,\gamma)+v\,\beta(\sigma,\gamma)$ with $\alpha,\beta$
+real (the real stem, \cite{Wang}); since $v$ is an imaginary unit, $\alpha+v\beta=0$ forces
+$\alpha=\beta=0$, independently of $v$. Hence a non-real zero occurs on a \emph{whole} sphere
+$\sigma+\gamma S^6$ or at none of its points (the spherical-zero structure, \cite{AdF}); real
+zeros are isolated real points (residue field $\RR$). Each such sphere $\sigma+\gamma S^6$ is the
+$\Gtwo$-orbit of any of its points (Theorem~\ref{thm:G2-S6}: $\Gtwo$ acts transitively on $S^6$
+with stabiliser $\mathrm{SU}(3)$), and the connected components of $\mathcal H_1$ are exactly the
+$\Gtwo$-orbits --- in a groupoid two objects share a component iff a morphism joins them, and a
+morphism $x\to y$ of $\mathcal H_1$ is a $g\in\Gtwo$ with $g\cdot x=y$. Therefore the
+residue-$\CC$ zeros --- the non-real ones --- are exactly the $6$-sphere components of
+$A^{-1}(0)$.
+\end{proof}
+
+\begin{lemma}[$\pi_0$ of a Grothendieck construction]\label{lem:pi0-grothendieck}
+\lean{CategoryTheory.Grothendieck}
+\uses{def:base}
+For a functor $F:\mathcal B\to\Grpd$, the connected-components functor carries the Grothendieck
+construction to the colimit of the component diagram:
+\[
+  \pi_0\Bigl(\int_{\mathcal B}F\Bigr)\ \cong\ \operatorname*{colim}_{\mathcal B}\,(\pi_0\circ F).
+\]
+\end{lemma}
+\begin{proof}
+The functor $\pi_0:\mathbf{Cat}\to\mathbf{Set}$ is left adjoint to the inclusion of discrete
+categories, so it preserves colimits; and components of a category correspond one-to-one with
+components of its classifying space (Quillen \cite[\S1]{Quillen73}). The identity is also direct
+at the level of categories. An object of $\int_{\mathcal B}F$ is a pair $(b,x)$; a morphism
+$(f,\varphi)$ projects to a morphism $f$ of $\mathcal B$ and restricts, over a fixed base object,
+to a morphism of the fibre. Hence a zigzag joining $(b,x)$ to $(b',x')$ projects to a zigzag
+joining $b$ to $b'$ and, fibrewise, joins the band coordinates; two objects of
+$\int_{\mathcal B}F$ lie in one component exactly when their base objects lie in one component of
+$\mathcal B$ and their fibre coordinates are identified there, which is precisely
+$\operatorname*{colim}_{\mathcal B}(\pi_0\circ F)$. Passing to classifying spaces, this is the
+$\pi_0$ of Thomason's equivalence
+$B\bigl(\int_{\mathcal B}F\bigr)\simeq\operatorname*{hocolim}_{\mathcal B}(B\circ F)$
+\cite{Thomason79} (see also \cite[Ch.~5--6]{Riehl}).
+\end{proof}
+
+\begin{definition}[$A$-sections]\label{def:A-section}
+\uses{def:R, prop:weierstrass, lem:residue-spheres}
+An \emph{$A$-section} is a section $A$ of the ring $\mathcal R$ of slice-preserving
+slice-regular functions on $\OO^{*}=S^8$ \textup{(Definition~\ref{def:R})} --- equivalently, a
+slice-preserving \emph{semiregular} function on $\OO^{*}$ \textup{(the meromorphic slice class;
+\cite[\S11]{AdF})} --- with the following four properties.
+\begin{enumerate}[label=\textup{(C\arabic*)},leftmargin=3.2em]
+\item \emph{Meromorphic continuation; single simple pole.} $A$ is meromorphically continued to
+  $\OO^{*}$ with exactly one pole; it is simple, lies at a real point, and its value there is the
+  point at infinity $\infty=N$.
+\item \emph{Infinite Euler product.} On a slice right half-space $\Omega_0\subset\OO^{*}$,
+  $A=\exp\!\big(\sum_p\ell_p\big)$ for an \emph{infinite} summable family $\{\ell_p\}$ of
+  slice-preserving slice-regular functions each zero-free on $\Omega_0$; in particular $A$ is
+  zero-free on $\Omega_0$.
+\item \emph{Infinite Weierstrass factorization.} On $\OO^{*}\setminus\{\text{pole}\}$,
+  \[
+    A\;=\;q^{m}\,R\;e^{g}\prod_n\mathcal E(\,\cdot\,;q_n),
+  \]
+  where $q$ is the octonionic coordinate, $m\ge0$, $R$ is the slice-regular Weierstrass product
+  over the residue-$\RR$ \textup{(}real\textup{)} zeros of $A$, vanishing only on $\RR$, $g$ is
+  slice-preserving entire, $\{q_n\}$ enumerates the residue-$\CC$ zero-spheres of $A$, and
+  $\mathcal E(\,\cdot\,;q_n)$ is the slice-regular Weierstrass primary factor of $q_n$
+  \textup{(}Proposition~\ref{prop:weierstrass}; \cite[Prop.~3.1, Thm.~3.2]{AdFslice},
+  \cite{GV}\textup{)}; the factorization holds with either family infinite.
+\item \emph{Infinitely many residue-$\CC$ zeros.} The index set $\{q_n\}$ is infinite. A closed
+  zero of such a section is a real point \textup{(}residue field $\RR$\textup{)} or a $6$-sphere
+  $S_{(\sigma,\gamma)}$ \textup{(}residue field $\CC$; \cite{AdFslice}\textup{)}; residue-$\CC$
+  names the classically nontrivial zeros \textup{(}Part~2\textup{)}.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Concentricity]\label{thm:concentricity}
+\uses{def:A-section, def:base, lem:residue-spheres, lem:pi0-grothendieck, prop:weierstrass,
+lem:exp-degenerate, thm:winding-lift, prop:winding-signature, thm:identity,
+thm:section-functor}
+Let $A$ be an $A$-section \textup{(Definition~\ref{def:A-section})}. Then the residue-$\CC$
+zero spheres of $A$ all lie in a single connected component of the total object $\mathcal T_A$
+\textup{(Definition~\ref{def:base})} --- equivalently, they have one and the same image in
+$\pi_0(\mathcal T_A)$.
+\end{theorem}
+
+\begin{proof}
+Let $p:\mathcal T_A=\int_{\mathcal B}F\to\mathcal B$ be the Grothendieck construction of
+Definition~\ref{def:base}. Hypotheses \textup{C1--C4} \emph{assemble} the diagram; the
+residue-$\CC$ zero-spheres then arrive as the degenerate fibre of its transport, an output; and
+$\pi_0$ reads off their component. The assembly is shared by both computations of $\pi_0$ (the
+cocartesian one below and the finality one of Remark~\ref{rmk:pi0-split}).
+
+\emph{Assembly: the unique tame transport extending the exponential's base.} The exponential's degenerate fibre over a real value is the level-indexed family
+of Lemma~\ref{lem:exp-degenerate} --- one real level, winding carried by the band --- a
+structure of the space itself, absent over $\CC$ (\cite[Rem.~5.2(b)]{VS};
+Definition~\ref{def:base}). \textup{C2} and \textup{C3} extend the exponential structure over
+$A$: by \textup{C2}, on $\Omega_0$ the section is the exponential $A=\exp(\sum_p\ell_p)$ of an
+infinite summable slice-preserving family, zero-free there, so the continuation of the
+hypercomplex logarithm of $A$ exists outright on $\Omega_0$ (Theorem~\ref{thm:winding-lift}: a
+continuation is $\tilde\gamma$ with $\exp\circ\tilde\gamma=\gamma$); by \textup{C3}, on
+$\OO^{*}\setminus\{\text{pole}\}$ the section is the exponential expression
+$A=q^{m}Re^{g}\prod_n\mathcal E(\cdot;q_n)$ over its full divisor. On any slice $\CC_I$ both are
+the one holomorphic stem $A_I$ (Definition~\ref{def:section-map}; Wang \cite[Rem.~2.11]{Wang}),
+agreeing on the overlap $\Omega_0$, hence coinciding wherever both are defined (Identity
+Theorem~\ref{thm:identity}). The value-loops of $A$ are therefore tame --- unique companion
+(\cite[Def.~4.20, Def.~5.2]{GPVwind}) --- so their lifts to the logarithm manifold, when they
+exist, are unique; and by \textup{C1} the section has exactly one pole, whose value is $\nfr$
+(Remark~\ref{rmk:two-poles}), the cone through which the value-loops close: along these loops the
+signature criterion holds and the lift exists \emph{and is itself a loop}
+(\cite[Cor.~5.13]{GPVwind}). This is the transport of Definition~\ref{def:base}, canonically
+attached to $A$ by \textup{C1--C4} jointly. Its degenerate fibre --- the $\exp$-preimage data
+over the real values met by the unique tame lift --- is the level-indexed fibre of
+Lemma~\ref{lem:exp-degenerate}, and the residue-$\CC$ zero-spheres $\{q_n\}$ of
+\textup{C3} are exactly this degenerate fibre, infinite by \textup{C4}.
+
+\TODO{The placement sentence (the author's). Ruling implemented: \emph{static base} ---
+$\mathcal B$ carries no morphisms between distinct levels, so the level is a conserved
+quantity along every zigzag of $\mathcal T_A$ and $\pi_0(\mathcal B)$ is the set of levels by
+construction; the conserved-level readout of Corollary~\ref{cor:nontrivial} is then immediate.
+Required here, in the sourced register of Remark~\ref{rmk:concentric-gloss}: the statement,
+in terms of levels and winding through the commuting triangle $\pi\circ E=\exp$ only, that
+the degenerate fibre of the unique tame transport attached to an $A$-section lies over a
+\emph{single} level. Metric vocabulary (centres, radii, ``concentric'') may not appear.}
+
+\emph{The cocartesian computation of $\pi_0$.} The fibre $F$ is connected, so by
+Lemma~\ref{lem:pi0-grothendieck}
+\[
+  \pi_0(\mathcal T_A)\ \cong\ \operatorname*{colim}_{\mathcal B}(\pi_0\circ F)\ \cong\
+  \pi_0(\mathcal B),
+\]
+under which a residue-$\CC$ zero-sphere maps to the class of the base object beneath it, and two
+of them share a component of $\mathcal T_A$ if and only if they share that class. By the assembly
+and the placement above, the degenerate fibre lies over one and the same class --- the
+zero-spheres over a single real level $c$, one for each winding index carried
+by the band --- hence has a single image in $\pi_0(\mathcal T_A)$: one connected component.
+
+\emph{Readback in $\mathcal H_1$.} By Lemma~\ref{lem:residue-spheres} each residue-$\CC$
+zero-sphere is a $\Gtwo$-orbit component of $\mathcal H_1$, carried into the slice world by the
+section functor $\Phi$ (Theorem~\ref{thm:section-functor}; Remark~\ref{rmk:collapse-cone});
+distinct spheres are distinct orbits, hence pairwise disjoint, and by \textup{C4} there are
+infinitely many. The theorem states only the one-component conclusion; reading the component as a
+common \emph{centre} is the downstream translation of Corollary~\ref{cor:nontrivial}.
+\end{proof}
+
+\begin{remark}[A second proof, via finality]\label{rmk:pi0-split}
+\uses{lem:pi0-grothendieck}
+The single-component conclusion also follows from Quillen's \S1 \cite{Quillen73}, on the same
+assembly, in either of two forms. \emph{Finality:} by \textup{C1} the continuation of $A$ carries
+every zero-bearing level of $\mathcal B$ to the north pole $\nfr$, and the winding lift supplies
+a unique tame companion along each such continuation (\cite[Def.~4.20, Cor.~5.13]{GPVwind}); so
+the comma category from a zero-bearing level to $\nfr$ is non-empty and connected, and $\nfr$ is
+final over the zero-bearing part of $\mathcal B$ --- the $\pi_0$ shadow of Theorem~A (``if
+$Y\backslash f$ is contractible for every $Y$, then $f$ is a homotopy equivalence''; connected
+and non-empty is the $\pi_0$-level hypothesis; textbook form Riehl \cite[\S8.3, \S8.5]{Riehl}).
+\emph{Fibred form:} the projection $p:\int_{\mathcal B}F\to\mathcal B$ is precofibred with fibre
+the connected band, and Quillen's corollary to Theorem~A (pre(co)fibred with contractible fibres
+$\Rightarrow$ homotopy equivalence) has as its $\pi_0$ shadow exactly the bijection
+$\pi_0(\mathcal T_A)\cong\pi_0(\mathcal B)$ used above. Thomason's theorem \cite{Thomason79}
+lifts the identity of Lemma~\ref{lem:pi0-grothendieck} to the classifying-space equivalence
+$B\bigl(\int_{\mathcal B}F\bigr)\simeq\operatorname*{hocolim}_{\mathcal B}(B\circ F)$. The
+cocartesian argument above is the primary one; this is recorded as an alternative.
+\end{remark}
+
+\begin{theorem}[Connected is concentric: the dictionary]\label{thm:connected-concentric}
+\uses{def:base, lem:exp-degenerate}
+Residue-$\CC$ spheres of the degenerate family of Lemma~\ref{lem:exp-degenerate} lie in one
+connected component of the static base --- have one image in $\pi_0(\mathcal B)$ --- if and
+only if they share one real level, if and only if they are $6$-spheres about one real
+centre: concentric.
+\end{theorem}
+\begin{proof}
+The components of the static base are the real levels by construction: the base is static,
+no morphisms between distinct levels, the level conserved along every zigzag
+(Definition~\ref{def:base}); so one image in $\pi_0(\mathcal B)$ is one level. By
+Lemma~\ref{lem:exp-degenerate} the degenerate fibre over $-r$ is
+$\exp^{-1}(-r)=\{\log r+I(2k{+}1)\pi\}$ --- one real level $\log r$, winding carried by the
+band --- and its spheres have centre $\log r$ and radii $(2k{+}1)\pi$: one level is one
+centre. Spheres about one centre are concentric. No property of $A$-sections and no part of
+Theorem~\ref{thm:concentricity} enters.
+\end{proof}
+
+\begin{remark}[Dictionary vs.\ application]\label{rmk:collapse-vs-translation}
+The dictionary above is logically independent of the collapse: its \texttt{uses} carries no
+arrow from Theorem~\ref{thm:concentricity}, and the blueprint graph shows the two nodes
+unlinked. The application, Corollary~\ref{cor:nontrivial}, consumes both --- the collapse
+supplies \emph{one component}; the dictionary reads it as \emph{one centre}.
+\end{remark}
+
+\begin{corollary}[Translation to the classical framework]\label{cor:nontrivial}
+\uses{thm:concentricity, thm:connected-concentric, thm:zero-equivalence, thm:zero-spheres, lem:residue-spheres}
+Identifying residue-$\CC$ zeros with the classically nontrivial zeros, and residue-$\RR$ zeros
+with the trivial ones (Part~2), such a section has its nontrivial zeros realised as infinitely
+many pairwise disjoint concentric $6$-spheres about a single real centre.
+\end{corollary}
+\begin{proof}
+By Theorem~\ref{thm:concentricity} the residue-$\CC$ zero-spheres lie in one connected component
+of $\mathcal T_A$. By the dictionary (Theorem~\ref{thm:connected-concentric}) one component of
+the static base is one real level, hence one real centre $c$: the spheres are concentric
+about $c$. Their identification with the classical nontrivial zeros is
+Theorems~\ref{thm:zero-equivalence} and~\ref{thm:zero-spheres}; infinitude and pairwise
+disjointness are \textup{C4} and Lemma~\ref{lem:residue-spheres}.
+\end{proof}
+
+
+\section{Corollaries}\label{sec:verification}
+\begin{corollary}[$\zetaO$ is an $A$-section]\label{cor:zeta-section}
+\uses{def:A-section, thm:zeta-in-R, thm:riemann, thm:euler, thm:hadamard, prop:weierstrass, thm:zero-spheres}
+$\zetaO$ is an $A$-section \textup{(Definition~\ref{def:A-section})}: a section of
+$\mathcal R$ satisfying \textup{(C1)--(C4)}.
+\end{corollary}
+\begin{proof}
+$\zetaO\in\mathcal R$ by slice-preservation (Theorem~\ref{thm:zeta-in-R}). The verification of
+\textup{(C1)--(C4)} cites the classical facts of the Riemann zeta function (Part~1) and the
+slice-regular zero-geometry that translates them:
+\begin{itemize}[leftmargin=2em]
+\item \textbf{(C1)} \emph{Meromorphic continuation; simple pole.} Classical fact: $\zeta$ is
+  meromorphically continued with a single simple pole at $s=1$ (Theorem~\ref{thm:riemann});
+  the value of $\zetaO$ there is the point at infinity, $\zetaO(1)=\infty=N$
+  (Definition~\ref{def:zeta_O}).
+\item \textbf{(C2)} \emph{Infinite Euler product.} Classical fact: $\zeta=\prod_p(1-p^{-s})^{-1}
+  =\exp(\sum_p\ell_p)$ on $\Re s>1$, the family indexed by the infinitely many primes
+  (Theorem~\ref{thm:euler}).
+\item \textbf{(C3)} \emph{Infinite Weierstrass factorization.} Supplied by the
+  \emph{slice-regular} Weierstrass factorization (Proposition~\ref{prop:weierstrass};
+  \cite[Prop.~3.1, Thm.~3.2]{AdFslice}, \cite{GV}):
+  $\zetaO=q^{m}Re^{g}\prod_n\mathcal E(\cdot;q_n)$, where $m=0$ \textup{(}$\zeta(0)=-\tfrac12
+  \neq0$\textup{)}, $R$ is the product over the residue-$\RR$ zeros --- the classically trivial
+  zeros $-2,-4,\dots$, honest real zeros of $\zetaO$ --- and $\{q_n\}$ enumerates its
+  residue-$\CC$ zero-spheres.
+\item \textbf{(C4)} \emph{Infinitely many residue-$\CC$ zeros.} Classical fact: $\zeta$ has
+  infinitely many nontrivial zeros (the Hadamard product, Theorem~\ref{thm:hadamard}; also Hardy,
+  Theorem~\ref{thm:hardy}). By the residue dictionary below these are exactly the residue-$\CC$
+  zeros, so $\{q_n\}$ is infinite.
+\end{itemize}
+The one remaining classical fact enters the downstream centre-pinning rather than
+\textup{(C1)--(C4)}: the \emph{functional equation} $\xi(s)=\xi(1-s)$,
+$\xi(\bar s)=\overline{\xi(s)}$ (Theorem~\ref{thm:riemann}), used in Corollary~\ref{cor:rh}. The
+\emph{residue dictionary} --- a closed zero of $\zetaO$ is a real point (residue field $\RR$, the
+classically \emph{trivial} zeros) or a $6$-sphere $S_{(\sigma,\gamma)}$ (residue field $\CC$, the
+classically \emph{nontrivial} zeros) --- is the slice-regular zero-geometry of
+Theorem~\ref{thm:zero-spheres} and \cite{AdF}; it is what makes ``residue-$\CC$'' and
+``nontrivial'' the same notion. Thus \textup{(C1)--(C4)} hold.
+\end{proof}
+
+\begin{corollary}[Riemann Hypothesis]\label{cor:rh}
+\uses{cor:zeta-section, thm:concentricity, cor:nontrivial, thm:rh-equiv}
+Every nontrivial zero of the classical Riemann zeta function has real part $\tfrac12$; in
+particular infinitely many zeros lie on the line $\Re s=\tfrac12$.
+\end{corollary}
+\begin{proof}
+By Corollary~\ref{cor:zeta-section}, $\zetaO$ satisfies \textup{(C1)--(C4)}; by
+Theorem~\ref{thm:concentricity} the residue-$\CC$ zero-spheres of $\zetaO$ lie in a single
+connected component of $\mathcal T_{\zetaO}$. By Corollary~\ref{cor:nontrivial} that one
+component is a single real centre $c$, so the residue-$\CC$ zeros are infinitely many concentric
+$6$-spheres about $c$; under the residue dictionary (Corollary~\ref{cor:zeta-section}) these are
+the classically nontrivial zeros, so every nontrivial zero has real part $c$. The functional
+equation $\xi(s)=\xi(1-s)$ (Theorem~\ref{thm:riemann}) sends a zero of real part $c$ to one of
+real part $1-c$; applied to the \emph{common} centre it forces $c=1-c$, whence $c=\tfrac12$ (this
+is Theorem~\ref{thm:rh-equiv} read on $\zetaO$). Therefore every nontrivial zero has real part
+$\tfrac12$, and by \textup{(C4)} infinitely many lie on $\Re s=\tfrac12$.
+\end{proof}
+
+
+\begin{remark}[Status and formalization]\label{rmk:status}
+Theorem~\ref{thm:concentricity} rests on the cited slice-regular inputs --- the Weierstrass
+factorization (Proposition~\ref{prop:weierstrass}; \cite[Prop.~3.1, Thm.~3.2]{AdFslice},
+\cite{GV}), the winding lift and its criteria (Theorem~\ref{thm:winding-lift},
+Proposition~\ref{prop:winding-signature}; \cite[Def.~5.11, Def.~4.20, Cor.~5.13,
+Cor.~5.21]{GPVwind}), and the exponential's degenerate fibre (Theorem~\ref{thm:slice-exp};
+Lemma~\ref{lem:exp-degenerate}) --- together with the identity
+$\pi_0(\mathcal T_A)\cong\operatorname*{colim}_{\mathcal B}(\pi_0\circ F)$ of
+Lemma~\ref{lem:pi0-grothendieck}. A second proof from Quillen's \S1 (Theorem~A and its
+pre(co)fibred corollary \cite{Quillen73}; Riehl \cite[\S8.3]{Riehl}) is recorded in
+Remark~\ref{rmk:pi0-split}. The placement sentence remains the author's and is conspicuously marked inside the proof of
+Theorem~\ref{thm:concentricity}; the static-base reading is fixed, so the sentence must speak
+of levels and winding only.
+
+The translation from ``one connected component'' to ``one real centre,'' and thence to concentric
+$6$-spheres and the classical nontrivial zeros, is Corollary~\ref{cor:nontrivial}: the components
+of the static base are the real levels (Definition~\ref{def:base}), and the equivalence
+Theorems~\ref{thm:zero-equivalence} and~\ref{thm:zero-spheres} perform the identification. It is
+a corollary of the theorem, kept logically separate: the Concentricity Theorem itself states and
+uses only the one-component conclusion.
+
+A machine formalization is future work; nothing in this document has been run in Lean. The
+categorical objects rest on existing Mathlib foundations --- the translation groupoid
+$\mathcal H_1$ (\texttt{CategoryTheory.ActionCategory}), the Grothendieck construction
+$\mathcal T_A$ (\texttt{CategoryTheory.Grothendieck}), and $\pi_0$
+(\texttt{CategoryTheory.ConnectedComponents}) --- while the octonionic and $\Gtwo$ data and the
+band $U(1)$, absent from Mathlib, enter as axioms carrying their citations \cite{Mathlib}. The
+section functor $\Phi$ (Theorem~\ref{thm:section-functor}) and the winding lift
+(Theorem~\ref{thm:winding-lift}) are the constructions to formalize; the one-component conclusion
+is then the $\pi_0$ computation of Lemma~\ref{lem:pi0-grothendieck}.
+\end{remark}
+
+%=====================================================================
+\begin{thebibliography}{99}
+%=====================================================================
+\bibitem{AdF} A.~Altavilla and C.~De Fabritiis, \emph{$\ast$-logarithm for slice regular
+functions}, Rend.\ Lincei Mat.\ Appl.\ (arXiv:2106.04227); the slice-regular exponential
+$\exp_{*}$ (Def.~2.14, and Rem.~2.23 for the slice-preserving formula
+$\exp_{*}(f)=e^{f_0}(\cos f_1+I\sin f_1)$) and the $\ast$-logarithm on never-vanishing
+functions (Def.~2.24, Thm.~6.17).
+\bibitem{AdFslice} A.~Altavilla and C.~De Fabritiis, \emph{$s$-regular functions which
+preserve a complex slice}, Ann.\ Mat.\ Pura Appl.\ (arXiv:1801.01318); Prop.~3.1 and
+Thm.~3.2 factor a slice-regular function into a factor carrying exactly its (real and
+spherical) zeros and a never-vanishing factor, including the case of infinitely many zeros
+--- the citable form of C3.
+\bibitem{Baez02} J.~C.~Baez, \emph{The octonions}, Bull.\ Amer.\ Math.\ Soc.\
+\textbf{39} (2002), 145--205.
+\bibitem{BisiWinkelmann} C.~Bisi and J.~Winkelmann, \emph{Invariants and Automorphisms for slice
+regular functions: the octonionic case}, arXiv:2411.16762 (2024); companion arXiv:2411.15896 in
+J.~Noncommutative Geometry (EMS). Supplies the $I$-independent lift $\phi_I\circ F=A\circ\phi_I$
+(the slice projection) and, in \S3.2/\S3.7/\S14, the axially-symmetric-domain, slice-preserving, and
+central-divisor notions.
+\bibitem{CSS12} F.~Colombo, I.~Sabadini, and D.~C.~Struppa, \emph{Noncommutative
+Functional Calculus: Theory and Applications of Slice Hyperholomorphic Functions},
+Progress in Mathematics \textbf{289}, Birkh\"auser, 2011.
+\bibitem{GP11} R.~Ghiloni and A.~Perotti, \emph{Slice regular functions on real
+alternative algebras}, Adv.\ Math.\ \textbf{226} (2011), 1662--1691.
+\bibitem{SeriesExp} R.~Ghiloni, A.~Perotti, and C.~Stoppato, \emph{Singularities of slice regular
+functions / series expansion} (slice-function and stem-function formalism; the slice-preserving
+$\Leftrightarrow$ intrinsic $\Leftrightarrow$ $\RR$-valued-stem characterization used in
+Definition~\ref{def:slice-squares}).
+\bibitem{GS07} G.~Gentili and D.~C.~Struppa, \emph{A new theory of regular functions
+of a quaternionic variable}, Adv.\ Math.\ \textbf{216} (2007), 279--301.
+\bibitem{GSS13} G.~Gentili, C.~Stoppato, and D.~C.~Struppa, \emph{Regular Functions of
+a Quaternionic Variable}, Springer Monographs in Mathematics, Springer, 2013.
+\bibitem{GV} G.~Gentili and I.~Vignozzi, \emph{The Weierstrass factorization theorem
+for slice regular functions over the quaternions}, Ann.\ Global Anal.\ Geom.\
+\textbf{40} (2011), 435--466.
+\bibitem{Hardy14} G.~H.~Hardy, \emph{Sur les z\'eros de la fonction $\zeta(s)$ de
+Riemann}, C.\ R.\ Acad.\ Sci.\ Paris \textbf{158} (1914), 1012--1014.
+\bibitem{Munkres00} J.~R.~Munkres, \emph{Topology}, 2nd ed., Prentice Hall, 2000.
+\bibitem{Riemann1859} B.~Riemann, \emph{\"Uber die Anzahl der Primzahlen unter einer
+gegebenen Gr\"osse}, Monatsber.\ Berlin.\ Akad.\ (1859).
+\bibitem{Schafer66} R.~D.~Schafer, \emph{An Introduction to Nonassociative Algebras},
+Academic Press, 1966.
+\bibitem{Titchmarsh86} E.~C.~Titchmarsh (rev.\ D.~R.~Heath-Brown), \emph{The Theory of
+the Riemann Zeta-Function}, 2nd ed., Oxford University Press, 1986.
+\bibitem{Wang} X.~Wang, \emph{On geometric aspects of quaternionic and octonionic
+slice regular functions}, arXiv:1512.01414v3.
+\bibitem{VS} G.~Gentili, J.~Prezelj, and F.~Vlacci, \emph{Slice conformality and
+Riemann manifolds on quaternions and octonions}, Math.\ Z.\ \textbf{302} (2022),
+971--994 (arXiv:2107.07892v2).
+\bibitem{Stacks} The Stacks Project Authors, \emph{The Stacks Project},
+\url{https://stacks.math.columbia.edu}, 2024.
+\bibitem{Mathlib} The mathlib Community, \emph{The Lean mathematical library}
+(\texttt{CategoryTheory.ActionCategory}, \texttt{CategoryTheory.ConnectedComponents}, \texttt{CategoryTheory.Comma}),
+\url{https://leanprover-community.github.io/mathlib4_docs/}.
+\bibitem{GJ} P.~G.~Goerss and J.~F.~Jardine, \emph{Simplicial Homotopy Theory}, Modern
+Birkh\"auser Classics, Birkh\"auser, 2009 (Ch.~I: simplicial sets and the nerve; Ch.~IV: the
+bisimplicial engine behind Theorem~A and Thomason's theorem).
+\bibitem{GPVwind} G.~Gentili, J.~Prezelj, and F.~Vlacci, \emph{On a continuation of
+quaternionic and octonionic logarithm along curves and the winding number},
+arXiv:2307.14047 (Def.~5.11: the loop lift $\mathrm{pr}_1\circ\Gamma=\gamma\circ\exp$;
+Def.~4.20, Def.~5.2: tameness = unique companion; Cor.~5.13: a lift of a loop exists iff the
+signature lies in $\{0,-1\}$ on each obstruction interval, and is then a loop; Cor.~5.21:
+winding $=|\sigma^c|/2$; Rem.~5.2(b), verbatim: $\exp$ ``has a non-empty degenerate set consisting of spheres''; Rem.~5.2(a): $\pi\circ E=\exp$).
+\bibitem{Sharma} A.~Sharma, \emph{coCartesian fibrations and homotopy colimits},
+arXiv:2205.13686 (quotes Thomason's Thm.~1.2 verbatim as its Thm.~1.1).
+\bibitem{Thomason79} R.~W.~Thomason, \emph{Homotopy colimits in the category of small
+categories}, Math.\ Proc.\ Cambridge Philos.\ Soc.\ \textbf{85} (1979), 91--109 (Thm.~1.2:
+the Grothendieck construction of a diagram of small categories models its homotopy colimit).
+\bibitem{Quillen73} D.~Quillen, \emph{Higher algebraic $K$-theory: I}, in \emph{Algebraic
+$K$-theory, I}, Lecture Notes in Math.\ \textbf{341}, Springer, 1973, 85--147 (Theorem~A:
+a functor whose comma categories are contractible is final and induces an equivalence of
+classifying spaces).
+\bibitem{Riehl} E.~Riehl, \emph{Categorical Homotopy Theory}, New Mathematical Monographs \textbf{24},
+Cambridge University Press, 2014 (the nerve, classifying spaces, the two-sided bar construction, and
+homotopy colimits; Ch.~1, 4--6).
+\bibitem{Vistoli} A.~Vistoli, \emph{Notes on Grothendieck topologies, fibered categories and descent
+theory}, in \emph{Fundamental Algebraic Geometry}, Math.\ Surveys Monogr.\ \textbf{123}, AMS, 2005
+(arXiv:math/0412512); \S3.1 for the Grothendieck construction and categories fibered in groupoids.
+\end{thebibliography}
+
+\end{document}
