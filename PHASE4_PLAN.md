@@ -60,6 +60,52 @@ FIRST** — cleared up front, not saved for last; the visible ledger drop starts
 lands. Then cheap-first: 1 → 3 → 4 → 5 → 7 (isometry block) → 8 → 6 → 9 → 10 → 11 →
 cone completion → 12 → 13.
 
+## Standing review invariants (author, 2026-07-03 — checked against every commit)
+
+R3/R4 invariants for the assembly seam:
+- 𝓑 / the exponential's degenerate base is derived from C1–C4 (`lem:exp-degenerate`),
+  never assumed independently.
+- The cocartesian π₀ colimit consumes all four hypotheses, not a subset.
+- C2 Euler and C3 Weierstrass stay the infinite versions (`Infinite ι`, `∑'`, `∏'`,
+  `c4_infinite`) — no finite-truncation shortcut.
+- The residue-ℂ zero 6-spheres are output (the degenerate fibre), never defined up front
+  as input to force the conclusion. Any close that inverts this is an R6 stop.
+
+**Register guardrail (R6 stop if violated; corrected 2026-07-03).** The readout closes
+by the **cocartesian route only, Lean-native**: `CategoryTheory.Grothendieck`, π₀ as left
+adjoint to the discrete inclusion (preserves colimits), connectedness via
+`IsConnected`/`ConnectedComponents` (functors to discrete categories are constant), and
+`colimit`. Quillen Theorem A / Thomason's |hocolim NF| ≃ B(∫F) are the
+finality/classifying-space reading — expository, community-left, NOT formalized here; do
+not reach for them to discharge `pi0_grothendieck`, `totalObject_components_eq_levels`,
+`assemblyComponent`, or `concentricity`. If a close seems to need Thomason, it's the
+wrong proof — stop (R6). There is no per-point, per-slice, or "n-th zero" construction
+anywhere in the readout. The residue-ℂ zeros are the degenerate fibre, read off by π₀ —
+never enumerated as inputs. If a close begins destructuring individual octonions/slice
+points/zeros to force a component equality: stop and report the goal — wrong register, it
+will not close, and a fill that appears to work that way is vacuous (all four hypotheses
+must be live; the infinite Euler product derives the base; the cone is the continuum of
+Riemann spheres through ∞).
+
+**Three hard fences (author, 2026-07-03):**
+1. **No jumping ahead.** No translation/equivalence theorem (Track 2) and no corollary
+   (Track 4, incl. `cor:rh`) is stated or used until `concentricity` is proved. R4:
+   corollaries attach after the theorem. Don't pull a downstream statement forward to
+   shortcut a spine goal.
+2. **No restatement.** Every def/lemma/theorem matches the master verbatim. If a
+   statement looks like it needs to change to close, that is an R6 stop — report the
+   goal, don't edit the statement. Changing the target to fit the proof is the failure
+   we're guarding against.
+3. **Standard register only.** Diagram chasing and standard π₀ arguments from the
+   project literature and Mathlib. The viewpoint is novel; the techniques are not, and
+   they are all already present. Every obligation is an instance of a known categorical
+   move — recognize it and cite it; invent nothing. A goal that seems to demand a new
+   technique is a register error or a misread statement, not a license to improvise.
+
+**Compactified-transport rule.** Per `rmk:slice-pres-compact`: cite the uncompactified
+literature statement, then extend through `OnePoint` (`OnePoint.rec`/`map`). Do not
+reprove toolkit lemmas by hand on ℝ⁸ and adjoin ∞ — that reintroduces the local register.
+
 Standing flags the assembly transcription will touch (both already reported, neither
 resolved by me): the `def:base` "How the section populates" paragraph still cites
 `[Def. 4.20, Def. 5.2]{GPVwind}` for unique-companion (the Def 4.7 ruling corrected the
