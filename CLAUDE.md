@@ -139,7 +139,7 @@ mirrors the discovery order.
   — supersedes the old 5.22 cite; Cor 5.21 (winding = |σᶜ|/2); Rem 2.1 (the direction
   I(q) has no continuous extension to ℝ).
 - **Wang Rem 2.11**; **Bisi–Winkelmann §3.2/§3.7**; **AdF 1801.01318 Prop 3.1 + Thm 3.2**
-  (C3); **AdF 2106.04227 §1, §11** (slices; semiregular); **Baez** (G₂ ↷ S⁶, stab SU(3)).
+  (C3); **GPS 1606.03609 §1, §11** (slices; semiregular); **Baez** (G₂ ↷ S⁶, stab SU(3)).
 - **Mathlib** (verify live): `CategoryTheory.Grothendieck` (✓ verified — *not* the
   Grothendieck-topology files), `CategoryTheory.ConnectedComponents` + `IsConnected`
   (✓ verified — connectedness is *defined* by "functors to discrete categories are
