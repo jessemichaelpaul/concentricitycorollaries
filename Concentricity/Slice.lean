@@ -79,12 +79,19 @@ theorem sliceEmbed_mul {v : Octonion} (hv : v ∈ unitImaginarySphere) (z w : �
     Octonion.mul_one, Octonion.one_mul]
   module
 
-/-- The direction of a non-real octonion is a unit imaginary octonion.
-Queued (R8): `re (im x) = 0` by construction and `normSq (dir x) = 1` by
-the smul-homogeneity of `normSq`. -/
+/-- The imaginary part has no real part — by construction. -/
+theorem re_im (x : Octonion) : re (im x) = 0 := by
+  rw [im, re_sub, re_ofReal, sub_self]
+
+/-- The direction of a non-real octonion is a unit imaginary octonion:
+`re (im x) = 0` by construction and `normSq (dir x) = 1` by the
+smul-homogeneity of `normSq` (`normSq_normalize`). -/
 theorem dir_mem_unitImaginarySphere {x : Octonion} (hx : im x ≠ 0) :
     dir x ∈ unitImaginarySphere := by
-  sorry
+  refine ⟨?_, ?_⟩
+  · show re ((norm (im x))⁻¹ • im x) = 0
+    rw [re_smul, re_im, mul_zero]
+  · exact normSq_normalize hx
 
 /-- The slice Riemann sphere ℂ_v* = ℂ_v ∪ {∞} = S²_v (master `def:slices`),
 as a subset of the compactified 𝕆*. "All slice spheres share the single
