@@ -17,10 +17,31 @@ isomorphism φ_v : ℂ → ℂ_v, i ↦ v. … Its one-point compactification is
 import Concentricity.ASection
 import Concentricity.G2
 import Mathlib.Analysis.SpecialFunctions.Sqrt
+import Mathlib.Tactic.Module
 
 noncomputable section
 
 namespace Octonion
+
+/-! ### Componentwise helpers (DERIVED, R10) -/
+
+theorem ofReal_eq_smul_one (r : ℝ) : ofReal r = r • (1 : Octonion) := by
+  refine Prod.ext ?_ ?_
+  · show ((r : ℝ) : Quaternion ℝ) = r • (1 : Quaternion ℝ)
+    simpa [Algebra.algebraMap_eq_smul_one] using
+      (congrFun Quaternion.algebraMap_def r).symm
+  · show (0 : Quaternion ℝ) = r • (0 : Quaternion ℝ)
+    rw [smul_zero]
+
+theorem re_smul (r : ℝ) (x : Octonion) : re (r • x) = r * re x := by
+  show (r • x).1.re = r * x.1.re
+  rw [show (r • x).1 = r • x.1 from rfl, Quaternion.re_smul, smul_eq_mul]
+
+theorem re_add (x y : Octonion) : re (x + y) = re x + re y := rfl
+
+theorem re_sub (x y : Octonion) : re (x - y) = re x - re y := rfl
+
+theorem re_one : re (1 : Octonion) = 1 := rfl
 
 /-- The imaginary part: "An octonion s ∈ 𝕆 decomposes as s = σ + w with
 σ = re(s) ∈ ℝ and w = im(s) ∈ im(𝕆) ≅ ℝ⁷" (master, §Octonions and slices). -/
@@ -45,12 +66,18 @@ def sliceEmbed (v : Octonion) (z : ℂ) : Octonion := ofReal z.re + z.im • v
 
 /-- master `def:slices`: "Since v² = −1, this is a subalgebra isomorphic to
 ℂ via the ℝ-algebra isomorphism φ_v : ℂ → ℂ_v, i ↦ v" — multiplicativity of
-the slice embedding. Queued (R8): distributivity + `v * v = −1`
+the slice embedding. Distributivity + `v * v = −1`
 (`sq_eq_neg_one_of_mem_unitImaginarySphere`) + scalar-multiplication
-compatibility of the Cayley–Dickson product. -/
+compatibility of the Cayley–Dickson product (the `IsScalarTower`/
+`SMulCommClass` instances of Concentricity/OctonionForm.lean). -/
 theorem sliceEmbed_mul {v : Octonion} (hv : v ∈ unitImaginarySphere) (z w : ℂ) :
     sliceEmbed v (z * w) = sliceEmbed v z * sliceEmbed v w := by
-  sorry
+  have hv2 : v * v = -1 := sq_eq_neg_one_of_mem_unitImaginarySphere hv
+  simp only [sliceEmbed, ofReal_eq_smul_one, Complex.mul_re, Complex.mul_im]
+  rw [mul_add, add_mul, add_mul, smul_mul_smul_comm, smul_mul_smul_comm,
+    smul_mul_smul_comm, smul_mul_smul_comm, hv2, Octonion.one_mul,
+    Octonion.mul_one, Octonion.one_mul]
+  module
 
 /-- The direction of a non-real octonion is a unit imaginary octonion.
 Queued (R8): `re (im x) = 0` by construction and `normSq (dir x) = 1` by
