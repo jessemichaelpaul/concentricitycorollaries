@@ -117,17 +117,27 @@ mirrors the discovery order.
   https://emilyriehl.github.io/files/cathtpy.pdf
 - **Goerss–Jardine** (Ch. I nerve; Ch. IV bisimplicial engine):
   https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/Goerss-Jardine2.pdf
-- **GPV/VS, "Slice conformality…" (GPV_pdf.pdf — HAS a text layer, p. 22 verified)**:
+- **VS, "Slice conformality…" — Math. Z. 302(2) (2022), 971–994, DOI
+  10.1007/s00209-022-03079-4, open access; version-of-record excerpts in SOURCES/VS.md
+  (supersedes the old GPV_pdf.pdf note)**:
   **Rem 5.2(a)** verbatim: (π∘E)(q) = exp(q) — *the commuting triangle*. **Rem 5.2(b)**
-  verbatim: "Unlike what happens in the complex setting, the map π : E⁺_K → K is not a
-  covering. It is not an open map as well, due to the fact that exp… has a **non-empty
-  degenerate set consisting of spheres**." Prop 4.1/Thm 4.2 (stereographic atlas);
-  Prop 5.1–5.4, Def 5.3/5.5 (E⁺, L). The fibre formula exp⁻¹(−r) = {log r + I(2k+1)π} is
-  **derived** (`lem:exp-degenerate`), not cited.
-- **GPV winding, arXiv:2307.14047** (text-searchable): Def 5.11 (loop lift,
-  pr₁∘Γ = γ∘exp); Def 4.20/5.2 (tame = unique companion); **Cor 5.13** (lift exists iff
-  σ ∈ {0,−1} per obstruction interval; then a loop) — supersedes the old 5.22 cite;
-  Cor 5.21 (winding = |σᶜ|/2); Rem 2.1 (the direction I(q) has no continuous extension to ℝ).
+  verbatim (printed p. 988): "Unlike what happens in the complex setting, the map
+  π : 𝓔⁺_K → K is not a covering. It is not an open map as well, due to the fact that
+  exp : K → K is not an open map (it has a non–empty degenerate set consisting of
+  spheres)." Prop 4.1/Thm 4.2 (stereographic atlas); Prop 5.1, Rem 5.2, Def 5.3,
+  Prop 5.4, Def 5.5 (E⁺, L — environment types per the print). The fibre formula
+  exp⁻¹(−r) = {log r + I(2k+1)π} is **derived** (`lem:exp-degenerate`); VS's Preface
+  (p. 972) prints it as unproved motivation — acknowledged in the master's lemma,
+  derivation load-bearing.
+- **GPV winding — J. Math. Anal. Appl. 536(1) (2024), Paper No. 128219, DOI
+  10.1016/j.jmaa.2024.128219 (arXiv:2307.14047 v1; excerpts in SOURCES/GPVwind.md;
+  JMAA-version numbering unverified — publisher 403, author to confirm via library)**:
+  Def 5.11 (loop lift, pr₁∘Γ = γ∘exp); Def 4.7 (tame path = unique companion; Def 4.20
+  for maps; Def 5.2 = tame/semi-tame at an obstruction parameter — the paper has NO
+  Rem 5.2 and never prints "degenerate": those quotes are VS's, per SOURCES/GPVwind.md
+  FLAGS); **Cor 5.13** (lift exists iff σ ∈ {0,−1} per obstruction interval; then a loop)
+  — supersedes the old 5.22 cite; Cor 5.21 (winding = |σᶜ|/2); Rem 2.1 (the direction
+  I(q) has no continuous extension to ℝ).
 - **Wang Rem 2.11**; **Bisi–Winkelmann §3.2/§3.7**; **AdF 1801.01318 Prop 3.1 + Thm 3.2**
   (C3); **AdF 2106.04227 §1, §11** (slices; semiregular); **Baez** (G₂ ↷ S⁶, stab SU(3)).
 - **Mathlib** (verify live): `CategoryTheory.Grothendieck` (✓ verified — *not* the

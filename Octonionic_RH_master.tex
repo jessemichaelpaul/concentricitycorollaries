@@ -444,7 +444,7 @@ given on each slice by
 Consequently $|\exp q|=e^{\re q}$ depends only on the real part, and $\exp$ is nowhere zero.
 \end{theorem}
 
-\begin{theorem}[The logarithm manifold $E^{+}_{\OO}$; \protect{\cite[Prop.~5.1--5.4, Rem.~5.2, Def.~5.3, 5.5]{VS}; \cite[\S3]{GPVwind}}]\label{thm:log-manifold}
+\begin{theorem}[The logarithm manifold $E^{+}_{\OO}$; \protect{\cite[Prop.~5.1, Rem.~5.2, Def.~5.3, Prop.~5.4, Def.~5.5]{VS}; \cite[\S3]{GPVwind}}]\label{thm:log-manifold}
 \uses{thm:slice-exp}
 Let $T:\OO\to\OO\times\im\OO$, $T(x+Iy)=(\sinh x\cos y+I\sinh x\sin y,\ Iy)$, and
 $\OO^{+}=\{q:\re q>0\}$. The \emph{logarithm manifold} is $E^{+}_{\OO}:=T(\OO^{+})$, the
@@ -482,6 +482,8 @@ $e^{x}\sin y=0$, hence $y\in\pi\ZZ$; negativity of the value forces $y=(2k{+}1)\
 $x=\log r$; the direction $I$ is unconstrained. The fibre is thus indexed by the single real
 \emph{level} $\log r=\log|{-}r|$ and, within it, by the odd winding indices $2k{+}1$ carried as
 band data (the winding lift, Theorem~\ref{thm:winding-lift}; \cite[Cor.~5.21]{GPVwind}).
+The fibre formula itself appears, stated without proof as Preface motivation, in \cite{VS}
+(p.~972); the slice-form derivation above is the load-bearing statement.
 \end{lemma}
 
 \begin{remark}[``Concentric'' is translation vocabulary]\label{rmk:concentric-gloss}
@@ -1119,8 +1121,8 @@ $\pi_0(\mathcal T_A)$.
 Let $p:\mathcal T_A=\int_{\mathcal B}F\to\mathcal B$ be the Grothendieck construction of
 Definition~\ref{def:base}. Hypotheses \textup{C1--C4} \emph{assemble} the diagram; the
 residue-$\CC$ zero-spheres then arrive as the degenerate fibre of its transport, an output; and
-$\pi_0$ reads off their component. The assembly is shared by both computations of $\pi_0$ (the
-cocartesian one below and the finality one of Remark~\ref{rmk:pi0-split}).
+$\pi_0$ reads off their component.\footnote{Remark~\ref{rmk:pi0-split} sketches an
+alternative, finality-based computation of $\pi_0$; it is expository and not used here.}
 
 \emph{Assembly: the unique tame transport extending the exponential's base.} The exponential's degenerate fibre over a real value is the level-indexed family
 of Lemma~\ref{lem:exp-degenerate} --- one real level, winding carried by the band --- a
@@ -1135,7 +1137,7 @@ $A=q^{m}Re^{g}\prod_n\mathcal E(\cdot;q_n)$ over its full divisor. On any slice 
 the one holomorphic stem $A_I$ (Definition~\ref{def:section-map}; Wang \cite[Rem.~2.11]{Wang}),
 agreeing on the overlap $\Omega_0$, hence coinciding wherever both are defined (Identity
 Theorem~\ref{thm:identity}). The value-loops of $A$ are therefore tame --- unique companion
-(\cite[Def.~4.20, Def.~5.2]{GPVwind}) --- so their lifts to the logarithm manifold, when they
+(\cite[Def.~4.7]{GPVwind}) --- so their lifts to the logarithm manifold, when they
 exist, are unique; and by \textup{C1} the section has exactly one pole, whose value is $\nfr$
 (Remark~\ref{rmk:two-poles}), the cone through which the value-loops close: along these loops the
 signature criterion holds and the lift exists \emph{and is itself a loop}
@@ -1385,10 +1387,13 @@ Birkh\"auser Classics, Birkh\"auser, 2009 (Ch.~I: simplicial sets and the nerve;
 bisimplicial engine behind Theorem~A and Thomason's theorem).
 \bibitem{GPVwind} G.~Gentili, J.~Prezelj, and F.~Vlacci, \emph{On a continuation of
 quaternionic and octonionic logarithm along curves and the winding number},
-arXiv:2307.14047 (Def.~5.11: the loop lift $\mathrm{pr}_1\circ\Gamma=\gamma\circ\exp$;
-Def.~4.20, Def.~5.2: tameness = unique companion; Cor.~5.13: a lift of a loop exists iff the
+J.~Math.\ Anal.\ Appl.\ \textbf{536} (2024), no.~1, Paper No.~128219,
+DOI 10.1016/j.jmaa.2024.128219 (arXiv:2307.14047) (Rem.~2.1: the direction $I(q)$ has no
+continuous extension to $\RR$; Def.~4.7: tame path = unique companion (Def.~4.20 for maps;
+Def.~5.2: tame/semi-tame at an obstruction parameter); Def.~5.11: the loop lift
+$\mathrm{pr}_1\circ\Gamma=\gamma\circ\exp$; Cor.~5.13: a lift of a loop exists iff the
 signature lies in $\{0,-1\}$ on each obstruction interval, and is then a loop; Cor.~5.21:
-winding $=|\sigma^c|/2$; Rem.~5.2(b), verbatim: $\exp$ ``has a non-empty degenerate set consisting of spheres''; Rem.~5.2(a): $\pi\circ E=\exp$).
+winding $=|\sigma^c|/2$).
 \bibitem{Sharma} A.~Sharma, \emph{coCartesian fibrations and homotopy colimits},
 arXiv:2205.13686 (quotes Thomason's Thm.~1.2 verbatim as its Thm.~1.1).
 \bibitem{Thomason79} R.~W.~Thomason, \emph{Homotopy colimits in the category of small
