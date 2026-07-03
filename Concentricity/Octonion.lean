@@ -141,12 +141,33 @@ def IsImaginary (x : Octonion) : Prop := re x = 0
 def unitImaginarySphere : Set Octonion := {v | re v = 0 ∧ normSq v = 1}
 
 /-- A unit imaginary octonion squares to −1 (the slice-generator property,
-consumed by `def:slices`). Queued proof (R8): with `re a = 0` one has
-`a + star a = 0` and `a * a = −normSq a` in ℍ; the Cayley–Dickson components
-then give `(a,b)² = (−normSq(a,b), 0)`. -/
+consumed by `def:slices`). Proof: with `re a = 0` one has `a + star a = 0`
+and `a * a = −normSq a` in ℍ; the Cayley–Dickson components then give
+`(a,b)² = (−normSq(a,b), 0)`. -/
 theorem sq_eq_neg_one_of_mem_unitImaginarySphere
     {v : Octonion} (hv : v ∈ unitImaginarySphere) : v * v = -1 := by
-  sorry
+  obtain ⟨hre, hnorm⟩ := hv
+  have hre' : v.1.re = 0 := hre
+  have hnorm' : Quaternion.normSq v.1 + Quaternion.normSq v.2 = 1 := hnorm
+  have hstar : star v.1 = -v.1 := by
+    rw [Quaternion.star_eq_two_re_sub, hre']
+    simp
+  have hsum : v.1 + star v.1 = 0 := by rw [hstar]; simp
+  have ha : v.1 * v.1 = -((Quaternion.normSq v.1 : ℝ) : Quaternion ℝ) := by
+    have h := Quaternion.star_mul_self v.1
+    rw [hstar, neg_mul, neg_eq_iff_eq_neg] at h
+    exact h
+  have key : v * v = ((-1 : Quaternion ℝ), (0 : Quaternion ℝ)) := by
+    refine Prod.ext ?_ ?_
+    · show v.1 * v.1 - star v.2 * v.2 = -1
+      rw [ha, Quaternion.star_mul_self, ← Quaternion.coe_neg, ← Quaternion.coe_sub,
+        show -Quaternion.normSq v.1 - Quaternion.normSq v.2
+            = -(Quaternion.normSq v.1 + Quaternion.normSq v.2) from by ring,
+        hnorm', Quaternion.coe_neg, Quaternion.coe_one]
+    · show v.2 * v.1 + v.2 * star v.1 = 0
+      rw [← mul_add, hsum, mul_zero]
+  rw [key]
+  refine Prod.ext ?_ ?_ <;> simp [one_def]
 
 /-- `def:octonions`(iv) — alternativity, left law: `(x x) y = x (x y)`.
 Queued proof (R8): 8-component expansion over ℝ, closable by `ring`;
