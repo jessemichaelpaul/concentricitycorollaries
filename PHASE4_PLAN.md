@@ -46,7 +46,7 @@ the ledger before it drops (HANDOFF failure-mode note anticipates exactly this):
   per the recon gate). State ~30, prove 200–400.
 - **`prop:winding-signature`** (GPVwind Cor 5.13 + Cor 5.21) — **LITERATURE INPUT**.
   R2 note: SOURCES/GPVwind.md records a GAP — the definitions of the signature σ and
-  coherent signature σᶜ (Def 5.7 and neighbours) were outside the pinned excerpt targets;
+  circular signature σᶜ (Def 5.7 and neighbours) were outside the pinned excerpt targets;
   a SOURCES top-up is required **before** these can be stated verbatim. Cor 5.21 carries
   the printed hypothesis "σᶜ(γ) even" (FLAGS). State ~20 (after top-up), prove 150–300.
 
