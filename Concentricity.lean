@@ -4,3 +4,5 @@ import Concentricity.Spine
 import Concentricity.G2
 import Concentricity.Base
 import Concentricity.Slice
+import Concentricity.TwoWorlds
+import Concentricity.Theorem
