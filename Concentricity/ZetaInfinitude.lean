@@ -795,3 +795,63 @@ theorem completedZeta₀_growth : ∃ C : ℝ, 0 < C ∧ ∀ s : ℂ,
     linarith
 
 end GrowthBound
+
+/-! ## A6 — the same growth bound for ξ -/
+
+/-- **A6** — ξ obeys the same growth-bound shape as Λ₀: the polynomial
+prefactor s(s−1) is absorbed into the exponential
+(`completedZeta₀_growth`; `Real.exp_log`, `Real.exp_add`). -/
+theorem xi_growth : ∃ C : ℝ, 0 < C ∧ ∀ s : ℂ,
+    ‖xi s‖ ≤ C * Real.exp (C * (‖s‖ + 2) * Real.log (‖s‖ + 2)) := by
+  obtain ⟨C, hC, hbound⟩ := completedZeta₀_growth
+  refine ⟨C + 2, by linarith, fun s => ?_⟩
+  set X : ℝ := ‖s‖ + 2 with hX
+  have hX2 : (2 : ℝ) ≤ X := by
+    rw [hX]
+    linarith [norm_nonneg s]
+  have hXnn : (0 : ℝ) ≤ X := by linarith
+  have hlogX : 0 < Real.log X := Real.log_pos (by linarith)
+  have h1 : ‖xi s‖ ≤ ‖s‖ * ‖s - 1‖ * ‖completedRiemannZeta₀ s‖ + 1 := by
+    rw [xi]
+    calc ‖s * (s - 1) * completedRiemannZeta₀ s + 1‖
+        ≤ ‖s * (s - 1) * completedRiemannZeta₀ s‖ + ‖(1 : ℂ)‖ := norm_add_le _ _
+      _ = ‖s‖ * ‖s - 1‖ * ‖completedRiemannZeta₀ s‖ + 1 := by
+          rw [norm_mul, norm_mul, norm_one]
+  have h2 : ‖s - 1‖ ≤ X := by
+    calc ‖s - 1‖ ≤ ‖s‖ + ‖(1 : ℂ)‖ := norm_sub_le _ _
+      _ = ‖s‖ + 1 := by rw [norm_one]
+      _ ≤ X := by rw [hX]; linarith
+  have h3 : ‖s‖ ≤ X := by rw [hX]; linarith
+  have h4 : ‖s‖ * ‖s - 1‖ * ‖completedRiemannZeta₀ s‖
+      ≤ X * X * (C * Real.exp (C * X * Real.log X)) := by
+    apply mul_le_mul (mul_le_mul h3 h2 (norm_nonneg _) hXnn) (hbound s)
+      (norm_nonneg _) (mul_nonneg hXnn hXnn)
+  have h5 : X * X ≤ Real.exp (2 * X * Real.log X) := by
+    have hXpos : (0 : ℝ) < X := by linarith
+    have hxx : X * X = Real.exp (Real.log X + Real.log X) := by
+      rw [Real.exp_add, Real.exp_log hXpos]
+    rw [hxx]
+    apply Real.exp_le_exp.mpr
+    nlinarith [hlogX.le, hX2]
+  have hexp_nonneg : 0 ≤ (C + 2) * X * Real.log X :=
+    mul_nonneg (mul_nonneg (by linarith) hXnn) hlogX.le
+  calc ‖xi s‖ ≤ ‖s‖ * ‖s - 1‖ * ‖completedRiemannZeta₀ s‖ + 1 := h1
+    _ ≤ X * X * (C * Real.exp (C * X * Real.log X)) + 1 := by linarith [h4]
+    _ ≤ Real.exp (2 * X * Real.log X) * (C * Real.exp (C * X * Real.log X)) + 1 := by
+        have := mul_le_mul_of_nonneg_right h5
+          (mul_nonneg hC.le (Real.exp_pos (C * X * Real.log X)).le)
+        linarith
+    _ = C * (Real.exp (2 * X * Real.log X) * Real.exp (C * X * Real.log X)) + 1 := by
+        ring
+    _ = C * Real.exp (2 * X * Real.log X + C * X * Real.log X) + 1 := by
+        rw [← Real.exp_add]
+    _ = C * Real.exp ((C + 2) * X * Real.log X) + 1 := by
+        rw [show 2 * X * Real.log X + C * X * Real.log X
+          = (C + 2) * X * Real.log X by ring]
+    _ ≤ C * Real.exp ((C + 2) * X * Real.log X)
+        + 1 * Real.exp ((C + 2) * X * Real.log X) := by
+        have := Real.one_le_exp hexp_nonneg
+        nlinarith
+    _ = (C + 1) * Real.exp ((C + 2) * X * Real.log X) := by ring
+    _ ≤ (C + 2) * Real.exp ((C + 2) * X * Real.log X) :=
+        mul_le_mul_of_nonneg_right (by linarith) (Real.exp_pos _).le
