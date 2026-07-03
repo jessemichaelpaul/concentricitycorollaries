@@ -449,3 +449,349 @@ theorem gamma_lower_bound_real (K : ℝ) :
     have := (le_div_iff₀ hπpow).mpr hn
     rwa [div_eq_mul_inv] at this
   exact h1.trans (h2.trans (hxi_lower n))
+
+/-! ## A5 — growth of the completed zeta: ‖Λ₀(s)‖ ≤ C·exp(C·(‖s‖+2)·log(‖s‖+2)) -/
+
+section GrowthBound
+
+open Set MeasureTheory HurwitzZeta Asymptotics
+
+/-- The norm of `Λ₀` is bounded by the norm-integral of its Mellin integrand
+(`WeakFEPair.Λ₀`, AbstractFuncEq.lean:385; `mellin`, MellinTransform.lean:91;
+`norm_integral_le_integral_norm`; `Complex.norm_cpow_eq_rpow_re_of_pos`,
+Pow/Real.lean:337). -/
+theorem lambda0_norm_le (w : ℂ) :
+    ‖(hurwitzEvenFEPair 0).Λ₀ w‖
+      ≤ ∫ t in Ioi (0 : ℝ), t ^ (w.re - 1) * ‖(hurwitzEvenFEPair 0).f_modif t‖ := by
+  have h1 : ‖(hurwitzEvenFEPair 0).Λ₀ w‖
+      = ‖∫ t in Ioi (0 : ℝ), (t : ℂ) ^ (w - 1) • (hurwitzEvenFEPair 0).f_modif t‖ := rfl
+  rw [h1]
+  refine (norm_integral_le_integral_norm _).trans (le_of_eq ?_)
+  refine setIntegral_congr_fun measurableSet_Ioi fun t ht => ?_
+  rw [norm_smul, Complex.norm_cpow_eq_rpow_re_of_pos ht, Complex.sub_re, Complex.one_re]
+
+/-- The Mellin integrand of `f_modif` is norm-integrable on (0, ∞) for every
+real exponent (`StrongFEPair.hasMellin`, AbstractFuncEq.lean:203, applied to
+`WeakFEPair.toStrongFEPair`, AbstractFuncEq.lean:307). -/
+theorem f_modif_norm_integrable (c : ℝ) :
+    IntegrableOn (fun t : ℝ => t ^ (c - 1) * ‖(hurwitzEvenFEPair 0).f_modif t‖)
+      (Ioi (0 : ℝ)) := by
+  have h2 : IntegrableOn
+      (fun t : ℝ => ‖(t : ℂ) ^ ((c : ℂ) - 1) • (hurwitzEvenFEPair 0).f_modif t‖)
+      (Ioi (0 : ℝ)) :=
+    ((hurwitzEvenFEPair 0).toStrongFEPair.hasMellin (c : ℂ)).1.norm
+  refine (integrableOn_congr_fun (fun t ht => ?_) measurableSet_Ioi).mp h2
+  rw [norm_smul, Complex.norm_cpow_eq_rpow_re_of_pos ht]
+  norm_num
+
+/-- The (0, 1] piece of the Mellin bound is uniformly bounded over all
+exponents x ≥ 1/4 (`Real.rpow_le_rpow_of_exponent_ge`, Pow/Real.lean:639;
+`setIntegral_mono_on`, Bochner/Set.lean:764). -/
+theorem piece_A_bound : ∃ C₀ : ℝ, 0 ≤ C₀ ∧ ∀ x : ℝ, 1 / 4 ≤ x →
+    (∫ t in Ioc (0 : ℝ) 1, t ^ (x - 1) * ‖(hurwitzEvenFEPair 0).f_modif t‖) ≤ C₀ := by
+  refine ⟨∫ t in Ioc (0 : ℝ) 1, t ^ (1 / 4 - 1 : ℝ) * ‖(hurwitzEvenFEPair 0).f_modif t‖,
+    setIntegral_nonneg measurableSet_Ioc fun t ht =>
+      mul_nonneg (Real.rpow_nonneg ht.1.le _) (norm_nonneg _), fun x hx => ?_⟩
+  refine setIntegral_mono_on
+    ((f_modif_norm_integrable x).mono_set Ioc_subset_Ioi_self)
+    ((f_modif_norm_integrable (1 / 4)).mono_set Ioc_subset_Ioi_self)
+    measurableSet_Ioc fun t ht => ?_
+  exact mul_le_mul_of_nonneg_right
+    (Real.rpow_le_rpow_of_exponent_ge ht.1 ht.2 (by linarith)) (norm_nonneg _)
+
+/-- Uniform exponential decay of `f_modif` on (1, ∞): the theta-kernel decay
+(`isBigO_atTop_evenKernel_sub`, HurwitzZetaEven.lean:223) on a tail, plus a
+compactness bound (`IsCompact.exists_bound_of_continuousOn`,
+Normed/Group/Bounded.lean:96; `continuousOn_evenKernel`,
+HurwitzZetaEven.lean:116) on the middle range. -/
+theorem f_modif_exp_decay : ∃ p C₂ : ℝ, 0 < p ∧ 0 ≤ C₂ ∧
+    ∀ t : ℝ, 1 < t →
+      ‖(hurwitzEvenFEPair 0).f_modif t‖ ≤ C₂ * Real.exp (-p * t) := by
+  obtain ⟨p, hp, hbig₀⟩ := isBigO_atTop_evenKernel_sub (0 : UnitAddCircle)
+  have hbig : (fun t : ℝ => evenKernel 0 t - 1)
+      =O[Filter.atTop] fun t : ℝ => Real.exp (-p * t) := by simpa using hbig₀
+  obtain ⟨c, hc, hbigW⟩ := hbig.exists_pos
+  have hev := hbigW.bound
+  rw [Filter.eventually_atTop] at hev
+  obtain ⟨T₀, hT₀⟩ := hev
+  set T : ℝ := max T₀ 2 with hT
+  have hcont : ContinuousOn (fun t : ℝ => evenKernel 0 t - 1) (Icc (1 : ℝ) T) :=
+    ((continuousOn_evenKernel 0).mono fun t ht =>
+      lt_of_lt_of_le zero_lt_one ht.1).sub continuousOn_const
+  obtain ⟨M, hM⟩ := isCompact_Icc.exists_bound_of_continuousOn hcont
+  set C₂ : ℝ := max c (max M 0 * Real.exp (p * T)) with hC₂
+  have hC₂0 : 0 ≤ C₂ := le_trans hc.le (le_max_left _ _)
+  have hf₀ : (hurwitzEvenFEPair 0).f₀ = 1 := if_pos rfl
+  refine ⟨p, C₂, hp, hC₂0, fun t ht => ?_⟩
+  have hnorm : ‖(hurwitzEvenFEPair 0).f_modif t‖ = ‖evenKernel 0 t - 1‖ := by
+    have h1 : (hurwitzEvenFEPair 0).f_modif t
+        = (hurwitzEvenFEPair 0).f t - (hurwitzEvenFEPair 0).f₀ := by
+      simp only [WeakFEPair.f_modif, Pi.add_apply]
+      rw [Set.indicator_of_mem (Set.mem_Ioi.mpr ht),
+        Set.indicator_of_notMem (Set.notMem_Ioo_of_ge ht.le), add_zero]
+    rw [h1, hf₀, show (hurwitzEvenFEPair 0).f t = ((evenKernel 0 t : ℝ) : ℂ) from rfl,
+      show ((evenKernel 0 t : ℝ) : ℂ) - 1 = ((evenKernel 0 t - 1 : ℝ) : ℂ) by push_cast; ring,
+      Complex.norm_real]
+  rw [hnorm]
+  rcases le_or_gt T t with hTt | htT
+  · have h1 := hT₀ t (le_trans (le_max_left _ _) hTt)
+    calc ‖evenKernel 0 t - 1‖ ≤ c * ‖Real.exp (-p * t)‖ := h1
+      _ = c * Real.exp (-p * t) := by
+          rw [Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
+      _ ≤ C₂ * Real.exp (-p * t) :=
+          mul_le_mul_of_nonneg_right (le_max_left _ _) (Real.exp_pos _).le
+  · have hmem : t ∈ Icc (1 : ℝ) T := ⟨ht.le, htT.le⟩
+    have h1 : ‖evenKernel 0 t - 1‖ ≤ max M 0 := le_trans (hM t hmem) (le_max_left _ _)
+    have h2 : (1 : ℝ) ≤ Real.exp (p * T) * Real.exp (-p * t) := by
+      rw [← Real.exp_add, ← Real.exp_zero]
+      apply Real.exp_le_exp.mpr
+      nlinarith [hp, htT.le]
+    calc ‖evenKernel 0 t - 1‖ ≤ max M 0 := h1
+      _ ≤ max M 0 * (Real.exp (p * T) * Real.exp (-p * t)) :=
+          le_mul_of_one_le_right (le_max_right _ _) h2
+      _ = max M 0 * Real.exp (p * T) * Real.exp (-p * t) := by ring
+      _ ≤ C₂ * Real.exp (-p * t) :=
+          mul_le_mul_of_nonneg_right (le_max_right _ _) (Real.exp_pos _).le
+
+/-- The (1, ∞) piece: the Γ-type bound
+`∫₁^∞ t^{x−1}·‖f_modif t‖ dt ≤ C₃·exp(x·log(A·x))`, via the elementary
+estimate `log t ≤ log(2x/p) + pt/(2x) − 1` (`Real.log_le_sub_one_of_pos`,
+Log/Basic.lean:306; `integrableOn_exp_mul_Ioi`, ImproperIntegrals.lean:78). -/
+theorem piece_B_bound : ∃ C₃ A : ℝ, 0 ≤ C₃ ∧ 0 < A ∧ ∀ x : ℝ, 1 / 4 ≤ x →
+    (∫ t in Ioi (1 : ℝ), t ^ (x - 1) * ‖(hurwitzEvenFEPair 0).f_modif t‖)
+      ≤ C₃ * Real.exp (x * Real.log (A * x)) := by
+  obtain ⟨p, C₂, hp, hC₂, hdecay⟩ := f_modif_exp_decay
+  set Cp : ℝ := ∫ t in Ioi (1 : ℝ), Real.exp (-(p / 2) * t) with hCp
+  have hCp0 : 0 ≤ Cp :=
+    setIntegral_nonneg measurableSet_Ioi fun t _ => (Real.exp_pos _).le
+  refine ⟨C₂ * Cp, 2 / p, mul_nonneg hC₂ hCp0, by positivity, fun x hx => ?_⟩
+  have hx0 : 0 < x := by linarith
+  have hpt : ∀ t : ℝ, t ∈ Ioi (1 : ℝ) →
+      t ^ (x - 1) * ‖(hurwitzEvenFEPair 0).f_modif t‖
+        ≤ C₂ * Real.exp (x * Real.log (2 / p * x)) * Real.exp (-(p / 2) * t) := by
+    intro t ht
+    rw [mem_Ioi] at ht
+    have ht0 : (0 : ℝ) < t := lt_trans zero_lt_one ht
+    have hlog : Real.log t ≤ Real.log (2 / p * x) + p / (2 * x) * t - 1 := by
+      have hu : (0 : ℝ) < t * (p / (2 * x)) := by positivity
+      have h1 := Real.log_le_sub_one_of_pos hu
+      rw [Real.log_mul (ne_of_gt ht0) (by positivity)] at h1
+      have h2 : Real.log (p / (2 * x)) = -Real.log (2 / p * x) := by
+        rw [← Real.log_inv]
+        congr 1
+        field_simp
+      linarith [h1, h2]
+    have h3 : t ^ (x - 1) ≤ t ^ x :=
+      Real.rpow_le_rpow_of_exponent_le ht.le (by linarith)
+    have h4 : t ^ x = Real.exp (Real.log t * x) := Real.rpow_def_of_pos ht0 x
+    have h5 : Real.log t * x ≤ x * Real.log (2 / p * x) + p / 2 * t - x := by
+      have hmul := mul_le_mul_of_nonneg_left hlog hx0.le
+      have hxx : x * (p / (2 * x) * t) = p / 2 * t := by
+        field_simp
+      nlinarith [hmul, hxx]
+    have h6 : t ^ (x - 1) ≤ Real.exp (x * Real.log (2 / p * x) + p / 2 * t - x) := by
+      rw [h4] at h3
+      exact h3.trans (Real.exp_le_exp.mpr (by linarith))
+    have h7 : ‖(hurwitzEvenFEPair 0).f_modif t‖ ≤ C₂ * Real.exp (-p * t) := hdecay t ht
+    calc t ^ (x - 1) * ‖(hurwitzEvenFEPair 0).f_modif t‖
+        ≤ Real.exp (x * Real.log (2 / p * x) + p / 2 * t - x)
+            * (C₂ * Real.exp (-p * t)) :=
+          mul_le_mul h6 h7 (norm_nonneg _) (Real.exp_pos _).le
+      _ = C₂ * Real.exp (x * Real.log (2 / p * x) + p / 2 * t - x + -p * t) := by
+          rw [Real.exp_add]
+          ring
+      _ ≤ C₂ * Real.exp (x * Real.log (2 / p * x) + -(p / 2) * t) := by
+          apply mul_le_mul_of_nonneg_left (Real.exp_le_exp.mpr (by linarith)) hC₂
+      _ = C₂ * Real.exp (x * Real.log (2 / p * x)) * Real.exp (-(p / 2) * t) := by
+          rw [Real.exp_add]
+          ring
+  have hint1 : IntegrableOn
+      (fun t : ℝ => t ^ (x - 1) * ‖(hurwitzEvenFEPair 0).f_modif t‖) (Ioi (1 : ℝ)) :=
+    (f_modif_norm_integrable x).mono_set (Ioi_subset_Ioi zero_le_one)
+  have hint2 : IntegrableOn
+      (fun t : ℝ => C₂ * Real.exp (x * Real.log (2 / p * x)) * Real.exp (-(p / 2) * t))
+      (Ioi (1 : ℝ)) :=
+    (integrableOn_exp_mul_Ioi (by linarith) 1).const_mul _
+  calc (∫ t in Ioi (1 : ℝ), t ^ (x - 1) * ‖(hurwitzEvenFEPair 0).f_modif t‖)
+      ≤ ∫ t in Ioi (1 : ℝ),
+          C₂ * Real.exp (x * Real.log (2 / p * x)) * Real.exp (-(p / 2) * t) :=
+        setIntegral_mono_on hint1 hint2 measurableSet_Ioi hpt
+    _ = C₂ * Real.exp (x * Real.log (2 / p * x)) * Cp := by
+        rw [hCp, ← integral_const_mul]
+    _ = C₂ * Cp * Real.exp (x * Real.log (2 / p * x)) := by ring
+
+/-- Right-half growth bound for `Λ₀` of the theta FE-pair: split the Mellin
+norm-integral at t = 1 (`setIntegral_union`, Bochner/Set.lean:87;
+`Set.Ioc_union_Ioi_eq_Ioi`, Interval/Set/LinearOrder.lean:198). -/
+theorem lambda0_bound_right : ∃ C₀ C₃ A : ℝ, 0 ≤ C₀ ∧ 0 ≤ C₃ ∧ 0 < A ∧
+    ∀ w : ℂ, 1 / 4 ≤ w.re →
+      ‖(hurwitzEvenFEPair 0).Λ₀ w‖
+        ≤ C₀ + C₃ * Real.exp (w.re * Real.log (A * w.re)) := by
+  obtain ⟨C₀, hC₀, hA⟩ := piece_A_bound
+  obtain ⟨C₃, A, hC₃, hApos, hB⟩ := piece_B_bound
+  refine ⟨C₀, C₃, A, hC₀, hC₃, hApos, fun w hw => ?_⟩
+  refine (lambda0_norm_le w).trans ?_
+  have hsplit : (∫ t in Ioi (0 : ℝ), t ^ (w.re - 1) * ‖(hurwitzEvenFEPair 0).f_modif t‖)
+      = (∫ t in Ioc (0 : ℝ) 1, t ^ (w.re - 1) * ‖(hurwitzEvenFEPair 0).f_modif t‖)
+        + ∫ t in Ioi (1 : ℝ), t ^ (w.re - 1) * ‖(hurwitzEvenFEPair 0).f_modif t‖ := by
+    rw [← setIntegral_union (Ioc_disjoint_Ioi le_rfl) measurableSet_Ioi
+      ((f_modif_norm_integrable w.re).mono_set Ioc_subset_Ioi_self)
+      ((f_modif_norm_integrable w.re).mono_set (Ioi_subset_Ioi zero_le_one)),
+      Ioc_union_Ioi_eq_Ioi zero_le_one]
+  rw [hsplit]
+  exact add_le_add (hA w.re hw) (hB w.re hw)
+
+/-- The Λ₀-functional equation specializes to the reflection
+`Λ₀(w) = Λ₀(1/2 − w)` (`WeakFEPair.functional_equation₀`,
+AbstractFuncEq.lean:429; `hurwitzEvenFEPair_zero_symm`,
+HurwitzZetaEven.lean:279). -/
+theorem lambda0_reflect (w : ℂ) :
+    (hurwitzEvenFEPair 0).Λ₀ w = (hurwitzEvenFEPair 0).Λ₀ ((1 : ℂ) / 2 - w) := by
+  have h := (hurwitzEvenFEPair 0).functional_equation₀ w
+  rw [hurwitzEvenFEPair_zero_symm] at h
+  have hk : (((hurwitzEvenFEPair 0).k : ℝ) : ℂ) = (1 : ℂ) / 2 := by
+    rw [show (hurwitzEvenFEPair 0).k = 1 / 2 from rfl]
+    push_cast
+    norm_num
+  have hε : (hurwitzEvenFEPair 0).ε = 1 := rfl
+  rw [hk, hε, one_smul] at h
+  exact h.symm
+
+/-- Pure-real massage: the raw bound `C₀ + C₁·exp(x·log(A·x))` for
+1/4 ≤ x ≤ X + 2 is absorbed into the single-constant form
+`C·exp(C·(X+2)·log(X+2))`. Elementary log/exp bookkeeping
+(`Real.log_mul`, `Real.log_nonpos`, `Real.log_le_log`, `Real.one_le_exp`). -/
+theorem growth_massage {C₀ C₁ A : ℝ} (hC₀ : 0 ≤ C₀) (hC₁ : 0 ≤ C₁) (hA : 0 < A) :
+    ∃ C : ℝ, 0 < C ∧ ∀ x X : ℝ, 1 / 4 ≤ x → x ≤ X + 2 → 0 ≤ X →
+      C₀ + C₁ * Real.exp (x * Real.log (A * x))
+        ≤ C * Real.exp (C * (X + 2) * Real.log (X + 2)) := by
+  have hlog2 : 0 < Real.log 2 := Real.log_pos one_lt_two
+  set L : ℝ := max (Real.log A) 0 with hLdef
+  have hL0 : 0 ≤ L := le_max_right _ _
+  set C' : ℝ := 2 * L / Real.log 2 + 1 with hC'def
+  have hC'0 : 0 < C' := by positivity
+  set C : ℝ := C' + (C₀ + C₁) + 1 with hCdef
+  have hC0 : 0 < C := by positivity
+  refine ⟨C, hC0, fun x X hx hxX hX => ?_⟩
+  have hx0 : 0 < x := by linarith
+  have hX2 : (2 : ℝ) ≤ X + 2 := by linarith
+  have hlogX : Real.log 2 ≤ Real.log (X + 2) := Real.log_le_log two_pos hX2
+  have hlogX0 : 0 < Real.log (X + 2) := lt_of_lt_of_le hlog2 hlogX
+  have hXlog0 : 0 ≤ (X + 2) * Real.log (X + 2) := by positivity
+  have hlogA_le : Real.log A ≤ L := le_max_left _ _
+  have hLlog : L ≤ 2 * L / Real.log 2 * Real.log (X + 2) := by
+    rw [div_mul_eq_mul_div, le_div_iff₀ hlog2]
+    nlinarith [mul_le_mul_of_nonneg_left hlogX hL0,
+      mul_nonneg hL0 hlogX0.le]
+  have hkey : x * Real.log (A * x) ≤ C' * ((X + 2) * Real.log (X + 2)) := by
+    have hlogAx : Real.log (A * x) = Real.log A + Real.log x :=
+      Real.log_mul hA.ne' hx0.ne'
+    rcases le_or_gt x 1 with hx1 | hx1
+    · have h1 : x * Real.log x ≤ 0 :=
+        mul_nonpos_of_nonneg_of_nonpos hx0.le (Real.log_nonpos hx0.le hx1)
+      have h2 : x * Real.log A ≤ L := by
+        rcases le_or_gt (Real.log A) 0 with hLA | hLA
+        · exact le_trans (mul_nonpos_of_nonneg_of_nonpos hx0.le hLA) hL0
+        · calc x * Real.log A ≤ 1 * Real.log A :=
+              mul_le_mul_of_nonneg_right hx1 hLA.le
+            _ = Real.log A := one_mul _
+            _ ≤ L := hlogA_le
+      have h3 : x * Real.log (A * x) ≤ L := by
+        rw [hlogAx, mul_add]
+        linarith
+      calc x * Real.log (A * x) ≤ L := h3
+        _ ≤ 2 * L / Real.log 2 * Real.log (X + 2) := hLlog
+        _ ≤ 2 * L / Real.log 2 * ((X + 2) * Real.log (X + 2)) := by
+            apply mul_le_mul_of_nonneg_left ?_ (by positivity)
+            nlinarith [mul_nonneg (by linarith : (0 : ℝ) ≤ X + 1) hlogX0.le]
+        _ ≤ C' * ((X + 2) * Real.log (X + 2)) := by
+            apply mul_le_mul_of_nonneg_right ?_ hXlog0
+            rw [hC'def]
+            linarith
+    · have hlx0 : 0 ≤ Real.log x := Real.log_nonneg hx1.le
+      have hlxle : Real.log x ≤ Real.log (X + 2) := Real.log_le_log hx0 hxX
+      have h1 : x * Real.log x ≤ (X + 2) * Real.log (X + 2) :=
+        mul_le_mul hxX hlxle hlx0 (by linarith)
+      have h2 : x * Real.log A ≤ (X + 2) * L := by
+        rcases le_or_gt (Real.log A) 0 with hLA | hLA
+        · exact le_trans (mul_nonpos_of_nonneg_of_nonpos hx0.le hLA)
+            (mul_nonneg (by linarith) hL0)
+        · calc x * Real.log A ≤ (X + 2) * Real.log A :=
+              mul_le_mul_of_nonneg_right hxX hLA.le
+            _ ≤ (X + 2) * L := mul_le_mul_of_nonneg_left hlogA_le (by linarith)
+      have h3 : (X + 2) * L ≤ (X + 2) * (2 * L / Real.log 2 * Real.log (X + 2)) :=
+        mul_le_mul_of_nonneg_left hLlog (by linarith)
+      rw [hlogAx, mul_add]
+      calc x * Real.log A + x * Real.log x
+          ≤ (X + 2) * (2 * L / Real.log 2 * Real.log (X + 2))
+            + (X + 2) * Real.log (X + 2) := by linarith [h2.trans h3, h1]
+        _ = C' * ((X + 2) * Real.log (X + 2)) := by
+            rw [hC'def]
+            ring
+  have hCC' : C' ≤ C := by
+    rw [hCdef]
+    linarith
+  have hexp : Real.exp (x * Real.log (A * x))
+      ≤ Real.exp (C * (X + 2) * Real.log (X + 2)) := by
+    apply Real.exp_le_exp.mpr
+    calc x * Real.log (A * x) ≤ C' * ((X + 2) * Real.log (X + 2)) := hkey
+      _ ≤ C * ((X + 2) * Real.log (X + 2)) := mul_le_mul_of_nonneg_right hCC' hXlog0
+      _ = C * (X + 2) * Real.log (X + 2) := by ring
+  have hone : (1 : ℝ) ≤ Real.exp (C * (X + 2) * Real.log (X + 2)) := by
+    apply Real.one_le_exp
+    rw [mul_assoc]
+    exact mul_nonneg hC0.le hXlog0
+  calc C₀ + C₁ * Real.exp (x * Real.log (A * x))
+      ≤ C₀ * Real.exp (C * (X + 2) * Real.log (X + 2))
+        + C₁ * Real.exp (C * (X + 2) * Real.log (X + 2)) := by
+        apply add_le_add
+        · exact le_mul_of_one_le_right hC₀ hone
+        · exact mul_le_mul_of_nonneg_left hexp hC₁
+    _ = (C₀ + C₁) * Real.exp (C * (X + 2) * Real.log (X + 2)) := by ring
+    _ ≤ C * Real.exp (C * (X + 2) * Real.log (X + 2)) := by
+        apply mul_le_mul_of_nonneg_right ?_ (Real.exp_pos _).le
+        rw [hCdef]
+        linarith
+
+/-- **A5** — the completed-zeta growth bound: there is C > 0 with
+`‖completedRiemannZeta₀ s‖ ≤ C·exp(C·(‖s‖+2)·log(‖s‖+2))` for every s.
+Derived from the Mellin/theta representation (`completedRiemannZeta₀` =
+`(hurwitzEvenFEPair 0).Λ₀ (s/2) / 2`, RiemannZeta.lean:63 +
+HurwitzZetaEven.lean:302) via `lambda0_bound_right` on the right half-plane
+and the unconditional functional equation `lambda0_reflect` on the left. -/
+theorem completedZeta₀_growth : ∃ C : ℝ, 0 < C ∧ ∀ s : ℂ,
+    ‖completedRiemannZeta₀ s‖
+      ≤ C * Real.exp (C * (‖s‖ + 2) * Real.log (‖s‖ + 2)) := by
+  obtain ⟨C₀, C₃, A, hC₀, hC₃, hApos, hright⟩ := lambda0_bound_right
+  obtain ⟨C, hCpos, hmas⟩ := growth_massage hC₀ hC₃ hApos
+  refine ⟨C, hCpos, fun s => ?_⟩
+  have hhalf : ‖completedRiemannZeta₀ s‖ ≤ ‖(hurwitzEvenFEPair 0).Λ₀ (s / 2)‖ := by
+    have hval : completedRiemannZeta₀ s = ((hurwitzEvenFEPair 0).Λ₀ (s / 2)) / 2 := rfl
+    rw [hval, norm_div, Complex.norm_ofNat]
+    exact div_le_self (norm_nonneg _) one_le_two
+  have hs2 : ‖s / 2‖ ≤ ‖s‖ := by
+    rw [norm_div, Complex.norm_ofNat]
+    exact div_le_self (norm_nonneg _) one_le_two
+  refine hhalf.trans ?_
+  rcases le_or_gt (1 / 4 : ℝ) ((s / 2).re) with hcase | hcase
+  · refine (hright (s / 2) hcase).trans ?_
+    apply hmas _ _ hcase ?_ (norm_nonneg s)
+    calc (s / 2).re ≤ |(s / 2).re| := le_abs_self _
+      _ ≤ ‖s / 2‖ := Complex.abs_re_le_norm _
+      _ ≤ ‖s‖ := hs2
+      _ ≤ ‖s‖ + 2 := by linarith
+  · rw [lambda0_reflect (s / 2)]
+    have hre' : ((1 : ℂ) / 2 - s / 2).re = 1 / 2 - (s / 2).re := by
+      rw [Complex.sub_re, show ((1 : ℂ) / 2) = (((1 : ℝ) / 2 : ℝ) : ℂ) by norm_num,
+        Complex.ofReal_re]
+    have hge : 1 / 4 ≤ ((1 : ℂ) / 2 - s / 2).re := by
+      rw [hre']
+      linarith
+    refine (hright _ hge).trans ?_
+    apply hmas _ _ hge ?_ (norm_nonneg s)
+    rw [hre']
+    have h1 : -(s / 2).re ≤ |(s / 2).re| := neg_le_abs _
+    have h2 : |(s / 2).re| ≤ ‖s‖ := (Complex.abs_re_le_norm _).trans hs2
+    linarith
+
+end GrowthBound
