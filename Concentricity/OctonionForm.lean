@@ -32,12 +32,26 @@ theorem innerO_one (x : Octonion) : innerO x 1 = re x := by
   sorry
 
 /-- P4.2.a — the quadratic identity: `x² = 2(re x)·x − N(x)` (the minimal
-polynomial of an octonion over ℝ). Queued (R8): componentwise from
-`mul_def` and the quaternionic quadratic identity. Also the engine of the
-Phase-4 #7 isometry block. -/
+polynomial of an octonion over ℝ). Componentwise from `mul_def` and the
+quaternionic quadratic identity `a² = (a + a*)a − a*a`. Also the engine of
+the Phase-4 #7 isometry block. -/
 theorem mul_self_eq (x : Octonion) :
     x * x = (2 * re x) • x - ofReal (normSq x) := by
-  sorry
+  have ha : x.1 * x.1
+      = ((2 * x.1.re : ℝ) : Quaternion ℝ) * x.1 - ((Quaternion.normSq x.1 : ℝ) : Quaternion ℝ) := by
+    have h1 := Quaternion.self_add_star' x.1
+    have h2 := Quaternion.star_mul_self x.1
+    calc x.1 * x.1 = (x.1 + star x.1) * x.1 - star x.1 * x.1 := by noncomm_ring
+    _ = ((2 * x.1.re : ℝ) : Quaternion ℝ) * x.1 - ((Quaternion.normSq x.1 : ℝ) : Quaternion ℝ) := by
+        rw [h1, h2]
+  refine Prod.ext ?_ ?_
+  · show x.1 * x.1 - star x.2 * x.2
+        = (2 * re x) • x.1 - ((Quaternion.normSq x.1 + Quaternion.normSq x.2 : ℝ) : Quaternion ℝ)
+    rw [ha, Quaternion.star_mul_self, Quaternion.coe_add, Quaternion.coe_mul_eq_smul, sub_sub]
+    rfl
+  · show x.2 * x.1 + x.2 * star x.1 = (2 * re x) • x.2 - 0
+    rw [← mul_add, Quaternion.self_add_star', Quaternion.mul_coe_eq_smul, sub_zero]
+    rfl
 
 /-- P4.2.b — composition polarized on the left:
 `⟪x·y, x·z⟫ = N(x)·⟪y, z⟫`. Queued (R8): polarize `normSq_mul` (proved,
