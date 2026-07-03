@@ -13,6 +13,8 @@ composition-algebra vocabulary, never load.
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
 import Concentricity.Octonion
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Abel
 
 noncomputable section
 
@@ -81,12 +83,43 @@ theorem innerO_mul_mul_right (x y z : Octonion) :
   ring
 
 /-- P4.2.c — orthogonal imaginary octonions anticommute:
-`re x = re y = 0` and `⟪x, y⟫ = 0` force `x·y = −(y·x)`. Queued (R8):
-linearize the quadratic identity P4.2.a at `x + y`. -/
+`re x = re y = 0` and `⟪x, y⟫ = 0` force `x·y = −(y·x)`. Linearizes the
+quadratic identity P4.2.a at `x + y`. -/
 theorem mul_anticomm_of_orthogonal {x y : Octonion}
     (hx : re x = 0) (hy : re y = 0) (hxy : innerO x y = 0) :
     x * y = -(y * x) := by
-  sorry
+  have hre : re (x + y) = 0 := by
+    show x.1.re + y.1.re = 0
+    rw [show x.1.re = re x from rfl, show y.1.re = re y from rfl, hx, hy, add_zero]
+  have hN : normSq (x + y) = normSq x + normSq y := by
+    have h := hxy
+    rw [innerO] at h
+    linarith
+  have h := mul_self_eq (x + y)
+  rw [hre, mul_zero, zero_smul, zero_sub, hN] at h
+  have hxx := mul_self_eq x
+  rw [hx, mul_zero, zero_smul, zero_sub] at hxx
+  have hyy := mul_self_eq y
+  rw [hy, mul_zero, zero_smul, zero_sub] at hyy
+  have hofadd : ofReal (normSq x + normSq y) = ofReal (normSq x) + ofReal (normSq y) := by
+    refine Prod.ext ?_ ?_
+    · show ((normSq x + normSq y : ℝ) : Quaternion ℝ)
+          = ((normSq x : ℝ) : Quaternion ℝ) + ((normSq y : ℝ) : Quaternion ℝ)
+      rw [Quaternion.coe_add]
+    · show (0 : Quaternion ℝ) = 0 + 0
+      rw [add_zero]
+  have hexp : (x + y) * (x + y) = x * x + x * y + (y * x + y * y) := by
+    rw [add_mul, mul_add, mul_add]
+  rw [hexp, hxx, hyy, hofadd] at h
+  have hsum : x * y + y * x = 0 := by
+    have h2 : x * y + y * x - (ofReal (normSq x) + ofReal (normSq y))
+        = -(ofReal (normSq x) + ofReal (normSq y)) := by
+      calc x * y + y * x - (ofReal (normSq x) + ofReal (normSq y))
+          = -ofReal (normSq x) + x * y + (y * x + -ofReal (normSq y)) := by abel
+        _ = -(ofReal (normSq x) + ofReal (normSq y)) := h
+    have h3 := congrArg (fun t => t + (ofReal (normSq x) + ofReal (normSq y))) h2
+    simpa using h3
+  exact eq_neg_of_add_eq_zero_left hsum
 
 /-- P4.2.d — the product of orthogonal unit imaginaries is a unit imaginary
 orthogonal to both factors. Queued (R8): composition (P4.2.b) +
