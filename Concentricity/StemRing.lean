@@ -18,6 +18,8 @@ never an assumption).
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
 import Mathlib.Analysis.Complex.Basic
+import Mathlib.Analysis.Complex.CauchyIntegral
+import Mathlib.Analysis.Analytic.IsolatedZeros
 import Mathlib.Analysis.Calculus.FDeriv.Add
 import Mathlib.Analysis.Calculus.FDeriv.Mul
 import Mathlib.Algebra.Algebra.Subalgebra.Basic
@@ -73,12 +75,34 @@ theorem isIntrinsic (f : StemRing) : IsIntrinsic (f : ℂ → ℂ) :=
   f.2.2
 
 /-- Master `prop:R-domain`: "If f, g ∈ 𝓡 and f ∗ g = 0, then f = 0 or
-g = 0." Queued proof (R8): on a slice the pointwise product of holomorphic
-functions vanishes identically iff one factor does (classical identity
-principle on the connected slice; master cites `thm:wang` + `thm:identity`). -/
+g = 0." Proof: on a slice the pointwise product of holomorphic functions
+vanishes identically iff one factor does (classical identity principle on
+the connected slice; master cites `thm:wang` + `thm:identity`). Pin:
+`AnalyticOnNhd.eq_zero_or_eq_zero_of_mul_eq_zero`
+(Mathlib/Analysis/Analytic/IsolatedZeros.lean:300),
+`Complex.analyticOnNhd_univ_iff_differentiable`
+(Mathlib/Analysis/Complex/CauchyIntegral.lean:678), `isPreconnected_univ`. -/
 theorem eq_zero_or_eq_zero_of_mul_eq_zero {f g : StemRing} (h : f * g = 0) :
     f = 0 ∨ g = 0 := by
-  sorry
+  have hf : AnalyticOnNhd ℂ (f : ℂ → ℂ) Set.univ :=
+    Complex.analyticOnNhd_univ_iff_differentiable.mpr (differentiable f)
+  have hg : AnalyticOnNhd ℂ (g : ℂ → ℂ) Set.univ :=
+    Complex.analyticOnNhd_univ_iff_differentiable.mpr (differentiable g)
+  have hfg : ∀ z ∈ Set.univ, (f : ℂ → ℂ) z * (g : ℂ → ℂ) z = 0 := by
+    intro z _
+    have h0 : ((f * g : StemRing) : ℂ → ℂ) z = ((0 : StemRing) : ℂ → ℂ) z := by
+      rw [h]
+    simpa using h0
+  rcases AnalyticOnNhd.eq_zero_or_eq_zero_of_mul_eq_zero hf hg hfg
+      isPreconnected_univ with h1 | h1
+  · left
+    apply Subtype.ext
+    funext z
+    simpa using h1 z (Set.mem_univ z)
+  · right
+    apply Subtype.ext
+    funext z
+    simpa using h1 z (Set.mem_univ z)
 
 /-- An intrinsic stem is real on the real axis — the stem-level form of
 master `def:slice-preserving`(iii) ("f(Ω ∩ ℝ) ⊆ ℝ"). DERIVED (R10):
