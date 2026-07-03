@@ -28,6 +28,7 @@ Statement-layer renderings (flagged for the author's skim, R6):
 import Concentricity.StemRing
 import Mathlib.Analysis.Meromorphic.Order
 import Mathlib.Analysis.Complex.Exponential
+import Mathlib.Topology.Compactification.OnePoint.Basic
 
 noncomputable section
 
@@ -124,6 +125,15 @@ structure ASection where
   /-- C4: "Infinitely many residue-ℂ zeros. The index set {qₙ} is
   infinite." -/
   c4_infinite : (Set.range sphereZero).Infinite
+  /-- The compactified value at ∞ = N — data of the section as a map on
+  𝕆* = S⁸ that the stem alone does not determine (the marked compactification
+  node, `rmk:compactify`; for ζ this is ζ*(∞) = 1, `def:zeta-Cstar`). -/
+  valueAtInfinity : OnePoint ℂ
+  /-- `def:section-map`(ii): "A(N) ∈ ⋂_I ℂ_I* = ℝ ∪ {N} by (i)" — at stem
+  level: the value at ∞, when finite, is real. (Derived in the master from
+  slice preservation of values; carried here as a field of the compactified
+  data, per `rmk:compactify`.) -/
+  valueAtInfinity_real : ∀ z : ℂ, valueAtInfinity = (z : OnePoint ℂ) → z.im = 0
 
 namespace ASection
 
