@@ -21,14 +21,21 @@ the task requires it. The settled list stays settled; quote the master, never pa
   `monodromyFunctor` IS pin-present (Topology/Homotopy/Lifting.lean:394); `windingNumber`
   absent everywhere — ~200–300 lines in-repo when needed; `SummationFilter` is in the pin —
   bare `∏'`/`Summable` already unconditional, pin those forms in C2/C3.
-* **Declared permanent axiom** (author's ruling): `riemannZeta_nontrivialZeros_infinite`,
-  C4-floor form, predicate mirrors Mathlib's `RiemannHypothesis` trivial-zero exclusion +
-  `s ≠ 1`. Written ONLY when the ZetaO bucket exists. Docstring: Titchmarsh Ch. 2 verbatim
-  (GAP — author's UNCG scan) + price of deletion ~2,000–4,000 lines (falling; Mathlib's
-  ValueDistribution cluster). If cor:zeta-section's Lean proof demands more than infinitude,
-  report the exact demanded statement before widening the leaf. Gate per amended R9:
-  zero sorries + `#print axioms` = declared leaf set (currently this one alone);
-  Mathlib's three foundational axioms always print and are not counted.
+* **RE-RULED (2026-07-02, late): the Hadamard-infinitude fact is a SORRIED THEOREM,
+  not an axiom** — author's ruling supersedes the earlier same-day axiom ruling.
+  `theorem riemannZeta_nontrivialZeros_infinite : {s : ℂ | riemannZeta s = 0 ∧
+  (¬∃ n : ℕ, s = -2 * (n + 1)) ∧ s ≠ 1}.Infinite := sorry` — C4-floor form, predicate
+  mirrors Mathlib's `RiemannHypothesis` exclusions. Stated when the ZetaO bucket exists;
+  PROVED in-repo per `PROOF_PLAN_zeta_infinitude.md` (itemized plan FIRST, author
+  approves the itemization before any lemma lands; cheap route to cost explicitly:
+  finitely-many-zeros ⇒ `MeromorphicOn.extract_zeros_poles` + Borel–Carathéodory +
+  unconditional functional equation + Γ-growth ⇒ contradiction; standard order-1 route
+  costed for comparison). Gate is now literal: **zero sorries + zero project axioms** —
+  declared leaf set EMPTY. Queue the matching R9 wording diff for author approval.
+  Consequence: the Titchmarsh scan is no longer load-bearing (no axiom docstring
+  requires it); Titchmarsh86 remains an ordinary bibitem, provenance never load.
+  If cor:zeta-section's proof demands more than infinitude, report the exact demanded
+  statement before widening the theorem.
 * **SOURCES/**: `Thomason79.md` committed (GAP: original printed Thm 1.2 — Cambridge
   paywall; author has UNCG access; the nLab file is the WRONG Thomason paper — homotopy
   limit problem, not the 1979 hocolim paper). Untracked, awaiting author review: `AdF.md`,
@@ -54,25 +61,63 @@ the task requires it. The settled list stays settled; quote the master, never pa
   for now). Octonion build receipt: olean at 20:46 preceding commit 20:47 — formal
   build-tail-with-commit discipline reaffirmed below.
 
-## Current task
+## Current task (updated 2026-07-03, map thread; author's rulings of today inline)
 
-1. Fold outstanding tree changes into quiet commits and push: (a) author edits
-   (master + CLAUDE.md), message: `Author: VS/GPVwind flags resolved (cite types,
-   Preface acknowledgment, pin exactified, bibitem corrected)`; (b) this HANDOFF.md.
-2. Author reviews the 8 untracked SOURCES files (3 pre-reviews on record); commit
-   approved ones individually, Thomason79-style messages, GAP discipline throughout.
-   Then fetch the still-missing pins (Wang, Baez; Titchmarsh as GAP-stub).
-3. **Statement layer per Phase 3**, citing pin-present names only, leaves as axioms
-   with verbatim SOURCES/ docstrings, sorries per R8: 𝓡 via the stem functor over
-   Mathlib's Hol(ℂ) → `structure ASection` (C2 stated as `cexp (∑' p, ℓ p)`,
-   unconditional forms pinned) → G₂ := AlgAut(𝕆) → 𝓗₁ = G₂ ⋉ 𝕆* (ActionCategory) →
-   𝒮₂ → Φ → 𝓑 (levels, static) → F (band U(1)) → 𝒯_A = ∫_𝓑 F (CategoryTheory.Grothendieck)
-   → the π₀ lemma (ConnectedComponents) → theorem statement → **STOP at the red
-   placement `\TODO`** — the sentence is the author's alone.
-4. Author's lane: the placement sentence (note: the TODO's phrase "the conserved-level
-   readout of Corollary cor:nontrivial" now reads through `thm:connected-concentric`);
-   UNCG library errands — Titchmarsh Ch. 2 page (load-bearing: axiom docstring),
-   Thomason original Thm 1.2 (paper hygiene), JMAA numbering check for GPVwind (R11).
+**Goal: blueprint site postable to Zulip ASAP.** Sorries visible in a posted blueprint
+are normal — it announces a live project; the zero-and-zero gate is the endgame claim,
+not the announcement. **The placement sentence LANDED 2026-07-03** (author's "land it",
+wording via map thread, sourced register, all tags in the proof's orbit) — the master now
+has ZERO TODOs. Critical path to the post: statement layer + rebuild + author's site read.
+
+1. **LANES OPEN (author's go, 2026-07-03).** Statement layer per Phase 3, citing
+   pin-present names only, leaves as axioms with verbatim SOURCES/ docstrings, sorries
+   per R8: 𝓡 via the stem functor over Mathlib's Hol(ℂ) → `structure ASection` (C2
+   stated as `cexp (∑' p, ℓ p)`, unconditional forms pinned) → G₂ := AlgAut(𝕆) →
+   𝓗₁ = G₂ ⋉ 𝕆* (ActionCategory) → 𝒮₂ → Φ → 𝓑 (levels, static) → F (band U(1)) →
+   𝒯_A = ∫_𝓑 F (CategoryTheory.Grothendieck) → the π₀ lemma (ConnectedComponents) →
+   theorem statement → **STOP at the red placement `\TODO`** — the sentence is the
+   author's alone. Second lane: zeta-infinitude per `PROOF_PLAN_zeta_infinitude.md` —
+   **Route A APPROVED** (map-thread cross-read against pin fabf563a: every PRESENT row
+   verified at file:line; bonus find: the pin holds `NumberTheory/LSeries/ZetaZeros.lean`
+   — `isDiscrete_riemannZetaZeros`, `IsCompact.inter_riemannZetaZeros_finite` — may
+   shave A2/A3 bookkeeping).
+2. **Commit ceremony re-ruled (author, 2026-07-03): NO per-commit approvals in the Lean
+   lanes.** Pre-approved message templates: `ZetaInfinitude: close A<n> (<name>) on
+   green` and `Statement: <object> lands (sorries +<n>)`. The Code tab commits
+   autonomously on green — per-lemma or per-session at its discretion — and may batch
+   pushes. Build tail still shown in-thread with each push (the receipts rule stands
+   unchanged). Words-before-commits now applies to prose/rulebook files only (master,
+   CLAUDE.md, HANDOFF, SOURCES).
+3. **Applied in-tree today (author-approved, via map thread); quiet commits pending one
+   go-word, proposed messages:** (a) CLAUDE.md R9 gate wording — `Author: R9 gate
+   exactified — zero and zero, leaf set empty; infinitude enters as sorried theorem`;
+   (b) master split — new `cor:hadamard-infinitude` under thm:hadamard, `\uses`
+   re-pointed in cor:zeta-section AND thm:zero-spheres, three body cites — `Author:
+   Hadamard infinitude clause gets its own label; consumer arrows re-pointed`; (c) this
+   HANDOFF.md — `HANDOFF: lanes open, Route A approved, commit ceremony lifted`;
+   (d) the placement sentence — `Author: the placement sentence lands (levels and
+   winding through the triangle; the document's last TODO closes)`.
+   Blueprint rebuild pending (the split AND the closed proof change the site).
+4. **SOURCES = background lane; gates nothing.** Map-thread verification sweep against
+   the author's PDF pool, zero mismatches found: VERIFIED = Wang, AdF, AdFslice,
+   GPVwind, VS, Quillen73 (word-level via OCR); PARTIAL = GJ (Ch. IV unreached), Riehl
+   (§8.3/§8.5 unreached); NO-PDF = Baez02, BisiWinkelmann, Thomason79 (nLab scan
+   re-confirmed textless). Author approved Wang-style fetches: Baez (AMS), the BW pair +
+   Sharma (arXiv), full GJ/Riehl PDFs for page-addressable checking — **fetched PDFs
+   stay out of git**. GPVwind JMAA numbering: GAP-mark, Thomason precedent (author
+   ruled 2026-07-03). Author review = FLAGS skim + commit words, trickled, never a gate.
+5. **PIN FIX awaiting one word:** the CLAUDE.md pin `AdF 2106.04227 §1, §11 (slices;
+   semiregular)` conflates two papers — 2106.04227 prints six sections and no §11; the
+   §1/§11 slices-and-semiregular content is Ghiloni–Perotti–Stoppato arXiv:1606.03609
+   (sitting in the author's own PDF pool). Proposed: attribute §1/§11 to GPS 1606.03609;
+   keep AdF 2106.04227 for the ∗-logarithm. Grep the master's bibitems for the same
+   conflation before any commit.
+6. **Author's lane: the placement sentence is DONE** (landed 2026-07-03; the master has
+   zero TODOs). Remaining author items: the final site read before the Zulip post.
+   Resolved today: the sentence, the split (applied in-tree), JMAA (GAP-marked),
+   Route A, R9. Still open, later, never gating: the finality remark's
+   long-term fate (scoped prose session + graph re-audit; walks Quillen/Thomason/Sharma
+   out of the bib). Thomason original: OPTIONAL per the 2026-07-02 ruling, unchanged.
 
 ## Failure modes (all prior ones stand) + today's additions
 
@@ -82,7 +127,10 @@ the task requires it. The settled list stays settled; quote the master, never pa
   come BEFORE commits. No PRs. No installs without naming the tool and why.
 * Commit-on-green means SHOW the green: build tail in-thread with the commit.
 * Unresolved attributions are settled by verbatim quotes from ALL claimants
-  (the Rem 5.2 method), never from memory or bibitem annotations.
+  (the Rem 5.2 method), never from memory or bibitem annotations. Author's
+  standing convention (2026-07-02): every cite names the exact matching
+  environment — the item that says what the gloss says — never a neighbor
+  (the Def 4.7 ruling; body cite corrected accordingly).
 * The sorry ledger will balloon when the statement layer lands — by design (R8).
   Sorry count is queue length, never error count. Octonion went 4→0 in one evening.
 * "Concentric" stays translation vocabulary; the base is levels + winding; never attach
