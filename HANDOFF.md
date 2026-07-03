@@ -1,115 +1,90 @@
 # HANDOFF — current-task opener (replaces ALL earlier handoffs)
 
-Read order: (1) `CLAUDE.md` — rules R1–R11, architecture map, pins; unchanged today, still
-ground truth. (2) This file. (3) Nothing else until the task requires it. The settled list
-stays settled; do not re-derive the architecture; quote the master, never paraphrase it.
+Read order: (1) `CLAUDE.md` — rules R1–R11, architecture map, pins (pins updated today:
+VS entry now carries the journal record and points to SOURCES/VS.md; GPVwind entry carries
+the JMAA record and the corrected tameness numbering). (2) This file. (3) Nothing else until
+the task requires it. The settled list stays settled; quote the master, never paraphrase it.
 
-## State (2026-07-02, end of thread 2)
+## State (2026-07-02, end of thread 3)
 
-- Working folder = repo: `~/Desktop/concentricity`. Files current: `CLAUDE.md`,
-  `Octonionic_RH_master.tex` (v4 + today's deltas), `DEPENDENCY_TABULATION.md` (+ dated
-  Delta section), `RECON_MATHLIB.md` (independent live-docs recon), `blueprint/`
-  scaffolded, site built once (stale until one rebuild).
-- **Claude Code, Step 1** (its own honest completion report): DONE — CLAUDE.md corrections
-  as root commit `44ab40cc36d9`; lake project, Mathlib pinned v4.31.0, cache decompressed
-  (8542 files); SOURCES/ (empty, .gitkeep); blueprint scaffolded + site built (post-report).
-  PENDING — complete `.gitignore` + scaffold commit (include RECON_MATHLIB.md; commit
-  message queued in-thread); `gh` installed but **not authenticated**: device-code
-  walkthrough → create PRIVATE repo `concentricity` → push → hand over rebuild + serve
-  commands **verified by running them**. There is no R12; rules end at R11.
-- **Zulip**: account exists (real name, GitHub sign-in); timezone fix to America/New_York
-  possibly pending; lurk-only. Community post: none, and none until the gate
-  (zero sorries + honest `#print axioms`). Author scrapped the optional early question —
-  recon answered it in-house.
-- Author state: git/terminal beginner (click-level guidance, one step at a time); GitHub
-  account works in browser; wants the local website loop for prose iteration, sphere
-  eversion as the clarity model.
-
-## Today's document deltas (applied to BOTH `Octonionic_RH_master.tex` AND `blueprint/src/content.tex`)
-
-1. **NEW `thm:connected-concentric`** ("Connected is concentric: the dictionary"), derived
-   register, `\uses{def:base, lem:exp-degenerate}` — statement/proof assembled verbatim
-   from existing master sentences. **Machine-verified independent of `thm:concentricity`**
-   (neither node in the other's cone; the whole `\uses` graph is a DAG; no orphan refs).
-   Consumer: `cor:nontrivial`.
-2. **`cor:nontrivial` rewired**: `\uses{thm:concentricity, thm:connected-concentric,
-   thm:zero-equivalence, thm:zero-spheres, lem:residue-spheres}`; its proof routes
-   one-component→one-centre through the dictionary and **no longer cites the gloss**
-   (register fix per R10).
-3. **`rmk:collapse-vs-translation`** reduced to a two-sentence pointer (dictionary vs
-   application; collapse supplies *one component*, dictionary reads it as *one centre*).
-4. **Deleted** from the assembly paragraph of `thm:concentricity`'s proof: the opener
-   "The base precedes the section:" — author's ruling: it invited a circular-proof
-   misreading. The paragraph now opens at the lemma-tagged fibre fact; C2's Euler product
-   does the implying in the very next sentence. **Theorem statement, `\uses`, proof
-   otherwise untouched** — cone still 28 nodes.
-5. Tabulation: new dictionary row, totals 54 nodes, Delta section records everything.
-
-## Audits on record (mechanical, from v4 `\uses` annotations)
-
-- cone(`thm:concentricity`) = 28 nodes, **all S+T buckets** (spine + slice-preserving/
-  octonionic theory). **Zero Z-bucket members**: classical facts (`thm:riemann`,
-  `thm:euler`, `thm:hadamard`) enter first at `cor:zeta-section`; translation theorems at
-  `cor:nontrivial`/`cor:zeta-section`; `cor:rh` terminal.
-- Base cluster and section apparatus (`def:R`, `def:A-section`, `def:section-map`,
-  `thm:section-functor`, `thm:identity`, `prop:weierstrass`) are **disjoint below the
-  theorem** — they meet first inside `thm:concentricity`. No cycles anywhere.
-
-## Mathlib recon (full report: `RECON_MATHLIB.md`; Step 2 must cross-check per R5)
-
-(a) octonions/Cayley–Dickson **ABSENT** (0 decls) → build CD(ℍ) in-repo per R9.
-(b) zeta cluster **RICH** — incl. `riemannZeta_eulerProduct_exp_log` (literally C2's shape)
-and Mathlib's formal **`RiemannHypothesis : Prop`** — `cor:rh` should target that exact
-declaration. (c) Hadamard factorization + infinitude **ABSENT** (ZetaZeros = discreteness
-only) — priciest floor leaf. (d) `Complex.isCoveringMap_exp` + full
-liftPath/liftHomotopy/monodromy API **PRESENT** — near-free slice-wise winding floor, as
-priced. (e) Weierstrass products absent as theory; convergence machinery present.
-(f) `Multipliable`/`tprod` rich; **API caveat: new `SummationFilter` parameter — pin
-unconditional/atTop forms in C2/C3 statements.**
+* Repo `~/Desktop/concentricity` = private GitHub `jessemichaelpaul/concentricity`;
+  commit-to-main only, **no PRs** (standing ruling; `/create-pr` fired twice by accident —
+  always discard). Site loop: `./rebuild.sh` then Cmd+R; `leanblueprint serve` if stopped.
+* **Lean: `Concentricity/Octonion.lean` COMPLETE** — CD(ℍ) construction per R9, all four
+  closures committed (`61fd9f8` normSq_mul via Degen, convention checked 8/8; `bb33245`
+  imaginary-sphere square; `2f3b749` alt_left; `060f7c4` alt_right). Sorry count 0, zero
+  axioms, zero project leaves. No other Lean exists yet (`Basic.lean` is a stub).
+* **Recon gate PASSED** (Code-tab pass cross-read against RECON_MATHLIB.md plus independent
+  grep audit in the map thread). Binding resolutions: statement layer cites **pin-present
+  names only** (Mathlib v4.31.0 = commit fabf563a); the deck-group block
+  (liftPathQuotient etc.) is post-pin — backport priced ~300 lines, not built;
+  `monodromyFunctor` IS pin-present (Topology/Homotopy/Lifting.lean:394); `windingNumber`
+  absent everywhere — ~200–300 lines in-repo when needed; `SummationFilter` is in the pin —
+  bare `∏'`/`Summable` already unconditional, pin those forms in C2/C3.
+* **Declared permanent axiom** (author's ruling): `riemannZeta_nontrivialZeros_infinite`,
+  C4-floor form, predicate mirrors Mathlib's `RiemannHypothesis` trivial-zero exclusion +
+  `s ≠ 1`. Written ONLY when the ZetaO bucket exists. Docstring: Titchmarsh Ch. 2 verbatim
+  (GAP — author's UNCG scan) + price of deletion ~2,000–4,000 lines (falling; Mathlib's
+  ValueDistribution cluster). If cor:zeta-section's Lean proof demands more than infinitude,
+  report the exact demanded statement before widening the leaf. Gate per amended R9:
+  zero sorries + `#print axioms` = declared leaf set (currently this one alone);
+  Mathlib's three foundational axioms always print and are not counted.
+* **SOURCES/**: `Thomason79.md` committed (GAP: original printed Thm 1.2 — Cambridge
+  paywall; author has UNCG access; the nLab file is the WRONG Thomason paper — homotopy
+  limit problem, not the 1979 hocolim paper). Untracked, awaiting author review: `AdF.md`,
+  `AdFslice.md`, `BisiWinkelmann.md`, `GJ.md`, `GPVwind.md`, `Quillen73.md`, `Riehl.md`,
+  `VS.md`. Map thread pre-reviewed and endorsed: VS.md (version-of-record, zero gaps),
+  GPVwind.md (see FLAGS), Thomason79.md. Still missing vs Pins: Wang, Baez, Titchmarsh
+  GAP-stub, classical Riemann/Euler/Hadamard-bearing references as needed.
+* **Rem 5.2 attribution RESOLVED empirically**: the quotes live in VS alone (Math. Z.
+  302(2), printed p. 988 — SOURCES/VS.md); the winding paper contains NO Remark 5.2 and
+  never prints "degenerate" (SOURCES/GPVwind.md FLAGS, full environment inventory).
+  Master's GPVwind bibitem corrected accordingly (Rem 5.2 clauses struck; tameness
+  numbering fixed: paths Def 4.7, maps Def 4.20, at-parameter Def 5.2; journal record
+  added: J. Math. Anal. Appl. 536(1) (2024), Paper No. 128219). CAVEAT for the SOURCES
+  pass: GPVwind excerpts are arXiv v1; JMAA-version numbering unverified (publisher 403)
+  — author to confirm via library.
+* **Master edits today (author-approved, applied via map thread, in tree)**:
+  thm:log-manifold cite now lists true environment types (Prop 5.1, Rem 5.2, Def 5.3,
+  Prop 5.4, Def 5.5); lem:exp-degenerate gained the closing acknowledgment sentence
+  (VS Preface p. 972 prints the fibre formula as unproved motivation; slice-form
+  derivation stays load-bearing); GPVwind bibitem corrected. CLAUDE.md pin updates
+  match. Blueprint regenerates from the master on rebuild — one rebuild pending.
+* CI: stock Lean Action runs on push (nibbles free minutes; disable offered, declined
+  for now). Octonion build receipt: olean at 20:46 preceding commit 20:47 — formal
+  build-tail-with-commit discipline reaffirmed below.
 
 ## Current task
 
-1. **Finish Step 1** in the Code tab, in this order: rebuild + serve the site NOW (author
-   is waiting to read it; both source files changed today) → scaffold commit → GitHub
-   device auth (author has never used git; one step at a time) → private repo → push →
-   completion report with evidence + the two verified commands.
-2. **Paste Step 2** into the Code tab when Step 1 is green — this exact text:
-
-   ```
-   Per CLAUDE.md Phase 2–3, but first a reconnaissance report against live
-   Mathlib docs (R5), no code yet. Check and report on each: (a) octonions or a
-   Cayley–Dickson construction; (b) the riemannZeta cluster — continuation,
-   functional equation, Euler product; (c) Hadamard factorization and/or
-   infinitude of nontrivial zeros of zeta; (d) Complex.exp as a covering map and
-   the path/homotopy lifting API; (e) Weierstrass products for entire functions;
-   (f) infinite products (Multipliable/tprod) suitable for C2. For each: exists /
-   partial / absent, with declaration names, and the price of building it
-   in-repo if absent. Cross-check your recon against RECON_MATHLIB.md already in
-   this folder (an independent live-docs pass); flag any disagreement explicitly
-   before building. Then build SOURCES/ from the Pins, then the statement layer
-   per Phase 3 — structure ASection first — stopping at the placement step per
-   the master's TODO.
-   ```
-
-   → SOURCES/ from the Pins → statement layer per Phase 3, `structure ASection` first,
-   `cor:rh` stated against Mathlib's `RiemannHypothesis`, **stopping at the placement TODO**.
-3. **Author's lane**: prose iteration on the served site; the placement sentence — spec is
-   the red `\TODO` itself (master line ~1148). Note when writing it: the TODO's phrase
-   "the conserved-level readout of Corollary cor:nontrivial" now maps to
-   `thm:connected-concentric` (the dictionary node postdates the TODO's wording).
+1. Fold outstanding tree changes into quiet commits and push: (a) author edits
+   (master + CLAUDE.md), message: `Author: VS/GPVwind flags resolved (cite types,
+   Preface acknowledgment, pin exactified, bibitem corrected)`; (b) this HANDOFF.md.
+2. Author reviews the 8 untracked SOURCES files (3 pre-reviews on record); commit
+   approved ones individually, Thomason79-style messages, GAP discipline throughout.
+   Then fetch the still-missing pins (Wang, Baez; Titchmarsh as GAP-stub).
+3. **Statement layer per Phase 3**, citing pin-present names only, leaves as axioms
+   with verbatim SOURCES/ docstrings, sorries per R8: 𝓡 via the stem functor over
+   Mathlib's Hol(ℂ) → `structure ASection` (C2 stated as `cexp (∑' p, ℓ p)`,
+   unconditional forms pinned) → G₂ := AlgAut(𝕆) → 𝓗₁ = G₂ ⋉ 𝕆* (ActionCategory) →
+   𝒮₂ → Φ → 𝓑 (levels, static) → F (band U(1)) → 𝒯_A = ∫_𝓑 F (CategoryTheory.Grothendieck)
+   → the π₀ lemma (ConnectedComponents) → theorem statement → **STOP at the red
+   placement `\TODO`** — the sentence is the author's alone.
+4. Author's lane: the placement sentence (note: the TODO's phrase "the conserved-level
+   readout of Corollary cor:nontrivial" now reads through `thm:connected-concentric`);
+   UNCG library errands — Titchmarsh Ch. 2 page (load-bearing: axiom docstring),
+   Thomason original Thm 1.2 (paper hygiene), JMAA numbering check for GPVwind (R11).
 
 ## Failure modes (all prior ones stand) + today's additions
 
-- **Quote, never paraphrase, the assembly paragraph** — the "precedes" incident: a
-  one-line paraphrase of the proof twice read as asserting the wrong logical order.
-- "Concentric" stays translation-layer; the base is levels + winding; GPV's term is
-  *degenerate set*. Never attach metric vocabulary to 𝓑.
-- The dictionary (`thm:connected-concentric`) is logically independent of the collapse —
-  independence is graph-visible; do not re-fold it into a remark or a corollary of the
-  theorem.
-- No prose verdicts (R8); `sorry` = unformalized never unsound; the placement sentence is
-  the author's alone.
-- Posting gate unchanged: **zero sorries + honest `#print axioms`** ("zero axioms" = zero
-  project-added leaves; Mathlib's three foundational axioms will always print). Nothing is
-  announced until ripe; Mathlib infrastructure (CD(ℍ), Hadamard theory) may be upstreamed
-  quietly as self-justifying pieces that reveal no endgame.
+* Session resets lose chat state, never file state: on reset, read CLAUDE.md + this
+  file, claim nothing you can't see (no build log in context = say so, don't assert green).
+* Scope drift after resets: "queue / pending my approval" ≠ "do now". Wording approvals
+  come BEFORE commits. No PRs. No installs without naming the tool and why.
+* Commit-on-green means SHOW the green: build tail in-thread with the commit.
+* Unresolved attributions are settled by verbatim quotes from ALL claimants
+  (the Rem 5.2 method), never from memory or bibitem annotations.
+* The sorry ledger will balloon when the statement layer lands — by design (R8).
+  Sorry count is queue length, never error count. Octonion went 4→0 in one evening.
+* "Concentric" stays translation vocabulary; the base is levels + winding; never attach
+  metric language to 𝓑. The dictionary (`thm:connected-concentric`) stays independent of
+  the collapse — graph-visible, never re-folded.
