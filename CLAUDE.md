@@ -30,7 +30,7 @@ mirrors the discovery order.
 
 ## Sources of truth, in order
 
-1. **Lean code**, once it exists — `lake build` is the arbiter.
+1. **Lean code**, once it exists — `lake build` is the meter.
 2. **`Octonionic_RH_master.tex`** (v4) — the author's paper, fully folded: `def:A-section`,
    `lem:exp-degenerate` + `rmk:concentric-gloss`, `\uses{}` annotations document-wide.
    **One open item**: the placement sentence, marked as the document's single red `\TODO`
@@ -76,7 +76,8 @@ mirrors the discovery order.
 - **R4** — Build from the hypotheses; read the zeros off at the end. Translation theorems
   attach only after the theorem, as corollaries.
 - **R5** — Verify Mathlib names against live docs before use. Every axiom carries the
-  verbatim source statement in its docstring.
+  verbatim source statement in its docstring. Live docs are for diagnosis; the pin binds
+  citations.
 - **R6** — Ask the author when a ruling is needed; mark real gaps as gaps; never invent
   done-ness.
 - **R7** — Deliverables are files or diffs against the master, not essays about it.
@@ -88,7 +89,10 @@ mirrors the discovery order.
   G₂ := AlgAut(𝕆), the groupoids, Φ, 𝓑, F, 𝒯_A) is constructed; axiom leaves are theorems
   from the literature, never existence claims. Zero-axiom target: R is defined by the stem
   functor over Mathlib's Hol(C); literature is cited for faithfulness of definitions, never
-  as load. Each remaining axiom's docstring carries its price of deletion.
+  as load. Each remaining axiom's docstring carries its price of deletion. The gate: zero
+  sorries, and `#print axioms` showing exactly the declared leaf set (currently
+  `riemannZeta_nontrivialZeros_infinite` alone); aspiration zero. (Mathlib's three
+  foundational axioms always print and are not counted.)
 - **R10** — **Three registers, typographically distinct**, especially in the
   slice-preserving octonionic layer (mostly axiomatized): SOURCED statements are verbatim
   quotes with pinpoint cites (in Lean, the quote lives in the axiom's docstring; any
