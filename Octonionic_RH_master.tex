@@ -168,9 +168,17 @@ $\{\rho\}$ of $\zeta$, and admits the Hadamard factorization
 \[
   \xi(s)=\xi(0)\prod_{\rho}\Bigl(1-\tfrac{s}{\rho}\Bigr)e^{s/\rho},
 \]
-the product taken over the infinitely many nontrivial zeros. In particular $\zeta$ has infinitely
-many nontrivial zeros.
+the product taken over the infinitely many nontrivial zeros.
 \end{theorem}
+
+\begin{corollary}[Infinitude of the nontrivial zeros]\label{cor:hadamard-infinitude}
+\uses{thm:hadamard}
+$\zeta$ has infinitely many nontrivial zeros.
+\end{corollary}
+\begin{proof}
+Immediate from Theorem~\ref{thm:hadamard}: its zeros are infinitely many and are exactly
+the nontrivial zeros of $\zeta$.
+\end{proof}
 
 \begin{theorem}[Hardy \cite{Hardy14}]\label{thm:hardy}
 Infinitely many nontrivial zeros of $\zeta$ lie on the line $\re s=\tfrac12$.
@@ -673,7 +681,7 @@ Lemma~\ref{lem:zero-Cstar}.
 \end{proof}
 
 \begin{theorem}[Nontrivial zeros are infinitely many disjoint $6$-spheres]\label{thm:zero-spheres}
-\uses{thm:zero-equivalence, thm:G2-S6, thm:G2-equiv, thm:hadamard}
+\uses{thm:zero-equivalence, thm:G2-S6, thm:G2-equiv, cor:hadamard-infinitude}
 For a nontrivial zero $\rho=\sigma+i\gamma$ of $\zetaC$ (so $\gamma>0$) set
 \[
 S_\rho=\{\sigma+\gamma v:v\in S^6\}=\sigma+\gamma\,S^6\subset\OO .
@@ -689,8 +697,8 @@ Then:
 \item[(iii)] the nontrivial-zero set is the disjoint union
   $Z^{\mathrm{nt}}_{\Ostar}=\bigsqcup_{[\rho]}S_\rho$ over conjugate pairs
   $[\rho]=\{\rho,\bar\rho\}$, with distinct pairs giving disjoint spheres;
-\item[(iv)] there are infinitely many such spheres (the Hadamard product,
-  Theorem~\ref{thm:hadamard}; also Hardy \cite{Hardy14}, Theorem~\ref{thm:hardy}).
+\item[(iv)] there are infinitely many such spheres (Corollary~\ref{cor:hadamard-infinitude};
+  also Hardy \cite{Hardy14}, Theorem~\ref{thm:hardy}).
 \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -715,8 +723,8 @@ parts gives $\sigma=\sigma'$ and $\gamma v=\gamma'w$, whence $\gamma=\gamma'$ (t
 norms, $|v|=|w|=1$) and $\{\rho',\bar\rho'\}=\{\rho,\bar\rho\}$; so two spheres coincide or
 are disjoint.
 
-(iv) There are infinitely many spheres because $\zeta$ has infinitely many nontrivial zeros (the
-Hadamard product, Theorem~\ref{thm:hadamard}; also Hardy, Theorem~\ref{thm:hardy}).
+(iv) There are infinitely many spheres because $\zeta$ has infinitely many nontrivial zeros
+(Corollary~\ref{cor:hadamard-infinitude}; also Hardy, Theorem~\ref{thm:hardy}).
 \end{proof}
 
 % [Conjugate pairs, Disjointness, and Zero-Set Decomposition are folded into
@@ -1238,7 +1246,7 @@ disjointness are \textup{C4} and Lemma~\ref{lem:residue-spheres}.
 
 \section{Corollaries}\label{sec:verification}
 \begin{corollary}[$\zetaO$ is an $A$-section]\label{cor:zeta-section}
-\uses{def:A-section, thm:zeta-in-R, thm:riemann, thm:euler, thm:hadamard, prop:weierstrass, thm:zero-spheres}
+\uses{def:A-section, thm:zeta-in-R, thm:riemann, thm:euler, cor:hadamard-infinitude, prop:weierstrass, thm:zero-spheres}
 $\zetaO$ is an $A$-section \textup{(Definition~\ref{def:A-section})}: a section of
 $\mathcal R$ satisfying \textup{(C1)--(C4)}.
 \end{corollary}
@@ -1262,7 +1270,7 @@ slice-regular zero-geometry that translates them:
   zeros $-2,-4,\dots$, honest real zeros of $\zetaO$ --- and $\{q_n\}$ enumerates its
   residue-$\CC$ zero-spheres.
 \item \textbf{(C4)} \emph{Infinitely many residue-$\CC$ zeros.} Classical fact: $\zeta$ has
-  infinitely many nontrivial zeros (the Hadamard product, Theorem~\ref{thm:hadamard}; also Hardy,
+  infinitely many nontrivial zeros (Corollary~\ref{cor:hadamard-infinitude}; also Hardy,
   Theorem~\ref{thm:hardy}). By the residue dictionary below these are exactly the residue-$\CC$
   zeros, so $\{q_n\}$ is infinite.
 \end{itemize}
