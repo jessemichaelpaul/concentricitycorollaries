@@ -17,6 +17,7 @@ import Mathlib.NumberTheory.LSeries.RiemannZeta
 import Mathlib.NumberTheory.LSeries.Nonvanishing
 import Mathlib.Analysis.SpecialFunctions.Gamma.Deligne
 import Mathlib.Analysis.Meromorphic.FactorizedRational
+import Mathlib.Analysis.Complex.HasPrimitives
 import Mathlib.Tactic.FieldSimp
 
 noncomputable section
@@ -252,3 +253,47 @@ theorem xi_factorization_of_finite
     fun z => h_ne ⟨z, Set.mem_univ z⟩, fun z => ?_⟩
   have hz := hEq (Set.mem_univ z)
   rwa [hφ, Function.FactorizedRational.finprod_eq_fun hsupp] at hz
+
+/-! ## A4 — global logarithm of an entire nonvanishing function -/
+
+/-- **A4** — an entire nowhere-vanishing function has an entire logarithm.
+Route: the logarithmic derivative `h'/h` is entire
+(`DifferentiableOn.deriv`, CauchyIntegral.lean:644), so by Morera's theorem
+for the complex plane it has a primitive g₀
+(`Differentiable.isExactOn_univ`, HasPrimitives.lean:309); then
+`h · exp(−g₀)` has vanishing derivative, hence is a nonzero constant
+(`is_const_of_deriv_eq_zero`, MeanValue.lean:751), which is absorbed into
+the logarithm (`Complex.exp_log`, Complex/Log.lean:41). -/
+theorem exists_log_of_entire_nonvanishing {h : ℂ → ℂ}
+    (hd : Differentiable ℂ h) (hne : ∀ z, h z ≠ 0) :
+    ∃ g : ℂ → ℂ, Differentiable ℂ g ∧ ∀ z, h z = Complex.exp (g z) := by
+  have hderiv : Differentiable ℂ (deriv h) :=
+    differentiableOn_univ.mp (hd.differentiableOn.deriv isOpen_univ)
+  have hf : Differentiable ℂ (fun z => deriv h z / h z) := hderiv.div hd hne
+  obtain ⟨g₀, hg₀⟩ := hf.isExactOn_univ
+  have hg₀' : ∀ z, HasDerivAt g₀ (deriv h z / h z) z :=
+    fun z => hg₀ z (Set.mem_univ z)
+  have hg₀_diff : Differentiable ℂ g₀ := fun z => (hg₀' z).differentiableAt
+  set F : ℂ → ℂ := fun z => h z * Complex.exp (-(g₀ z)) with hF
+  have hF_deriv : ∀ z, HasDerivAt F 0 z := by
+    intro z
+    have h1 : HasDerivAt h (deriv h z) z := (hd z).hasDerivAt
+    have h2 : HasDerivAt (fun w => Complex.exp (-(g₀ w)))
+        (Complex.exp (-(g₀ z)) * -(deriv h z / h z)) z := (hg₀' z).neg.cexp
+    have h3 := h1.mul h2
+    have key : deriv h z * Complex.exp (-(g₀ z))
+        + h z * (Complex.exp (-(g₀ z)) * -(deriv h z / h z)) = 0 := by
+      have hzne : h z ≠ 0 := hne z
+      field_simp
+      ring
+    rwa [key] at h3
+  have hF_diff : Differentiable ℂ F := fun z => (hF_deriv z).differentiableAt
+  have hF_const : ∀ z, F z = F 0 := fun z =>
+    is_const_of_deriv_eq_zero hF_diff (fun w => (hF_deriv w).deriv) z 0
+  have hc : F 0 ≠ 0 := mul_ne_zero (hne 0) (Complex.exp_ne_zero _)
+  refine ⟨fun z => g₀ z + Complex.log (F 0), hg₀_diff.add_const _, fun z => ?_⟩
+  calc h z = h z * Complex.exp (-(g₀ z)) * Complex.exp (g₀ z) := by
+        rw [mul_assoc, ← Complex.exp_add, neg_add_cancel, Complex.exp_zero, mul_one]
+    _ = F 0 * Complex.exp (g₀ z) := by rw [← hF_const z]
+    _ = Complex.exp (g₀ z + Complex.log (F 0)) := by
+        rw [Complex.exp_add, Complex.exp_log hc, mul_comm]
