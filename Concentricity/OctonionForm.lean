@@ -13,6 +13,8 @@ composition-algebra vocabulary, never load.
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
 import Concentricity.Octonion
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+import Mathlib.Analysis.Real.Sqrt
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Abel
 
@@ -185,11 +187,134 @@ structure BasicTriple where
   hwz : innerO w z = 0
   hmulz : innerO (u * w) z = 0
 
-/-- P4.2.e — every unit imaginary extends to a basic triple. Queued (R8):
-dimension count in the 8-dimensional positive-definite form (the orthogonal
-complement of a span of ≤ 4 vectors contains a unit imaginary). -/
+/-! ### Linear-algebra helpers for the dimension count (P4.2.e) -/
+
+@[simp] theorem fst_smul (r : ℝ) (x : Octonion) : (r • x).1 = r • x.1 := rfl
+@[simp] theorem snd_smul (r : ℝ) (x : Octonion) : (r • x).2 = r • x.2 := rfl
+
+/-- `normSq` is quadratically homogeneous. Componentwise via
+`Quaternion.normSq_smul` (Mathlib/Algebra/Quaternion.lean:1091). -/
+theorem normSq_smul (r : ℝ) (x : Octonion) : normSq (r • x) = r ^ 2 * normSq x := by
+  show Quaternion.normSq (r • x.1) + Quaternion.normSq (r • x.2)
+      = r ^ 2 * (Quaternion.normSq x.1 + Quaternion.normSq x.2)
+  rw [Quaternion.normSq_smul, Quaternion.normSq_smul]
+  ring
+
+/-- Additivity of the polarization form in its first argument.
+Componentwise via `innerO_def'`. -/
+theorem innerO_add_left (x y z : Octonion) :
+    innerO (x + y) z = innerO x z + innerO y z := by
+  rw [innerO_def', innerO_def', innerO_def']
+  simp only [fst_add, snd_add, Quaternion.re_add, Quaternion.imI_add,
+    Quaternion.imJ_add, Quaternion.imK_add]
+  ring
+
+/-- Homogeneity of the polarization form in its first argument.
+Componentwise via `innerO_def'`. -/
+theorem innerO_smul_left (r : ℝ) (x y : Octonion) :
+    innerO (r • x) y = r * innerO x y := by
+  rw [innerO_def', innerO_def']
+  simp only [fst_smul, snd_smul, Quaternion.re_smul, Quaternion.imI_smul,
+    Quaternion.imJ_smul, Quaternion.imK_smul, smul_eq_mul]
+  ring
+
+/-- Positive definiteness of `normSq`. Componentwise via
+`Quaternion.normSq_nonneg`/`normSq_ne_zero` (Mathlib/Algebra/Quaternion.lean:1121–1124). -/
+theorem normSq_pos_of_ne_zero {x : Octonion} (hx : x ≠ 0) : 0 < normSq x := by
+  have h1 : (0 : ℝ) ≤ Quaternion.normSq x.1 := Quaternion.normSq_nonneg
+  have h2 : (0 : ℝ) ≤ Quaternion.normSq x.2 := Quaternion.normSq_nonneg
+  show 0 < Quaternion.normSq x.1 + Quaternion.normSq x.2
+  rcases eq_or_ne x.1 0 with hx1 | hx1
+  · have hx2 : x.2 ≠ 0 := fun h => hx (Prod.ext hx1 h)
+    have : Quaternion.normSq x.2 ≠ 0 := Quaternion.normSq_ne_zero.mpr hx2
+    have := lt_of_le_of_ne h2 (Ne.symm this)
+    linarith
+  · have : Quaternion.normSq x.1 ≠ 0 := Quaternion.normSq_ne_zero.mpr hx1
+    have := lt_of_le_of_ne h1 (Ne.symm this)
+    linarith
+
+/-- Normalization: a nonzero octonion scaled by the inverse of its Euclidean
+norm has unit `normSq`. `Real.sq_sqrt` (Mathlib/Analysis/Real/Sqrt.lean:178). -/
+theorem normSq_normalize {x : Octonion} (hx : x ≠ 0) :
+    normSq ((Real.sqrt (normSq x))⁻¹ • x) = 1 := by
+  have hpos := normSq_pos_of_ne_zero hx
+  rw [normSq_smul, inv_pow, Real.sq_sqrt hpos.le]
+  exact inv_mul_cancel₀ hpos.ne'
+
+/-- `innerO` bundled as an ℝ-linear map in its first argument. -/
+def innerOLinear (y : Octonion) : Octonion →ₗ[ℝ] ℝ where
+  toFun x := innerO x y
+  map_add' x x' := innerO_add_left x x' y
+  map_smul' r x := innerO_smul_left r x y
+
+@[simp] theorem innerOLinear_apply (y x : Octonion) : innerOLinear y x = innerO x y := rfl
+
+instance : FiniteDimensional ℝ Octonion :=
+  inferInstanceAs (FiniteDimensional ℝ (Quaternion ℝ × Quaternion ℝ))
+
+/-- 𝕆 is 8-dimensional over ℝ: the Cayley–Dickson double of the
+4-dimensional ℍ (`Quaternion.finrank_eq_four`,
+Mathlib/Algebra/Quaternion.lean:972; `Module.finrank_prod`,
+Mathlib/LinearAlgebra/Dimension/Constructions.lean:161). -/
+theorem finrank_eq_eight : Module.finrank ℝ Octonion = 8 := by
+  have h : Module.finrank ℝ (Quaternion ℝ × Quaternion ℝ) = 8 := by
+    rw [Module.finrank_prod, Quaternion.finrank_eq_four]
+  exact h
+
+/-- P4.2.e — every unit imaginary extends to a basic triple. Dimension count
+in the 8-dimensional positive-definite form: rank-nullity
+(`LinearMap.ker_ne_bot_of_finrank_lt`,
+Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean:178) produces a nonzero
+vector orthogonal to `{1, u}` (normalized: `w`), then one orthogonal to
+`{1, u, w, u·w}` (normalized: `z`). -/
 theorem exists_basicTriple (u : Octonion) (hu : u ∈ unitImaginarySphere) :
     ∃ T : BasicTriple, T.u = u := by
-  sorry
+  -- Step 1: a nonzero x ⊥ {1, u}.
+  have hdim2 : Module.finrank ℝ (ℝ × ℝ) < Module.finrank ℝ Octonion := by
+    rw [finrank_eq_eight, Module.finrank_prod, Module.finrank_self]
+    norm_num
+  obtain ⟨x, hxker, hx0⟩ := (Submodule.ne_bot_iff _).mp
+    (LinearMap.ker_ne_bot_of_finrank_lt
+      (f := (innerOLinear 1).prod (innerOLinear u)) hdim2)
+  have hfx := LinearMap.mem_ker.mp hxker
+  have hx1 : innerO x 1 = 0 := congrArg Prod.fst hfx
+  have hxu : innerO x u = 0 := congrArg Prod.snd hfx
+  -- Normalize to w.
+  set c : ℝ := (Real.sqrt (normSq x))⁻¹ with hc
+  set w : Octonion := c • x with hwdef
+  have hNw : normSq w = 1 := normSq_normalize hx0
+  have hrw : re w = 0 := by
+    rw [← innerO_one w, hwdef, innerO_smul_left, hx1, mul_zero]
+  have huw : innerO u w = 0 := by
+    rw [innerO_comm, hwdef, innerO_smul_left, hxu, mul_zero]
+  -- Step 2: a nonzero y ⊥ {1, u, w, u·w}.
+  have hdim4 : Module.finrank ℝ (ℝ × ℝ × ℝ × ℝ) < Module.finrank ℝ Octonion := by
+    rw [finrank_eq_eight, Module.finrank_prod, Module.finrank_prod,
+      Module.finrank_prod, Module.finrank_self]
+    norm_num
+  obtain ⟨y, hyker, hy0⟩ := (Submodule.ne_bot_iff _).mp
+    (LinearMap.ker_ne_bot_of_finrank_lt
+      (f := (innerOLinear 1).prod ((innerOLinear u).prod
+        ((innerOLinear w).prod (innerOLinear (u * w)))) ) hdim4)
+  have hfy := LinearMap.mem_ker.mp hyker
+  have hy1 : innerO y 1 = 0 := congrArg Prod.fst hfy
+  have hyu : innerO y u = 0 := congrArg Prod.fst (congrArg Prod.snd hfy)
+  have hyw : innerO y w = 0 :=
+    congrArg Prod.fst (congrArg Prod.snd (congrArg Prod.snd hfy))
+  have hyuw : innerO y (u * w) = 0 :=
+    congrArg Prod.snd (congrArg Prod.snd (congrArg Prod.snd hfy))
+  -- Normalize to z.
+  set d : ℝ := (Real.sqrt (normSq y))⁻¹ with hd
+  set z : Octonion := d • y with hzdef
+  have hNz : normSq z = 1 := normSq_normalize hy0
+  have hrz : re z = 0 := by
+    rw [← innerO_one z, hzdef, innerO_smul_left, hy1, mul_zero]
+  have huz : innerO u z = 0 := by
+    rw [innerO_comm, hzdef, innerO_smul_left, hyu, mul_zero]
+  have hwz : innerO w z = 0 := by
+    rw [innerO_comm, hzdef, innerO_smul_left, hyw, mul_zero]
+  have hmulz : innerO (u * w) z = 0 := by
+    rw [innerO_comm, hzdef, innerO_smul_left, hyuw, mul_zero]
+  exact ⟨⟨u, w, z, hu, ⟨hrw, hNw⟩, ⟨hrz, hNz⟩, huw, huz, hwz, hmulz⟩, rfl⟩
 
 end Octonion
