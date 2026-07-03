@@ -12,6 +12,7 @@ world half).
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
 import Concentricity.Octonion
+import Concentricity.OctonionForm
 import Mathlib.CategoryTheory.Action
 import Mathlib.Topology.Compactification.OnePoint.Basic
 
@@ -94,9 +95,20 @@ theorem smul_ofReal (g : G2) (r : ℝ) : g • Octonion.ofReal r = Octonion.ofRe
   calc g • (r • (1 : Octonion)) = r • (g • (1 : Octonion)) := g.toEquiv.map_smul r 1
   _ = r • (1 : Octonion) := by rw [smul_one]
 
+/-- P4.2.f — G₂ acts transitively on basic triples (Baez §4 substance,
+faithfulness gloss; DERIVED in-repo per PHASE4_PLAN #2). Queued (R8): the
+frame `(1, u, w, uw, z, uz, wz, (uw)z)` of a basic triple is an orthonormal
+basis (P4.2.b–d + the internal-doubling multiplication table), and the
+linear map matching two frames is multiplicative because both frames carry
+the same Cayley–Dickson table. -/
+theorem exists_smul_basicTriple (T₁ T₂ : Octonion.BasicTriple) :
+    ∃ g : G2, g • T₁.u = T₂.u ∧ g • T₁.w = T₂.w ∧ g • T₁.z = T₂.z := by
+  sorry
+
 /-- master `thm:G2-S6` (Baez, SOURCES/Baez02.md): "G₂ acts transitively on
 S⁶ …" — the transitivity clause, on the unit imaginary sphere of
-Concentricity/Octonion.lean. Queued (R8).
+Concentricity/Octonion.lean. CLOSED against the P4.2 decomposition: extend
+both points to basic triples (P4.2.e) and match the triples (P4.2.f).
 
 SOURCES/Baez02.md records: transitivity is printed in substance at p. 185
 ("the automorphism … can map e₁ to any point e₁′ on the 6-sphere of unit
@@ -108,7 +120,10 @@ theorem exists_smul_eq_of_mem_unitImaginarySphere
     {u v : Octonion} (hu : u ∈ Octonion.unitImaginarySphere)
     (hv : v ∈ Octonion.unitImaginarySphere) :
     ∃ g : G2, g • u = v := by
-  sorry
+  obtain ⟨T₁, hT₁⟩ := Octonion.exists_basicTriple u hu
+  obtain ⟨T₂, hT₂⟩ := Octonion.exists_basicTriple v hv
+  obtain ⟨g, hg, -, -⟩ := exists_smul_basicTriple T₁ T₂
+  exact ⟨g, by rw [hT₁, hT₂] at hg; exact hg⟩
 
 end G2
 
