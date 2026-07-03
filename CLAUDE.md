@@ -89,10 +89,10 @@ mirrors the discovery order.
   G₂ := AlgAut(𝕆), the groupoids, Φ, 𝓑, F, 𝒯_A) is constructed; axiom leaves are theorems
   from the literature, never existence claims. Zero-axiom target: R is defined by the stem
   functor over Mathlib's Hol(C); literature is cited for faithfulness of definitions, never
-  as load. Each remaining axiom's docstring carries its price of deletion. The gate: zero
-  sorries, and `#print axioms` showing exactly the declared leaf set (currently
-  `riemannZeta_nontrivialZeros_infinite` alone); aspiration zero. (Mathlib's three
-  foundational axioms always print and are not counted.)
+  as load. Each remaining axiom's docstring carries its price of deletion. The gate is
+  literal: zero sorries and zero project axioms — the declared leaf set is empty;
+  `riemannZeta_nontrivialZeros_infinite` enters as a sorried theorem and is proved
+  in-repo. (Mathlib's three foundational axioms always print and are not counted.)
 - **R10** — **Three registers, typographically distinct**, especially in the
   slice-preserving octonionic layer (mostly axiomatized): SOURCED statements are verbatim
   quotes with pinpoint cites (in Lean, the quote lives in the axiom's docstring; any
