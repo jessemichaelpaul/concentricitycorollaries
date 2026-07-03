@@ -102,6 +102,55 @@ theorem dir_mem_unitImaginarySphere {x : Octonion} (hx : im x ≠ 0) :
     rw [re_smul, re_im, mul_zero]
   · exact normSq_normalize hx
 
+/-! ### Slice computations for the value-preservation clause (DERIVED) -/
+
+theorem sliceEmbed_ofReal (v : Octonion) (r : ℝ) :
+    sliceEmbed v (r : ℂ) = ofReal r := by
+  rw [sliceEmbed, Complex.ofReal_re, Complex.ofReal_im, zero_smul, add_zero]
+
+theorem re_sliceEmbed {v : Octonion} (hv : v ∈ unitImaginarySphere) (ζ : ℂ) :
+    re (sliceEmbed v ζ) = ζ.re := by
+  rw [sliceEmbed, re_add, re_ofReal, re_smul, hv.1, mul_zero, add_zero]
+
+theorem im_sliceEmbed {v : Octonion} (hv : v ∈ unitImaginarySphere) (ζ : ℂ) :
+    im (sliceEmbed v ζ) = ζ.im • v := by
+  rw [im, re_sliceEmbed hv, sliceEmbed, add_sub_cancel_left]
+
+theorem norm_smul_unit {v : Octonion} (hv : v ∈ unitImaginarySphere) (r : ℝ) :
+    norm (r • v) = |r| := by
+  rw [norm, normSq_smul, hv.2, _root_.mul_one, Real.sqrt_sq_eq_abs]
+
+theorem sliceCoord_sliceEmbed {v : Octonion} (hv : v ∈ unitImaginarySphere)
+    (ζ : ℂ) : sliceCoord (sliceEmbed v ζ) = ⟨ζ.re, |ζ.im|⟩ := by
+  rw [sliceCoord, re_sliceEmbed hv, im_sliceEmbed hv, norm_smul_unit hv]
+
+theorem dir_sliceEmbed_of_pos {v : Octonion} (hv : v ∈ unitImaginarySphere)
+    {ζ : ℂ} (h : 0 < ζ.im) : dir (sliceEmbed v ζ) = v := by
+  rw [dir, im_sliceEmbed hv, norm_smul_unit hv, abs_of_pos h, smul_smul,
+    inv_mul_cancel₀ (ne_of_gt h), one_smul]
+
+theorem dir_sliceEmbed_of_neg {v : Octonion} (hv : v ∈ unitImaginarySphere)
+    {ζ : ℂ} (h : ζ.im < 0) : dir (sliceEmbed v ζ) = -v := by
+  rw [dir, im_sliceEmbed hv, norm_smul_unit hv, abs_of_neg h, smul_smul,
+    inv_neg, neg_mul, inv_mul_cancel₀ (ne_of_lt h), neg_smul, one_smul]
+
+theorem dir_sliceEmbed_of_im_zero {v : Octonion}
+    (hv : v ∈ unitImaginarySphere) {ζ : ℂ} (h : ζ.im = 0) :
+    dir (sliceEmbed v ζ) = 0 := by
+  rw [dir, im_sliceEmbed hv, h, zero_smul, smul_zero]
+
+/-- The slice embedding of the opposite direction sees the conjugate
+coordinate: `φ_{−v}(w̄) = φ_v(w)`. -/
+theorem sliceEmbed_neg_conj (v : Octonion) (w : ℂ) :
+    sliceEmbed (-v) ((starRingEnd ℂ) w) = sliceEmbed v w := by
+  rw [sliceEmbed, sliceEmbed, Complex.conj_re, Complex.conj_im, neg_smul,
+    smul_neg, neg_neg]
+
+/-- The zero-direction junk value is direction-blind: it lands on the real
+axis. -/
+theorem sliceEmbed_zero_dir (w : ℂ) : sliceEmbed 0 w = ofReal w.re := by
+  rw [sliceEmbed, smul_zero, add_zero]
+
 /-- The slice Riemann sphere ℂ_v* = ℂ_v ∪ {∞} = S²_v (master `def:slices`),
 as a subset of the compactified 𝕆*. "All slice spheres share the single
 point at infinity, as well as the real axis." -/
@@ -260,15 +309,6 @@ def realize (A : ASection) (q : OnePoint Octonion) : OnePoint Octonion :=
       else OnePoint.infty)
     q
 
-/-- master `def:section-map`(i) — "*Slice preservation of values.*
-A(ℂ_I*) ⊆ ℂ_I* for every I: the value at a point lies on that point's own
-slice sphere (Definition def:R)." Queued (R8). -/
-theorem realize_mem_sliceSphere (A : ASection) {v : Octonion}
-    (hv : v ∈ Octonion.unitImaginarySphere) {q : OnePoint Octonion}
-    (hq : q ∈ Octonion.sliceSphere v) :
-    A.realize q ∈ Octonion.sliceSphere v := by
-  sorry
-
 open Classical in
 /-- The realization at a finite point, unfolded (definitional). -/
 theorem realize_coe (A : ASection) (x : Octonion) :
@@ -283,6 +323,61 @@ theorem realize_infty (A : ASection) :
     A.realize OnePoint.infty
       = OnePoint.map (fun z : ℂ => Octonion.ofReal z.re) A.valueAtInfinity :=
   rfl
+
+/-- master `def:section-map`(i) — "*Slice preservation of values.*
+A(ℂ_I*) ⊆ ℂ_I* for every I: the value at a point lies on that point's own
+slice sphere (Definition def:R)." Proof: q = φ_v(ζ) forces
+`im q = ζ.im • v`, so `dir q ∈ {v, −v}` (plus the real junk case, blind by
+construction); `φ_{−v}(w̄) = φ_v(w)` and intrinsicality of the stem
+symmetrize the negative case. -/
+theorem realize_mem_sliceSphere (A : ASection) {v : Octonion}
+    (hv : v ∈ Octonion.unitImaginarySphere) {q : OnePoint Octonion}
+    (hq : q ∈ Octonion.sliceSphere v) :
+    A.realize q ∈ Octonion.sliceSphere v := by
+  rcases Set.mem_insert_iff.mp hq with rfl | hq'
+  · -- q = ∞: the compactified value is ∞ or real, both on every sphere.
+    rw [realize_infty]
+    induction hval : A.valueAtInfinity using OnePoint.rec with
+    | infty => rw [OnePoint.map_infty]; exact Set.mem_insert _ _
+    | coe z =>
+      rw [OnePoint.map_some]
+      exact Set.mem_insert_of_mem _
+        ⟨Octonion.ofReal z.re, ⟨(z.re : ℂ), Octonion.sliceEmbed_ofReal v z.re⟩,
+          rfl⟩
+  · obtain ⟨x, hx, rfl⟩ := hq'
+    obtain ⟨ζ, rfl⟩ := hx
+    rw [realize_coe]
+    by_cases hA : AnalyticAt ℂ A.F (Octonion.sliceCoord (Octonion.sliceEmbed v ζ))
+    · rw [if_pos hA]
+      rcases lt_trichotomy ζ.im 0 with hneg | hzero | hpos
+      · -- lower half-plane: dir = −v, coordinate = ζ̄; intrinsicality flips.
+        have hcoord : Octonion.sliceCoord (Octonion.sliceEmbed v ζ)
+            = (starRingEnd ℂ) ζ := by
+          rw [Octonion.sliceCoord_sliceEmbed hv]
+          exact Complex.ext (by rw [Complex.conj_re])
+            (by rw [Complex.conj_im, abs_of_neg hneg])
+        rw [hcoord, Octonion.dir_sliceEmbed_of_neg hv hneg, A.intrinsic ζ,
+          Octonion.sliceEmbed_neg_conj]
+        exact Set.mem_insert_of_mem _ ⟨_, ⟨A.F ζ, rfl⟩, rfl⟩
+      · -- real point: the direction junk is never consumed (the value is
+        -- real by construction of the zero-direction embedding).
+        have hcoord : Octonion.sliceCoord (Octonion.sliceEmbed v ζ)
+            = (ζ.re : ℂ) := by
+          rw [Octonion.sliceCoord_sliceEmbed hv]
+          exact Complex.ext (by rw [Complex.ofReal_re])
+            (by rw [Complex.ofReal_im, hzero, abs_zero])
+        rw [hcoord, Octonion.dir_sliceEmbed_of_im_zero hv hzero,
+          Octonion.sliceEmbed_zero_dir]
+        exact Set.mem_insert_of_mem _
+          ⟨_, ⟨((A.F (ζ.re : ℂ)).re : ℂ), Octonion.sliceEmbed_ofReal v _⟩, rfl⟩
+      · -- upper half-plane: dir = v, coordinate = ζ.
+        have hcoord : Octonion.sliceCoord (Octonion.sliceEmbed v ζ) = ζ := by
+          rw [Octonion.sliceCoord_sliceEmbed hv]
+          exact Complex.ext rfl (abs_of_pos hpos)
+        rw [hcoord, Octonion.dir_sliceEmbed_of_pos hv hpos]
+        exact Set.mem_insert_of_mem _ ⟨_, ⟨A.F ζ, rfl⟩, rfl⟩
+    · rw [if_neg hA]
+      exact Set.mem_insert _ _
 
 /-- master `def:section-map`(iii) — "*Blindness to the sphere direction.*
 On a G₂-orbit S_(σ,γ) the stem coordinates (F₁, F₂)(σ + iγ) are constant; in
