@@ -1,0 +1,142 @@
+/-
+Concentricity/ASection.lean
+
+`structure ASection` — the four-property package of master `def:A-section`,
+in the stem encoding of Concentricity/StemRing.lean (R9: constructed, never
+axiomatized; the compactified reading 𝕆* = S⁸ is the marked derivation node
+of `rmk:compactify`).
+
+Master `def:A-section` (verbatim): "An *A-section* is a section A of the ring
+𝓡 of slice-preserving slice-regular functions on 𝕆* = S⁸ (Definition def:R)
+— equivalently, a slice-preserving *semiregular* function on 𝕆* (the
+meromorphic slice class; [AdF §11]) — with the following four properties."
+The four properties C1–C4 are quoted field-by-field below.
+
+Statement-layer renderings (flagged for the author's skim, R6):
+- Stem level: an A-section is carried by its intrinsic stem F : ℂ → ℂ
+  (def:section-map: "one holomorphic stem with ℝ-valued components, the same
+  for every I ∈ S⁶"); the residue-ℂ zero-spheres appear as the stem's
+  conjugate zero pairs, enumerated by their upper-half-plane representatives.
+- C3's slice-regular primary factors (prop:weierstrass; AdFslice Prop 3.1 +
+  Thm 3.2, GV) are rendered at stem level by the classical elementary factors
+  over conjugate pairs (`spherePrimary` below), with per-zero genus data.
+- `∏'`/`Summable`/`∑'` are the bare (unconditional) forms, per the recon
+  ruling on `SummationFilter`.
+
+`sorry` marks UNFORMALIZED, never UNSOUND (R8).
+-/
+import Concentricity.StemRing
+import Mathlib.Analysis.Meromorphic.Order
+import Mathlib.Analysis.Complex.Exponential
+
+noncomputable section
+
+open Complex
+
+/-- The classical Weierstrass elementary factor
+`E_p(w) = (1 - w) · exp(w + w²/2 + ⋯ + wᵖ/p)`. -/
+def weierstrassE (p : ℕ) (w : ℂ) : ℂ :=
+  (1 - w) * Complex.exp (∑ k ∈ Finset.range p, w ^ (k + 1) / (k + 1))
+
+/-- The stem-level primary factor of a residue-ℂ zero-sphere: the elementary
+factors of the conjugate stem pair `{a, conj a}` (master C3's slice-regular
+primary factor 𝓔(·; qₙ), prop:weierstrass; AdFslice Prop 3.1 + Thm 3.2, GV —
+cited for faithfulness of the rendering, never as load). The product is
+intrinsic in `z`. -/
+def spherePrimary (p : ℕ) (a z : ℂ) : ℂ :=
+  weierstrassE p (z / a) * weierstrassE p (z / starRingEnd ℂ a)
+
+/-- Master `def:A-section`: the four-property package C1–C4, stem-encoded.
+Each field's docstring quotes the master clause it transcribes. -/
+structure ASection where
+  /-- The intrinsic stem carrying the section (def:section-map): the
+  underlying function of the A-section, slicewise `A(x + Iy) = F₁ + I·F₂`
+  with `F = F₁ + iF₂` the stem. -/
+  F : ℂ → ℂ
+  /-- Slice preservation: the stem is intrinsic (def:slice-preserving). -/
+  intrinsic : IsIntrinsic F
+  /-- "equivalently, a slice-preserving *semiregular* function on 𝕆* (the
+  meromorphic slice class; [AdF §11])" — stem level: meromorphic on ℂ. -/
+  meromorphic : MeromorphicOn F Set.univ
+  /-- C1 data: the pole's location — "it … lies at a real point". -/
+  pole : ℝ
+  /-- C1: "A is meromorphically continued to 𝕆* with exactly one pole" —
+  analytic away from the pole. -/
+  c1_analyticAt : ∀ z : ℂ, z ≠ (pole : ℂ) → AnalyticAt ℂ F z
+  /-- C1: "it is simple" — meromorphic order exactly −1 at the pole. (The
+  clause "its value there is the point at infinity ∞ = N" is the compactified
+  reading of the pole, `rmk:two-poles`.) -/
+  c1_simple : meromorphicOrderAt F (pole : ℂ) = ((-1 : ℤ) : WithTop ℤ)
+  /-- C2 data: the Euler index — "an *infinite* summable family {ℓ_p}". -/
+  ι : Type
+  /-- C2: the family is infinite. -/
+  ι_infinite : Infinite ι
+  /-- C2 data: the Euler family of stems. -/
+  ℓ : ι → ℂ → ℂ
+  /-- C2 data: the abscissa of the "slice right half-space Ω₀ ⊂ 𝕆*" —
+  stem level: `{z | Ω₀ < re z}`. -/
+  Ω₀ : ℝ
+  /-- C2: the family members are slice-preserving (intrinsic stems). -/
+  c2_intrinsic : ∀ p, IsIntrinsic (ℓ p)
+  /-- C2: the family members are slice-regular on Ω₀. -/
+  c2_analyticAt : ∀ p, ∀ z : ℂ, Ω₀ < z.re → AnalyticAt ℂ (ℓ p) z
+  /-- C2: "each zero-free on Ω₀". -/
+  c2_zero_free : ∀ p, ∀ z : ℂ, Ω₀ < z.re → ℓ p z ≠ 0
+  /-- C2: "summable family" (bare `Summable` = unconditional, per the recon
+  ruling). -/
+  c2_summable : ∀ z : ℂ, Ω₀ < z.re → Summable fun p => ℓ p z
+  /-- C2: "On a slice right half-space Ω₀ ⊂ 𝕆*, A = exp(∑_p ℓ_p)". -/
+  c2_euler : ∀ z : ℂ, Ω₀ < z.re → F z = Complex.exp (∑' p, ℓ p z)
+  /-- C3 data: "q is the octonionic coordinate, m ≥ 0" — the order of the
+  zero at the origin. -/
+  m : ℕ
+  /-- C3 data: "R is the slice-regular Weierstrass product over the
+  residue-ℝ (real) zeros of A, vanishing only on ℝ". -/
+  Rfac : ℂ → ℂ
+  /-- C3 data: "g is slice-preserving entire". -/
+  gfac : ℂ → ℂ
+  /-- C3 data: the genus of each primary factor (part of "the slice-regular
+  Weierstrass primary factor of qₙ", prop:weierstrass / GV). -/
+  genus : ℕ → ℕ
+  /-- C3 data: "{qₙ} enumerates the residue-ℂ zero-spheres of A" — stem
+  level: the upper-half-plane representatives of the conjugate zero pairs. -/
+  sphereZero : ℕ → ℂ
+  /-- C3: R is slice-preserving. -/
+  c3_R_intrinsic : IsIntrinsic Rfac
+  /-- C3: R is entire (stem level). -/
+  c3_R_entire : Differentiable ℂ Rfac
+  /-- C3: R vanishes "only on ℝ". -/
+  c3_R_zeros_real : ∀ z : ℂ, Rfac z = 0 → z.im = 0
+  /-- C3: g is slice-preserving. -/
+  c3_g_intrinsic : IsIntrinsic gfac
+  /-- C3: "g is slice-preserving entire". -/
+  c3_g_entire : Differentiable ℂ gfac
+  /-- C3: the zero-spheres are residue-ℂ — non-real; upper-half-plane
+  representatives. -/
+  c3_sphere_nonreal : ∀ n, 0 < (sphereZero n).im
+  /-- C3: the infinite product converges (bare `Multipliable` =
+  unconditional, per the recon ruling). -/
+  c3_multipliable : ∀ z : ℂ, Multipliable fun n => spherePrimary (genus n) (sphereZero n) z
+  /-- C3: "On 𝕆* ∖ {pole}, A = qᵐ · R · e^g · ∏ₙ 𝓔(·; qₙ)". -/
+  c3_factorization : ∀ z : ℂ, z ≠ (pole : ℂ) →
+    F z = z ^ m * Rfac z * Complex.exp (gfac z) *
+      ∏' n, spherePrimary (genus n) (sphereZero n) z
+  /-- C4: "Infinitely many residue-ℂ zeros. The index set {qₙ} is
+  infinite." -/
+  c4_infinite : (Set.range sphereZero).Infinite
+
+namespace ASection
+
+/-- C2's closing clause, DERIVED (R10): "in particular A is zero-free on
+Ω₀" — the exponential never vanishes. -/
+theorem zero_free_on_halfSpace (A : ASection) {z : ℂ} (hz : A.Ω₀ < z.re) :
+    A.F z ≠ 0 := by
+  rw [A.c2_euler z hz]
+  exact Complex.exp_ne_zero _
+
+/-- The stem of an A-section is real on the real axis (def:section-map:
+"A(ℝ) ⊆ ℝ"). DERIVED (R10), inherited from intrinsicality. -/
+theorem real_on_real (A : ASection) (x : ℝ) : (A.F x).im = 0 :=
+  StemRing.real_on_real A.intrinsic x
+
+end ASection
