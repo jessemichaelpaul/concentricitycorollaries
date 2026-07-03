@@ -83,6 +83,15 @@ theorem sliceEmbed_mul {v : Octonion} (hv : v ∈ unitImaginarySphere) (z w : �
 theorem re_im (x : Octonion) : re (im x) = 0 := by
   rw [im, re_sub, re_ofReal, sub_self]
 
+theorem im_ofReal (r : ℝ) : im (ofReal r) = 0 := by
+  rw [im, re_ofReal, sub_self]
+
+/-- Vanishing imaginary part characterizes the real axis. -/
+theorem eq_ofReal_of_im_eq_zero {x : Octonion} (h : im x = 0) :
+    x = ofReal (re x) := by
+  rw [im] at h
+  exact sub_eq_zero.mp h
+
 /-- The direction of a non-real octonion is a unit imaginary octonion:
 `re (im x) = 0` by construction and `normSq (dir x) = 1` by the
 smul-homogeneity of `normSq` (`normSq_normalize`). -/
@@ -100,6 +109,132 @@ def sliceSphere (v : Octonion) : Set (OnePoint Octonion) :=
   insert OnePoint.infty ((↑) '' Set.range (sliceEmbed v))
 
 end Octonion
+
+namespace G2
+
+/-! ### The isometry block (master `def:section-map`(ii) proof engine)
+
+The quadratic identity P4.2.a (`Octonion.mul_self_eq`) forces every G₂
+element to preserve `re` and `normSq` of non-real elements (uniqueness of
+the decomposition `x² = 2(re x)·x − N(x)`); real elements are G₂-fixed
+(`G2.smul_ofReal`, proved). Everything DERIVED (R10). -/
+
+theorem smul_add (g : G2) (a b : Octonion) : g • (a + b) = g • a + g • b :=
+  g.toEquiv.map_add a b
+
+theorem smul_sub (g : G2) (a b : Octonion) : g • (a - b) = g • a - g • b :=
+  g.toEquiv.map_sub a b
+
+theorem smul_rsmul (g : G2) (r : ℝ) (x : Octonion) :
+    g • (r • x) = r • (g • x) :=
+  g.toEquiv.map_smul r x
+
+/-- G₂ preserves non-reality: automorphisms fix ℝ pointwise, so a
+non-real octonion cannot land on the real axis. -/
+theorem im_smul_ne_zero (g : G2) {x : Octonion} (hx : Octonion.im x ≠ 0) :
+    Octonion.im (g • x) ≠ 0 := by
+  intro h0
+  apply hx
+  have hyr := Octonion.eq_ofReal_of_im_eq_zero h0
+  have h1 : g⁻¹ • (g • x) = g⁻¹ • Octonion.ofReal (Octonion.re (g • x)) := by
+    rw [← hyr]
+  rw [inv_smul_smul, G2.smul_ofReal] at h1
+  rw [h1]
+  exact Octonion.im_ofReal _
+
+/-- The isometry engine: G₂ preserves the real part and the quadratic
+form. Non-real case: the two quadratic identities for `g•x` (its own, and
+the g-transport of x's) force the coefficients to agree, since `{g•x, 1}`
+is independent when `g•x` is non-real. Real case: `smul_ofReal`. -/
+theorem smul_re_normSq (g : G2) (x : Octonion) :
+    Octonion.re (g • x) = Octonion.re x ∧
+      Octonion.normSq (g • x) = Octonion.normSq x := by
+  by_cases hx : Octonion.im x = 0
+  · rw [Octonion.eq_ofReal_of_im_eq_zero hx, G2.smul_ofReal]
+    exact ⟨rfl, rfl⟩
+  · have hy_im : Octonion.im (g • x) ≠ 0 := im_smul_ne_zero g hx
+    have h1 : (g • x) * (g • x)
+        = (2 * Octonion.re (g • x)) • (g • x)
+          - Octonion.ofReal (Octonion.normSq (g • x)) :=
+      Octonion.mul_self_eq (g • x)
+    have h2 : (g • x) * (g • x)
+        = (2 * Octonion.re x) • (g • x)
+          - Octonion.ofReal (Octonion.normSq x) := by
+      have hxx : g • (x * x)
+          = g • ((2 * Octonion.re x) • x - Octonion.ofReal (Octonion.normSq x)) := by
+        rw [Octonion.mul_self_eq x]
+      rw [G2.smul_mul, smul_sub, smul_rsmul, G2.smul_ofReal] at hxx
+      exact hxx
+    have key : (2 * Octonion.re x - 2 * Octonion.re (g • x)) • (g • x)
+        = (Octonion.normSq x - Octonion.normSq (g • x)) • (1 : Octonion) := by
+      have h := h1.symm.trans h2
+      rw [Octonion.ofReal_eq_smul_one, Octonion.ofReal_eq_smul_one] at h
+      have h' := sub_eq_sub_iff_sub_eq_sub.mp h
+      rw [← sub_smul, ← sub_smul] at h'
+      have h'' : -((2 * Octonion.re (g • x) - 2 * Octonion.re x) • (g • x))
+          = -((Octonion.normSq (g • x) - Octonion.normSq x) • (1 : Octonion)) := by
+        rw [h']
+      rwa [← neg_smul, ← neg_smul, neg_sub, neg_sub] at h''
+    have hre : Octonion.re (g • x) = Octonion.re x := by
+      by_contra hne
+      have ha : 2 * Octonion.re x - 2 * Octonion.re (g • x) ≠ 0 := by
+        intro h0
+        apply hne
+        linarith
+      have hyval : (2 * Octonion.re x - 2 * Octonion.re (g • x))⁻¹
+            • ((2 * Octonion.re x - 2 * Octonion.re (g • x)) • (g • x))
+          = (2 * Octonion.re x - 2 * Octonion.re (g • x))⁻¹
+            • ((Octonion.normSq x - Octonion.normSq (g • x)) • (1 : Octonion)) := by
+        rw [key]
+      rw [inv_smul_smul₀ ha, smul_smul] at hyval
+      apply hy_im
+      rw [hyval, ← Octonion.ofReal_eq_smul_one]
+      exact Octonion.im_ofReal _
+    refine ⟨hre, ?_⟩
+    rw [hre, sub_self, zero_smul] at key
+    have h0 := congrArg Octonion.re key.symm
+    rw [Octonion.re_smul, Octonion.re_one, mul_one,
+      show Octonion.re (0 : Octonion) = 0 from rfl] at h0
+    linarith
+
+theorem smul_re (g : G2) (x : Octonion) :
+    Octonion.re (g • x) = Octonion.re x :=
+  (smul_re_normSq g x).1
+
+theorem smul_normSq (g : G2) (x : Octonion) :
+    Octonion.normSq (g • x) = Octonion.normSq x :=
+  (smul_re_normSq g x).2
+
+theorem smul_norm (g : G2) (x : Octonion) :
+    Octonion.norm (g • x) = Octonion.norm x := by
+  rw [Octonion.norm, Octonion.norm, smul_normSq]
+
+/-- The imaginary part commutes with the G₂ action. -/
+theorem smul_im (g : G2) (x : Octonion) :
+    Octonion.im (g • x) = g • Octonion.im x := by
+  rw [Octonion.im, Octonion.im, smul_re, smul_sub, G2.smul_ofReal]
+
+/-- The direction commutes with the G₂ action: `dir (g•x) = g • dir x`
+(junk-consistent at real points: both sides are 0). -/
+theorem smul_dir (g : G2) (x : Octonion) :
+    Octonion.dir (g • x) = g • Octonion.dir x := by
+  rw [Octonion.dir, Octonion.dir, smul_im, smul_norm, smul_rsmul]
+
+/-- The slice embedding intertwines the G₂ action: `g(φ_v w) = φ_{g v} w`
+(linearity + `smul_ofReal`). -/
+theorem smul_sliceEmbed (g : G2) (v : Octonion) (ζ : ℂ) :
+    g • Octonion.sliceEmbed v ζ = Octonion.sliceEmbed (g • v) ζ := by
+  rw [Octonion.sliceEmbed, Octonion.sliceEmbed, smul_add, G2.smul_ofReal,
+    smul_rsmul]
+
+theorem smul_onePoint_infty (g : G2) :
+    g • (OnePoint.infty : OnePoint Octonion) = OnePoint.infty := rfl
+
+theorem smul_onePoint_coe (g : G2) (x : Octonion) :
+    g • ((x : Octonion) : OnePoint Octonion)
+      = ((g • x : Octonion) : OnePoint Octonion) := rfl
+
+end G2
 
 namespace ASection
 
@@ -134,22 +269,54 @@ theorem realize_mem_sliceSphere (A : ASection) {v : Octonion}
     A.realize q ∈ Octonion.sliceSphere v := by
   sorry
 
-/-- master `def:section-map`(ii) — "*G₂-equivariance.* For g ∈ G₂ and
-non-real q = x + Iy, A(g·q) = F₁ + g(I)F₂ = g·(F₁ + I F₂) = g·A(q) …; for
-q ∈ ℝ ∪ {N} both sides are G₂-fixed." Queued (R8): the one I-independent
-real stem (Wang Rem. 2.11, SOURCES/Wang.md) against the G₂ slice
-relabelling. -/
-theorem realize_equivariant (A : ASection) (g : G2) (q : OnePoint Octonion) :
-    A.realize (g • q) = g • A.realize q := by
-  sorry
+open Classical in
+/-- The realization at a finite point, unfolded (definitional). -/
+theorem realize_coe (A : ASection) (x : Octonion) :
+    A.realize (x : OnePoint Octonion)
+      = if AnalyticAt ℂ A.F (Octonion.sliceCoord x) then
+          ((Octonion.sliceEmbed (Octonion.dir x)
+            (A.F (Octonion.sliceCoord x)) : Octonion) : OnePoint Octonion)
+        else OnePoint.infty := rfl
+
+/-- The realization at ∞, unfolded (definitional). -/
+theorem realize_infty (A : ASection) :
+    A.realize OnePoint.infty
+      = OnePoint.map (fun z : ℂ => Octonion.ofReal z.re) A.valueAtInfinity :=
+  rfl
 
 /-- master `def:section-map`(iii) — "*Blindness to the sphere direction.*
 On a G₂-orbit S_(σ,γ) the stem coordinates (F₁, F₂)(σ + iγ) are constant; in
 particular if A vanishes at one point of the orbit it vanishes on the whole
 orbit (Lemma lem:residue-spheres)." Stem-level statement: the slice
-coordinate is G₂-invariant. Queued (R8). -/
+coordinate is G₂-invariant — corollary of the isometry block. -/
 theorem sliceCoord_smul_invariant (g : G2) (x : Octonion) :
     Octonion.sliceCoord (g • x) = Octonion.sliceCoord x := by
-  sorry
+  rw [Octonion.sliceCoord, Octonion.sliceCoord, G2.smul_re, G2.smul_im,
+    G2.smul_norm]
+
+/-- master `def:section-map`(ii) — "*G₂-equivariance.* For g ∈ G₂ and
+non-real q = x + Iy, A(g·q) = F₁ + g(I)F₂ = g·(F₁ + I F₂) = g·A(q) …; for
+q ∈ ℝ ∪ {N} both sides are G₂-fixed." The one I-independent real stem
+(Wang Rem. 2.11, SOURCES/Wang.md) against the G₂ slice relabelling: the
+slice coordinate is G₂-invariant (`sliceCoord_smul_invariant`), and the
+direction is G₂-transported (`G2.smul_dir`). -/
+theorem realize_equivariant (A : ASection) (g : G2) (q : OnePoint Octonion) :
+    A.realize (g • q) = g • A.realize q := by
+  induction q using OnePoint.rec with
+  | infty =>
+    rw [G2.smul_onePoint_infty, realize_infty]
+    induction hval : A.valueAtInfinity using OnePoint.rec with
+    | infty => rw [OnePoint.map_infty]; rfl
+    | coe z =>
+      rw [OnePoint.map_some]
+      rw [G2.smul_onePoint_coe, G2.smul_ofReal]
+  | coe x =>
+    rw [G2.smul_onePoint_coe, realize_coe, realize_coe,
+      sliceCoord_smul_invariant g x]
+    by_cases hA : AnalyticAt ℂ A.F (Octonion.sliceCoord x)
+    · rw [if_pos hA, if_pos hA, G2.smul_onePoint_coe, G2.smul_sliceEmbed,
+        ← G2.smul_dir]
+    · rw [if_neg hA, if_neg hA]
+      rfl
 
 end ASection
