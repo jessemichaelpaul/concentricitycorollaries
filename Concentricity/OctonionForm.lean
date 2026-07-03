@@ -14,7 +14,12 @@ composition-algebra vocabulary, never load.
 -/
 import Concentricity.Octonion
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+import Mathlib.LinearAlgebra.Basis.Defs
+import Mathlib.LinearAlgebra.LinearIndependent.Defs
 import Mathlib.Analysis.Real.Sqrt
+import Mathlib.Data.Fin.VecNotation
+import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.LinearCombination
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Abel
 
@@ -316,5 +321,492 @@ theorem exists_basicTriple (u : Octonion) (hu : u ∈ unitImaginarySphere) :
   have hmulz : innerO (u * w) z = 0 := by
     rw [innerO_comm, hzdef, innerO_smul_left, hyuw, mul_zero]
   exact ⟨⟨u, w, z, hu, ⟨hrw, hNw⟩, ⟨hrz, hNz⟩, huw, huz, hwz, hmulz⟩, rfl⟩
+
+/-! ### Further polarization identities (P4.2.f machinery)
+
+Everything below is DERIVED (R10) from the proved stock: `normSq_mul`
+(Degen), the polarized composition identities P4.2.b/b′, the quadratic
+identity P4.2.a, anticommutation P4.2.c, `alt_left`/`alt_right`
+(Octonion.lean, proved). Baez §4 is a faithfulness gloss, never load. -/
+
+theorem innerO_add_right (x y z : Octonion) :
+    innerO x (y + z) = innerO x y + innerO x z := by
+  rw [innerO_comm x, innerO_add_left, innerO_comm y, innerO_comm z]
+
+theorem innerO_neg_left (x y : Octonion) : innerO (-x) y = -innerO x y := by
+  rw [innerO_comm, innerO_neg_right, innerO_comm y x]
+
+theorem innerO_one_left (x : Octonion) : innerO 1 x = re x := by
+  rw [innerO_comm, innerO_one]
+
+/-- The form against itself is the quadratic form. Componentwise. -/
+theorem innerO_self (x : Octonion) : innerO x x = normSq x := by
+  rw [innerO_def']
+  show _ = Quaternion.normSq x.1 + Quaternion.normSq x.2
+  rw [Quaternion.normSq_def', Quaternion.normSq_def']
+  ring
+
+/-- The parallelogram expansion of `normSq` — the polarization identity
+read backwards. -/
+theorem normSq_add_eq (x y : Octonion) :
+    normSq (x + y) = normSq x + normSq y + 2 * innerO x y := by
+  rw [innerO]; ring
+
+/-- The **exchange identity**: full polarization of the composition law
+P4.2.b in its first slot —
+`⟪a·b, c·d⟫ + ⟪c·b, a·d⟫ = 2·⟪a,c⟫·⟪b,d⟫`. -/
+theorem innerO_mul_exchange (a b c d : Octonion) :
+    innerO (a * b) (c * d) + innerO (c * b) (a * d)
+      = 2 * innerO a c * innerO b d := by
+  have h := innerO_mul_mul_left (a + c) b d
+  simp only [add_mul, innerO_add_left, innerO_add_right, innerO_mul_mul_left,
+    normSq_add_eq] at h
+  linear_combination h
+
+/-- Exchange with `d = 1`: the trace-form adjointness
+`⟪a·b, c⟫ + ⟪c·b, a⟫ = 2·⟪a,c⟫·re b`. -/
+theorem innerO_mul_right_adjoint (a b c : Octonion) :
+    innerO (a * b) c + innerO (c * b) a = 2 * innerO a c * re b := by
+  have h := innerO_mul_exchange a b c 1
+  rwa [Octonion.mul_one, Octonion.mul_one, innerO_one] at h
+
+/-- Exchange with `c = 1`: the trace-form adjointness
+`⟪a·b, d⟫ + ⟪b, a·d⟫ = 2·(re a)·⟪b,d⟫`. -/
+theorem innerO_mul_left_adjoint (a b d : Octonion) :
+    innerO (a * b) d + innerO b (a * d) = 2 * re a * innerO b d := by
+  have h := innerO_mul_exchange a b 1 d
+  rwa [Octonion.one_mul, Octonion.one_mul, innerO_one] at h
+
+/-! ### Scalar–multiplication compatibility of the Cayley–Dickson product -/
+
+instance : IsScalarTower ℝ Octonion Octonion :=
+  ⟨fun r x y => by
+    show (r • x) * y = r • (x * y)
+    refine Prod.ext ?_ ?_
+    · show (r • x.1) * y.1 - star y.2 * (r • x.2)
+          = r • (x.1 * y.1 - star y.2 * x.2)
+      rw [smul_sub, smul_mul_assoc, mul_smul_comm]
+    · show y.2 * (r • x.1) + (r • x.2) * star y.1
+          = r • (y.2 * x.1 + x.2 * star y.1)
+      rw [smul_add, mul_smul_comm, smul_mul_assoc]⟩
+
+instance : SMulCommClass ℝ Octonion Octonion :=
+  ⟨fun r x y => by
+    show r • (x * y) = x * (r • y)
+    refine Prod.ext ?_ ?_
+    · show r • (x.1 * y.1 - star y.2 * x.2)
+          = x.1 * (r • y.1) - star (r • y.2) * x.2
+      rw [Quaternion.star_smul, smul_sub, mul_smul_comm, smul_mul_assoc]
+    · show r • (y.2 * x.1 + x.2 * star y.1)
+          = (r • y.2) * x.1 + x.2 * star (r • y.1)
+      rw [Quaternion.star_smul, smul_add, smul_mul_assoc, mul_smul_comm]⟩
+
+/-! ### Linearized alternativity -/
+
+/-- Left alternativity, linearized at `a + b`:
+`(a·b)·c + (b·a)·c = a·(b·c) + b·(a·c)`. -/
+theorem mul_alt_left_linear (a b c : Octonion) :
+    (a * b) * c + (b * a) * c = a * (b * c) + b * (a * c) := by
+  have h : (a * a) * c + ((a * b) * c + (b * a) * c) + (b * b) * c
+      = a * (a * c) + (a * (b * c) + b * (a * c)) + b * (b * c) := by
+    calc (a * a) * c + ((a * b) * c + (b * a) * c) + (b * b) * c
+        = ((a + b) * (a + b)) * c := by simp only [add_mul, mul_add]; abel
+      _ = (a + b) * ((a + b) * c) := alt_left (a + b) c
+      _ = a * (a * c) + (a * (b * c) + b * (a * c)) + b * (b * c) := by
+          simp only [add_mul, mul_add]; abel
+  rw [alt_left a c, alt_left b c] at h
+  exact add_left_cancel (add_right_cancel h)
+
+/-- Right alternativity, linearized at `b + c`:
+`a·(b·c) + a·(c·b) = (a·b)·c + (a·c)·b`. -/
+theorem mul_alt_right_linear (a b c : Octonion) :
+    a * (b * c) + a * (c * b) = (a * b) * c + (a * c) * b := by
+  have h : a * (b * b) + (a * (b * c) + a * (c * b)) + a * (c * c)
+      = (a * b) * b + ((a * b) * c + (a * c) * b) + (a * c) * c := by
+    calc a * (b * b) + (a * (b * c) + a * (c * b)) + a * (c * c)
+        = a * ((b + c) * (b + c)) := by simp only [add_mul, mul_add]; abel
+      _ = (a * (b + c)) * (b + c) := alt_right a (b + c)
+      _ = (a * b) * b + ((a * b) * c + (a * c) * b) + (a * c) * c := by
+          simp only [add_mul, mul_add]; abel
+  rw [alt_right a b, alt_right a c] at h
+  exact add_left_cancel (add_right_cancel h)
+
+/-- For a unit imaginary `v`: `v·(v·x) = −x` (left alternativity +
+`v² = −1`). -/
+theorem self_mul_mul {v : Octonion} (hv : v ∈ unitImaginarySphere)
+    (x : Octonion) : v * (v * x) = -x := by
+  rw [← alt_left, sq_eq_neg_one_of_mem_unitImaginarySphere hv, neg_mul,
+    Octonion.one_mul]
+
+/-- For a unit imaginary `v`: `(x·v)·v = −x` (right alternativity +
+`v² = −1`). -/
+theorem mul_mul_self {v : Octonion} (hv : v ∈ unitImaginarySphere)
+    (x : Octonion) : (x * v) * v = -x := by
+  rw [← alt_right, sq_eq_neg_one_of_mem_unitImaginarySphere hv, mul_neg,
+    Octonion.mul_one]
+
+namespace BasicTriple
+
+variable (T : BasicTriple)
+
+/-! ### The frame of a basic triple: membership and Gram facts (P4.2.f)
+
+All entries of the Gram matrix of `(1, u, w, uw, z, uz, wz, (uw)z)` are
+derived from the triple's orthogonality fields through P4.2.d and the
+exchange identity. -/
+
+theorem uw_mem : T.u * T.w ∈ unitImaginarySphere :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.hu T.hw T.huw).1
+
+theorem innerO_u_uw : innerO T.u (T.u * T.w) = 0 :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.hu T.hw T.huw).2.1
+
+theorem innerO_w_uw : innerO T.w (T.u * T.w) = 0 :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.hu T.hw T.huw).2.2
+
+theorem uz_mem : T.u * T.z ∈ unitImaginarySphere :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.hu T.hz T.huz).1
+
+theorem innerO_u_uz : innerO T.u (T.u * T.z) = 0 :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.hu T.hz T.huz).2.1
+
+theorem innerO_z_uz : innerO T.z (T.u * T.z) = 0 :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.hu T.hz T.huz).2.2
+
+theorem wz_mem : T.w * T.z ∈ unitImaginarySphere :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.hw T.hz T.hwz).1
+
+theorem innerO_w_wz : innerO T.w (T.w * T.z) = 0 :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.hw T.hz T.hwz).2.1
+
+theorem innerO_z_wz : innerO T.z (T.w * T.z) = 0 :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.hw T.hz T.hwz).2.2
+
+theorem uwz_mem : (T.u * T.w) * T.z ∈ unitImaginarySphere :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.uw_mem T.hz T.hmulz).1
+
+theorem innerO_uw_uwz : innerO (T.u * T.w) ((T.u * T.w) * T.z) = 0 :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.uw_mem T.hz T.hmulz).2.1
+
+theorem innerO_z_uwz : innerO T.z ((T.u * T.w) * T.z) = 0 :=
+  (mul_mem_unitImaginarySphere_of_orthogonal T.uw_mem T.hz T.hmulz).2.2
+
+/-- `z ⊥ uw` transports to `w ⊥ uz` through the exchange identity. -/
+theorem innerO_w_uz : innerO T.w (T.u * T.z) = 0 := by
+  have h := innerO_mul_left_adjoint T.u T.w T.z
+  rw [T.hmulz, T.hu.1, T.hwz] at h
+  linarith
+
+/-- `z ⊥ uw` transports to `u ⊥ wz` through the exchange identity. -/
+theorem innerO_u_wz : innerO T.u (T.w * T.z) = 0 := by
+  have h := innerO_mul_left_adjoint T.w T.u T.z
+  rw [mul_anticomm_of_orthogonal T.hw.1 T.hu.1
+      (by rw [innerO_comm]; exact T.huw),
+    innerO_neg_left, T.hmulz, T.hw.1, T.huz] at h
+  linarith
+
+theorem innerO_uw_uz : innerO (T.u * T.w) (T.u * T.z) = 0 := by
+  rw [innerO_mul_mul_left, T.hwz, mul_zero]
+
+theorem innerO_uz_wz : innerO (T.u * T.z) (T.w * T.z) = 0 := by
+  rw [innerO_mul_mul_right, T.huw, zero_mul]
+
+theorem innerO_uw_wz : innerO (T.u * T.w) (T.w * T.z) = 0 := by
+  have h := innerO_mul_exchange T.u T.w T.w T.z
+  rw [sq_eq_neg_one_of_mem_unitImaginarySphere T.hw, innerO_neg_left,
+    innerO_one_left, T.uz_mem.1, T.huw, T.hwz] at h
+  linarith
+
+theorem innerO_uz_uwz : innerO (T.u * T.z) ((T.u * T.w) * T.z) = 0 := by
+  rw [innerO_mul_mul_right, T.innerO_u_uw, zero_mul]
+
+theorem innerO_wz_uwz : innerO (T.w * T.z) ((T.u * T.w) * T.z) = 0 := by
+  rw [innerO_mul_mul_right, T.innerO_w_uw, zero_mul]
+
+theorem innerO_u_uwz : innerO T.u ((T.u * T.w) * T.z) = 0 := by
+  have h := innerO_mul_right_adjoint (T.u * T.w) T.z T.u
+  rw [innerO_comm (T.u * T.z), T.innerO_uw_uz,
+    innerO_comm (T.u * T.w) T.u, T.innerO_u_uw, T.hz.1] at h
+  rw [innerO_comm]
+  linarith
+
+theorem innerO_w_uwz : innerO T.w ((T.u * T.w) * T.z) = 0 := by
+  have h := innerO_mul_right_adjoint (T.u * T.w) T.z T.w
+  rw [innerO_comm (T.w * T.z), T.innerO_uw_wz,
+    innerO_comm (T.u * T.w) T.w, T.innerO_w_uw, T.hz.1] at h
+  rw [innerO_comm]
+  linarith
+
+/-! ### The multiplication table of the frame (P4.2.f — the hard part)
+
+Every product of two frame elements, derived from the proved stock:
+`sq_eq_neg_one_of_mem_unitImaginarySphere`, P4.2.c anticommutation,
+`self_mul_mul`/`mul_mul_self`, and the two linearized alternative laws.
+The table is universal — the same right-hand sides for every basic
+triple — which is exactly what makes the frame-matching linear map
+multiplicative. -/
+
+theorem mul_u_u : T.u * T.u = -1 :=
+  sq_eq_neg_one_of_mem_unitImaginarySphere T.hu
+
+theorem mul_w_w : T.w * T.w = -1 :=
+  sq_eq_neg_one_of_mem_unitImaginarySphere T.hw
+
+theorem mul_z_z : T.z * T.z = -1 :=
+  sq_eq_neg_one_of_mem_unitImaginarySphere T.hz
+
+theorem mul_uw_uw : (T.u * T.w) * (T.u * T.w) = -1 :=
+  sq_eq_neg_one_of_mem_unitImaginarySphere T.uw_mem
+
+theorem mul_uz_uz : (T.u * T.z) * (T.u * T.z) = -1 :=
+  sq_eq_neg_one_of_mem_unitImaginarySphere T.uz_mem
+
+theorem mul_wz_wz : (T.w * T.z) * (T.w * T.z) = -1 :=
+  sq_eq_neg_one_of_mem_unitImaginarySphere T.wz_mem
+
+theorem mul_uwz_uwz : ((T.u * T.w) * T.z) * ((T.u * T.w) * T.z) = -1 :=
+  sq_eq_neg_one_of_mem_unitImaginarySphere T.uwz_mem
+
+theorem mul_w_u : T.w * T.u = -(T.u * T.w) :=
+  mul_anticomm_of_orthogonal T.hw.1 T.hu.1
+    (by rw [innerO_comm]; exact T.huw)
+
+theorem mul_z_u : T.z * T.u = -(T.u * T.z) :=
+  mul_anticomm_of_orthogonal T.hz.1 T.hu.1
+    (by rw [innerO_comm]; exact T.huz)
+
+theorem mul_z_w : T.z * T.w = -(T.w * T.z) :=
+  mul_anticomm_of_orthogonal T.hz.1 T.hw.1
+    (by rw [innerO_comm]; exact T.hwz)
+
+theorem mul_z_uw : T.z * (T.u * T.w) = -((T.u * T.w) * T.z) :=
+  mul_anticomm_of_orthogonal T.hz.1 T.uw_mem.1
+    (by rw [innerO_comm]; exact T.hmulz)
+
+theorem mul_u_uw : T.u * (T.u * T.w) = -T.w := self_mul_mul T.hu T.w
+
+theorem mul_u_uz : T.u * (T.u * T.z) = -T.z := self_mul_mul T.hu T.z
+
+theorem mul_w_wz : T.w * (T.w * T.z) = -T.z := self_mul_mul T.hw T.z
+
+theorem mul_uw_uwz : (T.u * T.w) * ((T.u * T.w) * T.z) = -T.z :=
+  self_mul_mul T.uw_mem T.z
+
+theorem mul_uz_z : (T.u * T.z) * T.z = -T.u := mul_mul_self T.hz T.u
+
+theorem mul_wz_z : (T.w * T.z) * T.z = -T.w := mul_mul_self T.hz T.w
+
+theorem mul_uwz_z : ((T.u * T.w) * T.z) * T.z = -(T.u * T.w) :=
+  mul_mul_self T.hz (T.u * T.w)
+
+theorem mul_w_uw : T.w * (T.u * T.w) = T.u := by
+  rw [mul_anticomm_of_orthogonal T.hu.1 T.hw.1 T.huw, mul_neg,
+    self_mul_mul T.hw T.u, neg_neg]
+
+theorem mul_z_uz : T.z * (T.u * T.z) = T.u := by
+  rw [mul_anticomm_of_orthogonal T.hu.1 T.hz.1 T.huz, mul_neg,
+    self_mul_mul T.hz T.u, neg_neg]
+
+theorem mul_z_wz : T.z * (T.w * T.z) = T.w := by
+  rw [mul_anticomm_of_orthogonal T.hw.1 T.hz.1 T.hwz, mul_neg,
+    self_mul_mul T.hz T.w, neg_neg]
+
+theorem mul_z_uwz : T.z * ((T.u * T.w) * T.z) = T.u * T.w := by
+  rw [mul_anticomm_of_orthogonal T.uw_mem.1 T.hz.1 T.hmulz, mul_neg,
+    self_mul_mul T.hz (T.u * T.w), neg_neg]
+
+theorem mul_uw_u : (T.u * T.w) * T.u = T.w := by
+  rw [mul_anticomm_of_orthogonal T.uw_mem.1 T.hu.1
+      (by rw [innerO_comm]; exact T.innerO_u_uw),
+    T.mul_u_uw, neg_neg]
+
+theorem mul_uw_w : (T.u * T.w) * T.w = -T.u := by
+  rw [mul_anticomm_of_orthogonal T.uw_mem.1 T.hw.1
+      (by rw [innerO_comm]; exact T.innerO_w_uw),
+    T.mul_w_uw]
+
+theorem mul_uz_u : (T.u * T.z) * T.u = T.z := by
+  rw [mul_anticomm_of_orthogonal T.uz_mem.1 T.hu.1
+      (by rw [innerO_comm]; exact T.innerO_u_uz),
+    T.mul_u_uz, neg_neg]
+
+theorem mul_wz_w : (T.w * T.z) * T.w = T.z := by
+  rw [mul_anticomm_of_orthogonal T.wz_mem.1 T.hw.1
+      (by rw [innerO_comm]; exact T.innerO_w_wz),
+    T.mul_w_wz, neg_neg]
+
+theorem mul_uwz_uw : ((T.u * T.w) * T.z) * (T.u * T.w) = T.z := by
+  rw [mul_anticomm_of_orthogonal T.uwz_mem.1 T.uw_mem.1
+      (by rw [innerO_comm]; exact T.innerO_uw_uwz),
+    T.mul_uw_uwz, neg_neg]
+
+theorem mul_uz_w : (T.u * T.z) * T.w = -((T.u * T.w) * T.z) := by
+  have h := mul_alt_right_linear T.u T.z T.w
+  rw [T.mul_z_w, mul_neg, neg_add_cancel] at h
+  exact eq_neg_of_add_eq_zero_left h.symm
+
+theorem mul_w_uz : T.w * (T.u * T.z) = (T.u * T.w) * T.z := by
+  rw [mul_anticomm_of_orthogonal T.hw.1 T.uz_mem.1 T.innerO_w_uz,
+    T.mul_uz_w, neg_neg]
+
+theorem mul_u_wz : T.u * (T.w * T.z) = -((T.u * T.w) * T.z) := by
+  have h := mul_alt_left_linear T.u T.w T.z
+  rw [T.mul_w_u, neg_mul, add_neg_cancel, T.mul_w_uz] at h
+  exact eq_neg_of_add_eq_zero_left h.symm
+
+theorem mul_wz_u : (T.w * T.z) * T.u = (T.u * T.w) * T.z := by
+  rw [mul_anticomm_of_orthogonal T.wz_mem.1 T.hu.1
+      (by rw [innerO_comm]; exact T.innerO_u_wz),
+    T.mul_u_wz, neg_neg]
+
+theorem mul_uwz_u : ((T.u * T.w) * T.z) * T.u = -(T.w * T.z) := by
+  have h := mul_alt_right_linear (T.u * T.w) T.z T.u
+  rw [T.mul_z_u, mul_neg, neg_add_cancel, T.mul_uw_u] at h
+  exact eq_neg_of_add_eq_zero_left h.symm
+
+theorem mul_u_uwz : T.u * ((T.u * T.w) * T.z) = T.w * T.z := by
+  rw [mul_anticomm_of_orthogonal T.hu.1 T.uwz_mem.1 T.innerO_u_uwz,
+    T.mul_uwz_u, neg_neg]
+
+theorem mul_uw_uz : (T.u * T.w) * (T.u * T.z) = -(T.w * T.z) := by
+  have h := mul_alt_left_linear T.u (T.u * T.w) T.z
+  rw [T.mul_u_uw, neg_mul, T.mul_uw_u, neg_add_cancel, T.mul_u_uwz] at h
+  exact eq_neg_of_add_eq_zero_right h.symm
+
+theorem mul_uz_uw : (T.u * T.z) * (T.u * T.w) = T.w * T.z := by
+  rw [mul_anticomm_of_orthogonal T.uz_mem.1 T.uw_mem.1
+      (by rw [innerO_comm]; exact T.innerO_uw_uz),
+    T.mul_uw_uz, neg_neg]
+
+theorem mul_uwz_w : ((T.u * T.w) * T.z) * T.w = T.u * T.z := by
+  have h := mul_alt_right_linear (T.u * T.w) T.z T.w
+  rw [T.mul_z_w, mul_neg, neg_add_cancel, T.mul_uw_w, neg_mul] at h
+  have h2 := eq_neg_of_add_eq_zero_left h.symm
+  rwa [neg_neg] at h2
+
+theorem mul_w_uwz : T.w * ((T.u * T.w) * T.z) = -(T.u * T.z) := by
+  rw [mul_anticomm_of_orthogonal T.hw.1 T.uwz_mem.1 T.innerO_w_uwz,
+    T.mul_uwz_w]
+
+theorem mul_uw_wz : (T.u * T.w) * (T.w * T.z) = T.u * T.z := by
+  have h := mul_alt_left_linear T.w (T.u * T.w) T.z
+  rw [T.mul_w_uw, T.mul_uw_w, neg_mul, add_neg_cancel, T.mul_w_uwz] at h
+  have h2 := eq_neg_of_add_eq_zero_right h.symm
+  rwa [neg_neg] at h2
+
+theorem mul_wz_uw : (T.w * T.z) * (T.u * T.w) = -(T.u * T.z) := by
+  rw [mul_anticomm_of_orthogonal T.wz_mem.1 T.uw_mem.1
+      (by rw [innerO_comm]; exact T.innerO_uw_wz),
+    T.mul_uw_wz]
+
+theorem mul_uz_wz : (T.u * T.z) * (T.w * T.z) = -(T.u * T.w) := by
+  have h := mul_alt_right_linear T.u T.z (T.w * T.z)
+  rw [T.mul_z_wz, T.mul_wz_z, mul_neg, add_neg_cancel, T.mul_u_wz, neg_mul,
+    T.mul_uwz_z, neg_neg] at h
+  exact eq_neg_of_add_eq_zero_left h.symm
+
+theorem mul_wz_uz : (T.w * T.z) * (T.u * T.z) = T.u * T.w := by
+  rw [mul_anticomm_of_orthogonal T.wz_mem.1 T.uz_mem.1
+      (by rw [innerO_comm]; exact T.innerO_uz_wz),
+    T.mul_uz_wz, neg_neg]
+
+theorem mul_uz_uwz : (T.u * T.z) * ((T.u * T.w) * T.z) = T.w := by
+  have h := mul_alt_right_linear T.u T.z ((T.u * T.w) * T.z)
+  rw [T.mul_z_uwz, T.mul_uwz_z, mul_neg, T.mul_u_uw, neg_neg,
+    neg_add_cancel, T.mul_u_uwz, T.mul_wz_z] at h
+  have h2 := eq_neg_of_add_eq_zero_left h.symm
+  rwa [neg_neg] at h2
+
+theorem mul_uwz_uz : ((T.u * T.w) * T.z) * (T.u * T.z) = -T.w := by
+  rw [mul_anticomm_of_orthogonal T.uwz_mem.1 T.uz_mem.1
+      (by rw [innerO_comm]; exact T.innerO_uz_uwz),
+    T.mul_uz_uwz]
+
+theorem mul_wz_uwz : (T.w * T.z) * ((T.u * T.w) * T.z) = -T.u := by
+  have h := mul_alt_right_linear T.w T.z ((T.u * T.w) * T.z)
+  rw [T.mul_z_uwz, T.mul_uwz_z, mul_neg, T.mul_w_uw, add_neg_cancel,
+    T.mul_w_uwz, neg_mul, T.mul_uz_z, neg_neg] at h
+  exact eq_neg_of_add_eq_zero_left h.symm
+
+theorem mul_uwz_wz : ((T.u * T.w) * T.z) * (T.w * T.z) = T.u := by
+  rw [mul_anticomm_of_orthogonal T.uwz_mem.1 T.wz_mem.1
+      (by rw [innerO_comm]; exact T.innerO_wz_uwz),
+    T.mul_wz_uwz, neg_neg]
+
+/-! ### The frame as an orthonormal basis -/
+
+/-- The frame of a basic triple: `(1, u, w, uw, z, uz, wz, (uw)z)`
+(Baez §4 vocabulary; faithfulness gloss, never load). -/
+def frame : Fin 8 → Octonion :=
+  ![1, T.u, T.w, T.u * T.w, T.z, T.u * T.z, T.w * T.z, (T.u * T.w) * T.z]
+
+set_option maxHeartbeats 1600000 in
+/-- The frame is orthonormal: its Gram matrix is the identity. -/
+theorem frame_innerO (i j : Fin 8) :
+    innerO (T.frame i) (T.frame j) = if i = j then 1 else 0 := by
+  fin_cases i <;> fin_cases j <;>
+    simp [frame] <;>
+    first
+      | (rw [innerO_self]
+         first
+           | exact normSq_one
+           | exact T.hu.2 | exact T.hw.2 | exact T.hz.2
+           | exact T.uw_mem.2 | exact T.uz_mem.2 | exact T.wz_mem.2
+           | exact T.uwz_mem.2)
+      | exact T.huw | exact T.huz | exact T.hwz | exact T.hmulz
+      | exact T.innerO_u_uw | exact T.innerO_w_uw
+      | exact T.innerO_u_uz | exact T.innerO_z_uz
+      | exact T.innerO_w_wz | exact T.innerO_z_wz
+      | exact T.innerO_uw_uwz | exact T.innerO_z_uwz
+      | exact T.innerO_w_uz | exact T.innerO_u_wz
+      | exact T.innerO_uw_uz | exact T.innerO_uw_wz
+      | exact T.innerO_uz_wz | exact T.innerO_uz_uwz
+      | exact T.innerO_wz_uwz | exact T.innerO_u_uwz | exact T.innerO_w_uwz
+      | (rw [innerO_one]
+         first
+           | exact T.hu.1 | exact T.hw.1 | exact T.hz.1
+           | exact T.uw_mem.1 | exact T.uz_mem.1 | exact T.wz_mem.1
+           | exact T.uwz_mem.1)
+      | (rw [innerO_comm]
+         first
+           | exact T.huw | exact T.huz | exact T.hwz | exact T.hmulz
+           | exact T.innerO_u_uw | exact T.innerO_w_uw
+           | exact T.innerO_u_uz | exact T.innerO_z_uz
+           | exact T.innerO_w_wz | exact T.innerO_z_wz
+           | exact T.innerO_uw_uwz | exact T.innerO_z_uwz
+           | exact T.innerO_w_uz | exact T.innerO_u_wz
+           | exact T.innerO_uw_uz | exact T.innerO_uw_wz
+           | exact T.innerO_uz_wz | exact T.innerO_uz_uwz
+           | exact T.innerO_wz_uwz | exact T.innerO_u_uwz
+           | exact T.innerO_w_uwz
+           | (rw [innerO_one]
+              first
+                | exact T.hu.1 | exact T.hw.1 | exact T.hz.1
+                | exact T.uw_mem.1 | exact T.uz_mem.1 | exact T.wz_mem.1
+                | exact T.uwz_mem.1))
+
+/-- Orthonormality forces linear independence: pairing a vanishing
+combination with each frame element isolates its coefficient. -/
+theorem frame_linearIndependent : LinearIndependent ℝ T.frame := by
+  rw [Fintype.linearIndependent_iff]
+  intro c hc i
+  have h := congrArg (innerOLinear (T.frame i)) hc
+  rw [map_sum, map_zero] at h
+  simp only [map_smul, innerOLinear_apply, smul_eq_mul, frame_innerO,
+    mul_ite, mul_zero, Finset.sum_ite_eq', Finset.mem_univ,
+    if_true] at h
+  simpa using h
+
+/-- The frame as an ℝ-basis of 𝕆: 8 independent vectors in dimension 8
+(`basisOfLinearIndependentOfCardEqFinrank`,
+Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean:286). -/
+noncomputable def frameBasis : Module.Basis (Fin 8) ℝ Octonion :=
+  basisOfLinearIndependentOfCardEqFinrank T.frame_linearIndependent
+    (by rw [Fintype.card_fin, finrank_eq_eight])
+
+theorem frameBasis_apply (i : Fin 8) : T.frameBasis i = T.frame i :=
+  congrFun (coe_basisOfLinearIndependentOfCardEqFinrank _ _) i
+
+end BasicTriple
 
 end Octonion

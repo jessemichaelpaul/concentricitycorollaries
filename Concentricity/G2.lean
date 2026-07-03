@@ -95,15 +95,90 @@ theorem smul_ofReal (g : G2) (r : ℝ) : g • Octonion.ofReal r = Octonion.ofRe
   calc g • (r • (1 : Octonion)) = r • (g • (1 : Octonion)) := g.toEquiv.map_smul r 1
   _ = r • (1 : Octonion) := by rw [smul_one]
 
+set_option maxHeartbeats 1600000 in
 /-- P4.2.f — G₂ acts transitively on basic triples (Baez §4 substance,
-faithfulness gloss; DERIVED in-repo per PHASE4_PLAN #2). Queued (R8): the
-frame `(1, u, w, uw, z, uz, wz, (uw)z)` of a basic triple is an orthonormal
-basis (P4.2.b–d + the internal-doubling multiplication table), and the
-linear map matching two frames is multiplicative because both frames carry
-the same Cayley–Dickson table. -/
+faithfulness gloss; DERIVED in-repo per PHASE4_PLAN #2). The frame
+`(1, u, w, uw, z, uz, wz, (uw)z)` of a basic triple is an orthonormal
+basis (`BasicTriple.frameBasis`), and the linear map matching two frames
+is multiplicative because both frames carry the same multiplication table
+(`BasicTriple.mul_*`, the P4.2.f table, universal across triples). -/
 theorem exists_smul_basicTriple (T₁ T₂ : Octonion.BasicTriple) :
     ∃ g : G2, g • T₁.u = T₂.u ∧ g • T₁.w = T₂.w ∧ g • T₁.z = T₂.z := by
-  sorry
+  classical
+  set E : Octonion ≃ₗ[ℝ] Octonion :=
+    T₁.frameBasis.equiv T₂.frameBasis (Equiv.refl (Fin 8)) with hE
+  have hframe : ∀ i : Fin 8, E (T₁.frame i) = T₂.frame i := by
+    intro i
+    have h := Module.Basis.equiv_apply (b := T₁.frameBasis)
+      (b' := T₂.frameBasis) (i := i) (e := Equiv.refl (Fin 8))
+    rw [T₁.frameBasis_apply, T₂.frameBasis_apply, Equiv.refl_apply, ← hE] at h
+    exact h
+  -- The eight frame equations, in canonical-element form.
+  have he0 : E (1 : Octonion) = 1 := hframe 0
+  have he1 : E T₁.u = T₂.u := hframe 1
+  have he2 : E T₁.w = T₂.w := hframe 2
+  have he3 : E (T₁.u * T₁.w) = T₂.u * T₂.w := hframe 3
+  have he4 : E T₁.z = T₂.z := hframe 4
+  have he5 : E (T₁.u * T₁.z) = T₂.u * T₂.z := hframe 5
+  have he6 : E (T₁.w * T₁.z) = T₂.w * T₂.z := hframe 6
+  have he7 : E ((T₁.u * T₁.w) * T₁.z) = (T₂.u * T₂.w) * T₂.z := hframe 7
+  -- Multiplicativity on frame pairs: both frames carry the same table.
+  have hpair : ∀ i j : Fin 8,
+      E (T₁.frame i * T₁.frame j) = E (T₁.frame i) * E (T₁.frame j) := by
+    intro i j
+    fin_cases i <;> fin_cases j <;>
+      simp [Octonion.BasicTriple.frame, he0, he1, he2, he3, he4, he5, he6, he7,
+        Octonion.BasicTriple.mul_u_u, Octonion.BasicTriple.mul_w_w,
+        Octonion.BasicTriple.mul_z_z, Octonion.BasicTriple.mul_uw_uw,
+        Octonion.BasicTriple.mul_uz_uz, Octonion.BasicTriple.mul_wz_wz,
+        Octonion.BasicTriple.mul_uwz_uwz, Octonion.BasicTriple.mul_w_u,
+        Octonion.BasicTriple.mul_z_u, Octonion.BasicTriple.mul_z_w,
+        Octonion.BasicTriple.mul_z_uw, Octonion.BasicTriple.mul_u_uw,
+        Octonion.BasicTriple.mul_u_uz, Octonion.BasicTriple.mul_w_wz,
+        Octonion.BasicTriple.mul_uw_uwz, Octonion.BasicTriple.mul_uz_z,
+        Octonion.BasicTriple.mul_wz_z, Octonion.BasicTriple.mul_uwz_z,
+        Octonion.BasicTriple.mul_w_uw, Octonion.BasicTriple.mul_z_uz,
+        Octonion.BasicTriple.mul_z_wz, Octonion.BasicTriple.mul_z_uwz,
+        Octonion.BasicTriple.mul_uw_u, Octonion.BasicTriple.mul_uw_w,
+        Octonion.BasicTriple.mul_uz_u, Octonion.BasicTriple.mul_wz_w,
+        Octonion.BasicTriple.mul_uwz_uw, Octonion.BasicTriple.mul_uz_w,
+        Octonion.BasicTriple.mul_w_uz, Octonion.BasicTriple.mul_u_wz,
+        Octonion.BasicTriple.mul_wz_u, Octonion.BasicTriple.mul_uwz_u,
+        Octonion.BasicTriple.mul_u_uwz, Octonion.BasicTriple.mul_uw_uz,
+        Octonion.BasicTriple.mul_uz_uw, Octonion.BasicTriple.mul_uwz_w,
+        Octonion.BasicTriple.mul_w_uwz, Octonion.BasicTriple.mul_uw_wz,
+        Octonion.BasicTriple.mul_wz_uw, Octonion.BasicTriple.mul_uz_wz,
+        Octonion.BasicTriple.mul_wz_uz, Octonion.BasicTriple.mul_uz_uwz,
+        Octonion.BasicTriple.mul_uwz_uz, Octonion.BasicTriple.mul_wz_uwz,
+        Octonion.BasicTriple.mul_uwz_wz]
+  -- Bilinear bootstrap: from frame pairs to all pairs, one slot at a time.
+  have hstep : ∀ (i : Fin 8) (y : Octonion),
+      E (T₁.frame i * y) = E (T₁.frame i) * E y := by
+    intro i
+    have h : E.toLinearMap ∘ₗ LinearMap.mulLeft ℝ (T₁.frame i)
+        = LinearMap.mulLeft ℝ (E (T₁.frame i)) ∘ₗ E.toLinearMap := by
+      refine T₁.frameBasis.ext fun j => ?_
+      rw [T₁.frameBasis_apply]
+      simp only [LinearMap.comp_apply, LinearMap.mulLeft_apply,
+        LinearEquiv.coe_coe]
+      exact hpair i j
+    intro y
+    have h2 := LinearMap.congr_fun h y
+    simpa only [LinearMap.comp_apply, LinearMap.mulLeft_apply,
+      LinearEquiv.coe_coe] using h2
+  have hmul : ∀ x y : Octonion, E (x * y) = E x * E y := by
+    intro x y
+    have h : E.toLinearMap ∘ₗ LinearMap.mulRight ℝ y
+        = LinearMap.mulRight ℝ (E y) ∘ₗ E.toLinearMap := by
+      refine T₁.frameBasis.ext fun i => ?_
+      rw [T₁.frameBasis_apply]
+      simp only [LinearMap.comp_apply, LinearMap.mulRight_apply,
+        LinearEquiv.coe_coe]
+      exact hstep i y
+    have h2 := LinearMap.congr_fun h x
+    simpa only [LinearMap.comp_apply, LinearMap.mulRight_apply,
+      LinearEquiv.coe_coe] using h2
+  exact ⟨⟨E, hmul⟩, he1, he2, he4⟩
 
 /-- master `thm:G2-S6` (Baez, SOURCES/Baez02.md): "G₂ acts transitively on
 S⁶ …" — the transitivity clause, on the unit imaginary sphere of
