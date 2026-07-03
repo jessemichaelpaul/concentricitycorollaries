@@ -855,3 +855,113 @@ theorem xi_growth : ∃ C : ℝ, 0 < C ∧ ∀ s : ℂ,
     _ = (C + 1) * Real.exp ((C + 2) * X * Real.log X) := by ring
     _ ≤ (C + 2) * Real.exp ((C + 2) * X * Real.log X) :=
         mul_le_mul_of_nonneg_right (by linarith) (Real.exp_pos _).le
+
+/-! ## A8 — entire functions of subquadratic growth are affine -/
+
+/-- **A8** — an entire function with `‖g z‖ ≤ B·(‖z‖+2)·log(‖z‖+2)` is
+affine. Cauchy's estimate for the second derivative
+(`Complex.norm_iteratedDeriv_le_of_forall_mem_sphere_norm_le`,
+Liouville.lean:44) on circles of radius R → ∞ kills `g''`
+(`Real.isLittleO_log_id_atTop`, Log/Basic.lean:449; `ge_of_tendsto`,
+OrderClosed.lean:130); two constancy steps
+(`is_const_of_deriv_eq_zero`, MeanValue.lean:751) finish. -/
+theorem affine_of_subquadratic_growth {g : ℂ → ℂ} (hg : Differentiable ℂ g)
+    {B : ℝ} (hB : 0 ≤ B)
+    (hbound : ∀ z : ℂ, ‖g z‖ ≤ B * (‖z‖ + 2) * Real.log (‖z‖ + 2)) :
+    ∃ a b : ℂ, ∀ z, g z = a + b * z := by
+  -- Step 1: the second derivative vanishes identically.
+  have h2nd : ∀ c : ℂ, iteratedDeriv 2 g c = 0 := by
+    intro c
+    set a : ℝ := ‖c‖ + 2 with ha
+    have ha2 : (2 : ℝ) ≤ a := by
+      rw [ha]
+      linarith [norm_nonneg c]
+    -- Cauchy estimate on the sphere of radius R about c
+    have hest : ∀ R : ℝ, 1 ≤ R → ‖iteratedDeriv 2 g c‖
+        ≤ 2 * (B * (R + a) * Real.log (R + a)) / R ^ 2 := by
+      intro R hR
+      have hR0 : (0 : ℝ) < R := lt_of_lt_of_le zero_lt_one hR
+      have hC : ∀ z ∈ Metric.sphere c R, ‖g z‖ ≤ B * (R + a) * Real.log (R + a) := by
+        intro z hz
+        have hz_norm : ‖z‖ ≤ ‖c‖ + R := by
+          have h1 : ‖z - c‖ = R := mem_sphere_iff_norm.mp hz
+          calc ‖z‖ = ‖z - c + c‖ := by ring_nf
+            _ ≤ ‖z - c‖ + ‖c‖ := norm_add_le _ _
+            _ = R + ‖c‖ := by rw [h1]
+            _ = ‖c‖ + R := by ring
+        have hzR : ‖z‖ + 2 ≤ R + a := by
+          rw [ha]
+          linarith
+        have hz2 : (1 : ℝ) ≤ ‖z‖ + 2 := by linarith [norm_nonneg z]
+        calc ‖g z‖ ≤ B * (‖z‖ + 2) * Real.log (‖z‖ + 2) := hbound z
+          _ ≤ B * (R + a) * Real.log (R + a) := by
+              apply mul_le_mul (mul_le_mul_of_nonneg_left hzR hB)
+                (Real.log_le_log (by linarith) hzR)
+                (Real.log_nonneg hz2) (mul_nonneg hB (by linarith))
+      have := Complex.norm_iteratedDeriv_le_of_forall_mem_sphere_norm_le 2 hR0
+        hg.diffContOnCl hC
+      calc ‖iteratedDeriv 2 g c‖
+          ≤ (Nat.factorial 2 : ℝ) * (B * (R + a) * Real.log (R + a)) / R ^ 2 := this
+        _ = 2 * (B * (R + a) * Real.log (R + a)) / R ^ 2 := by
+            norm_num [Nat.factorial]
+    -- the bound tends to zero
+    have hten : Filter.Tendsto
+        (fun R : ℝ => 2 * (B * (R + a) * Real.log (R + a)) / R ^ 2)
+        Filter.atTop (nhds 0) := by
+      have h₁ : Filter.Tendsto (fun R : ℝ => (R + a) / R) Filter.atTop (nhds 1) := by
+        have hbase : Filter.Tendsto (fun R : ℝ => 1 + a / R) Filter.atTop (nhds 1) := by
+          have := (Filter.Tendsto.const_div_atTop
+            (Filter.tendsto_id (α := ℝ) (x := Filter.atTop)) a)
+          simpa using (tendsto_const_nhds (x := (1 : ℝ))
+            (f := Filter.atTop)).add this
+        refine hbase.congr' ?_
+        filter_upwards [Filter.eventually_gt_atTop (0 : ℝ)] with R hR
+        field_simp
+      have h₂ : Filter.Tendsto (fun R : ℝ => Real.log (R + a) / (R + a))
+          Filter.atTop (nhds 0) := by
+        have hbase : Filter.Tendsto (fun y : ℝ => Real.log y / y)
+            Filter.atTop (nhds 0) :=
+          Real.isLittleO_log_id_atTop.tendsto_div_nhds_zero
+        exact hbase.comp (Filter.tendsto_atTop_add_const_right Filter.atTop a Filter.tendsto_id)
+      have h₃ : Filter.Tendsto
+          (fun R : ℝ => 2 * B * ((R + a) / R * ((R + a) / R)
+            * (Real.log (R + a) / (R + a)))) Filter.atTop (nhds 0) := by
+        have := ((h₁.mul h₁).mul h₂).const_mul (2 * B)
+        simpa using this
+      refine h₃.congr' ?_
+      filter_upwards [Filter.eventually_gt_atTop (0 : ℝ)] with R hR
+      have hRa : (0 : ℝ) < R + a := by linarith
+      field_simp
+    -- squeeze
+    have hle : ‖iteratedDeriv 2 g c‖ ≤ 0 := by
+      refine ge_of_tendsto hten ?_
+      filter_upwards [Filter.eventually_ge_atTop (1 : ℝ)] with R hR
+      exact hest R hR
+    exact norm_le_zero_iff.mp hle
+  -- Step 2: deriv g is constant.
+  have hg' : Differentiable ℂ (deriv g) :=
+    differentiableOn_univ.mp (hg.differentiableOn.deriv isOpen_univ)
+  have hderiv2 : ∀ c : ℂ, deriv (deriv g) c = 0 := by
+    intro c
+    have h := h2nd c
+    rwa [iteratedDeriv_succ, iteratedDeriv_one] at h
+  have hconst : ∀ c : ℂ, deriv g c = deriv g 0 :=
+    fun c => is_const_of_deriv_eq_zero hg' hderiv2 c 0
+  -- Step 3: g − (deriv g 0)·z is constant.
+  set b : ℂ := deriv g 0 with hb
+  have hGdiff : Differentiable ℂ (fun z : ℂ => g z - b * z) :=
+    hg.sub (differentiable_id.const_mul b)
+  have hGderiv : ∀ z : ℂ, deriv (fun z : ℂ => g z - b * z) z = 0 := by
+    intro z
+    have h1 : HasDerivAt (fun z : ℂ => g z - b * z) (deriv g z - b) z := by
+      have hgz : HasDerivAt g (deriv g z) z := (hg z).hasDerivAt
+      have hbz : HasDerivAt (fun z : ℂ => b * z) b z := by
+        simpa using (hasDerivAt_id z).const_mul b
+      exact hgz.sub hbz
+    rw [h1.deriv, hconst z, sub_self]
+  have hGconst : ∀ z : ℂ, g z - b * z = g 0 - b * 0 :=
+    fun z => is_const_of_deriv_eq_zero hGdiff hGderiv z 0
+  refine ⟨g 0, b, fun z => ?_⟩
+  have := hGconst z
+  rw [mul_zero, sub_zero] at this
+  linear_combination this
