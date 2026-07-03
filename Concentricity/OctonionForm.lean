@@ -46,6 +46,25 @@ theorem innerO_one (x : Octonion) : innerO x 1 = re x := by
       - (Quaternion.normSq x.1 + Quaternion.normSq x.2) - 1) / 2 = x.1.re
   ring
 
+/-- The explicit coordinate form of the polarization: `⟪x, y⟫` is the
+Euclidean pairing of the 8 real coordinates. Componentwise. -/
+theorem innerO_def' (x y : Octonion) :
+    innerO x y = x.1.re * y.1.re + x.1.imI * y.1.imI + x.1.imJ * y.1.imJ
+      + x.1.imK * y.1.imK + x.2.re * y.2.re + x.2.imI * y.2.imI
+      + x.2.imJ * y.2.imJ + x.2.imK * y.2.imK := by
+  show (Quaternion.normSq (x.1 + y.1) + Quaternion.normSq (x.2 + y.2)
+      - (Quaternion.normSq x.1 + Quaternion.normSq x.2)
+      - (Quaternion.normSq y.1 + Quaternion.normSq y.2)) / 2 = _
+  simp only [Quaternion.normSq_def', Quaternion.re_add, Quaternion.imI_add,
+    Quaternion.imJ_add, Quaternion.imK_add]
+  ring
+
+theorem innerO_neg_right (x y : Octonion) : innerO x (-y) = -innerO x y := by
+  rw [innerO_def', innerO_def']
+  simp only [fst_neg, snd_neg, Quaternion.re_neg, Quaternion.imI_neg,
+    Quaternion.imJ_neg, Quaternion.imK_neg]
+  ring
+
 /-- P4.2.a — the quadratic identity: `x² = 2(re x)·x − N(x)` (the minimal
 polynomial of an octonion over ℝ). Componentwise from `mul_def` and the
 quaternionic quadratic identity `a² = (a + a*)a − a*a`. Also the engine of
@@ -122,13 +141,33 @@ theorem mul_anticomm_of_orthogonal {x y : Octonion}
   exact eq_neg_of_add_eq_zero_left hsum
 
 /-- P4.2.d — the product of orthogonal unit imaginaries is a unit imaginary
-orthogonal to both factors. Queued (R8): composition (P4.2.b) +
-anticommutation (P4.2.c). -/
+orthogonal to both factors. Composition (P4.2.b/b′) against `u·1`, `1·w`,
+and `u·u = −1` (proved, Octonion.lean). -/
 theorem mul_mem_unitImaginarySphere_of_orthogonal {u w : Octonion}
     (hu : u ∈ unitImaginarySphere) (hw : w ∈ unitImaginarySphere)
     (huw : innerO u w = 0) :
     u * w ∈ unitImaginarySphere ∧ innerO u (u * w) = 0 ∧ innerO w (u * w) = 0 := by
-  sorry
+  obtain ⟨hru, hNu⟩ := hu
+  obtain ⟨hrw, hNw⟩ := hw
+  have huu : u * u = -1 := sq_eq_neg_one_of_mem_unitImaginarySphere ⟨hru, hNu⟩
+  have h3 : innerO u (u * w) = 0 := by
+    have h := innerO_mul_mul_left u 1 w
+    rw [Octonion.mul_one, innerO_comm 1 w, innerO_one, hrw] at h
+    simpa using h
+  have h4 : innerO w (u * w) = 0 := by
+    have h := innerO_mul_mul_right 1 u w
+    rw [Octonion.one_mul, innerO_comm 1 u, innerO_one, hru] at h
+    simpa using h
+  have h2 : normSq (u * w) = 1 := by
+    rw [normSq_mul, hNu, hNw]
+    norm_num
+  have h1 : re (u * w) = 0 := by
+    have h := innerO_mul_mul_left u w u
+    rw [huu, innerO_comm w u, huw, innerO_neg_right] at h
+    simp only [mul_zero, neg_eq_zero] at h
+    rw [innerO_one] at h
+    exact h
+  exact ⟨⟨h1, h2⟩, h3, h4⟩
 
 /-- A **basic triple**: pairwise-orthogonal unit imaginaries with the third
 orthogonal to the quaternion subalgebra of the first two (Baez §4
