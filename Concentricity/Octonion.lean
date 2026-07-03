@@ -22,6 +22,8 @@ normed, non-associative, alternative — stated below, proofs queued per R8),
 -/
 import Mathlib.Algebra.Quaternion
 import Mathlib.Analysis.Quaternion
+import Mathlib.Algebra.Ring.Identities
+import Mathlib.Tactic.LinearCombination
 
 noncomputable section
 
@@ -113,11 +115,21 @@ def normSq (x : Octonion) : ℝ := Quaternion.normSq x.1 + Quaternion.normSq x.2
 @[simp] theorem normSq_one : normSq 1 = 1 := by simp [normSq, one_def]
 
 /-- `def:octonions`(ii) — 𝕆 is a normed algebra: `normSq` is multiplicative.
-Queued proof (R8): componentwise expansion; Mathlib's Degen eight-square
-identity `sum_eight_sq_mul_sum_eight_sq` (Mathlib/Algebra/Ring/Identities.lean,
-signs octonion-matched per its docstring) is the intended engine. -/
+Engine: Mathlib's Degen eight-square identity `sum_eight_sq_mul_sum_eight_sq`
+(Mathlib/Algebra/Ring/Identities.lean, pinned v4.31.0). Convention checked
+before expansion (2026-07-02): all 8 real components of the CD product match
+the identity's eight bilinear forms verbatim, under x₁..x₄ = x.1.(re,imI,imJ,imK),
+x₅..x₈ = x.2.(re,imI,imJ,imK). -/
 theorem normSq_mul (x y : Octonion) : normSq (x * y) = normSq x * normSq y := by
-  sorry
+  simp only [normSq, Quaternion.normSq_def', fst_mul, snd_mul, Quaternion.re_sub,
+    Quaternion.imI_sub, Quaternion.imJ_sub, Quaternion.imK_sub, Quaternion.re_add,
+    Quaternion.imI_add, Quaternion.imJ_add, Quaternion.imK_add, Quaternion.re_mul,
+    Quaternion.imI_mul, Quaternion.imJ_mul, Quaternion.imK_mul, Quaternion.re_star,
+    Quaternion.imI_star, Quaternion.imJ_star, Quaternion.imK_star]
+  linear_combination
+    -@sum_eight_sq_mul_sum_eight_sq ℝ _ x.1.re x.1.imI x.1.imJ x.1.imK
+      x.2.re x.2.imI x.2.imJ x.2.imK y.1.re y.1.imI y.1.imJ y.1.imK
+      y.2.re y.2.imI y.2.imJ y.2.imK
 
 /-- Purely imaginary octonions: vanishing real part (the real coefficient
 of the ℝ⁸ decomposition is `x.1.re`; all seven remaining coordinates —
