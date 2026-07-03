@@ -67,16 +67,18 @@ theorem mul_self_eq (x : Octonion) :
     rfl
 
 /-- P4.2.b — composition polarized on the left:
-`⟪x·y, x·z⟫ = N(x)·⟪y, z⟫`. Queued (R8): polarize `normSq_mul` (proved,
-Degen) in the second argument, using left distributivity. -/
+`⟪x·y, x·z⟫ = N(x)·⟪y, z⟫`. Polarizes `normSq_mul` (proved, Degen) in the
+second argument through left distributivity. -/
 theorem innerO_mul_mul_left (x y z : Octonion) :
     innerO (x * y) (x * z) = normSq x * innerO y z := by
-  sorry
+  rw [innerO, innerO, ← mul_add, normSq_mul, normSq_mul, normSq_mul]
+  ring
 
-/-- P4.2.b′ — composition polarized on the right. Queued (R8). -/
+/-- P4.2.b′ — composition polarized on the right. -/
 theorem innerO_mul_mul_right (x y z : Octonion) :
     innerO (x * z) (y * z) = innerO x y * normSq z := by
-  sorry
+  rw [innerO, innerO, ← add_mul, normSq_mul, normSq_mul, normSq_mul]
+  ring
 
 /-- P4.2.c — orthogonal imaginary octonions anticommute:
 `re x = re y = 0` and `⟪x, y⟫ = 0` force `x·y = −(y·x)`. Queued (R8):
