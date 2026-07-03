@@ -34,3 +34,31 @@ at A1–A10 below. -/
 theorem riemannZeta_nontrivialZeros_infinite :
     {s : ℂ | riemannZeta s = 0 ∧ (¬∃ n : ℕ, s = -2 * (n + 1)) ∧ s ≠ 1}.Infinite := by
   sorry
+
+/-! ## A1 — the completed ξ and its entirety -/
+
+/-- Route A, A1 data: ξ(s) = s(s−1)Λ(s) in its **entire normalization**
+`s(s−1)·Λ₀(s) + 1`.
+
+Pin: `completedRiemannZeta_eq` (RiemannZeta.lean:84):
+Λ(s) = Λ₀(s) − 1/s − 1/(1−s), so s(s−1)Λ(s) = s(s−1)Λ₀(s) − (s−1) + s
+= s(s−1)Λ₀(s) + 1 away from {0, 1}. Mathlib's Λ carries junk values at 0
+and 1, which make the naive product `s*(s-1)*Λ(s)` discontinuous there —
+the entire side is therefore the definition, and `xi_eq` records the
+agreement off {0, 1}. -/
+def xi (s : ℂ) : ℂ := s * (s - 1) * completedRiemannZeta₀ s + 1
+
+/-- ξ agrees with s(s−1)Λ(s) away from 0 and 1
+(pin: `completedRiemannZeta_eq`). -/
+theorem xi_eq {s : ℂ} (hs0 : s ≠ 0) (hs1 : s ≠ 1) :
+    xi s = s * (s - 1) * completedRiemannZeta s := by
+  have h1 : (1 : ℂ) - s ≠ 0 := sub_ne_zero.mpr (Ne.symm hs1)
+  rw [xi, completedRiemannZeta_eq]
+  field_simp
+  ring
+
+/-- **A1** — ξ is entire (pin: `differentiable_completedZeta₀`,
+RiemannZeta.lean:89). -/
+theorem xi_entire : Differentiable ℂ xi :=
+  ((differentiable_id.mul (differentiable_id.sub_const 1)).mul
+    differentiable_completedZeta₀).add_const 1
