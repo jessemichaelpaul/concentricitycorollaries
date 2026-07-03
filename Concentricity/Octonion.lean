@@ -206,8 +206,36 @@ theorem alt_left (x y : Octonion) : (x * x) * y = x * (x * y) := by
     rw [Quaternion.coe_commutes, Quaternion.coe_commutes]
     simp only [sub_self, mul_zero, add_zero, zero_add]
 
-/-- `def:octonions`(iv) — alternativity, right law: `x (y y) = (x y) y`. -/
+/-- `def:octonions`(iv) — alternativity, right law: `x (y y) = (x y) y`.
+Proof: mirror of `alt_left` at the ℍ-pair level; the central elements are
+`star d * d = normSq d` and `c + star c = 2 re c`. -/
 theorem alt_right (x y : Octonion) : x * (y * y) = (x * y) * y := by
-  sorry
+  obtain ⟨a, b⟩ := x
+  obtain ⟨c, d⟩ := y
+  refine Prod.ext ?_ ?_
+  · show a * (c * c - star d * d) - star (d * c + d * star c) * b
+        = (a * c - star d * b) * c - star d * (d * a + b * star c)
+    simp only [star_add, star_mul, star_star]
+    rw [← sub_eq_zero,
+      show a * (c * c - star d * d) - (star c * star d + c * star d) * b
+            - ((a * c - star d * b) * c - star d * (d * a + b * star c))
+          = ((star d * d) * a - a * (star d * d))
+            + ((star d * b) * (c + star c) - (c + star c) * (star d * b)) from by
+        noncomm_ring,
+      Quaternion.star_mul_self, Quaternion.self_add_star']
+    rw [Quaternion.coe_commutes, Quaternion.coe_commutes]
+    simp only [sub_self, mul_zero, add_zero, zero_add]
+  · show (d * c + d * star c) * a + b * star (c * c - star d * d)
+        = d * (a * c - star d * b) + (d * a + b * star c) * star c
+    simp only [star_sub, star_mul, star_star]
+    rw [← sub_eq_zero,
+      show (d * c + d * star c) * a + b * (star c * star c - star d * d)
+            - (d * (a * c - star d * b) + (d * a + b * star c) * star c)
+          = (d * ((c + star c) * a - a * (c + star c)))
+            + ((d * star d) * b - b * (star d * d)) from by
+        noncomm_ring,
+      Quaternion.self_mul_star, Quaternion.star_mul_self, Quaternion.self_add_star']
+    rw [Quaternion.coe_commutes, Quaternion.coe_commutes]
+    simp only [sub_self, mul_zero, add_zero, zero_add]
 
 end Octonion
