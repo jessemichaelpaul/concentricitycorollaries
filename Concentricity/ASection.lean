@@ -9,7 +9,7 @@ of `rmk:compactify`).
 Master `def:A-section` (verbatim): "An *A-section* is a section A of the ring
 𝓡 of slice-preserving slice-regular functions on 𝕆* = S⁸ (Definition def:R)
 — equivalently, a slice-preserving *semiregular* function on 𝕆* (the
-meromorphic slice class; [AdF §11]) — with the following four properties."
+meromorphic slice class; [SeriesExp §11]) — with the following four properties."
 The four properties C1–C4 are quoted field-by-field below.
 
 Statement-layer renderings (flagged for the author's skim, R6):
@@ -57,7 +57,7 @@ structure ASection where
   /-- Slice preservation: the stem is intrinsic (def:slice-preserving). -/
   intrinsic : IsIntrinsic F
   /-- "equivalently, a slice-preserving *semiregular* function on 𝕆* (the
-  meromorphic slice class; [AdF §11])" — stem level: meromorphic on ℂ. -/
+  meromorphic slice class; [SeriesExp §11])" — stem level: meromorphic on ℂ. -/
   meromorphic : MeromorphicOn F Set.univ
   /-- C1 data: the pole's location — "it … lies at a real point". -/
   pole : ℝ
