@@ -297,3 +297,155 @@ theorem exists_log_of_entire_nonvanishing {h : ℂ → ℂ}
     _ = F 0 * Complex.exp (g₀ z) := by rw [← hF_const z]
     _ = Complex.exp (g₀ z + Complex.log (F 0)) := by
         rw [Complex.exp_add, Complex.exp_log hc, mul_comm]
+
+/-! ## A9 — real-axis lower bound for ξ -/
+
+/-- ζ has real part ≥ 1 at real arguments σ > 1: the Dirichlet series
+`ζ(σ) = ∑ n^{−σ}` has nonnegative real terms, and the n = 1 term equals 1.
+Pins: `LSeriesHasSum_one` (Dirichlet.lean:311), `Complex.hasSum_re`
+(Complex/Basic.lean:607), `le_hasSum` (InfiniteSum/Order.lean:105),
+`Complex.ofReal_cpow` (Pow/Complex.lean). -/
+theorem one_le_riemannZeta_re_of_real {σ : ℝ} (hσ : 1 < σ) :
+    1 ≤ (riemannZeta (σ : ℂ)).re := by
+  have hσ' : 1 < (σ : ℂ).re := by simpa using hσ
+  have hsum : HasSum (fun n : ℕ => (LSeries.term 1 (σ : ℂ) n).re)
+      (riemannZeta (σ : ℂ)).re :=
+    Complex.hasSum_re (LSeriesHasSum_one hσ')
+  have hterm : ∀ n : ℕ, n ≠ 0 →
+      (LSeries.term 1 (σ : ℂ) n).re = ((n : ℝ) ^ σ)⁻¹ := by
+    intro n hn
+    rw [LSeries.term_of_ne_zero hn, Pi.one_apply,
+      show ((n : ℂ)) ^ (σ : ℂ) = (((n : ℝ) ^ σ : ℝ) : ℂ) by
+        rw [Complex.ofReal_cpow (Nat.cast_nonneg n), Complex.ofReal_natCast],
+      one_div, ← Complex.ofReal_inv, Complex.ofReal_re]
+  have hnonneg : ∀ j : ℕ, j ≠ 1 → 0 ≤ (LSeries.term 1 (σ : ℂ) j).re := by
+    intro j _
+    rcases eq_or_ne j 0 with rfl | hj
+    · simp [LSeries.term_zero]
+    · rw [hterm j hj]; positivity
+  have h1 : (LSeries.term 1 (σ : ℂ) 1).re = 1 := by
+    rw [hterm 1 one_ne_zero]
+    simp
+  calc (1 : ℝ) = (LSeries.term 1 (σ : ℂ) 1).re := h1.symm
+    _ ≤ (riemannZeta (σ : ℂ)).re := le_hasSum hsum 1 hnonneg
+
+/-- **A9** — the real-axis Γ-growth of ξ beats every geometric sequence:
+along σ = 2n + 2, eventually K^n ≤ ‖ξ(σ)‖. Route: ξ(σ) = σ(σ−1)Λ(σ) (A1),
+Λ(σ) = ζ(σ)·Γℝ(σ) (`riemannZeta_def_of_ne_zero`, RiemannZeta.lean:152),
+Γℝ(2n+2) = π^{−(n+1)}·n! (`Complex.Gammaℝ_def`, Deligne.lean:45;
+`Complex.Gamma_nat_eq_factorial`, Gamma/Basic.lean:324;
+`Complex.norm_cpow_eq_rpow_re_of_pos`, Pow/Real.lean:337), ‖ζ(2n+2)‖ ≥ 1
+(`one_le_riemannZeta_re_of_real`), and n! eventually dominates π·(Kπ)^n
+(`FloorSemiring.tendsto_pow_div_factorial_atTop`,
+Topology/Algebra/Order/Floor.lean:54). -/
+theorem gamma_lower_bound_real (K : ℝ) :
+    ∀ᶠ (n : ℕ) in Filter.atTop, K ^ n ≤ ‖xi (2 * (n : ℂ) + 2)‖ := by
+  set K' : ℝ := |K| + 1 with hK'
+  have hK'0 : 0 < K' := by positivity
+  -- the factorial eventually dominates K'^n · π^(n+1)
+  have hfact : ∀ᶠ (n : ℕ) in Filter.atTop,
+      K' ^ n * Real.pi ^ (n + 1) ≤ (Nat.factorial n : ℝ) := by
+    have h0 := FloorSemiring.tendsto_pow_div_factorial_atTop (K := ℝ) (K' * Real.pi)
+    have hπ : (0 : ℝ) < Real.pi⁻¹ := by positivity
+    filter_upwards [h0.eventually (gt_mem_nhds hπ)] with n hn
+    have hfac : (0 : ℝ) < (Nat.factorial n : ℝ) := by exact_mod_cast Nat.factorial_pos n
+    rw [div_lt_iff₀ hfac] at hn
+    have hπpos := Real.pi_pos
+    have hkey : Real.pi * (K' * Real.pi) ^ n < (Nat.factorial n : ℝ) := by
+      calc Real.pi * (K' * Real.pi) ^ n
+          < Real.pi * (Real.pi⁻¹ * (Nat.factorial n : ℝ)) := by
+            exact mul_lt_mul_of_pos_left hn hπpos
+        _ = (Nat.factorial n : ℝ) := by field_simp
+    calc K' ^ n * Real.pi ^ (n + 1) = Real.pi * (K' * Real.pi) ^ n := by ring
+      _ ≤ (Nat.factorial n : ℝ) := hkey.le
+  -- the pointwise lower bound ‖ξ(2n+2)‖ ≥ n!/π^(n+1)
+  have hxi_lower : ∀ n : ℕ,
+      (Nat.factorial n : ℝ) * (Real.pi ^ (n + 1))⁻¹ ≤ ‖xi (2 * (n : ℂ) + 2)‖ := by
+    intro n
+    set s : ℂ := 2 * (n : ℂ) + 2 with hs
+    have hs_re : s.re = 2 * (n : ℝ) + 2 := by simp [hs]
+    have hn0 : (0 : ℝ) ≤ (n : ℝ) := Nat.cast_nonneg n
+    have hs0 : s ≠ 0 := by
+      intro h
+      have h' := congrArg Complex.re h
+      rw [hs_re] at h'
+      simp only [Complex.zero_re] at h'
+      linarith
+    have hs1 : s ≠ 1 := by
+      intro h
+      have h' := congrArg Complex.re h
+      rw [hs_re] at h'
+      simp only [Complex.one_re] at h'
+      linarith
+    have hG : Complex.Gammaℝ s ≠ 0 := by
+      intro h
+      obtain ⟨m, hm⟩ := Complex.Gammaℝ_eq_zero_iff.mp h
+      have h' := congrArg Complex.re hm
+      rw [hs_re] at h'
+      have hm0 : (0 : ℝ) ≤ (m : ℝ) := Nat.cast_nonneg m
+      have : (-(2 * (m : ℂ))).re = -(2 * (m : ℝ)) := by simp
+      rw [this] at h'
+      linarith
+    have hΛ : completedRiemannZeta s = riemannZeta s * Complex.Gammaℝ s := by
+      rw [riemannZeta_def_of_ne_zero hs0, div_mul_cancel₀ _ hG]
+    have hs2 : s / 2 = (n : ℂ) + 1 := by rw [hs]; ring
+    have hGval : Complex.Gammaℝ s = (Real.pi : ℂ) ^ (-s / 2) * ((Nat.factorial n : ℕ) : ℂ) := by
+      rw [Complex.Gammaℝ_def, hs2, Complex.Gamma_nat_eq_factorial]
+    have hneg : -s / 2 = -((n : ℂ) + 1) := by rw [hs]; ring
+    have hnorm_pi : ‖(Real.pi : ℂ) ^ (-s / 2)‖ = (Real.pi ^ (n + 1))⁻¹ := by
+      rw [hneg, Complex.norm_cpow_eq_rpow_re_of_pos Real.pi_pos]
+      have hre : (-((n : ℂ) + 1)).re = -((n : ℝ) + 1) := by simp
+      rw [hre, Real.rpow_neg Real.pi_pos.le]
+      congr 1
+      rw [show ((n : ℝ) + 1) = ((n + 1 : ℕ) : ℝ) by push_cast; ring, Real.rpow_natCast]
+    have hGnorm : ‖Complex.Gammaℝ s‖ = (Real.pi ^ (n + 1))⁻¹ * (Nat.factorial n : ℝ) := by
+      rw [hGval, norm_mul, hnorm_pi]
+      congr 1
+      rw [show ((Nat.factorial n : ℕ) : ℂ) = (((Nat.factorial n : ℕ) : ℝ) : ℂ) by push_cast; ring,
+        Complex.norm_real, Real.norm_of_nonneg (by positivity)]
+    have hζ : 1 ≤ ‖riemannZeta s‖ := by
+      have hcast : s = ((2 * (n : ℝ) + 2 : ℝ) : ℂ) := by rw [hs]; push_cast; ring
+      have h1 : 1 < (2 * (n : ℝ) + 2 : ℝ) := by linarith
+      calc (1 : ℝ) ≤ (riemannZeta ((2 * (n : ℝ) + 2 : ℝ) : ℂ)).re :=
+            one_le_riemannZeta_re_of_real h1
+        _ ≤ |(riemannZeta ((2 * (n : ℝ) + 2 : ℝ) : ℂ)).re| := le_abs_self _
+        _ ≤ ‖riemannZeta ((2 * (n : ℝ) + 2 : ℝ) : ℂ)‖ := Complex.abs_re_le_norm _
+        _ = ‖riemannZeta s‖ := by rw [← hcast]
+    have hs_norm : 1 ≤ ‖s‖ := by
+      calc (1 : ℝ) ≤ |s.re| := by
+            rw [hs_re, abs_of_nonneg (by linarith)]; linarith
+        _ ≤ ‖s‖ := Complex.abs_re_le_norm s
+    have hs1_norm : 1 ≤ ‖s - 1‖ := by
+      have hre : (s - 1).re = 2 * (n : ℝ) + 1 := by
+        rw [Complex.sub_re, hs_re, Complex.one_re]; ring
+      calc (1 : ℝ) ≤ |(s - 1).re| := by
+            rw [hre, abs_of_nonneg (by linarith)]; linarith
+        _ ≤ ‖s - 1‖ := Complex.abs_re_le_norm _
+    have hxi_val : xi s = s * (s - 1) * (riemannZeta s * Complex.Gammaℝ s) := by
+      rw [xi_eq hs0 hs1, hΛ]
+    rw [hxi_val]
+    calc (Nat.factorial n : ℝ) * (Real.pi ^ (n + 1))⁻¹
+        = (Real.pi ^ (n + 1))⁻¹ * (Nat.factorial n : ℝ) := by ring
+      _ ≤ ‖riemannZeta s‖ * ‖Complex.Gammaℝ s‖ := by
+          rw [hGnorm]
+          exact le_mul_of_one_le_left (by positivity) hζ
+      _ ≤ ‖s - 1‖ * (‖riemannZeta s‖ * ‖Complex.Gammaℝ s‖) :=
+          le_mul_of_one_le_left (by positivity) hs1_norm
+      _ ≤ ‖s‖ * (‖s - 1‖ * (‖riemannZeta s‖ * ‖Complex.Gammaℝ s‖)) :=
+          le_mul_of_one_le_left (by positivity) hs_norm
+      _ = ‖s * (s - 1) * (riemannZeta s * Complex.Gammaℝ s)‖ := by
+          rw [norm_mul, norm_mul, norm_mul]; ring
+  -- assemble
+  filter_upwards [hfact] with n hn
+  have h1 : K ^ n ≤ K' ^ n := by
+    calc K ^ n ≤ |K ^ n| := le_abs_self _
+      _ = |K| ^ n := abs_pow K n
+      _ ≤ K' ^ n := by
+          apply pow_le_pow_left₀ (abs_nonneg K)
+          rw [hK']
+          linarith
+  have h2 : K' ^ n ≤ (Nat.factorial n : ℝ) * (Real.pi ^ (n + 1))⁻¹ := by
+    have hπpow : (0 : ℝ) < Real.pi ^ (n + 1) := by positivity
+    have := (le_div_iff₀ hπpow).mpr hn
+    rwa [div_eq_mul_inv] at this
+  exact h1.trans (h2.trans (hxi_lower n))
