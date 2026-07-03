@@ -26,10 +26,23 @@ theorem innerO_comm (x y : Octonion) : innerO x y = innerO y x := by
   rw [innerO, innerO, add_comm x y]
   ring
 
-/-- `⟪x, 1⟫ = re x` — the form sees the real part. Queued (R8):
-componentwise. -/
+/-- `⟪x, 1⟫ = re x` — the form sees the real part. Componentwise. -/
 theorem innerO_one (x : Octonion) : innerO x 1 = re x := by
-  sorry
+  have hq : Quaternion.normSq (x.1 + 1) = Quaternion.normSq x.1 + 2 * x.1.re + 1 := by
+    simp only [Quaternion.normSq_def', Quaternion.re_add, Quaternion.imI_add,
+      Quaternion.imJ_add, Quaternion.imK_add, Quaternion.re_one, Quaternion.imI_one,
+      Quaternion.imJ_one, Quaternion.imK_one]
+    ring
+  have h2 : (x + 1).2 = x.2 := by
+    show x.2 + 0 = x.2
+    rw [add_zero]
+  show (normSq (x + 1) - normSq x - normSq 1) / 2 = re x
+  rw [normSq_one,
+    show normSq (x + 1) = Quaternion.normSq ((x + 1).1) + Quaternion.normSq ((x + 1).2) from rfl,
+    h2, show (x + 1).1 = x.1 + 1 from rfl, hq]
+  show (Quaternion.normSq x.1 + 2 * x.1.re + 1 + Quaternion.normSq x.2
+      - (Quaternion.normSq x.1 + Quaternion.normSq x.2) - 1) / 2 = x.1.re
+  ring
 
 /-- P4.2.a — the quadratic identity: `x² = 2(re x)·x − N(x)` (the minimal
 polynomial of an octonion over ℝ). Componentwise from `mul_def` and the
