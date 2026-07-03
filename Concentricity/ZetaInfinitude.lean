@@ -18,6 +18,7 @@ import Mathlib.NumberTheory.LSeries.Nonvanishing
 import Mathlib.Analysis.SpecialFunctions.Gamma.Deligne
 import Mathlib.Analysis.Meromorphic.FactorizedRational
 import Mathlib.Analysis.Complex.HasPrimitives
+import Mathlib.Analysis.Complex.BorelCaratheodory
 import Mathlib.Tactic.FieldSimp
 
 noncomputable section
@@ -965,3 +966,197 @@ theorem affine_of_subquadratic_growth {g : ℂ → ℂ} (hg : Differentiable ℂ
   have := hGconst z
   rw [mul_zero, sub_zero] at this
   linear_combination this
+
+/-! ## A7 — the logarithm factor has subquadratic growth -/
+
+/-- Constant-absorption helper: an affine-in-Y bound `K₁ + K₂·Y` with
+`Y = (X+2)·log(X+2) ≥ 2·log 2 > 0` is absorbed into a single multiple of Y. -/
+theorem absorb_const (K₁ K₂ : ℝ) : ∃ B : ℝ, 0 ≤ B ∧ ∀ X : ℝ, 0 ≤ X →
+    K₁ + K₂ * ((X + 2) * Real.log (X + 2)) ≤ B * (X + 2) * Real.log (X + 2) := by
+  have hlog2 : 0 < Real.log 2 := Real.log_pos one_lt_two
+  have hden : (0:ℝ) < 2 * Real.log 2 := by linarith
+  refine ⟨max K₁ 0 / (2 * Real.log 2) + max K₂ 0,
+    add_nonneg (div_nonneg (le_max_right _ _) hden.le) (le_max_right _ _),
+    fun X hX => ?_⟩
+  have hX2 : (2:ℝ) ≤ X + 2 := by linarith
+  have hlogX : Real.log 2 ≤ Real.log (X + 2) := Real.log_le_log two_pos hX2
+  have hY : 2 * Real.log 2 ≤ (X + 2) * Real.log (X + 2) :=
+    mul_le_mul hX2 hlogX hlog2.le (by linarith)
+  have hY0 : 0 < (X + 2) * Real.log (X + 2) := lt_of_lt_of_le hden hY
+  have h1 : K₁ ≤ max K₁ 0 / (2 * Real.log 2) * ((X + 2) * Real.log (X + 2)) := by
+    calc K₁ ≤ max K₁ 0 := le_max_left _ _
+      _ = max K₁ 0 / (2 * Real.log 2) * (2 * Real.log 2) :=
+          (div_mul_cancel₀ _ hden.ne').symm
+      _ ≤ max K₁ 0 / (2 * Real.log 2) * ((X + 2) * Real.log (X + 2)) :=
+          mul_le_mul_of_nonneg_left hY (div_nonneg (le_max_right _ _) hden.le)
+  have h2 : K₂ * ((X + 2) * Real.log (X + 2))
+      ≤ max K₂ 0 * ((X + 2) * Real.log (X + 2)) :=
+    mul_le_mul_of_nonneg_right (le_max_left _ _) hY0.le
+  calc K₁ + K₂ * ((X + 2) * Real.log (X + 2))
+      ≤ max K₁ 0 / (2 * Real.log 2) * ((X + 2) * Real.log (X + 2))
+        + max K₂ 0 * ((X + 2) * Real.log (X + 2)) := add_le_add h1 h2
+    _ = (max K₁ 0 / (2 * Real.log 2) + max K₂ 0) * (X + 2) * Real.log (X + 2) := by
+        ring
+
+/-- **A7** — the logarithm factor grows subquadratically: with ξ = P·h from
+A3 and h = exp∘g from A4, the entire g obeys
+`‖g z‖ ≤ B·(‖z‖+2)·log(‖z‖+2)` globally. Route: outside a disk containing
+the divisor support, ‖P‖ ≥ 1 (`Function.FactorizedRational` +
+`Finset.one_le_prod'`), so exp(Re g) = ‖h‖ ≤ ‖ξ‖ and A6 bounds Re g;
+inside, compactness; then **Borel–Carathéodory**
+(`Complex.borelCaratheodory`, BorelCaratheodory.lean:109) on the ball of
+radius 2‖z‖+2 converts the Re-bound into a norm bound. -/
+theorem log_factor_growth
+    (hfin : {s : ℂ | riemannZeta s = 0 ∧ (¬∃ n : ℕ, s = -2 * (n + 1)) ∧ s ≠ 1}.Finite)
+    {h g : ℂ → ℂ} (hg : Differentiable ℂ g)
+    (hfac : ∀ z, xi z = (∏ᶠ u, (z - u) ^ (MeromorphicOn.divisor xi Set.univ u)) * h z)
+    (hexp : ∀ z, h z = Complex.exp (g z)) :
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ z : ℂ, ‖g z‖ ≤ B * (‖z‖ + 2) * Real.log (‖z‖ + 2) := by
+  have hsupp := xi_divisor_support_finite hfin
+  obtain ⟨r, hr⟩ := hsupp.isBounded.subset_closedBall 0
+  set R₁ : ℝ := max r 0 + 1 with hR₁
+  have hR₁0 : 0 < R₁ := by
+    rw [hR₁]
+    have := le_max_right r 0
+    linarith
+  -- outside the disk of radius R₁, the factorized rational has norm ≥ 1
+  have hP_ge : ∀ z : ℂ, R₁ ≤ ‖z‖ →
+      1 ≤ ‖∏ᶠ u, (z - u) ^ (MeromorphicOn.divisor xi Set.univ u)‖ := by
+    intro z hz
+    have hsub : (Function.mulSupport
+        (fun u : ℂ => (z - u) ^ (MeromorphicOn.divisor xi Set.univ u)))
+        ⊆ ↑hsupp.toFinset := by
+      intro u hu
+      simp only [Function.mem_mulSupport] at hu
+      rw [Set.Finite.coe_toFinset]
+      simp only [Function.mem_support]
+      intro hns
+      apply hu
+      rw [hns, zpow_zero]
+    rw [finprod_eq_prod_of_mulSupport_subset _ hsub, norm_prod]
+    apply Finset.one_le_prod
+    intro u hu
+    rw [norm_zpow]
+    apply one_le_zpow₀ ?_ (xi_divisor_nonneg u)
+    have hu_mem : u ∈ Function.support
+        (fun u : ℂ => MeromorphicOn.divisor xi Set.univ u) := by
+      rwa [Set.Finite.mem_toFinset] at hu
+    have hu_ball : u ∈ Metric.closedBall (0 : ℂ) r := hr hu_mem
+    have hu_norm : ‖u‖ ≤ r := by
+      rwa [Metric.mem_closedBall, dist_zero_right] at hu_ball
+    have h1 : ‖z - u‖ ≥ ‖z‖ - ‖u‖ := norm_sub_norm_le z u
+    have h2 : r ≤ max r 0 := le_max_left r 0
+    rw [hR₁] at hz
+    linarith
+  -- outside the disk, exp(Re g) ≤ ‖ξ‖
+  have hre_bound : ∀ z : ℂ, R₁ ≤ ‖z‖ → Real.exp ((g z).re) ≤ ‖xi z‖ := by
+    intro z hz
+    have h1 : ‖xi z‖
+        = ‖∏ᶠ u, (z - u) ^ (MeromorphicOn.divisor xi Set.univ u)‖ * ‖h z‖ := by
+      rw [hfac z, norm_mul]
+    have h2 : ‖h z‖ = Real.exp ((g z).re) := by
+      rw [hexp z, Complex.norm_exp]
+    rw [h1, h2]
+    exact le_mul_of_one_le_left (Real.exp_pos _).le (hP_ge z hz)
+  -- growth of ξ transfers to Re g outside the disk
+  obtain ⟨C, hC, hxi⟩ := xi_growth
+  have hre2 : ∀ z : ℂ, R₁ ≤ ‖z‖ →
+      (g z).re ≤ Real.log C + C * ((‖z‖ + 2) * Real.log (‖z‖ + 2)) := by
+    intro z hz
+    have h1 : Real.exp ((g z).re)
+        ≤ C * Real.exp (C * (‖z‖ + 2) * Real.log (‖z‖ + 2)) :=
+      (hre_bound z hz).trans (hxi z)
+    rw [show C * Real.exp (C * (‖z‖ + 2) * Real.log (‖z‖ + 2))
+        = Real.exp (Real.log C + C * (‖z‖ + 2) * Real.log (‖z‖ + 2)) by
+      rw [Real.exp_add, Real.exp_log hC]] at h1
+    have h2 := Real.exp_le_exp.mp h1
+    nlinarith [h2]
+  -- compactness bound inside the disk
+  obtain ⟨Mc, hMc⟩ := (isCompact_closedBall (0 : ℂ) R₁).exists_bound_of_continuousOn
+    hg.continuous.continuousOn
+  -- global Re-bound
+  set K₁ : ℝ := max (Real.log C) 0 + max Mc 0 with hK₁def
+  have hK₁ : 0 ≤ K₁ :=
+    add_nonneg (le_max_right _ _) (le_max_right _ _)
+  have hreG : ∀ z : ℂ, (g z).re ≤ K₁ + C * ((‖z‖ + 2) * Real.log (‖z‖ + 2)) := by
+    intro z
+    have hz0 : (0:ℝ) ≤ ‖z‖ := norm_nonneg z
+    have hY : 0 ≤ (‖z‖ + 2) * Real.log (‖z‖ + 2) :=
+      mul_nonneg (by linarith) (Real.log_nonneg (by linarith))
+    rcases le_or_gt R₁ ‖z‖ with hz | hz
+    · have h1 := hre2 z hz
+      have h2 : Real.log C ≤ max (Real.log C) 0 := le_max_left _ _
+      have h3 : (0:ℝ) ≤ max Mc 0 := le_max_right _ _
+      rw [hK₁def]
+      linarith
+    · have h1 : (g z).re ≤ ‖g z‖ :=
+        (le_abs_self _).trans (Complex.abs_re_le_norm _)
+      have h2 : ‖g z‖ ≤ Mc := by
+        apply hMc
+        rw [Metric.mem_closedBall, dist_zero_right]
+        exact hz.le
+      have h3 : Mc ≤ max Mc 0 := le_max_left _ _
+      have h4 : (0:ℝ) ≤ max (Real.log C) 0 := le_max_right _ _
+      have h5 : 0 ≤ C * ((‖z‖ + 2) * Real.log (‖z‖ + 2)) := mul_nonneg hC.le hY
+      rw [hK₁def]
+      linarith
+  -- Borel–Carathéodory on the ball of radius 2‖z₀‖+2
+  have hBC : ∀ z₀ : ℂ, ‖g z₀‖
+      ≤ 2 * (K₁ + 4 * C * ((‖z₀‖ + 2) * Real.log (‖z₀‖ + 2)) + 1) + 3 * ‖g 0‖ := by
+    intro z₀
+    have hz₀ : (0:ℝ) ≤ ‖z₀‖ := norm_nonneg z₀
+    set R : ℝ := 2 * ‖z₀‖ + 2 with hR
+    have hRpos : (0:ℝ) < R := by rw [hR]; linarith
+    have hz2 : (2:ℝ) ≤ ‖z₀‖ + 2 := by linarith
+    have hlogz : 0 ≤ Real.log (‖z₀‖ + 2) := Real.log_nonneg (by linarith)
+    have hR2eq : R + 2 = 2 * (‖z₀‖ + 2) := by rw [hR]; ring
+    have hRlog : (R + 2) * Real.log (R + 2)
+        ≤ 4 * ((‖z₀‖ + 2) * Real.log (‖z₀‖ + 2)) := by
+      rw [hR2eq, Real.log_mul two_ne_zero (by linarith)]
+      have hlog2le : Real.log 2 ≤ Real.log (‖z₀‖ + 2) := Real.log_le_log two_pos hz2
+      nlinarith [mul_le_mul_of_nonneg_left hlog2le (by linarith : (0:ℝ) ≤ ‖z₀‖ + 2)]
+    set M : ℝ := K₁ + C * ((R + 2) * Real.log (R + 2)) + 1 with hM
+    have hYR : 0 ≤ (R + 2) * Real.log (R + 2) :=
+      mul_nonneg (by linarith) (Real.log_nonneg (by linarith))
+    have hM0 : 0 < M := by
+      rw [hM]
+      nlinarith [mul_nonneg hC.le hYR]
+    have hmaps : Set.MapsTo g (Metric.ball 0 R) {w : ℂ | w.re ≤ M} := by
+      intro w hw
+      simp only [Set.mem_setOf_eq]
+      have hwR : ‖w‖ < R := by rwa [Metric.mem_ball, dist_zero_right] at hw
+      have hw0 : (0:ℝ) ≤ ‖w‖ := norm_nonneg w
+      have hmono : (‖w‖ + 2) * Real.log (‖w‖ + 2) ≤ (R + 2) * Real.log (R + 2) := by
+        apply mul_le_mul (by linarith)
+          (Real.log_le_log (by linarith) (by linarith))
+          (Real.log_nonneg (by linarith)) (by linarith)
+      have h1 := hreG w
+      have h2 := mul_le_mul_of_nonneg_left hmono hC.le
+      rw [hM]
+      linarith
+    have hball : z₀ ∈ Metric.ball (0 : ℂ) R := by
+      rw [Metric.mem_ball, dist_zero_right, hR]
+      linarith
+    have hbc := Complex.borelCaratheodory hM0 hg.differentiableOn hmaps hRpos hball
+    have hden : R - ‖z₀‖ = ‖z₀‖ + 2 := by rw [hR]; ring
+    have hfrac1 : 2 * M * ‖z₀‖ / (R - ‖z₀‖) ≤ 2 * M := by
+      rw [hden, div_le_iff₀ (by linarith : (0:ℝ) < ‖z₀‖ + 2)]
+      nlinarith [hM0]
+    have hfrac2 : ‖g 0‖ * (R + ‖z₀‖) / (R - ‖z₀‖) ≤ 3 * ‖g 0‖ := by
+      rw [hden, div_le_iff₀ (by linarith : (0:ℝ) < ‖z₀‖ + 2), hR]
+      nlinarith [norm_nonneg (g 0)]
+    have hMle : M ≤ K₁ + 4 * C * ((‖z₀‖ + 2) * Real.log (‖z₀‖ + 2)) + 1 := by
+      rw [hM]
+      have := mul_le_mul_of_nonneg_left hRlog hC.le
+      nlinarith [this]
+    calc ‖g z₀‖ ≤ 2 * M * ‖z₀‖ / (R - ‖z₀‖)
+          + ‖g 0‖ * (R + ‖z₀‖) / (R - ‖z₀‖) := hbc
+      _ ≤ 2 * M + 3 * ‖g 0‖ := add_le_add hfrac1 hfrac2
+      _ ≤ 2 * (K₁ + 4 * C * ((‖z₀‖ + 2) * Real.log (‖z₀‖ + 2)) + 1) + 3 * ‖g 0‖ := by
+          linarith [hMle]
+  -- absorb constants
+  obtain ⟨B, hB0, hAb⟩ := absorb_const (2 * K₁ + 2 + 3 * ‖g 0‖) (8 * C)
+  refine ⟨B, hB0, fun z => ?_⟩
+  have h1 := hBC z
+  have h2 := hAb ‖z‖ (norm_nonneg z)
+  nlinarith [h1, h2]
