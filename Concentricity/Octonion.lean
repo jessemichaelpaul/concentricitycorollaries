@@ -24,6 +24,7 @@ import Mathlib.Algebra.Quaternion
 import Mathlib.Analysis.Quaternion
 import Mathlib.Algebra.Ring.Identities
 import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.NoncommRing
 
 noncomputable section
 
@@ -170,11 +171,40 @@ theorem sq_eq_neg_one_of_mem_unitImaginarySphere
   refine Prod.ext ?_ ?_ <;> simp [one_def]
 
 /-- `def:octonions`(iv) — alternativity, left law: `(x x) y = x (x y)`.
-Queued proof (R8): 8-component expansion over ℝ, closable by `ring`;
-watch elaboration cost (recon (a) note). Cited-for-faithfulness:
-Schafer/Baez (SOURCES pass). -/
+Proof at the ℍ-pair level (quaternion associativity + star; no 8-component
+expansion): per component, the difference collapses — a `noncomm_ring`
+formal identity — to commutators against the central elements
+`star b * b = normSq b` and `a + star a = 2 re a`, which vanish by
+`Quaternion.coe_commutes`. Cited-for-faithfulness: Schafer/Baez
+(SOURCES pass). -/
 theorem alt_left (x y : Octonion) : (x * x) * y = x * (x * y) := by
-  sorry
+  obtain ⟨a, b⟩ := x
+  obtain ⟨c, d⟩ := y
+  refine Prod.ext ?_ ?_
+  · show (a * a - star b * b) * c - star d * (b * a + b * star a)
+        = a * (a * c - star d * b) - star (d * a + b * star c) * b
+    simp only [star_add, star_mul, star_star]
+    rw [← sub_eq_zero,
+      show (a * a - star b * b) * c - star d * (b * a + b * star a)
+            - (a * (a * c - star d * b) - (star a * star d + c * star b) * b)
+          = (c * (star b * b) - star b * b * c)
+            + ((a + star a) * (star d * b) - star d * b * (a + star a)) from by
+        noncomm_ring,
+      Quaternion.star_mul_self, Quaternion.self_add_star']
+    rw [Quaternion.coe_commutes, Quaternion.coe_commutes]
+    simp only [sub_self, mul_zero, add_zero, zero_add]
+  · show d * (a * a - star b * b) + (b * a + b * star a) * star c
+        = (d * a + b * star c) * a + b * star (a * c - star d * b)
+    simp only [star_sub, star_mul, star_star]
+    rw [← sub_eq_zero,
+      show d * (a * a - star b * b) + (b * a + b * star a) * star c
+            - ((d * a + b * star c) * a + b * (star c * star a - star b * d))
+          = ((b * star b) * d - d * (star b * b))
+            + (b * ((a + star a) * star c - star c * (a + star a))) from by
+        noncomm_ring,
+      Quaternion.self_mul_star, Quaternion.star_mul_self, Quaternion.self_add_star']
+    rw [Quaternion.coe_commutes, Quaternion.coe_commutes]
+    simp only [sub_self, mul_zero, add_zero, zero_add]
 
 /-- `def:octonions`(iv) — alternativity, right law: `x (y y) = (x y) y`. -/
 theorem alt_right (x y : Octonion) : x * (y * y) = (x * y) * y := by
