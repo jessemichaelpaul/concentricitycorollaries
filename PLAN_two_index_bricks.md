@@ -141,6 +141,9 @@ translations-fixing-0 and the "differences only" clause needs restating.
 
 ## 7. Execution order
 
+*Order note (2026-07-04): the rulings recorded in §8–§9 execute before step 2 — repairs
+precede landings. Section numbers record when rulings were made, not when they run.*
+
 1. Confirm §1–§3 statement shapes with the author (this document is the confirmation
    surface).
 2. Land `Concentricity/PlacementSet.lean`; import in `Concentricity.lean`;
