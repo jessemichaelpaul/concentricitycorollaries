@@ -106,6 +106,21 @@ def levelClass : ConnectedComponents TotalObject ≃ ℝ where
   left_inv := Quotient.ind fun X => rfl
   right_inv _ := rfl
 
+/-- Every object of 𝒯 is the canonical object of its level (single-object
+fibres; structure eta). -/
+theorem eq_ofLevel (X : TotalObject) : X = ofLevel (level X) := rfl
+
+/-- In the static base, zigzag-reachability carries exactly the level and
+nothing else — the formal content of master `def:base`: "Distinct levels are
+distinct objects with *no* morphisms between them, so the level is constant
+along every zigzag and π₀(𝓑) is the set of levels by construction."
+Forward: `level_eq_of_zigzag` (proved). Backward: two objects over one level
+are equal, so the zigzag is reflexivity. -/
+theorem zigzag_iff_level {X Y : TotalObject} :
+    Zigzag X Y ↔ level X = level Y :=
+  ⟨level_eq_of_zigzag, fun h => by
+    rw [eq_ofLevel X, eq_ofLevel Y, h]⟩
+
 end TotalObject
 
 /-- The π₀ readout, specialized to the band diagram (master, proof of
