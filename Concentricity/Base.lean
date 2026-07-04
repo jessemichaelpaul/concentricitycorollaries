@@ -63,11 +63,57 @@ def TotalObject := Grothendieck (bandFunctor ⋙ Grpd.forgetToCat)
 instance : Category TotalObject :=
   inferInstanceAs (Category (Grothendieck (bandFunctor ⋙ Grpd.forgetToCat)))
 
+namespace TotalObject
+
+/-- The level read-off on the objects of 𝒯 (master `def:base`: "objects the
+pairs (c, x), x in the band over c" — the read-off returns c, the real
+level). DERIVED (R10): the base of a Grothendieck object, projected to its
+`Discrete ℝ` factor. -/
+def level (X : TotalObject) : ℝ :=
+  (Grothendieck.base X).1.as
+
+/-- The level is a conserved quantity along every zigzag of 𝒯 (master
+`def:base`: "Distinct levels are distinct objects with *no* morphisms
+between them, so the level is constant along every zigzag"). DERIVED: every
+`Grothendieck.Hom` projects to a morphism of the base, whose `Discrete ℝ`
+component forces equal levels (`Discrete.eq_of_hom`); zigzags transport
+along the projection functor (`zigzag_obj_of_zigzag`, `eq_of_zigzag`). -/
+theorem level_eq_of_zigzag {X Y : TotalObject} (h : Zigzag X Y) :
+    level X = level Y :=
+  eq_of_zigzag ℝ
+    (zigzag_obj_of_zigzag
+      (Grothendieck.forget (bandFunctor ⋙ Grpd.forgetToCat) ⋙
+        CategoryTheory.Prod.fst (Discrete ℝ) (SingleObj G2)) h)
+
+/-- The canonical object of 𝒯 over a real level: the single band object in
+the single fibre over the level c (master `def:base`: "one object for each
+real level c"). -/
+def ofLevel (r : ℝ) : TotalObject :=
+  Grothendieck.mk (F := bandFunctor ⋙ Grpd.forgetToCat)
+    (⟨r⟩, SingleObj.star G2) (SingleObj.star Circle)
+
+/-- The π₀ readout as a named equivalence (master, proof of
+`thm:concentricity`: "Readout: π₀(𝒯_A) ≅ colim_𝓑(π₀∘F) ≅ π₀(𝓑) = the
+levels"). Forward: the level read-off, zigzag-invariant
+(`level_eq_of_zigzag`), descended along the `ConnectedComponents` quotient;
+inverse: the class of the canonical object. Both fibres over a level are
+single-object, so two objects over one level are equal and the round trips
+are definitional. Cocartesian register only (PHASE4_PLAN guardrail):
+no Quillen A / Thomason input. -/
+def levelClass : ConnectedComponents TotalObject ≃ ℝ where
+  toFun := Quotient.lift level fun _ _ h => level_eq_of_zigzag h
+  invFun r := Quotient.mk (Zigzag.setoid TotalObject) (ofLevel r)
+  left_inv := Quotient.ind fun X => rfl
+  right_inv _ := rfl
+
+end TotalObject
+
 /-- The π₀ readout, specialized to the band diagram (master, proof of
 `thm:concentricity`: "Readout: π₀(𝒯_A) ≅ colim_𝓑(π₀∘F) ≅ π₀(𝓑) = the
 levels"; the general statement is `lem:pi0-grothendieck`, queued for the
 Phase-4 spine). Each band fibre is connected and the base levels are
-discrete, so the components of 𝒯 are the levels ℝ. Queued (R8). -/
+discrete, so the components of 𝒯 are the levels ℝ. CLOSED by
+`TotalObject.levelClass`. -/
 theorem totalObject_components_eq_levels :
-    Nonempty (ConnectedComponents TotalObject ≃ ℝ) := by
-  sorry
+    Nonempty (ConnectedComponents TotalObject ≃ ℝ) :=
+  ⟨TotalObject.levelClass⟩
