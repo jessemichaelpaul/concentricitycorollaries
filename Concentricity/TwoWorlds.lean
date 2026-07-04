@@ -161,7 +161,8 @@ theorem sectionFunctor_map_direction (A : ASection) (g : G2) (x : OnePoint Octon
   rfl
 
 /-- The object pin of `thm:section-functor`: "Φ(q) = A(q) on objects" —
-the realization of Concentricity/Slice.lean. Queued (R8). -/
+the realization of Concentricity/Slice.lean. Definitional against the
+Phase-4 #9 construction. -/
 theorem sectionFunctor_obj (A : ASection) (x : OnePoint Octonion) :
-    (sectionFunctor A).obj (H1.of x) = S2.of (A.realize x) := by
-  sorry
+    (sectionFunctor A).obj (H1.of x) = S2.of (A.realize x) :=
+  rfl
