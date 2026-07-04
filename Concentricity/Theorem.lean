@@ -12,6 +12,7 @@ C1–C4 assembly, including the placement sentence (landed in the master
 -/
 import Concentricity.Base
 import Concentricity.TwoWorlds
+import Concentricity.Toolkit
 import Mathlib.CategoryTheory.Limits.Types.Colimits
 
 noncomputable section
@@ -144,19 +145,84 @@ theorem pi0_grothendieck {B : Type u} [SmallCategory B] (F : B ⥤ Grpd.{u, u}) 
       ≃ Limits.colimit ((F ⋙ Grpd.forgetToCat) ⋙ pi0Functor)) :=
   ⟨pi0GrothendieckEquiv F⟩
 
+/-- The **transport level** of the n-th residue-ℂ zero-sphere: the level of
+the fibre point over the n-th zero-sphere, read in the vocabulary of
+`lem:exp-degenerate` (`Octonion.exp_fibre_neg_real`,
+Concentricity/Toolkit.lean) — a degenerate-fibre point
+φ_v(log r + (2k+1)πi) carries its level log r as its real part: "The fibre
+is thus indexed by the single real level log r = log|−r| and, within it, by
+the odd winding indices 2k+1 carried as band data" (master
+`lem:exp-degenerate`); "GPV's log|·| is a label on objects, never an
+operation" (master `def:base`).
+
+DERIVED (R10; Brief-6 binding condition (1)): computed from the existing
+`def:A-section` data alone — the C3 enumeration `sphereZero` of the
+residue-ℂ zero-spheres by their upper-half-plane stem representatives —
+through the Step-A cone nodes' level reading; NEVER a new structure field,
+never a strengthening of `def:A-section`. The winding height (the imaginary
+part, odd multiples of π under the placement) stays band data, never an
+object label (master `def:base`). -/
+def ASection.transportLevel (A : ASection) (n : ℕ) : ℝ :=
+  (A.sphereZero n).re
+
+/-- **The placement** (master, proof of `thm:concentricity`, the placement
+paragraph, verbatim): "Through the commuting triangle π∘E = exp
+([Rem. 5.2(a)]{VS}), the unique tame lift traverses the logarithm manifold
+as a single closed loop ([Cor. 5.13]{GPVwind}), and every point of the
+degenerate fibre it meets is, by Lemma lem:exp-degenerate, the level log r
+paired with an odd winding height I(2k+1)π: all multiplicity in the fibre
+lies in the winding direction ([Cor. 5.21]{GPVwind}), none in the level.
+Since 𝓑 is static — no morphisms between distinct levels (Definition
+def:base) — the level is a conserved quantity along every zigzag of 𝒯_A,
+and the degenerate fibre of the unique tame transport attached to the
+A-section — the residue-ℂ zero-spheres {q_n} of C3 — lies over a *single*
+level."
+
+All four hypotheses are live in the assembly this transcribes (master,
+assembly paragraph; R3): C2 supplies the outright continuation of the
+hypercomplex logarithm on Ω₀ (`exists_log_continuation`); C3 the
+exponential expression over the full divisor, agreeing with C2 on the
+overlap by the Identity Theorem (`stem_identity`), whence the tame lift is
+unique (`winding_lift_unique`); C1's pole is the cone through which the
+value-loops close ([Cor. 5.13]{GPVwind}); C4 makes the degenerate fibre
+infinite.
+
+Queued (R8) — sorried against the sorried cone nodes of
+Concentricity/Toolkit.lean; step-by-step transcription record:
+(a) "the unique tame lift traverses the logarithm manifold as a single
+closed loop" — GPVwind Cor 5.13, whose σ-apparatus is the recorded GAP of
+`winding_loop_defect`; (b) "every point of the degenerate fibre it meets
+is … the level log r paired with an odd winding height I(2k+1)π" —
+`Octonion.exp_fibre_neg_real` (sorried); (c) the C2/C3 agreement feeding
+(a) — `stem_identity` (sorried); (d) "the level is a conserved quantity
+along every zigzag of 𝒯_A" — PROVED, `TotalObject.level_eq_of_zigzag`
+(Concentricity/Base.lean); (e) "lies over a *single* level" — the
+conclusion discharged here. -/
+theorem ASection.transportLevel_placement (A : ASection) (n m : ℕ) :
+    A.transportLevel n = A.transportLevel m := by
+  sorry
+
 /-- The component of 𝒯 in which the n-th residue-ℂ zero-sphere of an
 A-section arrives — the OUTPUT of the C1–C4 assembly (master, proof of
 `thm:concentricity`: "Hypotheses C1–C4 *assemble* the diagram; the
 residue-ℂ zero-spheres then arrive as the degenerate fibre of its
 transport, an output; and π₀ reads off their component").
 
-Queued (R8): constructed by the Phase-4 assembly — the unique tame
-transport extending the exponential's base (C2/C3 agreeing by the identity
-theorem; C1's pole closing lifts into loops, GPVwind Cor 5.13;
-`lem:exp-degenerate` supplying the level). Until then this is the named
-seam between the statement layer and the proof. -/
-def assemblyComponent (A : ASection) (n : ℕ) : ConnectedComponents TotalObject := by
-  sorry
+CLOSED (Phase 4 #12): the class of the base object beneath the n-th
+zero-sphere — `TotalObject.levelClass.symm` at the transport level
+(`ASection.transportLevel`), per the master's readout paragraph: "under
+which a residue-ℂ zero-sphere maps to the class of the base object beneath
+it, and two of them share a component of 𝒯_A if and only if they share
+that class." The anti-vacuity pin is `assemblyComponent_eq` below. -/
+def assemblyComponent (A : ASection) (n : ℕ) : ConnectedComponents TotalObject :=
+  TotalObject.levelClass.symm (A.transportLevel n)
+
+/-- The anti-vacuity pin of the Phase-4 #12 close (PROVED, definitional):
+`assemblyComponent` is the level read-off `TotalObject.levelClass.symm` at
+the transport level — never an arbitrary component. -/
+theorem assemblyComponent_eq (A : ASection) (n : ℕ) :
+    assemblyComponent A n = TotalObject.levelClass.symm (A.transportLevel n) :=
+  rfl
 
 /-- **The Concentricity Theorem** (master `thm:concentricity`, verbatim):
 "Let A be an A-section (Definition def:A-section). Then the residue-ℂ zero
