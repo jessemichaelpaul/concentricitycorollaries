@@ -1,0 +1,103 @@
+% ============================================================================
+% MASTER DIFF — the great-circle play, formal iteration (2026-07-04)
+% Author of the argument: Jesse Paul. Formal layout: this session.
+% Register discipline (R10): SOURCED carries a pin; DERIVED carries a proof
+% or a repo label; OPEN is marked OPEN. Nothing is promoted silently.
+% Insertion point: Part 3, immediately before thm:concentricity's proof;
+% prop:placement-gc is the candidate text for the red \TODO slot.
+% ============================================================================
+
+% ---------------------------------------------------------------------------
+\begin{lemma}[The shared circle]\label{lem:great-circle}
+\uses{rmk:compactify}
+For $I \ne \pm J \in S^6$: $\CC_I^* \cap \CC_J^* = \RR \cup \{N\}$. The
+compactified real axis is the unique circle through $N$ common to every slice
+sphere, and it is precisely the fixed locus of $\Gtwo$ acting on $\OO^*$.
+\end{lemma}
+% STATUS: DERIVED-adjacent. Slice intersection is definitional (AdF 2106.04227
+% \S1, pin; master rmk:compactify). G2 fixes RR pointwise and N (Baez pin;
+% spine). Lean: wire to existing spine lemmas.
+
+% ---------------------------------------------------------------------------
+\begin{lemma}[The normalization fan]\label{lem:fan}
+\uses{lem:great-circle, lem:residue-spheres}
+On $\OO \setminus \RR$, the normalization $q = \sigma + I(q)\,\tau$ with
+$I(q) = \operatorname{Im} q / |\operatorname{Im} q| \in S^6$, $\tau > 0$,
+exhibits each set $\{\sigma + I\tau : I \in S^6\}$ as a single transitive
+$\Gtwo$-orbit $6$-sphere. The fan is defined off the shared circle only: the
+direction $I(q)$ admits no continuous extension to $\RR$
+\textup{(\cite[Rem.~2.1]{GPVwind})}.
+\end{lemma}
+% STATUS: SOURCED + DERIVED. Transitivity: Baez pin (G2 acts transitively on
+% S^6, stabilizer SU(3)). Assembly of the zero 6-spheres at fixed (sigma,tau):
+% lem:residue-spheres / thm:zero-spheres — PROVED in repo. The non-extension
+% clause is the author's own pinned Rem 2.1 and is load-bearing below: the fan
+% glues each sphere AT its own (sigma,tau); it does not continue through the
+% circle. Lean: wire to repo names.
+
+% ---------------------------------------------------------------------------
+\begin{lemma}[Level invariance of the assembling symmetries]\label{lem:level-invariance}
+\uses{lem:fan, def:base}
+Every arrow of the assembled diagram fixes the level. $\Gtwo$ --- hence every
+$U(1) \le \Gtwo$ --- fixes $\RR$ pointwise and preserves $|\operatorname{Im}|$,
+so it preserves $(\sigma, \tau)$ on the nose. The band $U(1)$ fixes $0$,
+$\infty$, and the modulus, so it preserves the level of the degenerate fibre
+\textup{(}Lemma~\ref{lem:exp-degenerate}\textup{)}. Consequently the level is
+a conserved quantity along every zigzag of $\mathcal T_A$.
+\end{lemma}
+% STATUS: DERIVED (this is the engine already proved in the repo as
+% zigzag_iff_level; restated here in the play's own vocabulary so that the
+% chain displays its conserved quantity explicitly). Note what this lemma is:
+% it is the reason the fan assembles each zero-sphere so cleanly — the
+% assembling symmetries are exactly the level-preserving ones.
+
+% ---------------------------------------------------------------------------
+\begin{proposition}[The placement sentence, great-circle register — candidate
+for the \TODO{} slot]\label{prop:placement-gc}
+\uses{lem:great-circle, lem:fan, lem:level-invariance, lem:exp-degenerate,
+thm:winding-lift}
+The degenerate fibre of the unique tame transport attached to an $A$-section
+lies over a \emph{single} level: the normalization fan through the shared
+circle, together with the band winding closing at $\nfr$, carries every
+residue-$\CC$ zero-sphere of \textup{C3} into the degenerate family of one
+$\exp$-fibre.
+\end{proposition}
+% STATUS: OPEN. This lands the author's sentence in the sourced register
+% (levels and winding through pi o E = exp; no metric vocabulary). The
+% sentence is now STATED; its justification is the document's one obligation.
+% Lean twin: ASection.transportLevel_placement (the one sorry).
+
+% ---------------------------------------------------------------------------
+\paragraph{The residual goal, displayed.}
+After Lemmas \ref{lem:great-circle}--\ref{lem:level-invariance} discharge the
+assembly, the winding closure \textup{(C1, Cor.~5.13)}, and the per-fibre
+structure \textup{(}Lemma~\ref{lem:exp-degenerate}\textup{)}, the obligation
+of Proposition~\ref{prop:placement-gc} is exactly:
+\[
+  \forall\, n\, m:\ \operatorname{level}(q_n) \;=\; \operatorname{level}(q_m).
+\]
+Three formal observations, each tagged, none a verdict:
+\begin{itemize}
+\item Every arrow supplied by the chain conserves the quantity the goal
+  equates \textup{(}Lemma~\ref{lem:level-invariance}; repo:
+  \texttt{zigzag\_iff\_level}\textup{)}. A closing term therefore consumes
+  input not among the arrows of the chain.
+\item \textup{C4} makes the index set infinite. The goal is an equality
+  statement quantified over that set; enlarging the set enlarges the
+  quantifier's range and leaves the equality obligation unchanged, because
+  Lemma~\ref{lem:level-invariance} is uniform in $n$. Infinitude is consumed
+  by the fibre's infinitude \textup{(}the $k$-ladder\textup{)}, not by the
+  placement.
+\item The fan cannot carry the goal through the circle: the normalization has
+  no continuous extension to $\RR$ \textup{(\cite[Rem.~2.1]{GPVwind},
+  the author's pin)}; the gluing of slices is along $\RR \cup \{N\}$
+  pointwise, and $\nfr$ is the pole \textup{(C1)}, not a zero.
+\end{itemize}
+\TODO{R6 --- the licensing input for Proposition~\ref{prop:placement-gc}: the
+author's ruling. The chain above shows exactly where it plugs in --- it must
+supply an arrow, or an equality, not conserved by
+Lemma~\ref{lem:level-invariance}'s families, and its availability must come
+from a named property of the section beyond the class fields \textup{C1--C4}.
+When it is named, Proposition~\ref{prop:placement-gc} closes, the red
+\TODO{} of \texttt{thm:concentricity} is replaced by its statement, and the
+$\pi_0$ computation finishes the theorem as already written.}

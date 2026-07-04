@@ -1098,16 +1098,20 @@ slice-preserving \emph{semiregular} function on $\OO^{*}$ \textup{(the meromorph
   $A=\exp\!\big(\sum_p\ell_p\big)$ for an \emph{infinite} summable family $\{\ell_p\}$ of
   slice-preserving slice-regular functions each zero-free on $\Omega_0$; in particular $A$ is
   zero-free on $\Omega_0$.
-\item \emph{Infinite Weierstrass factorization.} On $\OO^{*}\setminus\{\text{pole}\}$,
+\item \emph{Infinite Weierstrass factorization.} Over the \emph{full divisor} of $A$ ---
+  including the single pole of \textup{(C1)}, at the real point $p_0$, multiplicity $-1$,
+  carried by the explicit left factor --- on $\OO^{*}\setminus\{p_0\}$,
   \[
-    A\;=\;q^{m}\,R\;e^{g}\prod_n\mathcal E(\,\cdot\,;q_n),
+    (q-p_0)\,A\;=\;q^{m}\,R\;e^{g}\prod_n\mathcal E(\,\cdot\,;q_n),
   \]
   where $q$ is the octonionic coordinate, $m\ge0$, $R$ is the slice-regular Weierstrass product
-  over the residue-$\RR$ \textup{(}real\textup{)} zeros of $A$, vanishing only on $\RR$, $g$ is
-  slice-preserving entire, $\{q_n\}$ enumerates the residue-$\CC$ zero-spheres of $A$, and
-  $\mathcal E(\,\cdot\,;q_n)$ is the slice-regular Weierstrass primary factor of $q_n$
-  \textup{(}Proposition~\ref{prop:weierstrass}; \cite[Prop.~3.1, Thm.~3.2]{AdFslice},
-  \cite{GV}\textup{)}; the factorization holds with either family infinite.
+  over the \emph{nonzero} residue-$\RR$ \textup{(}real\textup{)} zeros of $A$, vanishing only
+  on $\RR$, $g$ is slice-preserving entire, $\{q_n\}$ enumerates the residue-$\CC$ zero-spheres
+  of $A$, and $\mathcal E(\,\cdot\,;q_n)$ is the slice-regular Weierstrass primary factor of
+  $q_n$ \textup{(}Proposition~\ref{prop:weierstrass}; \cite[Prop.~3.1, Thm.~3.2]{AdFslice},
+  \cite{GV}\textup{)}; the factorization holds with either family infinite. \textup{(}The left
+  factor makes ``full divisor'' literal: the divisor of a meromorphic section includes its
+  single pole; classically, Hadamard factors $(s-1)\zeta(s)$.\textup{)}
 \item \emph{Infinitely many residue-$\CC$ zeros.} The index set $\{q_n\}$ is infinite. A closed
   zero of such a section is a real point \textup{(}residue field $\RR$\textup{)} or a $6$-sphere
   $S_{(\sigma,\gamma)}$ \textup{(}residue field $\CC$; \cite{AdFslice}\textup{)}; residue-$\CC$
@@ -1186,15 +1190,19 @@ common \emph{centre} is the downstream translation of Corollary~\ref{cor:nontriv
 \end{proof}
 
 \begin{remark}[A second proof, via finality]\label{rmk:pi0-split}
-\uses{lem:pi0-grothendieck}
+\uses{lem:pi0-grothendieck, eq:placement-set}
 The single-component conclusion also follows from Quillen's \S1 \cite{Quillen73}, on the same
-assembly, in either of two forms. \emph{Finality:} by \textup{C1} the continuation of $A$ carries
-every zero-bearing level of $\mathcal B$ to the north pole $\nfr$, and the winding lift supplies
-a unique tame companion along each such continuation (\cite[Def.~4.20, Cor.~5.13]{GPVwind}); so
-the comma category from a zero-bearing level to $\nfr$ is non-empty and connected, and $\nfr$ is
-final over the zero-bearing part of $\mathcal B$ --- the $\pi_0$ shadow of Theorem~A (``if
-$Y\backslash f$ is contractible for every $Y$, then $f$ is a homotopy equivalence''; connected
-and non-empty is the $\pi_0$-level hypothesis; textbook form Riehl \cite[\S8.3, \S8.5]{Riehl}).
+assembly, in either of two forms. \emph{Finality (post-placement reading --- this half
+consumes the placement \eqref{eq:placement-set}):} after the placement, the zero-bearing part
+of $\mathcal B$ is a \emph{single} level; by \textup{C1} the continuation of $A$ carries it to
+the north pole $\nfr$, and the winding lift supplies a unique tame companion along the
+continuation (\cite[Def.~4.20, Cor.~5.13]{GPVwind}); so the comma category from that level to
+$\nfr$ is non-empty and connected, and $\nfr$ is final over the zero-bearing part of
+$\mathcal B$ --- the $\pi_0$ shadow of Theorem~A (``if $Y\backslash f$ is contractible for
+every $Y$, then $f$ is a homotopy equivalence''; connected and non-empty is the
+$\pi_0$-level hypothesis; textbook form Riehl \cite[\S8.3, \S8.5]{Riehl}). Absent the
+placement the static base has no arrows between distinct levels, and this half asserts
+nothing.
 \emph{Fibred form:} the projection $p:\int_{\mathcal B}F\to\mathcal B$ is precofibred with fibre
 the connected band, and Quillen's corollary to Theorem~A (pre(co)fibred with contractible fibres
 $\Rightarrow$ homotopy equivalence) has as its $\pi_0$ shadow exactly the bijection
@@ -1266,10 +1274,11 @@ slice-regular zero-geometry that translates them:
 \item \textbf{(C3)} \emph{Infinite Weierstrass factorization.} Supplied by the
   \emph{slice-regular} Weierstrass factorization (Proposition~\ref{prop:weierstrass};
   \cite[Prop.~3.1, Thm.~3.2]{AdFslice}, \cite{GV}):
-  $\zetaO=q^{m}Re^{g}\prod_n\mathcal E(\cdot;q_n)$, where $m=0$ \textup{(}$\zeta(0)=-\tfrac12
-  \neq0$\textup{)}, $R$ is the product over the residue-$\RR$ zeros --- the classically trivial
-  zeros $-2,-4,\dots$, honest real zeros of $\zetaO$ --- and $\{q_n\}$ enumerates its
-  residue-$\CC$ zero-spheres.
+  $(q-1)\,\zetaO=q^{m}Re^{g}\prod_n\mathcal E(\cdot;q_n)$ \textup{(}pole factor at $p_0=1$;
+  classically, Hadamard factors $(s-1)\zeta(s)$\textup{)}, where $m=0$
+  \textup{(}$\zeta(0)=-\tfrac12\neq0$\textup{)}, $R$ is the product over the nonzero
+  residue-$\RR$ zeros --- the classically trivial zeros $-2,-4,\dots$, honest real zeros of
+  $\zetaO$ --- and $\{q_n\}$ enumerates its residue-$\CC$ zero-spheres.
 \item \textbf{(C4)} \emph{Infinitely many residue-$\CC$ zeros.} Classical fact: $\zeta$ has
   infinitely many nontrivial zeros (Corollary~\ref{cor:hadamard-infinitude}; also Hardy,
   Theorem~\ref{thm:hardy}). By the residue dictionary below these are exactly the residue-$\CC$

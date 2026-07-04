@@ -1,138 +1,119 @@
-# HANDOFF — current-task opener (replaces ALL earlier handoffs)
+# HANDOFF — current task: the two-index bricks (replaces ALL earlier handoffs)
 
-Read order: (1) `CLAUDE.md` — rules R1–R11, architecture map, pins (pins updated today:
-VS entry now carries the journal record and points to SOURCES/VS.md; GPVwind entry carries
-the JMAA record and the corrected tameness numbering). (2) This file. (3) Nothing else until
-the task requires it. The settled list stays settled; quote the master, never paraphrase it.
+Read order: (1) `CLAUDE.md` — rules, architecture, pins. (2) This file. (3)
+`PLAN_two_index_bricks.md` — the current task's statement shapes (author-confirmed
+direction). (4) `SCAN_shapes_and_C5_ledger.md` — this session's full record; do not
+re-derive anything recorded there. `HANDOFF_concentricity_argument.md` (2026-07-03,
+03:39) remains valid as the diagnosis of record; nothing in it is overturned.
 
-## State (2026-07-02, end of thread 3)
+## Where things stand (2026-07-04, end of Fable session)
 
-* Repo `~/Desktop/concentricity` = private GitHub `jessemichaelpaul/concentricity`;
-  commit-to-main only, **no PRs** (standing ruling; `/create-pr` fired twice by accident —
-  always discard). Site loop: `./rebuild.sh` then Cmd+R; `leanblueprint serve` if stopped.
-* **Lean: `Concentricity/Octonion.lean` COMPLETE** — CD(ℍ) construction per R9, all four
-  closures committed (`61fd9f8` normSq_mul via Degen, convention checked 8/8; `bb33245`
-  imaginary-sphere square; `2f3b749` alt_left; `060f7c4` alt_right). Sorry count 0, zero
-  axioms, zero project leaves. No other Lean exists yet (`Basic.lean` is a stub).
-* **Recon gate PASSED** (Code-tab pass cross-read against RECON_MATHLIB.md plus independent
-  grep audit in the map thread). Binding resolutions: statement layer cites **pin-present
-  names only** (Mathlib v4.31.0 = commit fabf563a); the deck-group block
-  (liftPathQuotient etc.) is post-pin — backport priced ~300 lines, not built;
-  `monodromyFunctor` IS pin-present (Topology/Homotopy/Lifting.lean:394); `windingNumber`
-  absent everywhere — ~200–300 lines in-repo when needed; `SummationFilter` is in the pin —
-  bare `∏'`/`Summable` already unconditional, pin those forms in C2/C3.
-* **RE-RULED (2026-07-02, late): the Hadamard-infinitude fact is a SORRIED THEOREM,
-  not an axiom** — author's ruling supersedes the earlier same-day axiom ruling.
-  `theorem riemannZeta_nontrivialZeros_infinite : {s : ℂ | riemannZeta s = 0 ∧
-  (¬∃ n : ℕ, s = -2 * (n + 1)) ∧ s ≠ 1}.Infinite := sorry` — C4-floor form, predicate
-  mirrors Mathlib's `RiemannHypothesis` exclusions. Stated when the ZetaO bucket exists;
-  PROVED in-repo per `PROOF_PLAN_zeta_infinitude.md` (itemized plan FIRST, author
-  approves the itemization before any lemma lands; cheap route to cost explicitly:
-  finitely-many-zeros ⇒ `MeromorphicOn.extract_zeros_poles` + Borel–Carathéodory +
-  unconditional functional equation + Γ-growth ⇒ contradiction; standard order-1 route
-  costed for comparison). Gate is now literal: **zero sorries + zero project axioms** —
-  declared leaf set EMPTY. Queue the matching R9 wording diff for author approval.
-  Consequence: the Titchmarsh scan is no longer load-bearing (no axiom docstring
-  requires it); Titchmarsh86 remains an ordinary bibitem, provenance never load.
-  If cor:zeta-section's proof demands more than infinitude, report the exact demanded
-  statement before widening the theorem.
-* **SOURCES/**: `Thomason79.md` committed (GAP: original printed Thm 1.2 — Cambridge
-  paywall; author has UNCG access; the nLab file is the WRONG Thomason paper — homotopy
-  limit problem, not the 1979 hocolim paper). Untracked, awaiting author review: `AdF.md`,
-  `AdFslice.md`, `BisiWinkelmann.md`, `GJ.md`, `GPVwind.md`, `Quillen73.md`, `Riehl.md`,
-  `VS.md`. Map thread pre-reviewed and endorsed: VS.md (version-of-record, zero gaps),
-  GPVwind.md (see FLAGS), Thomason79.md. Still missing vs Pins: Wang, Baez, Titchmarsh
-  GAP-stub, classical Riemann/Euler/Hadamard-bearing references as needed.
-* **Rem 5.2 attribution RESOLVED empirically**: the quotes live in VS alone (Math. Z.
-  302(2), printed p. 988 — SOURCES/VS.md); the winding paper contains NO Remark 5.2 and
-  never prints "degenerate" (SOURCES/GPVwind.md FLAGS, full environment inventory).
-  Master's GPVwind bibitem corrected accordingly (Rem 5.2 clauses struck; tameness
-  numbering fixed: paths Def 4.7, maps Def 4.20, at-parameter Def 5.2; journal record
-  added: J. Math. Anal. Appl. 536(1) (2024), Paper No. 128219). CAVEAT for the SOURCES
-  pass: GPVwind excerpts are arXiv v1; JMAA-version numbering unverified (publisher 403)
-  — author to confirm via library.
-* **Master edits today (author-approved, applied via map thread, in tree)**:
-  thm:log-manifold cite now lists true environment types (Prop 5.1, Rem 5.2, Def 5.3,
-  Prop 5.4, Def 5.5); lem:exp-degenerate gained the closing acknowledgment sentence
-  (VS Preface p. 972 prints the fibre formula as unproved motivation; slice-form
-  derivation stays load-bearing); GPVwind bibitem corrected. CLAUDE.md pin updates
-  match. Blueprint regenerates from the master on rebuild — one rebuild pending.
-* CI: stock Lean Action runs on push (nibbles free minutes; disable offered, declined
-  for now). Octonion build receipt: olean at 20:46 preceding commit 20:47 — formal
-  build-tail-with-commit discipline reaffirmed below.
+**Ledger: 1 sorry / 0 project axioms.** The sorry is
+`ASection.transportLevel_placement` (Theorem.lean:201) — literally
+`(A.sphereZero n).re = (A.sphereZero m).re`. `winding_lift_unique` is CLOSED σ-free
+(covering-map uniqueness, per BRIEF_beta_sigma Option A — the author's instinct,
+executed). `concentricity` is proved ON the placement (congrArg of the level read-off);
+everything funnels through the one goal.
 
-## Current task (updated 2026-07-03, map thread; author's rulings of today inline)
+## What happened this session (so you don't repeat it)
 
-**Goal: blueprint site postable to Zulip ASAP.** Sorries visible in a posted blueprint
-are normal — it announces a live project; the zero-and-zero gate is the endgame claim,
-not the announcement. **The placement sentence LANDED 2026-07-03** (author's "land it",
-wording via map thread, sourced register, all tags in the proof's orbit) — the master now
-has ZERO TODOs. Critical path to the post: statement layer + rebuild + author's site read.
+Nine forcing vocabularies were proposed and run to completion — coequalizer/pushout at
+𝔫, Euler-summability license, great-circle gluing, U(1)-in-G₂ restriction morphisms,
+Grothendieck topology on 𝓑, winding non-extension (Rem 2.1), C4 cone-limit, compactified
+base (= the 01:41 plan; its run-record IS the 03:39 handoff), and the applied-triangle
+reading. Every run lands on the same unconsumed row. The records, with sources fetched
+and quoted (Quillen §1 verbatim — Theorem A, the precofibred corollary, and Cor. 2,
+which is the citation for why N-as-terminal is vacuous): `SCAN_shapes_and_C5_ledger.md`
+§3 (shapes), §6 (colimit-at-𝔫 dichotomy), §7 (chart orders at N: closeness is
+first-order and level-blind; the level is the second-order coefficient), §8 (what a
+level IS; consumption table — all four class hypotheses are spent, each level-uniform;
+placement is the only unconsumed line). Structural ceilings, established: the toolkit is
+unary, the goal is binary; N-asymptotics at best give `Tendsto` (tail), never equality
+at finite pairs; `zigzag_iff_level` makes transport-connectivity and level-equality one
+proposition, so transport cannot prove the level.
 
-1. **LANES OPEN (author's go, 2026-07-03).** Statement layer per Phase 3, citing
-   pin-present names only, leaves as axioms with verbatim SOURCES/ docstrings, sorries
-   per R8: 𝓡 via the stem functor over Mathlib's Hol(ℂ) → `structure ASection` (C2
-   stated as `cexp (∑' p, ℓ p)`, unconditional forms pinned) → G₂ := AlgAut(𝕆) →
-   𝓗₁ = G₂ ⋉ 𝕆* (ActionCategory) → 𝒮₂ → Φ → 𝓑 (levels, static) → F (band U(1)) →
-   𝒯_A = ∫_𝓑 F (CategoryTheory.Grothendieck) → the π₀ lemma (ConnectedComponents) →
-   theorem statement → **STOP at the red placement `\TODO`** — the sentence is the
-   author's alone. Second lane: zeta-infinitude per `PROOF_PLAN_zeta_infinitude.md` —
-   **Route A APPROVED** (map-thread cross-read against pin fabf563a: every PRESENT row
-   verified at file:line; bonus find: the pin holds `NumberTheory/LSeries/ZetaZeros.lean`
-   — `isDiscrete_riemannZetaZeros`, `IsCompact.inter_riemannZetaZeros_finite` — may
-   shave A2/A3 bookkeeping).
-2. **Commit ceremony re-ruled (author, 2026-07-03): NO per-commit approvals in the Lean
-   lanes.** Pre-approved message templates: `ZetaInfinitude: close A<n> (<name>) on
-   green` and `Statement: <object> lands (sorries +<n>)`. The Code tab commits
-   autonomously on green — per-lemma or per-session at its discretion — and may batch
-   pushes. Build tail still shown in-thread with each push (the receipts rule stands
-   unchanged). Words-before-commits now applies to prose/rulebook files only (master,
-   CLAUDE.md, HANDOFF, SOURCES).
-3. **Applied in-tree today (author-approved, via map thread); quiet commits pending one
-   go-word, proposed messages:** (a) CLAUDE.md R9 gate wording — `Author: R9 gate
-   exactified — zero and zero, leaf set empty; infinitude enters as sorried theorem`;
-   (b) master split — new `cor:hadamard-infinitude` under thm:hadamard, `\uses`
-   re-pointed in cor:zeta-section AND thm:zero-spheres, three body cites — `Author:
-   Hadamard infinitude clause gets its own label; consumer arrows re-pointed`; (c) this
-   HANDOFF.md — `HANDOFF: lanes open, Route A approved, commit ceremony lifted`;
-   (d) the placement sentence — `Author: the placement sentence lands (levels and
-   winding through the triangle; the document's last TODO closes)`.
-   Blueprint rebuild pending (the split AND the closed proof change the site).
-4. **SOURCES = background lane; gates nothing.** Map-thread verification sweep against
-   the author's PDF pool, zero mismatches found: VERIFIED = Wang, AdF, AdFslice,
-   GPVwind, VS, Quillen73 (word-level via OCR); PARTIAL = GJ (Ch. IV unreached), Riehl
-   (§8.3/§8.5 unreached); NO-PDF = Baez02, BisiWinkelmann, Thomason79 (nLab scan
-   re-confirmed textless). Author approved Wang-style fetches: Baez (AMS), the BW pair +
-   Sharma (arXiv), full GJ/Riehl PDFs for page-addressable checking — **fetched PDFs
-   stay out of git**. GPVwind JMAA numbering: GAP-mark, Thomason precedent (author
-   ruled 2026-07-03). Author review = FLAGS skim + commit words, trickled, never a gate.
-5. **PIN FIX awaiting one word:** the CLAUDE.md pin `AdF 2106.04227 §1, §11 (slices;
-   semiregular)` conflates two papers — 2106.04227 prints six sections and no §11; the
-   §1/§11 slices-and-semiregular content is Ghiloni–Perotti–Stoppato arXiv:1606.03609
-   (sitting in the author's own PDF pool). Proposed: attribute §1/§11 to GPS 1606.03609;
-   keep AdF 2106.04227 for the ∗-logarithm. Grep the master's bibitems for the same
-   conflation before any commit.
-6. **Author's lane: the placement sentence is DONE** (landed 2026-07-03; the master has
-   zero TODOs). Remaining author items: the final site read before the Zulip post.
-   Resolved today: the sentence, the split (applied in-tree), JMAA (GAP-marked),
-   Route A, R9. Still open, later, never gating: the finality remark's
-   long-term fate (scoped prose session + graph re-audit; walks Quillen/Thomason/Sharma
-   out of the bib). Thomason original: OPTIONAL per the 2026-07-02 ruling, unchanged.
+## Author's rulings this session (R6, recorded)
 
-## Failure modes (all prior ones stand) + today's additions
+1. **Set-level placement is the OFFICIAL form of the node** (enumeration-free — "the
+   zero set is F's alone"): see PLAN §1. The frozen row stays; the set form + divisor
+   bundle + iff land as additional statements.
+2. **The route is the two-index plan** (author's insight, converged in-session): Brick 1
+   `stem_identity_logDeriv` — the log-derivative of `stem_identity`, FE-free, where an
+   individual Euler p meets an individual Weierstrass n for the first time; Brick 2 the
+   test-function pairing (Σ_p ↔ Σ_n ledger); Brick 3 the closing clause.
+3. **Groupoid-layer variants deprioritized** (site-at-N etc. — "we probably don't need
+   them"); no further N-forcing runs.
+4. **Stem encoding confirmed correct** (author asked): `F : ℂ → ℂ` is `def:section-map`
+   via the Wang node (`thm:wang`, StemRing.lean); the 𝕆*→𝕆* face is
+   `sectionFunctor : H1 ⥤ S2` (TwoWorlds.lean). Both worlds are formalized.
+5. **C3 carries the pole factor** (PLAN §8): `c3_factorization` is amended to the
+   (z − pole)·F form — transcription repair (full divisor includes the pole at −1;
+   frozen shape collides with `c1_simple` under the §4 upgrade and makes
+   `cor:zeta-section` unbuildable). `logDeriv_weierstrass` gains −1/(z − pole);
+   master C3 display gains the explicit factor.
+6. **`rmk:pi0-split` finality half made placement-consuming** (PLAN §9, Lane B's leak
+   find under the sharpened criterion — verified): explicit `\uses{}` on the placement
+   + a post-placement-reading sentence; fibred half unchanged. Rides in the Lane B
+   task-1 diff.
 
-* Session resets lose chat state, never file state: on reset, read CLAUDE.md + this
-  file, claim nothing you can't see (no build log in context = say so, don't assert green).
-* Scope drift after resets: "queue / pending my approval" ≠ "do now". Wording approvals
-  come BEFORE commits. No PRs. No installs without naming the tool and why.
-* Commit-on-green means SHOW the green: build tail in-thread with the commit.
-* Unresolved attributions are settled by verbatim quotes from ALL claimants
-  (the Rem 5.2 method), never from memory or bibitem annotations. Author's
-  standing convention (2026-07-02): every cite names the exact matching
-  environment — the item that says what the gloss says — never a neighbor
-  (the Def 4.7 ruling; body cite corrected accordingly).
-* The sorry ledger will balloon when the statement layer lands — by design (R8).
-  Sorry count is queue length, never error count. Octonion went 4→0 in one evening.
-* "Concentric" stays translation vocabulary; the base is levels + winding; never attach
-  metric language to 𝓑. The dictionary (`thm:connected-concentric`) stays independent of
-  the collapse — graph-visible, never re-folded.
+## Care points (named, R6 — not formalities)
+
+- **Operative vacuity criterion (sharpened 2026-07-04, author's correction):** a route is
+  vacuous iff it changes what is concluded — connectivity in a *modified* object instead
+  of the real-number equality of levels. A route that derives the level equality itself
+  from C1–C4 is not vacuous; it is the theorem. Uniformity-over-the-class is fatal only
+  for category-modifying constructions (coequalizer legs, N-terminal; SCAN §6(2b)); it is
+  harmless for equation-routes (the bricks). Difficulty estimates gate nothing;
+  `lake build` gates everything.
+
+- **Convergence upgrade** (PLAN §4): bare `Summable`/`Multipliable` license neither
+  term-by-term log-differentiation nor tprod-vanishing. Needed by the divisor bundle
+  AND Brick 1. Derive-if-derivable first; adding class hypotheses is an R3 statement
+  change requiring the author's explicit ruling.
+- **R5**: verify Mathlib names live before commit (tprod zero lemma, logDeriv API;
+  `CategoryTheory.Grothendieck` re-verified live this session).
+- **Brick 3 honesty pin**: Bricks 1–2 state the closing clause; they do not discharge
+  it. The clause (positivity that equalizes levels) is the relocated C5; classical home
+  Weil's criterion / Li's criterion — read both at class level and write the exact
+  target before any claim. "Euler + Weierstrass alone force one level" is GRH-scale for
+  the class. The genuinely uncharted parts: a class-level FE-free pairing has never been
+  formalized in Lean, and whether the band/winding packaging gives a new handle on the
+  positivity term is open and fair to explore.
+
+## Ledger trajectory (net-0 execution; balloon is waived per Toolkit pattern)
+
+Phase 0 (now): 1/0. Phase 1 (Lane A lands PlacementSet.lean statements): balloon to
+~7/0 — all statement-layer, none load-bearing. Phase 2 (author's §4 ruling, then close
+divisor bundle + Brick 1): drive to ~3/0. Phase 3 (Brick 2 pairing: state, then close
+the ledger identity): brief balloon, then ~2/0. Phase 4 (Brick 3: the (iv) sentence,
+value-free + covariant): either a C1–C4 derivation closes placement_set → placement →
+concentricity → **0/0**, or the sentence stands as the named C5 target — the honest
+alternative endpoint. Division of labor: Lane A (Claude Code) = all Lean, lake
+arbiter; Lane B = master folds (five), SOURCES, (iv) drafting; author = rulings, gates,
+midnight rule. No lane writes another's layer.
+
+## First acts
+
+1. `PLAN_two_index_bricks.md` §7 order: confirm shapes → land
+   `Concentricity/PlacementSet.lean` → import → `lake build` → repair against the
+   arbiter.
+2. SOURCES pulls: SATISFIED 2026-07-04 — SOURCES/Riehl.md (§8.3/§8.5 pinpoints) and
+   SOURCES/GJ.md (Ch. IV engine) were already complete on disk (2026-07-02/03) and were
+   independently re-verified 2026-07-04 against the repo copies in inbox/ (dated
+   provenance lines in each file; every quote matched verbatim). The "front matter
+   only" note was a later session's fetch record, not the state of SOURCES/.
+   Quillen §1 verbatim is captured in SCAN Appendix A.
+3. Class-level Weil/Li read for the Brick-3 target shape.
+
+## File inventory (this session's additions, repo root)
+
+- `PLAN_two_index_bricks.md` — the current task (statement shapes, obligations, order).
+- `SCAN_shapes_and_C5_ledger.md` — the full session record (§0–§8 + Quillen capture).
+- `MASTER_DIFF_great_circle_play.tex` — LaTeX statements of the great-circle chain
+  (lem:great-circle, lem:fan, lem:level-invariance, prop:placement-gc) if wanted for the
+  master's prose.
+
+The standing fences hold: anti-vacuity, R2, R8, no statement edits to pass a proof. The
+frame is one two-index sentence from closing; the current task is to build the pairing
+that states that sentence exactly, and to read its classical home before deciding what,
+if anything, closes it.
