@@ -88,6 +88,17 @@ structure ASection where
   c2_summable : ∀ z : ℂ, Ω₀ < z.re → Summable fun p => ℓ p z
   /-- C2: "On a slice right half-space Ω₀ ⊂ 𝕆*, A = exp(∑_p ℓ_p)". -/
   c2_euler : ∀ z : ℂ, Ω₀ < z.re → F z = Complex.exp (∑' p, ℓ p z)
+  /-- §4α (author-ruled transcription clarification, 2026-07-04): C2's
+  "infinite Euler product" converges in the cited sources' sense — locally
+  normally (Titchmarsh Ch. 1 register). The frozen pointwise `Summable` was
+  an under-transcription of the master's meaning; the class does not change.
+  Function-majorants on a ball; derivative majorants follow on the half-ball
+  by Cauchy estimates. REGISTER NOTE (author's words, not re-encoded): the
+  class is "even stronger — meromorphically continued through the infinity
+  point and convergent"; that strength is already transcribed as C1 + the
+  semiregular typing (def:R) and is deliberately not duplicated here. -/
+  c2_locMajorant : ∀ z : ℂ, Ω₀ < z.re → ∃ r > 0, ∃ u : ι → ℝ, Summable u ∧
+    ∀ p, ∀ w ∈ Metric.ball z r, ‖ℓ p w‖ ≤ u p
   /-- C3 data: "q is the octonionic coordinate, m ≥ 0" — the order of the
   zero at the origin. -/
   m : ℕ
@@ -122,6 +133,13 @@ structure ASection where
   /-- C3: the infinite product converges (bare `Multipliable` =
   unconditional, per the recon ruling). -/
   c3_multipliable : ∀ z : ℂ, Multipliable fun n => spherePrimary (genus n) (sphereZero n) z
+  /-- §4α (author-ruled transcription clarification, 2026-07-04): C3's
+  "Weierstrass factorization" converges in the cited sources' sense —
+  locally normally (AdF/prop:weierstrass register). Same clarification as
+  `c2_locMajorant`; the class does not change. -/
+  c3_locMajorant : ∀ z : ℂ, z ≠ (pole : ℂ) → ∃ r > 0, ∃ u : ℕ → ℝ, Summable u ∧
+    ∀ n, ∀ w ∈ Metric.ball z r,
+      ‖spherePrimary (genus n) (sphereZero n) w - 1‖ ≤ u n
   /-- C3: "On 𝕆* ∖ {pole}, A = qᵐ · R · e^g · ∏ₙ 𝓔(·; qₙ)" — over the **full
   divisor**, which includes the pole with multiplicity −1 (PLAN §8, author-ruled
   transcription repair 2026-07-04: classically Hadamard factors (s−1)ζ(s); the
