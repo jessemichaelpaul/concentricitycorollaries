@@ -118,9 +118,15 @@ structure ASection where
   /-- C3: the infinite product converges (bare `Multipliable` =
   unconditional, per the recon ruling). -/
   c3_multipliable : ∀ z : ℂ, Multipliable fun n => spherePrimary (genus n) (sphereZero n) z
-  /-- C3: "On 𝕆* ∖ {pole}, A = qᵐ · R · e^g · ∏ₙ 𝓔(·; qₙ)". -/
+  /-- C3: "On 𝕆* ∖ {pole}, A = qᵐ · R · e^g · ∏ₙ 𝓔(·; qₙ)" — over the **full
+  divisor**, which includes the pole with multiplicity −1 (PLAN §8, author-ruled
+  transcription repair 2026-07-04: classically Hadamard factors (s−1)ζ(s); the
+  frozen entire-shaped form collided with `c1_simple` under the convergence
+  upgrade and made `cor:zeta-section` unbuildable — the pole factor is what lets
+  the one meromorphic object carry both infinite families against the single
+  pole). -/
   c3_factorization : ∀ z : ℂ, z ≠ (pole : ℂ) →
-    F z = z ^ m * Rfac z * Complex.exp (gfac z) *
+    (z - (pole : ℂ)) * F z = z ^ m * Rfac z * Complex.exp (gfac z) *
       ∏' n, spherePrimary (genus n) (sphereZero n) z
   /-- C4: "Infinitely many residue-ℂ zeros. The index set {qₙ} is
   infinite." -/
