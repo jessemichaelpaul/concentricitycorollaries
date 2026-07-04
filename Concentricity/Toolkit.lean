@@ -72,8 +72,12 @@ conjugate case, needed for faithfulness of the master's "x, y ∈ ℝ": for
 together with exp_ℂ ∘ conj = conj ∘ exp_ℂ symmetrize). Queued (R8). -/
 theorem exp_sliceEmbed_of_im_neg {v : Octonion} (hv : v ∈ unitImaginarySphere)
     {ζ : ℂ} (hζ : ζ.im < 0) :
-    exp (sliceEmbed v ζ) = sliceEmbed v (Complex.exp ζ) :=
-  sorry
+    exp (sliceEmbed v ζ) = sliceEmbed v (Complex.exp ζ) := by
+  have hcoord : sliceCoord (sliceEmbed v ζ) = (starRingEnd ℂ) ζ := by
+    rw [sliceCoord_sliceEmbed hv, abs_of_neg hζ]
+    exact Complex.ext (Complex.conj_re ζ).symm (Complex.conj_im ζ).symm
+  rw [exp, hcoord, dir_sliceEmbed_of_neg hv hζ, Complex.exp_conj,
+    sliceEmbed_neg_conj]
 
 /-- master `thm:slice-exp`, modulus clause (verbatim): "Consequently
 |exp q| = e^{re q} depends only on the real part". Queued (R8): pin
