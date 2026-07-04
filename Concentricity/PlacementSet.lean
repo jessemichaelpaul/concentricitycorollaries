@@ -442,4 +442,21 @@ theorem logDeriv_weierstrass (A : ASection) :
   rw [← logDeriv_apply A.F z, ← logDeriv_apply A.Rfac z, htsum_eq]
   linear_combination main
 
+/-- **The two-index ledger's seed** (PLAN §3: `stem_identity_logDeriv` — the
+two log-derivative expansions of the one stem, equated on the overlap; the
+continuation beyond the overlap is Brick-2 machinery). An individual Euler
+index p and an individual Weierstrass index n meet in one identity, FE-free.
+PROVED from Brick 1 (both rows closed on green). Conclusion is a value-level
+identity; no σ₀, no ½ (PLAN §6 admissibility). -/
+theorem stem_identity_logDeriv (A : ASection) :
+    ∀ z : ℂ, A.Ω₀ < z.re → z ≠ (A.pole : ℂ) → z ≠ 0 → A.F z ≠ 0 →
+      A.Rfac z ≠ 0 →
+      ∑' p : A.ι, deriv (A.ℓ p) z =
+        -(1 / (z - (A.pole : ℂ))) + (A.m : ℂ) / z
+          + deriv A.Rfac z / A.Rfac z + deriv A.gfac z
+          + ∑' n, deriv (spherePrimary (A.genus n) (A.sphereZero n)) z /
+              spherePrimary (A.genus n) (A.sphereZero n) z := by
+  intro z hΩ hp h0 hF hR
+  rw [← A.logDeriv_euler z hΩ, A.logDeriv_weierstrass z hp h0 hF hR]
+
 end ASection
