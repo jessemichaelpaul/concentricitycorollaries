@@ -208,6 +208,15 @@ absorbable into Rfac per c3_R_zeros_real) — verify def:A-section/C3's wording 
 the migration; if the origin is genuinely distinguished, the gauge is
 translations-fixing-0 and the "differences only" clause needs restating.
 
+**ADOPTED (author's ruling, 2026-07-04): the (iv) target sentence is v0.2** of
+`READ_weil_li_findings.md` — *there exists a real β such that the generalized-Li sums
+are nonnegative for anchors on both sides of β, for all n* — equivalent to
+`placement_set` by the generalized Bombieri–Lagarias theorem read two-sidedly. It is a
+proved-equivalent restatement of the open node, not a hypothesis; nothing enters
+`def:A-section`. B2.2's design proceeds against the anchor-pair Möbius-kernel family
+(`DESIGN_B2_2_kernels.md`); ladder rungs L1–L3 (READ addendum) queue as
+statements-first work behind it.
+
 ## 7. Execution order
 
 *Order note (2026-07-04): the rulings recorded in §8–§9 execute before step 2 — repairs
