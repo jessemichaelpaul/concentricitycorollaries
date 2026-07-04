@@ -111,6 +111,15 @@ theorem exp_ne_zero (q : Octonion) : exp q ≠ 0 := by
   rw [h, norm_zero] at hnorm
   exact ne_of_lt (Real.exp_pos (re q)) hnorm
 
+/-- The slice display without a sign hypothesis: the two pins combined. -/
+theorem exp_sliceEmbed' {v : Octonion} (hv : v ∈ unitImaginarySphere) (ζ : ℂ) :
+    exp (sliceEmbed v ζ) = sliceEmbed v (Complex.exp ζ) := by
+  rcases le_total 0 ζ.im with h | h
+  · exact exp_sliceEmbed hv h
+  · rcases h.lt_or_eq with h' | h'
+    · exact exp_sliceEmbed_of_im_neg hv h'
+    · exact exp_sliceEmbed hv (le_of_eq h'.symm)
+
 /-- **The degenerate fibre** (master `lem:exp-degenerate`).
 
 SOURCED clauses (verbatim). VS Rem 5.2(a) (SOURCES/VS.md, printed p. 988):
@@ -139,8 +148,82 @@ above is the load-bearing statement." Queued (R8): pin
 theorem exp_fibre_neg_real {r : ℝ} (hr : 0 < r) :
     {q : Octonion | exp q = ofReal (-r)}
       = {q : Octonion | ∃ v ∈ unitImaginarySphere, ∃ k : ℤ,
-          q = sliceEmbed v ⟨Real.log r, ((2 * k + 1 : ℤ) : ℝ) * Real.pi⟩} :=
-  sorry
+          q = sliceEmbed v ⟨Real.log r, ((2 * k + 1 : ℤ) : ℝ) * Real.pi⟩} := by
+  ext q
+  simp only [Set.mem_setOf_eq]
+  constructor
+  · intro h
+    by_cases him : im q = 0
+    · exfalso
+      have hd : dir q = 0 := by rw [dir, him, smul_zero]
+      have hci : (sliceCoord q).im = 0 := by
+        show norm (im q) = 0
+        rw [him, norm_zero]
+      rw [exp, hd, sliceEmbed_zero_dir] at h
+      have hre := congrArg re h
+      rw [re_ofReal, re_ofReal, Complex.exp_re, hci, Real.cos_zero,
+        _root_.mul_one] at hre
+      have := Real.exp_pos (sliceCoord q).re
+      linarith
+    · have hv := dir_mem_unitImaginarySphere him
+      rw [← sliceEmbed_dir_sliceCoord q, exp_sliceEmbed' hv] at h
+      have him0 : (Complex.exp (sliceCoord q)).im = 0 := by
+        have h1 := congrArg im h
+        rw [im_sliceEmbed hv, im_ofReal] at h1
+        have h2 := congrArg normSq h1
+        rw [normSq_smul, hv.2, _root_.mul_one, normSq_zero] at h2
+        exact pow_eq_zero_iff (two_ne_zero) |>.mp h2
+      have hre0 : (Complex.exp (sliceCoord q)).re = -r := by
+        have h1 := congrArg re h
+        rw [re_sliceEmbed hv, re_ofReal] at h1
+        exact h1
+      have hsin0 : Real.sin (sliceCoord q).im = 0 := by
+        rw [Complex.exp_im] at him0
+        rcases mul_eq_zero.mp him0 with h' | h'
+        · exact absurd h' (ne_of_gt (Real.exp_pos _))
+        · exact h'
+      obtain ⟨n, hn⟩ := Real.sin_eq_zero_iff.mp hsin0
+      have hcos : Real.exp (sliceCoord q).re
+          * Real.cos (sliceCoord q).im = -r := by
+        rw [← Complex.exp_re]
+        exact hre0
+      rw [← hn, Real.cos_int_mul_pi] at hcos
+      rcases Int.even_or_odd n with he | ho
+      · exfalso
+        rw [Even.neg_one_zpow he, _root_.mul_one] at hcos
+        have := Real.exp_pos (sliceCoord q).re
+        linarith
+      · rw [Odd.neg_one_zpow ho] at hcos
+        obtain ⟨k, hk⟩ := ho
+        have hexpx : Real.exp (sliceCoord q).re = r := by
+          linarith
+        refine ⟨dir q, hv, k, ?_⟩
+        have hcoord : sliceCoord q
+            = ⟨Real.log r, ((2 * k + 1 : ℤ) : ℝ) * Real.pi⟩ := by
+          apply Complex.ext
+          · show (sliceCoord q).re = Real.log r
+            rw [← Real.log_exp (sliceCoord q).re, hexpx]
+          · show (sliceCoord q).im = ((2 * k + 1 : ℤ) : ℝ) * Real.pi
+            rw [← hn, hk]
+        rw [← hcoord]
+        exact (sliceEmbed_dir_sliceCoord q).symm
+  · rintro ⟨v, hv, k, rfl⟩
+    rw [exp_sliceEmbed' hv]
+    have hexp : Complex.exp ⟨Real.log r, ((2 * k + 1 : ℤ) : ℝ) * Real.pi⟩
+        = ((-r : ℝ) : ℂ) := by
+      apply Complex.ext
+      · rw [Complex.exp_re, Complex.ofReal_re]
+        show Real.exp (Real.log r)
+            * Real.cos (((2 * k + 1 : ℤ) : ℝ) * Real.pi) = -r
+        rw [Real.exp_log hr, Real.cos_int_mul_pi,
+          Odd.neg_one_zpow (⟨k, by ring⟩ : Odd (2 * k + 1))]
+        ring
+      · rw [Complex.exp_im, Complex.ofReal_im]
+        show Real.exp (Real.log r)
+            * Real.sin (((2 * k + 1 : ℤ) : ℝ) * Real.pi) = 0
+        rw [Real.sin_int_mul_pi, mul_zero]
+    rw [hexp]
+    exact sliceEmbed_ofReal v (-r)
 
 end Octonion
 
