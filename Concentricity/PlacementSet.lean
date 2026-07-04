@@ -21,6 +21,7 @@ appear.
 -/
 import Concentricity.Theorem
 import Mathlib.Analysis.Calculus.Deriv.Basic
+import Mathlib.Analysis.SpecialFunctions.Log.Summable
 
 noncomputable section
 
@@ -82,12 +83,84 @@ theorem stem_zero_of_sphereZero (A : ASection) (n : ℕ) :
   · exact absurd (sub_eq_zero.mp h) hzp
   · exact h
 
-/-- Completeness half: every upper-half stem zero is enumerated. Needs the
-§4 upgrade (a non-enumerated zero would force a factor-zero-free tprod to
-vanish). -/
+/-- The elementary factor vanishes exactly at `w = 1`: `E_p(w) =
+(1 − w)·exp(…)` and the exponential never vanishes. PROVED helper (R8:
+helpers are never sorried). -/
+theorem _root_.weierstrassE_eq_zero_iff (p : ℕ) (w : ℂ) :
+    weierstrassE p w = 0 ↔ w = 1 := by
+  unfold weierstrassE
+  constructor
+  · intro h
+    rcases mul_eq_zero.mp h with h1 | h1
+    · exact (sub_eq_zero.mp h1).symm
+    · exact absurd h1 (Complex.exp_ne_zero _)
+  · intro h
+    rw [h, sub_self, zero_mul]
+
+/-- The sphere primary factor is nonzero away from its conjugate stem pair
+`{a, conj a}`. PROVED helper. -/
+theorem _root_.spherePrimary_ne_zero (p : ℕ) {a z : ℂ} (ha : a ≠ 0)
+    (hz₁ : z ≠ a) (hz₂ : z ≠ starRingEnd ℂ a) : spherePrimary p a z ≠ 0 := by
+  have hc : starRingEnd ℂ a ≠ 0 := by simpa using ha
+  refine mul_ne_zero (fun h => hz₁ ?_) (fun h => hz₂ ?_)
+  · exact (div_eq_one_iff_eq ha).mp ((weierstrassE_eq_zero_iff _ _).mp h)
+  · exact (div_eq_one_iff_eq hc).mp ((weierstrassE_eq_zero_iff _ _).mp h)
+
+/-- The §4α tprod-nonvanishing estimate, derived in-repo from
+`c3_locMajorant`-shaped data: a product with a summable `‖· − 1‖`-majorant
+and all factors nonzero is nonzero. Pin (R5, verified live):
+`tprod_one_add_ne_zero_of_summable`
+(Mathlib/Analysis/SpecialFunctions/Log/Summable.lean:216). PROVED helper. -/
+theorem _root_.tprod_ne_zero_of_norm_sub_one_le {ι : Type*} {f : ι → ℂ}
+    {u : ι → ℝ} (hu : Summable u) (hle : ∀ i, ‖f i - 1‖ ≤ u i)
+    (hne : ∀ i, f i ≠ 0) : (∏' i, f i) ≠ 0 := by
+  have hsum : Summable fun i => ‖f i - 1‖ :=
+    Summable.of_nonneg_of_le (fun i => norm_nonneg _) hle hu
+  have h1 : (fun i => 1 + (f i - 1)) = f := by
+    funext i
+    ring
+  have h := tprod_one_add_ne_zero_of_summable (f := fun i => f i - 1)
+    (fun i h => hne i (by linear_combination h)) hsum
+  rwa [h1] at h
+
+/-- Completeness half: every upper-half stem zero is enumerated. CLOSED
+through the §8-repaired `c3_factorization`: a non-enumerated upper-half zero
+would make the left side vanish while every right-side factor — `z^m` (z ≠ 0),
+`R` (`c3_R_zeros_real`), `e^g`, and the tprod (each primary factor avoids its
+conjugate pair; §4α majorant + `tprod_ne_zero_of_norm_sub_one_le`) — is
+nonzero. -/
 theorem sphereZero_complete (A : ASection) ⦃z : ℂ⦄
     (hz : A.F z = 0) (him : 0 < z.im) : ∃ n, A.sphereZero n = z := by
-  sorry
+  by_contra hno
+  have hno' : ∀ n, A.sphereZero n ≠ z := fun n h => hno ⟨n, h⟩
+  have hzp : z ≠ (A.pole : ℂ) := by
+    intro h
+    rw [h] at him
+    simp at him
+  have hz0 : z ≠ 0 := by
+    intro h
+    rw [h] at him
+    simp at him
+  have hfac_ne : ∀ n, spherePrimary (A.genus n) (A.sphereZero n) z ≠ 0 := by
+    intro n
+    have himn := A.c3_sphere_nonreal n
+    have ha0 : A.sphereZero n ≠ 0 := by
+      intro h
+      rw [h] at himn
+      simp at himn
+    refine spherePrimary_ne_zero _ ha0 (fun h => hno' n h.symm) fun h => ?_
+    have hzim : z.im = -(A.sphereZero n).im := by
+      rw [h, Complex.conj_im]
+    linarith
+  obtain ⟨r, hr, u, hu, hbound⟩ := A.c3_locMajorant z hzp
+  have hprod_ne : (∏' n, spherePrimary (A.genus n) (A.sphereZero n) z) ≠ 0 :=
+    tprod_ne_zero_of_norm_sub_one_le hu
+      (fun n => hbound n z (Metric.mem_ball_self hr)) hfac_ne
+  have hR : A.Rfac z ≠ 0 := fun h => ne_of_gt him (A.c3_R_zeros_real z h).1
+  have hfac := A.c3_factorization z hzp
+  rw [hz, mul_zero] at hfac
+  exact mul_ne_zero (mul_ne_zero (mul_ne_zero (pow_ne_zero _ hz0) hR)
+    (Complex.exp_ne_zero _)) hprod_ne hfac.symm
 
 /-- The equivalence pin: set form ⟷ the frozen
 `transportLevel_placement`. -/
