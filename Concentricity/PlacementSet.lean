@@ -444,6 +444,36 @@ theorem logDeriv_weierstrass (A : ASection) :
   rw [← logDeriv_apply A.F z, ← logDeriv_apply A.Rfac z, htsum_eq]
   linear_combination main
 
+/-- **B2.0 — the inverse-coordinate bridge** (confirmed 2026-07-04): the
+exact identity ‖ρ‖²·Re(1/ρ) = Re ρ — the ‖ρ‖²-form pinned, never
+τ²-normalized (PLAN §6 correction). PROVED. -/
+theorem _root_.inv_re_bridge {ρ : ℂ} (hρ : ρ ≠ 0) :
+    ‖ρ‖ ^ 2 * (1 / ρ).re = ρ.re := by
+  have hN : Complex.normSq ρ ≠ 0 := (Complex.normSq_pos.mpr hρ).ne'
+  rw [one_div, Complex.inv_re, ← Complex.normSq_eq_norm_sq]
+  field_simp
+
+/-- **B2.0 — the official node in inverse-zero coordinates** (confirmed
+2026-07-04): placement ⟷ the ‖ρ‖²·Re(1/ρ) values agree across the zero set —
+the variable in which explicit-formula ledgers speak. Equalities across
+zeros only; no absolute level (PLAN §6 admissibility). PROVED via the
+bridge. -/
+theorem placement_set_iff_inv_re (A : ASection) :
+    (∀ ⦃z w : ℂ⦄, A.F z = 0 → A.F w = 0 → 0 < z.im → 0 < w.im → z.re = w.re)
+      ↔ ∀ ⦃z w : ℂ⦄, A.F z = 0 → A.F w = 0 → 0 < z.im → 0 < w.im →
+          ‖z‖ ^ 2 * (1 / z).re = ‖w‖ ^ 2 * (1 / w).re := by
+  have hnz : ∀ {z : ℂ}, 0 < z.im → z ≠ 0 := by
+    intro z hz h
+    rw [h] at hz
+    simp at hz
+  constructor
+  · intro H z w hz hw hzi hwi
+    rw [inv_re_bridge (hnz hzi), inv_re_bridge (hnz hwi)]
+    exact H hz hw hzi hwi
+  · intro H z w hz hw hzi hwi
+    have h := H hz hw hzi hwi
+    rwa [inv_re_bridge (hnz hzi), inv_re_bridge (hnz hwi)] at h
+
 /-- **The two-index ledger's seed** (PLAN §3: `stem_identity_logDeriv` — the
 two log-derivative expansions of the one stem, equated on the overlap; the
 continuation beyond the overlap is Brick-2 machinery). An individual Euler
