@@ -77,6 +77,50 @@ instance : Category S2 :=
 def S2.of (w : OnePoint Octonion) : S2 :=
   ⟨w⟩
 
+namespace S2
+
+/-- The direction morphism of 𝒮₂ (master `def:two-worlds`: "the *direction*
+isomorphisms g : w → g·w for g ∈ G₂"): the class of the direction generator,
+with its target transported along an equality by `eqToHom` — the exact
+composite Φ needs (master `thm:section-functor`). -/
+def directionHom (g : G2) (w w' : OnePoint Octonion) (h : g • w = w') :
+    S2.of w ⟶ S2.of w' :=
+  (CategoryTheory.Quotient.functor SliceWorld.Rel).map
+      (Quiver.Hom.toPath (SliceWorld.Gen.direction g w)) ≫
+    eqToHom (congrArg (CategoryTheory.Quotient.functor SliceWorld.Rel).obj h)
+
+/-- Functoriality of the direction morphisms, identity clause:
+`SliceWorld.Rel.direction_one` through the quotient. DERIVED (R10);
+term-level `Eq.trans` chain (the quotient's hom-relation typechecks only at
+default transparency, so tactic rewriting is avoided). -/
+theorem directionHom_one (w : OnePoint Octonion) (h : (1 : G2) • w = w) :
+    directionHom 1 w w h = 𝟙 (S2.of w) := by
+  have hs := (CategoryTheory.Quotient.sound SliceWorld.Rel
+      (SliceWorld.Rel.direction_one w)).trans
+    (eqToHom_map (CategoryTheory.Quotient.functor SliceWorld.Rel)
+      (one_smul G2 w).symm)
+  exact (congrArg
+      (· ≫ eqToHom (congrArg (CategoryTheory.Quotient.functor SliceWorld.Rel).obj h))
+      hs).trans ((eqToHom_trans _ _).trans (eqToHom_refl _ _))
+
+/-- Functoriality of the direction morphisms, composition clause:
+`SliceWorld.Rel.direction_mul` through the quotient. DERIVED (R10);
+term-level, as for `directionHom_one`. -/
+theorem directionHom_mul {g h : G2} {w w' w'' : OnePoint Octonion}
+    (h₁ : g • w = w') (h₂ : h • w' = w'') (h₃ : (h * g) • w = w'') :
+    directionHom (h * g) w w'' h₃
+      = directionHom g w w' h₁ ≫ directionHom h w' w'' h₂ := by
+  subst h₁; subst h₂
+  have hs := CategoryTheory.Quotient.sound SliceWorld.Rel
+    (SliceWorld.Rel.direction_mul g h w)
+  exact (congrArg
+      ((CategoryTheory.Quotient.functor SliceWorld.Rel).map
+        (Quiver.Hom.toPath (SliceWorld.Gen.direction (h * g) w)) ≫ ·)
+      (eqToHom_map (CategoryTheory.Quotient.functor SliceWorld.Rel)
+        (mul_smul h g w)).symm).trans hs.symm
+
+end S2
+
 /-- The canonical object of 𝓗₁ over a point of 𝕆*. -/
 def H1.of (x : OnePoint Octonion) : H1 :=
   (x : CategoryTheory.ActionCategory G2 (OnePoint Octonion))
@@ -86,14 +130,35 @@ the assignment Φ(q) = A(q) on objects, Φ(g : q → g·q) = (g : A(q) → A(g·
 on morphisms, is a functor of groupoids Φ : 𝓗₁ → 𝒮₂ — *the section
 functor*."
 
-Queued (R8): the construction is the Phase-4 assembly of
-`def:section-map`(i)/(ii) (values on the own slice sphere; G₂-equivariance
-`realize_equivariant`) against the direction relations of `SliceWorld.Rel`.
-The object pin is `sectionFunctor_obj` below; the morphism pin
-(Φ(g) = the direction generator's class, transported along
-`realize_equivariant` by `eqToHom`) is queued with the construction. -/
-def sectionFunctor (A : ASection) : H1 ⥤ S2 := by
-  sorry
+CLOSED (Phase 4 #9): the master's proof is "the standard fact that an
+equivariant map of G-sets induces a functor of the associated translation
+groupoids, applied to A" — objects through the realization of
+Concentricity/Slice.lean, morphisms through `S2.directionHom` along the
+equivariance `realize_equivariant` (`def:section-map`(ii)), functoriality
+by the direction relations of `SliceWorld.Rel`
+(`S2.directionHom_one`/`S2.directionHom_mul`). The object pin is
+`sectionFunctor_obj` below; the morphism pin is
+`sectionFunctor_map_direction` (proved). -/
+def sectionFunctor (A : ASection) : H1 ⥤ S2 where
+  obj x := S2.of (A.realize (CategoryTheory.ActionCategory.back x))
+  map {p q} f :=
+    S2.directionHom f.val (A.realize (CategoryTheory.ActionCategory.back p))
+      (A.realize (CategoryTheory.ActionCategory.back q))
+      (by rw [← A.realize_equivariant]; exact congrArg A.realize f.property)
+  map_id p := S2.directionHom_one _ _
+  map_comp f g := S2.directionHom_mul _ _ _
+
+/-- The morphism pin of `thm:section-functor` (master, verbatim:
+"Φ(g : q → g·q) = (g : A(q) → A(g·q)) on morphisms"): Φ sends the g-hom at
+x to the class of the direction generator at A(x), transported along
+`realize_equivariant` by `eqToHom`. PROVED — the beyond-green certificate
+of the Phase-4 #9 close. -/
+theorem sectionFunctor_map_direction (A : ASection) (g : G2) (x : OnePoint Octonion) :
+    (sectionFunctor A).map (show H1.of x ⟶ H1.of (g • x) from ⟨g, rfl⟩)
+      = (CategoryTheory.Quotient.functor SliceWorld.Rel).map
+          (Quiver.Hom.toPath (SliceWorld.Gen.direction g (A.realize x)))
+        ≫ eqToHom (congrArg S2.of (A.realize_equivariant g x).symm) :=
+  rfl
 
 /-- The object pin of `thm:section-functor`: "Φ(q) = A(q) on objects" —
 the realization of Concentricity/Slice.lean. Queued (R8). -/
