@@ -24,6 +24,9 @@ import Mathlib.Analysis.Calculus.Deriv.Basic
 import Mathlib.Analysis.SpecialFunctions.Log.Summable
 import Mathlib.Analysis.Complex.LocallyUniformLimit
 import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+import Mathlib.Analysis.Calculus.LogDerivUniformlyOn
+import Mathlib.Analysis.Normed.Module.MultipliableUniformlyOn
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 
 noncomputable section
 
@@ -240,11 +243,35 @@ theorem logDeriv_euler (A : ASection) :
     mul_div_cancel_left₀ _ (Complex.exp_ne_zero _)]
   exact hHasSum.tsum_eq.symm
 
+/-- The elementary factor composed with `z ↦ z/a` is entire. PROVED
+helper. -/
+theorem _root_.differentiable_weierstrassE_div (p : ℕ) (a : ℂ) :
+    Differentiable ℂ fun z => weierstrassE p (z / a) := by
+  unfold weierstrassE
+  fun_prop
+
+/-- The sphere primary factor is entire. PROVED helper. -/
+theorem _root_.differentiable_spherePrimary (p : ℕ) (a : ℂ) :
+    Differentiable ℂ (spherePrimary p a) := by
+  have h : spherePrimary p a
+      = fun z => weierstrassE p (z / a) * weierstrassE p (z / starRingEnd ℂ a) :=
+    rfl
+  rw [h]
+  exact (differentiable_weierstrassE_div p a).mul
+    (differentiable_weierstrassE_div p (starRingEnd ℂ a))
+
 /-- Weierstrass side, away from pole, origin, and zeros: F′/F unfolds over
 individual n (each zero its own term) + m/z + R′/R + g′ − 1/(z − pole)
 (the pole term from the §8 repair: (z − pole)·F equals the product, so F
-inherits −1/(z − pole)). Needs the §4 upgrade to differentiate through
-`∏'`. -/
+inherits −1/(z − pole)). CLOSED via the §4α field `c3_locMajorant`: the
+product converges locally normally on a ball around z avoiding the pole
+(pins, R5 verified live: `Summable.multipliableLocallyUniformlyOn_nat_one_add`,
+Mathlib/Analysis/Normed/Module/MultipliableUniformlyOn.lean;
+`logDeriv_tprod_eq_tsum`, Mathlib/Analysis/Calculus/LogDerivUniformlyOn.lean),
+the log-derivative summability comes from Cauchy estimates on the majorant
+ball (`Complex.cderiv_eq_deriv` + `Complex.norm_cderiv_le`), and the finite
+factors log-differentiate by `logDeriv_mul`/`logDeriv_pow`/
+`Complex.logDeriv_exp` against the §8-repaired `c3_factorization`. -/
 theorem logDeriv_weierstrass (A : ASection) :
     ∀ z : ℂ, z ≠ (A.pole : ℂ) → z ≠ 0 → A.F z ≠ 0 → A.Rfac z ≠ 0 →
       deriv A.F z / A.F z =
@@ -252,6 +279,167 @@ theorem logDeriv_weierstrass (A : ASection) :
           + deriv A.Rfac z / A.Rfac z + deriv A.gfac z
           + ∑' n, deriv (spherePrimary (A.genus n) (A.sphereZero n)) z /
               spherePrimary (A.genus n) (A.sphereZero n) z := by
-  sorry
+  intro z hzp hz0 hF hR
+  obtain ⟨r, hr, u, hu, hbound⟩ := A.c3_locMajorant z hzp
+  -- the working ball: inside the majorant ball, avoiding the pole
+  set ρ : ℝ := min r (dist z (A.pole : ℂ)) with hρdef
+  have hρ : 0 < ρ := lt_min hr (dist_pos.mpr hzp)
+  have hsub : Metric.ball z ρ ⊆ Metric.ball z r :=
+    Metric.ball_subset_ball (min_le_left _ _)
+  have hnopole : ∀ w ∈ Metric.ball z ρ, w ≠ (A.pole : ℂ) := by
+    intro w hw h
+    rw [h] at hw
+    have h1 : dist (A.pole : ℂ) z < ρ := Metric.mem_ball.mp hw
+    rw [dist_comm] at h1
+    exact absurd h1 (not_lt.mpr (min_le_right _ _))
+  have hzU : z ∈ Metric.ball z ρ := Metric.mem_ball_self hρ
+  -- factor nonvanishing at z, read off the §8-repaired factorization
+  have hval := A.c3_factorization z hzp
+  have hLHS : (z - (A.pole : ℂ)) * A.F z ≠ 0 :=
+    mul_ne_zero (sub_ne_zero.mpr hzp) hF
+  have hPne : (∏' n, spherePrimary (A.genus n) (A.sphereZero n) z) ≠ 0 := by
+    intro h0
+    rw [h0, mul_zero] at hval
+    exact hLHS hval
+  have hfne : ∀ n, spherePrimary (A.genus n) (A.sphereZero n) z ≠ 0 :=
+    fun n h0 => hPne ((A.c3_multipliable z).tprod_eq_zero_of_eq_zero h0)
+  -- local normal convergence of the product on the ball (§4α)
+  have htend : MultipliableLocallyUniformlyOn
+      (fun n => spherePrimary (A.genus n) (A.sphereZero n)) (Metric.ball z ρ) := by
+    have h1 : MultipliableLocallyUniformlyOn
+        (fun n w => 1 + (spherePrimary (A.genus n) (A.sphereZero n) w - 1))
+        (Metric.ball z ρ) :=
+      Summable.multipliableLocallyUniformlyOn_nat_one_add Metric.isOpen_ball hu
+        (Filter.Eventually.of_forall fun n w hw => hbound n w (hsub hw))
+        (fun n => ((differentiable_spherePrimary _ _).sub_const 1).continuous.continuousOn)
+    exact MultipliableLocallyUniformlyOn_congr (fun n w _ => by ring) h1
+  have hd : ∀ n, DifferentiableOn ℂ (spherePrimary (A.genus n) (A.sphereZero n))
+      (Metric.ball z ρ) := fun n => (differentiable_spherePrimary _ _).differentiableOn
+  -- the tprod is differentiable at z (Weierstrass convergence theorem)
+  have hPdiffOn : DifferentiableOn ℂ
+      (fun w => ∏' n, spherePrimary (A.genus n) (A.sphereZero n) w)
+      (Metric.ball z ρ) := by
+    have h2 := hasProdLocallyUniformlyOn_iff_tendstoLocallyUniformlyOn.mp
+      htend.hasProdLocallyUniformlyOn
+    exact h2.differentiableOn
+      (Filter.Eventually.of_forall fun t => (fun w _ =>
+        (DifferentiableAt.fun_finsetProd fun i _ =>
+          (differentiable_spherePrimary _ _).differentiableAt).differentiableWithinAt))
+      Metric.isOpen_ball
+  have hPdiffAt : DifferentiableAt ℂ
+      (fun w => ∏' n, spherePrimary (A.genus n) (A.sphereZero n) w) z :=
+    hPdiffOn.differentiableAt (Metric.isOpen_ball.mem_nhds hzU)
+  -- summability of the log-derivatives at z: Cauchy estimates on the ball
+  have hupos : ∀ n, 0 ≤ u n := fun n =>
+    le_trans (norm_nonneg _) (hbound n z (Metric.mem_ball_self hr))
+  have hδ : 0 < r / 2 := by positivity
+  have hderiv_le : ∀ n,
+      ‖deriv (spherePrimary (A.genus n) (A.sphereZero n)) z‖ ≤ u n / (r / 2) := by
+    intro n
+    have hcb : Metric.closedBall z (r / 2) ⊆ Metric.ball z r :=
+      Metric.closedBall_subset_ball (by linarith)
+    have hdOn : DifferentiableOn ℂ
+        (fun w => spherePrimary (A.genus n) (A.sphereZero n) w - 1)
+        (Metric.ball z r) :=
+      ((differentiable_spherePrimary _ _).sub_const 1).differentiableOn
+    have heq := Complex.cderiv_eq_deriv Metric.isOpen_ball hdOn hδ hcb
+    have hsphere : ∀ w ∈ Metric.sphere z (r / 2),
+        ‖spherePrimary (A.genus n) (A.sphereZero n) w - 1‖ ≤ u n :=
+      fun w hw => hbound n w (hcb (Metric.sphere_subset_closedBall hw))
+    have h0 := Complex.norm_cderiv_le hδ hsphere
+    rw [heq, deriv_sub_const] at h0
+    exact h0
+  have hmsum : Summable
+      (fun n => logDeriv (spherePrimary (A.genus n) (A.sphereZero n)) z) := by
+    have hev : ∀ᶠ n in Filter.atTop, u n ≤ 1 / 2 := by
+      have h := hu.tendsto_cofinite_zero.eventually_le_const one_half_pos
+      rwa [Nat.cofinite_eq_atTop] at h
+    refine Summable.of_norm_bounded_eventually_nat
+      ((hu.div_const (r / 2)).mul_right 2) ?_
+    filter_upwards [hev] with n hn
+    have hfz : 1 / 2 ≤ ‖spherePrimary (A.genus n) (A.sphereZero n) z‖ := by
+      have h1 := abs_norm_sub_norm_le
+        (spherePrimary (A.genus n) (A.sphereZero n) z) 1
+      rw [norm_one] at h1
+      have h2 := hbound n z (Metric.mem_ball_self hr)
+      have h3 := (abs_le.mp h1).1
+      linarith
+    rw [logDeriv_apply, norm_div]
+    calc ‖deriv (spherePrimary (A.genus n) (A.sphereZero n)) z‖ /
+          ‖spherePrimary (A.genus n) (A.sphereZero n) z‖
+        ≤ (u n / (r / 2)) / (1 / 2) :=
+          div_le_div₀ (div_nonneg (hupos n) hδ.le) (hderiv_le n) one_half_pos hfz
+      _ = u n / (r / 2) * 2 := by ring
+  -- the log-derivative of the tprod is the sum of the log-derivatives
+  have hlogP : logDeriv
+      (fun w => ∏' n, spherePrimary (A.genus n) (A.sphereZero n) w) z
+      = ∑' n, logDeriv (spherePrimary (A.genus n) (A.sphereZero n)) z :=
+    logDeriv_tprod_eq_tsum Metric.isOpen_ball hzU hfne hd hmsum htend hPne
+  -- the two sides of the factorization agree near z
+  have hGH : (fun w => (w - (A.pole : ℂ)) * A.F w) =ᶠ[nhds z]
+      (fun w => w ^ A.m * A.Rfac w * Complex.exp (A.gfac w) *
+        ∏' n, spherePrimary (A.genus n) (A.sphereZero n) w) := by
+    filter_upwards [Metric.isOpen_ball.mem_nhds hzU] with w hw
+    exact A.c3_factorization w (hnopole w hw)
+  have hkey : logDeriv (fun w => (w - (A.pole : ℂ)) * A.F w) z
+      = logDeriv (fun w => w ^ A.m * A.Rfac w * Complex.exp (A.gfac w) *
+          ∏' n, spherePrimary (A.genus n) (A.sphereZero n) w) z := by
+    simp only [logDeriv_apply]
+    rw [hGH.deriv_eq, hGH.eq_of_nhds]
+  -- differentiability of the finite factors at z
+  have hFd : DifferentiableAt ℂ A.F z := (A.c1_analyticAt z hzp).differentiableAt
+  have hsubd : DifferentiableAt ℂ (fun w : ℂ => w - (A.pole : ℂ)) z := by fun_prop
+  have hpowd : DifferentiableAt ℂ (fun w : ℂ => w ^ A.m) z := by fun_prop
+  have hRd : DifferentiableAt ℂ A.Rfac z := A.c3_R_entire.differentiableAt
+  have hgd : DifferentiableAt ℂ A.gfac z := A.c3_g_entire.differentiableAt
+  have hexpd : DifferentiableAt ℂ (fun w => Complex.exp (A.gfac w)) z := hgd.cexp
+  have hexp_ne : Complex.exp (A.gfac z) ≠ 0 := Complex.exp_ne_zero _
+  have hpow_ne : z ^ A.m ≠ 0 := pow_ne_zero _ hz0
+  -- expand the left side
+  have hsub1 : logDeriv (fun w : ℂ => w - (A.pole : ℂ)) z
+      = 1 / (z - (A.pole : ℂ)) := by
+    rw [logDeriv_apply, deriv_sub_const]
+    simp [deriv_id'']
+  have hL : logDeriv (fun w => (w - (A.pole : ℂ)) * A.F w) z
+      = 1 / (z - (A.pole : ℂ)) + logDeriv A.F z := by
+    rw [logDeriv_mul (f := fun w : ℂ => w - (A.pole : ℂ)) (g := A.F) z
+      (sub_ne_zero.mpr hzp) hF hsubd hFd, hsub1]
+  -- expand the right side
+  have hR1 : logDeriv (fun w => w ^ A.m * A.Rfac w * Complex.exp (A.gfac w) *
+        ∏' n, spherePrimary (A.genus n) (A.sphereZero n) w) z
+      = logDeriv (fun w => w ^ A.m * A.Rfac w * Complex.exp (A.gfac w)) z
+        + logDeriv (fun w => ∏' n, spherePrimary (A.genus n) (A.sphereZero n) w) z :=
+    logDeriv_mul (f := fun w => w ^ A.m * A.Rfac w * Complex.exp (A.gfac w))
+      (g := fun w => ∏' n, spherePrimary (A.genus n) (A.sphereZero n) w) z
+      (mul_ne_zero (mul_ne_zero hpow_ne hR) hexp_ne) hPne
+      ((hpowd.mul hRd).mul hexpd) hPdiffAt
+  have hR2 : logDeriv (fun w => w ^ A.m * A.Rfac w * Complex.exp (A.gfac w)) z
+      = logDeriv (fun w => w ^ A.m * A.Rfac w) z
+        + logDeriv (fun w => Complex.exp (A.gfac w)) z :=
+    logDeriv_mul (f := fun w => w ^ A.m * A.Rfac w)
+      (g := fun w => Complex.exp (A.gfac w)) z
+      (mul_ne_zero hpow_ne hR) hexp_ne (hpowd.mul hRd) hexpd
+  have hR3 : logDeriv (fun w => w ^ A.m * A.Rfac w) z
+      = logDeriv (fun w : ℂ => w ^ A.m) z + logDeriv A.Rfac z :=
+    logDeriv_mul (f := fun w : ℂ => w ^ A.m) (g := A.Rfac) z hpow_ne hR hpowd hRd
+  have hR4 : logDeriv (fun w : ℂ => w ^ A.m) z = (A.m : ℂ) / z := logDeriv_pow z A.m
+  have hR5 : logDeriv (fun w => Complex.exp (A.gfac w)) z = deriv A.gfac z := by
+    have h := logDeriv_comp (f := Complex.exp) (g := A.gfac) (x := z)
+      Complex.differentiable_exp.differentiableAt hgd
+    rw [Complex.logDeriv_exp] at h
+    simpa [Function.comp_def] using h
+  -- assemble
+  have main : 1 / (z - (A.pole : ℂ)) + logDeriv A.F z
+      = (A.m : ℂ) / z + logDeriv A.Rfac z + deriv A.gfac z
+        + ∑' n, logDeriv (spherePrimary (A.genus n) (A.sphereZero n)) z := by
+    have h := hkey
+    rw [hL, hR1, hR2, hR3, hR4, hR5, hlogP] at h
+    linear_combination h
+  have htsum_eq : (∑' n, deriv (spherePrimary (A.genus n) (A.sphereZero n)) z /
+        spherePrimary (A.genus n) (A.sphereZero n) z)
+      = ∑' n, logDeriv (spherePrimary (A.genus n) (A.sphereZero n)) z :=
+    tsum_congr fun n => (logDeriv_apply _ _).symm
+  rw [← logDeriv_apply A.F z, ← logDeriv_apply A.Rfac z, htsum_eq]
+  linear_combination main
 
 end ASection
