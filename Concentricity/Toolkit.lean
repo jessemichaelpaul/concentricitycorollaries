@@ -128,7 +128,7 @@ forms and cross-references at Mathlib/Analysis/Analytic/Uniqueness
 theorem stem_identity {F G : ℂ → ℂ} (hF : AnalyticOnNhd ℂ F Set.univ)
     (hG : AnalyticOnNhd ℂ G Set.univ) {z₀ : ℂ}
     (hfg : ∃ᶠ z in 𝓝[≠] z₀, F z = G z) : Set.EqOn F G Set.univ :=
-  sorry
+  hF.eqOn_of_preconnected_of_frequently_eq hG isPreconnected_univ (Set.mem_univ z₀) hfg
 
 /-- **The winding lift, slice form** (master `thm:winding-lift`, verbatim;
 [Def. 3.4, Def. 4.1, Prop. 4.2, Def. 5.11]{GPVwind}): "Let
@@ -213,5 +213,8 @@ inside the assembly transcription seam. Queued (R8): pin
 .lean:141). -/
 theorem winding_loop_defect (γ : C(unitInterval, ℂ)) (hloop : γ 0 = γ 1)
     (γ' : C(unitInterval, ℂ)) (hlift : ∀ t, Complex.exp (γ' t) = γ t) :
-    ∃ k : ℤ, γ' 1 - γ' 0 = (k : ℂ) * (2 * (Real.pi : ℂ) * Complex.I) :=
-  sorry
+    ∃ k : ℤ, γ' 1 - γ' 0 = (k : ℂ) * (2 * (Real.pi : ℂ) * Complex.I) := by
+  have h : Complex.exp (γ' 1) = Complex.exp (γ' 0) := by
+    rw [hlift 1, hlift 0, hloop]
+  obtain ⟨n, hn⟩ := Complex.exp_eq_exp_iff_exists_int.1 h
+  exact ⟨n, by rw [hn]; ring⟩
