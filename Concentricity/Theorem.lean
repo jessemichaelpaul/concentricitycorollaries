@@ -230,10 +230,16 @@ spheres of A all lie in a single connected component of the total object
 𝒯_A (Definition def:base) — equivalently, they have one and the same image
 in π₀(𝒯_A)."
 
-Queued (R8): the cocartesian proof (primary, Lean-native); the finality
-proof (Quillen Thm A / precofibred corollary) is an expository remark,
-deliberately left for the community to formalize. The statement layer stops
-here. -/
+CLOSED (Phase 4 #13), cocartesian register only (the primary, Lean-native
+proof; PHASE4_PLAN guardrail): `congrArg` of the level read-off
+`TotalObject.levelClass.symm` on the placement lemma
+`ASection.transportLevel_placement` — the master's readout paragraph: "By
+the assembly and the placement above, the degenerate fibre lies over one
+and the same class — the zero-spheres over a single real level c, one for
+each winding index carried by the band — hence has a single image in
+π₀(𝒯_A): one connected component." The finality proof (Quillen Thm A /
+precofibred corollary) is an expository remark, deliberately left for the
+community to formalize. -/
 theorem concentricity (A : ASection) (n m : ℕ) :
-    assemblyComponent A n = assemblyComponent A m := by
-  sorry
+    assemblyComponent A n = assemblyComponent A m :=
+  congrArg (⇑TotalObject.levelClass.symm) (A.transportLevel_placement n m)
