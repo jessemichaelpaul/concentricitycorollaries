@@ -53,8 +53,17 @@ slice exponential is the slice embedding of the classical complex
 exponential. Queued (R8): `dir_sliceEmbed_of_pos`/`of_im_zero` +
 `sliceCoord_sliceEmbed` of Concentricity/Slice.lean. -/
 theorem exp_sliceEmbed {v : Octonion} (hv : v ∈ unitImaginarySphere) {ζ : ℂ}
-    (hζ : 0 ≤ ζ.im) : exp (sliceEmbed v ζ) = sliceEmbed v (Complex.exp ζ) :=
-  sorry
+    (hζ : 0 ≤ ζ.im) : exp (sliceEmbed v ζ) = sliceEmbed v (Complex.exp ζ) := by
+  have hcoord : sliceCoord (sliceEmbed v ζ) = ζ := by
+    rw [sliceCoord_sliceEmbed hv, abs_of_nonneg hζ]
+  rcases lt_or_eq_of_le hζ with hpos | hzero
+  · rw [exp, hcoord, dir_sliceEmbed_of_pos hv hpos]
+  · rw [exp, hcoord, dir_sliceEmbed_of_im_zero hv hzero.symm, sliceEmbed_zero_dir]
+    have hexpim : (Complex.exp ζ).im = 0 := by
+      rw [Complex.exp_im, ← hzero, Real.sin_zero, mul_zero]
+    show ofReal ((Complex.exp ζ).re)
+        = ofReal ((Complex.exp ζ).re) + (Complex.exp ζ).im • v
+    rw [hexpim, zero_smul, add_zero]
 
 /-- The display pin of master `thm:slice-exp`, lower-half clause (the
 conjugate case, needed for faithfulness of the master's "x, y ∈ ℝ": for
