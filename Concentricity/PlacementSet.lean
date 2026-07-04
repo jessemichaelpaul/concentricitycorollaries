@@ -39,12 +39,48 @@ theorem placement_set (A : ASection) :
 /-! ## §2 — The divisor bundle (set form ⟷ frozen row; both directions
 need the §4 convergence upgrade) -/
 
-/-- Forward half: every enumerated sphere-zero is a stem zero. Needs: tprod
-vanishes at a vanishing factor (R5: find/derive the Mathlib lemma; requires
-the §4 upgrade — bare `Multipliable` does not suffice). -/
+/-- tprod vanishes at a vanishing factor — with bare `Multipliable` (R5:
+absent from the pin; the nearest lemma, `tprod_eq_zero_mul`, is ℕ-index
+factor-splitting, different content). Partial products over finsets
+containing the vanishing index are zero; the unconditional limit is unique
+(T2). In-repo per the §4α presentation: this half needs NO class upgrade. -/
+theorem _root_.Multipliable.tprod_eq_zero_of_eq_zero {ι : Type*} {f : ι → ℂ}
+    (hf : Multipliable f) {i : ι} (h : f i = 0) : ∏' j, f j = 0 := by
+  have hp := hf.hasProd
+  have hev : ∀ᶠ s : Finset ι in Filter.atTop, ∏ j ∈ s, f j = 0 := by
+    filter_upwards [Filter.eventually_ge_atTop ({i} : Finset ι)] with s hs
+    exact Finset.prod_eq_zero (hs (Finset.mem_singleton_self i)) h
+  exact tendsto_nhds_unique hp
+    (Filter.Tendsto.congr' (hev.mono fun s hs => hs.symm) tendsto_const_nhds)
+
+/-- The sphere primary factor vanishes at its own zero: `E(1) = 0`. -/
+theorem _root_.spherePrimary_self_eq_zero (p : ℕ) {a : ℂ} (ha : a ≠ 0) :
+    spherePrimary p a a = 0 := by
+  rw [spherePrimary, weierstrassE, div_self ha]
+  simp
+
+/-- Forward half of the divisor bundle: every enumerated sphere-zero is a
+stem zero — CLOSED with bare fields (the vanishing-factor lemma above needs
+no §4 upgrade), through the §8-repaired `c3_factorization`. -/
 theorem stem_zero_of_sphereZero (A : ASection) (n : ℕ) :
     A.F (A.sphereZero n) = 0 := by
-  sorry
+  have him : 0 < (A.sphereZero n).im := A.c3_sphere_nonreal n
+  have hz0 : A.sphereZero n ≠ 0 := by
+    intro h
+    rw [h] at him
+    simp at him
+  have hzp : A.sphereZero n ≠ (A.pole : ℂ) := by
+    intro h
+    rw [h] at him
+    simp [Complex.ofReal_im] at him
+  have hfac := A.c3_factorization (A.sphereZero n) hzp
+  have hprod : (∏' k, spherePrimary (A.genus k) (A.sphereZero k) (A.sphereZero n)) = 0 :=
+    (A.c3_multipliable (A.sphereZero n)).tprod_eq_zero_of_eq_zero
+      (i := n) (spherePrimary_self_eq_zero _ hz0)
+  rw [hprod, mul_zero] at hfac
+  rcases mul_eq_zero.mp hfac with h | h
+  · exact absurd (sub_eq_zero.mp h) hzp
+  · exact h
 
 /-- Completeness half: every upper-half stem zero is enumerated. Needs the
 §4 upgrade (a non-enumerated zero would force a factor-zero-free tprod to
