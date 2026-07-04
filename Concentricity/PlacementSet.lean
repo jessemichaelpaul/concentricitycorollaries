@@ -163,11 +163,23 @@ theorem sphereZero_complete (A : ASection) ⦃z : ℂ⦄
     (Complex.exp_ne_zero _)) hprod_ne hfac.symm
 
 /-- The equivalence pin: set form ⟷ the frozen
-`transportLevel_placement`. -/
+`transportLevel_placement`. CLOSED: → is the set form read at the two
+enumerated zeros (`stem_zero_of_sphereZero` + `c3_sphere_nonreal`;
+`transportLevel` is definitionally `(A.sphereZero ·).re`, Theorem.lean); ←
+enumerates both zeros by `sphereZero_complete` and reads off the level
+equality. -/
 theorem placement_set_iff (A : ASection) :
     (∀ ⦃z w : ℂ⦄, A.F z = 0 → A.F w = 0 → 0 < z.im → 0 < w.im → z.re = w.re)
       ↔ ∀ n m : ℕ, A.transportLevel n = A.transportLevel m := by
-  sorry
+  constructor
+  · intro h n m
+    exact h (A.stem_zero_of_sphereZero n) (A.stem_zero_of_sphereZero m)
+      (A.c3_sphere_nonreal n) (A.c3_sphere_nonreal m)
+  · intro h z w hz hw hzim hwim
+    obtain ⟨n, hn⟩ := A.sphereZero_complete hz hzim
+    obtain ⟨m, hm⟩ := A.sphereZero_complete hw hwim
+    rw [← hn, ← hm]
+    exact h n m
 
 /-! ## §3 — Brick 1: `stem_identity_logDeriv`, the two-index engine
 (FE-free). Hypothesis shapes finalized against the arbiter per the
