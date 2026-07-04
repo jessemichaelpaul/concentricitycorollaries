@@ -504,10 +504,43 @@ theorem ledger_meromorphic (A : ASection) :
 
 /-- B2.1 helper: any zero value is enumerated with finite multiplicity —
 from `c3_locMajorant` (factors → 1 forces finite repetition at any point).
-Queued (R8). -/
+CLOSED: an infinite fiber would pin the majorant at `u k ≥ 1` infinitely
+often (`spherePrimary_self_eq_zero` evaluated at the zero itself), against
+`Summable u`. -/
 theorem sphereZero_fiber_finite (A : ASection) (n : ℕ) :
     {k : ℕ | A.sphereZero k = A.sphereZero n}.Finite := by
-  sorry
+  by_contra hinf
+  have hS : {k : ℕ | A.sphereZero k = A.sphereZero n}.Infinite := hinf
+  have hzp : A.sphereZero n ≠ (A.pole : ℂ) := by
+    intro h
+    have him := A.c3_sphere_nonreal n
+    rw [h] at him
+    simp at him
+  obtain ⟨r, hr, u, hu, hbound⟩ := A.c3_locMajorant (A.sphereZero n) hzp
+  -- every fiber index k forces 1 ≤ u k: the k-th factor vanishes at the zero
+  have hone : ∀ k ∈ {k : ℕ | A.sphereZero k = A.sphereZero n}, (1 : ℝ) ≤ u k := by
+    intro k hk
+    have hk' : A.sphereZero k = A.sphereZero n := hk
+    have ha0 : A.sphereZero k ≠ 0 := by
+      intro h
+      have him := A.c3_sphere_nonreal k
+      rw [h] at him
+      simp at him
+    have h0 : spherePrimary (A.genus k) (A.sphereZero k) (A.sphereZero n) = 0 := by
+      rw [← hk']
+      exact spherePrimary_self_eq_zero _ ha0
+    have hb := hbound k (A.sphereZero n) (Metric.mem_ball_self hr)
+    rw [h0] at hb
+    simpa using hb
+  -- but the summable majorant is eventually below 1
+  have hev : ∀ᶠ k in Filter.atTop, u k ≤ 1 / 2 := by
+    have h := hu.tendsto_cofinite_zero.eventually_le_const one_half_pos
+    rwa [Nat.cofinite_eq_atTop] at h
+  obtain ⟨M, hM⟩ := Filter.eventually_atTop.mp hev
+  obtain ⟨k, hkS, hkM⟩ := hS.exists_gt M
+  have h1 := hone k hkS
+  have h2 := hM k hkM.le
+  linarith
 
 /-- B2.1 per-zero order: the continued log-derivative has a simple pole at
 each enumerated zero (order −1 regardless of multiplicity). Residue-API
