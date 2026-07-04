@@ -106,8 +106,12 @@ structure ASection where
   c3_R_intrinsic : IsIntrinsic Rfac
   /-- C3: R is entire (stem level). -/
   c3_R_entire : Differentiable ℂ Rfac
-  /-- C3: R vanishes "only on ℝ". -/
-  c3_R_zeros_real : ∀ z : ℂ, Rfac z = 0 → z.im = 0
+  /-- C3: R vanishes only at the **nonzero** residue-ℝ zeros (the C3 one-word
+  repair, author-ruled 2026-07-04: "R is the slice-regular Weierstrass product
+  over the nonzero residue-ℝ zeros" — `q^m` alone carries the origin). Zeros of
+  R are real and nonzero. Load-bearing for PLAN §6's gauge caveat: a slid
+  origin is a nonzero real zero, absorbable into R. -/
+  c3_R_zeros_real : ∀ z : ℂ, Rfac z = 0 → z.im = 0 ∧ z ≠ 0
   /-- C3: g is slice-preserving. -/
   c3_g_intrinsic : IsIntrinsic gfac
   /-- C3: "g is slice-preserving entire". -/
