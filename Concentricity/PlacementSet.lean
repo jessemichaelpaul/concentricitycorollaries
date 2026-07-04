@@ -542,14 +542,327 @@ theorem sphereZero_fiber_finite (A : ASection) (n : ℕ) :
   have h2 := hM k hkM.le
   linarith
 
+/-- The zero-slot elementary factor peels its zero explicitly:
+`E_p(z/a) = (z − a) · (−a⁻¹ · exp(…))`. PROVED helper (R8: helpers are
+never sorried). -/
+theorem _root_.weierstrassE_div_factor (p : ℕ) {a : ℂ} (ha : a ≠ 0) (z : ℂ) :
+    weierstrassE p (z / a) = (z - a) *
+      (-a⁻¹ * Complex.exp (∑ k ∈ Finset.range p, (z / a) ^ (k + 1) / (k + 1))) := by
+  rw [weierstrassE]
+  have h : 1 - z / a = (z - a) * -a⁻¹ := by
+    have h1 : (z - a) * -a⁻¹ = -(z * a⁻¹) + a * a⁻¹ := by ring
+    rw [h1, mul_inv_cancel₀ ha, div_eq_mul_inv]
+    ring
+  rw [h, mul_assoc]
+
+/-- The entire unit accompanying `(z − a)` in a fiber factor of the
+Weierstrass product (`stem_local_form` scaffolding). -/
+def _root_.sphereUnit (p : ℕ) (a z : ℂ) : ℂ :=
+  -a⁻¹ * Complex.exp (∑ k ∈ Finset.range p, (z / a) ^ (k + 1) / (k + 1)) *
+    weierstrassE p (z / starRingEnd ℂ a)
+
+/-- Fiber-factor peeling: the primary factor of a fiber member is `(z − a)`
+times the unit. PROVED helper. -/
+theorem _root_.spherePrimary_eq_sub_mul_sphereUnit (p : ℕ) {a : ℂ} (ha : a ≠ 0)
+    (z : ℂ) : spherePrimary p a z = (z - a) * sphereUnit p a z := by
+  rw [spherePrimary, sphereUnit, weierstrassE_div_factor p ha z]
+  ring
+
+/-- The unit is entire. PROVED helper. -/
+theorem _root_.differentiable_sphereUnit (p : ℕ) (a : ℂ) :
+    Differentiable ℂ (sphereUnit p a) := by
+  have h1 : Differentiable ℂ fun z : ℂ =>
+      -a⁻¹ * Complex.exp (∑ k ∈ Finset.range p, (z / a) ^ (k + 1) / (k + 1)) := by
+    fun_prop
+  exact h1.mul (differentiable_weierstrassE_div p (starRingEnd ℂ a))
+
+/-- The unit avoids zero away from the conjugate point. PROVED helper. -/
+theorem _root_.sphereUnit_ne_zero (p : ℕ) {a z : ℂ} (ha : a ≠ 0)
+    (hz : z ≠ starRingEnd ℂ a) : sphereUnit p a z ≠ 0 := by
+  have hc : starRingEnd ℂ a ≠ 0 := by simpa using ha
+  rw [sphereUnit]
+  exact mul_ne_zero (mul_ne_zero (neg_ne_zero.mpr (inv_ne_zero ha))
+    (Complex.exp_ne_zero _))
+    fun h => hz ((div_eq_one_iff_eq hc).mp ((weierstrassE_eq_zero_iff _ _).mp h))
+
+/-- CORE of the B2.1 per-zero rows — the stem's local form at an enumerated
+zero: near `a := A.sphereZero n` the stem factors as `(z − a)^N · G` with
+`G` analytic and nonvanishing at `a` and `N` the fiber tally. Route: the
+§8-repaired `c3_factorization`; the tprod split at the finite fiber
+(`sphereZero_fiber_finite` + `Multipliable.prod_mul_tprod_compl`); the
+explicit unit peeling on each fiber factor; the §4α scaffolding
+(`Summable.multipliableLocallyUniformlyOn_nat_one_add` + Weierstrass
+convergence) for the analytic, nonvanishing tail. PROVED helper. -/
+theorem stem_local_form (A : ASection) (n : ℕ) :
+    ∃ G : ℂ → ℂ, AnalyticAt ℂ G (A.sphereZero n) ∧ G (A.sphereZero n) ≠ 0 ∧
+      A.F =ᶠ[nhds (A.sphereZero n)] fun z =>
+        (z - A.sphereZero n) ^ Nat.card {k : ℕ | A.sphereZero k = A.sphereZero n} *
+          G z := by
+  have him : 0 < (A.sphereZero n).im := A.c3_sphere_nonreal n
+  have ha0 : A.sphereZero n ≠ 0 := by
+    intro h; rw [h] at him; simp at him
+  have hap : A.sphereZero n ≠ (A.pole : ℂ) := by
+    intro h; rw [h] at him; simp at him
+  have hconj : A.sphereZero n ≠ starRingEnd ℂ (A.sphereZero n) := by
+    intro h
+    have h2 := congrArg Complex.im h
+    rw [Complex.conj_im] at h2
+    linarith
+  -- the finite fiber and its tally
+  have hSfin := A.sphereZero_fiber_finite n
+  set s : Finset ℕ := hSfin.toFinset with hs_def
+  have hcard : Nat.card {k : ℕ | A.sphereZero k = A.sphereZero n} = s.card := by
+    rw [hs_def, Nat.card_coe_set_eq, Set.ncard_eq_toFinset_card _ hSfin]
+  -- the §4α majorant ball at the zero
+  obtain ⟨r, hr, u, hu, hbound⟩ := A.c3_locMajorant (A.sphereZero n) hap
+  have hupos : ∀ k, 0 ≤ u k := fun k =>
+    le_trans (norm_nonneg _) (hbound k (A.sphereZero n) (Metric.mem_ball_self hr))
+  set ρ : ℝ := min r (dist (A.sphereZero n) (A.pole : ℂ)) with hρ_def
+  have hρ : 0 < ρ := lt_min hr (dist_pos.mpr hap)
+  have hsub : Metric.ball (A.sphereZero n) ρ ⊆ Metric.ball (A.sphereZero n) r :=
+    Metric.ball_subset_ball (min_le_left _ _)
+  have hnopole : ∀ w ∈ Metric.ball (A.sphereZero n) ρ, w ≠ (A.pole : ℂ) := by
+    intro w hw h
+    rw [h] at hw
+    have h1 : dist (A.pole : ℂ) (A.sphereZero n) < ρ := Metric.mem_ball.mp hw
+    rw [dist_comm] at h1
+    exact absurd h1 (not_lt.mpr (min_le_right _ _))
+  have hzball : A.sphereZero n ∈ Metric.ball (A.sphereZero n) ρ := Metric.mem_ball_self hρ
+  -- the tail (fiber factors replaced by 1): differentiable on the majorant ball
+  have hitem : ∀ k : ℕ, Differentiable ℂ fun w =>
+      (if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) w) := by
+    intro k
+    by_cases hk : k ∈ s
+    · simp only [if_pos hk]
+      exact differentiable_const 1
+    · simp only [if_neg hk]
+      exact differentiable_spherePrimary _ _
+  have hTdiff : DifferentiableOn ℂ
+      (fun w => ∏' k, if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) w)
+      (Metric.ball (A.sphereZero n) r) := by
+    have htend : MultipliableLocallyUniformlyOn
+        (fun k w => if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) w)
+        (Metric.ball (A.sphereZero n) r) := by
+      have h1 : MultipliableLocallyUniformlyOn
+          (fun k w => 1 + ((if k ∈ s then (1 : ℂ) else
+            spherePrimary (A.genus k) (A.sphereZero k) w) - 1))
+          (Metric.ball (A.sphereZero n) r) :=
+        Summable.multipliableLocallyUniformlyOn_nat_one_add Metric.isOpen_ball hu
+          (Filter.Eventually.of_forall fun k w hw => by
+            by_cases hk : k ∈ s
+            · simpa [if_pos hk] using hupos k
+            · rw [if_neg hk]
+              exact hbound k w hw)
+          (fun k => ((hitem k).sub_const 1).continuous.continuousOn)
+      exact MultipliableLocallyUniformlyOn_congr (fun k w _ => by ring) h1
+    have h2 := hasProdLocallyUniformlyOn_iff_tendstoLocallyUniformlyOn.mp
+      htend.hasProdLocallyUniformlyOn
+    exact h2.differentiableOn
+      (Filter.Eventually.of_forall fun t => fun w _ =>
+        (DifferentiableAt.fun_finsetProd fun i _ =>
+          (hitem i).differentiableAt).differentiableWithinAt)
+      Metric.isOpen_ball
+  -- the tail is nonzero at the zero itself
+  have hTa : (∏' k, if k ∈ s then (1 : ℂ) else
+      spherePrimary (A.genus k) (A.sphereZero k) (A.sphereZero n)) ≠ 0 := by
+    refine tprod_ne_zero_of_norm_sub_one_le hu (fun k => ?_) (fun k => ?_)
+    · by_cases hk : k ∈ s
+      · simpa [if_pos hk] using hupos k
+      · rw [if_neg hk]
+        exact hbound k (A.sphereZero n) (Metric.mem_ball_self hr)
+    · by_cases hk : k ∈ s
+      · rw [if_pos hk]; exact one_ne_zero
+      · rw [if_neg hk]
+        have himk := A.c3_sphere_nonreal k
+        have hak : A.sphereZero k ≠ 0 := by
+          intro h; rw [h] at himk; simp at himk
+        have hne1 : A.sphereZero n ≠ A.sphereZero k := by
+          intro h
+          exact hk (hSfin.mem_toFinset.mpr h.symm)
+        have hne2 : A.sphereZero n ≠ starRingEnd ℂ (A.sphereZero k) := by
+          intro h
+          have h2 : (A.sphereZero n).im = -(A.sphereZero k).im := by
+            rw [h, Complex.conj_im]
+          linarith
+        exact spherePrimary_ne_zero _ hak hne1 hne2
+  -- the tprod splits at the fiber, on the majorant ball (monoid-level route:
+  -- head = finitely-supported HasProd, tail = §4α summable majorant →
+  -- `multipliable_one_add_of_summable`, glued by `Multipliable.tprod_mul`)
+  have hsplit : ∀ w ∈ Metric.ball (A.sphereZero n) r,
+      (∏' k, spherePrimary (A.genus k) (A.sphereZero k) w)
+      = (∏ k ∈ s, spherePrimary (A.genus k) (A.sphereZero k) w) *
+        ∏' k, (if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) w) := by
+    intro w hw
+    have hhead : HasProd
+        (fun k => if k ∈ s then spherePrimary (A.genus k) (A.sphereZero k) w else 1)
+        (∏ k ∈ s, if k ∈ s then spherePrimary (A.genus k) (A.sphereZero k) w else 1) :=
+      hasProd_prod_of_ne_finset_one fun b hb => if_neg hb
+    have htail_sum : Summable fun k =>
+        ‖(if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) w) - 1‖ := by
+      refine Summable.of_nonneg_of_le (fun k => norm_nonneg _) (fun k => ?_) hu
+      by_cases hk : k ∈ s
+      · simpa [if_pos hk] using hupos k
+      · rw [if_neg hk]
+        exact hbound k w hw
+    have htail : Multipliable fun k =>
+        (if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) w) := by
+      have h1 := multipliable_one_add_of_summable (f := fun k =>
+        (if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) w) - 1)
+        htail_sum
+      have h2 : (fun k => 1 + ((if k ∈ s then (1 : ℂ) else
+          spherePrimary (A.genus k) (A.sphereZero k) w) - 1))
+          = fun k => (if k ∈ s then (1 : ℂ) else
+            spherePrimary (A.genus k) (A.sphereZero k) w) := by
+        funext k
+        ring
+      rwa [h2] at h1
+    calc (∏' k, spherePrimary (A.genus k) (A.sphereZero k) w)
+        = ∏' k, ((if k ∈ s then spherePrimary (A.genus k) (A.sphereZero k) w else 1) *
+            (if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) w)) :=
+          tprod_congr fun k => by by_cases hk : k ∈ s <;> simp [hk]
+      _ = (∏' k, if k ∈ s then spherePrimary (A.genus k) (A.sphereZero k) w else 1) *
+            ∏' k, (if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) w) :=
+          Multipliable.tprod_mul hhead.multipliable htail
+      _ = (∏ k ∈ s, spherePrimary (A.genus k) (A.sphereZero k) w) *
+            ∏' k, (if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) w) := by
+          rw [hhead.tprod_eq]
+          congr 1
+          exact Finset.prod_congr rfl fun k hk => if_pos hk
+  -- the fiber product peels its zeros
+  have hfib : ∀ z : ℂ, (∏ k ∈ s, spherePrimary (A.genus k) (A.sphereZero k) z)
+      = (z - A.sphereZero n) ^ s.card *
+        ∏ k ∈ s, sphereUnit (A.genus k) (A.sphereZero n) z := by
+    intro z
+    calc (∏ k ∈ s, spherePrimary (A.genus k) (A.sphereZero k) z)
+        = ∏ k ∈ s, ((z - A.sphereZero n) * sphereUnit (A.genus k) (A.sphereZero n) z) :=
+          Finset.prod_congr rfl fun k hk => by
+            rw [show A.sphereZero k = A.sphereZero n from hSfin.mem_toFinset.mp hk]
+            exact spherePrimary_eq_sub_mul_sphereUnit _ ha0 z
+      _ = (∏ _k ∈ s, (z - A.sphereZero n)) *
+            ∏ k ∈ s, sphereUnit (A.genus k) (A.sphereZero n) z :=
+          Finset.prod_mul_distrib
+      _ = (z - A.sphereZero n) ^ s.card *
+            ∏ k ∈ s, sphereUnit (A.genus k) (A.sphereZero n) z := by
+          rw [Finset.prod_const]
+  -- assemble G
+  refine ⟨fun z => z ^ A.m * A.Rfac z * Complex.exp (A.gfac z) *
+      (∏ k ∈ s, sphereUnit (A.genus k) (A.sphereZero n) z) *
+      (∏' k, if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) z) /
+      (z - (A.pole : ℂ)), ?_, ?_, ?_⟩
+  · -- analytic at the zero: differentiable on the pole-free ball
+    have hGdiff : DifferentiableOn ℂ (fun z => z ^ A.m * A.Rfac z * Complex.exp (A.gfac z) *
+        (∏ k ∈ s, sphereUnit (A.genus k) (A.sphereZero n) z) *
+        (∏' k, if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) z) /
+        (z - (A.pole : ℂ))) (Metric.ball (A.sphereZero n) ρ) := by
+      intro w hw
+      have hT_at : DifferentiableAt ℂ (fun z => ∏' k, if k ∈ s then (1 : ℂ) else
+          spherePrimary (A.genus k) (A.sphereZero k) z) w :=
+        (hTdiff.mono hsub).differentiableAt (Metric.isOpen_ball.mem_nhds hw)
+      have hpow : DifferentiableAt ℂ (fun z : ℂ => z ^ A.m) w := by fun_prop
+      have hQ : DifferentiableAt ℂ
+          (fun z => ∏ k ∈ s, sphereUnit (A.genus k) (A.sphereZero n) z) w :=
+        DifferentiableAt.fun_finsetProd fun i _ =>
+          (differentiable_sphereUnit _ _).differentiableAt
+      have hden : DifferentiableAt ℂ (fun z : ℂ => z - (A.pole : ℂ)) w := by fun_prop
+      exact (((((hpow.mul A.c3_R_entire.differentiableAt).mul
+        A.c3_g_entire.differentiableAt.cexp).mul hQ).mul hT_at).div hden
+        (sub_ne_zero.mpr (hnopole w hw))).differentiableWithinAt
+    exact hGdiff.analyticAt (Metric.isOpen_ball.mem_nhds hzball)
+  · -- nonvanishing at the zero
+    have hpow_ne : (A.sphereZero n) ^ A.m ≠ 0 := pow_ne_zero _ ha0
+    have hR_ne : A.Rfac (A.sphereZero n) ≠ 0 :=
+      fun h => ne_of_gt him (A.c3_R_zeros_real _ h).1
+    have hQ_ne : (∏ k ∈ s, sphereUnit (A.genus k) (A.sphereZero n) (A.sphereZero n)) ≠ 0 :=
+      Finset.prod_ne_zero_iff.mpr fun k _ => sphereUnit_ne_zero _ ha0 hconj
+    exact div_ne_zero (mul_ne_zero (mul_ne_zero (mul_ne_zero (mul_ne_zero hpow_ne hR_ne)
+      (Complex.exp_ne_zero _)) hQ_ne) hTa) (sub_ne_zero.mpr hap)
+  · -- the local factorization, on the pole-free ball
+    filter_upwards [Metric.isOpen_ball.mem_nhds hzball] with w hw
+    have hwp : w ≠ (A.pole : ℂ) := hnopole w hw
+    have hfacw := A.c3_factorization w hwp
+    rw [hsplit w (hsub hw), hfib w] at hfacw
+    have hdne : w - (A.pole : ℂ) ≠ 0 := sub_ne_zero.mpr hwp
+    show A.F w = (w - A.sphereZero n) ^ Nat.card {k : ℕ | A.sphereZero k = A.sphereZero n} *
+      (w ^ A.m * A.Rfac w * Complex.exp (A.gfac w) *
+        (∏ k ∈ s, sphereUnit (A.genus k) (A.sphereZero n) w) *
+        (∏' k, if k ∈ s then (1 : ℂ) else spherePrimary (A.genus k) (A.sphereZero k) w) /
+        (w - (A.pole : ℂ)))
+    rw [hcard, ← mul_div_assoc, eq_div_iff hdne]
+    linear_combination hfacw
+
+/-- CORE presentation for the two remaining B2.1 rows: near an enumerated
+zero the continued log-derivative is `(z − a)⁻¹ · u` with `u` analytic at
+`a` and `u a = N`, the fiber tally — the simple pole and its trailing
+coefficient in one package, shaped for `meromorphicOrderAt_eq_int_iff` and
+`AnalyticAt.meromorphicTrailingCoeffAt_of_ne_zero_of_eq_nhdsNE`. PROVED
+helper. -/
+theorem logDeriv_local_form (A : ASection) (n : ℕ) :
+    ∃ u : ℂ → ℂ, AnalyticAt ℂ u (A.sphereZero n) ∧
+      u (A.sphereZero n) = (Nat.card {k : ℕ | A.sphereZero k = A.sphereZero n} : ℂ) ∧
+      u (A.sphereZero n) ≠ 0 ∧
+      (fun z => deriv A.F z / A.F z)
+        =ᶠ[nhdsWithin (A.sphereZero n) {A.sphereZero n}ᶜ]
+          fun z => (z - A.sphereZero n) ^ (-1 : ℤ) • u z := by
+  obtain ⟨G, hGa, hGne, hev⟩ := A.stem_local_form n
+  set N := Nat.card {k : ℕ | A.sphereZero k = A.sphereZero n} with hN_def
+  have hNpos : 0 < N := by
+    haveI : Nonempty {k : ℕ | A.sphereZero k = A.sphereZero n} := ⟨⟨n, rfl⟩⟩
+    haveI : Finite {k : ℕ | A.sphereZero k = A.sphereZero n} :=
+      (A.sphereZero_fiber_finite n).to_subtype
+    exact Nat.card_pos
+  have hval : ((N : ℂ) * G (A.sphereZero n) +
+      (A.sphereZero n - A.sphereZero n) * deriv G (A.sphereZero n)) / G (A.sphereZero n)
+      = (N : ℂ) := by
+    simp only [sub_self, zero_mul, add_zero, mul_div_assoc, div_self hGne, mul_one]
+  refine ⟨fun z => ((N : ℂ) * G z + (z - A.sphereZero n) * deriv G z) / G z,
+    ?_, ?_, ?_, ?_⟩
+  · exact ((analyticAt_const.mul hGa).add
+      ((analyticAt_id.sub analyticAt_const).mul hGa.deriv)).div hGa hGne
+  · exact hval
+  · exact ne_of_eq_of_ne hval (Nat.cast_ne_zero.mpr hNpos.ne')
+  · have hev2 : ∀ᶠ z in nhds (A.sphereZero n), A.F =ᶠ[nhds z]
+        fun w => (w - A.sphereZero n) ^ N * G w :=
+      Filter.Eventually.eventually_nhds hev
+    have hGan : ∀ᶠ z in nhds (A.sphereZero n), AnalyticAt ℂ G z :=
+      hGa.eventually_analyticAt
+    have hGne2 : ∀ᶠ z in nhds (A.sphereZero n), G z ≠ 0 :=
+      hGa.continuousAt.eventually_ne hGne
+    filter_upwards [self_mem_nhdsWithin,
+      eventually_nhdsWithin_of_eventually_nhds hev2,
+      eventually_nhdsWithin_of_eventually_nhds hGan,
+      eventually_nhdsWithin_of_eventually_nhds hGne2] with z hzmem hFz hGz hGnz
+    have hzne : z ≠ A.sphereZero n := hzmem
+    have hzsub : z - A.sphereZero n ≠ 0 := sub_ne_zero.mpr hzne
+    have hd1 : HasDerivAt (fun w => (w - A.sphereZero n) ^ N * G w)
+        ((N : ℂ) * (z - A.sphereZero n) ^ (N - 1) * 1 * G z +
+          (z - A.sphereZero n) ^ N * deriv G z) z :=
+      (((hasDerivAt_id z).sub_const (A.sphereZero n)).pow N).mul
+        hGz.differentiableAt.hasDerivAt
+    have hderivF : deriv A.F z
+        = (N : ℂ) * (z - A.sphereZero n) ^ (N - 1) * 1 * G z +
+          (z - A.sphereZero n) ^ N * deriv G z := by
+      rw [hFz.deriv_eq]
+      exact hd1.deriv
+    have hFval : A.F z = (z - A.sphereZero n) ^ N * G z := hFz.eq_of_nhds
+    obtain ⟨M, hM⟩ := Nat.exists_eq_succ_of_ne_zero hNpos.ne'
+    rw [hderivF, hFval, hM]
+    rw [zpow_neg_one, smul_eq_mul]
+    simp only [Nat.add_sub_cancel, mul_one, pow_succ]
+    push_cast
+    field_simp
+
 /-- B2.1 per-zero order: the continued log-derivative has a simple pole at
 each enumerated zero (order −1 regardless of multiplicity). Residue-API
 caveat as confirmed: the pin has no residue function; rendered via
-`meromorphicOrderAt` + trailing coefficient. Queued (R8). -/
+`meromorphicOrderAt` + trailing coefficient. CLOSED: the
+`logDeriv_local_form` presentation `(z − a)⁻¹ · u`, `u a = N ≠ 0`, read
+through the pin's `meromorphicOrderAt_eq_int_iff`. -/
 theorem ledger_orderAt_zero (A : ASection) (n : ℕ) :
     meromorphicOrderAt (fun z => deriv A.F z / A.F z) (A.sphereZero n)
       = ((-1 : ℤ) : WithTop ℤ) := by
-  sorry
+  obtain ⟨u, hu_an, hu_val, hu_ne, hev⟩ := A.logDeriv_local_form n
+  exact (meromorphicOrderAt_eq_int_iff
+    (A.ledger_meromorphic (A.sphereZero n) (Set.mem_univ _))).mpr ⟨u, hu_an, hu_ne, hev⟩
 
 /-- B2.1 per-zero residue value, trailing-coefficient rendering: the residue
 of F′/F at an enumerated zero is its multiplicity tally in the enumeration.
