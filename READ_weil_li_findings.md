@@ -109,6 +109,50 @@ integral of g·(log ξ)′ — Sekatskii Thms 4–5 = generalized Littlewood) �
   from structure. Record: the ONLY fully honest endpoints are (0/0 via C-2) or
   (named C5 with cor:rh explicitly withheld). No third door.
 
+## The intermediate ladder (added same day, author's question: what lies between
+## full derivation and naming C5?)
+
+Every rung is unconditional — no hypothesis added anywhere; rungs narrow the gap
+from both ends. Ordered by cost:
+
+- **L1 — the first side is already (nearly) in the repo.** C2's zero-free right
+  half-space bounds every level above: "∃β with all levels ≤ β" is essentially
+  `zero_free_on_halfSpace` read through Theorem 2's (a)⟺(b). The one-sided BL
+  positivity family (anchors below β) is therefore DERIVABLE NOW from C1–C4.
+  The entire gap is the second side — this rung makes that literal in Lean.
+- **L2 — finite-multiset BL, formalized.** For a FINITE multiset, Theorem 2 is
+  pure algebra + Dirichlet simultaneous approximation — no convergence, no
+  analysis. Formalizing it makes the two-sided⟺pinned reduction machine-checked
+  and isolates the remaining gap to a single limit passage (finite truncations
+  → full multiset). The open sentence then has the shape "positivity survives
+  the limit," which is a different — and possibly more tractable — face.
+- **L3 — small-n positivity from the ledger.** Classically λ₁ > 0 is
+  unconditional for ζ. Class version: derive k_{a,1} ≥ 0 (and finitely many
+  higher n) from the seed + B2.0/B2.1. Each n proved is an unconditional
+  constraint on the zero geometry, and the derivations exercise exactly the
+  contour machinery B2.2 will need.
+- **L4 — interval confinement (the lower edge).** Class analogue of the
+  critical strip: upper edge from C2 (L1); investigate what C1 + C3 divisor
+  data give as a lower edge (classically the FE reflects the upper edge down —
+  the class must earn it differently or record its absence). Confinement ≠
+  placement, but two-sided BOUNDS at possibly-different β₁ ≤ β₂ reduce the gap
+  to "width zero," a quantitative target.
+- **L5 — member-end narrowing (for cor:rh, without full clause-for-ζ).**
+  ζ-private unconditional theorems (Hardy: infinitely many zeros share one
+  level; density results) weaken what cor:rh must consume. Exploration: if the
+  class derivation yields partial placement (e.g., "at most one level carries
+  infinitely many zeros"), member-private facts may finish ζ's case without
+  clause-for-ζ in full. Speculative — author's direction required before any
+  statement work.
+- **L6 — the second side via band/winding (= C-2 proper).** The assault: what
+  does the octonionic transport supply that classical one-sided cones don't?
+  If found, this is not intermediate — it is the win.
+
+Only if L1–L6 all stall does the named-C5 endpoint activate (cor:rh withheld,
+per C-5 hygiene). The ladder is the operational content of "derive what we
+need from C1–C4": rungs L1–L3 are immediately actionable statements-first work
+for Lane A after B2 lands.
+
 ## Consequence for Brick 2 (design input for Lane A, via the author's gate)
 
 B2.2's eventual non-tautological face is now identified: the pairing against
