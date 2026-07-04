@@ -1095,8 +1095,10 @@ slice-preserving \emph{semiregular} function on $\OO^{*}$ \textup{(the meromorph
   $\OO^{*}$ with exactly one pole; it is simple, lies at a real point, and its value there is the
   point at infinity $\infty=N$.
 \item \emph{Infinite Euler product.} On a slice right half-space $\Omega_0\subset\OO^{*}$,
-  $A=\exp\!\big(\sum_p\ell_p\big)$ for an \emph{infinite} summable family $\{\ell_p\}$ of
-  slice-preserving slice-regular functions each zero-free on $\Omega_0$; in particular $A$ is
+  $A=\exp\!\big(\sum_p\ell_p\big)$ for an \emph{infinite} family $\{\ell_p\}$ of
+  slice-preserving slice-regular functions each zero-free on $\Omega_0$, the family summable
+  \emph{locally normally} on $\Omega_0$ \textup{(}the sense in which the cited Euler products
+  converge; Theorem~\ref{thm:euler}\textup{)}; in particular $A$ is
   zero-free on $\Omega_0$.
 \item \emph{Infinite Weierstrass factorization.} Over the \emph{full divisor} of $A$ ---
   including the single pole of \textup{(C1)}, at the real point $p_0$, multiplicity $-1$,
@@ -1109,7 +1111,9 @@ slice-preserving \emph{semiregular} function on $\OO^{*}$ \textup{(the meromorph
   on $\RR$, $g$ is slice-preserving entire, $\{q_n\}$ enumerates the residue-$\CC$ zero-spheres
   of $A$, and $\mathcal E(\,\cdot\,;q_n)$ is the slice-regular Weierstrass primary factor of
   $q_n$ \textup{(}Proposition~\ref{prop:weierstrass}; \cite[Prop.~3.1, Thm.~3.2]{AdFslice},
-  \cite{GV}\textup{)}; the factorization holds with either family infinite. \textup{(}The left
+  \cite{GV}\textup{)}; the factorization holds with either family infinite, the product
+  converging \emph{locally normally} on $\OO^{*}\setminus\{p_0\}$ \textup{(}the convergence of
+  Proposition~\ref{prop:weierstrass}\textup{)}. \textup{(}The left
   factor makes ``full divisor'' literal: the divisor of a meromorphic section includes its
   single pole; classically, Hadamard factors $(s-1)\zeta(s)$.\textup{)}
 \item \emph{Infinitely many residue-$\CC$ zeros.} The index set $\{q_n\}$ is infinite. A closed
@@ -1165,9 +1169,19 @@ and every point of the degenerate fibre it meets is, by Lemma~\ref{lem:exp-degen
 level $\log r$ paired with an odd winding height $I(2k+1)\pi$: all multiplicity in the fibre
 lies in the winding direction (\cite[Cor.~5.21]{GPVwind}), none in the level. Since
 $\mathcal B$ is static --- no morphisms between distinct levels (Definition~\ref{def:base})
---- the level is a conserved quantity along every zigzag of $\mathcal T_A$, and the
-degenerate fibre of the unique tame transport attached to the $A$-section --- the
-residue-$\CC$ zero-spheres $\{q_n\}$ of \textup{C3} --- lies over a \emph{single} level.
+--- the level is a conserved quantity along every zigzag of $\mathcal T_A$: zero-spheres
+sharing a component share a level. That the degenerate fibre of the unique tame transport
+attached to the $A$-section --- the residue-$\CC$ zero-spheres $\{q_n\}$ of \textup{C3} ---
+lies over a \emph{single} level is the \emph{placement}, the document's one open node, in
+its official enumeration-free set-level form (the zero set is the stem's alone): on any
+slice $\CC_I$,
+\begin{equation}\label{eq:placement-set}
+  A_I(z)=A_I(w)=0,\quad \Im z>0,\quad \Im w>0
+  \;\;\Longrightarrow\;\; \Re z=\Re w \qquad (z,w\in\CC_I).
+\end{equation}
+The route on record toward it is Remark~\ref{rmk:two-index-roadmap} \textup{(}in the
+formalization: \texttt{ASection.transportLevel\_placement}, held as the repository's
+single load-bearing \texttt{sorry}\textup{)}. Granting the placement, the proof concludes.
 
 \emph{The cocartesian computation of $\pi_0$.} The fibre $F$ is connected, so by
 Lemma~\ref{lem:pi0-grothendieck}
@@ -1188,6 +1202,22 @@ distinct spheres are distinct orbits, hence pairwise disjoint, and by \textup{C4
 infinitely many. The theorem states only the one-component conclusion; reading the component as a
 common \emph{centre} is the downstream translation of Corollary~\ref{cor:nontrivial}.
 \end{proof}
+
+\begin{remark}[The two-index route; equation only]\label{rmk:two-index-roadmap}
+The placement \eqref{eq:placement-set} is a two-index statement --- an equality between
+data indexed by the Euler family of \textup{C2} and data indexed by the zero-spheres of
+\textup{C3}. The route on record (author, 2026-07-04) stays entirely in the equation
+layer: \textup{(i)} the logarithmic derivative of the stem identity --- the \textup{C2}
+Euler side equated with the \textup{C3} Weierstrass side through the explicit pole factor
+--- where an individual index $p$ first meets an individual index $n$; \textup{(ii)} the
+pairing of the two expansions against test functions, the
+$\sum_p\!\leftrightarrow\!\sum_n$ ledger; \textup{(iii)} the closing clause, stated
+value-free and in level-differences only. No morphism is added anywhere: the objects
+$\mathcal B$, $F$, $\mathcal T_A$ of Definition~\ref{def:base} are unchanged, and the
+statement of Theorem~\ref{thm:concentricity} is untouched. The clause of \textup{(iii)}
+either derives from \textup{C1--C4} or stands as a named additional property of the member
+under study; deciding which is the route's endpoint.
+\end{remark}
 
 \begin{remark}[A second proof, via finality]\label{rmk:pi0-split}
 \uses{lem:pi0-grothendieck, eq:placement-set}
