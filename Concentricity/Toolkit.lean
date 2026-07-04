@@ -15,6 +15,8 @@ master node verbatim plus its SOURCES pointers (R1/R2/R10).
 -/
 import Concentricity.Slice
 import Mathlib.Analysis.SpecialFunctions.Complex.Log
+import Mathlib.Analysis.Complex.CoveringMap
+import Mathlib.Topology.Homotopy.Lifting
 import Mathlib.Topology.UnitInterval
 import Mathlib.Topology.ContinuousMap.Basic
 
@@ -271,8 +273,12 @@ logarithm along a nonvanishing path. Queued (R8): floor
 + path lifting. -/
 theorem exists_log_continuation (γ : C(unitInterval, ℂ))
     (hγ : ∀ t, γ t ≠ 0) :
-    ∃ γ' : C(unitInterval, ℂ), ∀ t, Complex.exp (γ' t) = γ t :=
-  sorry
+    ∃ γ' : C(unitInterval, ℂ), ∀ t, Complex.exp (γ' t) = γ t := by
+  let γs : C(unitInterval, {z : ℂ // z ≠ 0}) :=
+    ⟨fun t => ⟨γ t, hγ t⟩, (map_continuous γ).subtype_mk _⟩
+  obtain ⟨Γ, hΓ, -⟩ := Complex.isCoveringMap_exp.exists_path_lifts γs
+    (Complex.log (γ 0)) (Subtype.ext (Complex.exp_log (hγ 0)).symm)
+  exact ⟨Γ, fun t => congrArg Subtype.val (congrFun hΓ t)⟩
 
 /-- master `prop:winding-signature`(i) (verbatim; header cites
 [Def. 4.20, Cor. 5.21, Cor. 5.22]{GPVwind}): "Uniqueness (tameness). γ is
