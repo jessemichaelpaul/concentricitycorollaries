@@ -36,7 +36,9 @@ namespace ASection
 
 /-- The placement, set-level (OFFICIAL form of the open node; author's
 ruling 2026-07-04 — enumeration-free, "the zero set is F's alone"). Any two
-upper-half-plane zeros of the stem share one real part. -/
+upper-half-plane zeros of the stem share one real part. Master label:
+`eq:placement-set` (the labeled OPEN node inside the proof of
+`thm:concentricity`, landed d8f5b93). -/
 theorem placement_set (A : ASection) :
     ∀ ⦃z w : ℂ⦄, A.F z = 0 → A.F w = 0 → 0 < z.im → 0 < w.im →
       z.re = w.re := by
