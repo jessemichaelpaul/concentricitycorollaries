@@ -22,6 +22,8 @@ appear.
 import Concentricity.Theorem
 import Mathlib.Analysis.Calculus.Deriv.Basic
 import Mathlib.Analysis.SpecialFunctions.Log.Summable
+import Mathlib.Analysis.Complex.LocallyUniformLimit
+import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 
 noncomputable section
 
@@ -186,12 +188,57 @@ theorem placement_set_iff (A : ASection) :
 sanctioned pre-commit tightening; the Weierstrass side carries the pole
 term from day one (§8 repair). -/
 
-/-- Euler side, on the half-space: F′/F = ∑′ p, (ℓ p)′. Needs the §4
-upgrade to differentiate through `∑'`. -/
+/-- Euler side, on the half-space: F′/F = ∑′ p, (ℓ p)′. CLOSED via the §4α
+field `c2_locMajorant`: on a majorant ball inside the half-space the sum
+differentiates term-by-term (Weierstrass convergence theorem; pins, R5
+verified live: `Complex.hasSum_deriv_of_summable_norm`,
+`Complex.differentiableOn_tsum_of_summable_norm`,
+Mathlib/Analysis/Complex/LocallyUniformLimit.lean), and F = exp ∘ S near z
+(`c2_euler`) chains through `HasDerivAt.cexp`. -/
 theorem logDeriv_euler (A : ASection) :
     ∀ z : ℂ, A.Ω₀ < z.re →
       deriv A.F z / A.F z = ∑' p : A.ι, deriv (A.ℓ p) z := by
-  sorry
+  intro z hz
+  obtain ⟨r, hr, u, hu, hbound⟩ := A.c2_locMajorant z hz
+  set ρ : ℝ := min r (z.re - A.Ω₀)
+  have hρ : 0 < ρ := lt_min hr (sub_pos.mpr hz)
+  -- the majorant ball lies inside the half-space
+  have hUhalf : ∀ w ∈ Metric.ball z ρ, A.Ω₀ < w.re := by
+    intro w hw
+    have h1 : |(w - z).re| < ρ :=
+      lt_of_le_of_lt (Complex.abs_re_le_norm _)
+        (by rw [← dist_eq_norm]; exact Metric.mem_ball.mp hw)
+    have h2 := (abs_lt.mp h1).1
+    rw [Complex.sub_re] at h2
+    have h3 : ρ ≤ z.re - A.Ω₀ := min_le_right _ _
+    linarith
+  have hUsubball : Metric.ball z ρ ⊆ Metric.ball z r :=
+    Metric.ball_subset_ball (min_le_left _ _)
+  have hdiff : ∀ p, DifferentiableOn ℂ (A.ℓ p) (Metric.ball z ρ) := fun p w hw =>
+    ((A.c2_analyticAt p w (hUhalf w hw)).differentiableAt).differentiableWithinAt
+  have hle : ∀ p, ∀ w : ℂ, w ∈ Metric.ball z ρ → ‖A.ℓ p w‖ ≤ u p :=
+    fun p w hw => hbound p w (hUsubball hw)
+  have hzU : z ∈ Metric.ball z ρ := Metric.mem_ball_self hρ
+  -- term-by-term differentiation of the stem sum
+  have hHasSum : HasSum (fun p => deriv (A.ℓ p) z)
+      (deriv (fun w => ∑' p, A.ℓ p w) z) :=
+    Complex.hasSum_deriv_of_summable_norm hu hdiff Metric.isOpen_ball hle hzU
+  have hSdiff : DifferentiableAt ℂ (fun w => ∑' p, A.ℓ p w) z :=
+    (Complex.differentiableOn_tsum_of_summable_norm hu hdiff Metric.isOpen_ball
+      hle).differentiableAt (Metric.isOpen_ball.mem_nhds hzU)
+  -- F = exp ∘ S on the open half-space, hence near z
+  have hopen : IsOpen {w : ℂ | A.Ω₀ < w.re} :=
+    isOpen_lt continuous_const Complex.continuous_re
+  have hev : A.F =ᶠ[nhds z] fun w => Complex.exp (∑' p, A.ℓ p w) := by
+    filter_upwards [hopen.mem_nhds hz] with w hw
+    exact A.c2_euler w hw
+  have hderivF : deriv A.F z
+      = Complex.exp (∑' p, A.ℓ p z) * deriv (fun w => ∑' p, A.ℓ p w) z := by
+    rw [hev.deriv_eq]
+    exact (hSdiff.hasDerivAt.cexp).deriv
+  rw [hderivF, A.c2_euler z hz,
+    mul_div_cancel_left₀ _ (Complex.exp_ne_zero _)]
+  exact hHasSum.tsum_eq.symm
 
 /-- Weierstrass side, away from pole, origin, and zeros: F′/F unfolds over
 individual n (each zero its own term) + m/z + R′/R + g′ − 1/(z − pole)
