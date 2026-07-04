@@ -300,8 +300,15 @@ covering floor `Complex.isCoveringMap_exp`
 (Mathlib/Analysis/Complex/CoveringMap.lean:40). Queued (R8). -/
 theorem winding_lift_unique (γ : C(unitInterval, ℂ)) (hγ : ∀ t, γ t ≠ 0)
     (γ₁ γ₂ : C(unitInterval, ℂ)) (h₁ : ∀ t, Complex.exp (γ₁ t) = γ t)
-    (h₂ : ∀ t, Complex.exp (γ₂ t) = γ t) (h0 : γ₁ 0 = γ₂ 0) : γ₁ = γ₂ :=
-  sorry
+    (h₂ : ∀ t, Complex.exp (γ₂ t) = γ t) (h0 : γ₁ 0 = γ₂ 0) : γ₁ = γ₂ := by
+  have he : (fun z : ℂ => (⟨Complex.exp z, Complex.exp_ne_zero z⟩ : {w : ℂ // w ≠ 0})) ∘ ⇑γ₁
+      = (fun z : ℂ => (⟨Complex.exp z, Complex.exp_ne_zero z⟩ : {w : ℂ // w ≠ 0})) ∘ ⇑γ₂ :=
+    funext fun t => Subtype.ext (by
+      show Complex.exp (γ₁ t) = Complex.exp (γ₂ t)
+      rw [h₁ t, h₂ t])
+  exact ContinuousMap.ext fun t =>
+    congrFun (Complex.isCoveringMap_exp.eq_of_comp_eq (map_continuous γ₁)
+      (map_continuous γ₂) he 0 h0) t
 
 /-- master `prop:winding-signature`(ii)/(iii), the stateable frame over the
 `exists_log_continuation` vocabulary — the loop defect. Master (ii)
