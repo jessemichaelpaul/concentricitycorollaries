@@ -21,6 +21,7 @@ appear.
 -/
 import Concentricity.Theorem
 import Mathlib.Analysis.Calculus.Deriv.Basic
+import Mathlib.Analysis.Meromorphic.TrailingCoefficient
 import Mathlib.Analysis.SpecialFunctions.Log.Summable
 import Mathlib.Analysis.Complex.LocallyUniformLimit
 import Mathlib.Analysis.SpecialFunctions.ExpDeriv
@@ -490,5 +491,39 @@ theorem stem_identity_logDeriv (A : ASection) :
               spherePrimary (A.genus n) (A.sphereZero n) z := by
   intro z hΩ hp h0 hF hR
   rw [← A.logDeriv_euler z hΩ, A.logDeriv_weierstrass z hp h0 hF hR]
+
+/-! ## B2.1 — the residue ledger (confirmed 2026-07-04; STRICTLY per-zero —
+any summed residue statement is already a pairing and waits with B2.2) -/
+
+/-- B2.1: the log-derivative of the stem is meromorphic on all of ℂ — the
+Euler side's continuation IS the Weierstrass side, as one meromorphic
+object. PROVED (Mathlib meromorphic calculus). -/
+theorem ledger_meromorphic (A : ASection) :
+    MeromorphicOn (fun z => deriv A.F z / A.F z) Set.univ :=
+  fun z hz => ((A.meromorphic z hz).deriv).div (A.meromorphic z hz)
+
+/-- B2.1 helper: any zero value is enumerated with finite multiplicity —
+from `c3_locMajorant` (factors → 1 forces finite repetition at any point).
+Queued (R8). -/
+theorem sphereZero_fiber_finite (A : ASection) (n : ℕ) :
+    {k : ℕ | A.sphereZero k = A.sphereZero n}.Finite := by
+  sorry
+
+/-- B2.1 per-zero order: the continued log-derivative has a simple pole at
+each enumerated zero (order −1 regardless of multiplicity). Residue-API
+caveat as confirmed: the pin has no residue function; rendered via
+`meromorphicOrderAt` + trailing coefficient. Queued (R8). -/
+theorem ledger_orderAt_zero (A : ASection) (n : ℕ) :
+    meromorphicOrderAt (fun z => deriv A.F z / A.F z) (A.sphereZero n)
+      = ((-1 : ℤ) : WithTop ℤ) := by
+  sorry
+
+/-- B2.1 per-zero residue value, trailing-coefficient rendering: the residue
+of F′/F at an enumerated zero is its multiplicity tally in the enumeration.
+STRICTLY per-zero (author's fence). Queued (R8). -/
+theorem ledger_residueAt_zero (A : ASection) (n : ℕ) :
+    meromorphicTrailingCoeffAt (fun z => deriv A.F z / A.F z) (A.sphereZero n)
+      = (Nat.card {k : ℕ | A.sphereZero k = A.sphereZero n} : ℂ) := by
+  sorry
 
 end ASection
