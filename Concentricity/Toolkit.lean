@@ -70,13 +70,33 @@ theorem exp_sliceEmbed_of_im_neg {v : Octonion} (hv : v ∈ unitImaginarySphere)
 |exp q| = e^{re q} depends only on the real part". Queued (R8): pin
 `Complex.norm_exp` (Mathlib/Analysis/SpecialFunctions/Complex/Log.lean, in
 use at :55) through the slice embedding. -/
-theorem norm_exp (q : Octonion) : norm (exp q) = Real.exp (re q) :=
-  sorry
+theorem norm_exp (q : Octonion) : norm (exp q) = Real.exp (re q) := by
+  by_cases him : im q = 0
+  · have hdir : dir q = 0 := by rw [dir, him, smul_zero]
+    have hcoordim : (sliceCoord q).im = 0 := by
+      show norm (im q) = 0
+      rw [him, norm_zero]
+    rw [exp, hdir, sliceEmbed_zero_dir, norm_ofReal, Complex.exp_re, hcoordim,
+      Real.cos_zero, _root_.mul_one]
+    show |Real.exp (re q)| = Real.exp (re q)
+    exact abs_of_pos (Real.exp_pos _)
+  · rw [exp, norm, normSq_sliceEmbed (dir_mem_unitImaginarySphere him),
+      Complex.exp_re, Complex.exp_im,
+      show (Real.exp (sliceCoord q).re * Real.cos (sliceCoord q).im) ^ 2
+            + (Real.exp (sliceCoord q).re * Real.sin (sliceCoord q).im) ^ 2
+          = Real.exp (sliceCoord q).re ^ 2 from by
+        linear_combination (Real.exp (sliceCoord q).re) ^ 2
+          * Real.sin_sq_add_cos_sq (sliceCoord q).im,
+      Real.sqrt_sq (Real.exp_nonneg _)]
+    rfl
 
 /-- master `thm:slice-exp`, nowhere-zero clause (verbatim): "and exp is
 nowhere zero." Queued (R8): from `norm_exp` and `Real.exp_pos`. -/
-theorem exp_ne_zero (q : Octonion) : exp q ≠ 0 :=
-  sorry
+theorem exp_ne_zero (q : Octonion) : exp q ≠ 0 := by
+  intro h
+  have hnorm := norm_exp q
+  rw [h, norm_zero] at hnorm
+  exact ne_of_lt (Real.exp_pos (re q)) hnorm
 
 /-- **The degenerate fibre** (master `lem:exp-degenerate`).
 

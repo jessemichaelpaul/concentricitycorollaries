@@ -120,6 +120,44 @@ theorem norm_smul_unit {v : Octonion} (hv : v ∈ unitImaginarySphere) (r : ℝ)
     norm (r • v) = |r| := by
   rw [norm, normSq_smul, hv.2, _root_.mul_one, Real.sqrt_sq_eq_abs]
 
+theorem norm_zero : norm (0 : Octonion) = 0 := by
+  rw [norm, normSq_zero, Real.sqrt_zero]
+
+theorem norm_pos_of_ne_zero {x : Octonion} (hx : x ≠ 0) : 0 < norm x := by
+  rw [norm]
+  exact Real.sqrt_pos.mpr (normSq_pos_of_ne_zero hx)
+
+theorem normSq_ofReal (r : ℝ) : normSq (ofReal r) = r ^ 2 := by
+  rw [ofReal_eq_smul_one, normSq_smul, normSq_one, _root_.mul_one]
+
+theorem norm_ofReal (r : ℝ) : norm (ofReal r) = |r| := by
+  rw [norm, normSq_ofReal, Real.sqrt_sq_eq_abs]
+
+/-- The squared norm of a slice embedding along a unit direction is the
+Euclidean square of the coordinate: the real and imaginary legs are
+orthogonal (`innerO_one` against the imaginarity of `v`). -/
+theorem normSq_sliceEmbed {v : Octonion} (hv : v ∈ unitImaginarySphere) (ζ : ℂ) :
+    normSq (sliceEmbed v ζ) = ζ.re ^ 2 + ζ.im ^ 2 := by
+  have hcross : innerO (ofReal ζ.re) (ζ.im • v) = 0 := by
+    rw [ofReal_eq_smul_one, innerO_smul_left, innerO_comm, innerO_smul_left,
+      innerO_one, hv.1]
+    ring
+  rw [sliceEmbed, normSq_add_eq, normSq_ofReal, normSq_smul, hv.2, hcross]
+  ring
+
+/-- Reconstruction: every octonion is the slice embedding of its slice
+coordinate along its direction — junk-robust at real points (the zero
+direction is never consumed: the coordinate is then real). -/
+theorem sliceEmbed_dir_sliceCoord (x : Octonion) :
+    sliceEmbed (dir x) (sliceCoord x) = x := by
+  show ofReal (re x) + norm (im x) • dir x = x
+  by_cases him : im x = 0
+  · rw [him, norm_zero, zero_smul, add_zero]
+    exact (eq_ofReal_of_im_eq_zero him).symm
+  · rw [dir, smul_smul, mul_inv_cancel₀ (ne_of_gt (norm_pos_of_ne_zero him)),
+      one_smul, im]
+    abel
+
 theorem sliceCoord_sliceEmbed {v : Octonion} (hv : v ∈ unitImaginarySphere)
     (ζ : ℂ) : sliceCoord (sliceEmbed v ζ) = ⟨ζ.re, |ζ.im|⟩ := by
   rw [sliceCoord, re_sliceEmbed hv, im_sliceEmbed hv, norm_smul_unit hv]
