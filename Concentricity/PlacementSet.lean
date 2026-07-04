@@ -866,10 +866,15 @@ theorem ledger_orderAt_zero (A : ASection) (n : ℕ) :
 
 /-- B2.1 per-zero residue value, trailing-coefficient rendering: the residue
 of F′/F at an enumerated zero is its multiplicity tally in the enumeration.
-STRICTLY per-zero (author's fence). Queued (R8). -/
+STRICTLY per-zero (author's fence). CLOSED: the same `logDeriv_local_form`
+presentation, read through the pin's
+`AnalyticAt.meromorphicTrailingCoeffAt_of_ne_zero_of_eq_nhdsNE`; the
+trailing coefficient is `u a = N`, the fiber tally. -/
 theorem ledger_residueAt_zero (A : ASection) (n : ℕ) :
     meromorphicTrailingCoeffAt (fun z => deriv A.F z / A.F z) (A.sphereZero n)
       = (Nat.card {k : ℕ | A.sphereZero k = A.sphereZero n} : ℂ) := by
-  sorry
+  obtain ⟨u, hu_an, hu_val, hu_ne, hev⟩ := A.logDeriv_local_form n
+  rw [hu_an.meromorphicTrailingCoeffAt_of_ne_zero_of_eq_nhdsNE hu_ne hev]
+  exact hu_val
 
 end ASection
