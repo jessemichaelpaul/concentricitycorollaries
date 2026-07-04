@@ -23,23 +23,6 @@ import Mathlib.Tactic.FieldSimp
 
 noncomputable section
 
-/-- **The target** (author's ruling, verbatim statement): the Riemann zeta
-function has infinitely many nontrivial zeros. The nontriviality predicate
-mirrors Mathlib's `RiemannHypothesis` exclusions; the trivial-zero clause
-matches `riemannZeta_neg_two_mul_nat_add_one` (RiemannZeta.lean:171)
-verbatim.
-
-Proof route (approved): Route A of PROOF_PLAN_zeta_infinitude.md — suppose
-finitely many; extract the finite zero divisor of ξ
-(`MeromorphicOn.extract_zeros_poles`), take a global logarithm, bound growth
-via the Mellin/theta representation and the unconditional functional
-equation, force the log-factor affine by Borel–Carathéodory + Cauchy
-estimates, contradict Γ-growth on the real axis. Queued (R8); burned down
-at A1–A10 below. -/
-theorem riemannZeta_nontrivialZeros_infinite :
-    {s : ℂ | riemannZeta s = 0 ∧ (¬∃ n : ℕ, s = -2 * (n + 1)) ∧ s ≠ 1}.Infinite := by
-  sorry
-
 /-! ## A1 — the completed ξ and its entirety -/
 
 /-- Route A, A1 data: ξ(s) = s(s−1)Λ(s) in its **entire normalization**
@@ -1160,3 +1143,169 @@ theorem log_factor_growth
   have h1 := hBC z
   have h2 := hAb ‖z‖ (norm_nonneg z)
   nlinarith [h1, h2]
+
+/-! ## A10 — assembly: the target theorem -/
+
+/-- Polynomial bound for the finite factorized-rational prefactor of A3:
+under the finiteness hypothesis the divisor of ξ has finite support
+(`xi_divisor_support_finite`), and the finprod is bounded by `(‖z‖ + M)^D`,
+with M a closed-ball radius containing the support
+(`Set.Finite.isBounded`) and D the total degree
+(`finprod_eq_prod_of_mulSupport_subset`, `Finset.prod_le_prod`,
+`Finset.prod_pow_eq_pow_sum`; nonnegativity of the exponents is
+`xi_divisor_nonneg`). -/
+theorem xi_finprod_poly_bound
+    (hfin : {s : ℂ | riemannZeta s = 0 ∧ (¬∃ n : ℕ, s = -2 * (n + 1)) ∧ s ≠ 1}.Finite) :
+    ∃ (M : ℝ) (D : ℕ), 0 ≤ M ∧ ∀ z : ℂ,
+      ‖∏ᶠ u, (z - u) ^ (MeromorphicOn.divisor xi Set.univ u)‖ ≤ (‖z‖ + M) ^ D := by
+  have hsupp := xi_divisor_support_finite hfin
+  obtain ⟨r, hr⟩ := hsupp.isBounded.subset_closedBall 0
+  refine ⟨max r 0, ∑ u ∈ hsupp.toFinset, (MeromorphicOn.divisor xi Set.univ u).toNat,
+    le_max_right _ _, fun z => ?_⟩
+  have hsub : (Function.mulSupport
+      (fun u : ℂ => (z - u) ^ (MeromorphicOn.divisor xi Set.univ u)))
+      ⊆ ↑hsupp.toFinset := by
+    intro u hu
+    simp only [Function.mem_mulSupport] at hu
+    rw [Set.Finite.coe_toFinset]
+    simp only [Function.mem_support]
+    intro hns
+    apply hu
+    rw [hns, zpow_zero]
+  rw [finprod_eq_prod_of_mulSupport_subset _ hsub, norm_prod]
+  have hfactor : ∀ u ∈ hsupp.toFinset,
+      ‖(z - u) ^ (MeromorphicOn.divisor xi Set.univ u)‖
+        ≤ (‖z‖ + max r 0) ^ (MeromorphicOn.divisor xi Set.univ u).toNat := by
+    intro u hu
+    have hd := xi_divisor_nonneg u
+    have hu_mem : u ∈ Function.support
+        (fun u : ℂ => MeromorphicOn.divisor xi Set.univ u) := by
+      rwa [Set.Finite.mem_toFinset] at hu
+    have hu_norm : ‖u‖ ≤ r := by
+      have hu_ball : u ∈ Metric.closedBall (0 : ℂ) r := hr hu_mem
+      rwa [Metric.mem_closedBall, dist_zero_right] at hu_ball
+    have hzu : ‖z - u‖ ≤ ‖z‖ + max r 0 := by
+      have h1 : ‖z - u‖ ≤ ‖z‖ + ‖u‖ := norm_sub_le z u
+      have h2 : r ≤ max r 0 := le_max_left r 0
+      linarith
+    have h1 : ‖(z - u) ^ (MeromorphicOn.divisor xi Set.univ u)‖
+        = ‖z - u‖ ^ (MeromorphicOn.divisor xi Set.univ u).toNat := by
+      rw [norm_zpow]
+      conv_lhs => rw [← Int.toNat_of_nonneg hd]
+      rw [zpow_natCast]
+    rw [h1]
+    exact pow_le_pow_left₀ (norm_nonneg _) hzu _
+  calc ∏ u ∈ hsupp.toFinset, ‖(z - u) ^ (MeromorphicOn.divisor xi Set.univ u)‖
+      ≤ ∏ u ∈ hsupp.toFinset,
+          (‖z‖ + max r 0) ^ (MeromorphicOn.divisor xi Set.univ u).toNat :=
+        Finset.prod_le_prod (fun u _ => norm_nonneg _) hfactor
+    _ = (‖z‖ + max r 0)
+          ^ ∑ u ∈ hsupp.toFinset, (MeromorphicOn.divisor xi Set.univ u).toNat :=
+        Finset.prod_pow_eq_pow_sum _ _ _
+
+/-- **The target** (author's ruling, verbatim statement): the Riemann zeta
+function has infinitely many nontrivial zeros. The nontriviality predicate
+mirrors Mathlib's `RiemannHypothesis` exclusions; the trivial-zero clause
+matches `riemannZeta_neg_two_mul_nat_add_one` (RiemannZeta.lean:171)
+verbatim.
+
+Proof (Route A of PROOF_PLAN_zeta_infinitude.md, **A10** assembly): suppose
+finitely many. A3 (`xi_factorization_of_finite`) extracts the finite zero
+divisor, ξ = P·h with h entire nonvanishing; A4
+(`exists_log_of_entire_nonvanishing`) writes h = exp ∘ g; A6 + A7
+(`xi_growth`, `log_factor_growth`) bound ‖g‖ subquadratically, so A8
+(`affine_of_subquadratic_growth`) forces g = a + b·s. Then along the real
+points σ = 2n + 2, ‖ξ(σ)‖ ≤ c·(n+1)^D·E^n with E = exp(2·Re b)
+(`xi_finprod_poly_bound`), while A9 (`gamma_lower_bound_real`) gives
+(2E)^n ≤ ‖ξ(σ)‖ eventually — and 2^n eventually beats c·(n+1)^D
+(`tendsto_pow_const_div_const_pow_of_one_lt`). Contradiction. -/
+theorem riemannZeta_nontrivialZeros_infinite :
+    {s : ℂ | riemannZeta s = 0 ∧ (¬∃ n : ℕ, s = -2 * (n + 1)) ∧ s ≠ 1}.Infinite := by
+  by_contra hcon
+  have hfin : {s : ℂ | riemannZeta s = 0 ∧ (¬∃ n : ℕ, s = -2 * (n + 1)) ∧ s ≠ 1}.Finite :=
+    Set.not_infinite.mp hcon
+  obtain ⟨h, hd, hne, hfac⟩ := xi_factorization_of_finite hfin
+  obtain ⟨g, hg, hexp⟩ := exists_log_of_entire_nonvanishing hd hne
+  obtain ⟨B, hB, hgB⟩ := log_factor_growth hfin hg hfac hexp
+  obtain ⟨a, b, hab⟩ := affine_of_subquadratic_growth hg hB hgB
+  obtain ⟨M, D, hM, hP⟩ := xi_finprod_poly_bound hfin
+  set E : ℝ := Real.exp (2 * b.re) with hE
+  set c : ℝ := Real.exp (a.re + 2 * b.re) * (M + 4) ^ D with hc
+  have hE0 : 0 < E := Real.exp_pos _
+  have hM4 : (0 : ℝ) < M + 4 := by linarith
+  have hc0 : 0 < c := by
+    rw [hc]
+    exact mul_pos (Real.exp_pos _) (pow_pos hM4 D)
+  -- the upper bound along σ = 2n + 2: ‖ξ(σ)‖ ≤ c·(n+1)^D·E^n
+  have hub : ∀ n : ℕ, ‖xi (2 * (n : ℂ) + 2)‖ ≤ c * ((n : ℝ) + 1) ^ D * E ^ n := by
+    intro n
+    rw [hc, hE]
+    have hn0 : (0 : ℝ) ≤ (n : ℝ) := Nat.cast_nonneg n
+    set s : ℂ := 2 * (n : ℂ) + 2 with hs
+    have hs_re : s.re = 2 * (n : ℝ) + 2 := by simp [hs]
+    have hs_im : s.im = 0 := by simp [hs]
+    have hs_norm : ‖s‖ = 2 * (n : ℝ) + 2 := by
+      rw [hs, show (2 : ℂ) * (n : ℂ) + 2 = ((2 * (n : ℝ) + 2 : ℝ) : ℂ) by push_cast; ring,
+        Complex.norm_real, Real.norm_of_nonneg (by linarith)]
+    have hPb : ‖∏ᶠ u, (s - u) ^ (MeromorphicOn.divisor xi Set.univ u)‖
+        ≤ ((M + 4) * ((n : ℝ) + 1)) ^ D := by
+      refine (hP s).trans (pow_le_pow_left₀ (add_nonneg (norm_nonneg s) hM) ?_ D)
+      rw [hs_norm]
+      nlinarith [mul_nonneg hM hn0, hn0]
+    have hgre : (g s).re = a.re + b.re * (2 * (n : ℝ) + 2) := by
+      rw [hab s, Complex.add_re, Complex.mul_re, hs_re, hs_im]
+      ring
+    have hsplit : Real.exp (a.re + b.re * (2 * (n : ℝ) + 2))
+        = Real.exp (a.re + 2 * b.re) * Real.exp (2 * b.re) ^ n := by
+      rw [← Real.exp_nat_mul, ← Real.exp_add]
+      congr 1
+      ring
+    calc ‖xi s‖
+        = ‖∏ᶠ u, (s - u) ^ (MeromorphicOn.divisor xi Set.univ u)‖
+            * Real.exp ((g s).re) := by
+          rw [hfac s, norm_mul, hexp s, Complex.norm_exp]
+      _ ≤ ((M + 4) * ((n : ℝ) + 1)) ^ D * Real.exp ((g s).re) :=
+          mul_le_mul_of_nonneg_right hPb (Real.exp_pos _).le
+      _ = Real.exp (a.re + 2 * b.re) * (M + 4) ^ D * ((n : ℝ) + 1) ^ D
+            * Real.exp (2 * b.re) ^ n := by
+          rw [hgre, hsplit, mul_pow]
+          ring
+  -- A9's lower bound at K = 2E meets the geometric-beats-polynomial window
+  have hden : (0 : ℝ) < c * 2 ^ D + 1 := by
+    have h2D : (0 : ℝ) < (2 : ℝ) ^ D := by positivity
+    linarith [mul_pos hc0 h2D]
+  have hδ : (0 : ℝ) < 1 / (c * 2 ^ D + 1) := one_div_pos.mpr hden
+  have hsmall : ∀ᶠ n : ℕ in Filter.atTop,
+      (n : ℝ) ^ D / 2 ^ n < 1 / (c * 2 ^ D + 1) :=
+    (tendsto_pow_const_div_const_pow_of_one_lt D (one_lt_two : (1 : ℝ) < 2)).eventually
+      (gt_mem_nhds hδ)
+  obtain ⟨n, hn1, hn2, hn3⟩ :=
+    ((gamma_lower_bound_real (2 * E)).and
+      (hsmall.and (Filter.eventually_ge_atTop 1))).exists
+  have h2n : (0 : ℝ) < 2 ^ n := by positivity
+  have hEn : (0 : ℝ) < E ^ n := pow_pos hE0 n
+  have hkey : (2 : ℝ) ^ n ≤ c * ((n : ℝ) + 1) ^ D := by
+    refine le_of_mul_le_mul_right ?_ hEn
+    calc (2 : ℝ) ^ n * E ^ n = (2 * E) ^ n := (mul_pow 2 E n).symm
+      _ ≤ ‖xi (2 * (n : ℂ) + 2)‖ := hn1
+      _ ≤ c * ((n : ℝ) + 1) ^ D * E ^ n := hub n
+  have hn1R : (1 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn3
+  have hstep : ((n : ℝ) + 1) ^ D ≤ 2 ^ D * (n : ℝ) ^ D := by
+    calc ((n : ℝ) + 1) ^ D ≤ (2 * (n : ℝ)) ^ D :=
+          pow_le_pow_left₀ (by linarith) (by linarith) D
+      _ = 2 ^ D * (n : ℝ) ^ D := mul_pow 2 _ D
+  have hnD : (n : ℝ) ^ D < 1 / (c * 2 ^ D + 1) * 2 ^ n := by
+    rwa [div_lt_iff₀ h2n] at hn2
+  have hfinal : (2 : ℝ) ^ n < 2 ^ n := by
+    calc (2 : ℝ) ^ n ≤ c * ((n : ℝ) + 1) ^ D := hkey
+      _ ≤ c * (2 ^ D * (n : ℝ) ^ D) := mul_le_mul_of_nonneg_left hstep hc0.le
+      _ < c * (2 ^ D * (1 / (c * 2 ^ D + 1) * 2 ^ n)) :=
+          mul_lt_mul_of_pos_left
+            (mul_lt_mul_of_pos_left hnD (by positivity)) hc0
+      _ = c * 2 ^ D / (c * 2 ^ D + 1) * 2 ^ n := by ring
+      _ < 1 * 2 ^ n := by
+          refine mul_lt_mul_of_pos_right ?_ h2n
+          rw [div_lt_one hden]
+          linarith
+      _ = 2 ^ n := one_mul _
+  exact absurd hfinal (lt_irrefl _)
