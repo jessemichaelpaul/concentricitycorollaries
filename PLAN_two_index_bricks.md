@@ -98,11 +98,80 @@ required (R3 — this touches the class definition):
   `c3_multipliable_locNormal`) — strengthens the class; must be checked against the
   master's `def:A-section` wording and flagged in the LaTeX if adopted.
 
-## 5. Brick 2 — the pairing (deferred until Brick 1 is green)
+## 5. Brick 2 — the pairing (AMENDED 2026-07-04, post-Brick-1-green: statement
+shapes for the author's confirmation; nothing lands unconfirmed)
 
-Test-function pairing of the two log-derivative expansions: the genuine Σ_p ↔ Σ_n
-ledger. Statement shape drafted only after Brick 1's exact term shapes survive
-`lake build`.
+Brick 1 is green (logDeriv_euler `4f6eec2`, logDeriv_weierstrass `5cc27d5`, seed
+`stem_identity_logDeriv` `1fcda7a`). Against the surviving term shapes, three
+candidate statement layers, in ascending commitment; each audited against §6
+(value-free; covariant; differences/equalities only; no σ₀, no ½):
+
+**B2.0 — the inverse-coordinate bridge pin (zero analytic risk; provable now).**
+The §6 bridge made formal: the exact identity ‖ρ‖²·Re(1/ρ) = Re ρ, and the recast
+of the official node in inverse-zero coordinates — the variable in which
+explicit-formula ledgers speak.
+
+```lean
+theorem inv_re_bridge {ρ : ℂ} (hρ : ρ ≠ 0) :
+    ‖ρ‖ ^ 2 * (1 / ρ).re = ρ.re
+
+theorem placement_set_iff_inv_re (A : ASection) :
+    (∀ ⦃z w : ℂ⦄, A.F z = 0 → A.F w = 0 → 0 < z.im → 0 < w.im → z.re = w.re)
+      ↔ ∀ ⦃z w : ℂ⦄, A.F z = 0 → A.F w = 0 → 0 < z.im → 0 < w.im →
+          ‖z‖ ^ 2 * (1 / z).re = ‖w‖ ^ 2 * (1 / w).re
+```
+
+Audit: equalities across zeros only; no absolute level; pure algebra (Complex
+inv_re API). [Per the §6 correction: the ‖ρ‖²-form, never τ²-normalized.]
+
+**B2.1 — the residue ledger (the Σ_p ↔ Σ_n readout in residue form).** The seed
+says the Euler side E(z) := ∑′_p (ℓ p)′(z) and the five-term Weierstrass side
+W(z) agree on the overlap; the ledger's content is that W is E's meromorphic
+continuation and its poles READ OFF the divisor — zeros arrive as simple poles
+of the continued log-derivative, an output:
+
+```lean
+theorem ledger_meromorphic (A : ASection) :
+    MeromorphicOn (fun z => deriv A.F z / A.F z) Set.univ
+
+theorem ledger_residue_at_zero (A : ASection) (n : ℕ) :
+    <residue of deriv A.F / A.F at A.sphereZero n>
+      = (multiplicity of A.sphereZero n in the enumeration)
+```
+
+Audit: per-zero facts, no cross-zero comparison — admissible trivially. R5 FLAG:
+the pin has `meromorphicOrderAt` but a residue API must be located or built
+(grep `residue` in the pin before confirming this shape; if absent, the
+order/leading-coefficient form via `meromorphicTrailingCoeffAt` — present, used
+by extract_zeros_poles — is the fallback rendering).
+
+**B2.2 — the test-function pairing (the integral face; the genuine Brick-2).**
+For every admissible abscissa (∀-quantified relative to Ω₀ — bound, never named)
+and every test radius, the circle pairing of the seed: term-by-term
+circleIntegral of the two expansions, equal by the seed identity on any circle
+whose closed disk sits in the overlap. Schematic:
+
+```lean
+theorem ledger_pairing (A : ASection) :
+    ∀ c r, A.Ω₀ < c - r → 0 < r →
+      (∮ z in C(c, r), g z * (∑' p, deriv (A.ℓ p) z))
+        = ∮ z in C(c, r), g z * <five-term Weierstrass side>
+```
+
+for g in a test class to be fixed at confirmation (minimal honest choice:
+continuous g, since the equality is pointwise from the seed — the pairing only
+becomes non-tautological when a later shape moves the contour LEFT across
+zeros; that contour-shift statement is deliberately NOT drafted here, because
+its residue bookkeeping is exactly B2.1 and its target is Brick 3's clause).
+Audit: c, r universally quantified against Ω₀ — covariant; no named locus.
+R5 FLAG: circleIntegral API present in the pin (CauchyIntegral cluster).
+
+**Recommendation (drafter's, non-binding):** confirm B2.0 now (it is the §6
+bridge verbatim and gives Brick 3 its variable); confirm B2.1 with the R5
+residue-API caveat as the ledger's readout form; hold B2.2 until Lane B's
+Brick-3 target sentence fixes which pairing the closing clause actually
+consumes — drafting the contour-shift today would be pre-reading Brick 3 into
+statements, which directive 1 forbids.
 
 ## 6. Brick 3 — the closing clause (honesty pin)
 
