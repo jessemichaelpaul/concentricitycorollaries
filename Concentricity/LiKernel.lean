@@ -400,3 +400,313 @@ literal Lean fact. -/
 theorem ASection.liSum_first_side (A : ASection) :
     ∃ β : ℝ, ∀ a : ℝ, a < β → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n := by
   sorry
+
+/-! ## C-1 reduction stock (B2.2 burn session, 2026-07-04; all PROVED)
+
+Steps (1), (3), (4) of the C-1 decomposition, landed proved: the upper
+edge, the center-shift stability of quadratic point-density, the paired
+binomial tail bound, the Sekatskii-(ii) bridge, and the comparison closing
+C-1's summability FROM quadratic point-density (single-center form
+included). Step (2) — the density itself, out of `c3_locMajorant` — is an
+R6 STOP of record (session report): the majorant bounds deviations of the
+paired primary factor, which are of size `~ ‖w/ρₖ‖^(genus k + 1)`, so
+`Summable u` carries the needed `1/‖ρₖ‖²` information only for
+`genus k ≤ 1`; `genus : ℕ → ℕ` is free class data, and already constant
+genus 2 admits strip divisors with `Σ 1/‖ρₖ‖² = ∞` under every C3
+convergence field. `liSum_summable` stays sorried (R8: UNFORMALIZED,
+never UNSOUND — pending the author's fork ruling); D3/D2 HOLD per the
+junk-tsum hygiene rider. -/
+
+/-- **C-1 step (1) — the upper edge**: every enumerated zero-sphere
+representative has real part at most the half-space abscissa — C2's
+zero-freeness (`zero_free_on_halfSpace`) read at the divisor through
+`stem_zero_of_sphereZero`. With `c3_lowerEdge` the divisor's real parts
+lie in a bounded strip, so Sekatskii (ii)'s numerator `1 + |Re ρ|` is
+bounded on the class. PROVED. -/
+theorem ASection.re_le_upperEdge (A : ASection) (k : ℕ) :
+    (A.sphereZero k).re ≤ A.Ω₀ := by
+  by_contra h
+  exact A.zero_free_on_halfSpace (not_le.mp h) (A.stem_zero_of_sphereZero k)
+
+/-- **C-1 step (3) scaffolding — center-shift stability of quadratic
+point-density**: density at one real center gives it at every real center
+(`1 + ‖ρ − c‖² ≤ (2 + 2(c′ − c)²)(1 + ‖ρ − c′‖²)`). The C-1 residue is
+therefore a single center-free goal. PROVED. -/
+theorem summable_inv_one_add_norm_sq_center_shift {ρ : ℕ → ℂ} {c : ℝ}
+    (h : Summable fun k => 1 / (1 + ‖ρ k - (c : ℂ)‖ ^ 2)) (c' : ℝ) :
+    Summable fun k => 1 / (1 + ‖ρ k - (c' : ℂ)‖ ^ 2) := by
+  refine Summable.of_nonneg_of_le (fun k => by positivity) (fun k => ?_)
+    (h.mul_left (2 + 2 * (c' - c) ^ 2))
+  have hpos : (0 : ℝ) < 1 + ‖ρ k - (c : ℂ)‖ ^ 2 := by positivity
+  have hpos' : (0 : ℝ) < 1 + ‖ρ k - (c' : ℂ)‖ ^ 2 := by positivity
+  have htri : ‖ρ k - (c : ℂ)‖ ≤ ‖ρ k - (c' : ℂ)‖ + |c - c'| := by
+    calc ‖ρ k - (c : ℂ)‖ = ‖(ρ k - (c' : ℂ)) + ((c' : ℂ) - (c : ℂ))‖ := by
+          congr 1
+          ring
+      _ ≤ ‖ρ k - (c' : ℂ)‖ + ‖(c' : ℂ) - (c : ℂ)‖ := norm_add_le _ _
+      _ = ‖ρ k - (c' : ℂ)‖ + |c - c'| := by
+          rw [← Complex.ofReal_sub, Complex.norm_real, Real.norm_eq_abs,
+            abs_sub_comm]
+  rw [mul_one_div, div_le_div_iff₀ hpos' hpos]
+  nlinarith [htri, norm_nonneg (ρ k - (c : ℂ)), norm_nonneg (ρ k - (c' : ℂ)),
+    abs_nonneg (c - c'), sq_abs (c - c'),
+    sq_nonneg (‖ρ k - (c' : ℂ)‖ - |c - c'|)]
+
+/-- **C-1 step (4) scaffolding — the paired binomial tail bound**: for
+`‖w‖ ≤ D`, `1 ≤ D`, the remainder after the `j = 0, 1` binomial terms is
+quadratic: `‖(1 + w)ⁿ − 1 − n·w‖ ≤ ‖w‖² (1 + D)ⁿ`. Isolates the one term
+of the kernel expansion that needs `Re` (the `j = 1` term); the quadratic
+remainder is what the point-density absorbs outright. PROVED. -/
+theorem norm_one_add_pow_sub_one_sub_mul_le (n : ℕ) {w : ℂ} {D : ℝ}
+    (hD : 1 ≤ D) (hw : ‖w‖ ≤ D) :
+    ‖(1 + w) ^ n - 1 - (n : ℂ) * w‖ ≤ ‖w‖ ^ 2 * (1 + D) ^ n := by
+  rcases Nat.eq_zero_or_pos n with rfl | hn
+  · simp only [pow_zero, Nat.cast_zero, zero_mul, sub_zero, sub_self,
+      norm_zero, mul_one]
+    positivity
+  have hD0 : (0 : ℝ) ≤ D := le_trans zero_le_one hD
+  have hexp : (1 + w) ^ n = ∑ k ∈ Finset.range (n + 1), w ^ k * (n.choose k : ℂ) := by
+    rw [add_comm 1 w, add_pow]
+    exact Finset.sum_congr rfl fun k _ => by rw [one_pow, mul_one]
+  have hsplit : ∑ k ∈ Finset.range (n + 1), w ^ k * (n.choose k : ℂ)
+      = 1 + (n : ℂ) * w + ∑ k ∈ Finset.Ico 2 (n + 1), w ^ k * (n.choose k : ℂ) := by
+    rw [Finset.range_eq_Ico,
+      Finset.sum_eq_sum_Ico_succ_bot (by omega : (0 : ℕ) < n + 1), zero_add,
+      Finset.sum_eq_sum_Ico_succ_bot (by omega : (1 : ℕ) < n + 1),
+      show (1 : ℕ) + 1 = 2 from rfl,
+      pow_zero, one_mul, pow_one, Nat.choose_zero_right, Nat.choose_one_right,
+      Nat.cast_one]
+    ring
+  have hkey : (1 + w) ^ n - 1 - (n : ℂ) * w
+      = ∑ k ∈ Finset.Ico 2 (n + 1), w ^ k * (n.choose k : ℂ) := by
+    rw [hexp, hsplit]
+    ring
+  rw [hkey]
+  have hbound : ∀ k ∈ Finset.Ico 2 (n + 1),
+      ‖w ^ k * (n.choose k : ℂ)‖ ≤ ‖w‖ ^ 2 * (D ^ k * (n.choose k : ℝ)) := by
+    intro k hk
+    obtain ⟨hk2, -⟩ := Finset.mem_Ico.mp hk
+    rw [norm_mul, norm_pow, Complex.norm_natCast]
+    have hpowsplit : ‖w‖ ^ k = ‖w‖ ^ 2 * ‖w‖ ^ (k - 2) := by
+      rw [← pow_add, Nat.add_sub_cancel' hk2]
+    have hwk : ‖w‖ ^ (k - 2) ≤ D ^ k :=
+      le_trans (pow_le_pow_left₀ (norm_nonneg w) hw _)
+        (pow_le_pow_right₀ hD (by omega))
+    calc ‖w‖ ^ k * (n.choose k : ℝ)
+        = ‖w‖ ^ 2 * ‖w‖ ^ (k - 2) * (n.choose k : ℝ) := by rw [hpowsplit]
+      _ ≤ ‖w‖ ^ 2 * D ^ k * (n.choose k : ℝ) :=
+          mul_le_mul_of_nonneg_right
+            (mul_le_mul_of_nonneg_left hwk (sq_nonneg _)) (Nat.cast_nonneg _)
+      _ = ‖w‖ ^ 2 * (D ^ k * (n.choose k : ℝ)) := mul_assoc _ _ _
+  calc ‖∑ k ∈ Finset.Ico 2 (n + 1), w ^ k * (n.choose k : ℂ)‖
+      ≤ ∑ k ∈ Finset.Ico 2 (n + 1), ‖w ^ k * (n.choose k : ℂ)‖ :=
+        norm_sum_le _ _
+    _ ≤ ∑ k ∈ Finset.Ico 2 (n + 1), ‖w‖ ^ 2 * (D ^ k * (n.choose k : ℝ)) :=
+        Finset.sum_le_sum hbound
+    _ = ‖w‖ ^ 2 * ∑ k ∈ Finset.Ico 2 (n + 1), D ^ k * (n.choose k : ℝ) := by
+        rw [Finset.mul_sum]
+    _ ≤ ‖w‖ ^ 2 * ∑ k ∈ Finset.range (n + 1), D ^ k * (n.choose k : ℝ) := by
+        refine mul_le_mul_of_nonneg_left
+          (Finset.sum_le_sum_of_subset_of_nonneg ?_ ?_) (sq_nonneg _)
+        · rw [Finset.range_eq_Ico]
+          exact Finset.Ico_subset_Ico (by omega) le_rfl
+        · intro k _ _
+          exact mul_nonneg (pow_nonneg hD0 _) (Nat.cast_nonneg _)
+    _ = ‖w‖ ^ 2 * (1 + D) ^ n := by
+        rw [add_comm 1 D, add_pow]
+        congr 1
+        exact Finset.sum_congr rfl fun k _ => by rw [one_pow, mul_one]
+
+/-- **Sekatskii (ii), in-frame**: from quadratic point-density at one
+center, the strip (`c3_lowerEdge` + `re_le_upperEdge`) upgrades to the
+bounded-numerator form `Σₖ (1 + |Re ρₖ|)/(1 + ‖ρₖ − c‖²) < ∞` at every
+real center — the mission decomposition's `blDensity`, exactly Theorem 2's
+convergence condition (READ_weil_li_findings.md, OCR shape flagged there).
+PROVED. -/
+theorem ASection.blDensity_of_density (A : ASection) {c₀ : ℝ}
+    (hd : Summable fun k => 1 / (1 + ‖A.sphereZero k - (c₀ : ℂ)‖ ^ 2)) (c : ℝ) :
+    Summable fun k =>
+      (1 + |(A.sphereZero k).re|) / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2) := by
+  obtain ⟨βlo, hβlo⟩ := A.c3_lowerEdge
+  set N : ℝ := 1 + max |βlo| |A.Ω₀| with hN_def
+  have hshift := summable_inv_one_add_norm_sq_center_shift hd c
+  refine Summable.of_nonneg_of_le (fun k => by positivity) (fun k => ?_)
+    (hshift.mul_left N)
+  have h1 : |(A.sphereZero k).re| ≤ max |βlo| |A.Ω₀| := by
+    rw [abs_le]
+    constructor
+    · have h2 := neg_abs_le βlo
+      have h3 : |βlo| ≤ max |βlo| |A.Ω₀| := le_max_left _ _
+      linarith [hβlo k]
+    · have h2 := le_abs_self A.Ω₀
+      have h3 : |A.Ω₀| ≤ max |βlo| |A.Ω₀| := le_max_right _ _
+      linarith [A.re_le_upperEdge k]
+  rw [mul_one_div]
+  have h4 : 1 + |(A.sphereZero k).re| ≤ N := by
+    rw [hN_def]
+    linarith
+  gcongr
+
+/-- **C-1 steps (3)+(4) — the paired binomial comparison, PROVED**: C-1's
+summability follows from quadratic point-density of the divisor at the
+kernel's mirror anchor `2β − a`. The strip (`c3_lowerEdge` +
+`re_le_upperEdge`) bounds the `j = 1` binomial term's numerator through
+`Re` (the worked paired expansion's only `1/‖ρ − c‖`-order term); the
+quadratic remainder is majorized outright by the tail bound. What remains
+of C-1 is exactly the hypothesis `hd` — the R6 stop of record. -/
+theorem ASection.liSum_summable_of_density (A : ASection) (a β : ℝ) (n : ℕ)
+    (hd : Summable fun k =>
+      1 / (1 + ‖A.sphereZero k - ((2 * β - a : ℝ) : ℂ)‖ ^ 2)) :
+    Summable fun k => 2 * (liKernel n a β (A.sphereZero k)).re := by
+  obtain ⟨βlo, hβlo⟩ := A.c3_lowerEdge
+  set c : ℝ := 2 * β - a with hc_def
+  set d : ℝ := c - a with hd_def
+  set M : ℝ := max |βlo - c| |A.Ω₀ - c| with hM_def
+  set D : ℝ := max |d| 1 with hD_def
+  have hM0 : (0 : ℝ) ≤ M := le_trans (abs_nonneg _) (le_max_left _ _)
+  have hD1 : (1 : ℝ) ≤ D := le_max_right _ _
+  set B : ℝ := 4 * ((n : ℝ) * |d| * M + d ^ 2 * (1 + D) ^ n) with hB_def
+  -- the tail: eventually 1 ≤ ‖ρₖ − c‖, from the density's vanishing terms
+  have hev : ∀ᶠ k in Filter.atTop, 1 ≤ ‖A.sphereZero k - (c : ℂ)‖ := by
+    have h0 : ∀ᶠ k in Filter.atTop,
+        1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2) < 1 / 2 := by
+      have h := hd.tendsto_cofinite_zero.eventually_lt_const one_half_pos
+      rwa [Nat.cofinite_eq_atTop] at h
+    filter_upwards [h0] with k hk
+    by_contra hlt
+    push_neg at hlt
+    have hn0 := norm_nonneg (A.sphereZero k - (c : ℂ))
+    have hle : 1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2 ≤ 2 := by nlinarith
+    have hpos : (0 : ℝ) < 1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2 := by positivity
+    have h2 := one_div_le_one_div_of_le hpos hle
+    linarith
+  refine Summable.of_norm_bounded_eventually_nat (hd.mul_left B) ?_
+  filter_upwards [hev] with k hX1
+  have him : (A.sphereZero k).im ≠ 0 := ne_of_gt (A.c3_sphere_nonreal k)
+  have hreL : βlo ≤ (A.sphereZero k).re := hβlo k
+  have hreU : (A.sphereZero k).re ≤ A.Ω₀ := A.re_le_upperEdge k
+  set z : ℂ := A.sphereZero k with hz_def
+  set X : ℝ := ‖z - (c : ℂ)‖ with hX_def
+  have hX0 : (0 : ℝ) < X := lt_of_lt_of_le zero_lt_one hX1
+  have hcC : 2 * (β : ℂ) - (a : ℂ) = ((c : ℝ) : ℂ) := by
+    rw [hc_def]
+    push_cast
+    ring
+  have hzc : z - ((c : ℝ) : ℂ) ≠ 0 := by
+    rw [← hcC]
+    exact liRatio_den_ne_zero him a β
+  set w : ℂ := ((d : ℝ) : ℂ) / (z - ((c : ℝ) : ℂ)) with hw_def
+  have hda : ((d : ℝ) : ℂ) = ((c : ℝ) : ℂ) - ((a : ℝ) : ℂ) := by
+    rw [hd_def]
+    push_cast
+    ring
+  -- the ratio in inverse-distance coordinates: liRatio = 1 + w
+  have h1w : (1 : ℂ) + w = ((z - ((c : ℝ) : ℂ)) + ((d : ℝ) : ℂ)) / (z - ((c : ℝ) : ℂ)) := by
+    rw [hw_def, add_div, div_self hzc]
+  have hratio : liRatio a β z = 1 + w := by
+    unfold liRatio
+    rw [hcC, h1w, hda]
+    congr 1
+    ring
+  have hK : liKernel n a β z = 1 - (1 + w) ^ n := by
+    rw [liKernel_eq_ratio, hratio]
+  -- norms of w
+  have hnw : ‖w‖ = |d| / X := by
+    rw [hw_def, norm_div, Complex.norm_real, Real.norm_eq_abs, hX_def]
+  have hwD : ‖w‖ ≤ D := by
+    rw [hnw]
+    exact le_trans (div_le_self (abs_nonneg d) hX1) (le_max_left _ _)
+  have hw2 : ‖w‖ ^ 2 = d ^ 2 / X ^ 2 := by
+    rw [hnw, div_pow, sq_abs]
+  have hT : ‖(1 + w) ^ n - 1 - (n : ℂ) * w‖ ≤ ‖w‖ ^ 2 * (1 + D) ^ n :=
+    norm_one_add_pow_sub_one_sub_mul_le n hD1 hwD
+  -- the strip bounds the j = 1 term's numerator
+  have hstrip : |z.re - c| ≤ M := by
+    rw [abs_le]
+    constructor
+    · have h2 := neg_abs_le (βlo - c)
+      have h3 : |βlo - c| ≤ M := le_max_left _ _
+      linarith
+    · have h2 := le_abs_self (A.Ω₀ - c)
+      have h3 : |A.Ω₀ - c| ≤ M := le_max_right _ _
+      linarith
+  have hwre : |w.re| ≤ |d| * M / X ^ 2 := by
+    have h1 : w.re = d * ((z - ((c : ℝ) : ℂ))⁻¹).re := by
+      rw [hw_def, div_eq_mul_inv, Complex.re_ofReal_mul]
+    have h2 : ((z - ((c : ℝ) : ℂ))⁻¹).re = (z.re - c) / X ^ 2 := by
+      rw [Complex.inv_re, Complex.normSq_eq_norm_sq, hX_def, Complex.sub_re,
+        Complex.ofReal_re]
+    rw [h1, h2]
+    calc |d * ((z.re - c) / X ^ 2)| = |d| * |z.re - c| / X ^ 2 := by
+          rw [abs_mul, abs_div, abs_of_nonneg (le_of_lt (pow_pos hX0 2)),
+            mul_div_assoc]
+      _ = |d| * |z.re - c| * (X ^ 2)⁻¹ := div_eq_mul_inv _ _
+      _ ≤ |d| * M * (X ^ 2)⁻¹ :=
+          mul_le_mul_of_nonneg_right
+            (mul_le_mul_of_nonneg_left hstrip (abs_nonneg d))
+            (inv_nonneg.mpr (le_of_lt (pow_pos hX0 2)))
+      _ = |d| * M / X ^ 2 := (div_eq_mul_inv _ _).symm
+  have hnre : ((n : ℂ) * w).re = (n : ℝ) * w.re := by
+    simp [Complex.mul_re]
+  -- the per-term bound
+  have hKre : |(liKernel n a β z).re|
+      ≤ ((n : ℝ) * |d| * M + d ^ 2 * (1 + D) ^ n) / X ^ 2 := by
+    have hsplitK : liKernel n a β z
+        = -((n : ℂ) * w) - ((1 + w) ^ n - 1 - (n : ℂ) * w) := by
+      rw [hK]
+      ring
+    rw [hsplitK]
+    have h4 : (-((n : ℂ) * w) - ((1 + w) ^ n - 1 - (n : ℂ) * w)).re
+        = -(((n : ℂ) * w).re + ((1 + w) ^ n - 1 - (n : ℂ) * w).re) := by
+      rw [Complex.sub_re, Complex.neg_re]
+      ring
+    rw [h4, abs_neg]
+    calc |((n : ℂ) * w).re + ((1 + w) ^ n - 1 - (n : ℂ) * w).re|
+        ≤ |((n : ℂ) * w).re| + |((1 + w) ^ n - 1 - (n : ℂ) * w).re| :=
+          abs_add_le _ _
+      _ ≤ (n : ℝ) * |d| * M / X ^ 2 + d ^ 2 * (1 + D) ^ n / X ^ 2 := by
+          refine add_le_add ?_ ?_
+          · rw [hnre, abs_mul, abs_of_nonneg (Nat.cast_nonneg (α := ℝ) n)]
+            calc (n : ℝ) * |w.re| ≤ (n : ℝ) * (|d| * M / X ^ 2) :=
+                  mul_le_mul_of_nonneg_left hwre (Nat.cast_nonneg n)
+              _ = (n : ℝ) * |d| * M / X ^ 2 := by ring
+          · calc |((1 + w) ^ n - 1 - (n : ℂ) * w).re|
+                ≤ ‖(1 + w) ^ n - 1 - (n : ℂ) * w‖ := Complex.abs_re_le_norm _
+              _ ≤ ‖w‖ ^ 2 * (1 + D) ^ n := hT
+              _ = d ^ 2 * (1 + D) ^ n / X ^ 2 := by
+                  rw [hw2]
+                  ring
+      _ = ((n : ℝ) * |d| * M + d ^ 2 * (1 + D) ^ n) / X ^ 2 :=
+          (add_div _ _ _).symm
+  -- assemble against the majorant
+  have hX2 : (1 : ℝ) ≤ X ^ 2 := by nlinarith [hX1, hX0.le]
+  have hXpos : (0 : ℝ) < X ^ 2 := pow_pos hX0 2
+  have h1pos : (0 : ℝ) < 1 + X ^ 2 := by positivity
+  have hS0 : (0 : ℝ) ≤ (n : ℝ) * |d| * M + d ^ 2 * (1 + D) ^ n := by
+    have hD0 : (0 : ℝ) ≤ 1 + D := by linarith
+    have h1 : (0 : ℝ) ≤ (n : ℝ) * |d| * M :=
+      mul_nonneg (mul_nonneg (Nat.cast_nonneg n) (abs_nonneg d)) hM0
+    have h2 : (0 : ℝ) ≤ d ^ 2 * (1 + D) ^ n :=
+      mul_nonneg (sq_nonneg d) (pow_nonneg hD0 n)
+    linarith
+  rw [Real.norm_eq_abs, abs_mul, abs_two, mul_one_div]
+  calc 2 * |(liKernel n a β z).re|
+      ≤ 2 * (((n : ℝ) * |d| * M + d ^ 2 * (1 + D) ^ n) / X ^ 2) := by
+        linarith [hKre]
+    _ = (2 * ((n : ℝ) * |d| * M + d ^ 2 * (1 + D) ^ n)) / X ^ 2 := by ring
+    _ ≤ (4 * ((n : ℝ) * |d| * M + d ^ 2 * (1 + D) ^ n)) / (1 + X ^ 2) := by
+        rw [div_le_div_iff₀ hXpos h1pos]
+        nlinarith [mul_nonneg hS0 (sub_nonneg.mpr hX2)]
+    _ = B / (1 + X ^ 2) := by rw [hB_def]
+
+/-- **The C-1 residue, single-center form (PROVED reduction)**: quadratic
+point-density of the divisor at ONE real center closes C-1 for every
+anchor pair and every `n` (center-shift + the paired binomial comparison).
+The exact goal that remains of C-1 is the hypothesis `hd` — the R6 stop
+of record. -/
+theorem ASection.liSum_summable_of_density_at (A : ASection) {c₀ : ℝ}
+    (hd : Summable fun k => 1 / (1 + ‖A.sphereZero k - (c₀ : ℂ)‖ ^ 2))
+    (a β : ℝ) (n : ℕ) :
+    Summable fun k => 2 * (liKernel n a β (A.sphereZero k)).re :=
+  A.liSum_summable_of_density a β n
+    (summable_inv_one_add_norm_sq_center_shift hd (2 * β - a))
