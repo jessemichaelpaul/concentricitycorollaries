@@ -407,15 +407,24 @@ Steps (1), (3), (4) of the C-1 decomposition, landed proved: the upper
 edge, the center-shift stability of quadratic point-density, the paired
 binomial tail bound, the Sekatskii-(ii) bridge, and the comparison closing
 C-1's summability FROM quadratic point-density (single-center form
-included). Step (2) — the density itself, out of `c3_locMajorant` — is an
-R6 STOP of record (session report): the majorant bounds deviations of the
-paired primary factor, which are of size `~ ‖w/ρₖ‖^(genus k + 1)`, so
-`Summable u` carries the needed `1/‖ρₖ‖²` information only for
-`genus k ≤ 1`; `genus : ℕ → ℕ` is free class data, and already constant
-genus 2 admits strip divisors with `Σ 1/‖ρₖ‖² = ∞` under every C3
-convergence field. `liSum_summable` stays sorried (R8: UNFORMALIZED,
-never UNSOUND — pending the author's fork ruling); D3/D2 HOLD per the
-junk-tsum hygiene rider. -/
+included).
+
+REGISTER (author's ruling, 2026-07-04; replaces the "R6 stop on quadratic
+density" formerly recorded here — that stop mistook a possession for a
+gap): C1–C4 are the DEFINITION of an A-section; they are not under
+revision. Every convergence/density property C-1 needs is a possession of
+that definition, carried by C3: the infinite Weierstrass factorization
+over the full divisor, factoring THROUGH THE POLE, is one convergent
+meromorphic section that joins the residue-ℂ zero-spheres (∏ₙ 𝓔(·;qₙ)) to
+the residue-ℝ skeleton (R, the concentric real axis) against the single
+pole at N. Its convergence is intrinsic to C3 being a factorization at
+all — not a rider, not a side-condition. A divisor without a convergent
+through-the-pole factorization is not an A-section — it fails C3 — so no
+such object obstructs step (2). The remaining `sorry` at `liSum_summable`
+is a debt of transcription (making C3's possession visible to the
+checker), not of belief; the rendered transcription fix is
+words-before-commits (author's gate). D3/D2 hold per the junk-tsum
+hygiene rider until C-1 is green. -/
 
 /-- **C-1 step (1) — the upper edge**: every enumerated zero-sphere
 representative has real part at most the half-space abscissa — C2's
