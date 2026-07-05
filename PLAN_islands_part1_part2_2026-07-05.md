@@ -292,6 +292,15 @@ no Part-1/Part-2 island touches it.
   (SCAN §7: closeness to N is first-order and level-blind; the level is the second-order
   coefficient, `inv_re_bridge`).
 
+- **P-route 3 — the contradiction render** (author's proposition, 2026-07-05 night,
+  verbatim): "An A-section has one hyperplane. Proof. Suppose not. Then A has two
+  different base objects B_1, B_2 over different great circles. Hence, the A section is
+  disconnected. Contradiction to concentricity theorem. Hence A section has one
+  hyperplane." Rendered clause-by-clause in `Concentricity/OneHyperplaneRoute.lean`
+  (unimported working artifact; lake decides): clauses (a)–(c) — the supposition, the two
+  distinct base objects, the static disconnection across distinct levels — PROVED; the
+  contradiction clause (d) is the recorded seam (see the file's R6 receipt).
+
 **AUTHOR'S STANDING RESERVATION (2026-07-05 evening — recorded, UNRESOLVED):** the author
 suspects the picture is simpler than Island P as framed: with each residue-ℂ zero
 6-sphere its own closed point / connected object (`thm:zero-spheres`(i)–(ii), the AdF

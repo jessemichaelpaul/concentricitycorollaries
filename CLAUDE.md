@@ -30,12 +30,16 @@ mirrors the discovery order.
 
 ## Sources of truth, in order
 
-1. **Lean code**, once it exists — `lake build` is the meter.
+1. **Lean code** — `lake build` is the meter. `ASection.concentricity_transport`
+   (Concentricity/TransportObject.lean) is the locked Lean carrier of `thm:concentricity`
+   — kernel certificate `[propext, Classical.choice, Quot.sound]`; frozen, cone included.
 2. **`Octonionic_RH_master.tex`** (v4) — the author's paper, fully folded: `def:A-section`,
    `lem:exp-degenerate` + `rmk:concentric-gloss`, `\uses{}` annotations document-wide.
-   **One open item**: the placement sentence, marked as the document's single red `\TODO`
-   inside the proof of `thm:concentricity` — the author's to supply, in the sourced register
-   (levels and winding through the triangle π∘E = exp; no metric vocabulary).
+   **One open node**: **Island P — the One-Hyperplane Theorem** (`eq:placement-set`; Lean
+   `placement_set` ≡ `transportLevel_placement`, one welded node), at the translation
+   layer, consumed by `cor:nontrivial` → `cor:rh`; routes: bricks B2.2, preimage-at-N,
+   contradiction render (P-route 3); the author's standing reservation is recorded in
+   PLAN_islands_part1_part2_2026-07-05.md §3.5.
 3. **SOURCES/** — verbatim one-page excerpts of every cited statement (build per Pins).
 4. **`DEPENDENCY_TABULATION.md`** — the backwards dependency audit; consumer columns = the
    annotation skeleton; Lean bucket mapping (Spine / ClassicalInputs / ZetaO / Translation / RH).
@@ -147,15 +151,19 @@ mirrors the discovery order.
   (likely absent — build CD(ℍ) in-repo per R9), `riemannZeta` cluster (continuation, FE,
   Euler product — possibly Mathlib-native, shrinking the classical leaves).
 
-## Phase
+## Phase (islands runway, 2026-07-05 — PLAN_islands_part1_part2_2026-07-05.md is the spec)
 
-1. **The placement sentence** — the author's, into the one red `\TODO`; sourced register.
-2. **SOURCES/** — Quillen §1, VS Rem 5.2, GPV winding statements first (all already
-   extracted in-thread).
-3. **Statement layer** in Claude Code: repo = lake + Mathlib + leanblueprint. First file:
-   `structure ASection` (the four fields), first lemma the slice-preserving stem package;
-   then 𝓗₁, 𝒮₂, Φ, 𝓑, F, 𝒯_A, the π₀ lemma, the theorem statement; leaves as axioms with
-   verbatim docstrings. Sorries per R8.
-4. Prove the categorical spine; then the assembly against the leaves.
-5. Blueprint site (the LaTeX **is** the human face; prose iterates freely); verify
-   everything; then post.
+1. **Delineate** — ✓ done, confirmed in dialogue (the islands, Island P, the Juncture
+   Protocol; the statement layer, spine, and theorem of the old phases 3–4 are landed and
+   locked).
+2. **Net-0 the islands, one at a time, no circularity** — A1→A2 (✓, ZetaCstar.lean) →
+   R5 sweep report → B1–B7 (ζ_𝕆, zero-equivalence, zero-spheres, rh-equiv) → C1 fields
+   cheapest-first → C2/C3 landed GATED. Island-P routes (bricks B2.2; preimage-at-N;
+   P-route 3 render) in parallel — the only open mathematics. Dialogue before execution
+   at every phase boundary; Juncture Protocol (PLAN_islands §6) at every juncture.
+3. **Cleanup on green** — attic the unimported artifacts, docstring scrub (timeless
+   voice; master labels, verbatim quotes, honesty pins, status markers kept), blueprint.
+4. **Prose/webpage** — author curates (microhistory voice; inbox/064-082.pdf).
+5. **Quiet push** (currently DEFERRED; main ahead of origin), then the announcement at
+   project-wide **0/0** — before it, only the theorem + certificate are claimed;
+   landed-gated rows are never "proved".
