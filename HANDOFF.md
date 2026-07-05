@@ -1,79 +1,81 @@
-# HANDOFF — gate GREEN: thm:concentricity PROVED; phase = translations in earnest; announcement deferred to project-wide 0/0 (replaces ALL earlier handoffs; 2026-07-05, afternoon)
+# HANDOFF — fan-out phase: everything downstream of the locked theorem (replaces ALL earlier handoffs; 2026-07-05, evening)
 
-**Read order:** (1) CLAUDE.md. (2) This file. (3) `PLAN_reencode_concentricity_2026-07-05.md`
-(approved, EXECUTED). (4) `Concentricity/TransportObject.lean`. Threads: Claude Code (Lane A:
-build, goal-closing, commits) · Opus chat (Lane B: master folds, SOURCES) · Fable chat
-(coordination, ledger audit).
+**Read order:** (1) CLAUDE.md. (2) This file. (3) `DESIGN_translations.md` — the approved
+statement spec for this phase. (4) `PLAN_two_index_bricks.md` + `DESIGN_B2_2_kernels.md` —
+the bricks. (5) `Concentricity/TransportObject.lean` — the locked theorem.
+Threads: Claude Code (Lane A: build, goal-closing, commits) · Opus chat (Lane B: master
+folds, SOURCES) · Fable chat (coordination, ledger audit). `OPENER_next_threads.md` carries
+the paste-ready lane instructions.
+
+## The locked centre
+
+`ASection.concentricity_transport` (master `thm:concentricity`) is PROVED — kernel
+certificate on record, verbatim:
+
+    'ASection.concentricity_transport' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+Mathlib's three foundational axioms only; no `sorryAx`; no project axioms. Everything in
+this phase fans out from it and nothing in this phase may modify it, its file, or its cone.
 
 ## Ledger — exact, no rounding
 
-- **Gate DISCHARGED 2026-07-05:** full root `lake build` exit 0, zero error lines, on exactly
-  the committed tree **e68abc0**. `concentricity_transport` (the master's `thm:concentricity`)
-  is **PROVED**: 0 sorry terms and 0 axioms in TransportObject.lean, pins 1–3 landed as
-  theorems, dependency cone never touches the open node. Lane A's two in-tree fixes
-  (qualified `CategoryTheory.ConnectedComponents`; `Quotient.sound'`) are part of e68abc0.
-- Imported root: **2 sorries / 0 axioms** — the 2 is the ONE welded node
-  `placement_set` (PlacementSet.lean:46) ≡ `transportLevel_placement` (Theorem.lean:213)
-  via the proved `placement_set_iff`; translation-layer address; gates ONLY
-  `cor:nontrivial` → `cor:rh`. LiKernel (3 sorries) unimported on disk; Keystone
-  artifacts unimported. `riemannZeta_nontrivialZeros_infinite`: proved in-repo.
-- **Certificate ON RECORD (Lane A, 2026-07-05), verbatim:**
-  `'ASection.concentricity_transport' depends on axioms: [propext, Classical.choice, Quot.sound]`
-  — exactly Mathlib's three foundational axioms (R9: always print, not counted), no
-  `sorryAx`, no project axioms. Kernel-checked; this is the announcement-grade quote.
-- **PUSH DEFERRED (author's ruling 2026-07-05):** main is 1 ahead of origin (e68abc0).
-  No push until the runway's quiet-push step; work stays private.
+- Imported root: **2 sorries / 0 axioms** — the ONE welded node: `placement_set`
+  (PlacementSet.lean:46) ≡ `transportLevel_placement` (Theorem.lean:213) via the proved
+  `placement_set_iff`. Gates only the `cor:nontrivial` → `cor:rh` chain.
+- Proved stock this phase builds on: the divisor bundle (`stem_zero_of_sphereZero`,
+  `sphereZero_complete` = the stem-level zero dictionary), Brick 1 + B2.1 ledger rows
+  (PlacementSet.lean), `riemannZeta_nontrivialZeros_infinite` (ZetaInfinitude.lean),
+  G₂ orbit transitivity (G2.lean).
+- Unimported on disk: LiKernel, KeystoneAssembly, KeystoneFinality (→ `attic/` per H2).
+- Superseded process docs live in `archive/` (git history preserves everything).
+- **PUSH DEFERRED** (author): main ahead of origin stays local until the runway's
+  quiet-push step.
 
-## Open author ruling (R6; surfaced by Lane A's five-lens audit, 2026-07-05)
+## Open author ruling (R6) — non-blocking
 
-`transportClass`/`Populated` read the frozen `transportLevel` row as each zero's ARRIVAL
-ADDRESS — a letter-of-§4 read of level data, audit-verified INERT (Pin 2: no map from the
-populated object's components back to levels exists; the proof consumes only the witness
-arrows; the master's readout language — "the class of the base object beneath it" —
-sanctions the address-read). Options: **(i)** author sanctions; one docstring line records
-the ruling, dated (recommended — no code churn on a green tree); **(ii)** re-route through
-the witness arrow's source object (definitionally identical). AWAITING RULING — blocks
-nothing in T1–T4.
+`transportClass`/`Populated` read frozen `transportLevel` as each zero's arrival address:
+letter-of-§4, audit-verified inert (Pin 2 forbids readback; proof consumes witness arrows
+only). Options: (i) sanction + one docstring line (recommended); (ii) re-route through the
+witness arrow's source (definitionally identical). If (i), execute as H4.
 
-## The phase — translations in earnest (author, 2026-07-05: step by step, all logically
-independent of the theorem and of each other; R4: attached after, as corollaries; each
-lands sorried, then closes; R6-stop with the exact goal on any resist)
+## Execution sequence (Lane A) — spec = DESIGN_translations.md; shapes there are the
+author-approved words
 
-- **T1 — ζ_𝕆 constructed** (master `def:zeta_O`, Part 1–2): the slice-preserving section
-  whose stem is Mathlib's `riemannZeta` (StemRing.lean seat; R9 constructed, never
-  axiomatized; R5 verify the `riemannZeta` cluster live — continuation, pole at 1, Euler
-  product). Well-definedness = slice-preservation + semiregularity + value N at the pole.
-- **T2 — zero dictionary** (classical ρ ⟺ residue-ℂ sphere) and **T4 — residue
-  translation** (residue-ℂ = nontrivial; residue-ℝ = trivial) next.
-- **T3 — equivalence theorem** (RH ⟺ concentric 6-spheres about one real centre).
-- **C1 — main corollary:** ζ_𝕆 is an A-section (C1–C4 from T1 + classical facts;
-  infinitude already proved in-repo).
-- **T5 — connected = concentric:** the ONE non-free translation — consumes `placement_set`
-  (OPEN). Stays sorried; the bricks (`PLAN_two_index_bricks.md`) keep targeting it — THE
-  LONG POLE. Brick 1 + B2.1 ledger rows already proved in PlacementSet.lean; B2.2
-  (pairing) + closing clause remain. Do NOT fold any of it into `concentricity_transport`.
-- **C2 — `cor:rh`:** assembles last; honestly gated by `placement_set`; no other claim.
+- **H1–H3 housekeeping** (per OPENER): verify build after archive move; move the three
+  unimported Lean artifacts to `attic/`; docstring scrub — remove process meta-commentary
+  from `Concentricity/*.lean`, KEEP master labels, verbatim sourced quotes + pinpoint
+  cites (R10), honesty-pin content, PROVED/OPEN/GAP markers. Docstring-only; every
+  statement and proof byte-identical; lake gates.
+- **#1** `zero_equivalence` — free, over the proved divisor bundle.
+- **#4** `nontrivial_one_centre` — one line; compiles but its cone contains the open
+  node: placement-gated, never reported as proved until the bricks close.
+- **#3** `Concentricity/ZetaSection.lean` — `zetaSection : ASection` with every field
+  sorried first (design field table), after a day-one R5 sweep reporting live-Mathlib
+  coverage of the `riemannZeta` cluster (continuation, pole, FE, Euler product, Hadamard).
+  Close fields cheapest-first; ledger delta per commit.
+- **#5** `riemannHypothesis` — drafted sorried per design; FE pin verified live. Closes
+  only when #3's fields and `placement_set` are both closed.
+- **Bricks in parallel — THE LONG POLE:** B2.2 pairing + closing clause toward
+  `placement_set` (Brick 1, B2.1 already proved). The only open mathematics in the repo.
 
-Lane B: §7 master folds (restate the theorem on the populated 𝒯_A; the red TODO moves into
-`cor:nontrivial` with explicit \uses{placement}; rmk:pi0-split reshape; supersession notes
-dated 2026-07-05) + Part 1–2 verbatim SOURCES excerpts for T1–T4; journal-only (R11).
+Lane B: master folds (theorem restated on the populated 𝒯_A; red TODO into
+`cor:nontrivial` with \uses{placement}; rmk:pi0-split reshape) + Part 1–2 verbatim
+SOURCES excerpts for the ζ_𝕆 chain; journal-only citations (R11).
 
-## Publication runway (author's revised sequence 2026-07-05 — SUPERSEDES the prior
-announce-with-open-ledger runway)
+## Publication runway (author's sequence)
 
-1. Translations + corollaries in earnest (above), step by step.
-2. Blueprint website compiled PRIVATELY (LaTeX is the human face; verify \uses{} graph =
-   Lean dependency graph; ledger page states the honest split). Prose polish in the
-   author's register — style reference: the author's "What is Microhistory?" essay
-   (request from the author when this phase opens; not in the repo).
-3. QUIET push of what's needed (repo to origin; any library-bound pieces as the author
-   rules).
+1. This phase: translations + ζ_𝕆 + corollary drafts; bricks toward `placement_set`.
+2. Blueprint website compiled PRIVATELY; \uses{} graph = Lean dependency graph; prose
+   polish in the author's register (style reference: the author's "What is Microhistory?"
+   essay — request from the author when this phase opens; not in the repo).
+3. QUIET push of what's needed.
 4. **Announcement ONLY after project-wide 0 sorries / 0 project axioms** (R9's literal
-   gate: `placement_set` closed via the bricks; all T/C rows closed). The announcement
-   still carries the ledger verbatim; the honesty pins remain the shield.
+   gate). The announcement carries the ledger verbatim; the honesty pins are the shield.
 
-## Standing rules for this phase
+## Standing rules
 
-Zeros are output, never input. No statement edits to pass proofs. Frozen rows stay frozen.
-Centres never enter the theorem file. N is real — on the great circle ℝ ∪ {N}; witness
-docstrings carry it. Words-before-commits for every new statement; lake gates all.
+Zeros are output, never input. No statement edits to pass proofs. Frozen rows stay
+frozen. Centres never enter the theorem file. N is real — on the great circle ℝ ∪ {N}.
+Design-spec shapes are the approved words; genuinely new statements need
+words-before-commits. R5 live checks on every Mathlib name; R6-stop with the exact goal
+on any resist; lake gates all.

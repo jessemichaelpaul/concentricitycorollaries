@@ -1,85 +1,99 @@
-# Openers for the next threads (2026-07-04 evening; replaces the earlier opener file; repo is the memory)
-
-**Comprehension gate, any lane (use before giving the floor):** after the read order,
-ask the session to play back — own words, no quoting — (1) the sharpened vacuity
-criterion (unchanged: vacuous iff the conclusion changes; uniformity fatal only for
-category-modifying constructions; equation-routes face exactly one gate — lake on
-unmodified statements); (2) the Brick-3 honesty pin PLUS the two-sided reduction:
-why conjugation makes the sums real but never pins, why the FE classically converts
-one-sided containment into pinning, how two-sided anchors at an EXISTENTIAL β replace
-the FE, and what the C-1 counterexample (ρₖ = −k + i) demonstrated about fields vs.
-typing; (3) junk-tsum hygiene: why the burn order D1 → C-1 → D3 → D2 is load-bearing.
-If the playback matches, floor's theirs. If not, point at the HANDOFF bullet and
-re-gate. (Last thread the gate's cousin — the receipt discipline — converted a
-semantics dispute into a counterexample and a one-line fork. It tests and pays.)
+# Openers — paste-ready lane instructions (2026-07-05 evening; replaces the earlier opener file; repo is the memory)
 
 ---
 
-## Lane A — Claude Code, on the repo (lake is arbiter)
+## Lane A opener (Claude Code) — paste verbatim
 
-Repo: ~/Desktop/concentricity. Read order: CLAUDE.md → HANDOFF.md (2026-07-04
-evening; replaces ALL earlier) → PLAN_two_index_bricks.md (§5 amendment, §6 ADOPTED
-block, §7 order note) → DESIGN_B2_2_kernels.md → READ_weil_li_findings.md →
-SCAN_shapes_and_C5_ledger.md (records; do not re-derive; do not re-run the nine
-mapped routes).
+You are Lane A (build, goal-closing, commits) on the Concentricity repo. Read, in order:
+CLAUDE.md → HANDOFF.md → DESIGN_translations.md. The theorem is locked
+(`ASection.concentricity_transport`, kernel certificate in HANDOFF.md): nothing you do may
+modify TransportObject.lean, its statements, or its cone. Work the sequence below top to
+bottom; commit per item (or per coherent field group in #3); after every commit report:
+hash · files touched · imported-root sorry/axiom ledger · `#print axioms` output for each
+newly closed row. Any resisting goal: R6-stop — paste the exact goal or type error, no
+prose verdicts, and wait.
 
-Ledger at handoff: 5/0 with the C-1 → D3 → D2 burn in flight (or already reported —
-trust the repo over this paragraph). The five: C-1 (liSum_summable), D3, D2, and the
-one node's two faces (placement_set ⟷ transportLevel_placement, iff proved).
+**H1 — build check on the archive move.** Root docs were moved to `archive/` (docs only,
+no Lean). Run `lake build`; confirm green; report.
 
-Task: finish the burn per the confirmed order and riders — C-1 first (paired
-expansion against c3_lowerEdge + quadratic density), then D3, then D2 (limit face may
-hold its honestly-labeled sorry) — commit-per-close, report table + tails + survivor
-set, then HOLD: no D4, no L-rung statements, nothing touches def:A-section or the
-frozen set, pending the γ verdict and the author's word. Rulings binding: §8, the
-conjunction, §4α, (β)-with-price-of-deletion, the adopted (iv) v0.2, the D1 im ≠ 0
-rendering note, the junk-tsum riders. R6 stops carry exact goals. Fences: no
-statement edits to pass a proof; sorry = UNFORMALIZED never UNSOUND; difficulty
-gates nothing; lake gates everything.
+**H2 — attic the dead branches.** `git mv Concentricity/LiKernel.lean
+Concentricity/KeystoneAssembly.lean Concentricity/KeystoneFinality.lean` to a new
+top-level `attic/` (outside the module tree; they are unimported). `lake build`; green;
+commit.
 
-## Lane B — ideas room / claude.ai successor (master + readings; writes no Lean, lands no commits)
+**H3 — docstring scrub (no meta-commentary).** In `Concentricity/*.lean` docstrings and
+comments, REMOVE process narration: dated rulings and their stories, lane attributions,
+plan-/handoff-file references, supersession and re-badging narratives, "revoked/waived/
+balloon" vocabulary. KEEP, untouched: master labels (`thm:…`, `def:…`, `cor:…`,
+`eq:placement-set`), verbatim sourced quotes with pinpoint cites (R10 — these are
+load-bearing), the honesty-pin content of Pins 1–3, and status markers (PROVED / OPEN /
+GAP / sorried-cone notes). Docstring-only: every `theorem`/`def`/`structure` statement and
+proof byte-identical — verify with a diff that shows no non-comment hunks. `lake build`;
+commit.
 
-Same read order (mount the repo). FIRST TASK — the γ reading (the C-1 fork's open
-half): does the master's semiregular-on-𝕆* typing (compactified continuation through
-N; currently bare `valueAtInfinity`) already forbid leftward-running residue-ℂ
-divisors — i.e., derive the lower edge, delete the (β) field per its docstring?
-Pinpoints: GPS Def. 11.1 (poles are isolated; what is N's typing when zeros
-accumulate to it), master def:R + rmk:compactify, SCAN §7(iv). Hold the wrinkle
-honestly: ζ's own trivial zeros (residue-ℝ) march leftward into N, so the question
-is specifically about SPHERES. Verdict routes to the author; then either the
-derivation plan (words to PLAN first) or the master's edge clause fold. Master
-wording for the edge WAITS on the verdict.
+**H4 — only if the author has ruled (i) on the §4 address-read:** add the one-line ruling
+to the `transportClass` docstring; nothing else.
 
-Then, in order: the parked rmk:status refresh (author's now-or-later); the D4 design
-gate (the explicit-formula face — only on the author's word); L1/L3 as
-statements-first candidates; the second-side thinking (does the band/winding
-transport supply the a > β positivity family — the discovery question, L6/C-2).
-SOURCES queue: BL JNT 77 via the author's library (paywalled); Sekatskii UMJ
-volume/pages live-verify (Springer DOI 10.1007/s11253-014-0940-9); Weil 1952 and
-Bombieri Lincei 2000 → SOURCES/ files when statements harden. Hold the pins:
-value-free / covariant / differences-only; the |ρₙ|²-form bridge (never τ²);
-per-statement conclusion-check at every landing (now including the divergent-tsum
-branch check); N-asymptotics never reach finite pairs; GRH-scale = the prize's size,
-not the odds (author's correction, banked).
+**#1 — `zero_equivalence`.** Land per DESIGN_translations.md §#1 (stem form) over the
+proved divisor bundle. Should close immediately; certificate expected clean.
 
-## Author's working rules
+**#4 — `nontrivial_one_centre`.** Land per design §#4. It compiles but consumes
+`transportLevel_placement` (the open node): report it as LANDED, PLACEMENT-GATED — never
+as proved. Its `#print axioms` will show `sorryAx` until the bricks close; that is
+expected and honest.
 
-No work after midnight; not on an empty stomach. Words before commits. Lane B edits
-files, Lane A commits (if stray .git/*.lock files appear with no git process running,
-remove them). Disagreements drive this forward — push back early, in the open, with
-tags.
+**#3 — `Concentricity/ZetaSection.lean`.** Day one: R5 sweep — verify against live
+Mathlib docs and REPORT coverage before closing anything: the `riemannZeta` cluster
+(analytic continuation, simple pole at 1, functional equation, Euler product,
+Hadamard/product factorization, trivial zeros, conjugation symmetry). Then land
+`zetaSection : ASection` with EVERY field sorried, exactly the design §#2+#3 field table
+(F := riemannZeta; pole := 1; ι := Nat.Primes; ℓ p z := -Complex.log (1 - p^(-z));
+Ω₀ := 1; m := 0; genus := 1; c4_infinite := riemannZeta_nontrivialZeros_infinite —
+already proved). Close fields cheapest-first, one commit per field or coherent group,
+Mathlib pin named in each docstring. Expected heavy fields: `c2_euler`/`c2_summable`
+(Euler-product cluster) and `c3_multipliable`/`c3_factorization` (Hadamard — if Mathlib
+has no product API, R6-stop with what exists and wait for a ruling on in-repo assembly
+scope). `c3_lowerEdge` for ζ is the classical critical-strip bound 0 < Re ρ,
+member-private.
 
-## One-paragraph state (for humans)
+**#5 — `riemannHypothesis`.** Draft sorried per design §#5; verify the Mathlib FE pin
+live (`riemannZeta_one_sub` / completed-zeta FE — report the exact name). It closes only
+when #3's fields and `placement_set` are closed; until then it is LANDED, GATED.
 
-The Concentricity Theorem is machine-checked except one sentence: all residue-ℂ
-zero levels of an A-section coincide. That sentence is now PROVED equivalent (D1 +
-B2.0/B2.1; D2 pending its burn) to: there exists a real β with the generalized-Li
-kernel sums nonnegative from both sides of β — value-free, FE-free, conjugation-only.
-The upper side is owned (C2); the convergence needs the lower edge, landed as a
-field pending the γ derivation question; the SECOND side of the positivity is the
-open mathematics — the exact spot where the octonionic transport (band, winding, the
-degenerate set that ℂ lacks) either supplies what the functional equation supplies
-classically, or the clause stands as the named C5 with cor:rh honestly withheld.
-Everything else — octonions, G₂, both worlds, the transport, π₀, the divisor bundle,
-both log-derivative expansions, the seed, the residue ledger, the finite BL engine —
-is green at zero project axioms.
+**Bricks (parallel, long pole).** Resume `PLAN_two_index_bricks.md` + `DESIGN_B2_2_kernels.md`
+toward `placement_set`: B2.2 pairing + closing clause. Brick 1 and B2.1 are proved stock
+in PlacementSet.lean. This is the repo's only open mathematics; everything else above is
+classical bookkeeping.
+
+Standing: R5 live-verify every Mathlib name; R8 `sorry` = UNFORMALIZED, never UNSOUND; no
+statement edits to pass proofs; frozen rows stay frozen; design-spec shapes are the
+author-approved words — genuinely new statements need words-before-commits; zeros are
+output, never input; lake gates all.
+
+---
+
+## Lane B opener (Opus chat) — paste verbatim
+
+You are Lane B (master folds, SOURCES) on the Concentricity project. Read: CLAUDE.md →
+HANDOFF.md → PLAN_reencode_concentricity_2026-07-05.md §7 → MASTER_DIFF_folds_2026-07-04.md.
+Deliverables are diffs against `Octonionic_RH_master.tex` (R7), never essays. Tasks, in
+order: (1) the §7 master folds — restate `thm:concentricity` on the populated 𝒯_A; move
+the red \TODO from the theorem's proof into `cor:nontrivial` (which gains explicit
+\uses{placement}); reshape `rmk:pi0-split`'s finality half; supersession notes dated
+2026-07-05. (2) Part 1–2 verbatim SOURCES excerpts for the ζ_𝕆 chain (`def:zeta_O`,
+`thm:zero-spheres`, `thm:rh-equiv`, `cor:zeta-section`, `cor:rh` consumers). (3) R11:
+journal-only citations — verify venue/volume/pages/DOI live; the GPV winding JMAA
+numbering is still author-to-confirm. Registers per R10: SOURCED verbatim with pinpoint
+cites; DERIVED as lemmas; GLOSSES in remarks, never load-bearing.
+
+---
+
+## Comprehension gate, any lane (use before giving the floor)
+
+After the read order, ask the session to play back — own words, no quoting — (1) why
+`concentricity_transport` is proved for EVERY A-section and what Pin 2 says its object
+cannot see; (2) where the one open node lives, what consumes it, and why deleting it
+would not shorten the path to `cor:rh`; (3) the announcement gate (project-wide 0/0) and
+what may be claimed before it (the theorem + certificate; landed-gated rows never
+"proved"). If the playback matches, floor's theirs. If not, point at the HANDOFF bullet
+and re-gate.
