@@ -1,5 +1,15 @@
 # DESIGN — the translation corollaries (Lane B, 2026-07-04)
 
+> **SUPERSESSION BANNER (2026-07-05, juncture ① — see
+> `PLAN_islands_part1_part2_2026-07-05.md`):** the FRAMING of §#2–#3 (classical ζ cited
+> directly into the member's fields) is superseded by PLAN_islands §0 — the member is
+> ζ_𝕆 (`def:zeta_O`); classical ζ lives on ℂ* (`def:zeta-Cstar`) and enters only over
+> the Zero Equivalence bridge (`thm:zero-equivalence`). The statement SHAPES (#4, #5, and
+> the #3 field table read at stem level) remain author-approved words. #1-octonionic is
+> NO LONGER deferred — it is Island B6. The keystone/placement node is now **Island P,
+> the One-Hyperplane Theorem** (PLAN_islands §3.5), with the author's standing
+> reservation recorded there.
+
 Register: design spec, words-before-commits. Shapes are SCHEMATIC; Lane A finalizes
 hypotheses/names against the arbiter (R5 live checks flagged inline) and returns the
 rendered statements for the author before landing. These are **logically independent**
