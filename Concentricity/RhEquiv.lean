@@ -22,17 +22,17 @@ the completed FE and the conjugation pin); and the rigidity row
 σ_ρ = c = 1 − σ_ρ, hence σ_ρ = ½") — the whole of (b)⇒(a) on the non-real
 zeros.
 
-NOT landed (R6-flagged, the one remaining classical leaf): the full iff
-against Mathlib's `RiemannHypothesis` needs "every nontrivial zero is
-non-real" — the real-zero exclusion ζ(σ) ≠ 0 on σ ∈ (0,1)
-(ZetaStrip.lean header). The iff row lands when that leaf does, by author
-ruling.
+The R6 flag is CLOSED: the real-zero exclusion is DERIVED in
+ZetaRealZeros.lean (the paired alternating series), so every nontrivial
+zero is non-real (`nontrivialZero_im_ne_zero`) and the FULL iff
+(`riemannHypothesis_iff_concentric`) lands PROVED below.
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8). This file targets ZERO
 sorries.
 -/
 import Concentricity.ZeroSpheres
 import Concentricity.ZetaStrip
+import Concentricity.ZetaRealZeros
 
 noncomputable section
 
@@ -117,3 +117,49 @@ theorem upperZero_re_eq_half_of_concentric {c : ℝ}
   have h₁ : σ = c := hc hγ hz
   have h₂ : 1 - σ = c := hc hγ hz2
   linarith
+
+/-- Cluster 4 COMPLETE: every nontrivial zero is non-real — the strip
+classification (ZetaStrip.lean) plus the real-zero exclusion, the
+ZetaRealZeros.lean leaf. PROVED. -/
+theorem nontrivialZero_im_ne_zero {s : ℂ} (hz : riemannZeta s = 0)
+    (htriv : ¬∃ n : ℕ, s = -2 * (n + 1)) (hone : s ≠ 1) : s.im ≠ 0 := by
+  intro him
+  obtain ⟨h0, h1⟩ := nontrivialZero_re_mem_Ioo hz htriv hone
+  have hseq : ((s.re : ℝ) : ℂ) = s :=
+    Complex.ext (Complex.ofReal_re _)
+      (by rw [Complex.ofReal_im]; exact him.symm)
+  exact riemannZeta_ne_zero_of_real_mem_Ioo h0 h1 (by rw [hseq]; exact hz)
+
+/-- **Island B7 COMPLETE — `thm:rh-equiv`, the full equivalence** (master,
+verbatim): "The following are equivalent: (a) the Riemann Hypothesis;
+(b) the nontrivial-zero 6-spheres {S_ρ} of ζ_𝕆 (Theorem thm:zero-spheres)
+are concentric — they share a single common centre, necessarily a point of
+the real axis. When they hold, the common centre is ½."
+
+(a) is Mathlib's `RiemannHypothesis`; (b) is the common-centre form over
+B6's sphere parameters (`zeroSphere σ γ` is "the round sphere of radius γ
+centred at the real point σ", `mem_zeroSphere_iff`). The centre clause is
+carried by both directions: (a)⇒(b) exhibits c = ½ (`concentric_of_RH`),
+and (b)⇒(a) forces every centre to ½ (`upperZero_re_eq_half_of_concentric`
+— the FE rigidity — after `nontrivialZero_im_ne_zero` folds every
+nontrivial zero onto a sphere). Per `rmk:half-downstream`, ½ enters this
+file only. PROVED. -/
+theorem riemannHypothesis_iff_concentric :
+    RiemannHypothesis ↔
+      ∃ c : ℝ, ∀ ⦃σ γ : ℝ⦄, 0 < γ → riemannZeta ⟨σ, γ⟩ = 0 → σ = c := by
+  constructor
+  · intro h
+    exact ⟨1 / 2, fun σ γ hγ hz => concentric_of_RH h hγ hz⟩
+  · rintro ⟨c, hc⟩ s hz htriv hone
+    have him := nontrivialZero_im_ne_zero hz htriv hone
+    rcases lt_or_gt_of_ne him with hneg | hpos
+    · have hconj : riemannZeta ⟨s.re, -s.im⟩ = 0 := by
+        have h := riemannZeta_conj s
+        rw [hz, map_zero] at h
+        have harg : (starRingEnd ℂ) s = (⟨s.re, -s.im⟩ : ℂ) :=
+          Complex.ext (by rw [Complex.conj_re]) (by rw [Complex.conj_im])
+        rwa [harg] at h
+      exact upperZero_re_eq_half_of_concentric hc
+        (by linarith : (0 : ℝ) < -s.im) hconj
+    · have hs : (⟨s.re, s.im⟩ : ℂ) = s := rfl
+      exact upperZero_re_eq_half_of_concentric hc hpos (by rw [hs]; exact hz)

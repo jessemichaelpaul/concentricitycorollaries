@@ -13,11 +13,11 @@ in-repo (R10) from pinned Mathlib inputs only:
   vanishing Γ-factor at Re ≤ 0 is exactly a trivial zero);
 - `riemannZeta_zero` (ζ(0) = −1/2 ≠ 0) to exclude the origin.
 
-NOT here (the one remaining classical leaf of the cluster, R6-flagged): the
-real-zero exclusion INSIDE the strip — ζ(σ) ≠ 0 for real σ ∈ (0, 1)
-(classically: (1 − 2^{1−σ})ζ(σ) is a negative alternating sum). The pinned
-Mathlib has no such lemma; it gates `thm:rh-equiv`(b)⇒(a) at the real case
-and `thm:zero-spheres`(iv)'s sphere-count form, and lands by author ruling.
+The real-zero exclusion INSIDE the strip — ζ(σ) ≠ 0 for real σ ∈ (0, 1) —
+is DERIVED in Concentricity/ZetaRealZeros.lean (the paired alternating
+series; the pinned Mathlib has no such lemma). Cluster 4 is COMPLETE:
+together, nontrivial zeros are non-real strip points
+(`nontrivialZero_im_ne_zero`, RhEquiv.lean).
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8). This file targets ZERO
 sorries.

@@ -15,5 +15,6 @@ import Concentricity.ZetaOctonion
 import Concentricity.ZetaInfinitude
 import Concentricity.ZetaStrip
 import Concentricity.ZetaPole
+import Concentricity.ZetaRealZeros
 import Concentricity.ZeroSpheres
 import Concentricity.RhEquiv
