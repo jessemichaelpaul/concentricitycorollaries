@@ -140,6 +140,18 @@ structure ASection where
   c3_locMajorant : ∀ z : ℂ, z ≠ (pole : ℂ) → ∃ r > 0, ∃ u : ℕ → ℝ, Summable u ∧
     ∀ n, ∀ w ∈ Metric.ball z r,
       ‖spherePrimary (genus n) (sphereZero n) w - 1‖ ≤ u n
+  /-- The L4 lower edge (C-1 fork ruling (β), author, 2026-07-04):
+  CLARIFICATION-PENDING-DERIVATION — the divisor's real parts are bounded
+  below. With the quadratic point-density of `c3_locMajorant` this implies
+  Sekatskii's condition (ii), closing C-1 by the worked paired expansion.
+  R9 price of deletion (author's wording, verbatim): "deleted the day (γ)
+  derives it from the semiregular-on-𝕆* typing; if underivable, this is a
+  flagged class hypothesis and the master gains the clause." The (γ)
+  derivation question — GPS Def. 11.1 (poles are isolated: N's typing when
+  zeros accumulate to it), master def:R + rmk:compactify, SCAN §7(iv) — is
+  Lane B's opening task; master wording waits for γ's verdict either way.
+  ζ instantiates with its classical strip (member-private, legitimate). -/
+  c3_lowerEdge : ∃ βlo : ℝ, ∀ k : ℕ, βlo ≤ (sphereZero k).re
   /-- C3: "On 𝕆* ∖ {pole}, A = qᵐ · R · e^g · ∏ₙ 𝓔(·; qₙ)" — over the **full
   divisor**, which includes the pole with multiplicity −1 (PLAN §8, author-ruled
   transcription repair 2026-07-04: classically Hadamard factors (s−1)ζ(s); the
