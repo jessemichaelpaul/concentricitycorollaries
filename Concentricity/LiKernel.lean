@@ -28,6 +28,10 @@ hold.
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
 import Concentricity.PlacementSet
+import Mathlib.Algebra.Order.BigOperators.Group.Multiset
+import Mathlib.Topology.Sequences
+import Mathlib.Topology.MetricSpace.ProperSpace
+import Mathlib.Analysis.SpecificLimits.Basic
 
 noncomputable section
 
@@ -64,6 +68,266 @@ theorem liSum_summable (A : ASection) (a β : ℝ) (n : ℕ) :
 
 end ASection
 
+/-! ## D1 scaffolding (all PROVED helpers; R8: helpers are never sorried)
+
+The key identity, the ratio's modulus trichotomy, and the simultaneous
+return of unit powers. R5 record: the pin's Dirichlet approximation
+(`Real.exists_int_int_abs_mul_sub_le`,
+Mathlib/NumberTheory/DiophantineApproximation/Basic.lean) is
+one-dimensional and Mathlib carries no simultaneous variant (grep
+2026-07-04: "simultaneous" empty over NumberTheory/), so the joint return
+is proved inline — the sanctioned pigeonhole, executed in metric form:
+sequential compactness of the finite torus supplies the
+two-multiples-in-one-cell step, and the exponent difference is the
+return. -/
+
+/-- The anchor-pair Möbius ratio underlying the kernel:
+`liKernel n a β z = 1 - (liRatio a β z) ^ n` definitionally. Its unit
+circle is the mirror line `Re = β` (the key identity below). -/
+def liRatio (a β : ℝ) (z : ℂ) : ℂ :=
+  (z - (a : ℂ)) / (z - (2 * (β : ℂ) - (a : ℂ)))
+
+theorem liKernel_eq_ratio (n : ℕ) (a β : ℝ) (z : ℂ) :
+    liKernel n a β z = 1 - liRatio a β z ^ n := rfl
+
+/-- Off the real axis the ratio's numerator is nonzero (the anchor `a` is
+real). -/
+theorem liRatio_num_ne_zero {z : ℂ} (hz : z.im ≠ 0) (a : ℝ) :
+    z - (a : ℂ) ≠ 0 := by
+  intro h
+  apply hz
+  simpa using congrArg Complex.im h
+
+/-- Off the real axis the ratio's denominator is nonzero (the mirror
+anchor `2β − a` is real) — totality of the kernel is genuine, no junk
+division. -/
+theorem liRatio_den_ne_zero {z : ℂ} (hz : z.im ≠ 0) (a β : ℝ) :
+    z - (2 * (β : ℂ) - (a : ℂ)) ≠ 0 := by
+  have h2 : 2 * (β : ℂ) - (a : ℂ) = ((2 * β - a : ℝ) : ℂ) := by push_cast; ring
+  rw [h2]
+  intro h
+  apply hz
+  simpa using congrArg Complex.im h
+
+theorem liRatio_ne_zero {z : ℂ} (hz : z.im ≠ 0) (a β : ℝ) :
+    liRatio a β z ≠ 0 :=
+  div_ne_zero (liRatio_num_ne_zero hz a) (liRatio_den_ne_zero hz a β)
+
+/-- **The key identity** (mission D1): the difference of squared distances
+to the anchor pair reads off the side of the mirror line:
+`‖z − a‖² − ‖z − (2β − a)‖² = 4(β − a)(Re z − β)`. Hence the ratio modulus
+is `< 1 ⟺ (β − a)(Re z − β) < 0` and `= 1 ⟺ Re z = β`. -/
+theorem normSq_anchor_sub_mirror (z : ℂ) (a β : ℝ) :
+    ‖z - (a : ℂ)‖ ^ 2 - ‖z - (2 * (β : ℂ) - (a : ℂ))‖ ^ 2
+      = 4 * (β - a) * (z.re - β) := by
+  have h2 : 2 * (β : ℂ) - (a : ℂ) = ((2 * β - a : ℝ) : ℂ) := by push_cast; ring
+  rw [h2]
+  simp only [← Complex.normSq_eq_norm_sq, Complex.normSq_apply, Complex.sub_re,
+    Complex.sub_im, Complex.ofReal_re, Complex.ofReal_im]
+  ring
+
+/-- On the mirror line the ratio is unimodular. -/
+theorem liRatio_norm_eq_one {z : ℂ} (hz : z.im ≠ 0) {a β : ℝ}
+    (hre : z.re = β) : ‖liRatio a β z‖ = 1 := by
+  have hkey : ‖z - (a : ℂ)‖ ^ 2 - ‖z - (2 * (β : ℂ) - (a : ℂ))‖ ^ 2
+      = 4 * ((β - a) * (z.re - β)) := by
+    linear_combination normSq_anchor_sub_mirror z a β
+  rw [hre, sub_self, mul_zero, mul_zero] at hkey
+  have hden : (0 : ℝ) < ‖z - (2 * (β : ℂ) - (a : ℂ))‖ :=
+    norm_pos_iff.mpr (liRatio_den_ne_zero hz a β)
+  have heq : ‖z - (a : ℂ)‖ = ‖z - (2 * (β : ℂ) - (a : ℂ))‖ :=
+    (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp (by linarith)
+  unfold liRatio
+  rw [norm_div, heq, div_self hden.ne']
+
+/-- Strictly on the near side of the mirror the ratio modulus is `< 1`
+(the D3 case). -/
+theorem liRatio_norm_lt_one {z : ℂ} (hz : z.im ≠ 0) {a β : ℝ}
+    (h : (β - a) * (z.re - β) < 0) : ‖liRatio a β z‖ < 1 := by
+  have hkey : ‖z - (a : ℂ)‖ ^ 2 - ‖z - (2 * (β : ℂ) - (a : ℂ))‖ ^ 2
+      = 4 * ((β - a) * (z.re - β)) := by
+    linear_combination normSq_anchor_sub_mirror z a β
+  have hden : (0 : ℝ) < ‖z - (2 * (β : ℂ) - (a : ℂ))‖ :=
+    norm_pos_iff.mpr (liRatio_den_ne_zero hz a β)
+  have hlt : ‖z - (a : ℂ)‖ < ‖z - (2 * (β : ℂ) - (a : ℂ))‖ :=
+    (sq_lt_sq₀ (norm_nonneg _) (norm_nonneg _)).mp (by linarith)
+  unfold liRatio
+  rw [norm_div]
+  exact (div_lt_one hden).mpr hlt
+
+/-- Strictly on the wrong side of the mirror the ratio modulus exceeds 1 —
+the contrapositive's engine. -/
+theorem one_lt_liRatio_norm {z : ℂ} (hz : z.im ≠ 0) {a β : ℝ}
+    (h : 0 < (β - a) * (z.re - β)) : 1 < ‖liRatio a β z‖ := by
+  have hkey : ‖z - (a : ℂ)‖ ^ 2 - ‖z - (2 * (β : ℂ) - (a : ℂ))‖ ^ 2
+      = 4 * ((β - a) * (z.re - β)) := by
+    linear_combination normSq_anchor_sub_mirror z a β
+  have hden : (0 : ℝ) < ‖z - (2 * (β : ℂ) - (a : ℂ))‖ :=
+    norm_pos_iff.mpr (liRatio_den_ne_zero hz a β)
+  have hlt : ‖z - (2 * (β : ℂ) - (a : ℂ))‖ < ‖z - (a : ℂ)‖ :=
+    (sq_lt_sq₀ (norm_nonneg _) (norm_nonneg _)).mp (by linarith)
+  unfold liRatio
+  rw [norm_div]
+  exact (one_lt_div hden).mpr hlt
+
+/-- Mirror-line termwise positivity: on `Re z = β` the ratio is
+unimodular, so `Re K = 1 − Re(ωⁿ) ≥ 0` — the `2(1 − cos nθ) ≥ 0` form. -/
+theorem liKernel_re_nonneg {z : ℂ} (hz : z.im ≠ 0) {a β : ℝ}
+    (hre : z.re = β) (n : ℕ) : 0 ≤ (liKernel n a β z).re := by
+  have h2 : (liRatio a β z ^ n).re ≤ 1 := by
+    calc (liRatio a β z ^ n).re ≤ |(liRatio a β z ^ n).re| := le_abs_self _
+      _ ≤ ‖liRatio a β z ^ n‖ := Complex.abs_re_le_norm _
+      _ = 1 := by rw [norm_pow, liRatio_norm_eq_one hz hre, one_pow]
+  rw [liKernel_eq_ratio, Complex.sub_re, Complex.one_re]
+  linarith
+
+/-- **The simultaneous return** (the Dirichlet/pigeonhole step of the D1
+brief): finitely many unit complex numbers return jointly near 1 at
+arbitrarily late powers. Proof: the orbit of multiples of `max N 1` on the
+finite torus `∏_{ω ∈ t} S¹` (compact: `isCompact_univ_pi` +
+`isCompact_sphere`) has a convergent subsequence
+(`IsCompact.tendsto_subseq`); two subsequence points within `ε/2` of the
+limit are within `ε` of each other, and dividing them — coordinatewise,
+`‖ω^{j₂M} − ω^{j₁M}‖ = ‖ω^{(j₂−j₁)M} − 1‖` on the unit circle — produces
+the return, of exponent `≥ max N 1`. -/
+theorem exists_pow_forall_norm_sub_one_lt (t : Finset ℂ)
+    (ht : ∀ ω ∈ t, ‖ω‖ = 1) {ε : ℝ} (hε : 0 < ε) (N : ℕ) :
+    ∃ n : ℕ, N ≤ n ∧ 1 ≤ n ∧ ∀ ω ∈ t, ‖ω ^ n - 1‖ < ε := by
+  classical
+  set N₁ : ℕ := max N 1 with hN₁def
+  set u : ℕ → (t → ℂ) := fun j ω => (ω : ℂ) ^ (j * N₁) with hudef
+  have hmem : ∀ j, u j ∈ Set.univ.pi fun _ : t => Metric.sphere (0 : ℂ) 1 := by
+    intro j
+    rw [Set.mem_univ_pi]
+    intro ω
+    simp only [hudef]
+    rw [mem_sphere_zero_iff_norm, norm_pow, ht ω ω.2, one_pow]
+  have hcpt : IsCompact (Set.univ.pi fun _ : t => Metric.sphere (0 : ℂ) 1) :=
+    isCompact_univ_pi fun _ => isCompact_sphere 0 1
+  obtain ⟨p, -, φ, hφ, hconv⟩ := hcpt.tendsto_subseq hmem
+  obtain ⟨K, hK⟩ := Metric.tendsto_atTop.mp hconv (ε / 2) (half_pos hε)
+  have h₁ : dist (u (φ K)) p < ε / 2 := hK K le_rfl
+  have h₂ : dist (u (φ (K + 1))) p < ε / 2 := hK (K + 1) (Nat.le_succ K)
+  have hφlt : φ K < φ (K + 1) := hφ (Nat.lt_succ_self K)
+  have hdist : dist (u (φ (K + 1))) (u (φ K)) < ε := by
+    calc dist (u (φ (K + 1))) (u (φ K))
+        ≤ dist (u (φ (K + 1))) p + dist (u (φ K)) p := dist_triangle_right _ _ _
+      _ < ε / 2 + ε / 2 := add_lt_add h₂ h₁
+      _ = ε := add_halves ε
+  have key : ∀ i : t, ‖(i : ℂ) ^ ((φ (K + 1) - φ K) * N₁) - 1‖ < ε := by
+    intro i
+    have hcoord : dist (u (φ (K + 1)) i) (u (φ K) i)
+        ≤ dist (u (φ (K + 1))) (u (φ K)) := dist_le_pi_dist _ _ i
+    have hval : dist (u (φ (K + 1)) i) (u (φ K) i)
+        = ‖(i : ℂ) ^ ((φ (K + 1) - φ K) * N₁) - 1‖ := by
+      simp only [hudef]
+      rw [dist_eq_norm]
+      have hsplit : (i : ℂ) ^ (φ (K + 1) * N₁)
+          = (i : ℂ) ^ (φ K * N₁) * (i : ℂ) ^ ((φ (K + 1) - φ K) * N₁) := by
+        rw [← pow_add, ← Nat.add_mul, Nat.add_sub_cancel' hφlt.le]
+      rw [hsplit]
+      have hfac : (i : ℂ) ^ (φ K * N₁) * (i : ℂ) ^ ((φ (K + 1) - φ K) * N₁)
+            - (i : ℂ) ^ (φ K * N₁)
+          = (i : ℂ) ^ (φ K * N₁) * ((i : ℂ) ^ ((φ (K + 1) - φ K) * N₁) - 1) := by
+        ring
+      rw [hfac, norm_mul, norm_pow, ht i i.2, one_pow, one_mul]
+    calc ‖(i : ℂ) ^ ((φ (K + 1) - φ K) * N₁) - 1‖
+        = dist (u (φ (K + 1)) i) (u (φ K) i) := hval.symm
+      _ ≤ dist (u (φ (K + 1))) (u (φ K)) := hcoord
+      _ < ε := hdist
+  refine ⟨(φ (K + 1) - φ K) * N₁, ?_, ?_, fun ω hω => key ⟨ω, hω⟩⟩
+  · calc N ≤ N₁ := le_max_left _ _
+      _ ≤ (φ (K + 1) - φ K) * N₁ := Nat.le_mul_of_pos_left _ (by omega)
+  · have hpos : 0 < (φ (K + 1) - φ K) * N₁ :=
+      Nat.mul_pos (by omega) (by omega)
+    omega
+
+/-- The D1 contrapositive engine: one element strictly on the wrong side
+of the mirror for the anchor `a` drives some kernel sum negative. At a
+simultaneous return of ALL the ratio directions every term is
+`≤ 2 − rⁿ` (aligned cosine `> 1/2`, so `Re(wⁿ) > rⁿ/2`), and the
+wrong-sided element's `rⁿ > 1ⁿ` outgrows `2·card S`. The side
+classification is `a`-independent (`r > 1 ⟺ (β − a)(Re z − β) > 0`, the
+key identity), so no "anchor close to β" care is needed. -/
+theorem exists_liKernel_sum_neg (S : Multiset ℂ) (hS : ∀ z ∈ S, z.im ≠ 0)
+    {a β : ℝ} {z₀ : ℂ} (hz₀ : z₀ ∈ S)
+    (hwrong : 0 < (β - a) * (z₀.re - β)) :
+    ∃ n : ℕ, 1 ≤ n ∧ (S.map fun z => 2 * (liKernel n a β z).re).sum < 0 := by
+  classical
+  set dir : ℂ → ℂ := fun z => liRatio a β z / (‖liRatio a β z‖ : ℂ) with hdir
+  set t : Finset ℂ := S.toFinset.image dir with ht_def
+  have ht : ∀ ω ∈ t, ‖ω‖ = 1 := by
+    intro ω hω
+    obtain ⟨z, hzS, rfl⟩ := Finset.mem_image.mp hω
+    have hzim : z.im ≠ 0 := hS z (Multiset.mem_toFinset.mp hzS)
+    have hne : liRatio a β z ≠ 0 := liRatio_ne_zero hzim a β
+    simp only [hdir]
+    rw [norm_div, Complex.norm_real, Real.norm_eq_abs, abs_norm,
+      div_self (norm_ne_zero_iff.mpr hne)]
+  have hr₀ : 1 < ‖liRatio a β z₀‖ := one_lt_liRatio_norm (hS z₀ hz₀) hwrong
+  obtain ⟨N, hN⟩ := Filter.eventually_atTop.mp
+    ((tendsto_pow_atTop_atTop_of_one_lt hr₀).eventually_gt_atTop
+      (2 * (Multiset.card S : ℝ)))
+  obtain ⟨n, hnN, hn1, halign⟩ :=
+    exists_pow_forall_norm_sub_one_lt t ht one_half_pos N
+  refine ⟨n, hn1, ?_⟩
+  have hterm : ∀ z ∈ S, 2 * (liKernel n a β z).re
+      ≤ 2 - ‖liRatio a β z‖ ^ n := by
+    intro z hz
+    have hzim := hS z hz
+    have hwne : liRatio a β z ≠ 0 := liRatio_ne_zero hzim a β
+    have hrpos : (0 : ℝ) < ‖liRatio a β z‖ := norm_pos_iff.mpr hwne
+    have hrneC : ((‖liRatio a β z‖ : ℝ) : ℂ) ≠ 0 :=
+      Complex.ofReal_ne_zero.mpr hrpos.ne'
+    have hmemt : dir z ∈ t :=
+      Finset.mem_image_of_mem dir (Multiset.mem_toFinset.mpr hz)
+    have halz : ‖dir z ^ n - 1‖ < 1 / 2 := halign (dir z) hmemt
+    have hfact : liRatio a β z ^ n
+        = ((‖liRatio a β z‖ ^ n : ℝ) : ℂ) * dir z ^ n := by
+      simp only [hdir]
+      rw [div_pow, Complex.ofReal_pow, ← mul_div_assoc,
+        mul_div_cancel_left₀ _ (pow_ne_zero n hrneC)]
+    have hRe : (liRatio a β z ^ n).re
+        = ‖liRatio a β z‖ ^ n * (dir z ^ n).re := by
+      rw [hfact, Complex.re_ofReal_mul]
+    have hdirRe : (1 : ℝ) / 2 < (dir z ^ n).re := by
+      have h1 : (1 : ℝ) - (dir z ^ n).re ≤ ‖dir z ^ n - 1‖ := by
+        calc (1 : ℝ) - (dir z ^ n).re = (1 - dir z ^ n).re := by
+              rw [Complex.sub_re, Complex.one_re]
+          _ ≤ |(1 - dir z ^ n).re| := le_abs_self _
+          _ ≤ ‖1 - dir z ^ n‖ := Complex.abs_re_le_norm _
+          _ = ‖dir z ^ n - 1‖ := norm_sub_rev _ _
+      linarith
+    have hprod : ‖liRatio a β z‖ ^ n * (1 / 2)
+        < ‖liRatio a β z‖ ^ n * (dir z ^ n).re :=
+      mul_lt_mul_of_pos_left hdirRe (pow_pos hrpos n)
+    have hKre : (liKernel n a β z).re = 1 - (liRatio a β z ^ n).re := by
+      rw [liKernel_eq_ratio, Complex.sub_re, Complex.one_re]
+    rw [hKre, hRe]
+    linarith
+  have hsum2 : (S.map fun z => 2 - ‖liRatio a β z‖ ^ n).sum
+      = 2 * (Multiset.card S : ℝ)
+        - (S.map fun z => ‖liRatio a β z‖ ^ n).sum := by
+    rw [Multiset.sum_map_sub]
+    congr 1
+    rw [Multiset.map_const', Multiset.sum_replicate, nsmul_eq_mul]
+    ring
+  have hnonneg : ∀ x ∈ S.map fun z => ‖liRatio a β z‖ ^ n, (0 : ℝ) ≤ x := by
+    intro x hx
+    obtain ⟨z, hzS, rfl⟩ := Multiset.mem_map.mp hx
+    positivity
+  have hsingle : ‖liRatio a β z₀‖ ^ n
+      ≤ (S.map fun z => ‖liRatio a β z‖ ^ n).sum :=
+    Multiset.single_le_sum hnonneg _ (Multiset.mem_map_of_mem _ hz₀)
+  have hbig : 2 * (Multiset.card S : ℝ) < ‖liRatio a β z₀‖ ^ n := hN n hnN
+  calc (S.map fun z => 2 * (liKernel n a β z).re).sum
+      ≤ (S.map fun z => 2 - ‖liRatio a β z‖ ^ n).sum :=
+        Multiset.sum_map_le_sum_map _ _ hterm
+    _ = 2 * (Multiset.card S : ℝ)
+        - (S.map fun z => ‖liRatio a β z‖ ^ n).sum := hsum2
+    _ ≤ 2 * (Multiset.card S : ℝ) - ‖liRatio a β z₀‖ ^ n := by linarith
+    _ < 0 := by linarith
+
 /-- **D1 — finite-multiset Bombieri–Lagarias** (ladder L2; DESIGN:
 "unconditional, pure algebra + Dirichlet approximation … the reduction's
 engine, fully formalizable now"): for a finite multiset avoiding the
@@ -73,14 +337,49 @@ FIDELITY NOTE (author's rider 1, 2026-07-04): the `im ≠ 0` hypothesis
 STRENGTHENS the BL source's literal two-point avoidance; it is chosen as
 the consumer-exact rendering — it keeps every kernel anchor-free for every
 quantified `a` (any real element is some `a`'s mirror), and the D2 consumer
-feeds only conjugate-closed zero multisets, all non-real. -/
+feeds only conjugate-closed zero multisets, all non-real.
+
+PROVED (B2.2 burn, 2026-07-04). (⟸): the key identity
+`‖z − a‖² − ‖z − (2β − a)‖² = 4(β − a)(Re z − β)` makes every ratio
+unimodular on the mirror line, so each term is `2(1 − cos nθ) ≥ 0`
+(`liKernel_re_nonneg`), on both sides. (⟹) by contraposition: an element
+off the line is strictly wrong-sided for the anchor `a = β ∓ 1` — the
+side classification `r > 1 ⟺ (β − a)(Re z − β) > 0` is `a`-independent —
+and `exists_liKernel_sum_neg` drives the corresponding family negative at
+a simultaneous return of all ratio directions (compactness pigeonhole,
+`exists_pow_forall_norm_sub_one_lt`; R5: no simultaneous Dirichlet lemma
+in the pin). -/
 theorem finite_BL (S : Multiset ℂ) (β : ℝ) (hS : ∀ z ∈ S, z.im ≠ 0) :
     ((∀ a : ℝ, a < β → ∀ n : ℕ, 1 ≤ n →
         0 ≤ (S.map fun z => 2 * (liKernel n a β z).re).sum)
       ∧ (∀ a : ℝ, β < a → ∀ n : ℕ, 1 ≤ n →
         0 ≤ (S.map fun z => 2 * (liKernel n a β z).re).sum))
       ↔ ∀ z ∈ S, z.re = β := by
-  sorry
+  constructor
+  · rintro ⟨h₁, h₂⟩ z₀ hz₀
+    by_contra hne
+    rcases lt_or_gt_of_ne hne with hlt | hgt
+    · -- `Re z₀ < β` is wrong-sided for the anchor `a = β + 1 > β`
+      have hwrong : 0 < (β - (β + 1)) * (z₀.re - β) := by
+        have h : (β - (β + 1)) * (z₀.re - β) = β - z₀.re := by ring
+        rw [h]
+        linarith
+      obtain ⟨n, hn1, hneg⟩ := exists_liKernel_sum_neg S hS hz₀ hwrong
+      exact absurd (h₂ (β + 1) (lt_add_one β) n hn1) (not_le.mpr hneg)
+    · -- `Re z₀ > β` is wrong-sided for the anchor `a = β − 1 < β`
+      have hwrong : 0 < (β - (β - 1)) * (z₀.re - β) := by
+        have h : (β - (β - 1)) * (z₀.re - β) = z₀.re - β := by ring
+        rw [h]
+        linarith
+      obtain ⟨n, hn1, hneg⟩ := exists_liKernel_sum_neg S hS hz₀ hwrong
+      exact absurd (h₁ (β - 1) (by linarith) n hn1) (not_le.mpr hneg)
+  · intro hall
+    refine ⟨fun a ha n hn => ?_, fun a ha n hn => ?_⟩ <;>
+    · refine Multiset.sum_nonneg fun x hx => ?_
+      obtain ⟨z, hzS, rfl⟩ := Multiset.mem_map.mp hx
+      have h : 0 ≤ (liKernel n a β z).re :=
+        liKernel_re_nonneg (hS z hzS) (hall z hzS) n
+      linarith
 
 /-- **D2 — the class reduction: the adopted (iv) target v0.2, as an iff**
 (DESIGN: via Theorem 2 both-sidedly + D1 + the limit passage; the limit
