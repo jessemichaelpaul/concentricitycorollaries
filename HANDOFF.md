@@ -1,63 +1,76 @@
-# HANDOFF — theorem landed; PHASE = the logically-independent translations, then the ζ_𝕆 corollaries (replaces ALL earlier handoffs; 2026-07-05, night)
+# HANDOFF — gate GREEN: thm:concentricity PROVED; phase = translations in earnest; announcement deferred to project-wide 0/0 (replaces ALL earlier handoffs; 2026-07-05, afternoon)
 
 **Read order:** (1) CLAUDE.md. (2) This file. (3) `PLAN_reencode_concentricity_2026-07-05.md`
-(approved). (4) `Concentricity/TransportObject.lean`. Threads: Claude Code (Lane A: build,
-goal-closing, commits) · Opus chat (Lane B: master folds, SOURCES) · Fable chat (coordination).
+(approved, EXECUTED). (4) `Concentricity/TransportObject.lean`. Threads: Claude Code (Lane A:
+build, goal-closing, commits) · Opus chat (Lane B: master folds, SOURCES) · Fable chat
+(coordination, ledger audit).
 
 ## Ledger — exact, no rounding
 
-- `concentricity_transport` (the master's `thm:concentricity`, re-encoded per the author's
-  2026-07-05 ruling) is LANDED CLOSED: zero sorries in TransportObject.lean, zero axioms,
-  and its dependency cone does NOT touch the open node. **GATE NOT YET RUN:** `lake build`
-  (Fable's sandbox has no toolchain — Claude Code's first act). "Proved" is claimable only
-  after green; until then the claim of record is "written closed, gate pending."
-- Repo-wide after green: **0 axioms; ONE open welded node** — `placement_set`
-  (PlacementSet.lean:46) ≡ `transportLevel_placement` (Theorem.lean, re-badged) via the
-  proved `placement_set_iff`. It gates ONLY the translation `cor:nontrivial` → `cor:rh`,
-  never the theorem. `riemannZeta_nontrivialZeros_infinite`: proved in-repo. LiKernel:
-  unimported, on disk. Keystone artifacts: parked, not imported.
+- **Gate DISCHARGED 2026-07-05:** full root `lake build` exit 0, zero error lines, on exactly
+  the committed tree **e68abc0**. `concentricity_transport` (the master's `thm:concentricity`)
+  is **PROVED**: 0 sorry terms and 0 axioms in TransportObject.lean, pins 1–3 landed as
+  theorems, dependency cone never touches the open node. Lane A's two in-tree fixes
+  (qualified `CategoryTheory.ConnectedComponents`; `Quotient.sound'`) are part of e68abc0.
+- Imported root: **2 sorries / 0 axioms** — the 2 is the ONE welded node
+  `placement_set` (PlacementSet.lean:46) ≡ `transportLevel_placement` (Theorem.lean:213)
+  via the proved `placement_set_iff`; translation-layer address; gates ONLY
+  `cor:nontrivial` → `cor:rh`. LiKernel (3 sorries) unimported on disk; Keystone
+  artifacts unimported. `riemannZeta_nontrivialZeros_infinite`: proved in-repo.
+- **Certificate pending (Lane A one-liner):** `#print axioms ASection.concentricity_transport`
+  — expected output: Mathlib's three foundational axioms only, no `sorryAx`, no project
+  axioms. Paste the verbatim output into this file when run; it is the kernel-checked,
+  announcement-grade quote.
+- **PUSH DEFERRED (author's ruling 2026-07-05):** main is 1 ahead of origin (e68abc0).
+  No push until the runway's quiet-push step; work stays private.
 
-## The phase — translations (author, 2026-07-05: all LOGICALLY INDEPENDENT of the theorem
-and of each other; R4: attached after, as corollaries; each lands sorried, then closes)
+## Open author ruling (R6; surfaced by Lane A's five-lens audit, 2026-07-05)
 
-- **T1 — ζ_𝕆 constructed** (master `def:zeta_O`, Part 1–2): build the octonionic zeta in
-  Lean — the slice-preserving section whose stem is Mathlib's `riemannZeta` (StemRing.lean
-  is the seat; R9: constructed, never axiomatized; R5: verify the `riemannZeta` cluster —
-  continuation, pole at 1, Euler product — against live Mathlib). Well-definedness =
-  slice-preservation + semiregularity + value N at the pole (`rmk:two-poles`).
-- **T2 — zero dictionary:** classical nontrivial zero ρ ⟺ residue-ℂ zero-sphere S_(σ,γ)
-  (master `thm:zero-spheres`, `lem:zero-Cstar`, `lem:residue-spheres`).
-- **T3 — equivalence theorem:** RH ⟺ the nontrivial zeros are concentric 6-spheres about
-  one real centre (master `thm:rh-equiv`, Part 2).
-- **T4 — residue translation:** residue-ℂ = classically nontrivial; residue-ℝ = trivial
-  (the residue dictionary, master `cor:zeta-section` proof block).
-- **T5 — connected = concentric** (one STATIC component ⟺ one σ; the hyperplane/centre
-  reading): carrier is the re-badged static row + Pin 3
-  (`translation_requires_placement`). **This is the ONE non-free translation — it consumes
-  `placement_set` (OPEN).** It stays sorried; the bricks (`PLAN_two_index_bricks.md`)
-  target it. Do NOT fold any of it into `concentricity_transport` (author's directive).
-- **C1 — main corollary: ζ_𝕆 is an A-section** (master `cor:zeta-section`): C1–C4 from
-  T1 + classical facts (continuation/simple pole; Euler; slice-regular Weierstrass/AdF;
-  infinitude — already proved in-repo).
-- **C2 — final corollary `cor:rh`:** transport theorem + T5(placement) + T2/T3/T4 + the
-  functional equation pin ½. **Remains gated by `placement_set`; no other claim is made.**
+`transportClass`/`Populated` read the frozen `transportLevel` row as each zero's ARRIVAL
+ADDRESS — a letter-of-§4 read of level data, audit-verified INERT (Pin 2: no map from the
+populated object's components back to levels exists; the proof consumes only the witness
+arrows; the master's readout language — "the class of the base object beneath it" —
+sanctions the address-read). Options: **(i)** author sanctions; one docstring line records
+the ruling, dated (recommended — no code churn on a green tree); **(ii)** re-route through
+the witness arrow's source object (definitionally identical). AWAITING RULING — blocks
+nothing in T1–T4.
 
-Execution order (Lane A): gate build → T1 → T2/T4 → T3 → C1; T5/bricks in parallel as the
-long pole; C2 assembles last. Statements sorried first (R8), one goal at a time, R6-stop
-with the exact goal on any resist. Lane B: the master folds already spec'd (PLAN_reencode
-§7) + Part 1–2 verbatim SOURCES excerpts for T1–T4; journal-only citations (R11).
+## The phase — translations in earnest (author, 2026-07-05: step by step, all logically
+independent of the theorem and of each other; R4: attached after, as corollaries; each
+lands sorried, then closes; R6-stop with the exact goal on any resist)
 
-## After the corollaries — publication runway (author's sequence)
+- **T1 — ζ_𝕆 constructed** (master `def:zeta_O`, Part 1–2): the slice-preserving section
+  whose stem is Mathlib's `riemannZeta` (StemRing.lean seat; R9 constructed, never
+  axiomatized; R5 verify the `riemannZeta` cluster live — continuation, pole at 1, Euler
+  product). Well-definedness = slice-preservation + semiregularity + value N at the pole.
+- **T2 — zero dictionary** (classical ρ ⟺ residue-ℂ sphere) and **T4 — residue
+  translation** (residue-ℂ = nontrivial; residue-ℝ = trivial) next.
+- **T3 — equivalence theorem** (RH ⟺ concentric 6-spheres about one real centre).
+- **C1 — main corollary:** ζ_𝕆 is an A-section (C1–C4 from T1 + classical facts;
+  infinitude already proved in-repo).
+- **T5 — connected = concentric:** the ONE non-free translation — consumes `placement_set`
+  (OPEN). Stays sorried; the bricks (`PLAN_two_index_bricks.md`) keep targeting it — THE
+  LONG POLE. Brick 1 + B2.1 ledger rows already proved in PlacementSet.lean; B2.2
+  (pairing) + closing clause remain. Do NOT fold any of it into `concentricity_transport`.
+- **C2 — `cor:rh`:** assembles last; honestly gated by `placement_set`; no other claim.
 
-1. Blueprint/private-website pass: LaTeX is the human face; verify \uses{} graph = Lean
-   dependency graph; ledger page states the honest split.
-2. Prose polish in the author's register, style reference = the author's "What is
-   Microhistory?" essay (request it from the author when this phase opens; it is not in
-   the repo).
-3. **Zulip announcement (author drops it).** The announcement MUST carry the ledger
-   verbatim: proved = the class theorem (connectivity, class-wide by design), the
-   translations T1–T4, and ζ_𝕆 ∈ class; open = `placement_set` ⇒ `cor:nontrivial` ⇒
-   `cor:rh`. The honesty pins are the shield: point readers at them first.
+Lane B: §7 master folds (restate the theorem on the populated 𝒯_A; the red TODO moves into
+`cor:nontrivial` with explicit \uses{placement}; rmk:pi0-split reshape; supersession notes
+dated 2026-07-05) + Part 1–2 verbatim SOURCES excerpts for T1–T4; journal-only (R11).
+
+## Publication runway (author's revised sequence 2026-07-05 — SUPERSEDES the prior
+announce-with-open-ledger runway)
+
+1. Translations + corollaries in earnest (above), step by step.
+2. Blueprint website compiled PRIVATELY (LaTeX is the human face; verify \uses{} graph =
+   Lean dependency graph; ledger page states the honest split). Prose polish in the
+   author's register — style reference: the author's "What is Microhistory?" essay
+   (request from the author when this phase opens; not in the repo).
+3. QUIET push of what's needed (repo to origin; any library-bound pieces as the author
+   rules).
+4. **Announcement ONLY after project-wide 0 sorries / 0 project axioms** (R9's literal
+   gate: `placement_set` closed via the bricks; all T/C rows closed). The announcement
+   still carries the ledger verbatim; the honesty pins remain the shield.
 
 ## Standing rules for this phase
 
