@@ -10,6 +10,7 @@ import Concentricity.Theorem
 import Concentricity.PlacementSet
 import Concentricity.TransportObject
 import Concentricity.ZetaCstar
+import Concentricity.ZetaConj
 import Concentricity.ZetaOctonion
 import Concentricity.ZetaInfinitude
 import Concentricity.ZeroSpheres
