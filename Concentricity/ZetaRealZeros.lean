@@ -29,6 +29,7 @@ through the paired (absolutely convergent) form:
 sorries.
 -/
 import Concentricity.ZetaPole
+import Concentricity.ZetaStrip
 import Mathlib.Analysis.PSeries
 import Mathlib.Analysis.PSeriesComplex
 import Mathlib.Analysis.Complex.LocallyUniformLimit
@@ -421,3 +422,17 @@ theorem riemannZeta_ne_zero_of_real_mem_Ioo {σ : ℝ} (h0 : 0 < σ)
   rw [etaPaired, tsum_congr hpair, ← Complex.ofReal_tsum] at heq
   rw [Complex.ofReal_eq_zero] at heq
   exact absurd heq (ne_of_gt hSpos)
+
+/-- Cluster 4 COMPLETE — every nontrivial zero is non-real: the strip
+classification (`nontrivialZero_re_mem_Ioo`, ZetaStrip.lean) plus the
+real-zero exclusion above. Consumed by `thm:rh-equiv`'s full iff
+(RhEquiv.lean) and `thm:zero-spheres`(iv)'s sphere-count
+(ZeroSpheres.lean). PROVED. -/
+theorem nontrivialZero_im_ne_zero {s : ℂ} (hz : riemannZeta s = 0)
+    (htriv : ¬∃ n : ℕ, s = -2 * (n + 1)) (hone : s ≠ 1) : s.im ≠ 0 := by
+  intro him
+  obtain ⟨h0, h1⟩ := nontrivialZero_re_mem_Ioo hz htriv hone
+  have hseq : ((s.re : ℝ) : ℂ) = s :=
+    Complex.ext (Complex.ofReal_re _)
+      (by rw [Complex.ofReal_im]; exact him.symm)
+  exact riemannZeta_ne_zero_of_real_mem_Ioo h0 h1 (by rw [hseq]; exact hz)

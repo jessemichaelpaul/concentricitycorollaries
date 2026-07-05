@@ -4,16 +4,18 @@ Concentricity/ZeroSpheres.lean
 Island B6 (PLAN_islands_part1_part2_2026-07-05.md): the zero 6-spheres
 (master `thm:zero-spheres`) — clauses (i) the sphere as a single G₂-orbit,
 (ii) every point a zero + conjugate zeros give the same sphere, (iii)
-distinct parameters give disjoint spheres, and the (iv) stepping stone
-(infinitude of the parameter set). The full (iv) sphere-count form and the
-lower-half/real clauses close with the R5 conjugation and zero-location
-pins (sweep clusters 2/4) — recorded, not sorried.
+distinct parameters give disjoint spheres, and (iv) — first the stepping
+stone (infinitude of the parameter set), then, with clusters 2/4 landed
+(the conjugation pin, ZetaConj.lean; the zero location,
+ZetaStrip/ZetaRealZeros.lean), the FULL sphere-count
+(`zeroSpheres_infinite`): infinitely many zero 6-spheres, as sets.
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8). This file targets ZERO
 sorries.
 -/
 import Concentricity.ZetaOctonion
 import Concentricity.ZetaInfinitude
+import Concentricity.ZetaRealZeros
 
 noncomputable section
 
@@ -175,3 +177,58 @@ theorem zeroParams_infinite :
     · rw [Set.mem_insert_iff, Set.mem_singleton_iff]
       exact Or.inr (Complex.ext rfl (by rw [abs_of_neg h, neg_neg]))
   exact (hfin.biUnion fun p _ => (Set.finite_singleton _).insert _).subset hcover
+
+/-- The unit imaginary sphere is inhabited — the Cayley–Dickson unit
+(0, 1) ∈ ℍ × ℍ: real part 0, norm-square 0 + 1. PROVED helper. -/
+theorem _root_.Octonion.unitImaginarySphere_nonempty :
+    unitImaginarySphere.Nonempty := by
+  refine ⟨((0 : Quaternion ℝ), (1 : Quaternion ℝ)), ?_, ?_⟩
+  · rfl
+  · simp [Octonion.normSq]
+
+/-- Every zero sphere is nonempty. PROVED helper. -/
+theorem zeroSphere_nonempty (σ γ : ℝ) : (zeroSphere σ γ).Nonempty := by
+  obtain ⟨v, hv⟩ := Octonion.unitImaginarySphere_nonempty
+  exact ⟨sliceEmbed v ⟨σ, γ⟩, v, hv, rfl⟩
+
+/-- **(iv) COMPLETE — "there are infinitely many such spheres"** (master
+`thm:zero-spheres`(iv), verbatim; the full sphere-count form, closing the
+stepping stone): the set of zero 6-spheres is infinite AS A SET OF SETS.
+Route: cluster 4 (`nontrivialZero_im_ne_zero`) makes every nontrivial-zero
+parameter upper-half (γ = |Im ρ| > 0), the conjugation pin folds the lower
+half up, the parameter set is infinite (`zeroParams_infinite`), and
+distinct parameters give distinct spheres (disjoint by
+`zeroSphere_disjoint`, nonempty by `zeroSphere_nonempty`). PROVED. -/
+theorem zeroSpheres_infinite :
+    {S : Set Octonion | ∃ σ γ : ℝ, 0 < γ ∧ riemannZeta ⟨σ, γ⟩ = 0
+      ∧ S = zeroSphere σ γ}.Infinite := by
+  set P : Set (ℝ × ℝ) := (fun s : ℂ => (s.re, |s.im|)) ''
+    {s : ℂ | riemannZeta s = 0 ∧ (¬∃ n : ℕ, s = -2 * (n + 1)) ∧ s ≠ 1}
+    with hP_def
+  have hPinf : P.Infinite := zeroParams_infinite
+  have hPpos : ∀ p ∈ P, 0 < p.2 := by
+    rintro p ⟨s, hs, rfl⟩
+    exact abs_pos.mpr (nontrivialZero_im_ne_zero hs.1 hs.2.1 hs.2.2)
+  have hPzero : ∀ p ∈ P, riemannZeta ⟨p.1, p.2⟩ = 0 := by
+    rintro p ⟨s, hs, rfl⟩
+    rcases abs_cases s.im with ⟨heq, _⟩ | ⟨heq, _⟩
+    · have hs' : (⟨s.re, |s.im|⟩ : ℂ) = s := Complex.ext rfl heq
+      rw [hs']
+      exact hs.1
+    · have hs' : (⟨s.re, |s.im|⟩ : ℂ) = (starRingEnd ℂ) s :=
+        Complex.ext (by rw [Complex.conj_re]) (by rw [Complex.conj_im]; exact heq)
+      rw [hs', riemannZeta_conj, hs.1, map_zero]
+  have hinj : Set.InjOn (fun p : ℝ × ℝ => zeroSphere p.1 p.2) P := by
+    intro p hp q hq heq
+    by_contra hne
+    have hne' : (p.1, p.2) ≠ (q.1, q.2) := by
+      rw [Prod.mk.eta, Prod.mk.eta]
+      exact hne
+    have hdisj := zeroSphere_disjoint (hPpos p hp) (hPpos q hq) hne'
+    have heq' : zeroSphere p.1 p.2 = zeroSphere q.1 q.2 := heq
+    rw [heq'] at hdisj
+    obtain ⟨x, hx⟩ := zeroSphere_nonempty q.1 q.2
+    exact Set.disjoint_left.mp hdisj hx hx
+  refine Set.Infinite.mono ?_ (hPinf.image hinj)
+  rintro S ⟨p, hp, rfl⟩
+  exact ⟨p.1, p.2, hPpos p hp, hPzero p hp, rfl⟩

@@ -118,18 +118,6 @@ theorem upperZero_re_eq_half_of_concentric {c : ℝ}
   have h₂ : 1 - σ = c := hc hγ hz2
   linarith
 
-/-- Cluster 4 COMPLETE: every nontrivial zero is non-real — the strip
-classification (ZetaStrip.lean) plus the real-zero exclusion, the
-ZetaRealZeros.lean leaf. PROVED. -/
-theorem nontrivialZero_im_ne_zero {s : ℂ} (hz : riemannZeta s = 0)
-    (htriv : ¬∃ n : ℕ, s = -2 * (n + 1)) (hone : s ≠ 1) : s.im ≠ 0 := by
-  intro him
-  obtain ⟨h0, h1⟩ := nontrivialZero_re_mem_Ioo hz htriv hone
-  have hseq : ((s.re : ℝ) : ℂ) = s :=
-    Complex.ext (Complex.ofReal_re _)
-      (by rw [Complex.ofReal_im]; exact him.symm)
-  exact riemannZeta_ne_zero_of_real_mem_Ioo h0 h1 (by rw [hseq]; exact hz)
-
 /-- **Island B7 COMPLETE — `thm:rh-equiv`, the full equivalence** (master,
 verbatim): "The following are equivalent: (a) the Riemann Hypothesis;
 (b) the nontrivial-zero 6-spheres {S_ρ} of ζ_𝕆 (Theorem thm:zero-spheres)
