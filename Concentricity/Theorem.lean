@@ -145,7 +145,12 @@ theorem pi0_grothendieck {B : Type u} [SmallCategory B] (F : B ⥤ Grpd.{u, u}) 
       ≃ Limits.colimit ((F ⋙ Grpd.forgetToCat) ⋙ pi0Functor)) :=
   ⟨pi0GrothendieckEquiv F⟩
 
-/-- The **transport level** of the n-th residue-ℂ zero-sphere: the level of
+/-- RE-BADGED 2026-07-05 (PLAN_reencode_concentricity_2026-07-05.md §5):
+translation-layer row — the level read that the STATIC readout consumes.
+The master label `thm:concentricity` now lives on
+`ASection.concentricity_transport` (Concentricity/TransportObject.lean).
+
+The **transport level** of the n-th residue-ℂ zero-sphere: the level of
 the fibre point over the n-th zero-sphere, read in the vocabulary of
 `lem:exp-degenerate` (`Octonion.exp_fibre_neg_real`,
 Concentricity/Toolkit.lean) — a degenerate-fibre point
@@ -165,7 +170,12 @@ object label (master `def:base`). -/
 def ASection.transportLevel (A : ASection) (n : ℕ) : ℝ :=
   (A.sphereZero n).re
 
-/-- **The placement** (master, proof of `thm:concentricity`, the placement
+/-- RE-BADGED 2026-07-05 (PLAN_reencode §5): the ONE open node, at its
+translation-layer address — welded to `placement_set` by the proved
+`placement_set_iff`; consumed by `cor:nontrivial`, never by
+`concentricity_transport`. Statement and sorry unchanged.
+
+**The placement** (master, proof of `thm:concentricity`, the placement
 paragraph, verbatim): "Through the commuting triangle π∘E = exp
 ([Rem. 5.2(a)]{VS}), the unique tame lift traverses the logarithm manifold
 as a single closed loop ([Cor. 5.13]{GPVwind}), and every point of the
@@ -224,7 +234,14 @@ theorem assemblyComponent_eq (A : ASection) (n : ℕ) :
     assemblyComponent A n = TotalObject.levelClass.symm (A.transportLevel n) :=
   rfl
 
-/-- **The Concentricity Theorem** (master `thm:concentricity`, verbatim):
+/-- RE-BADGED 2026-07-05 (PLAN_reencode §5): this row is now the Lean
+carrier of `cor:nontrivial`'s content — one STATIC component = one level =
+one centre — OPEN at `placement_set`. The master label `thm:concentricity`
+has moved to `ASection.concentricity_transport` (TransportObject.lean),
+where connectivity is the section's own, through N. The static object is
+the general ring 𝓡's geometry: static, connects nothing, by design.
+
+**The former statement row** (master `thm:concentricity` v4 wording, kept):
 "Let A be an A-section (Definition def:A-section). Then the residue-ℂ zero
 spheres of A all lie in a single connected component of the total object
 𝒯_A (Definition def:base) — equivalently, they have one and the same image

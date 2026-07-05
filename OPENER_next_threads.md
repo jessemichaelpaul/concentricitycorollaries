@@ -1,92 +1,85 @@
-# Openers for the two lanes (copy-paste; repo is the memory)
+# Openers for the next threads (2026-07-04 evening; replaces the earlier opener file; repo is the memory)
 
-**Comprehension gate, either lane (use before giving the floor):** after the read
-order, ask the session to play back — in its own words, no quoting — (1) the
-sharpened vacuity criterion (HANDOFF care points): what makes a route vacuous, why
-uniformity is fatal only for category-modifying constructions, and the single gate
-equation-routes face; and (2) the Brick-3 honesty pin: what Bricks 1–2 do and do not
-discharge. If the playback matches, floor's theirs. If not, point at the HANDOFF
-bullet and re-gate. (This gate caught nothing wrong on 2026-07-04 and instead
-produced the rmk:pi0-split leak find — it tests and pays.)
+**Comprehension gate, any lane (use before giving the floor):** after the read order,
+ask the session to play back — own words, no quoting — (1) the sharpened vacuity
+criterion (unchanged: vacuous iff the conclusion changes; uniformity fatal only for
+category-modifying constructions; equation-routes face exactly one gate — lake on
+unmodified statements); (2) the Brick-3 honesty pin PLUS the two-sided reduction:
+why conjugation makes the sums real but never pins, why the FE classically converts
+one-sided containment into pinning, how two-sided anchors at an EXISTENTIAL β replace
+the FE, and what the C-1 counterexample (ρₖ = −k + i) demonstrated about fields vs.
+typing; (3) junk-tsum hygiene: why the burn order D1 → C-1 → D3 → D2 is load-bearing.
+If the playback matches, floor's theirs. If not, point at the HANDOFF bullet and
+re-gate. (Last thread the gate's cousin — the receipt discipline — converted a
+semantics dispute into a counterexample and a one-line fork. It tests and pays.)
 
-## Lane A — Claude Code, on the repo (closing the gap; lake is arbiter)
+---
 
-Repo: ~/Desktop/concentricity. Read order: CLAUDE.md → HANDOFF.md →
-PLAN_two_index_bricks.md → SCAN_shapes_and_C5_ledger.md (session records — do not
-re-derive, do not re-run the nine mapped routes). Ledger: 1 sorry
-(`ASection.transportLevel_placement`, Theorem.lean:201, = set-level: any two
-upper-half zeros of the stem share a real part), 0 project axioms.
+## Lane A — Claude Code, on the repo (lake is arbiter)
 
-Task, in PLAN §7 order:
-1. Land `Concentricity/PlacementSet.lean` with the §1–§3 statements as shaped
-   (sorried on arrival, R8); import in `Concentricity.lean`; `lake build`; repair
-   names against live Mathlib (R5: tprod zero lemma, logDeriv API).
-2. The §4 convergence ruling is the AUTHOR'S (R6): present both routes
-   (derive locally-normal convergence vs. add flagged class hypotheses) with exact
-   costs; do not touch `def:A-section` without his word.
-3. Close the divisor bundle, then Brick 1 (`logDeriv_euler`, `logDeriv_weierstrass`).
-4. Brick 2 statements only after Brick 1 is green. Brick 3 (Weil/Li class-level
-   target) is a reading + target-statement task until the author rules.
+Repo: ~/Desktop/concentricity. Read order: CLAUDE.md → HANDOFF.md (2026-07-04
+evening; replaces ALL earlier) → PLAN_two_index_bricks.md (§5 amendment, §6 ADOPTED
+block, §7 order note) → DESIGN_B2_2_kernels.md → READ_weil_li_findings.md →
+SCAN_shapes_and_C5_ledger.md (records; do not re-derive; do not re-run the nine
+mapped routes).
 
-Operative vacuity criterion (sharpened, in HANDOFF): vacuous iff the conclusion
-changes — connectivity in a modified object instead of the real-number equality of
-levels. Equation-routes deriving the equality from C1–C4 are the theorem, not a
-vacuity. Difficulty estimates gate nothing; lake build gates everything. Fences:
-no statement edits to pass a proof; sorry = UNFORMALIZED never UNSOUND; R6 stops
-carry exact goals.
+Ledger at handoff: 5/0 with the C-1 → D3 → D2 burn in flight (or already reported —
+trust the repo over this paragraph). The five: C-1 (liSum_summable), D3, D2, and the
+one node's two faces (placement_set ⟷ transportLevel_placement, iff proved).
 
-## Lane B — claude.ai project thread (master iteration + precision questions)
+Task: finish the burn per the confirmed order and riders — C-1 first (paired
+expansion against c3_lowerEdge + quadratic density), then D3, then D2 (limit face may
+hold its honestly-labeled sorry) — commit-per-close, report table + tails + survivor
+set, then HOLD: no D4, no L-rung statements, nothing touches def:A-section or the
+frozen set, pending the γ verdict and the author's word. Rulings binding: §8, the
+conjunction, §4α, (β)-with-price-of-deletion, the adopted (iv) v0.2, the D1 im ≠ 0
+rendering note, the junk-tsum riders. R6 stops carry exact goals. Fences: no
+statement edits to pass a proof; sorry = UNFORMALIZED never UNSOUND; difficulty
+gates nothing; lake gates everything.
 
-Same read order (project knowledge carries the brief; repo files are source of
-truth). This lane does NOT write Lean. Tasks:
-1. Master diff: fold the set-level placement into the `\TODO` block as the node's
-   official statement (flagged OPEN, sourced register — levels and winding through
-   π∘E = exp; no metric vocabulary); add the two-index roadmap as a remark beside
-   the placement paragraph (equation-route, no new morphisms — the object of
-   `thm:concentricity` is unchanged).
-2. SOURCES pulls still queued: Riehl §8.3/§8.5 pinpoint wording; GJ Ch. IV
-   realization lemma. (Quillen §1 verbatim: SCAN Appendix A.)
-3. Weil positivity / Li coefficients read at class level; write the exact Brick-3
-   target sentence the frame would need; check whether the band/winding packaging
-   offers a handle on the positivity term.
-4. Author's precision questions land here; anything that changes a Lean statement
-   routes to Lane A as a PLAN edit first (words-before-commits).
+## Lane B — ideas room / claude.ai successor (master + readings; writes no Lean, lands no commits)
 
-Convergence protocol: lanes meet at 0 sorries / 0 axioms or at a named C5 target —
-whichever the mathematics yields. Master text follows Lean (R7; lake is arbiter #1).
-Author's working rules: no work after midnight; not on an empty stomach.
+Same read order (mount the repo). FIRST TASK — the γ reading (the C-1 fork's open
+half): does the master's semiregular-on-𝕆* typing (compactified continuation through
+N; currently bare `valueAtInfinity`) already forbid leftward-running residue-ℂ
+divisors — i.e., derive the lower edge, delete the (β) field per its docstring?
+Pinpoints: GPS Def. 11.1 (poles are isolated; what is N's typing when zeros
+accumulate to it), master def:R + rmk:compactify, SCAN §7(iv). Hold the wrinkle
+honestly: ζ's own trivial zeros (residue-ℝ) march leftward into N, so the question
+is specifically about SPHERES. Verdict routes to the author; then either the
+derivation plan (words to PLAN first) or the master's edge clause fold. Master
+wording for the edge WAITS on the verdict.
 
-## Lane A opener, CATCH-UP variant (for a Claude Code session 2–3 threads behind)
+Then, in order: the parked rmk:status refresh (author's now-or-later); the D4 design
+gate (the explicit-formula face — only on the author's word); L1/L3 as
+statements-first candidates; the second-side thinking (does the band/winding
+transport supply the a > β positivity family — the discovery question, L6/C-2).
+SOURCES queue: BL JNT 77 via the author's library (paywalled); Sekatskii UMJ
+volume/pages live-verify (Springer DOI 10.1007/s11253-014-0940-9); Weil 1952 and
+Bombieri Lincei 2000 → SOURCES/ files when statements harden. Hold the pins:
+value-free / covariant / differences-only; the |ρₙ|²-form bridge (never τ²);
+per-statement conclusion-check at every landing (now including the divergent-tsum
+branch check); N-asymptotics never reach finite pairs; GRH-scale = the prize's size,
+not the odds (author's correction, banked).
 
-HARD RESET — your prior thread state is superseded, whatever it says. The repo is
-the only memory. Read order: CLAUDE.md → HANDOFF.md (2026-07-04; replaces ALL earlier
-handoffs) → PLAN_two_index_bricks.md (the ONLY live plan) →
-SCAN_shapes_and_C5_ledger.md (records; do not re-derive, do not re-run the nine
-mapped routes). Explicitly revoked: PLAN_compactified_base.md and
-PLAN_transport_population.md — superseded, do NOT execute (run-record:
-HANDOFF_concentricity_argument.md §3.5(b), SCAN §6). The "circularity" question is
-resolved: the frame is sound and non-circular; the one open node is
-`ASection.transportLevel_placement` (Theorem.lean:201); ledger 1/0.
+## Author's working rules
 
-Gate before any work: play back (1) the sharpened vacuity criterion (HANDOFF care
-points) and (2) the Brick-3 honesty pin, in your own words. Then PLAN §7 in order:
-land `Concentricity/PlacementSet.lean` (§1–§3 statements, sorried, R8) → import →
-`lake build` → repair names (R5: tprod zero lemma, logDeriv API). Rulings 1–6 in
-HANDOFF are binding, including §8 (c3_factorization → (z − pole)·F form) and the C3
-one-word repair ("nonzero residue-ℝ zeros", author-ruled). The §4 convergence ruling
-is the AUTHOR'S — present both routes; touch nothing without his word. Ledger
-trajectory (HANDOFF): balloon to ~7/0 is waived; drive to 0/0 or the named C5
-target. Fences: no statement edits to pass a proof; sorry = UNFORMALIZED never
-UNSOUND; difficulty gates nothing; lake gates everything.
+No work after midnight; not on an empty stomach. Words before commits. Lane B edits
+files, Lane A commits (if stray .git/*.lock files appear with no git process running,
+remove them). Disagreements drive this forward — push back early, in the open, with
+tags.
 
-## Ideas-room opener (successor of the 2026-07-04 thread)
+## One-paragraph state (for humans)
 
-Same repo memory, same read order, same comprehension gate (criterion + honesty
-pin, own words). Role: framings, disambiguation, second eyeballs on Lane A (Lean)
-and Lane B (master folds + SOURCES + the (iv) target sentence). This room writes no
-Lean and lands no master edits; anything that hardens into a statement routes to
-the PLAN as a words-before-commits edit with the author's word. Hold the pins:
-value-free / covariant / differences-only (PLAN §6); the |ρₙ|²-form bridge (not τ²);
-per-statement conclusion-check at every landing; N-asymptotics never reach finite
-pairs. Author's rules: no work after midnight; not on an empty stomach.
-Disagreements drive this forward — push back early, in the open, with tags.
+The Concentricity Theorem is machine-checked except one sentence: all residue-ℂ
+zero levels of an A-section coincide. That sentence is now PROVED equivalent (D1 +
+B2.0/B2.1; D2 pending its burn) to: there exists a real β with the generalized-Li
+kernel sums nonnegative from both sides of β — value-free, FE-free, conjugation-only.
+The upper side is owned (C2); the convergence needs the lower edge, landed as a
+field pending the γ derivation question; the SECOND side of the positivity is the
+open mathematics — the exact spot where the octonionic transport (band, winding, the
+degenerate set that ℂ lacks) either supplies what the functional equation supplies
+classically, or the clause stands as the named C5 with cor:rh honestly withheld.
+Everything else — octonions, G₂, both worlds, the transport, π₀, the divisor bundle,
+both log-derivative expansions, the seed, the residue ledger, the finite BL engine —
+is green at zero project axioms.
