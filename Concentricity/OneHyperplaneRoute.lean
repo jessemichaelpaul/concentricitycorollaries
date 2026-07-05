@@ -78,3 +78,80 @@ theorem ASection.one_hyperplane_route3 (A : ASection) (n m : ℕ) :
   -- the same proposition as this theorem's goal. Exact resisting goal:
   --   ⊢ False
   sorry
+
+/-! ## Route 3′ (author's refinement, 2026-07-05 night)
+
+Verbatim: "the theorem is read on both static objects inside the same
+A-section: B₁ and B₂ both static, both with their own N₁, N₂ witnesses, so
+it has two connected components. So it should contradict the concentricity
+theorem. … One real hyperplane means one north pole object (the connecting
+witness) over B, not one real hyperplane means two north pole objects."
+
+Rendered in BOTH candidate ambients; each clause fed to lake. -/
+
+/-- Route 3′, middle step ("so it has two connected components"), read in
+the object of record 𝒯^𝔫 — REFUTED, and the refutation is the already-PROVED
+Pin 2: two levels do NOT give two components there. The geometric reason is
+the master's own compactification (`def:zeta_O`, verbatim): "It is one point
+with two names, so ∞ = N; it is the only point at infinity, shared by 𝕆*
+and by every slice Riemann sphere ℂ_v* = S²_v." — in 𝕆* there is no N₁ ≠ N₂:
+both levels' closing witnesses (`toNHom`) land at the SAME `nObj` by the
+type of the arrow, so the two cones are one cone. -/
+theorem route3'_two_components_false_in_record (c₁ c₂ : ℝ) :
+    CategoryTheory.ConnectedComponents.mk (TotalTransport.ofBase (BaseC.lvl c₁))
+      = CategoryTheory.ConnectedComponents.mk (TotalTransport.ofBase (BaseC.lvl c₂)) :=
+  TotalTransport.transport_not_level_separating c₁ c₂
+
+/-- Route 3′'s intended ambient, built honestly: per-level norths — each
+level `c` with its OWN witness target `N_c` (`Sum.inl` = levels, `Sum.inr`
+= per-level norths; arrows: each level to ITS north only). This is NOT the
+geometry of 𝕆* (one-point compactification, one N); it is constructed to
+locate route 3′'s seam. -/
+def TwoNorth := ℝ ⊕ ℝ
+
+/-- A level object of the per-level-north ambient. -/
+def TwoNorth.lvl (c : ℝ) : TwoNorth := Sum.inl c
+
+/-- The north of a single level — route 3′'s `N_c`. -/
+def TwoNorth.north (c : ℝ) : TwoNorth := Sum.inr c
+
+instance : CategoryTheory.Category TwoNorth where
+  Hom x y := PLift (x = y ∨ ∃ c : ℝ, x = Sum.inl c ∧ y = Sum.inr c)
+  id x := ⟨Or.inl rfl⟩
+  comp {x y z} f g := ⟨by
+    rcases f.down with h | ⟨c, hx, hy⟩
+    · rw [h]; exact g.down
+    · rcases g.down with h' | ⟨c', hx', hy'⟩
+      · rw [← h']; exact Or.inr ⟨c, hx, hy⟩
+      · rw [hy] at hx'; cases hx'⟩
+  id_comp _ := rfl
+  comp_id _ := rfl
+  assoc _ _ _ := rfl
+
+/-- The level read-off of the per-level-north ambient (both a level and its
+north carry the level). -/
+def TwoNorth.levelF : CategoryTheory.Functor TwoNorth (CategoryTheory.Discrete ℝ) where
+  obj x := CategoryTheory.Discrete.mk (Sum.elim id id x)
+  map {x y} f := CategoryTheory.Discrete.eqToHom (by
+    rcases f.down with h | ⟨c, hx, hy⟩
+    · rw [h]
+    · rw [hx, hy]; rfl)
+
+/-- **Route 3′'s seam, machine-checked**: on the per-level-north ambient —
+the one where "two hyperplanes give two components" HOLDS — the theorem's
+one-component reading is the SAME proposition as the level equality, i.e.
+as Island P (the `zigzag_iff_level` pattern, one ambient over). Forward:
+the level is conserved along every zigzag (each north carries its own
+level). Backward: equal levels, reflexive zigzag. So route 3′ needs, in
+place of the (refuted) middle step in 𝒯^𝔫, exactly the proposition it set
+out to prove; and the locked theorem does not transport here (the collapse
+onto 𝒯^𝔫 merges all norths into the one N — that is
+`route3'_two_components_false_in_record`). -/
+theorem TwoNorth.zigzag_iff (c₁ c₂ : ℝ) :
+    CategoryTheory.Zigzag (TwoNorth.lvl c₁) (TwoNorth.lvl c₂) ↔ c₁ = c₂ := by
+  constructor
+  · intro h
+    exact CategoryTheory.eq_of_zigzag ℝ
+      (CategoryTheory.zigzag_obj_of_zigzag TwoNorth.levelF h)
+  · rintro rfl
+    exact CategoryTheory.Zigzag.refl _
