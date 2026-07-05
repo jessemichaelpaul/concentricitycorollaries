@@ -17,10 +17,10 @@ build, goal-closing, commits) · Opus chat (Lane B: master folds, SOURCES) · Fa
   via the proved `placement_set_iff`; translation-layer address; gates ONLY
   `cor:nontrivial` → `cor:rh`. LiKernel (3 sorries) unimported on disk; Keystone
   artifacts unimported. `riemannZeta_nontrivialZeros_infinite`: proved in-repo.
-- **Certificate pending (Lane A one-liner):** `#print axioms ASection.concentricity_transport`
-  — expected output: Mathlib's three foundational axioms only, no `sorryAx`, no project
-  axioms. Paste the verbatim output into this file when run; it is the kernel-checked,
-  announcement-grade quote.
+- **Certificate ON RECORD (Lane A, 2026-07-05), verbatim:**
+  `'ASection.concentricity_transport' depends on axioms: [propext, Classical.choice, Quot.sound]`
+  — exactly Mathlib's three foundational axioms (R9: always print, not counted), no
+  `sorryAx`, no project axioms. Kernel-checked; this is the announcement-grade quote.
 - **PUSH DEFERRED (author's ruling 2026-07-05):** main is 1 ahead of origin (e68abc0).
   No push until the runway's quiet-push step; work stays private.
 
