@@ -301,6 +301,14 @@ no Part-1/Part-2 island touches it.
   distinct base objects, the static disconnection across distinct levels — PROVED; the
   contradiction clause (d) is the recorded seam (see the file's R6 receipt).
 
+**EXAMINATION DEFERRED (author, 2026-07-05 night):** after routes 3/3′ (rendered,
+R6 records + the TwoNorth receipts in OneHyperplaneRoute.lean), the author's position:
+𝒯^𝔫 is not the object of record — the A-SECTION is; the hypothesis is the A-section has
+two real hyperplanes; what is actually needed is a concentricity statement about the S⁶
+zero-spheres themselves; a quick argument directly on the A-section is suspected. Ruling:
+push Island P aside, close ALL other islands first (with the zero-sphere theorem B6 in
+view), then return. Lane A invited to think in parallel in the meantime.
+
 **AUTHOR'S STANDING RESERVATION (2026-07-05 evening — recorded, UNRESOLVED):** the author
 suspects the picture is simpler than Island P as framed: with each residue-ℂ zero
 6-sphere its own closed point / connected object (`thm:zero-spheres`(i)–(ii), the AdF

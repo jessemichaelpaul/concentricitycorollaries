@@ -89,6 +89,36 @@ theorem zetaO_sliceEmbed {v : Octonion} (hv : v ∈ unitImaginarySphere)
   simp only [zetaO]
   rw [if_neg (sliceEmbed_ne_pole hv hζ), hcoord, dir_sliceEmbed_of_pos hv hζ]
 
+/-- `sliceCoord` is G₂-invariant — the isometry block of Slice.lean
+(`G2.smul_re`, `G2.smul_im`, `G2.smul_norm`, all PROVED) read at the slice
+coordinate. PROVED helper. -/
+theorem _root_.G2.smul_sliceCoord (g : G2) (x : Octonion) :
+    sliceCoord (g • x) = sliceCoord x := by
+  rw [sliceCoord, sliceCoord, G2.smul_re, G2.smul_im, G2.smul_norm]
+
+/-- **G₂-equivariance of ζ_𝕆** (master `thm:G2-equiv`, verbatim):
+"ζ_𝕆(g·s) = g·ζ_𝕆(s) for all g ∈ G₂, s ∈ 𝕆." Master proof clause carried:
+"g carries the slice ℂ_v to the slice ℂ_{g(v)} by the isometric relabelling
+φ_{g(v)} = g ∘ φ_v" — here `G2.smul_sliceEmbed` (PROVED, Slice.lean).
+Extended to 𝕆* per `rmk:G2-compact` (the action fixes ∞ = N). Island B4;
+feeds B6(i), the zero-spheres as G₂-orbits. -/
+theorem zetaO_equivariant (g : G2) (x : OnePoint Octonion) :
+    zetaO (g • x) = g • zetaO x := by
+  cases x with
+  | infty =>
+    rw [G2.smul_onePoint_infty, zetaO_infty, G2.smul_onePoint_coe, G2.smul_ofReal]
+  | coe s =>
+    rw [G2.smul_onePoint_coe]
+    by_cases hs : s = ofReal 1
+    · subst hs
+      rw [G2.smul_ofReal, zetaO_one, G2.smul_onePoint_infty]
+    · have hgs : g • s ≠ ofReal 1 := fun h => hs (by
+        have h' : g⁻¹ • (g • s) = g⁻¹ • (ofReal 1 : Octonion) := by rw [h]
+        rwa [inv_smul_smul, G2.smul_ofReal] at h')
+      simp only [zetaO]
+      rw [if_neg hgs, if_neg hs, G2.smul_sliceCoord, G2.smul_dir,
+        ← G2.smul_sliceEmbed, ← G2.smul_onePoint_coe]
+
 /-- The slice embedding vanishes only at the vanishing coordinate
 (`normSq_sliceEmbed`). PROVED helper. -/
 theorem sliceEmbed_eq_zero_iff {v : Octonion} (hv : v ∈ unitImaginarySphere)
