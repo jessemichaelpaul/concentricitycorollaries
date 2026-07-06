@@ -371,16 +371,10 @@ theorem finite_BL (S : Multiset ℂ) (β : ℝ) (hS : ∀ z ∈ S, z.im ≠ 0) :
         liKernel_re_nonneg (hS z hzS) (hall z hzS) n
       linarith
 
-/-- **D2 — the class reduction: the adopted (iv) target v0.2, as an iff**
-(DESIGN: via Theorem 2 both-sidedly + D1 + the limit passage; the limit
-passage is the analytic face and may hold an honestly-labeled sorry after
-D1 is proved — that isolates the gap exactly as the ladder prescribes).
-A proved-equivalent restatement of the open node, never a hypothesis. -/
-theorem ASection.placement_set_iff_liSum (A : ASection) :
-    (∀ ⦃z w : ℂ⦄, A.F z = 0 → A.F w = 0 → 0 < z.im → 0 < w.im → z.re = w.re)
-      ↔ ∃ β : ℝ, (∀ a : ℝ, a < β → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n)
-          ∧ (∀ a : ℝ, β < a → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n) := by
-  sorry
+/- D2 — the class reduction — is PROVED at the end of this file
+(`ASection.placement_set_iff_liSum`, after the reduction stock it consumes:
+`liSum_summable`, `re_le_upperEdge`, the strip rows, and the `c3_atN`
+density — the same end-of-file pattern as D0 and D3). -/
 
 /- D3 — the first side — is PROVED at the end of this file
 (`ASection.liSum_first_side`, after the reduction stock it consumes:
@@ -760,3 +754,604 @@ theorem ASection.liSum_first_side (A : ASection) :
     rw [liKernel_eq_ratio, Complex.sub_re, Complex.one_re]
     linarith
   linarith
+
+/-! ## D2, closed (2026-07-06) — the limit passage
+
+The second side's analytic face: an enumerated zero strictly off the mirror
+line drives some GENUINE kernel sum negative. Head/tail split at a density
+threshold; the head is the D1 engine strengthened to carry a slack term
+`C₁·n + C₂·bⁿ` with sub-`r` base `b` (the wrong-sided `rⁿ` still wins at a
+simultaneous return); the tail is the paired binomial comparison rerun with
+the SHARP deviation base `1 + |d|/X₀` — which the threshold `X₀` pushes
+strictly under `r` — in place of the summability proof's crude `max |d| 1`.
+All helpers below are PROVED and private (R8: helpers are never sorried). -/
+
+/-- Small-deviation variant of the paired binomial tail bound
+(`norm_one_add_pow_sub_one_sub_mul_le` with `0 < D ` in place of `1 ≤ D`):
+`‖(1 + w)ⁿ − 1 − n·w‖ ≤ (‖w‖²/D²)·(1 + D)ⁿ` for `‖w‖ ≤ D`. The base
+`1 + D` can now sit arbitrarily close to 1 — the D2 tail needs it strictly
+below the wrong-sided ratio modulus — at the price of the n-free factor
+`1/D²`. PROVED. -/
+private theorem norm_one_add_pow_sub_one_sub_mul_le' (n : ℕ) {w : ℂ} {D : ℝ}
+    (hD : 0 < D) (hw : ‖w‖ ≤ D) :
+    ‖(1 + w) ^ n - 1 - (n : ℂ) * w‖ ≤ ‖w‖ ^ 2 / D ^ 2 * (1 + D) ^ n := by
+  rcases Nat.eq_zero_or_pos n with rfl | hn
+  · simp only [pow_zero, Nat.cast_zero, zero_mul, sub_self, norm_zero]
+    positivity
+  have hD0 : (0 : ℝ) ≤ D := hD.le
+  have hexp : (1 + w) ^ n = ∑ k ∈ Finset.range (n + 1), w ^ k * (n.choose k : ℂ) := by
+    rw [add_comm 1 w, add_pow]
+    exact Finset.sum_congr rfl fun k _ => by rw [one_pow, mul_one]
+  have hsplit : ∑ k ∈ Finset.range (n + 1), w ^ k * (n.choose k : ℂ)
+      = 1 + (n : ℂ) * w + ∑ k ∈ Finset.Ico 2 (n + 1), w ^ k * (n.choose k : ℂ) := by
+    rw [Finset.range_eq_Ico,
+      Finset.sum_eq_sum_Ico_succ_bot (by omega : (0 : ℕ) < n + 1), zero_add,
+      Finset.sum_eq_sum_Ico_succ_bot (by omega : (1 : ℕ) < n + 1),
+      show (1 : ℕ) + 1 = 2 from rfl,
+      pow_zero, one_mul, pow_one, Nat.choose_zero_right, Nat.choose_one_right,
+      Nat.cast_one]
+    ring
+  have hkey : (1 + w) ^ n - 1 - (n : ℂ) * w
+      = ∑ k ∈ Finset.Ico 2 (n + 1), w ^ k * (n.choose k : ℂ) := by
+    rw [hexp, hsplit]
+    ring
+  rw [hkey]
+  have hbound : ∀ k ∈ Finset.Ico 2 (n + 1),
+      ‖w ^ k * (n.choose k : ℂ)‖ ≤ ‖w‖ ^ 2 / D ^ 2 * (D ^ k * (n.choose k : ℝ)) := by
+    intro k hk
+    obtain ⟨hk2, -⟩ := Finset.mem_Ico.mp hk
+    rw [norm_mul, norm_pow, Complex.norm_natCast]
+    have hDk : D ^ (k - 2) = D ^ k / D ^ 2 := by
+      rw [eq_div_iff (pow_ne_zero 2 hD.ne'), ← pow_add]
+      congr 1
+      omega
+    have hpowsplit : ‖w‖ ^ k = ‖w‖ ^ 2 * ‖w‖ ^ (k - 2) := by
+      rw [← pow_add, Nat.add_sub_cancel' hk2]
+    have hwk : ‖w‖ ^ (k - 2) ≤ D ^ (k - 2) :=
+      pow_le_pow_left₀ (norm_nonneg w) hw _
+    calc ‖w‖ ^ k * (n.choose k : ℝ)
+        = ‖w‖ ^ 2 * ‖w‖ ^ (k - 2) * (n.choose k : ℝ) := by rw [hpowsplit]
+      _ ≤ ‖w‖ ^ 2 * D ^ (k - 2) * (n.choose k : ℝ) :=
+          mul_le_mul_of_nonneg_right
+            (mul_le_mul_of_nonneg_left hwk (sq_nonneg _)) (Nat.cast_nonneg _)
+      _ = ‖w‖ ^ 2 / D ^ 2 * (D ^ k * (n.choose k : ℝ)) := by
+          rw [hDk]
+          ring
+  calc ‖∑ k ∈ Finset.Ico 2 (n + 1), w ^ k * (n.choose k : ℂ)‖
+      ≤ ∑ k ∈ Finset.Ico 2 (n + 1), ‖w ^ k * (n.choose k : ℂ)‖ :=
+        norm_sum_le _ _
+    _ ≤ ∑ k ∈ Finset.Ico 2 (n + 1), ‖w‖ ^ 2 / D ^ 2 * (D ^ k * (n.choose k : ℝ)) :=
+        Finset.sum_le_sum hbound
+    _ = ‖w‖ ^ 2 / D ^ 2 * ∑ k ∈ Finset.Ico 2 (n + 1), D ^ k * (n.choose k : ℝ) := by
+        rw [Finset.mul_sum]
+    _ ≤ ‖w‖ ^ 2 / D ^ 2 * ∑ k ∈ Finset.range (n + 1), D ^ k * (n.choose k : ℝ) := by
+        refine mul_le_mul_of_nonneg_left
+          (Finset.sum_le_sum_of_subset_of_nonneg ?_ ?_) (by positivity)
+        · rw [Finset.range_eq_Ico]
+          exact Finset.Ico_subset_Ico (by omega) le_rfl
+        · intro k _ _
+          exact mul_nonneg (pow_nonneg hD0 _) (Nat.cast_nonneg _)
+    _ = ‖w‖ ^ 2 / D ^ 2 * (1 + D) ^ n := by
+        rw [add_comm 1 D, add_pow]
+        congr 1
+        exact Finset.sum_congr rfl fun k _ => by rw [one_pow, mul_one]
+
+/-- Sharp-base tail per-term bound (the paired binomial comparison of
+`liSum_summable_of_density`, rerun for the D2 tail): at distance `≥ X₀ ≥ 1`
+from the mirror anchor `c = 2β − a`, with `d := c − a` and the strip bound
+`Mst`, the doubled kernel real part obeys
+`|2·Re K| ≤ 4(n·|d|·Mst + X₀²·(1 + |d|/X₀)ⁿ)/(1 + X²)` — the deviation base
+`1 + |d|/X₀` shrinks to 1 as the tail threshold grows, which is what lets
+the head's `rⁿ` win. PROVED. -/
+private theorem liKernel_re_tail_bound (n : ℕ) {a β c d : ℝ} (hc : c = 2 * β - a)
+    (hd' : d = c - a) (hd : d ≠ 0) {z : ℂ} (him : z.im ≠ 0)
+    {Mst X₀ : ℝ} (hX₀ : 1 ≤ X₀)
+    (hstrip : |z.re - c| ≤ Mst)
+    (hX : X₀ ≤ ‖z - (c : ℂ)‖) :
+    |2 * (liKernel n a β z).re|
+      ≤ 4 * ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n)
+          / (1 + ‖z - (c : ℂ)‖ ^ 2) := by
+  have hX₀pos : (0 : ℝ) < X₀ := lt_of_lt_of_le zero_lt_one hX₀
+  have hX1 : (1 : ℝ) ≤ ‖z - (c : ℂ)‖ := le_trans hX₀ hX
+  have hX0 : (0 : ℝ) < ‖z - (c : ℂ)‖ := lt_of_lt_of_le zero_lt_one hX1
+  have hdd : (0 : ℝ) < |d| := abs_pos.mpr hd
+  have hD₀pos : (0 : ℝ) < |d| / X₀ := div_pos hdd hX₀pos
+  have hMst0 : (0 : ℝ) ≤ Mst := le_trans (abs_nonneg _) hstrip
+  have hcC : 2 * (β : ℂ) - (a : ℂ) = ((c : ℝ) : ℂ) := by
+    rw [hc]
+    push_cast
+    ring
+  have hzc : z - ((c : ℝ) : ℂ) ≠ 0 := by
+    rw [← hcC]
+    exact liRatio_den_ne_zero him a β
+  set X : ℝ := ‖z - (c : ℂ)‖ with hX_def
+  set w : ℂ := ((d : ℝ) : ℂ) / (z - ((c : ℝ) : ℂ)) with hw_def
+  have hda : ((d : ℝ) : ℂ) = ((c : ℝ) : ℂ) - ((a : ℝ) : ℂ) := by
+    rw [hd']
+    push_cast
+    ring
+  have h1w : (1 : ℂ) + w
+      = ((z - ((c : ℝ) : ℂ)) + ((d : ℝ) : ℂ)) / (z - ((c : ℝ) : ℂ)) := by
+    rw [hw_def, add_div, div_self hzc]
+  have hratio : liRatio a β z = 1 + w := by
+    unfold liRatio
+    rw [hcC, h1w, hda]
+    congr 1
+    ring
+  have hK : liKernel n a β z = 1 - (1 + w) ^ n := by
+    rw [liKernel_eq_ratio, hratio]
+  have hnw : ‖w‖ = |d| / X := by
+    rw [hw_def, norm_div, Complex.norm_real, Real.norm_eq_abs, hX_def]
+  have hwD : ‖w‖ ≤ |d| / X₀ := by
+    rw [hnw, div_le_div_iff₀ hX0 hX₀pos]
+    exact mul_le_mul_of_nonneg_left hX (abs_nonneg d)
+  have hw2 : ‖w‖ ^ 2 = d ^ 2 / X ^ 2 := by
+    rw [hnw, div_pow, sq_abs]
+  have hT : ‖(1 + w) ^ n - 1 - (n : ℂ) * w‖
+      ≤ ‖w‖ ^ 2 / (|d| / X₀) ^ 2 * (1 + |d| / X₀) ^ n :=
+    norm_one_add_pow_sub_one_sub_mul_le' n hD₀pos hwD
+  have hTX : ‖w‖ ^ 2 / (|d| / X₀) ^ 2 = X₀ ^ 2 / X ^ 2 := by
+    have hd2 : d ^ 2 ≠ 0 := pow_ne_zero 2 hd
+    have hX2 : X ^ 2 ≠ 0 := (pow_pos hX0 2).ne'
+    have hX₀2 : X₀ ^ 2 ≠ 0 := (pow_pos hX₀pos 2).ne'
+    rw [hw2, div_pow, sq_abs]
+    field_simp
+  have hwre : |w.re| ≤ |d| * Mst / X ^ 2 := by
+    have h1 : w.re = d * ((z - ((c : ℝ) : ℂ))⁻¹).re := by
+      rw [hw_def, div_eq_mul_inv, Complex.re_ofReal_mul]
+    have h2 : ((z - ((c : ℝ) : ℂ))⁻¹).re = (z.re - c) / X ^ 2 := by
+      rw [Complex.inv_re, Complex.normSq_eq_norm_sq, hX_def, Complex.sub_re,
+        Complex.ofReal_re]
+    rw [h1, h2]
+    calc |d * ((z.re - c) / X ^ 2)| = |d| * |z.re - c| / X ^ 2 := by
+          rw [abs_mul, abs_div, abs_of_nonneg (le_of_lt (pow_pos hX0 2)),
+            mul_div_assoc]
+      _ = |d| * |z.re - c| * (X ^ 2)⁻¹ := div_eq_mul_inv _ _
+      _ ≤ |d| * Mst * (X ^ 2)⁻¹ :=
+          mul_le_mul_of_nonneg_right
+            (mul_le_mul_of_nonneg_left hstrip (abs_nonneg d))
+            (inv_nonneg.mpr (le_of_lt (pow_pos hX0 2)))
+      _ = |d| * Mst / X ^ 2 := (div_eq_mul_inv _ _).symm
+  have hnre : ((n : ℂ) * w).re = (n : ℝ) * w.re := by
+    simp [Complex.mul_re]
+  have hKre : |(liKernel n a β z).re|
+      ≤ ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n) / X ^ 2 := by
+    have hsplitK : liKernel n a β z
+        = -((n : ℂ) * w) - ((1 + w) ^ n - 1 - (n : ℂ) * w) := by
+      rw [hK]
+      ring
+    rw [hsplitK]
+    have h4 : (-((n : ℂ) * w) - ((1 + w) ^ n - 1 - (n : ℂ) * w)).re
+        = -(((n : ℂ) * w).re + ((1 + w) ^ n - 1 - (n : ℂ) * w).re) := by
+      rw [Complex.sub_re, Complex.neg_re]
+      ring
+    rw [h4, abs_neg]
+    calc |((n : ℂ) * w).re + ((1 + w) ^ n - 1 - (n : ℂ) * w).re|
+        ≤ |((n : ℂ) * w).re| + |((1 + w) ^ n - 1 - (n : ℂ) * w).re| :=
+          abs_add_le _ _
+      _ ≤ (n : ℝ) * |d| * Mst / X ^ 2 + X₀ ^ 2 * (1 + |d| / X₀) ^ n / X ^ 2 := by
+          refine add_le_add ?_ ?_
+          · rw [hnre, abs_mul, abs_of_nonneg (Nat.cast_nonneg (α := ℝ) n)]
+            calc (n : ℝ) * |w.re| ≤ (n : ℝ) * (|d| * Mst / X ^ 2) :=
+                  mul_le_mul_of_nonneg_left hwre (Nat.cast_nonneg n)
+              _ = (n : ℝ) * |d| * Mst / X ^ 2 := by ring
+          · calc |((1 + w) ^ n - 1 - (n : ℂ) * w).re|
+                ≤ ‖(1 + w) ^ n - 1 - (n : ℂ) * w‖ := Complex.abs_re_le_norm _
+              _ ≤ ‖w‖ ^ 2 / (|d| / X₀) ^ 2 * (1 + |d| / X₀) ^ n := hT
+              _ = X₀ ^ 2 * (1 + |d| / X₀) ^ n / X ^ 2 := by
+                  rw [hTX]
+                  ring
+      _ = ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n) / X ^ 2 :=
+          (add_div _ _ _).symm
+  have hX2 : (1 : ℝ) ≤ X ^ 2 := by nlinarith
+  have hXpos : (0 : ℝ) < X ^ 2 := pow_pos hX0 2
+  have h1pos : (0 : ℝ) < 1 + X ^ 2 := by positivity
+  have hS0 : (0 : ℝ) ≤ (n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n := by
+    have h1 : (0 : ℝ) ≤ (n : ℝ) * |d| * Mst :=
+      mul_nonneg (mul_nonneg (Nat.cast_nonneg n) (abs_nonneg d)) hMst0
+    have h2 : (0 : ℝ) ≤ X₀ ^ 2 * (1 + |d| / X₀) ^ n := by positivity
+    linarith
+  rw [abs_mul, abs_two]
+  calc 2 * |(liKernel n a β z).re|
+      ≤ 2 * (((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n) / X ^ 2) := by
+        linarith [hKre]
+    _ = (2 * ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n)) / X ^ 2 := by
+        ring
+    _ ≤ 4 * ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n) / (1 + X ^ 2) := by
+        rw [div_le_div_iff₀ hXpos h1pos]
+        nlinarith [mul_nonneg hS0 (sub_nonneg.mpr hX2)]
+
+/-- Slack-carrying variant of the D1 contrapositive engine
+(`exists_liKernel_sum_neg` strengthened for the D2 head/tail comparison):
+the wrong-sided element's `rⁿ` outgrows `2·card S` PLUS any slack of the
+form `C₁·n + C₂·bⁿ` with base `b` strictly under `r` — at a simultaneous
+return of all the ratio directions the head sum plus the slack is negative.
+The exponent domination is elementary: `(1/r)ⁿ`, `n·(1/r)ⁿ` (geometric-decay
+summability, `summable_norm_pow_mul_geometric_of_norm_lt_one`), and `(b/r)ⁿ`
+all vanish, so their combination is eventually `< 1`; the return
+(`exists_pow_forall_norm_sub_one_lt`) is taken past that threshold. PROVED. -/
+private theorem exists_liKernel_sum_neg_slack (S : Multiset ℂ)
+    (hS : ∀ z ∈ S, z.im ≠ 0) {a β : ℝ} {z₀ : ℂ} (hz₀ : z₀ ∈ S)
+    (hwrong : 0 < (β - a) * (z₀.re - β))
+    (C₁ C₂ : ℝ) {b : ℝ} (hb0 : 0 ≤ b)
+    (hb : b < ‖liRatio a β z₀‖) :
+    ∃ n : ℕ, 1 ≤ n ∧
+      (S.map fun z => 2 * (liKernel n a β z).re).sum
+        + (C₁ * n + C₂ * b ^ n) < 0 := by
+  classical
+  set dir : ℂ → ℂ := fun z => liRatio a β z / (‖liRatio a β z‖ : ℂ) with hdir
+  set t : Finset ℂ := S.toFinset.image dir with ht_def
+  have ht : ∀ ω ∈ t, ‖ω‖ = 1 := by
+    intro ω hω
+    obtain ⟨z, hzS, rfl⟩ := Finset.mem_image.mp hω
+    have hzim : z.im ≠ 0 := hS z (Multiset.mem_toFinset.mp hzS)
+    have hne : liRatio a β z ≠ 0 := liRatio_ne_zero hzim a β
+    simp only [hdir]
+    rw [norm_div, Complex.norm_real, Real.norm_eq_abs, abs_norm,
+      div_self (norm_ne_zero_iff.mpr hne)]
+  have hr₀ : 1 < ‖liRatio a β z₀‖ := one_lt_liRatio_norm (hS z₀ hz₀) hwrong
+  have hrpos : (0 : ℝ) < ‖liRatio a β z₀‖ := lt_trans zero_lt_one hr₀
+  -- the eventual domination: `2·card S + C₁·n + C₂·bⁿ < rⁿ`
+  have hinv0 : (0 : ℝ) ≤ 1 / ‖liRatio a β z₀‖ := by positivity
+  have hinv1 : 1 / ‖liRatio a β z₀‖ < 1 := by
+    rw [div_lt_one hrpos]
+    exact hr₀
+  have t1 : Filter.Tendsto
+      (fun n : ℕ => (2 * (Multiset.card S : ℝ)) * (1 / ‖liRatio a β z₀‖) ^ n)
+      Filter.atTop (nhds 0) := by
+    simpa using
+      (tendsto_pow_atTop_nhds_zero_of_lt_one hinv0 hinv1).const_mul
+        (2 * (Multiset.card S : ℝ))
+  have t2 : Filter.Tendsto
+      (fun n : ℕ => C₁ * ((n : ℝ) * (1 / ‖liRatio a β z₀‖) ^ n))
+      Filter.atTop (nhds 0) := by
+    have hsum : Summable (fun n : ℕ => (n : ℝ) * (1 / ‖liRatio a β z₀‖) ^ n) := by
+      have h := summable_norm_pow_mul_geometric_of_norm_lt_one 1
+        (r := (1 / ‖liRatio a β z₀‖ : ℝ))
+        (by rwa [Real.norm_eq_abs, abs_of_nonneg hinv0])
+      simpa [pow_one] using h.of_norm
+    have h := hsum.tendsto_cofinite_zero
+    rw [Nat.cofinite_eq_atTop] at h
+    simpa using h.const_mul C₁
+  have t3 : Filter.Tendsto
+      (fun n : ℕ => C₂ * (b / ‖liRatio a β z₀‖) ^ n) Filter.atTop (nhds 0) := by
+    have h1 : (0 : ℝ) ≤ b / ‖liRatio a β z₀‖ := div_nonneg hb0 hrpos.le
+    have h2 : b / ‖liRatio a β z₀‖ < 1 := (div_lt_one hrpos).mpr hb
+    simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one h1 h2).const_mul C₂
+  have tall : Filter.Tendsto
+      (fun n : ℕ =>
+        (2 * (Multiset.card S : ℝ)) * (1 / ‖liRatio a β z₀‖) ^ n
+          + C₁ * ((n : ℝ) * (1 / ‖liRatio a β z₀‖) ^ n)
+          + C₂ * (b / ‖liRatio a β z₀‖) ^ n)
+      Filter.atTop (nhds 0) := by
+    simpa using (t1.add t2).add t3
+  have hevN : ∀ᶠ n : ℕ in Filter.atTop,
+      (2 * (Multiset.card S : ℝ)) * (1 / ‖liRatio a β z₀‖) ^ n
+        + C₁ * ((n : ℝ) * (1 / ‖liRatio a β z₀‖) ^ n)
+        + C₂ * (b / ‖liRatio a β z₀‖) ^ n < 1 :=
+    tall.eventually_lt_const one_pos
+  obtain ⟨N, hN⟩ := Filter.eventually_atTop.mp hevN
+  obtain ⟨n, hnN, hn1, halign⟩ :=
+    exists_pow_forall_norm_sub_one_lt t ht one_half_pos N
+  refine ⟨n, hn1, ?_⟩
+  have hpow_pos : (0 : ℝ) < ‖liRatio a β z₀‖ ^ n := pow_pos hrpos n
+  have hkey : ∀ A B C : ℝ,
+      (A * (1 / ‖liRatio a β z₀‖) ^ n + B * ((n : ℝ) * (1 / ‖liRatio a β z₀‖) ^ n)
+          + C * (b / ‖liRatio a β z₀‖) ^ n) * ‖liRatio a β z₀‖ ^ n
+        = A + B * n + C * b ^ n := by
+    intro A B C
+    have h1 : (1 / ‖liRatio a β z₀‖) ^ n * ‖liRatio a β z₀‖ ^ n = 1 := by
+      rw [← mul_pow, one_div, inv_mul_cancel₀ hrpos.ne', one_pow]
+    have h2 : (b / ‖liRatio a β z₀‖) ^ n * ‖liRatio a β z₀‖ ^ n = b ^ n := by
+      rw [← mul_pow, div_mul_cancel₀ _ hrpos.ne']
+    calc (A * (1 / ‖liRatio a β z₀‖) ^ n
+          + B * ((n : ℝ) * (1 / ‖liRatio a β z₀‖) ^ n)
+          + C * (b / ‖liRatio a β z₀‖) ^ n) * ‖liRatio a β z₀‖ ^ n
+        = A * ((1 / ‖liRatio a β z₀‖) ^ n * ‖liRatio a β z₀‖ ^ n)
+          + B * n * ((1 / ‖liRatio a β z₀‖) ^ n * ‖liRatio a β z₀‖ ^ n)
+          + C * ((b / ‖liRatio a β z₀‖) ^ n * ‖liRatio a β z₀‖ ^ n) := by ring
+      _ = A + B * n + C * b ^ n := by
+          rw [h1, h2]
+          ring
+  have hdom : 2 * (Multiset.card S : ℝ) + C₁ * n + C₂ * b ^ n
+      < ‖liRatio a β z₀‖ ^ n := by
+    have h' := mul_lt_mul_of_pos_right (hN n hnN) hpow_pos
+    rw [one_mul, hkey] at h'
+    exact h'
+  -- the aligned-return head estimate (as in `exists_liKernel_sum_neg`)
+  have hterm : ∀ z ∈ S, 2 * (liKernel n a β z).re
+      ≤ 2 - ‖liRatio a β z‖ ^ n := by
+    intro z hz
+    have hzim := hS z hz
+    have hwne : liRatio a β z ≠ 0 := liRatio_ne_zero hzim a β
+    have hrpos' : (0 : ℝ) < ‖liRatio a β z‖ := norm_pos_iff.mpr hwne
+    have hrneC : ((‖liRatio a β z‖ : ℝ) : ℂ) ≠ 0 :=
+      Complex.ofReal_ne_zero.mpr hrpos'.ne'
+    have hmemt : dir z ∈ t :=
+      Finset.mem_image_of_mem dir (Multiset.mem_toFinset.mpr hz)
+    have halz : ‖dir z ^ n - 1‖ < 1 / 2 := halign (dir z) hmemt
+    have hfact : liRatio a β z ^ n
+        = ((‖liRatio a β z‖ ^ n : ℝ) : ℂ) * dir z ^ n := by
+      simp only [hdir]
+      rw [div_pow, Complex.ofReal_pow, ← mul_div_assoc,
+        mul_div_cancel_left₀ _ (pow_ne_zero n hrneC)]
+    have hRe : (liRatio a β z ^ n).re
+        = ‖liRatio a β z‖ ^ n * (dir z ^ n).re := by
+      rw [hfact, Complex.re_ofReal_mul]
+    have hdirRe : (1 : ℝ) / 2 < (dir z ^ n).re := by
+      have h1 : (1 : ℝ) - (dir z ^ n).re ≤ ‖dir z ^ n - 1‖ := by
+        calc (1 : ℝ) - (dir z ^ n).re = (1 - dir z ^ n).re := by
+              rw [Complex.sub_re, Complex.one_re]
+          _ ≤ |(1 - dir z ^ n).re| := le_abs_self _
+          _ ≤ ‖1 - dir z ^ n‖ := Complex.abs_re_le_norm _
+          _ = ‖dir z ^ n - 1‖ := norm_sub_rev _ _
+      linarith
+    have hprod : ‖liRatio a β z‖ ^ n * (1 / 2)
+        < ‖liRatio a β z‖ ^ n * (dir z ^ n).re :=
+      mul_lt_mul_of_pos_left hdirRe (pow_pos hrpos' n)
+    have hKre : (liKernel n a β z).re = 1 - (liRatio a β z ^ n).re := by
+      rw [liKernel_eq_ratio, Complex.sub_re, Complex.one_re]
+    rw [hKre, hRe]
+    linarith
+  have hsum2 : (S.map fun z => 2 - ‖liRatio a β z‖ ^ n).sum
+      = 2 * (Multiset.card S : ℝ)
+        - (S.map fun z => ‖liRatio a β z‖ ^ n).sum := by
+    rw [Multiset.sum_map_sub]
+    congr 1
+    rw [Multiset.map_const', Multiset.sum_replicate, nsmul_eq_mul]
+    ring
+  have hnonneg : ∀ x ∈ S.map fun z => ‖liRatio a β z‖ ^ n, (0 : ℝ) ≤ x := by
+    intro x hx
+    obtain ⟨z, hzS, rfl⟩ := Multiset.mem_map.mp hx
+    positivity
+  have hsingle : ‖liRatio a β z₀‖ ^ n
+      ≤ (S.map fun z => ‖liRatio a β z‖ ^ n).sum :=
+    Multiset.single_le_sum hnonneg _ (Multiset.mem_map_of_mem _ hz₀)
+  have hhead : (S.map fun z => 2 * (liKernel n a β z).re).sum
+      ≤ 2 * (Multiset.card S : ℝ) - ‖liRatio a β z₀‖ ^ n := by
+    calc (S.map fun z => 2 * (liKernel n a β z).re).sum
+        ≤ (S.map fun z => 2 - ‖liRatio a β z‖ ^ n).sum :=
+          Multiset.sum_map_le_sum_map _ _ hterm
+      _ = 2 * (Multiset.card S : ℝ)
+          - (S.map fun z => ‖liRatio a β z‖ ^ n).sum := hsum2
+      _ ≤ 2 * (Multiset.card S : ℝ) - ‖liRatio a β z₀‖ ^ n := by linarith
+  linarith
+
+/-- **The D2 limit passage, negativity form**: one enumerated zero strictly
+on the wrong side of the mirror drives some GENUINE kernel sum negative.
+Head/tail split of the convergent sum (`liSum_summable`,
+`Summable.sum_add_tsum_subtype_compl`) at a density threshold `X₀` chosen so
+the tail's deviation base `1 + |d|/X₀` sits strictly under the wrong-sided
+ratio modulus `r`; the head — every zero within the threshold, plus the
+wrong-sided one — goes to the slack-carrying return engine, whose `rⁿ`
+dominates head cardinality AND the tail majorant
+`4(n·|d|·Mst + X₀²·(1+|d|/X₀)ⁿ)·E` (`E` the `c3_atN` density, center-shifted
+to the mirror anchor; the strip `c3_lowerEdge` + `re_le_upperEdge` bounds the
+`j = 1` binomial term). Junk-tsum hygiene (header rider): the split is
+performed on the summable sum itself, so the negativity is about a genuine
+limit, never the divergent-tsum branch. PROVED. -/
+private theorem ASection.exists_liSum_neg (A : ASection) {a β : ℝ} (k₀ : ℕ)
+    (hwrong : 0 < (β - a) * ((A.sphereZero k₀).re - β)) :
+    ∃ n : ℕ, 1 ≤ n ∧ A.liSum a β n < 0 := by
+  classical
+  have him : ∀ k, (A.sphereZero k).im ≠ 0 :=
+    fun k => ne_of_gt (A.c3_sphere_nonreal k)
+  obtain ⟨c, hc⟩ : ∃ x : ℝ, x = 2 * β - a := ⟨_, rfl⟩
+  obtain ⟨d, hd'⟩ : ∃ x : ℝ, x = c - a := ⟨_, rfl⟩
+  have hβa : β - a ≠ 0 := by
+    intro h
+    rw [h, zero_mul] at hwrong
+    exact lt_irrefl 0 hwrong
+  have hd : d ≠ 0 := by
+    rw [hd', hc]
+    intro h
+    apply hβa
+    linarith
+  have hr₀ : 1 < ‖liRatio a β (A.sphereZero k₀)‖ :=
+    one_lt_liRatio_norm (him k₀) hwrong
+  -- the tail threshold: base `1 + |d|/X₀` strictly under the ratio modulus
+  obtain ⟨X₀, hX₀eq⟩ :
+      ∃ x : ℝ, x = max 1 (2 * |d| / (‖liRatio a β (A.sphereZero k₀)‖ - 1)) :=
+    ⟨_, rfl⟩
+  have hX₀1 : (1 : ℝ) ≤ X₀ := hX₀eq ▸ le_max_left _ _
+  have hX₀pos : (0 : ℝ) < X₀ := lt_of_lt_of_le zero_lt_one hX₀1
+  have hb0 : (0 : ℝ) ≤ 1 + |d| / X₀ := by positivity
+  have hbr : 1 + |d| / X₀ < ‖liRatio a β (A.sphereZero k₀)‖ := by
+    have hr1 : (0 : ℝ) < ‖liRatio a β (A.sphereZero k₀)‖ - 1 := by linarith
+    have h1 : 2 * |d| / (‖liRatio a β (A.sphereZero k₀)‖ - 1) ≤ X₀ :=
+      hX₀eq ▸ le_max_right _ _
+    have h2 : 2 * |d| ≤ X₀ * (‖liRatio a β (A.sphereZero k₀)‖ - 1) := by
+      rw [div_le_iff₀ hr1] at h1
+      linarith
+    have h3 : |d| / X₀ ≤ (‖liRatio a β (A.sphereZero k₀)‖ - 1) / 2 := by
+      rw [div_le_div_iff₀ hX₀pos two_pos]
+      linarith
+    linarith
+  -- the density at the mirror anchor, and its tail threshold
+  have hdc : Summable fun k => 1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2) := by
+    have h0 : Summable fun k => 1 / (1 + ‖A.sphereZero k - ((0 : ℝ) : ℂ)‖ ^ 2) :=
+      A.c3_atN.congr fun k => by rw [Complex.ofReal_zero, sub_zero]
+    exact summable_inv_one_add_norm_sq_center_shift h0 c
+  have hev : ∀ᶠ k in Filter.atTop, X₀ ≤ ‖A.sphereZero k - (c : ℂ)‖ := by
+    have h0 : ∀ᶠ k in Filter.atTop,
+        1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2) < 1 / (1 + X₀ ^ 2) := by
+      have h := hdc.tendsto_cofinite_zero.eventually_lt_const
+        (show (0 : ℝ) < 1 / (1 + X₀ ^ 2) by positivity)
+      rwa [Nat.cofinite_eq_atTop] at h
+    filter_upwards [h0] with k hk
+    by_contra hlt
+    rw [not_le] at hlt
+    have h1 : 1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2 ≤ 1 + X₀ ^ 2 := by
+      have := pow_le_pow_left₀ (norm_nonneg _) hlt.le 2
+      linarith
+    have h2 := one_div_le_one_div_of_le (by positivity) h1
+    linarith
+  obtain ⟨M, hM⟩ := Filter.eventually_atTop.mp hev
+  -- the head: a finite Finset containing k₀ and all near indices
+  obtain ⟨H, hH⟩ : ∃ x : Finset ℕ, x = insert k₀ (Finset.range M) := ⟨_, rfl⟩
+  have hk₀H : k₀ ∈ H := hH ▸ Finset.mem_insert_self _ _
+  have hfarH : ∀ k : ℕ, k ∉ H → X₀ ≤ ‖A.sphereZero k - (c : ℂ)‖ := by
+    intro k hk
+    refine hM k ?_
+    by_contra hlt
+    rw [not_le] at hlt
+    exact hk (hH ▸ Finset.mem_insert_of_mem (Finset.mem_range.mpr hlt))
+  have hSim : ∀ z ∈ H.val.map A.sphereZero, z.im ≠ 0 := by
+    intro z hz
+    obtain ⟨k, -, rfl⟩ := Multiset.mem_map.mp hz
+    exact him k
+  have hz₀S : A.sphereZero k₀ ∈ H.val.map A.sphereZero :=
+    Multiset.mem_map_of_mem _ (Finset.mem_val.mpr hk₀H)
+  -- the strip
+  obtain ⟨βlo, hβlo⟩ := A.c3_lowerEdge
+  obtain ⟨Mst, hMst⟩ : ∃ x : ℝ, x = max |βlo - c| |A.Ω₀ - c| := ⟨_, rfl⟩
+  have hstrip : ∀ k, |(A.sphereZero k).re - c| ≤ Mst := by
+    intro k
+    rw [abs_le]
+    constructor
+    · have h2 := neg_abs_le (βlo - c)
+      have h3 : |βlo - c| ≤ Mst := hMst ▸ le_max_left _ _
+      have h4 := hβlo k
+      linarith
+    · have h2 := le_abs_self (A.Ω₀ - c)
+      have h3 : |A.Ω₀ - c| ≤ Mst := hMst ▸ le_max_right _ _
+      have h4 := A.re_le_upperEdge k
+      linarith
+  have hMst0 : (0 : ℝ) ≤ Mst := le_trans (abs_nonneg _) (hstrip 0)
+  -- the head engine, with the tail majorant's coefficients as the slack
+  obtain ⟨n, hn1, hneg⟩ := exists_liKernel_sum_neg_slack (H.val.map A.sphereZero)
+    hSim hz₀S hwrong
+    (4 * (|d| * Mst) * ∑' k, 1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2))
+    (4 * X₀ ^ 2 * ∑' k, 1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2))
+    hb0 hbr
+  refine ⟨n, hn1, ?_⟩
+  -- split the genuine sum at the head
+  have hfs : Summable fun k => 2 * (liKernel n a β (A.sphereZero k)).re :=
+    A.liSum_summable a β n
+  have hsplit := hfs.sum_add_tsum_subtype_compl H
+  -- the head sums agree
+  have hhead_eq : ((H.val.map A.sphereZero).map
+        fun z => 2 * (liKernel n a β z).re).sum
+      = ∑ k ∈ H, 2 * (liKernel n a β (A.sphereZero k)).re := by
+    rw [Multiset.map_map, Finset.sum_eq_multiset_sum]
+    rfl
+  -- the tail bound
+  have hBn0 : (0 : ℝ) ≤ 4 * ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n) := by
+    have h1 : (0 : ℝ) ≤ (n : ℝ) * |d| * Mst :=
+      mul_nonneg (mul_nonneg (Nat.cast_nonneg n) (abs_nonneg d)) hMst0
+    have h2 : (0 : ℝ) ≤ X₀ ^ 2 * (1 + |d| / X₀) ^ n := by positivity
+    linarith
+  have hterm_tail : ∀ k : {x // x ∉ H},
+      2 * (liKernel n a β (A.sphereZero ↑k)).re
+        ≤ 4 * ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n)
+            * (1 / (1 + ‖A.sphereZero ↑k - (c : ℂ)‖ ^ 2)) := by
+    rintro ⟨k, hk⟩
+    have hXk : X₀ ≤ ‖A.sphereZero k - (c : ℂ)‖ := hfarH k hk
+    have hbd := liKernel_re_tail_bound n hc hd' hd (him k) hX₀1 (hstrip k) hXk
+    have h1 := le_abs_self (2 * (liKernel n a β (A.sphereZero k)).re)
+    rw [mul_one_div]
+    exact le_trans h1 hbd
+  have hsub_f : Summable fun k : {x // x ∉ H} =>
+      2 * (liKernel n a β (A.sphereZero ↑k)).re :=
+    hfs.subtype _
+  have hsub_g : Summable fun k : {x // x ∉ H} =>
+      4 * ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n)
+        * (1 / (1 + ‖A.sphereZero ↑k - (c : ℂ)‖ ^ 2)) :=
+    (hdc.mul_left _).subtype _
+  have htail3 : (∑' k : {x // x ∉ H}, 1 / (1 + ‖A.sphereZero ↑k - (c : ℂ)‖ ^ 2))
+      ≤ ∑' k, 1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2) :=
+    Summable.tsum_le_tsum_of_inj (Subtype.val)
+      Subtype.val_injective (fun j _ => by positivity) (fun i => le_rfl)
+      (hdc.subtype _) hdc
+  have htail : (∑' k : {x // x ∉ H}, 2 * (liKernel n a β (A.sphereZero ↑k)).re)
+      ≤ 4 * ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n)
+        * ∑' k, 1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2) := by
+    calc (∑' k : {x // x ∉ H}, 2 * (liKernel n a β (A.sphereZero ↑k)).re)
+        ≤ ∑' k : {x // x ∉ H},
+            4 * ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n)
+              * (1 / (1 + ‖A.sphereZero ↑k - (c : ℂ)‖ ^ 2)) :=
+          hsub_f.tsum_le_tsum hterm_tail hsub_g
+      _ = 4 * ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n)
+          * ∑' k : {x // x ∉ H}, 1 / (1 + ‖A.sphereZero ↑k - (c : ℂ)‖ ^ 2) :=
+        tsum_mul_left
+      _ ≤ 4 * ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n)
+          * ∑' k, 1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2) :=
+        mul_le_mul_of_nonneg_left htail3 hBn0
+  -- reconcile the engine's slack with the tail majorant
+  have hBE : 4 * ((n : ℝ) * |d| * Mst + X₀ ^ 2 * (1 + |d| / X₀) ^ n)
+        * ∑' k, 1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2)
+      = (4 * (|d| * Mst) * ∑' k, 1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2)) * n
+        + (4 * X₀ ^ 2 * ∑' k, 1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2))
+            * (1 + |d| / X₀) ^ n := by
+    ring
+  -- assemble
+  have hfinal : A.liSum a β n
+      = (∑ k ∈ H, 2 * (liKernel n a β (A.sphereZero k)).re)
+        + ∑' k : {x // x ∉ H}, 2 * (liKernel n a β (A.sphereZero ↑k)).re := by
+    change (∑' k, 2 * (liKernel n a β (A.sphereZero k)).re) = _
+    exact hsplit.symm
+  rw [hfinal, ← hhead_eq]
+  linarith [htail, hneg, hBE.le, hBE.ge]
+
+/-- **D2 — the class reduction: the adopted (iv) target v0.2, as an iff**
+(DESIGN: via Theorem 2 both-sidedly + D1 + the limit passage; the limit
+passage is the analytic face and may hold an honestly-labeled sorry after
+D1 is proved — that isolates the gap exactly as the ladder prescribes).
+A proved-equivalent restatement of the open node, never a hypothesis.
+
+PROVED (D2 burn, 2026-07-06) — the limit passage is closed; no sorry was
+needed. (⟹): placement puts every enumerated zero on the one mirror line
+`Re = (sphereZero 0).re` (`stem_zero_of_sphereZero` + `c3_sphere_nonreal`),
+and `liKernel_re_nonneg` makes every term of every kernel sum nonnegative,
+both sides. (⟸) by contraposition through the divisor: an enumerated zero
+off the line `Re = β` is strictly wrong-sided for one of the two anchor
+families (`a = β ∓ 1`; the side classification is `a`-independent), and
+`ASection.exists_liSum_neg` — the head/tail limit passage above — drives
+that family's sum negative at a simultaneous return, against the assumed
+positivity; so every enumerated level equals β, and `sphereZero_complete`
+carries the level equality to arbitrary upper-half stem zeros. Junk-tsum
+hygiene (header rider): (⟹) is termwise on the genuine convergent sums
+(`liSum_summable`); (⟸) contradicts positivity with a genuinely convergent
+negative sum — no divergent-tsum branch is touched. -/
+theorem ASection.placement_set_iff_liSum (A : ASection) :
+    (∀ ⦃z w : ℂ⦄, A.F z = 0 → A.F w = 0 → 0 < z.im → 0 < w.im → z.re = w.re)
+      ↔ ∃ β : ℝ, (∀ a : ℝ, a < β → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n)
+          ∧ (∀ a : ℝ, β < a → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n) := by
+  constructor
+  · -- placement ⟹ positivity: all enumerated zeros sit on one mirror line
+    intro hplace
+    refine ⟨(A.sphereZero 0).re, ?_, ?_⟩ <;>
+    · intro a _ n _
+      change (0 : ℝ) ≤ ∑' k, 2 * (liKernel n a ((A.sphereZero 0).re) (A.sphereZero k)).re
+      refine tsum_nonneg fun k => ?_
+      have him : (A.sphereZero k).im ≠ 0 := ne_of_gt (A.c3_sphere_nonreal k)
+      have hre : (A.sphereZero k).re = (A.sphereZero 0).re :=
+        hplace (A.stem_zero_of_sphereZero k) (A.stem_zero_of_sphereZero 0)
+          (A.c3_sphere_nonreal k) (A.c3_sphere_nonreal 0)
+      have h := liKernel_re_nonneg (a := a) him hre n
+      linarith
+  · -- positivity ⟹ placement: an off-line zero is wrong-sided for one
+    -- anchor family, and the negativity engine contradicts it
+    rintro ⟨β, h₁, h₂⟩
+    have hall : ∀ k, (A.sphereZero k).re = β := by
+      intro k
+      by_contra hne
+      rcases lt_or_gt_of_ne hne with hlt | hgt
+      · have hwrong : 0 < (β - (β + 1)) * ((A.sphereZero k).re - β) := by
+          have h : (β - (β + 1)) * ((A.sphereZero k).re - β)
+              = β - (A.sphereZero k).re := by ring
+          rw [h]
+          linarith
+        obtain ⟨n, hn1, hneg⟩ := A.exists_liSum_neg k hwrong
+        exact absurd (h₂ (β + 1) (lt_add_one β) n hn1) (not_le.mpr hneg)
+      · have hwrong : 0 < (β - (β - 1)) * ((A.sphereZero k).re - β) := by
+          have h : (β - (β - 1)) * ((A.sphereZero k).re - β)
+              = (A.sphereZero k).re - β := by ring
+          rw [h]
+          linarith
+        obtain ⟨n, hn1, hneg⟩ := A.exists_liSum_neg k hwrong
+        exact absurd (h₁ (β - 1) (by linarith) n hn1) (not_le.mpr hneg)
+    intro z w hz hw hzim hwim
+    obtain ⟨nz, hnz⟩ := A.sphereZero_complete hz hzim
+    obtain ⟨nw, hnw⟩ := A.sphereZero_complete hw hwim
+    rw [← hnz, ← hnw, hall nz, hall nw]
