@@ -114,3 +114,25 @@ the analysis facts citable on that day" — i.e. the Weierstrass package
 (`zetaC3_package`) closed, leaving the ledger at Island P + nothing. The
 package build is running (genus-per-zero Weierstrass route; see the
 ZetaWeierstrass series of commits).
+
+## 7. P-route 4 rendered (2026-07-06, GreatCircleRoute.lean — unimported artifact)
+
+The one-great-circle route went to lake. THE GEOMETRY IS NOW PROVED — the
+archived play's `lem:great-circle`, formal: `sliceSphere_inter` (slice
+spheres of independent directions meet EXACTLY in ℝ ∪ {N} — the unique
+common circle through N) and `greatCircle_eq_fixedLocus` (the circle is
+precisely the G₂-fixed locus: "everything else is imaginary" — any
+non-real point is moved by the direction-reversing element). Both on the
+kernel triple; folding into the master is the author's call.
+
+Clause (d) — "hence the two centers agree" — RESISTS at exactly the
+recorded obstruction: with (a) one-component (Pin 1), (b) the unique
+circle + fixity, and (c) the sphere/hyperplane geometry all fed as proved
+rows, the goal `z.re = w.re` remains with no hypothesis mentioning the
+real parts; Pin 2 is the proved form of the wall (no level-separating
+invariant on the transport object; the G₂-fixed circle is fixed at EVERY
+level, so it separates none). Receipt in-file (`placement_via_greatCircle`,
+sorry = receipt, unimported). Consistent with routes 3/3′: per the
+litmus, the closing route must consume C2/C3's one-stem rigidity —
+Brick 2 — OR the categorical review must produce an invariant that the
+0.3/0.7 hypothetical cannot carry.
