@@ -35,15 +35,10 @@ namespace ASection
 
 /-! ## §1 — The set-level placement (OFFICIAL form of the open node) -/
 
-/-- The placement, set-level (OFFICIAL form of the open node; author's
-ruling 2026-07-04 — enumeration-free, "the zero set is F's alone"). Any two
-upper-half-plane zeros of the stem share one real part. Master label:
-`eq:placement-set` (the labeled OPEN node inside the proof of
-`thm:concentricity`, landed d8f5b93). -/
-theorem placement_set (A : ASection) :
-    ∀ ⦃z w : ℂ⦄, A.F z = 0 → A.F w = 0 → 0 < z.im → 0 < w.im →
-      z.re = w.re := by
-  sorry
+/- The placement, set-level (`eq:placement-set`) — CLOSED from the theorem
+`ASection.concentricity` (the statement carrier per the author's ruling of
+2026-07-06); its proof sits after the weld it consumes, at the end of §2
+below, statement byte-identical (the D0/D3/D2 relocation precedent). -/
 
 /-! ## §2 — The divisor bundle (set form ⟷ frozen row; both directions
 need the §4 convergence upgrade) -/
@@ -188,6 +183,18 @@ theorem placement_set_iff (A : ASection) :
     obtain ⟨m, hm⟩ := A.sphereZero_complete hw hwim
     rw [← hn, ← hm]
     exact h n m
+
+/-- The placement, set-level (OFFICIAL form; author's ruling 2026-07-04 —
+enumeration-free, "the zero set is F's alone"). Any two upper-half-plane
+zeros of the stem share one real part. Master label: `eq:placement-set`.
+CLOSED (2026-07-06, the author's ruling (a)): from the theorem
+`ASection.concentricity` through the frozen shadow
+`transportLevel_placement` and the proved weld — the corollary chain's
+consumption point, now riding the theorem directly. -/
+theorem placement_set (A : ASection) :
+    ∀ ⦃z w : ℂ⦄, A.F z = 0 → A.F w = 0 → 0 < z.im → 0 < w.im →
+      z.re = w.re :=
+  (A.placement_set_iff).mpr (A.transportLevel_placement)
 
 /-! ## §3 — Brick 1: `stem_identity_logDeriv`, the two-index engine
 (FE-free). Hypothesis shapes finalized against the arbiter per the

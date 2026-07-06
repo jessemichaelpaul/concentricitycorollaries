@@ -170,7 +170,11 @@ object label (master `def:base`). -/
 def ASection.transportLevel (A : ASection) (n : ℕ) : ℝ :=
   (A.sphereZero n).re
 
-/-- RE-BADGED 2026-07-05 (PLAN_reencode §5): the ONE open node, at its
+/- RE-BADGED 2026-07-05 (PLAN_reencode §5), SUPERSEDED 2026-07-06 by the
+author's ruling (a): the master label and the open node now live on
+`ASection.concentricity` below; this record is kept as the placement
+paragraph's transcription map. Original text:
+the ONE open node, at its
 translation-layer address — welded to `placement_set` by the proved
 `placement_set_iff`; consumed by `cor:nontrivial`, never by
 `concentricity_transport`. Statement and sorry unchanged.
@@ -208,9 +212,38 @@ is … the level log r paired with an odd winding height I(2k+1)π" —
 along every zigzag of 𝒯_A" — PROVED, `TotalObject.level_eq_of_zigzag`
 (Concentricity/Base.lean); (e) "lies over a *single* level" — the
 conclusion discharged here. -/
+/-- **THE CONCENTRICITY THEOREM** (master `thm:concentricity`; the
+statement carrier per the author's ruling of 2026-07-06, superseding the
+2026-07-05 re-encode: "(a) is literally the entire point of this entire
+project" — the theorem, stated as the author means it): **the infinitely
+many residue-ℂ zero-spheres of an A-section are concentric — one real
+centre.** The concentric dictionary's reading of the A-section's one
+concentric component: [the concentric component] → ∃ c, one centre.
+
+THE ONE OPEN NODE of the repository (R8: `sorry` = UNFORMALIZED, never
+UNSOUND). Everything on both sides is proved and certified: the transport
+connectivity (`concentricity_transport`, frozen kernel certificate), the
+articulation (`concentric_articulation` — one component, defined through
+the witness 𝔫, fibre concentric), the Φ-collapse and π₀(𝒮₂)
+(PhiConversion.lean: the glue total and proper, the slice world's
+components = the value moduli), the complete BL ladder (D0–D3 + mirror +
+D2's iff `placement_set_iff_liSum` — this statement's proved kernel-
+coordinate equivalent: ∃β two-sided positivity), the σ-closure rows, the
+supplier chain, and the corollary chain (`cor:nontrivial`, `cor:rh` with
+½ from `thm:rh-equiv`'s proved rigidity) consuming it downstream. The
+transport's memory is the witness structure; the transport over the base
+remembers the centres in the A-section (`rmk:collapse-cone`); this row is
+the memory's readback. -/
+theorem ASection.concentricity (A : ASection) :
+    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
+  sorry
+
+/-- The frozen shadow, CLOSED from the theorem (statement byte-identical
+to the 2026-07-04 landing; the weld partner of `placement_set`). -/
 theorem ASection.transportLevel_placement (A : ASection) (n m : ℕ) :
     A.transportLevel n = A.transportLevel m := by
-  sorry
+  obtain ⟨c, hc⟩ := A.concentricity
+  exact (hc n).trans (hc m).symm
 
 /-- The component of 𝒯 in which the n-th residue-ℂ zero-sphere of an
 A-section arrives — the OUTPUT of the C1–C4 assembly (master, proof of
