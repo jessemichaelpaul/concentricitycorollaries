@@ -25,6 +25,8 @@ sorries.
 import Concentricity.ZetaXiMatch
 import Mathlib.Analysis.Complex.JensenFormula
 import Mathlib.Data.Set.Card.Arithmetic
+import Concentricity.LiKernel
+import Concentricity.ZetaSection
 
 noncomputable section
 
@@ -207,3 +209,233 @@ theorem zetaEnum_count_le {C₁ : ℝ} (hC₁ : 1 ≤ C₁)
     rw [abs_of_pos (by linarith : (0:ℝ) < 2 * T)] at hznorm
     calc ‖xi z‖ ≤ C₁ * Real.exp (C₁ * (‖z‖ + 2) * Real.log (‖z‖ + 2)) := hgrow z
       _ = M := by rw [hM_def, hznorm]
+
+
+/-! ## Milestone (ii): the dyadic-shell comparison and the density -/
+
+/-- The shell index of an enumerated zero: j with 2^j ≤ ⌊‖qₖ‖⌋+1 < 2^(j+1). -/
+noncomputable def zetaShellIdx (k : ℕ) : ℕ :=
+  Nat.log 2 (⌊‖zetaSphereZero k‖⌋₊ + 1)
+
+/-- Shell bounds: the norm sits inside its dyadic shell. PROVED helper. -/
+theorem zetaShellIdx_bounds (k : ℕ) :
+    (2 : ℝ) ^ zetaShellIdx k - 1 ≤ ‖zetaSphereZero k‖ ∧
+      ‖zetaSphereZero k‖ < 2 ^ (zetaShellIdx k + 1) := by
+  set m : ℕ := ⌊‖zetaSphereZero k‖⌋₊ + 1 with hm_def
+  have hlow : (2 : ℕ) ^ zetaShellIdx k ≤ m :=
+    Nat.pow_log_le_self 2 (by omega)
+  have hhigh : m < (2 : ℕ) ^ (zetaShellIdx k + 1) :=
+    Nat.lt_pow_succ_log_self (by norm_num) m
+  constructor
+  · have h1 : (m : ℝ) ≤ ‖zetaSphereZero k‖ + 1 := by
+      rw [hm_def]
+      push_cast
+      have := Nat.floor_le (norm_nonneg (zetaSphereZero k))
+      linarith
+    have h2 : ((2 : ℝ)) ^ zetaShellIdx k ≤ (m : ℝ) := by
+      exact_mod_cast hlow
+    linarith
+  · have h1 : ‖zetaSphereZero k‖ < (m : ℝ) := by
+      rw [hm_def]
+      push_cast
+      exact Nat.lt_floor_add_one _
+    have h2 : (m : ℝ) < (2 : ℝ) ^ (zetaShellIdx k + 1) := by
+      exact_mod_cast hhigh
+    linarith
+
+/-- Term bound on a shell: 1/(1+‖qₖ‖²) ≤ 4/4^j. PROVED helper. -/
+theorem zeta_term_le_shell (k : ℕ) :
+    1 / (1 + ‖zetaSphereZero k‖ ^ 2) ≤ 4 / (4 : ℝ) ^ zetaShellIdx k := by
+  have hlow := (zetaShellIdx_bounds k).1
+  have hnn := norm_nonneg (zetaSphereZero k)
+  have hpow : (4 : ℝ) ^ zetaShellIdx k = ((2 : ℝ) ^ zetaShellIdx k) ^ 2 := by
+    rw [show (4 : ℝ) = 2 ^ 2 by norm_num, ← pow_mul, ← pow_mul, mul_comm]
+  have h2j : (0 : ℝ) < 2 ^ zetaShellIdx k := by positivity
+  rw [div_le_div_iff₀ (by positivity) (by positivity), hpow]
+  nlinarith [mul_nonneg
+      (by linarith : (0:ℝ) ≤ ‖zetaSphereZero k‖ + 1 - 2 ^ zetaShellIdx k)
+      (by positivity : (0:ℝ) ≤ ‖zetaSphereZero k‖ + 1 + 2 ^ zetaShellIdx k),
+    sq_nonneg (‖zetaSphereZero k‖ - 1)]
+
+/-- The shell fiber injects into the dyadic ball. PROVED helper. -/
+theorem zeta_shell_card_le (n j : ℕ) :
+    ((((Finset.range n).filter fun k => zetaShellIdx k = j)).card : ℝ)
+      ≤ ({k : ℕ | ‖zetaSphereZero k‖ < 2 ^ (j + 1)}.ncard : ℝ) := by
+  have hsub : ((((Finset.range n).filter fun k => zetaShellIdx k = j)) : Set ℕ)
+      ⊆ {k : ℕ | ‖zetaSphereZero k‖ < 2 ^ (j + 1)} := by
+    intro k hk
+    rw [Finset.mem_coe, Finset.mem_filter] at hk
+    have h1 := (zetaShellIdx_bounds k).2
+    rw [hk.2] at h1
+    exact h1
+  have hcard := Set.ncard_le_ncard hsub (zetaSphereZero_norm_lt_finite _)
+  rw [Set.ncard_coe_finset] at hcard
+  exact_mod_cast hcard
+
+/-- The dyadic ball count, in summable-friendly form:
+N_j ≤ log C₁/log 2 + 8C₁(j+3)·2^j. PROVED. -/
+theorem zeta_shell_count_bound {C₁ : ℝ} (hC₁ : 1 ≤ C₁)
+    (hgrow : ∀ s : ℂ, ‖xi s‖ ≤ C₁ * Real.exp (C₁ * (‖s‖ + 2) * Real.log (‖s‖ + 2)))
+    (j : ℕ) :
+    ({k : ℕ | ‖zetaSphereZero k‖ < 2 ^ (j + 1)}.ncard : ℝ)
+      ≤ Real.log C₁ / Real.log 2 + 8 * C₁ * ((j : ℝ) + 3) * 2 ^ j := by
+  have h2j1 : (1 : ℝ) ≤ 2 ^ (j + 1) := one_le_pow₀ (by norm_num)
+  have h2j : (1 : ℝ) ≤ (2 : ℝ) ^ j := one_le_pow₀ (by norm_num)
+  refine le_trans (zetaEnum_count_le hC₁ hgrow h2j1) ?_
+  have hlog2 : (0 : ℝ) < Real.log 2 := Real.log_pos one_lt_two
+  have harg : 2 * (2 : ℝ) ^ (j + 1) + 2 ≤ 2 ^ (j + 3) := by
+    rw [show (2 : ℝ) ^ (j + 3) = 8 * 2 ^ j by rw [pow_add]; ring,
+      show 2 * (2 : ℝ) ^ (j + 1) + 2 = 4 * 2 ^ j + 2 by rw [pow_add]; ring]
+    nlinarith
+  have hargpos : (1 : ℝ) ≤ 2 * (2 : ℝ) ^ (j + 1) + 2 := by nlinarith
+  have hlogarg : Real.log (2 * (2 : ℝ) ^ (j + 1) + 2)
+      ≤ ((j : ℝ) + 3) * Real.log 2 := by
+    calc Real.log (2 * (2 : ℝ) ^ (j + 1) + 2) ≤ Real.log ((2 : ℝ) ^ (j + 3)) :=
+          Real.log_le_log (by linarith) harg
+      _ = ((j : ℝ) + 3) * Real.log 2 := by
+          rw [Real.log_pow]
+          push_cast
+          ring
+  have hsplit : (Real.log C₁ + C₁ * (2 * 2 ^ (j + 1) + 2)
+        * Real.log (2 * 2 ^ (j + 1) + 2)) / Real.log 2
+      = Real.log C₁ / Real.log 2
+        + C₁ * (2 * 2 ^ (j + 1) + 2) * Real.log (2 * 2 ^ (j + 1) + 2)
+          / Real.log 2 := by
+    ring
+  rw [hsplit]
+  have h2nd : C₁ * (2 * 2 ^ (j + 1) + 2) * Real.log (2 * 2 ^ (j + 1) + 2)
+        / Real.log 2
+      ≤ 8 * C₁ * ((j : ℝ) + 3) * 2 ^ j := by
+    rw [div_le_iff₀ hlog2]
+    have hlogpos : 0 ≤ Real.log (2 * 2 ^ (j + 1) + 2) :=
+      Real.log_nonneg hargpos
+    have hC₁0 : (0 : ℝ) ≤ C₁ := by linarith
+    calc C₁ * (2 * 2 ^ (j + 1) + 2) * Real.log (2 * 2 ^ (j + 1) + 2)
+        ≤ C₁ * 2 ^ (j + 3) * (((j : ℝ) + 3) * Real.log 2) := by
+          refine mul_le_mul (mul_le_mul_of_nonneg_left harg hC₁0) hlogarg
+            hlogpos (by positivity)
+      _ = 8 * C₁ * ((j : ℝ) + 3) * 2 ^ j * Real.log 2 := by
+          rw [show (2 : ℝ) ^ (j + 3) = 8 * 2 ^ j by rw [pow_add]; ring]
+          ring
+  linarith
+
+/-- The shell majorant series is summable (geometric with a polynomial
+factor). PROVED helper. -/
+theorem summable_shellBound (D E : ℝ) :
+    Summable (fun j : ℕ =>
+      (D + E * ((j : ℝ) + 3) * 2 ^ j) * (4 / (4 : ℝ) ^ j)) := by
+  have hgeo4 : Summable (fun j : ℕ => (1 / 4 : ℝ) ^ j) :=
+    summable_geometric_of_lt_one (by norm_num) (by norm_num)
+  have hgeo2 : Summable (fun j : ℕ => (1 / 2 : ℝ) ^ j) :=
+    summable_geometric_of_lt_one (by norm_num) (by norm_num)
+  have hpoly : Summable (fun j : ℕ => (j : ℝ) * (1 / 2 : ℝ) ^ j) := by
+    have h := summable_pow_mul_geometric_of_norm_lt_one (R := ℝ) 1
+      (r := 1 / 2) (by rw [Real.norm_eq_abs]; norm_num)
+    refine h.congr fun j => ?_
+    rw [pow_one]
+  have hsum : Summable (fun j : ℕ =>
+      4 * D * (1 / 4 : ℝ) ^ j
+        + (4 * E * ((j : ℝ) * (1 / 2 : ℝ) ^ j) + 12 * E * (1 / 2 : ℝ) ^ j)) :=
+    (hgeo4.mul_left _).add ((hpoly.mul_left _).add (hgeo2.mul_left _))
+  refine hsum.congr fun j => ?_
+  have h1 : (1 / 4 : ℝ) ^ j = ((4 : ℝ) ^ j)⁻¹ := by
+    rw [one_div, inv_pow]
+  have h2 : (1 / 2 : ℝ) ^ j = ((2 : ℝ) ^ j)⁻¹ := by
+    rw [one_div, inv_pow]
+  have h3 : (4 : ℝ) ^ j = 2 ^ j * 2 ^ j := by
+    rw [show (4 : ℝ) = 2 * 2 by norm_num, mul_pow]
+  have h20 : (2 : ℝ) ^ j ≠ 0 := by positivity
+  rw [h1, h2, h3]
+  field_simp
+  ring
+
+/-- **ζ's QUADRATIC POINT-DENSITY** — Brick-2 runway item (1), the D0
+summability obligation's remaining goal, closed for the ζ member: Jensen's
+counting bound + the dyadic-shell comparison. PROVED. -/
+theorem zetaSphereZero_density :
+    Summable fun k => 1 / (1 + ‖zetaSphereZero k‖ ^ 2) := by
+  obtain ⟨C, hCpos, hgrowC⟩ := xi_growth
+  set C₁ : ℝ := max C 1 with hC₁_def
+  have hC₁ : 1 ≤ C₁ := le_max_right _ _
+  have hgrow : ∀ s : ℂ, ‖xi s‖
+      ≤ C₁ * Real.exp (C₁ * (‖s‖ + 2) * Real.log (‖s‖ + 2)) := by
+    intro s
+    have hXnn : (0 : ℝ) ≤ (‖s‖ + 2) * Real.log (‖s‖ + 2) := by
+      have h1 : (1 : ℝ) ≤ ‖s‖ + 2 := by linarith [norm_nonneg s]
+      have h2 := Real.log_nonneg h1
+      positivity
+    have hCC₁ : C ≤ C₁ := le_max_left _ _
+    have hexp : Real.exp (C * (‖s‖ + 2) * Real.log (‖s‖ + 2))
+        ≤ Real.exp (C₁ * (‖s‖ + 2) * Real.log (‖s‖ + 2)) := by
+      apply Real.exp_le_exp.mpr
+      have h1 : C * (‖s‖ + 2) * Real.log (‖s‖ + 2)
+          = C * ((‖s‖ + 2) * Real.log (‖s‖ + 2)) := by ring
+      have h2 : C₁ * (‖s‖ + 2) * Real.log (‖s‖ + 2)
+          = C₁ * ((‖s‖ + 2) * Real.log (‖s‖ + 2)) := by ring
+      rw [h1, h2]
+      nlinarith
+    refine le_trans (hgrowC s) ?_
+    have hep := Real.exp_pos (C * (‖s‖ + 2) * Real.log (‖s‖ + 2))
+    have hep2 := Real.exp_pos (C₁ * (‖s‖ + 2) * Real.log (‖s‖ + 2))
+    nlinarith
+  set D : ℝ := Real.log C₁ / Real.log 2 with hD_def
+  set E : ℝ := 8 * C₁ with hE_def
+  have hDnn : 0 ≤ D :=
+    div_nonneg (Real.log_nonneg hC₁) (Real.log_pos one_lt_two).le
+  have hEnn : 0 ≤ E := by rw [hE_def]; linarith
+  set g : ℕ → ℝ := fun j =>
+    (D + E * ((j : ℝ) + 3) * 2 ^ j) * (4 / (4 : ℝ) ^ j) with hg_def
+  have hgnn : ∀ j, 0 ≤ g j := by
+    intro j
+    rw [hg_def]
+    have h1 : (0 : ℝ) ≤ (j : ℝ) + 3 := by positivity
+    have h2 : (0 : ℝ) ≤ (2 : ℝ) ^ j := by positivity
+    have h3 : (0 : ℝ) ≤ 4 / (4 : ℝ) ^ j := by positivity
+    have h4 : 0 ≤ D + E * ((j : ℝ) + 3) * 2 ^ j := by
+      have h5 := mul_nonneg (mul_nonneg hEnn h1) h2
+      linarith
+    exact mul_nonneg h4 h3
+  have hg : Summable g := summable_shellBound D E
+  refine summable_of_sum_range_le (c := ∑' j, g j) (fun k => by positivity) fun n => ?_
+  set J : ℕ := ((Finset.range n).sup zetaShellIdx) + 1 with hJ_def
+  have hmaps : ∀ k ∈ Finset.range n, zetaShellIdx k ∈ Finset.range J :=
+    fun k hk => Finset.mem_range.mpr (Nat.lt_succ_of_le (Finset.le_sup hk))
+  calc ∑ k ∈ Finset.range n, 1 / (1 + ‖zetaSphereZero k‖ ^ 2)
+      = ∑ j ∈ Finset.range J, ∑ k ∈ (Finset.range n).filter
+          (fun k => zetaShellIdx k = j), 1 / (1 + ‖zetaSphereZero k‖ ^ 2) :=
+        (Finset.sum_fiberwise_of_maps_to hmaps _).symm
+    _ ≤ ∑ j ∈ Finset.range J, g j := by
+        refine Finset.sum_le_sum fun j _ => ?_
+        calc ∑ k ∈ (Finset.range n).filter (fun k => zetaShellIdx k = j),
+              1 / (1 + ‖zetaSphereZero k‖ ^ 2)
+            ≤ ∑ _k ∈ (Finset.range n).filter (fun k => zetaShellIdx k = j),
+              4 / (4 : ℝ) ^ j := by
+              refine Finset.sum_le_sum fun k hk => ?_
+              have h1 := zeta_term_le_shell k
+              rw [(Finset.mem_filter.mp hk).2] at h1
+              exact h1
+          _ = ((((Finset.range n).filter
+                (fun k => zetaShellIdx k = j)).card : ℝ))
+              * (4 / (4 : ℝ) ^ j) := by
+              rw [Finset.sum_const, nsmul_eq_mul]
+          _ ≤ (D + E * ((j : ℝ) + 3) * 2 ^ j) * (4 / (4 : ℝ) ^ j) := by
+              refine mul_le_mul_of_nonneg_right ?_ (by positivity)
+              exact le_trans (zeta_shell_card_le n j)
+                (zeta_shell_count_bound hC₁ hgrow j)
+          _ = g j := by rw [hg_def]
+    _ ≤ ∑' j, g j := hg.sum_le_tsum _ fun j _ => hgnn j
+
+/-! ## The D0 summability obligation, closed for the ζ member -/
+
+/-- **D0 for ζ** (the obligation of DESIGN §D0, member face): the paired
+kernel sums of `zetaSection` converge — the density above, centered at 0,
+through the PROVED reduction `liSum_summable_of_density_at`. With this,
+the BL ladder's D0 rung is green for the member that `cor:rh` consumes;
+the class face is the γ-dialogue (file header). PROVED. -/
+theorem zetaSection_liSum_summable (a β : ℝ) (n : ℕ) :
+    Summable fun k => 2 * (liKernel n a β (zetaSection.sphereZero k)).re := by
+  refine zetaSection.liSum_summable_of_density_at (c₀ := 0) ?_ a β n
+  have h := zetaSphereZero_density
+  refine h.congr fun k => ?_
+  have hz : zetaSection.sphereZero k = zetaSphereZero k := rfl
+  rw [Complex.ofReal_zero, sub_zero, hz]
