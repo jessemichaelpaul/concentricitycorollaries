@@ -15,7 +15,10 @@ enumeration, ZetaDivisor) with c3_sphere_nonreal + c4_infinite,
 c3_lowerEdge (the strip, ZetaStrip: ζ supplies 0 < Re ρ outright —
 member-private, PLAN §6-admissible as a bound, not a level), ι_infinite,
 valueAtInfinity = 1 (def:zeta-Cstar) + realness, m := 0 (ζ(0) = −1/2),
-genus := 1 (order-1 Hadamard shape).
+genus := fun n => n (per-zero genus — the def:A-section field's purpose;
+amended from the design table's order-1 guess, author-cleared 2026-07-05:
+the elementary Weierstrass route at growing genus needs only |qₙ| → ∞ from
+the pinned discreteness, no Jensen/density input).
 
 PROVED rows (closed 2026-07-05, same session): the C2 cluster (six rows —
 the SYMMETRIZED Euler-factor logs, equal to −log(1 − p^{−z}) on Ω₀ by
@@ -380,14 +383,14 @@ this row closes Island C1's mathematics. SORRIED (R8 — UNFORMALIZED,
 never UNSOUND; the divisor-repeated enumeration keeps it unconditional).
 -/
 theorem zetaC3_package : ∃ g : ℂ → ℂ, IsIntrinsic g ∧ Differentiable ℂ g ∧
-    (∀ z : ℂ, Multipliable fun n => spherePrimary 1 (zetaSphereZero n) z) ∧
+    (∀ z : ℂ, Multipliable fun n => spherePrimary n (zetaSphereZero n) z) ∧
     (∀ z : ℂ, z ≠ ((1 : ℝ) : ℂ) → ∃ r > 0, ∃ u : ℕ → ℝ, Summable u ∧
       ∀ n, ∀ w ∈ Metric.ball z r,
-        ‖spherePrimary 1 (zetaSphereZero n) w - 1‖ ≤ u n) ∧
+        ‖spherePrimary n (zetaSphereZero n) w - 1‖ ≤ u n) ∧
     (∀ z : ℂ, z ≠ ((1 : ℝ) : ℂ) →
       (z - ((1 : ℝ) : ℂ)) * riemannZeta z
         = z ^ 0 * zetaRfac z * Complex.exp (g z) *
-          ∏' n, spherePrimary 1 (zetaSphereZero n) z) := by
+          ∏' n, spherePrimary n (zetaSphereZero n) z) := by
   sorry
 
 /-- C3 data — the Hadamard exponential factor, extracted from the gated
@@ -401,19 +404,19 @@ theorem zetaGfac_entire : Differentiable ℂ zetaGfac :=
   zetaC3_package.choose_spec.2.1
 
 theorem zetaC3_multipliable :
-    ∀ z : ℂ, Multipliable fun n => spherePrimary 1 (zetaSphereZero n) z :=
+    ∀ z : ℂ, Multipliable fun n => spherePrimary n (zetaSphereZero n) z :=
   zetaC3_package.choose_spec.2.2.1
 
 theorem zetaC3_locMajorant : ∀ z : ℂ, z ≠ ((1 : ℝ) : ℂ) →
     ∃ r > 0, ∃ u : ℕ → ℝ, Summable u ∧
       ∀ n, ∀ w ∈ Metric.ball z r,
-        ‖spherePrimary 1 (zetaSphereZero n) w - 1‖ ≤ u n :=
+        ‖spherePrimary n (zetaSphereZero n) w - 1‖ ≤ u n :=
   zetaC3_package.choose_spec.2.2.2.1
 
 theorem zetaC3_factorization : ∀ z : ℂ, z ≠ ((1 : ℝ) : ℂ) →
     (z - ((1 : ℝ) : ℂ)) * riemannZeta z
       = z ^ 0 * zetaRfac z * Complex.exp (zetaGfac z) *
-        ∏' n, spherePrimary 1 (zetaSphereZero n) z :=
+        ∏' n, spherePrimary n (zetaSphereZero n) z :=
   zetaC3_package.choose_spec.2.2.2.2
 
 /-! ## The instance -/
@@ -449,7 +452,7 @@ noncomputable def zetaSection : ASection where
   m := 0
   Rfac := zetaRfac
   gfac := zetaGfac
-  genus := fun _ => 1
+  genus := fun n => n
   sphereZero := zetaSphereZero
   c3_R_intrinsic := zetaRfac_intrinsic
   c3_R_entire := zetaRfac_entire
