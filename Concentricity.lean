@@ -18,3 +18,5 @@ import Concentricity.ZetaPole
 import Concentricity.ZetaRealZeros
 import Concentricity.ZeroSpheres
 import Concentricity.RhEquiv
+import Concentricity.ZetaDivisor
+import Concentricity.ZetaSection
