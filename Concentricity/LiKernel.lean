@@ -52,19 +52,9 @@ touches a division by zero — totality is genuine. -/
 def liSum (A : ASection) (a β : ℝ) (n : ℕ) : ℝ :=
   ∑' k, 2 * (liKernel n a β (A.sphereZero k)).re
 
-/-- **C-1 — the named obligation** (DESIGN D0: well-definedness =
-summability, from the divisor's convergence; "expected derivable from the
-§4α majorants / genus data; if not derivable class-wide, R6 stop —
-author's word"). Lands sorried by ruling. REGISTER (author, 2026-07-04):
-convergence is a possession of the class — C3's divisor control with C1
-closing the divisor through the pole is exactly the density that makes the
-paired kernel sums converge; this sorry is "a debt of transcription, not
-of belief" (R8: UNFORMALIZED, never UNSOUND). No convergence hypothesis is
-being added; C-1 is not a C5-in-disguise; the statements are deliberately
-bare. Burn-order fence: D3/D2 hold until this closes. -/
-theorem liSum_summable (A : ASection) (a β : ℝ) (n : ℕ) :
-    Summable fun k => 2 * (liKernel n a β (A.sphereZero k)).re := by
-  sorry
+/- D0's summability obligation (the retired "C-1" label) is CLOSED at the
+end of this file (`ASection.liSum_summable`) — it consumes the reduction
+stock below, so its proof sits after it in file order. -/
 
 end ASection
 
@@ -392,14 +382,9 @@ theorem ASection.placement_set_iff_liSum (A : ASection) :
           ∧ (∀ a : ℝ, β < a → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n) := by
   sorry
 
-/-- **D3 — the first side, derived** (ladder L1; DESIGN: from
-`zero_free_on_halfSpace` (C2) — every level is bounded above by the
-half-space edge, and the one-sided Theorem 2 direction converts the bound
-into the positivity family). Makes "the remaining gap = the second side" a
-literal Lean fact. -/
-theorem ASection.liSum_first_side (A : ASection) :
-    ∃ β : ℝ, ∀ a : ℝ, a < β → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n := by
-  sorry
+/- D3 — the first side — is PROVED at the end of this file
+(`ASection.liSum_first_side`, after the reduction stock it consumes:
+`re_le_upperEdge`). -/
 
 /-! ## C-1 reduction stock (B2.2 burn session, 2026-07-04; all PROVED)
 
@@ -719,3 +704,59 @@ theorem ASection.liSum_summable_of_density_at (A : ASection) {c₀ : ℝ}
     Summable fun k => 2 * (liKernel n a β (A.sphereZero k)).re :=
   A.liSum_summable_of_density a β n
     (summable_inv_one_add_norm_sq_center_shift hd (2 * β - a))
+
+/-! ## D0 and D3, closed (2026-07-06) -/
+
+/-- **D0 — the summability obligation, CLOSED** (2026-06 label "C-1"
+retired by author ruling — the label collided with hypothesis C1 and
+Island C1). REGISTER (author, 2026-07-04, the ruling this closure
+vindicates): convergence is a possession of the class — C3's divisor
+control with C1 closing the divisor through the pole is exactly the
+density that makes the paired kernel sums converge; the sorry that stood
+here was "a debt of transcription, not of belief" (R8). DEBT PAID
+(2026-07-06): the transcription is `c3_atN` — C3's own convergence clause
+through N, the point where the divisor accumulates and every mirror
+circle closes — consumed through the PROVED reduction
+`liSum_summable_of_density_at` at c₀ = 0 (center-shift + the strip +
+the Sekatskii-(ii) bridge + the paired binomial comparison). One clause,
+every anchor pair, every n: the attachment of all the levels is the
+section's own possession. Burn-order fence LIFTED: D3/D2 may land. -/
+theorem ASection.liSum_summable (A : ASection) (a β : ℝ) (n : ℕ) :
+    Summable fun k => 2 * (liKernel n a β (A.sphereZero k)).re := by
+  refine A.liSum_summable_of_density_at (c₀ := 0) ?_ a β n
+  exact A.c3_atN.congr fun k => by rw [Complex.ofReal_zero, sub_zero]
+
+/-- **D3 — the first side, PROVED** (ladder L1; from
+`zero_free_on_halfSpace` (C2) — every level is bounded above by the
+half-space edge via `re_le_upperEdge`, so with β := Ω₀ + 1 every zero is
+strictly on the near side of every mirror line with anchor a < β:
+`liRatio_norm_lt_one` makes each ratio power sub-unimodular and every
+term of the sum nonnegative). Makes "the remaining gap = the second
+side" a literal Lean fact. Junk-tsum rider (burn-order fence, header):
+the sums here are GENUINE — `liSum_summable` is closed above, so the
+positivity is about convergent sums, never the divergent-tsum branch;
+the termwise proof below is branch-free either way. -/
+theorem ASection.liSum_first_side (A : ASection) :
+    ∃ β : ℝ, ∀ a : ℝ, a < β → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n := by
+  refine ⟨A.Ω₀ + 1, fun a ha n _ => ?_⟩
+  show (0 : ℝ) ≤ ∑' k, 2 * (liKernel n a (A.Ω₀ + 1) (A.sphereZero k)).re
+  refine tsum_nonneg fun k => ?_
+  have hz : (A.sphereZero k).im ≠ 0 := ne_of_gt (A.c3_sphere_nonreal k)
+  have hside : (A.Ω₀ + 1 - a) * ((A.sphereZero k).re - (A.Ω₀ + 1)) < 0 := by
+    have h1 := A.re_le_upperEdge k
+    have h2 : (A.sphereZero k).re - (A.Ω₀ + 1) < 0 := by linarith
+    have h3 : 0 < A.Ω₀ + 1 - a := by linarith
+    exact mul_neg_of_pos_of_neg h3 h2
+  have hr : ‖liRatio a (A.Ω₀ + 1) (A.sphereZero k)‖ < 1 :=
+    liRatio_norm_lt_one hz hside
+  have h2 : (liRatio a (A.Ω₀ + 1) (A.sphereZero k) ^ n).re ≤ 1 := by
+    calc (liRatio a (A.Ω₀ + 1) (A.sphereZero k) ^ n).re
+        ≤ |(liRatio a (A.Ω₀ + 1) (A.sphereZero k) ^ n).re| := le_abs_self _
+      _ ≤ ‖liRatio a (A.Ω₀ + 1) (A.sphereZero k) ^ n‖ :=
+          Complex.abs_re_le_norm _
+      _ = ‖liRatio a (A.Ω₀ + 1) (A.sphereZero k)‖ ^ n := norm_pow _ _
+      _ ≤ 1 := pow_le_one₀ (norm_nonneg _) hr.le
+  have h3 : 0 ≤ (liKernel n a (A.Ω₀ + 1) (A.sphereZero k)).re := by
+    rw [liKernel_eq_ratio, Complex.sub_re, Complex.one_re]
+    linarith
+  linarith

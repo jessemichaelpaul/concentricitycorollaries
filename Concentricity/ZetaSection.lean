@@ -44,6 +44,7 @@ import Concentricity.ASection
 import Concentricity.ZetaDivisor
 import Concentricity.RhEquiv
 import Concentricity.ZetaAssembly
+import Concentricity.ZetaDensityCore
 import Mathlib.Analysis.SpecialFunctions.Log.Summable
 import Mathlib.Analysis.SpecialFunctions.Complex.LogBounds
 
@@ -464,6 +465,7 @@ noncomputable def zetaSection : ASection where
     have him := zetaSphereZero_im_pos k
     obtain ⟨htriv, hone⟩ := nontrivial_of_im_ne_zero (ne_of_gt him)
     exact (nontrivialZero_re_mem_Ioo hz htriv hone).1.le
+  c3_atN := zetaSphereZero_density
   c3_factorization := zetaC3_factorization
   c4_infinite := zetaSphereZero_range_infinite
   valueAtInfinity := ((1 : ℂ) : OnePoint ℂ)
