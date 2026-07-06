@@ -421,4 +421,43 @@ theorem transportLevel_placement_draftII (A : ASection) (n m : ℕ) :
   -- level only.
   sorry
 
+/-! ## The articulation (author, 2026-07-06 dialogue — rendered verbatim) -/
+
+/-- **THE ARTICULATION, PROVED** (author's register, 2026-07-06, quoted):
+"The residue-ℂ zero spheres of C3 (i.e., of THE SECTION ITSELF which is
+the forest of C1, C2, C3, and C4) are therefore concentric (because the
+fibre is) because the connected component of the A-section is defined by
+the degenerate fibre through the witness N. You don't need the actual
+centers. … 𝓑 by itself doesn't do anything; the A-section functor (with
+all its conjoined properties and the great circle/Brick 2 argument) is
+what glues these."
+
+The three clauses, each on its proved carrier:
+(i)   ONE COMPONENT — all infinitely many residue-ℂ zero classes coincide
+      in the populated transport (`thm:concentricity`, the frozen
+      certificate; Pin 1's class-wide form).
+(ii)  DEFINED THROUGH THE WITNESS N — every zero class IS the class of 𝔫:
+      the component is the attachment through the witness (the grown
+      arrows of C1's cone; `classOf_eq_nClass`).
+(iii) THE FIBRE IS CONCENTRIC — each degenerate fibre carries exactly ONE
+      level, all multiplicity in the winding band (`lem:exp-degenerate`,
+      stem form; `exp_fibre_level` + `exp_fibre_height_band`).
+
+Register note (Pin 3, TransportObject.lean, stands unchanged): the centre
+readout of `cor:nontrivial` was pinned by the author's 2026-07-05 ruling
+to consume `placement_set`, not this object — so whether the translation
+corollary now rides THIS articulation instead is a master-layer ruling
+(the author's lane, words-before-commits), not a Lean fact this file can
+decide. -/
+theorem concentric_articulation (A : ASection) :
+    (∀ n m : ℕ, A.transportClass n = A.transportClass m)
+    ∧ (∀ n : ℕ, A.transportClass n
+        = CategoryTheory.ConnectedComponents.mk TotalTransport.nObj)
+    ∧ (∀ r : ℝ, 0 < r → ∀ w₁ w₂ : ℂ,
+        Complex.exp w₁ = -(r : ℂ) → Complex.exp w₂ = -(r : ℂ) →
+        w₁.re = w₂.re) := by
+  refine ⟨A.transport_universal, fun n => ?_, fun r hr w₁ w₂ h₁ h₂ => ?_⟩
+  · exact TotalTransport.classOf_eq_nClass _
+  · rw [exp_fibre_level hr h₁, exp_fibre_level hr h₂]
+
 end ASection
