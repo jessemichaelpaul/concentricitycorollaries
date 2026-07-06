@@ -1355,3 +1355,50 @@ theorem ASection.placement_set_iff_liSum (A : ASection) :
     obtain ⟨nz, hnz⟩ := A.sphereZero_complete hz hzim
     obtain ⟨nw, hnw⟩ := A.sphereZero_complete hw hwim
     rw [← hnz, ← hnw, hall nz, hall nw]
+
+/-- **The mirror of D3 — the second side at the lower edge, PROVED**: with
+β := βlo − 1 below the strip, every zero is strictly on the near side for
+every anchor a > β — the exact mirror of `liSum_first_side`'s argument,
+run on `c3_lowerEdge` in place of `re_le_upperEdge`. With D3 this puts
+BOTH one-sided positivity families on the board as possessions, each at
+its own edge of the strip; the open node is that ONE β serves both. -/
+theorem ASection.liSum_second_side (A : ASection) :
+    ∃ β : ℝ, ∀ a : ℝ, β < a → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n := by
+  obtain ⟨βlo, hβlo⟩ := A.c3_lowerEdge
+  refine ⟨βlo - 1, fun a ha n _ => ?_⟩
+  show (0 : ℝ) ≤ ∑' k, 2 * (liKernel n a (βlo - 1) (A.sphereZero k)).re
+  refine tsum_nonneg fun k => ?_
+  have hz : (A.sphereZero k).im ≠ 0 := ne_of_gt (A.c3_sphere_nonreal k)
+  have hside : (βlo - 1 - a) * ((A.sphereZero k).re - (βlo - 1)) < 0 := by
+    have h1 := hβlo k
+    have h2 : 0 < (A.sphereZero k).re - (βlo - 1) := by linarith
+    have h3 : βlo - 1 - a < 0 := by linarith
+    exact mul_neg_of_neg_of_pos h3 h2
+  have hr : ‖liRatio a (βlo - 1) (A.sphereZero k)‖ < 1 :=
+    liRatio_norm_lt_one hz hside
+  have h2 : (liRatio a (βlo - 1) (A.sphereZero k) ^ n).re ≤ 1 := by
+    calc (liRatio a (βlo - 1) (A.sphereZero k) ^ n).re
+        ≤ |(liRatio a (βlo - 1) (A.sphereZero k) ^ n).re| := le_abs_self _
+      _ ≤ ‖liRatio a (βlo - 1) (A.sphereZero k) ^ n‖ :=
+          Complex.abs_re_le_norm _
+      _ = ‖liRatio a (βlo - 1) (A.sphereZero k)‖ ^ n := norm_pow _ _
+      _ ≤ 1 := pow_le_one₀ (norm_nonneg _) hr.le
+  have h3 : 0 ≤ (liKernel n a (βlo - 1) (A.sphereZero k)).re := by
+    rw [liKernel_eq_ratio, Complex.sub_re, Complex.one_re]
+    linarith
+  linarith
+
+/-- **The supplier chain, PROVED — "D2 is doing what the keystone assembly
+needs" (author, 2026-07-06)**: the two-sided positivity at one β supplies
+the frozen keystone's level equality outright — D2's (⟸) direction chained
+through the proved weld `placement_set_iff`. The loop assembly, in also
+the pun sense: the loop of unit imaginary octonions (the ℂ-residue
+zero-spheres) connected with the great circle (the ℝ-residue concentric
+base). With this row the ENTIRE remaining mathematics of the repository
+is the single sentence `∃ β` below — everything on both sides of it is
+proved. -/
+theorem ASection.transportLevel_placement_of_two_sided (A : ASection)
+    (h : ∃ β : ℝ, (∀ a : ℝ, a < β → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n)
+        ∧ (∀ a : ℝ, β < a → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n)) :
+    ∀ n m : ℕ, A.transportLevel n = A.transportLevel m :=
+  (A.placement_set_iff).mp ((A.placement_set_iff_liSum).mpr h)
