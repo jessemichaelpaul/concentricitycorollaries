@@ -464,3 +464,144 @@ theorem zetaProd_orderAt_upper {s : ℂ} (hs : s ∈ zetaUpperZeros) :
     refine Filter.Eventually.of_forall fun w => ?_
     rw [smul_eq_mul, zetaProd_split t w, hpeel w]
     ring
+
+/-! ## STAGE B2b — ξ's order and the divisor match -/
+
+/-- ξ is analytic everywhere. PROVED helper. -/
+theorem xi_analyticAt (z : ℂ) : AnalyticAt ℂ xi z :=
+  xi_entire.analyticAt z
+
+/-- ζ's order is finite at every non-pole point (the ZetaDivisor
+identity-theorem block, extracted). PROVED helper. -/
+theorem riemannZeta_orderAt_ne_top {s : ℂ} (hs1 : s ≠ 1) :
+    analyticOrderAt riemannZeta s ≠ ⊤ := by
+  intro htop
+  have hev := analyticOrderAt_eq_top.mp htop
+  have hζ : AnalyticOnNhd ℂ riemannZeta ({(1 : ℂ)}ᶜ : Set ℂ) := fun z hz =>
+    riemannZeta_analyticAt (Set.mem_compl_singleton_iff.mp hz)
+  have h0 : AnalyticOnNhd ℂ (fun _ : ℂ => (0 : ℂ)) ({(1 : ℂ)}ᶜ : Set ℂ) :=
+    fun _ _ => analyticAt_const
+  have hUconn : IsPreconnected ({(1 : ℂ)}ᶜ : Set ℂ) := by
+    refine (isConnected_compl_singleton_of_one_lt_rank ?_ 1).isPreconnected
+    rw [← Module.finrank_eq_rank, Complex.finrank_real_complex]
+    exact_mod_cast one_lt_two
+  have hEq := hζ.eqOn_of_preconnected_of_eventuallyEq h0 hUconn
+    (Set.mem_compl_singleton_iff.mpr hs1) hev
+  exact riemannZeta_ne_zero_of_one_le_re (by norm_num)
+    (hEq (by norm_num : (2 : ℂ) ∈ ({(1 : ℂ)}ᶜ : Set ℂ)))
+
+/-- Γℝ is analytic on the right half-plane. PROVED helper. -/
+theorem Gammaℝ_analyticAt_of_re_pos {s : ℂ} (hs : 0 < s.re) :
+    AnalyticAt ℂ Gammaℝ s := by
+  have hd : DifferentiableOn ℂ Gammaℝ {z : ℂ | 0 < z.re} := by
+    intro z hz
+    have hz' : (0 : ℝ) < z.re := hz
+    have h1 : DifferentiableAt ℂ
+        (fun w : ℂ => ((Real.pi : ℝ) : ℂ) ^ (-w / 2)) z := by
+      have heq : (fun w : ℂ => ((Real.pi : ℝ) : ℂ) ^ (-w / 2))
+          = fun w => Complex.exp (Complex.log ((Real.pi : ℝ) : ℂ) * (-w / 2)) := by
+        funext w
+        exact Complex.cpow_def_of_ne_zero
+          (Complex.ofReal_ne_zero.mpr Real.pi_ne_zero) _
+      rw [heq]
+      fun_prop
+    have h2 : DifferentiableAt ℂ (fun w : ℂ => Complex.Gamma (w / 2)) z := by
+      have hpole : ∀ m : ℕ, z / 2 ≠ -(m : ℂ) := by
+        intro m h
+        have hz2 : z = -(m : ℂ) * 2 := by
+          rw [← h]
+          ring
+        have hcast : -(m : ℂ) * 2 = ((-(m : ℝ) * 2 : ℝ) : ℂ) := by
+          push_cast
+          ring
+        have hre : z.re = -(m : ℝ) * 2 := by
+          rw [hz2, hcast, Complex.ofReal_re]
+        have hm : (0 : ℝ) ≤ m := Nat.cast_nonneg m
+        rw [hre] at hz'
+        linarith
+      exact (Complex.differentiableAt_Gamma _ hpole).comp z
+        ((differentiable_id.div_const 2) z)
+    have heqΓ : Gammaℝ = fun w : ℂ =>
+        ((Real.pi : ℝ) : ℂ) ^ (-w / 2) * Complex.Gamma (w / 2) := by
+      funext w
+      rw [Gammaℝ]
+    rw [heqΓ]
+    exact (h1.mul h2).differentiableWithinAt
+  exact (hd.analyticOnNhd (isOpen_lt continuous_const Complex.continuous_re))
+    _ hs
+
+/-- **ξ's order at an upper zero is the multiplicity**: near the zero,
+ξ = [z(z−1)Γℝ]·ζ with the bracket analytic and nonvanishing — the orders
+add, and the bracket contributes zero. PROVED. -/
+theorem xi_orderAt_upper {s : ℂ} (hs : s ∈ zetaUpperZeros) :
+    analyticOrderAt xi s = (zetaZeroMult s : ℕ∞) := by
+  have hsim : 0 < s.im := hs.2
+  obtain ⟨htriv, hone⟩ := nontrivial_of_im_ne_zero (ne_of_gt hsim)
+  obtain ⟨hre0, _⟩ := nontrivialZero_re_mem_Ioo hs.1 htriv hone
+  have hs0 : s ≠ 0 := by
+    intro h
+    rw [h] at hre0
+    simp at hre0
+  have hΓs : Gammaℝ s ≠ 0 := Gammaℝ_ne_zero_of_re_pos hre0
+  have hΓan : AnalyticAt ℂ Gammaℝ s := Gammaℝ_analyticAt_of_re_pos hre0
+  have hUan : AnalyticAt ℂ (fun z : ℂ => z * (z - 1) * Gammaℝ z) s :=
+    ((analyticAt_id.mul (analyticAt_id.sub analyticAt_const)).mul hΓan)
+  have hev : xi =ᶠ[nhds s] (fun z : ℂ => z * (z - 1) * Gammaℝ z) * riemannZeta := by
+    have hopen : IsOpen (({(0 : ℂ)}ᶜ ∩ {(1 : ℂ)}ᶜ) : Set ℂ) :=
+      isOpen_compl_singleton.inter isOpen_compl_singleton
+    have hmem : s ∈ (({(0 : ℂ)}ᶜ ∩ {(1 : ℂ)}ᶜ) : Set ℂ) :=
+      ⟨Set.mem_compl_singleton_iff.mpr hs0, Set.mem_compl_singleton_iff.mpr hone⟩
+    filter_upwards [hopen.mem_nhds hmem,
+      hΓan.continuousAt.eventually_ne hΓs] with z hzmem hzΓ
+    have hz0 : z ≠ 0 := Set.mem_compl_singleton_iff.mp hzmem.1
+    have hz1 : z ≠ 1 := Set.mem_compl_singleton_iff.mp hzmem.2
+    rw [Pi.mul_apply, xi_eq hz0 hz1, riemannZeta_def_of_ne_zero hz0]
+    field_simp
+  rw [analyticOrderAt_congr hev,
+    analyticOrderAt_mul hUan (riemannZeta_analyticAt hone)]
+  have hU0 : analyticOrderAt (fun z : ℂ => z * (z - 1) * Gammaℝ z) s = 0 := by
+    rw [analyticOrderAt_eq_zero]
+    right
+    exact mul_ne_zero (mul_ne_zero hs0 (sub_ne_zero.mpr hone)) hΓs
+  rw [hU0, zero_add, zetaZeroMult, analyticOrderNatAt]
+  exact (ENat.coe_toNat (riemannZeta_orderAt_ne_top hone)).symm
+
+/-- **STAGE B COMPLETE — the divisor match**: ξ and P have identical
+divisors at EVERY point of ℂ — the precise level-matching of the extension
+move (author, 2026-07-05): the one stem's divisor (ξ) and the
+enumeration's (P), equal order by order, the lower half folded up by
+intrinsicality. PROVED. -/
+theorem xi_orderAt_eq_zetaProd_orderAt (s : ℂ) :
+    analyticOrderAt xi s = analyticOrderAt zetaProd s := by
+  have hcore : ∀ w : ℂ, 0 ≤ w.im →
+      analyticOrderAt xi w = analyticOrderAt zetaProd w := by
+    intro w him
+    by_cases hz : w ∈ zetaUpperZeros
+    · rw [xi_orderAt_upper hz, zetaProd_orderAt_upper hz]
+    · have hxine : xi w ≠ 0 := by
+        intro h0
+        have hmem : w ∈ {s : ℂ | xi s = 0} := h0
+        rw [xi_zeros_eq_nontrivialZeros] at hmem
+        obtain ⟨hz0, htriv, hone⟩ := hmem
+        have him' := nontrivialZero_im_ne_zero hz0 htriv hone
+        rcases lt_or_gt_of_ne him' with h | h
+        · linarith
+        · exact hz ⟨hz0, h⟩
+      have hPne : zetaProd w ≠ 0 := by
+        refine zetaProd_ne_zero (fun n hn => ?_) (fun n hn => ?_)
+        · exact hz (by rw [hn]; exact zetaSphereZero_mem n)
+        · have h1 := zetaSphereZero_im_pos n
+          have h2 : w.im = -(zetaSphereZero n).im := by
+            rw [hn, Complex.conj_im]
+          linarith
+      rw [analyticOrderAt_eq_zero.mpr (Or.inr hxine),
+        analyticOrderAt_eq_zero.mpr (Or.inr hPne)]
+  rcases le_or_gt 0 s.im with him | him
+  · exact hcore s him
+  · have hxi := xi_intrinsic.analyticOrderAt_conj xi_analyticAt
+      ((starRingEnd ℂ) s)
+    have hP := zetaProd_intrinsic.analyticOrderAt_conj zetaProd_analyticAt
+      ((starRingEnd ℂ) s)
+    rw [starRingEnd_self_apply] at hxi hP
+    rw [hxi, hP]
+    exact hcore _ (by rw [Complex.conj_im]; linarith)
