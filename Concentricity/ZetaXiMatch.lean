@@ -223,3 +223,244 @@ theorem xi_intrinsic : IsIntrinsic xi := by
   intro z
   rw [xi, xi, completedRiemannZeta₀_conj, map_add, map_one, map_mul, map_mul,
     map_sub, map_one]
+
+/-! ## STAGE B2a — fiber counts, nonvanishing, and P's local order -/
+
+/-- The fiber over any point is finite (it sits in a norm ball). PROVED
+helper. -/
+theorem zetaSphereZero_fiber_finite (s : ℂ) :
+    {n : ℕ | zetaSphereZero n = s}.Finite := by
+  refine Set.Finite.subset (zetaSphereZero_norm_lt_finite (‖s‖ + 1)) ?_
+  intro n hn
+  have h : zetaSphereZero n = s := hn
+  simp only [Set.mem_setOf_eq, h]
+  linarith [norm_nonneg s]
+
+/-- **The divisor-repetition readout**: over an upper-half zero the fiber
+has exactly the multiplicity many indices — the pairs construction,
+counted. PROVED. -/
+theorem zetaSphereZero_fiber_ncard {s : ℂ} (hs : s ∈ zetaUpperZeros) :
+    {n : ℕ | zetaSphereZero n = s}.ncard = zetaZeroMult s := by
+  set φ : ℕ → ℂ × ℕ := fun n => ((zetaZeroEnum n : ↥zetaZeroPairs) : ℂ × ℕ)
+    with hφ_def
+  have hφinj : Function.Injective φ := fun a b hab =>
+    zetaZeroEnum.injective (Subtype.ext hab)
+  have himg : φ '' {n : ℕ | zetaSphereZero n = s}
+      = ({s} : Set ℂ) ×ˢ Set.Iio (zetaZeroMult s) := by
+    ext ⟨v, k⟩
+    constructor
+    · rintro ⟨n, hn, hφn⟩
+      have h1 : zetaSphereZero n = s := hn
+      have hmem : φ n ∈ zetaZeroPairs := (zetaZeroEnum n).2
+      have hv : (φ n).1 = s := h1
+      rw [← hφn]
+      refine Set.mem_prod.mpr ⟨?_, ?_⟩
+      · show (φ n).1 ∈ ({s} : Set ℂ)
+        rw [hv]
+        rfl
+      · show (φ n).2 ∈ Set.Iio (zetaZeroMult (s : ℂ))
+        rw [Set.mem_Iio, ← hv]
+        exact hmem.2
+    · rintro ⟨hv, hk⟩
+      have hv' : v = s := hv
+      subst hv'
+      rw [Set.mem_Iio] at hk
+      have hp : (v, k) ∈ zetaZeroPairs := ⟨hs, hk⟩
+      refine ⟨zetaZeroEnum.symm ⟨(v, k), hp⟩, ?_, ?_⟩
+      · show zetaSphereZero _ = v
+        rw [zetaSphereZero, Equiv.apply_symm_apply]
+      · rw [hφ_def]
+        simp only [Equiv.apply_symm_apply]
+  have h1 : ({n : ℕ | zetaSphereZero n = s}).ncard
+      = (φ '' {n : ℕ | zetaSphereZero n = s}).ncard :=
+    (Set.ncard_image_of_injective _ hφinj).symm
+  rw [h1, himg]
+  have h2 : ({s} : Set ℂ) ×ˢ Set.Iio (zetaZeroMult s)
+      = (fun k => (s, k)) '' Set.Iio (zetaZeroMult s) := by
+    ext ⟨v, k⟩
+    simp [Set.mem_prod, eq_comm, and_comm]
+  rw [h2, Set.ncard_image_of_injective _ (fun a b hab => (Prod.mk.injEq _ _ _ _).mp hab |>.2),
+    show Set.Iio (zetaZeroMult s) = ↑(Finset.range (zetaZeroMult s)) by
+      rw [Finset.coe_range],
+    Set.ncard_coe_finset, Finset.card_range]
+
+/-- P does not vanish away from the enumerated pairs. PROVED. -/
+theorem zetaProd_ne_zero {z : ℂ}
+    (h1 : ∀ n, z ≠ zetaSphereZero n)
+    (h2 : ∀ n, z ≠ (starRingEnd ℂ) (zetaSphereZero n)) : zetaProd z ≠ 0 := by
+  obtain ⟨r, hr, u, hu, hbound⟩ := zetaC3_locMajorant_proved z
+  refine tprod_ne_zero_of_norm_sub_one_le hu
+    (fun n => hbound n z (Metric.mem_ball_self hr)) fun n => ?_
+  have ha : zetaSphereZero n ≠ 0 := by
+    intro h
+    have := zetaSphereZero_im_pos n
+    rw [h] at this
+    simp at this
+  exact spherePrimary_ne_zero _ ha (h1 n) (h2 n)
+
+/-- The tail past a finite index set is summable at every point (the
+stage-A geometric bound off the finitely many exceptions). PROVED
+helper. -/
+theorem zetaTail_summable (t : Finset ℕ) (w : ℂ) :
+    Summable fun n =>
+      (if n ∈ t then (1 : ℂ) else spherePrimary n (zetaSphereZero n) w) - 1 := by
+  have hbad := zetaSphereZero_norm_lt_finite (2 * (‖w‖ + 1))
+  refine Summable.of_norm_bounded_eventually summable_geoBound ?_
+  filter_upwards [hbad.eventually_cofinite_notMem,
+    t.finite_toSet.eventually_cofinite_notMem] with n hn1 hn2
+  have hn2' : n ∉ t := by simpa using hn2
+  rw [if_neg hn2']
+  exact zetaWeierstrass_bound_of_far (by positivity)
+    (by linarith [norm_nonneg w]) (not_lt.mp hn1)
+
+/-- The head/tail split of P at a finite index set, at every point (the
+PlacementSet `hsplit` pattern). PROVED helper. -/
+theorem zetaProd_split (t : Finset ℕ) (w : ℂ) :
+    zetaProd w = (∏ n ∈ t, spherePrimary n (zetaSphereZero n) w) *
+      ∏' n, (if n ∈ t then (1 : ℂ) else spherePrimary n (zetaSphereZero n) w) := by
+  have hhead : HasProd
+      (fun n => if n ∈ t then spherePrimary n (zetaSphereZero n) w else 1)
+      (∏ n ∈ t, if n ∈ t then spherePrimary n (zetaSphereZero n) w else 1) :=
+    hasProd_prod_of_ne_finset_one fun b hb => if_neg hb
+  have htail : Multipliable fun n =>
+      (if n ∈ t then (1 : ℂ) else spherePrimary n (zetaSphereZero n) w) := by
+    have h1 := Complex.multipliable_one_add_of_summable (zetaTail_summable t w)
+    exact h1.congr fun n => by ring
+  calc zetaProd w
+      = ∏' n, ((if n ∈ t then spherePrimary n (zetaSphereZero n) w else 1) *
+          (if n ∈ t then (1 : ℂ) else spherePrimary n (zetaSphereZero n) w)) := by
+        rw [zetaProd]
+        exact tprod_congr fun n => by by_cases hn : n ∈ t <;> simp [hn]
+    _ = (∏' n, if n ∈ t then spherePrimary n (zetaSphereZero n) w else 1) *
+          ∏' n, (if n ∈ t then (1 : ℂ) else spherePrimary n (zetaSphereZero n) w) :=
+        Multipliable.tprod_mul hhead.multipliable htail
+    _ = _ := by
+        rw [hhead.tprod_eq]
+        congr 1
+        exact Finset.prod_congr rfl fun n hn => if_pos hn
+
+/-- **P's order at an upper zero is the multiplicity** — the fiber peel
+(each fiber factor is (w−s)·unit) against the analytic nonvanishing tail;
+the exponent is the fiber count = the multiplicity
+(`zetaSphereZero_fiber_ncard`). PROVED. -/
+theorem zetaProd_orderAt_upper {s : ℂ} (hs : s ∈ zetaUpperZeros) :
+    analyticOrderAt zetaProd s = (zetaZeroMult s : ℕ∞) := by
+  have hsim : 0 < s.im := hs.2
+  have hs0 : s ≠ 0 := by
+    intro h
+    rw [h] at hsim
+    simp at hsim
+  have hconj : s ≠ (starRingEnd ℂ) s := by
+    intro h
+    have h2 := congrArg Complex.im h
+    rw [Complex.conj_im] at h2
+    linarith
+  have hfibfin := zetaSphereZero_fiber_finite s
+  set t : Finset ℕ := hfibfin.toFinset with ht_def
+  have hcard : t.card = zetaZeroMult s := by
+    rw [ht_def, ← Set.ncard_eq_toFinset_card _ hfibfin]
+    exact zetaSphereZero_fiber_ncard hs
+  have hmem_t : ∀ n, n ∈ t ↔ zetaSphereZero n = s := fun n =>
+    hfibfin.mem_toFinset
+  -- the fiber peel at every point
+  have hpeel : ∀ w : ℂ, (∏ n ∈ t, spherePrimary n (zetaSphereZero n) w)
+      = (w - s) ^ t.card * ∏ n ∈ t, sphereUnit n s w := by
+    intro w
+    calc (∏ n ∈ t, spherePrimary n (zetaSphereZero n) w)
+        = ∏ n ∈ t, ((w - s) * sphereUnit n s w) :=
+          Finset.prod_congr rfl fun n hn => by
+            rw [show zetaSphereZero n = s from (hmem_t n).mp hn]
+            exact spherePrimary_eq_sub_mul_sphereUnit _ hs0 w
+      _ = (∏ _n ∈ t, (w - s)) * ∏ n ∈ t, sphereUnit n s w :=
+          Finset.prod_mul_distrib
+      _ = (w - s) ^ t.card * ∏ n ∈ t, sphereUnit n s w := by
+          rw [Finset.prod_const]
+  -- the majorant ball at s, for the tail's analyticity
+  obtain ⟨r, hr, u, hu, hbound⟩ := zetaC3_locMajorant_proved s
+  have hupos : ∀ n, 0 ≤ u n := fun n =>
+    le_trans (norm_nonneg _) (hbound n s (Metric.mem_ball_self hr))
+  have hitem : ∀ n : ℕ, Differentiable ℂ fun w =>
+      (if n ∈ t then (1 : ℂ) else spherePrimary n (zetaSphereZero n) w) := by
+    intro n
+    by_cases hn : n ∈ t
+    · simp only [if_pos hn]
+      exact differentiable_const 1
+    · simp only [if_neg hn]
+      exact differentiable_spherePrimary _ _
+  have hTdiff : DifferentiableOn ℂ
+      (fun w => ∏' n, (if n ∈ t then (1 : ℂ)
+        else spherePrimary n (zetaSphereZero n) w))
+      (Metric.ball s r) := by
+    have htend : MultipliableLocallyUniformlyOn
+        (fun n w => if n ∈ t then (1 : ℂ)
+          else spherePrimary n (zetaSphereZero n) w)
+        (Metric.ball s r) := by
+      have h1 : MultipliableLocallyUniformlyOn
+          (fun n w => 1 + ((if n ∈ t then (1 : ℂ)
+            else spherePrimary n (zetaSphereZero n) w) - 1))
+          (Metric.ball s r) :=
+        Summable.multipliableLocallyUniformlyOn_nat_one_add Metric.isOpen_ball hu
+          (Filter.Eventually.of_forall fun n w hw => by
+            by_cases hn : n ∈ t
+            · simpa [if_pos hn] using hupos n
+            · rw [if_neg hn]
+              exact hbound n w hw)
+          (fun n => ((hitem n).sub_const 1).continuous.continuousOn)
+      exact MultipliableLocallyUniformlyOn_congr (fun n w _ => by ring) h1
+    have h2 := hasProdLocallyUniformlyOn_iff_tendstoLocallyUniformlyOn.mp
+      htend.hasProdLocallyUniformlyOn
+    exact h2.differentiableOn
+      (Filter.Eventually.of_forall fun τ => fun w _ =>
+        (DifferentiableAt.fun_finsetProd fun i _ =>
+          (hitem i).differentiableAt).differentiableWithinAt)
+      Metric.isOpen_ball
+  -- the tail is nonzero at s
+  have hTa : (∏' n, (if n ∈ t then (1 : ℂ)
+      else spherePrimary n (zetaSphereZero n) s)) ≠ 0 := by
+    refine tprod_ne_zero_of_norm_sub_one_le hu (fun n => ?_) (fun n => ?_)
+    · by_cases hn : n ∈ t
+      · simpa [if_pos hn] using hupos n
+      · rw [if_neg hn]
+        exact hbound n s (Metric.mem_ball_self hr)
+    · by_cases hn : n ∈ t
+      · rw [if_pos hn]
+        exact one_ne_zero
+      · rw [if_neg hn]
+        have han : zetaSphereZero n ≠ 0 := by
+          intro h
+          have := zetaSphereZero_im_pos n
+          rw [h] at this
+          simp at this
+        refine spherePrimary_ne_zero _ han (fun h => hn ?_) (fun h => ?_)
+        · exact (hmem_t n).mpr h.symm
+        · have h2 : s.im = -(zetaSphereZero n).im := by
+            rw [h, Complex.conj_im]
+          have := zetaSphereZero_im_pos n
+          linarith
+  -- assemble G
+  have hζcast : analyticOrderAt zetaProd s = ((t.card : ℕ) : ℕ∞) → _ := id
+  rw [show ((zetaZeroMult s : ℕ) : ℕ∞) = ((t.card : ℕ) : ℕ∞) by rw [hcard]]
+  rw [(zetaProd_analyticAt s).analyticOrderAt_eq_natCast]
+  refine ⟨fun w => (∏ n ∈ t, sphereUnit n s w) *
+      ∏' n, (if n ∈ t then (1 : ℂ) else spherePrimary n (zetaSphereZero n) w),
+    ?_, ?_, ?_⟩
+  · -- analytic at s
+    have hQ : AnalyticAt ℂ (fun w => ∏ n ∈ t, sphereUnit n s w) s := by
+      have hd : DifferentiableOn ℂ (fun w => ∏ n ∈ t, sphereUnit n s w)
+          (Metric.ball s r) := fun w _ =>
+        (DifferentiableAt.fun_finsetProd fun i _ =>
+          (differentiable_sphereUnit _ _).differentiableAt).differentiableWithinAt
+      exact (hd.analyticOnNhd Metric.isOpen_ball) _ (Metric.mem_ball_self hr)
+    have hTan : AnalyticAt ℂ
+        (fun w => ∏' n, (if n ∈ t then (1 : ℂ)
+          else spherePrimary n (zetaSphereZero n) w)) s :=
+      (hTdiff.analyticOnNhd Metric.isOpen_ball) _ (Metric.mem_ball_self hr)
+    exact hQ.mul hTan
+  · -- nonzero at s
+    have hQne : (∏ n ∈ t, sphereUnit n s s) ≠ 0 :=
+      Finset.prod_ne_zero_iff.mpr fun n _ => sphereUnit_ne_zero _ hs0 hconj
+    exact mul_ne_zero hQne hTa
+  · -- the identity, everywhere
+    refine Filter.Eventually.of_forall fun w => ?_
+    rw [smul_eq_mul, zetaProd_split t w, hpeel w]
+    ring
