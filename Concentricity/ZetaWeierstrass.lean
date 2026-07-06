@@ -24,7 +24,7 @@ stays the ONE sorried leaf until stage C closes it.
 `sorry` marks UNFORMALIZED, never UNSOUND (R8). This file targets ZERO
 sorries.
 -/
-import Concentricity.ZetaSection
+import Concentricity.ZetaDivisor
 import Concentricity.PlacementSet
 
 noncomputable section

@@ -27,6 +27,7 @@ PROVED here:
 sorries.
 -/
 import Concentricity.ZetaWeierstrass
+import Concentricity.RhEquiv
 
 noncomputable section
 

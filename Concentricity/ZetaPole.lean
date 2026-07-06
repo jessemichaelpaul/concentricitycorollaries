@@ -98,3 +98,16 @@ theorem riemannZeta_orderAt_one :
   have hz1 : z ≠ 1 := hz
   rw [zetaPoleUnit_apply_of_ne hz1, zpow_neg_one, smul_eq_mul, ← mul_assoc,
     inv_mul_cancel₀ (sub_ne_zero.mpr hz1), one_mul]
+
+/-- C3 data — R over the residue-ℝ (trivial) zeros: the entire 1/Γℝ with
+the origin's zero divided out (the `zetaPoleUnit` removable pattern;
+value 1/2 = the residue reading of s·Γℝ(s) → 2 at 0). Its zeros are
+exactly the trivial zeros −2, −4, … — real and nonzero, as
+`c3_R_zeros_real` demands (the C3 one-word repair: q^m alone carries the
+origin). -/
+noncomputable def zetaRfac : ℂ → ℂ :=
+  Function.update (fun s => (Gammaℝ s)⁻¹ / s) 0 (2⁻¹ : ℂ)
+
+theorem zetaRfac_apply_of_ne {s : ℂ} (hs : s ≠ 0) :
+    zetaRfac s = (Gammaℝ s)⁻¹ / s :=
+  Function.update_of_ne hs _ _

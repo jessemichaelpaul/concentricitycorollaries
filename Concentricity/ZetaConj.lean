@@ -129,3 +129,20 @@ theorem riemannZeta_intrinsic : IsIntrinsic riemannZeta :=
 the pin through `StemRing.real_on_real`). -/
 theorem riemannZeta_im_ofReal (x : ℝ) : (riemannZeta x).im = 0 :=
   StemRing.real_on_real riemannZeta_intrinsic x
+
+/-- Γℝ is intrinsic (π real; `Gamma_conj`). PROVED helper. -/
+theorem Gammaℝ_conj (s : ℂ) :
+    Gammaℝ ((starRingEnd ℂ) s) = (starRingEnd ℂ) (Gammaℝ s) := by
+  rw [Gammaℝ, Gammaℝ, map_mul]
+  congr 1
+  · have hπ : ((Real.pi : ℝ) : ℂ).arg ≠ Real.pi := by
+      rw [Complex.arg_ofReal_of_nonneg Real.pi_pos.le]
+      exact Real.pi_ne_zero.symm
+    have h := Complex.cpow_conj ((Real.pi : ℝ) : ℂ) (-s / 2) hπ
+    rw [Complex.conj_ofReal] at h
+    rw [← h]
+    congr 1
+    rw [map_div₀, map_neg, map_ofNat]
+  · rw [← Complex.Gamma_conj]
+    congr 1
+    rw [map_div₀, map_ofNat]

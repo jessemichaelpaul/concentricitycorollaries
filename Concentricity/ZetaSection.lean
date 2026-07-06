@@ -30,18 +30,20 @@ intrinsic via `Gamma_conj`, entire via `differentiable_Gammaℝ_inv` +
 `Gammaℝ_residue_zero` removable origin, zeros = the trivial zeros −2n,
 real and nonzero, via `Gammaℝ_eq_zero_iff`).
 
-SORRIED (R8 — UNFORMALIZED, never UNSOUND): ONE row, `zetaC3_package` —
-the infinite Weierstrass factorization of (s−1)ζ through the pole N over
-the divisor-repeated enumeration (author: "infinite Weierstrass through
-the pole N gets us attached to the infinitely many ℂ-residue side").
-gfac and its four consumer rows are `choose`-extracted from it, so the
-entire C3 gap is ONE named leaf.
+CLOSED (2026-07-05, stages A–C): `zetaC3_package` is PROVED — the
+infinite Weierstrass factorization of (s−1)ζ through the pole N over the
+divisor-repeated enumeration (author: "infinite Weierstrass through the
+pole N gets us attached to the infinitely many ℂ-residue side"): stage A
+convergence (ZetaWeierstrass.lean), stage B divisor match against ξ
+(ZetaXiMatch.lean), stage C assembly ξ = e^g·P + the Γℝ-cancellation
+(ZetaAssembly.lean). Island C1 carries ZERO sorries.
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
 import Concentricity.ASection
 import Concentricity.ZetaDivisor
 import Concentricity.RhEquiv
+import Concentricity.ZetaAssembly
 import Mathlib.Analysis.SpecialFunctions.Log.Summable
 import Mathlib.Analysis.SpecialFunctions.Complex.LogBounds
 
@@ -277,36 +279,6 @@ theorem zetaC2_locMajorant : ∀ z : ℂ, (1 : ℝ) < z.re →
 
 /-! ## C3 data and rows: Rfac, and the gated Hadamard package -/
 
-/-- C3 data — R over the residue-ℝ (trivial) zeros: the entire 1/Γℝ with
-the origin's zero divided out (the `zetaPoleUnit` removable pattern;
-value 1/2 = the residue reading of s·Γℝ(s) → 2 at 0). Its zeros are
-exactly the trivial zeros −2, −4, … — real and nonzero, as
-`c3_R_zeros_real` demands (the C3 one-word repair: q^m alone carries the
-origin). -/
-noncomputable def zetaRfac : ℂ → ℂ :=
-  Function.update (fun s => (Gammaℝ s)⁻¹ / s) 0 (2⁻¹ : ℂ)
-
-theorem zetaRfac_apply_of_ne {s : ℂ} (hs : s ≠ 0) :
-    zetaRfac s = (Gammaℝ s)⁻¹ / s :=
-  Function.update_of_ne hs _ _
-
-/-- Γℝ is intrinsic (π real; `Gamma_conj`). PROVED helper. -/
-theorem Gammaℝ_conj (s : ℂ) :
-    Gammaℝ ((starRingEnd ℂ) s) = (starRingEnd ℂ) (Gammaℝ s) := by
-  rw [Gammaℝ, Gammaℝ, map_mul]
-  congr 1
-  · have hπ : ((Real.pi : ℝ) : ℂ).arg ≠ Real.pi := by
-      rw [Complex.arg_ofReal_of_nonneg Real.pi_pos.le]
-      exact Real.pi_ne_zero.symm
-    have h := Complex.cpow_conj ((Real.pi : ℝ) : ℂ) (-s / 2) hπ
-    rw [Complex.conj_ofReal] at h
-    rw [← h]
-    congr 1
-    rw [map_div₀, map_neg, map_ofNat]
-  · rw [← Complex.Gamma_conj]
-    congr 1
-    rw [map_div₀, map_ofNat]
-
 /-- Rfac is intrinsic: away from 0 by `Gammaℝ_conj`, at 0 the update
 value 1/2 is real. PROVED. -/
 theorem zetaRfac_intrinsic : IsIntrinsic zetaRfac := by
@@ -377,11 +349,11 @@ pole-factor form: classically Hadamard factors (s−1)ζ(s)): there is a
 slice-preserving entire g with, over the divisor-repeated enumeration
 (ZetaDivisor.lean) at genus 1,
 (z−1)·ζ(z) = z⁰·R(z)·e^{g(z)}·∏ₙ 𝓔(·; qₙ) — together with the product's
-convergence and §4α majorant. ONE named leaf carrying the whole C3 gap;
-`gfac` and its consumer rows are extracted from it by choice, so closing
-this row closes Island C1's mathematics. SORRIED (R8 — UNFORMALIZED,
-never UNSOUND; the divisor-repeated enumeration keeps it unconditional).
--/
+convergence and §4α majorant. PROVED (stages A–C: convergence, the
+divisor match against ξ, and the assembly through the entire-log engine
+with the Γℝ-cancellation ξ·Rfac = (z−1)ζ; the divisor-repeated
+enumeration keeps every step unconditional). `gfac` and its consumer rows
+are extracted from it by choice. -/
 theorem zetaC3_package : ∃ g : ℂ → ℂ, IsIntrinsic g ∧ Differentiable ℂ g ∧
     (∀ z : ℂ, Multipliable fun n => spherePrimary n (zetaSphereZero n) z) ∧
     (∀ z : ℂ, z ≠ ((1 : ℝ) : ℂ) → ∃ r > 0, ∃ u : ℕ → ℝ, Summable u ∧
@@ -391,7 +363,31 @@ theorem zetaC3_package : ∃ g : ℂ → ℂ, IsIntrinsic g ∧ Differentiable �
       (z - ((1 : ℝ) : ℂ)) * riemannZeta z
         = z ^ 0 * zetaRfac z * Complex.exp (g z) *
           ∏' n, spherePrimary n (zetaSphereZero n) z) := by
-  sorry
+  obtain ⟨g, hg_intr, hg_diff, hg_eq⟩ := zeta_hadamard
+  refine ⟨g, hg_intr, hg_diff, zetaC3_multipliable_proved,
+    fun z _ => zetaC3_locMajorant_proved z, ?_⟩
+  intro z hz1
+  have hz1' : z ≠ 1 := by rwa [Complex.ofReal_one] at hz1
+  have hP : (∏' n, spherePrimary n (zetaSphereZero n) z) = zetaProd z := rfl
+  by_cases hz0 : z = 0
+  · subst hz0
+    have h0 := hg_eq 0
+    rw [xi_zero] at h0
+    rw [riemannZeta_zero, pow_zero,
+      show zetaRfac 0 = (2⁻¹ : ℂ) from Function.update_self ..,
+      Complex.ofReal_one, hP]
+    linear_combination (2⁻¹ : ℂ) * h0
+  · have hξ := hg_eq z
+    rw [xi_eq hz0 hz1'] at hξ
+    rw [zetaRfac_apply_of_ne hz0, pow_zero, one_mul,
+      riemannZeta_def_of_ne_zero hz0, Complex.ofReal_one, hP]
+    calc (z - 1) * (completedRiemannZeta z / Gammaℝ z)
+        = (Gammaℝ z)⁻¹ / z * (z * (z - 1) * completedRiemannZeta z) := by
+          rw [div_eq_mul_inv, div_eq_mul_inv]
+          linear_combination (-(z - 1) * completedRiemannZeta z * (Gammaℝ z)⁻¹)
+            * inv_mul_cancel₀ hz0
+      _ = (Gammaℝ z)⁻¹ / z * (Complex.exp (g z) * zetaProd z) := by rw [hξ]
+      _ = (Gammaℝ z)⁻¹ / z * Complex.exp (g z) * zetaProd z := by ring
 
 /-- C3 data — the Hadamard exponential factor, extracted from the gated
 package. -/
