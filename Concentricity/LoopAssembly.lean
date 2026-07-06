@@ -495,4 +495,37 @@ theorem nontrivial_one_centre_via_articulation (A : ASection) :
   -- the reading step: "one concentric component" → the common centre
   sorry
 
+/-- **`cor:nontrivial`'s printed proof, transcribed** (author's ruling,
+2026-07-06: "the connected concentric, read as one center — that's the
+main theorem, that's all we need; nothing is open because the
+concentricity theorem states: the infinitely many residue-ℂ zero-spheres
+lie in one concentric component"). The master's proof, verbatim: "By
+Theorem thm:concentricity the residue-ℂ zero-spheres lie in one connected
+component of 𝒯_A. By the dictionary (thm:connected-concentric) one
+component of the static base is one real level, hence one real centre c:
+the spheres are concentric about c." The theorem row is
+`transport_universal` (𝒯^𝔫); the dictionary rows are the PROVED
+`TotalObject.levelClass` iso / `level_eq_of_zigzag` (the static object).
+The `sorry` below sits at the proof's composition of the two — the
+reading of the one component in the dictionary — exactly where the
+printed text passes from 𝒯_A to the static base. Receipt (R8),
+unimported. -/
+theorem nontrivial_one_centre_via_dictionary (A : ASection) :
+    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
+  refine ⟨(A.sphereZero 0).re, fun n => ?_⟩
+  -- "By Theorem thm:concentricity … one connected component of 𝒯_A"
+  have h_one : A.transportClass n = A.transportClass 0 :=
+    A.transport_universal n 0
+  -- with the lemma: one CONCENTRIC component
+  obtain ⟨-, h_witness, h_fibre⟩ := A.concentric_articulation
+  -- the populated zigzag the component equality carries
+  have h_zig := Quotient.exact' h_one
+  -- "By the dictionary (thm:connected-concentric) one component of the
+  --  static base is one real level, hence one real centre c" — the
+  --  dictionary rows, fed:
+  have h_dict := @TotalObject.zigzag_iff_level
+  have h_read := @TotalObject.level_eq_of_zigzag
+  -- the composition: the one component, read in the dictionary
+  sorry
+
 end ASection
