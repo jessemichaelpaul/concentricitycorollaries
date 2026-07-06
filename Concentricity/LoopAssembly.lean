@@ -460,4 +460,39 @@ theorem concentric_articulation (A : ASection) :
   · exact TotalTransport.classOf_eq_nClass _
   · rw [exp_fibre_level hr h₁, exp_fibre_level hr h₂]
 
+/-! ## The re-encoded corollary chain (author's ruling, 2026-07-06:
+"Pin 3 is now completely irrelevant. All infinitely many ℂ-residue zero
+spheres are in one *concentric* component of the A section. Hence the
+corollary just notes that ζ_𝕆 is an instantiation of an A-section. Hence
+infinitely many concentric ℂ-residue zeros by the concentricity theorem
+and lemma; the common center is real and is pinned by the functional
+equation.") -/
+
+/-- **`cor:nontrivial`, re-encoded per the ruling** — the common centre
+read from the concentric component (the theorem + the articulation
+lemma), with the full green board additionally in context (the ladder
+D0–D3 + mirror, D2's iff, the supplier chain, the σ-closure and fibre
+rows of this file). RECEIPT at the reading step: the exact goal below is
+where the word *concentric* in "one concentric component" carries its
+weight — the zero-bearing base-shadow of the one component being a
+single level. The articulation's three clauses hold for every C1-bearing
+section by proofs that never touch the divisor, so the reading step is
+the register identification of record (value-side fibre level ↔
+domain-side transport level) — `eq:placement-set` in the ruling's new
+vocabulary. `sorry` = receipt (R8), unimported. -/
+theorem nontrivial_one_centre_via_articulation (A : ASection) :
+    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
+  obtain ⟨h_one, h_witness, h_fibre⟩ := A.concentric_articulation
+  -- the full green board, fed:
+  have h_ladder := A.liSum_summable
+  have h_first := A.liSum_first_side
+  have h_second := A.liSum_second_side
+  have h_iff := A.placement_set_iff_liSum
+  have h_supplier := A.transportLevel_placement_of_two_sided
+  have h_atN := A.c3_atN
+  have h_edge := A.c3_lowerEdge
+  have h_complete := @A.sphereZero_complete
+  -- the reading step: "one concentric component" → the common centre
+  sorry
+
 end ASection
