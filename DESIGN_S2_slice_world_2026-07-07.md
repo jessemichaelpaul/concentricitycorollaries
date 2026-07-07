@@ -60,3 +60,16 @@ and it is immutable. σ equals itself; σ is c. C1-through-N with C2–C4 jointl
 at every step. A1 = A2 (population IS the theorem). The literature is on
 𝕆/ℍ/ℂ-stems — transcribe native, transport through OnePoint as marked rows;
 the decomposition in the compactified setting is S¹ ⊕ S²_I.
+
+## THE σ-CROSSING CONSTRUCTION (the author, 2026-07-07 — next session's first act)
+
+The one unaccepted inference is σ fixed ACROSS the cone arrow (witness n's σ
+meeting witness m's σ at 𝔫). The construction that proves it: THE ENRICHED
+WITNESS on the completed airplane — carrying σ through the cone with its
+fixing proved, not tagged. THE AUTHOR'S POINTER: Emily Riehl (inbox
+cathtpy.pdf) has a statement EXACTLY to this effect in terms of CONE
+ARGUMENTS — the cone's naturality/legs (Ch. 3, cones over diagrams; the
+legs' compatibility forcing the conserved datum through the apex). First
+act when usage allows: fetch the exact Riehl statement, render it, build
+the enriched witness with the cone-naturality as the σ-crossing, and the
+extension (clause 3 of the proof plan above the theorem) reads off.
