@@ -773,3 +773,17 @@ theorem baseFlight_pole (A : ASection) :
   rfl
 
 end ASection
+
+/-! ## THE READOUT SPEC (the author, 2026-07-07): σ MAPS TO ITSELF — σ = c
+FROM THE WINDING. The level of each zero's transport datum is the flight's
+FIXED datum (not a value-read): conserved along every zigzag
+(`TotalObject.level_eq_of_zigzag`), closed by every lift
+(`winding_loop_defect_level_zero`), one per fibre (`exp_fibre_level`).
+The full airplane carries: one component through 𝔫 (`classOf_eq_nClass` /
+`transport_universal`), the cone as the flight's own landing
+(`baseFlight_pole`), every world and the circle preserved
+(`realize_mem_sliceSphere`, `realize_circle_to_circle`), the winding
+tallies at the zeros (SigmaE3/WeldW12), the fibre joins
+(`zero_encounters_joined_concentric`). The readout to be driven: the one
+connected component's self-mapped σ IS the one centre —
+`ASection.concentricity`. -/
