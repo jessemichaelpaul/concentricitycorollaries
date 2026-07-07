@@ -701,3 +701,75 @@ theorem realize_circle_to_circle (A : ASection) {x : OnePoint Octonion}
     · exact Set.mem_insert _ _
 
 end ASection
+
+/-! ## The round trip on the base: the flight as a self-map of 𝓑 -/
+
+namespace ASection
+
+/-- The circle-restricted flight: the section's action on the one great
+circle, landed (via `realize_circle_to_circle`) as a self-map of the
+circle's own points. -/
+def circleFlight (A : ASection) (p : ↥oneGreatCircle) : ↥oneGreatCircle :=
+  ⟨A.realize p.val, A.realize_circle_to_circle p.property⟩
+
+/-- **THE ROUND TRIP ON THE BASE** (the landing readout): through
+`circleBase` — the GPV base IS the one great circle — the section's
+flight restricted to the circle is a self-map of the transport's base 𝓑
+itself. The airplane takes off from the base, flies through the sphere
+world (every world preserved, `realize_mem_sliceSphere`), and lands on
+the base. -/
+def baseFlight (A : ASection) : BaseC → BaseC :=
+  fun b => circleBase.symm (A.circleFlight (circleBase b))
+
+end ASection
+
+namespace ASection
+
+/-- The flight lands a level at its VALUE's level: at an analytic real
+point c, the flight reads lvl c ↦ lvl ((F c).re) — the section's real
+values steering the base (the value is real by `real_on_real`, so its
+level IS its real part). -/
+theorem baseFlight_lvl (A : ASection) (c : ℝ)
+    (h : AnalyticAt ℂ A.F (Octonion.sliceCoord (Octonion.ofReal c))) :
+    A.baseFlight (BaseC.lvl c) = BaseC.lvl ((A.F (c : ℂ)).re) := by
+  unfold baseFlight circleFlight
+  have hcoord : Octonion.sliceCoord (Octonion.ofReal c) = (c : ℂ) := by
+    unfold Octonion.sliceCoord
+    rw [Octonion.im_ofReal, Octonion.norm_zero, Octonion.re_ofReal]
+    exact Complex.ext rfl (Complex.ofReal_im c).symm
+  have him : (A.F (c : ℂ)).im = 0 := A.real_on_real c
+  have hval : A.realize ((circleBase (BaseC.lvl c)).val)
+      = ((Octonion.ofReal ((A.F (c : ℂ)).re) : Octonion) : OnePoint Octonion) := by
+    rw [circleBase_lvl, realize_coe, if_pos h, hcoord]
+    congr 1
+    unfold Octonion.sliceEmbed
+    rw [him, zero_smul, add_zero]
+  simp only [hval]
+  show BaseC.lvl (Octonion.re (Octonion.ofReal ((A.F (c : ℂ)).re)))
+      = BaseC.lvl ((A.F (c : ℂ)).re)
+  rw [Octonion.re_ofReal]
+
+/-- The flight lands the pole at 𝔫: C1's simple pole forbids analyticity
+at the pole's slice coordinate, so the realization there is ∞ — the
+flight carries the pole's level to the witness point. The cone of the
+transport IS the flight's landing at the pole. -/
+theorem baseFlight_pole (A : ASection) :
+    A.baseFlight (BaseC.lvl A.pole) = BaseC.nPt := by
+  unfold baseFlight circleFlight
+  have hcoord : Octonion.sliceCoord (Octonion.ofReal A.pole) = (A.pole : ℂ) := by
+    unfold Octonion.sliceCoord
+    rw [Octonion.im_ofReal, Octonion.norm_zero, Octonion.re_ofReal]
+    exact Complex.ext rfl (Complex.ofReal_im _).symm
+  have hnot : ¬ AnalyticAt ℂ A.F (Octonion.sliceCoord (Octonion.ofReal A.pole)) := by
+    rw [hcoord]
+    intro han
+    have h0 := han.meromorphicOrderAt_nonneg
+    rw [A.c1_simple] at h0
+    have h1 : (0 : ℤ) ≤ (-1 : ℤ) := by exact_mod_cast h0
+    norm_num at h1
+  have hval : A.realize ((circleBase (BaseC.lvl A.pole)).val) = OnePoint.infty := by
+    rw [circleBase_lvl, realize_coe, if_neg hnot]
+  simp only [hval]
+  rfl
+
+end ASection
