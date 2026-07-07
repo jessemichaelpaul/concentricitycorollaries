@@ -652,3 +652,52 @@ theorem circleBase_lvl (c : ℝ) :
 
 theorem circleBase_nPt :
     (circleBase BaseC.nPt).val = (OnePoint.infty : OnePoint Octonion) := rfl
+
+/-! ## The section on the world: slice preservation (green stock) and THE
+LANDING — the one great circle is section-invariant -/
+
+namespace ASection
+
+/-- **THE LANDING ON THE BASE** (the round trip closed on the circle): the
+A-section carries THE ONE GREAT CIRCLE into itself — a real point's value
+is real (`real_on_real`, intrinsicality: the imaginary component of the
+realization vanishes on ℝ regardless of direction), the pole goes to ∞
+(still on the circle), and ∞ goes to its compactified value, real or ∞
+(`valueAtInfinity`). The GPV base lives ON the circle; the circle is
+section-invariant: the airplane's flight restricted to the base stays on
+the base. Sphere preservation is the already-proved
+`realize_mem_sliceSphere` (Slice.lean, `def:section-map`(i)) — together:
+the section preserves every world AND the one circle they share. -/
+theorem realize_circle_to_circle (A : ASection) {x : OnePoint Octonion}
+    (hx : x ∈ oneGreatCircle) : A.realize x ∈ oneGreatCircle := by
+  rcases Set.mem_insert_iff.mp hx with rfl | ⟨y, ⟨c, rfl⟩, rfl⟩
+  · -- ∞ ↦ the compactified value, real or ∞ — on the circle either way
+    rw [realize_infty]
+    induction A.valueAtInfinity using OnePoint.rec with
+    | infty =>
+        simp only [OnePoint.map_infty]
+        exact Set.mem_insert _ _
+    | coe z =>
+        simp only [OnePoint.map_some]
+        exact Set.mem_insert_iff.mpr
+          (Or.inr ⟨Octonion.ofReal z.re, ⟨z.re, rfl⟩, rfl⟩)
+  · -- a real point ↦ its real value (or ∞ at the pole)
+    rw [realize_coe]
+    split_ifs with h
+    · have hcoord : Octonion.sliceCoord (Octonion.ofReal c) = (c : ℂ) := by
+        unfold Octonion.sliceCoord
+        rw [Octonion.im_ofReal, Octonion.norm_zero, Octonion.re_ofReal]
+        exact Complex.ext rfl (Complex.ofReal_im c).symm
+      have him : (A.F (c : ℂ)).im = 0 := A.real_on_real c
+      have hembed : Octonion.sliceEmbed (Octonion.dir (Octonion.ofReal c))
+          (A.F (Octonion.sliceCoord (Octonion.ofReal c)))
+          = Octonion.ofReal ((A.F (c : ℂ)).re) := by
+        rw [hcoord]
+        unfold Octonion.sliceEmbed
+        rw [him, zero_smul, add_zero]
+      rw [hembed]
+      exact Set.mem_insert_iff.mpr
+        (Or.inr ⟨Octonion.ofReal ((A.F (c : ℂ)).re), ⟨(A.F (c : ℂ)).re, rfl⟩, rfl⟩)
+    · exact Set.mem_insert _ _
+
+end ASection
