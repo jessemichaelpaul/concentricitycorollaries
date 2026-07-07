@@ -8,6 +8,12 @@ lands without the author's word on the rendered statements.
 
 ## The object (the author, verbatim register)
 
+- **THERE IS ONE GREAT CIRCLE IN ALL WORLDS.** The S¹ = ℝ ∪ {N} is the SAME
+  circle in the domain 𝕆*, in every slice Riemann sphere S²_I of 𝒮₂, and in
+  the landed range 𝕆* — one circle shared across every world the round trip
+  touches. The degenerate concentric base lives on it; the levels live on it;
+  the centre the theorem exhibits is a point of it.
+
 - **The OBJECTS of 𝒮₂ are the slice Riemann spheres S²_I, one for EVERY unit
   imaginary octonion I ∈ S⁶.** Not points. The infinitely many Riemann
   spheres are glued along **the ONE great circle** S¹ = ℝ ∪ {N} (every S²_I
