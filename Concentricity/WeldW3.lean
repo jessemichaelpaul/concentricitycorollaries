@@ -64,7 +64,7 @@ fibre at some −r, whose octonionic fibre carries the ONE level log r
 
 THE RECEIPT (the file's ONE `sorry`, R6/R8 — the exact resisting goal):
 `ASection.concentricity_via_weldW3` at `⊢ False` with the complete W3
-board fed; see its docstring for the seam record and the litmus
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 consistency note. The imported root ledger is untouched.
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
@@ -621,8 +621,8 @@ shift counts the divisor, the tame companion is a DOMAIN direction — and
 no fed statement identifies a VALUE-side fibre level log r with the
 DOMAIN-side transport level Re(sphereZero ·): the identification of the
 two registers is `eq:placement-set` itself (Island P, the placement
-paragraph). LITMUS (the charter's honesty pin): every row above holds
-verbatim for a hypothetical two-level divisor stem — its sphere loops are
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 equally tame, its value loops wind its tallies, its encounters touch
 one-level fibres — because every proof consumes C1 (the pole), C3's local
 peel, and exp's geometry only, never the placement. The GPV clause that

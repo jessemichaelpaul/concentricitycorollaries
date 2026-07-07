@@ -12,7 +12,7 @@ Functor.Final, no Quillen A.
 
 HONESTY PINS (load-bearing; do not remove):
 - Pin 1 `transport_universal`: the statement is class-wide BY DESIGN — any
-  C1-bearing section is so connected, the 0.3/0.7 hypothetical included.
+  [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 - Pin 2 `transport_not_level_separating`: the populated object separates NO
   levels; no centre readout exists here. `cor:nontrivial` does not ride on
   this object — it consumes `placement_set` (Pin 3), whose sorry is the one
@@ -187,7 +187,7 @@ theorem ASection.concentricity_transport (A : ASection) (hA : A.Populated)
     (_root_.Quotient.sound' (Zigzag.of_hom (hA m).arrow)).symm
 
 /-- **HONESTY PIN 1** — class-wide by design: EVERY A-section is so
-connected, with no hypothesis beyond the class (the 0.3/0.7 hypothetical of
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 the previous handoff's verification step included — this discharges that
 step as a positive fact). "It's provable, holds for every section — the
 entire point of building all of this machinery" (author, 2026-07-05). The

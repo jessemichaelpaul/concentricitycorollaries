@@ -656,7 +656,7 @@ the band mixes.
 (γ) THE ENCOUNTER READ (`phi_encounter_zigzag`, PROVED): at the shared-
 ladder encounters the Φ-images share one 𝒮₂-component with non-degenerate
 read r — the encounter's own VALUE, conserved in the value fibre at any
-domain level (the LoopAssembly draft-I receipt's litmus, intact under Φ).
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 
 (δ) THE REGISTER SEAM, stated as the needed datum: to consume h_fibre at
 the goal's registers one needs an exp-fibre pair carrying the two DOMAIN

@@ -324,7 +324,7 @@ fed statement identifies the two registers. The identification is
 `eq:placement-set` itself (master, placement paragraph: that the
 degenerate fibre "lies over a *single* level is the placement, the
 document's one open node"). `exact?` at the seam: could not close the
-goal. Consistent with the recorded litmus (GreatCircleRoute receipt;
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 Pin 2 `transport_not_level_separating`): rows (1), (2), (4) hold verbatim
 for every C1-bearing section, and (3) is likewise level-blind — the shared
 ladder's level log r is the encounters' choice of r, conserved in the

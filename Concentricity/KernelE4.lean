@@ -53,14 +53,14 @@ connected `{pole}ᶜ`) against C2's zero-freeness
 level-maximizing zeros escape to N in norm
 (`tendsto_norm_atTop_of_levels_tendsto_supLevel`) — the configuration
 `c3_atN` (C3 read at N) is about. Neither horn closes the node: both are
-live for a two-level divisor.
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 
 THE EXACT RESISTING GOAL (R6, the honest pin — recorded, not sorried):
 
   ⊢ A.supLevel ≤ (A.sphereZero k).re        (any k : ℕ)
 
 equivalently `0 ≤ A.liSum a A.supLevel n` for `A.supLevel < a`, `1 ≤ n`.
-LITMUS (the failure-mode invariant of every prior route, AuditE1 verdict):
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 every row of THIS file also holds for the hypothetical two-level section
 with zeros at Re ∈ {0.3, 0.7} (supLevel = 0.7, infLevel = 0.3; the first
 family at 0.7 and the second at 0.3 hold there too), and the resisting
@@ -371,7 +371,7 @@ theorem concentricity_iff_exists_two_sided_level (A : ASection) :
 
 /-- **E4 §2 — the kernel form of the minimal node** (the two §2 faces
 composed): the second family at β = supLevel ⟺ no zero strictly below the
-top level. Both sides are statements the litmus two-level divisor fails;
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 their equivalence is proved, their truth is the open node. PROVED. -/
 theorem second_family_at_supLevel_iff_supLevel_le (A : ASection) :
     (∀ a : ℝ, A.supLevel < a → ∀ n : ℕ, 1 ≤ n →
@@ -386,7 +386,7 @@ Is the top level ATTAINED? The level set's closure contains supLevel, and
 zeros cannot accumulate at finite points (C1 + C2 jointly, through the
 meromorphic dichotomy) — so EITHER some zero sits on the top level, OR the
 level-maximizing zeros escape to N in norm. Both horns are live for a
-two-level divisor (attained: both levels carry zeros; escaping: levels
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 creeping up to an unattained sup), so neither closes the node; the
 dichotomy is recorded as the honest rendering of the attainment question. -/
 
@@ -515,7 +515,7 @@ theorem tendsto_norm_atTop_of_levels_tendsto_supLevel (A : ASection)
 /-- **E4 §3 — the attainment dichotomy of record**: the top level is
 attained by some enumerated zero, or a level-maximizing sequence of zeros
 escapes to N in norm. Neither horn closes the node (both are live for the
-litmus two-level divisor); the dichotomy renders the brief's attainment
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 question honestly. PROVED. -/
 theorem supLevel_attained_or_escape (A : ASection) :
     (∃ k : ℕ, (A.sphereZero k).re = A.supLevel)

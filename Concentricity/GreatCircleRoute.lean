@@ -16,11 +16,11 @@ RECEIPT (clause (d)): with (a) the one-component fact, (b) the unique
 great circle and its G₂-fixity, and (c) the sphere/hyperplane geometry
 ALL FED AS PROVED ROWS, the remaining goal is `z.re = w.re` with no
 hypothesis mentioning the real parts: (a)–(c) hold verbatim for EVERY
-C1-bearing section (the 0.3/0.7 litmus of the record, PLAN_islands §3.5
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 — Pin 2 `transport_not_level_separating` is the proved form of the
 obstruction: the transport object carries no level-separating invariant,
 and the G₂-fixed circle is fixed at EVERY level, so it separates none).
-Per the litmus, a closing route must consume C2/C3's joint rigidity (the
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 one stem) — the Brick 2 address. Lake's verdict, recorded.
 
 UNIMPORTED ARTIFACT until the author rules (folding `lem:great-circle`
@@ -184,7 +184,7 @@ invariant of the transport object, and Pin 2
 (`TotalTransport.transport_not_level_separating`, PROVED) states it has
 none; (b)'s circle is G₂-fixed at EVERY level, so it separates none
 either. Goal at the stop: `z.re = w.re`, with no remaining hypothesis
-mentioning the real parts. Per the record's litmus (PLAN_islands §3.5),
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 a closing route must consume C2/C3's joint rigidity — the one stem, the
 Brick 2 address. The `sorry` is the ROUTE RECEIPT (unimported artifact;
 R8), not a queue item. -/

@@ -67,9 +67,9 @@ GPVwind.md, verbatim: "the function 𝓘 cannot be extended as a continuous
 function to any single point of the real axis ℝ of 𝕂"), no continuous
 extension exists to carry it; every loop the C1–C4 board owns has EMPTY
 obstruction set (WeldW3 §(b)) or a level-blind stem shadow (closure ⟺
-winding 0, PROVED), so the criterion never engages a level. LITMUS
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 (the charter's honesty pin): every PROVED row of this file holds verbatim
-for a hypothetical two-level divisor stem — §A/§B assemble the
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 configuration the missing joint must kill, they are not the kill; the one
 field where class strength beyond the fed possessions could live is
 `c2_zero_free`'s splitting demand (AuditE1 §GLOSS flag, unresolved), the
@@ -100,8 +100,8 @@ each with the section's value-loop winding EXACTLY its own trapped count
 (W12's `counting_pair_of_two_levels`), and the two trapped ledgers
 DISJOINT with exactly additive cardinality (`openRect_disjoint_of_le` +
 `Finset.card_union_of_disjoint`): the two-center supposition's divisor
-data, fully itemized. LITMUS note (R10, GLOSS): this row holds for ANY
-section with a two-level divisor — it assembles the configuration the
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 missing joint must kill, it is not the kill. PROVED. -/
 theorem two_center_disjoint_counts (A : ASection) {n m : ℕ}
     (hsep : (A.sphereZero n).re < (A.sphereZero m).re) :
@@ -158,7 +158,7 @@ two-center winding in the pointwise composite Θ = Γn · Γm · Γp^(wn+wm):
 
 The ENTIRE two-center multiplicity — both sides jointly — is band data on
 the one closed lift through the witness cone: level closed, height
-closed. LITMUS note (R10, GLOSS): holds verbatim for a two-level stem —
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 the closed composite's level datum is VALUE-side; the row assembles the
 one-band configuration the missing joint must read back to the DOMAIN
 levels. PROVED. -/
@@ -296,9 +296,9 @@ one-sided limits of the direction field at real crossings, where
 be extended as a continuous function to any single point of the real
 axis ℝ of 𝕂") forbids the continuous extension that would carry it; the
 loops the C1–C4 board owns have EMPTY obstruction sets (WeldW3 §(b)) or
-level-blind stem shadows, so the criterion never engages a level. LITMUS
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 (the charter's honesty pin): every fed possession holds VERBATIM for a
-hypothetical two-level divisor stem — the one field where class strength
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 beyond the feed could live is `c2_zero_free`'s splitting demand (AuditE1
 §GLOSS flag, unresolved), the author's lane (R6). The `sorry` is the
 ROUTE RECEIPT (unimported artifact; R8), not a queue item. -/

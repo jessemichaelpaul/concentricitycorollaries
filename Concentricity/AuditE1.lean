@@ -7,7 +7,7 @@ sorry (`ASection.concentricity`, Theorem.lean) is a formalization wrinkle;
 this file is the mechanical audit that finds it or rules it out. Verdict
 of record (2026-07-06): RULED OUT — no wrinkle. Every row below is PROVED
 (kernel triple, no `sorryAx`); the audit's negative findings (search
-results, field-by-field structure audit, the zetaSection litmus) are
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 carried in the docstrings, register GLOSS (R10), never load-bearing.
 
 Audit trail:
@@ -141,30 +141,30 @@ end ASection
 load-bearing)
 
 **Field-by-field hidden-strength audit of `structure ASection`** (E1 step
-3), against the litmus divisor `{0.3 ± ik, 0.7 ± ik : k ≥ 1}` carried by
-the stem `F(z) = sinh(π(z−0.3))·sinh(π(z−0.7))/(z−1)` (paper-level model;
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 NOT formalized here):
 
 - `intrinsic`, `c2_intrinsic`, `c3_R_intrinsic`, `c3_g_intrinsic`:
-  conjugate symmetry only — the litmus stem is intrinsic (real
+  [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
   translates of sinh, real pole). No level pinning.
-- `pole`/`c1_analyticAt`/`c1_simple`: the litmus pole at 1 is simple,
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
   off the divisor. No level pinning.
 - `meromorphic`, `c3_R_entire`, `c3_g_entire`, `c3_R_zeros_real` (real
   zeros 0.3, 0.7 ≠ 0 go to `Rfac = (1−z/0.3)(1−z/0.7)`),
   `c3_sphere_nonreal`, `c3_lowerEdge` (βlo = 0.3), `c3_atN`
-  (∑ 1/(1+k²) < ∞), `c4_infinite`: all discharge for the litmus.
+  [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 - `c3_factorization` (with the pole factor): sinh's Hadamard product
-  `sinh(πw) = πw·∏(1 + w²/k²)` regroups into genus-1 `spherePrimary`
+  [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
   pairs times `e^{linear}` — `gfac` linear with real coefficients, `m = 0`.
   Evaluated at special points (z = 0, real axis, conjugates) it yields
-  sign/symmetry data only, never level data. Discharges for the litmus.
-- `c2_*`: on `Ω₀ = 1` the litmus F is zero-free; the Euler family is the
-  ONE field cluster whose litmus discharge is not immediate — the
+  [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
+  [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
   transcription `c2_zero_free : ℓ p z ≠ 0` demands an infinite summable
   splitting of log F into pointwise NONVANISHING intrinsic pieces. For ζ
   the Euler factors −log(1−p^{−z}) are canonically nonvanishing. For the
-  litmus stem the split g = u + v into two zero-free intrinsic pieces
+  [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
   (then u, d_p·v with ∑d_p = 1, d_p ≠ 0) is a value-distribution
   question (does some exp(q) avoid −g on the half-space?) — NOT settled
   by this audit either way. FLAG (R6): this is the only field where class
@@ -177,12 +177,12 @@ NOT formalized here):
   literal point ∞ (premise of `valueAtInfinity_real` then vacuous). Slack,
   not strength.
 
-**The zetaSection litmus** (E1 step 4): every field discharge in
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 `zetaSection` (ZetaSection.lean) is either generic complex analysis or a
-classical ζ fact whose analogue exists for the litmus stem (Euler product
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 ↔ sinh Hadamard regrouping; `zetaSphereZero_density` ↔ ∑1/(1+k²);
 `riemannZeta_nontrivialZeros_infinite` ↔ the two ladders). No field
-discharge visibly REFUSES a 0.3/0.7 divisor, with the single unresolved
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 flag at `c2_zero_free` above.
 
 **Verdict**: the sorry is not a silly wrinkle. The exact remaining

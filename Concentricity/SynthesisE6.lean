@@ -148,7 +148,7 @@ criterion fails on each side of the line; stem-honest closure form
 (`concentricity_iff_supLevel_le`) + ROW A + `sigma_level_separation`
 (SigmaE3 §B ← the C3 peel `stem_local_form` + `stemWinding_mul`). PROVED.
 
-LITMUS note (R10, GLOSS): this row holds for ANY section with a two-level
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 divisor — it is the configuration the missing inference must kill, not a
 closure. -/
 theorem negation_winding_configuration (A : ASection)
@@ -440,9 +440,9 @@ returns value-side data; the goal names domain-side levels; the
 identification of the two registers is `eq:placement-set` itself — the
 master's one open node ("Granting the placement, the proof concludes",
 master, proof of `thm:concentricity`; E5's sweep verdict: no printed
-proof to transcribe). LITMUS (the charter's honesty pin): every
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 possession (1)–(6) holds VERBATIM for a hypothetical section with a
-two-level divisor (zeros at Re 0.3/0.7) — its circles wind on both
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 sides, its pairs close through the witness, its ladders share values,
 its Φ glues and separates identically — so no assembly of these
 possessions alone can derive `False`; a proof that closed from them

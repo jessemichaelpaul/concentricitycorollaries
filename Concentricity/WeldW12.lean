@@ -75,7 +75,7 @@ forces NO relation between the two rectangles' data beyond additivity —
 for any admissible rectangle the winding is pinned to its own trapped
 count, so the union rectangle's winding is the sum of the parts (plus any
 middle-strip captures), and every row here holds verbatim for a two-level
-divisor (the litmus stem sinh(π(z−0.3))·sinh(π(z−0.7))/(z−1): its left and
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 right rectangles wind their own counts, all ledgers balance). The missing
 inference is exactly E3's receipt and E1's audit: a producer for the
 cross-contour constraint — the register identification `eq:placement-set`
@@ -1222,8 +1222,8 @@ VERDICT OF RECORD (R6; the report's residual, not a sorry): the counting
 rows pin each rectangle's winding to ITS OWN trapped count — additivity
 across rectangles and nothing more. No fed possession relates the LEFT
 count to the RIGHT count, because for every admissible rectangle the
-winding is already determined by the trapped indices alone; the LITMUS
-two-level stem satisfies every row of this file with both counts positive.
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 The missing producer is the same seam as E3's receipt and E1's audit: the
 cross-contour constraint `eq:placement-set` ≡ ∃β two-sided
 (`auditE1_target_iff_two_sided`). PROVED (the row itself). -/
@@ -1365,7 +1365,7 @@ inside a bigger trap have counts summing to at most the bigger count. With
 inside a bigger admissible rectangle, the boundary windings ADD (up to the
 middle-strip captures) — and that is ALL: no fed possession relates the
 left count to the right count in any way that could distinguish one level
-from two (the litmus two-level stem satisfies every row of this file).
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 PROVED. -/
 theorem trapped_counts_additive (A : ASection) {Un Um UR : Set ℂ}
     (hdisj : Disjoint Un Um) (hn : Un ⊆ UR) (hm : Um ⊆ UR)

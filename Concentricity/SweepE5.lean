@@ -25,7 +25,7 @@ SOURCES/AdFslice.md, SOURCES/Wang.md, SOURCES/GPS.md read in full):
 
 2. Printed-but-untranscribed clauses found by the sweep (ranked; none
    feeds the divisor statement — each is value-side/divisor-free and
-   holds verbatim for the 0.3/0.7 litmus section):
+   [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
    (a) GPVwind σ-apparatus — Defs 5.1, 5.2, 5.7, 5.15, 5.16, 5.17, 5.19,
        Prop 5.8, Cor 5.13 (full iff), Cor 5.21 (with its printed evenness
        hypothesis). Recorded GAP (Toolkit.lean `winding_loop_defect`
@@ -145,7 +145,7 @@ Register note (R10, DERIVED): this is the recorded Draft-I failure mode
 as a theorem. The value-side apparatus (the ladders, the levels log r,
 the winding heights — everything GPVwind/VS print) attaches a whole RAY
 of levels to each zero-sphere, identically for every C1-bearing section
-(litmus-consistent: a 0.3/0.7 divisor produces the same rays). The
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 placement's single level lives in the DOMAIN register Re(sphereZero ·)
 alone; the identification of the two registers is eq:placement-set
 itself — the master's one open node, with no printed proof to

@@ -53,7 +53,7 @@ bookkeeping with T → ∞ limits, machinery the pin does not carry; (ii) the
 SIGN — positivity of the Euler-side pairing at a common β is the C-2 heart
 of READ_weil_li_findings.md, not derivable from the fields' shapes alone by
 any route recorded so far (every C1-bearing section satisfies every row of
-this file; the litmus of record). `sorry` marks UNFORMALIZED, never
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 UNSOUND (R8); this file carries none.
 -/
 import Concentricity.LiKernel

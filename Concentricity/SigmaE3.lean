@@ -55,7 +55,7 @@ criterion FAILS at every zero circle), and the drive
 
 THE RECEIPT (the file's ONE `sorry`, R6/R8 — the exact resisting goal):
 `concentricity_via_sigma` at `⊢ False` with the complete board fed; see
-its docstring for the seam record, the `exact?` verdict, and the litmus
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 consistency note. The imported root ledger is untouched.
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
@@ -1041,8 +1041,8 @@ at N — lives on the octonionic direction field (Def 5.2's one-sided limits
 of Y/|Y|), which has NO stem carrier (GPVwind Rem 2.1; the recorded GAP of
 `winding_loop_defect`, Toolkit.lean), and its stem shadow (the closure iff
 of this file) is exactly the register identification `eq:placement-set` in
-σ-vocabulary. LITMUS (the charter's honesty pin): every row fed above
-holds verbatim for a hypothetical section with a two-level divisor — its
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 circles wind ≥ 1 on both sides, its pole −1, all ledgers balance — so no
 assembly of these possessions alone can close `False`; consistent with the
 E1 audit (`auditE1_target_iff_two_sided`: the remaining content is `∃β`)

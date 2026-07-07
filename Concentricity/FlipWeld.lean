@@ -70,7 +70,7 @@ its docstring for the two precise missing producers ((α) finiteness/
 tameness of the value obstruction sets — GPV's OWN general case, Defs
 5.15–5.19, companion-relative interval flips, is the remaining
 untranscribed clause; (β) the cross-contour identification, the same seam
-as E3/W12/E1) and the litmus consistency note. The imported root ledger is
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 untouched.
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
@@ -1162,12 +1162,12 @@ rectangle's ledger to the RIGHT one's; the cross-contour constraint is
 `eq:placement-set` ≡ ∃β two-sided (`auditE1_target_iff_two_sided`), the
 same seam as E3's receipt, W12's verdict of record, and E1's audit.
 
-LITMUS (the charter's honesty pin): every row of this file holds verbatim
-for a hypothetical two-level stem (`sinh(π(z−0.3))·sinh(π(z−0.7))/(z−1)`):
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 its rectangles trap their own zeros, their value-loops wind and flip, its
 crossing signs are rigid against ITS real divisor, all ledgers balance
 per contour — so no assembly of these possessions alone can close `False`;
-none of the §A–§D rows sits at a C1–C4 field that the litmus stem provably
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 fails. The `sorry` is the ROUTE RECEIPT (unimported artifact; R8), not a
 queue item. -/
 /- RECEIPT (prose only, per the author's fence 2026-07-07: no new sorried

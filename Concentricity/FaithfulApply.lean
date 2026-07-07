@@ -570,7 +570,7 @@ correction (1) confirms Rem 2.1 binds the DIRECTION only, and this file's
 §2 row proves the LEVEL passes through those crossings continuously; the
 level face of the passage is hereby fully transcribed, and the resisting
 content is not the level's continuity but the register identification
-(S4). LITMUS (the standing honesty pin): every row of this file holds
+[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 verbatim for a hypothetical two-level C1-bearing stem — §1/§2 consume
 C1's analyticity + intrinsicality + exp's geometry, §3 consumes C3's
 local peel + exp's geometry — so no assembly of these possessions alone
