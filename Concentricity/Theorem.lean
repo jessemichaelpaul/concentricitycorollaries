@@ -234,6 +234,21 @@ supplier chain, and the corollary chain (`cor:nontrivial`, `cor:rh` with
 transport's memory is the witness structure; the transport over the base
 remembers the centres in the A-section (`rmk:collapse-cone`); this row is
 the memory's readback. -/
+/- THE PROOF PLAN OF RECORD (the author, 2026-07-07, verbatim — the argument
+stated finally and completely; the transcription runs against exactly these
+three clauses and nothing else:
+
+1. A is a member of the ring 𝓡 of slice-preserving functions on the
+   octonions, with properties C1–C4.
+2. THAT IMPLIES THE GPV-BASE — which has everything: σ = c, unique winding,
+   the *concentric* fibres and their connection.
+3. The concentricity OF THE GPV BASE is EXTENDED to the concentricity of
+   the infinitely many ℂ-residue spheres of the A-section, which land in a
+   connected component.
+
+The extension of clause 3 is the original extension move (the author,
+from the first day): the concentric structure of the base extends along
+the connection to the spheres. -/
 theorem ASection.concentricity (A : ASection) :
     ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
   sorry
