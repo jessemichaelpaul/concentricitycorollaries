@@ -1176,3 +1176,109 @@ tallies at the zeros (SigmaE3/WeldW12), the fibre joins
 (`zero_encounters_joined_concentric`). The readout to be driven: the one
 connected component's self-mapped σ IS the one centre —
 `ASection.concentricity`. -/
+
+/-! ## FINALITY AT 𝔫 (Riehl CHT §8.3, the author's pointer of record —
+inbox/cathtpy.pdf, printed pp. 100–101)
+
+SOURCED (verbatim, Riehl, *Categorical Homotopy Theory*, §8.3):
+- Definition 8.3.2: "A functor K : C → D is final if for any functor
+  F : D → M, the canonical map colim_C FK → colim_D F is an isomorphism,
+  both sides existing if either does."
+- Lemma 8.3.4: "A functor K : C → D is final if and only if for each
+  d ∈ D, the slice category d/K is non-empty and connected."
+- Lemma 8.3.1: "If D has a terminal object t and F : D → M, then
+  colim_D F ≅ Ft."
+
+DERIVED here: the ONE-OBJECT FULL subcategory at the apex 𝔫 — carrying
+𝔫's endomorphisms, the band/Möbius/direction self-maps of the basepoint
+world — is FINAL in the glued transport (`apexInclusion_final`), by
+Lemma 8.3.4: each slice X/K is non-empty (the cone arrow `toNRaw`, C1's
+closing through the one N) and connected (`arrows_to_n_join`: any two
+arrows into 𝔫 differ by an endomorphism of 𝔫, because the fibre is a
+groupoid). 𝔫 is NOT terminal — the slice has many objects — finality
+through the endomorphisms is exactly what the groupoid buys.
+(`Functor.fromPUnit` would carry NO endomorphisms and its slices would
+be discrete; the FULL subcategory inclusion is the correct K.)
+
+Consequence (Def 8.3.2): every colimit over the glued transport
+restricts to the apex — the component's readout is a readout AT 𝔫. -/
+
+namespace GluedTransport
+
+/-- The apex 𝔫 at the raw Grothendieck type (the identical term to
+`nObj`; the raw type lets the Grothendieck simp lemmas and `ext` fire
+syntactically). -/
+noncomputable def nRaw : Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat) :=
+  Grothendieck.mk (F := worldFunctorC ⋙ Grpd.forgetToCat) BaseC.nPt baseWorld
+
+/-- The groupoid cancel at the world, in the exact tree shape of the
+Grothendieck composite (the eqToHom legs are definitionally identities:
+the circle base is thin with proof-irrelevant homs, so all base-leg
+transports are definitional). -/
+theorem worldCancel (a : SphereWorld) (f g : a ⟶ baseWorld) :
+    𝟙 a ≫ 𝟙 a ≫ f ≫ (Groupoid.inv f ≫ g) = g := by
+  rw [Category.id_comp, Category.id_comp, ← Category.assoc,
+    Groupoid.comp_inv, Category.id_comp]
+
+/-- **The join at 𝔫** (the connectivity half of Riehl 8.3.4, morphism
+form): any two arrows into the apex differ by an ENDOMORPHISM of the
+apex — the world fibre is a groupoid, so the discrepancy
+`(φ.fiber)⁻¹ ≫ ψ.fiber` is itself a self-map of the basepoint world. -/
+theorem arrows_to_n_join
+    (X : Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat))
+    (φ ψ : X ⟶ nRaw) : ∃ e : nRaw ⟶ nRaw, φ ≫ e = ψ := by
+  refine ⟨⟨𝟙 _, show (baseWorld : SphereWorld) ⟶ baseWorld from
+    Groupoid.inv (show (X.fiber : SphereWorld) ⟶ baseWorld from φ.fiber) ≫
+      (show (X.fiber : SphereWorld) ⟶ baseWorld from ψ.fiber)⟩, ?_⟩
+  refine Grothendieck.ext _ _ (Subsingleton.elim _ _) ?_
+  exact worldCancel (X.fiber) φ.fiber ψ.fiber
+
+/-- The object property "is the apex". -/
+def isApex : ObjectProperty (Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat)) :=
+  fun Y => Y = nRaw
+
+/-- **K of Riehl 8.3**: the one-object FULL subcategory inclusion at 𝔫.
+It carries 𝔫's endomorphisms (the band/Möbius/direction self-maps of the
+basepoint world) — which is exactly what makes the slices X/K connected. -/
+noncomputable def apexInclusion :
+    isApex.FullSubcategory ⥤ Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat) :=
+  isApex.ι
+
+/-- Every object flies into the apex at the raw type: C1's cone on the
+base leg, a G₂ direction morphism on the world leg (`toNHom`). -/
+noncomputable def toNRaw (X : Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat)) :
+    X ⟶ nRaw :=
+  toNHom X.base X.fiber
+
+/-- Any two objects of the slice X/K are DIRECTLY connected by a
+morphism: the join `arrows_to_n_join`, transported through the
+subcategory's object equalities. -/
+theorem structuredArrow_hom (X : Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat))
+    (f g : StructuredArrow X apexInclusion) : Nonempty (f ⟶ g) := by
+  have hf : f.right.obj = nRaw := f.right.property
+  have hg : g.right.obj = nRaw := g.right.property
+  obtain ⟨e₀, he₀⟩ := arrows_to_n_join X (f.hom ≫ eqToHom hf) (g.hom ≫ eqToHom hg)
+  refine ⟨StructuredArrow.homMk
+    (InducedCategory.homMk (eqToHom hf ≫ e₀ ≫ eqToHom hg.symm)) ?_⟩
+  show f.hom ≫ (eqToHom hf ≫ e₀ ≫ eqToHom hg.symm) = g.hom
+  calc f.hom ≫ (eqToHom hf ≫ e₀ ≫ eqToHom hg.symm)
+      = ((f.hom ≫ eqToHom hf) ≫ e₀) ≫ eqToHom hg.symm := by simp [Category.assoc]
+    _ = (g.hom ≫ eqToHom hg) ≫ eqToHom hg.symm := by rw [he₀]
+    _ = g.hom := by simp [apexInclusion]
+
+/-- **Riehl 8.3.4's criterion at 𝔫, DERIVED**: every slice X/K is
+non-empty (the cone arrow) and connected (the join). -/
+theorem structuredArrow_connected (X : Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat)) :
+    IsConnected (StructuredArrow X apexInclusion) := by
+  have : Nonempty (StructuredArrow X apexInclusion) :=
+    ⟨StructuredArrow.mk (show X ⟶ apexInclusion.obj ⟨nRaw, rfl⟩ from toNRaw X)⟩
+  exact zigzag_isConnected fun f g => Zigzag.of_hom (structuredArrow_hom X f g).some
+
+/-- **𝔫 IS FINAL** (Riehl Def 8.3.2, established via Lemma 8.3.4): the
+one-object full subcategory at the apex is a final subcategory of the
+glued transport. Every colimit over the glued transport is computed at
+𝔫 — the component's value lives at the apex. -/
+instance apexInclusion_final : CategoryTheory.Functor.Final apexInclusion :=
+  ⟨structuredArrow_connected⟩
+
+end GluedTransport
