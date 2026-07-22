@@ -77,9 +77,9 @@ theorem sectionAction_transport_full (A : ASection)
         (GreatCircle.cayleyProjective
             (GreatCircle.orbitRep
               (CategoryTheory.ActionCategory.back Y)) *
-          GreatCircle.diagonalMoebiusHom A.distinguishedPoleUnit *
+          GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit *
           GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
-          (GreatCircle.diagonalMoebiusHom A.distinguishedPoleUnit)⁻¹ *
+          (GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit)⁻¹ *
           (GreatCircle.cayleyProjective
             (GreatCircle.orbitRep
               (CategoryTheory.ActionCategory.back X)))⁻¹) *
@@ -87,9 +87,9 @@ theorem sectionAction_transport_full (A : ASection)
         (GreatCircle.cayleyProjective
             (GreatCircle.orbitRep
               (CategoryTheory.ActionCategory.back Y)) *
-          GreatCircle.diagonalMoebiusHom A.distinguishedPoleUnit *
+          GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit *
           GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
-          (GreatCircle.diagonalMoebiusHom A.distinguishedPoleUnit)⁻¹ *
+          (GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit)⁻¹ *
           (GreatCircle.cayleyProjective
             (GreatCircle.orbitRep
               (CategoryTheory.ActionCategory.back X)))⁻¹)⁻¹⟩ := by

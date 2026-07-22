@@ -139,6 +139,16 @@ theorem diagonalMoebiusHom_injective :
   have huv_coe : (u : ℂ) = (v : ℂ) := OnePoint.coe_injective h_at_one
   exact Units.ext huv_coe
 
+/-- The general-modulus diagonal multiplier in the same Cayley chart as the
+projective great-circle action.  This is the disk-automorphism form consumed
+by the A-section orbit--stabilizer construction. -/
+noncomputable def diskDiagonalMoebiusHom : ℂˣ →* Moebius where
+  toFun u := cayleyMoebius * diagonalMoebiusHom u * cayleyMoebius⁻¹
+  map_one' := by simp
+  map_mul' u v := by
+    rw [map_mul]
+    group
+
 /-- The Cayley-conjugated real action before projectivization. -/
 def cayleyConjMoebiusGL : GL (Fin 2) ℝ →* Moebius :=
   glToMoebius.comp cayleyConjGL
@@ -220,6 +230,25 @@ theorem cayleyMoebius_apply_infty :
     cayleyMoebius.val (OnePoint.infty : OnePoint ℂ) = ((1 : ℂ) : OnePoint ℂ) := by
   rw [cayleyMoebius, Moebius.of_apply, OnePoint.smul_infty_eq_ite]
   simp [cayleyGL_val]
+
+/-- Every general-modulus diagonal disk multiplier fixes the Cayley image of
+the one projective north point. -/
+@[simp] theorem diskDiagonalMoebiusHom_fixes_cayley_infty (u : ℂˣ) :
+    (diskDiagonalMoebiusHom u).val
+        (cayleyCoord (OnePoint.infty : GreatCircle.Point)) =
+      cayleyCoord (OnePoint.infty : GreatCircle.Point) := by
+  rw [cayleyCoord_infty]
+  change (cayleyMoebius * diagonalMoebiusHom u * cayleyMoebius⁻¹).val
+      (((1 : ℂ) : OnePoint ℂ)) = (((1 : ℂ) : OnePoint ℂ))
+  rw [← cayleyMoebius_apply_infty]
+  change cayleyMoebius.val
+      ((diagonalMoebiusHom u).val
+        ((cayleyMoebius⁻¹).val (cayleyMoebius.val OnePoint.infty))) =
+    cayleyMoebius.val OnePoint.infty
+  have hc : (cayleyMoebius⁻¹).val
+      (cayleyMoebius.val OnePoint.infty) = OnePoint.infty := by
+    exact cayleyMoebius.val.symm_apply_apply OnePoint.infty
+  rw [hc, diagonalMoebiusHom_apply_infty]
 
 /-- The finite-chart Cayley formula. -/
 theorem cayleyMoebius_apply_real (x : ℝ) :

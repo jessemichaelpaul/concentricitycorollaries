@@ -325,3 +325,35 @@ public announcement should present Concentricity, its three Lean axioms, and the
 already-formalized RH corollary without redesigning or weakening the proof.
 
 Canonical execution plan: `FINAL_PLAN_2026-07-21.md`.
+
+## 2026-07-22 Cayley-disk/orbit--stabilizer weld
+
+The first native-cargo seam is now a live geometric theorem, not prose or a
+wrapper.
+
+- `diskDiagonalMoebiusHom : ℂˣ →* Moebius` is the full-modulus distinguished
+  diagonal action conjugated into the same Cayley chart used by
+  `cayleyProjective`.  It fixes `cayleyCoord ∞`, the single projective north
+  point in that chart.
+- `distinguishedPoleElement A` is specialized from that homomorphism.  Thus
+  `projectiveObjectFrame A X` sends `cayleyCoord ∞` to the actual footpoint
+  `cayleyCoord (back X)`.
+- `projectiveArrowElement_maps_footpoint` proves that the full framed
+  orbit--stabilizer arrow sends the source footpoint to the target footpoint.
+- `GpvTransport` endpoints now use `cayleyCoord (back X/Y)`, rather than the
+  historically detached `complexPoint` chart.
+- `GpvTransport.sectionFunctor_map_domain` consequently proves that the exact
+  Möbius leg of `(sectionFunctor A).map f` carries the GPV source endpoint to
+  its target endpoint.  `GpvTransport.sectionFunctor_map_realize` proves the
+  same fact on the represented source and target Riemann spheres.
+
+This is the accepted meaning of placing the transport on the disk automorphism
+and extending it by orbit--stabilizer: the analytic transport and the authored
+arrow now inhabit one chart and one real sphere geometry.  No connector was
+chosen and no theorem-field bundle or conjunction wrapper was introduced.
+
+Verification: `lake build Concentricity.ProjectiveTotal` completed 3652 jobs.
+The new Cayley, object-frame, footpoint, GPV-domain, realized-sphere, and total
+transport rows all report exactly `[propext, Classical.choice, Quot.sound]`.
+This checkpoint establishes the geometric native weld; it does not by itself
+claim that the entire W1--W4/GPV closure or the final readout is complete.

@@ -173,9 +173,9 @@ structure GpvTransport (A : ASection)
   domain : C(unitInterval, OnePoint ℂ)
   value : C(unitInterval, ℂ)
   lift : C(unitInterval, ℂ)
-  domain_zero : domain 0 = GreatCircle.complexPoint
+  domain_zero : domain 0 = GreatCircle.cayleyCoord
     (CategoryTheory.ActionCategory.back X)
-  domain_one : domain 1 = GreatCircle.complexPoint
+  domain_one : domain 1 = GreatCircle.cayleyCoord
     (CategoryTheory.ActionCategory.back Y)
   value_compact : ∀ t, ((value t : ℂ) : OnePoint ℂ) = A.Fstar (domain t)
   value_ne_zero : ∀ t, value t ≠ 0
@@ -233,12 +233,12 @@ theorem GpvTransport.level_independent {A : ASection}
 theorem GpvTransport.value_at_source {A : ASection}
     {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
     ((h.value 0 : ℂ) : OnePoint ℂ) =
-      A.Fstar (GreatCircle.complexPoint
+      A.Fstar (GreatCircle.cayleyCoord
         (CategoryTheory.ActionCategory.back X)) := by
   calc
     ((h.value 0 : ℂ) : OnePoint ℂ) = A.Fstar (h.domain 0) :=
       h.value_compact 0
-    _ = A.Fstar (GreatCircle.complexPoint
+    _ = A.Fstar (GreatCircle.cayleyCoord
         (CategoryTheory.ActionCategory.back X)) :=
       congrArg A.Fstar h.domain_zero
 
@@ -247,12 +247,12 @@ theorem GpvTransport.value_at_source {A : ASection}
 theorem GpvTransport.value_at_target {A : ASection}
     {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
     ((h.value 1 : ℂ) : OnePoint ℂ) =
-      A.Fstar (GreatCircle.complexPoint
+      A.Fstar (GreatCircle.cayleyCoord
         (CategoryTheory.ActionCategory.back Y)) := by
   calc
     ((h.value 1 : ℂ) : OnePoint ℂ) = A.Fstar (h.domain 1) :=
       h.value_compact 1
-    _ = A.Fstar (GreatCircle.complexPoint
+    _ = A.Fstar (GreatCircle.cayleyCoord
         (CategoryTheory.ActionCategory.back Y)) :=
       congrArg A.Fstar h.domain_one
 
@@ -329,7 +329,7 @@ datum is a `GpvTransport` over the same point of the shared compactified
 great circle. -/
 noncomputable def GpvTransport.ofEulerHalfSpaceLoop (A : ASection)
     (X : GreatCircle.Base) (δ : C(unitInterval, ℂ))
-    (hstart : ((δ 0 : ℂ) : OnePoint ℂ) = GreatCircle.complexPoint
+    (hstart : ((δ 0 : ℂ) : OnePoint ℂ) = GreatCircle.cayleyCoord
       (CategoryTheory.ActionCategory.back X))
     (hloop : δ 0 = δ 1)
     (hpole : ∀ t, δ t ≠ (A.pole : ℂ))
@@ -368,7 +368,7 @@ noncomputable def GpvTransport.ofEulerHalfSpaceLoop (A : ASection)
       value_ne_zero := hne
       lift_exp := hlift
       winding := ?_ }
-  · change ((δ 1 : ℂ) : OnePoint ℂ) = GreatCircle.complexPoint
+  · change ((δ 1 : ℂ) : OnePoint ℂ) = GreatCircle.cayleyCoord
       (CategoryTheory.ActionCategory.back X)
     rw [← hloop]
     exact hstart
