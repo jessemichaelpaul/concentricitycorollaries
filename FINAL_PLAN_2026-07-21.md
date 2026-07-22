@@ -30,6 +30,13 @@ carrier:
   \operatorname{Re}(A.\texttt{sphereZero}(n))=c.
 \]
 
+This chain is strictly forward.  `ASection` denotes precisely the
+slice-preserving analytic/meromorphic elements satisfying C1--C4 that occur in
+the theorem.  The W/GPV facts are intrinsic consequences of that input.  The
+zero spheres and their normalized/total realizations are outputs of the
+orbit--stabilized action; no downstream zero object may be moved into the base
+action or used to define `F_A.obj` or `F_A.map`.
+
 Every arrow in that display is instantiated on Jesse's A-section construction.
 The generic statement of Riehl 8.3.4 is never treated as a source of a new
 functor, carrier, base, or total object.

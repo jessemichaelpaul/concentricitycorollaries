@@ -5,6 +5,14 @@ Read this before changing `sectionFunctor`, `𝒯_A`, the twelve analytic facts,
 
 ## The mathematical register
 
+- **Everything moves forward from the theorem's hypotheses.** `ASection` is
+  the C1--C4 class of slice-preserving analytic/meromorphic ring elements
+  considered by the theorem, not an arbitrary element of the ambient ring.
+  Its intrinsic W/GPV consequences determine the base action; the
+  orbit--stabilizer construction universalizes that action through every
+  `F.obj` and `F.map`; `𝒯_A` and the C3/C4 zero family are outputs.  Never
+  use a zero object, normalized leg, or total object to define or repair an
+  earlier stage.
 - Start with C1--C4/GPV/W.  They define one distinguished Euler--Weierstrass
   disk action; they are not cargo attached after a functor is built.
 - Use only `GreatCircle.Base`, `SphereWorld`, the A-section functor produced by

@@ -12,8 +12,8 @@ import Concentricity.ProjectiveCone
 # GPV value-transport cargo on the projective great circle
 
 This file contains the compactified stem and GPV lift facts loaded into the
-completed A-section functor.  Its endpoints are objects of
-`GreatCircle.Point`, the object carrier of the unique projective base.
+completed A-section functor.  Its endpoints are objects of the unique
+projective groupoid `GreatCircle.Base`.
 -/
 
 noncomputable section
@@ -166,14 +166,17 @@ noncomputable def distinguishedPoleUnit (A : ASection) : ℂˣ :=
     A.distinguishedPoleFactor_ne_zero
 
 /-- A compactified GPV value transport between two objects of the one
-projective great-circle base. -/
+projective great-circle base.  The endpoints are genuine objects of
+`GreatCircle.Base`, not bare points later wrapped into that groupoid. -/
 structure GpvTransport (A : ASection)
-    (σ σ' : GreatCircle.Point) (k : ℤ) : Type where
+    (X Y : GreatCircle.Base) (k : ℤ) : Type where
   domain : C(unitInterval, OnePoint ℂ)
   value : C(unitInterval, ℂ)
   lift : C(unitInterval, ℂ)
-  domain_zero : domain 0 = GreatCircle.complexPoint σ
-  domain_one : domain 1 = GreatCircle.complexPoint σ'
+  domain_zero : domain 0 = GreatCircle.complexPoint
+    (CategoryTheory.ActionCategory.back X)
+  domain_one : domain 1 = GreatCircle.complexPoint
+    (CategoryTheory.ActionCategory.back Y)
   value_compact : ∀ t, ((value t : ℂ) : OnePoint ℂ) = A.Fstar (domain t)
   value_ne_zero : ∀ t, value t ≠ 0
   lift_exp : ∀ t, Complex.exp (lift t) = value t
@@ -182,18 +185,55 @@ structure GpvTransport (A : ASection)
 /-- GPV winding changes only height, so the transported real level is the
 same at both endpoints. -/
 theorem GpvTransport.lift_endpoint_re_eq {A : ASection}
-    {σ σ' : GreatCircle.Point} {k : ℤ} (h : GpvTransport A σ σ' k) :
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
     (h.lift 0).re = (h.lift 1).re := by
   have hw := congrArg Complex.re h.winding
   norm_num [Complex.mul_re] at hw
   linarith
 
+/-- The real level carried at every instant by a projective-base transport is
+the logarithm of the norm of its own value tape. -/
+theorem GpvTransport.level {A : ASection}
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k)
+    (t : unitInterval) :
+    (h.lift t).re = Real.log ‖h.value t‖ := by
+  rw [← h.lift_exp t, Complex.norm_exp, Real.log_exp]
+
+/-- The transported real level varies continuously along every genuine
+projective-base transport. -/
+theorem GpvTransport.continuous_level {A : ASection}
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
+    Continuous fun t => (h.lift t).re :=
+  Complex.continuous_re.comp (map_continuous h.lift)
+
+/-- A second logarithmic lift of the same projective-base value tape is
+uniquely determined by its initial value. -/
+theorem GpvTransport.lift_unique {A : ASection}
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k)
+    (lift' : C(unitInterval, ℂ))
+    (hlift' : ∀ t, Complex.exp (lift' t) = h.value t)
+    (hzero : lift' 0 = h.lift 0) :
+    lift' = h.lift := by
+  exact winding_lift_unique h.value h.value_ne_zero lift' h.lift
+    hlift' h.lift_exp hzero
+
+/-- The real level belongs to the projective-base value transport, not to a
+choice of logarithmic lift: every lift of the same value tape has the same
+real part at every instant. -/
+theorem GpvTransport.level_independent {A : ASection}
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k)
+    (lift' : C(unitInterval, ℂ))
+    (hlift' : ∀ t, Complex.exp (lift' t) = h.value t)
+    (t : unitInterval) :
+    (lift' t).re = (h.lift t).re := by
+  rw [h.level t, ← hlift' t, Complex.norm_exp, Real.log_exp]
+
 /-- Reversing a compactified GPV transport reverses its base path and
 negates its winding.  The value and lift tapes are the same tapes read in
 the opposite direction. -/
 noncomputable def GpvTransport.inv {A : ASection}
-    {σ σ' : GreatCircle.Point} {k : ℤ} (h : GpvTransport A σ σ' k) :
-    GpvTransport A σ' σ (-k) := by
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
+    GpvTransport A Y X (-k) := by
   let rev : C(unitInterval, unitInterval) :=
     ⟨unitInterval.symm, unitInterval.continuous_symm⟩
   refine
@@ -240,12 +280,13 @@ half-space carries the prime-sum lift and has winding zero.  The resulting
 datum is a `GpvTransport` over the same point of the shared compactified
 great circle. -/
 noncomputable def GpvTransport.ofEulerHalfSpaceLoop (A : ASection)
-    (σ : GreatCircle.Point) (δ : C(unitInterval, ℂ))
-    (hstart : ((δ 0 : ℂ) : OnePoint ℂ) = GreatCircle.complexPoint σ)
+    (X : GreatCircle.Base) (δ : C(unitInterval, ℂ))
+    (hstart : ((δ 0 : ℂ) : OnePoint ℂ) = GreatCircle.complexPoint
+      (CategoryTheory.ActionCategory.back X))
     (hloop : δ 0 = δ 1)
     (hpole : ∀ t, δ t ≠ (A.pole : ℂ))
     (hhalf : ∀ t, A.Ω₀ < (δ t).re) :
-    GpvTransport A σ σ 0 := by
+    GpvTransport A X X 0 := by
   let value : C(unitInterval, ℂ) := A.projectiveValuePath δ hpole
   have hvalue : ∀ t, value t = A.F (δ t) := fun _ => rfl
   have hne : ∀ t, value t ≠ 0 := fun t => by
@@ -279,7 +320,8 @@ noncomputable def GpvTransport.ofEulerHalfSpaceLoop (A : ASection)
       value_ne_zero := hne
       lift_exp := hlift
       winding := ?_ }
-  · change ((δ 1 : ℂ) : OnePoint ℂ) = GreatCircle.complexPoint σ
+  · change ((δ 1 : ℂ) : OnePoint ℂ) = GreatCircle.complexPoint
+      (CategoryTheory.ActionCategory.back X)
     rw [← hloop]
     exact hstart
   · intro t
