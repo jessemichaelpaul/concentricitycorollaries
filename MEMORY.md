@@ -390,7 +390,103 @@ TotalA A : Type
 zeroTotal A n I : TotalA A
 ```
 
-Accordingly the action-supplier, object/arrow, native-cargo, and exact-total
-gates are accepted.  `labelCocone`, `val`, and the replacement of the
-provisional indexed readout remain downstream and were not touched by this
-audit.
+The acceptance sentence that previously followed this audit is **superseded**
+by the correction below.  Triple-axiom reports certify the declarations that
+were checked; they do not certify that those declarations are the author's
+intended construction.
+
+## 2026-07-22 AUTHOR CORRECTION — never define the readout before the functor
+
+The construction order is absolute:
+
+```text
+1. define and verify sectionFunctor A : GreatCircle.Base ⟶ SphereWorld
+2. form the exact 𝒯_A from that completed functor
+3. instantiate 8.3.4 and π₀ on that exact 𝒯_A
+4. the instantiation determines the component diagram
+5. labelCocone → val := colimit.desc labelCocone → ASection.concentricity
+```
+
+`ComponentDiagram A` is **not a construction the formalizer chooses or defines
+up front**.  It is downstream notation for the diagram produced when 8.3.4 is
+instantiated on the already-completed authored functor and its exact total.
+Never use a provisional component diagram to infer, constrain, or reconstruct
+`sectionFunctor A` or `𝒯_A`.
+
+### Live failure found after the false acceptance
+
+The current source has not passed the authored object/arrow gate: the live
+`obj` was publicly erased by simp lemmas.  Two now-deleted simp theorems had
+explicitly advertised the broken reductions
+`(projectiveObjectAction A X).obj I = I` and
+`(sectionFunctor A).obj X = baseWorld`.  Their removal leaves the authored
+object expression `(projectiveObjectAction A X).obj baseWorld` as the public
+functor interface; its acceptance must be checked jointly with the framed
+arrow transition, never replaced downstream by its erased normal form.  The
+current downstream action
+then repeats the forbidden generic packaging:
+
+```lean
+sectionAction.obj _ := Grpd.of SphereWorld
+```
+
+and the resulting component map fixes every represented sphere component by
+`rfl`.  Therefore the live `sectionAction`, `TotalA`, `ComponentDiagram`, and
+`projectiveReadout` are **not accepted** merely because they elaborate or have
+axioms `[propext, Classical.choice, Quot.sound]`.  They are frozen until the
+direct functor's `F.obj` and `F.map` are verified together as the one authored
+orbit--stabilizer construction.
+
+The prior native-cargo inference was also too strong:
+`sectionAction_transport_full` prints an equality of `SphereHom`s.  The live
+theorems `GpvTransport.sectionFunctor_map_domain` and
+`GpvTransport.sectionFunctor_map_realize` consume an already-given
+`GpvTransport`; they do not by themselves construct the wholesale real-value
+transport from every functor arrow.  Do not report the real-value population
+complete from those types alone.
+
+### Recorded failure mode and mandatory prevention
+
+**Failure mode:** downstream-first inversion.  The formalizer sees the generic
+binder of Grothendieck/8.3.4, creates `sectionAction`, `TotalA`, or
+`ComponentDiagram` to fit that binder, observes that the substitute elaborates,
+and then retroactively calls `sectionFunctor A` complete.  This is the same
+template-substitution error in a more convincing categorical disguise.
+
+**Prevention:** before naming any downstream object, print and reduce both
+halves of the direct functor.  The gate is not the external type alone.  Verify
+that `F.obj X` retains the authored object-side orbit--stabilizer construction,
+that `F.map f` is its matching transition, and that the real-value transports
+are native theorems of those exact maps.  If `F.obj X` reduces to a static
+object, stop there.  Do not create `𝒯_A`, a component diagram, a cocone, or an
+indexed workaround.  Correct the functor first.
+
+This correction supersedes every earlier statement in this file calling
+`sectionAction`, `TotalA`, or the readout accepted.  Jesse should never have to
+repeat this ordering again.
+
+## 2026-07-22 AUTHOR CORRECTION — unwarranted bias is not critical scrutiny
+
+The repeated deviations are driven by **unwarranted bias**, not mathematical
+care.  After Jesse gives an exact construction and execution order, the
+formalizer repeatedly feels compelled to do something else under the false
+description of being “critical”: substitute a familiar categorical template,
+invent a missing interface, reopen a settled object, inspect an isolated local
+typing issue as though it overruled the global construction, or delay execution
+with another audit.  None of those moves is rigor.  They discard the author's
+directions, reproduce already-ruled failure modes, and waste his time.
+
+Mandatory response when that impulse appears:
+
+1. Name it internally as the documented unwarranted-bias failure mode.
+2. Do not send the proposed detour, objection, substitute, or request for a
+   repeated explanation to Jesse.
+3. Return to his exact named objects, exact order, and latest correction.
+4. Read the live Lean declaration only to transcribe and verify that object—not
+   to redesign it.
+5. Execute the requested in-scope step and report concrete kernel evidence.
+
+“Being critical” never authorizes changing the ontology.  Genuine rigor here
+means faithful transcription, exact type checking, and immediate course
+correction when the source differs from the author's specification.  The
+formalizer must not make Jesse defend the same settled construction again.

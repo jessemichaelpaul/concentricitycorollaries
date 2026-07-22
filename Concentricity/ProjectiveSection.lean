@@ -228,10 +228,6 @@ def projectiveObjectAction (A : ASection) (X : GreatCircle.Base) :
     SphereWorld ⥤ SphereWorld :=
   distinguishedWorldAction (projectiveObjectFrame A X)
 
-@[simp] theorem projectiveObjectAction_obj (A : ASection)
-    (X : GreatCircle.Base) (I : SphereWorld) :
-    (projectiveObjectAction A X).obj I = I := rfl
-
 /-- At the north object the orbit representative is the identity, so the
 object frame is exactly A's distinguished Euler–Weierstrass element. -/
 @[simp] theorem projectiveObjectFrame_north (A : ASection) :
@@ -402,11 +398,6 @@ by an independently selected bundled fibre. -/
 @[simp] theorem sectionFunctor_obj (A : ASection) (X : GreatCircle.Base) :
     (sectionFunctor A).obj X =
       (projectiveObjectAction A X).obj baseWorld := rfl
-
-/-- The distinguished action is internal to each normalized sphere. -/
-@[simp] theorem sectionFunctor_obj_eq_baseWorld (A : ASection)
-    (X : GreatCircle.Base) :
-    (sectionFunctor A).obj X = baseWorld := rfl
 
 /-- At the shared north object, the functor's object action is precisely A's
 north-pole action. -/
