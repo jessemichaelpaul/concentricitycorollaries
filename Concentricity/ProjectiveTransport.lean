@@ -5,6 +5,8 @@ Authors: Jesse Michael Paul
 -/
 import Concentricity.CayleyDictionary
 import Concentricity.FaithfulApply
+import Concentricity.NormalizedNLeg
+import Concentricity.ProjectiveCone
 
 /-!
 # GPV value-transport cargo on the projective great circle
