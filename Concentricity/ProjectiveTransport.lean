@@ -186,6 +186,41 @@ theorem GpvTransport.lift_endpoint_re_eq {A : ASection}
   norm_num [Complex.mul_re] at hw
   linarith
 
+/-- Reversing a compactified GPV transport reverses its base path and
+negates its winding.  The value and lift tapes are the same tapes read in
+the opposite direction. -/
+noncomputable def GpvTransport.inv {A : ASection}
+    {σ σ' : GreatCircle.Point} {k : ℤ} (h : GpvTransport A σ σ' k) :
+    GpvTransport A σ' σ (-k) := by
+  let rev : C(unitInterval, unitInterval) :=
+    ⟨unitInterval.symm, unitInterval.continuous_symm⟩
+  refine
+    { domain := h.domain.comp rev
+      value := h.value.comp rev
+      lift := h.lift.comp rev
+      domain_zero := ?_
+      domain_one := ?_
+      value_compact := ?_
+      value_ne_zero := ?_
+      lift_exp := ?_
+      winding := ?_ }
+  · simpa [rev] using h.domain_one
+  · simpa [rev] using h.domain_zero
+  · intro t
+    exact h.value_compact (rev t)
+  · intro t
+    exact h.value_ne_zero (rev t)
+  · intro t
+    exact h.lift_exp (rev t)
+  · have hrev0 : rev 0 = 1 := unitInterval.symm_zero
+    have hrev1 : rev 1 = 0 := unitInterval.symm_one
+    change h.lift (rev 1) - h.lift (rev 0) =
+      2 * Real.pi * Complex.I * ((-k : ℤ) : ℂ)
+    rw [hrev1, hrev0]
+    rw [← neg_sub, h.winding]
+    push_cast
+    ring
+
 /-- The value path of the section along a domain path avoiding its pole. -/
 def projectiveValuePath (A : ASection) (δ : C(unitInterval, ℂ))
     (hp : ∀ t, δ t ≠ (A.pole : ℂ)) : C(unitInterval, ℂ) :=
@@ -197,6 +232,60 @@ def projectiveValuePath (A : ASection) (δ : C(unitInterval, ℂ))
     (δ : C(unitInterval, ℂ)) (hp : ∀ t, δ t ≠ (A.pole : ℂ))
     (t : unitInterval) :
     A.projectiveValuePath δ hp t = A.F (δ t) := rfl
+
+/-- W1 as a literal projective-base transport: a loop in C2's Euler
+half-space carries the prime-sum lift and has winding zero.  The resulting
+datum is a `GpvTransport` over the same point of the shared compactified
+great circle. -/
+noncomputable def GpvTransport.ofEulerHalfSpaceLoop (A : ASection)
+    (σ : GreatCircle.Point) (δ : C(unitInterval, ℂ))
+    (hstart : ((δ 0 : ℂ) : OnePoint ℂ) = GreatCircle.complexPoint σ)
+    (hloop : δ 0 = δ 1)
+    (hpole : ∀ t, δ t ≠ (A.pole : ℂ))
+    (hhalf : ∀ t, A.Ω₀ < (δ t).re) :
+    GpvTransport A σ σ 0 := by
+  let value : C(unitInterval, ℂ) := A.projectiveValuePath δ hpole
+  have hvalue : ∀ t, value t = A.F (δ t) := fun _ => rfl
+  have hne : ∀ t, value t ≠ 0 := fun t => by
+    rw [hvalue t]
+    exact A.zero_free_on_halfSpace (hhalf t)
+  have hopen : IsOpen {z : ℂ | A.Ω₀ < z.re} :=
+    isOpen_lt continuous_const Complex.continuous_re
+  have hcont : Continuous fun t : unitInterval =>
+      ∑' p : A.ι, A.ℓ p (δ t) :=
+    continuous_iff_continuousAt.mpr fun t =>
+      (A.continuousOn_eulerSum.continuousAt
+        (hopen.mem_nhds (hhalf t))).comp (map_continuous δ).continuousAt
+  let lift : C(unitInterval, ℂ) :=
+    ⟨fun t => ∑' p : A.ι, A.ℓ p (δ t), hcont⟩
+  have hlift : ∀ t, Complex.exp (lift t) = value t := fun t => by
+    rw [hvalue t]
+    exact (A.c2_euler (δ t) (hhalf t)).symm
+  have hclosed : lift 1 = lift 0 := by
+    change (∑' p : A.ι, A.ℓ p (δ 1)) = ∑' p : A.ι, A.ℓ p (δ 0)
+    rw [← hloop]
+  let domain : C(unitInterval, OnePoint ℂ) :=
+    ⟨fun t => ((δ t : ℂ) : OnePoint ℂ),
+      OnePoint.continuous_coe.comp (map_continuous δ)⟩
+  refine
+    { domain := domain
+      value := value
+      lift := lift
+      domain_zero := hstart
+      domain_one := ?_
+      value_compact := ?_
+      value_ne_zero := hne
+      lift_exp := hlift
+      winding := ?_ }
+  · change ((δ 1 : ℂ) : OnePoint ℂ) = GreatCircle.complexPoint σ
+    rw [← hloop]
+    exact hstart
+  · intro t
+    change ((A.F (δ t) : ℂ) : OnePoint ℂ) =
+      A.Fstar ((δ t : ℂ) : OnePoint ℂ)
+    exact (A.Fstar_coe (δ t) (hpole t)).symm
+  · rw [hclosed]
+    norm_num
 
 /-- The GPV lift, level tape, continuity, uniqueness, and lift-independent
 level supplied by an A-section and loaded onto its projective disk action. -/
