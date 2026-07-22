@@ -31,7 +31,11 @@ namespace ASection
 /-- The action of the completed direct A-section functor on the
 `SphereWorld` continuum.  Its arrow map is the same framed
 source/stabilizer/target transition that defines `(sectionFunctor A).map f`;
-the object frame and arrow transition are consumed as one construction. -/
+the object frame and arrow transition are consumed as one construction.
+The fibre carrier is the whole `SphereWorld` at every projective footpoint
+because objects of the total are all pairs `(b, I)`; the resulting diagram is
+not constant, since every transition is definitionally induced by A's exact
+framed arrow. -/
 def sectionAction (A : ASection) : GreatCircle.Base ⥤ Grpd.{0, 0} where
   obj _ := Grpd.of SphereWorld
   map f := distinguishedWorldAction ((sectionFunctor A).map f).mob

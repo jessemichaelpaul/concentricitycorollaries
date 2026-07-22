@@ -43,9 +43,36 @@ Read this before changing `sectionFunctor`, `𝒯_A`, the twelve analytic facts,
   transports.  `Grpd` is only implementation vocabulary inside the reusable
   statement of 8.3.4.  Its generic binder must never be promoted into the
   A-section functor, the project diagram, or a construction target.  The live
-  `sectionAction`/`Grpd.of SphereWorld` layer remains provisional until the
-  exact `𝒯_A` recipe is shown to arise from that completed functor and nothing
+  `sectionAction`/`Grpd.of SphereWorld` layer is accepted only when its maps
+  arise definitionally from the completed `sectionFunctor A` and nothing
   else.
+
+### Constant carrier is not a constant action — correction 2026-07-22
+
+Do not conflate these two statements again:
+
+- The intended total has objects `(b, I)` for every
+  `b : GreatCircle.Base` and every `I : SphereWorld`.  Consequently the
+  underlying fibre carrier over each `b` is the same whole `SphereWorld`.
+  This is the carrier of the continuum, not a constant A-section.
+- The transition functors are not constant: definitionally,
+  `(sectionAction A).map f = distinguishedWorldAction
+  ((sectionFunctor A).map f).mob`.  Those maps contain A's full `ℂˣ`
+  distinguished element, both orbit representatives, and
+  `stabilizerPart f`.
+- `distinguishedWorldAction` acts inside each represented Riemann sphere; it
+  does not relabel the unit-imaginary direction indexing that sphere.  Thus
+  the underlying direction of `sectionFunctor.obj` may reduce to
+  `baseWorld` while `projectiveObjectFrame A X` is still the object-side face
+  of the same framed action used by `map`.
+
+The rejected construction used `obj _ := Grpd.of SphereWorld` *instead of*
+the authored sphere-valued functor and supplied generic/value-free maps.  The
+same carrier is legitimate only in the induced action after
+`sectionFunctor A : GreatCircle.Base ⥤ SphereWorld` is built and only because
+its map is definitionally induced from that exact functor.  Never report the
+carrier's constancy as constancy of the A-action, and never report an
+A-specific map alone as proof of the object/frame gate.
 
 ## The element and its value
 
@@ -203,9 +230,10 @@ constructions:
   `labelCocone`, or `val` remain native consequences of the same action and
   travel with it.
 - Only after that Base-native gate passes may the exact `𝒯_A` be formed.
-  A layer whose object definition is the static placeholder
-  `Grpd.of SphereWorld` is not upgraded into the intended total merely because
-  its maps mention `sectionFunctor A`.
+  A layer with carrier `Grpd.of SphereWorld` is not upgraded merely because
+  its maps mention `sectionFunctor A`; its maps must be definitionally induced
+  from the completed A-specific functor, and the full object-frame/arrow-
+  transition gate must already have passed.
 
 ### Why the development appeared upside down
 
