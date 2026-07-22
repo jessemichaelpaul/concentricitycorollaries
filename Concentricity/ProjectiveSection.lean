@@ -464,7 +464,7 @@ the GPV endpoint data and the orbit--stabilizer action inhabit the same Cayley
 chart, with no separately chosen connector. -/
 theorem GpvTransport.sectionFunctor_map_domain {A : ASection}
     {X Y : GreatCircle.Base} {k : ℤ} (f : X ⟶ Y)
-    (h : GpvTransport A X Y k) :
+    (h : GpvTransport A f k) :
     (((sectionFunctor A).map f).mob).val (h.domain 0) = h.domain 1 := by
   rw [h.domain_zero, h.domain_one, sectionFunctor_map_mob]
   exact projectiveArrowElement_maps_footpoint A f
@@ -504,7 +504,7 @@ spheres: a GPV source endpoint is transported to its target endpoint by the
 exact `sectionFunctor A` arrow. -/
 theorem GpvTransport.sectionFunctor_map_realize {A : ASection}
     {X Y : GreatCircle.Base} {k : ℤ} (f : X ⟶ Y)
-    (h : GpvTransport A X Y k) :
+    (h : GpvTransport A f k) :
     (((sectionFunctor A).map f).realize
         (sphereChartPoint ((sectionFunctor A).obj X) (h.domain 0))).val =
       spherePt ((sectionFunctor A).obj Y).val (h.domain 1) := by
