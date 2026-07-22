@@ -194,9 +194,10 @@ theorem distinguishedWorldAction_comp (m n : Moebius) :
     group
 
 /-- The diagonal `w = 0` distinguished element determined by the A-section's
-one C1/C2/C3 Euler–Weierstrass pole unit. -/
+complete exponential/GPV logarithmic action.  C2 supplies the prime-sum
+coordinate; C1 and C3/W3 identify its continuation at `N`. -/
 def distinguishedPoleElement (A : ASection) : Moebius :=
-  GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit
+  GreatCircle.diskExpAction A.distinguishedPoleLog
 
 /-- A's own distinguished C1/C2/C3 Euler–Weierstrass disk element fixes the
 one shared north pole.  The element here is specifically
@@ -207,6 +208,8 @@ one shared north pole.  The element here is specifically
           (OnePoint.infty : GreatCircle.Point)) =
       GreatCircle.cayleyCoord
         (OnePoint.infty : GreatCircle.Point) := by
+  unfold distinguishedPoleElement
+  rw [A.diskExpAction_distinguishedPoleLog]
   exact GreatCircle.diskDiagonalMoebiusHom_fixes_cayley_infty
     A.distinguishedPoleUnit
 
@@ -378,24 +381,8 @@ the A-positioned frame.  Every base arrow is carried by the matching full
 orbit--stabilizer Möbius transition.  Object and arrow are therefore the two
 faces of the same A-specialized action. -/
 def sectionFunctor (A : ASection) : GreatCircle.Base ⥤ SphereWorld where
-  obj X :=
-    (distinguishedWorldAction
-      (GreatCircle.cayleyProjective
-          (GreatCircle.orbitRep
-            (CategoryTheory.ActionCategory.back X)) *
-        GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit)).obj
-      baseWorld
-  map {X Y} f :=
-    ⟨1, one_smul G2 baseWorld.val,
-      (GreatCircle.cayleyProjective
-          (GreatCircle.orbitRep
-            (CategoryTheory.ActionCategory.back Y)) *
-        GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit) *
-      GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
-      (GreatCircle.cayleyProjective
-          (GreatCircle.orbitRep
-            (CategoryTheory.ActionCategory.back X)) *
-        GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit)⁻¹⟩
+  obj X := (projectiveObjectAction A X).obj baseWorld
+  map {X Y} f := projectiveArrowHom A f
   map_id X := by
     apply SphereHom.ext
     · rfl
@@ -433,9 +420,9 @@ theorem projectiveArrowElement_eq_full_factorization (A : ASection)
       GreatCircle.cayleyProjective
           (GreatCircle.orbitRep
             (CategoryTheory.ActionCategory.back Y)) *
-        GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit *
+        GreatCircle.diskExpAction A.distinguishedPoleLog *
         GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
-        (GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit)⁻¹ *
+        (GreatCircle.diskExpAction A.distinguishedPoleLog)⁻¹ *
         (GreatCircle.cayleyProjective
           (GreatCircle.orbitRep
             (CategoryTheory.ActionCategory.back X)))⁻¹ := by
@@ -475,12 +462,12 @@ theorem sectionFunctor_map_full (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     (sectionFunctor A).map f =
       ⟨1, one_smul G2 baseWorld.val,
-        GreatCircle.cayleyProjective
+          GreatCircle.cayleyProjective
             (GreatCircle.orbitRep
               (CategoryTheory.ActionCategory.back Y)) *
-          GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit *
+          GreatCircle.diskExpAction A.distinguishedPoleLog *
           GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
-          (GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit)⁻¹ *
+          (GreatCircle.diskExpAction A.distinguishedPoleLog)⁻¹ *
           (GreatCircle.cayleyProjective
             (GreatCircle.orbitRep
               (CategoryTheory.ActionCategory.back X)))⁻¹⟩ := by

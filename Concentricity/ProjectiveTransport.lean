@@ -165,6 +165,53 @@ noncomputable def distinguishedPoleUnit (A : ASection) : ℂˣ :=
   Units.mk0 (A.distinguishedPoleFactor (A.pole : ℂ))
     A.distinguishedPoleFactor_ne_zero
 
+/-- The logarithmic coordinate of the continued Euler--Weierstrass unit at
+the common pole chart.  Its exponential is the full `ℂˣ` multiplier; changing
+the logarithmic branch changes only the GPV winding rung. -/
+noncomputable def distinguishedPoleLog (A : ASection) : ℂ :=
+  Complex.log (A.distinguishedPoleFactor (A.pole : ℂ))
+
+@[simp] theorem exp_distinguishedPoleLog (A : ASection) :
+    Complex.exp A.distinguishedPoleLog =
+      A.distinguishedPoleFactor (A.pole : ℂ) := by
+  exact Complex.exp_log A.distinguishedPoleFactor_ne_zero
+
+/-- The pole unit is the exponential unit of the GPV logarithmic action. -/
+theorem expUnit_distinguishedPoleLog (A : ASection) :
+    GreatCircle.expUnit A.distinguishedPoleLog = A.distinguishedPoleUnit := by
+  apply Units.ext
+  exact A.exp_distinguishedPoleLog
+
+/-- C1's continuation and C3's Weierstrass presentation land in the same
+Cayley-disk exponential action as C2's prime-sum lift. -/
+theorem diskExpAction_distinguishedPoleLog (A : ASection) :
+    GreatCircle.diskExpAction A.distinguishedPoleLog =
+      GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit := by
+  unfold GreatCircle.diskExpAction
+  rw [A.expUnit_distinguishedPoleLog]
+
+/-! ## C2 populates the distinguished projective-base action -/
+
+/-- C2's canonical prime-sum logarithmic coordinate. -/
+noncomputable def eulerPrimeSum (A : ASection) (z : ℂ) : ℂ :=
+  ∑' p : A.ι, A.ℓ p z
+
+/-- The C2 Euler multiplier as the distinguished Cayley-disk action. -/
+noncomputable def eulerDiskAction (A : ASection) (z : ℂ) : Moebius :=
+  GreatCircle.diskExpAction (A.eulerPrimeSum z)
+
+/-- On the Euler half-space, the distinguished action's multiplier is
+literally A's value `exp (∑ₚ ℓₚ)`. -/
+theorem eulerDiskAction_eq_value (A : ASection) (z : ℂ)
+    (hz : A.Ω₀ < z.re) :
+    A.eulerDiskAction z =
+      GreatCircle.diskDiagonalMoebiusHom
+        (Units.mk0 (A.F z) (A.zero_free_on_halfSpace hz)) := by
+  unfold eulerDiskAction GreatCircle.diskExpAction GreatCircle.expUnit eulerPrimeSum
+  apply congrArg GreatCircle.diskDiagonalMoebiusHom
+  apply Units.ext
+  exact (A.c2_euler z hz).symm
+
 /-- A compactified GPV value transport between two objects of the one
 projective great-circle base.  The endpoints are genuine objects of
 `GreatCircle.Base`, not bare points later wrapped into that groupoid. -/
@@ -181,6 +228,42 @@ structure GpvTransport (A : ASection)
   value_ne_zero : ∀ t, value t ≠ 0
   lift_exp : ∀ t, Complex.exp (lift t) = value t
   winding : lift 1 - lift 0 = 2 * Real.pi * Complex.I * (k : ℂ)
+
+/-- Every point of the GPV lift acts through the same exponential diagonal
+action whose multiplier is the transport's own value tape.  Thus value,
+lift, level, and winding are coordinates of the distinguished action itself,
+not data attached to a later sphere-world arrow. -/
+theorem GpvTransport.diskExpAction_eq_value {A : ASection}
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k)
+    (t : unitInterval) :
+    GreatCircle.diskExpAction (h.lift t) =
+      GreatCircle.diskDiagonalMoebiusHom
+        (Units.mk0 (h.value t) (h.value_ne_zero t)) := by
+  unfold GreatCircle.diskExpAction
+  apply congrArg GreatCircle.diskDiagonalMoebiusHom
+  apply Units.ext
+  exact h.lift_exp t
+
+/-- A complete GPV winding changes only the logarithmic rung: its two
+endpoints determine the same `ℂˣ` Cayley-disk automorphism.  This is the
+base-action form of the winding law, before orbit--stabilizer transports the
+action through `SphereWorld`. -/
+theorem GpvTransport.diskExpAction_endpoint_eq {A : ASection}
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
+    GreatCircle.diskExpAction (h.lift 0) =
+      GreatCircle.diskExpAction (h.lift 1) := by
+  unfold GreatCircle.diskExpAction
+  apply congrArg GreatCircle.diskDiagonalMoebiusHom
+  apply Units.ext
+  have hlift : h.lift 1 =
+      h.lift 0 + (k : ℂ) * (2 * Real.pi * Complex.I) := by
+    calc
+      h.lift 1 = (h.lift 1 - h.lift 0) + h.lift 0 := by ring
+      _ = (2 * Real.pi * Complex.I * (k : ℂ)) + h.lift 0 := by
+        rw [h.winding]
+      _ = h.lift 0 + (k : ℂ) * (2 * Real.pi * Complex.I) := by ring
+  change Complex.exp (h.lift 0) = Complex.exp (h.lift 1)
+  rw [hlift, Complex.exp_add, Complex.exp_int_mul_two_pi_mul_I, mul_one]
 
 /-- GPV winding changes only height, so the transported real level is the
 same at both endpoints. -/

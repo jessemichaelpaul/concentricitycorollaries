@@ -92,6 +92,44 @@ def diagonalGLHom : ℂˣ →* GL (Fin 2) ℂ where
 def diagonalMoebiusHom : ℂˣ →* Moebius :=
   glToMoebius.comp diagonalGLHom
 
+/-! ## The exponential/GPV diagonal action
+
+The logarithmic GPV coordinate is not extra data attached to a Möbius
+element.  Exponentiation sends it to the nonzero diagonal multiplier itself.
+Its real part is the multiplier's modulus level and its `2πiℤ` ambiguity is
+exactly the winding/band direction.
+-/
+
+/-- A logarithmic coordinate exponentiated as a nonzero complex unit. -/
+noncomputable def expUnit (z : ℂ) : ℂˣ :=
+  Units.mk0 (Complex.exp z) (Complex.exp_ne_zero z)
+
+@[simp] theorem expUnit_coe (z : ℂ) :
+    ((expUnit z : ℂˣ) : ℂ) = Complex.exp z := rfl
+
+@[simp] theorem expUnit_zero : expUnit 0 = 1 := by
+  apply Units.ext
+  simp
+
+theorem expUnit_add (z w : ℂ) :
+    expUnit (z + w) = expUnit z * expUnit w := by
+  apply Units.ext
+  exact Complex.exp_add z w
+
+/-- The complete exponential diagonal action before changing to the Cayley
+disk chart.  Addition of logarithmic lifts is composition of multipliers. -/
+noncomputable def expDiagonalMoebius (z : ℂ) : Moebius :=
+  diagonalMoebiusHom (expUnit z)
+
+@[simp] theorem expDiagonalMoebius_zero : expDiagonalMoebius 0 = 1 := by
+  rw [expDiagonalMoebius, expUnit_zero, map_one]
+
+theorem expDiagonalMoebius_add (z w : ℂ) :
+    expDiagonalMoebius (z + w) =
+      expDiagonalMoebius z * expDiagonalMoebius w := by
+  unfold expDiagonalMoebius
+  rw [expUnit_add, map_mul]
+
 /-- The diagonal Möbius element acts on the finite chart by multiplication
 by its defining nonzero scalar. -/
 theorem diagonalMoebiusHom_apply_coe (u : ℂˣ) (z : ℂ) :
@@ -148,6 +186,18 @@ noncomputable def diskDiagonalMoebiusHom : ℂˣ →* Moebius where
   map_mul' u v := by
     rw [map_mul]
     group
+
+/-- The exponential diagonal action in the projective Cayley disk chart. -/
+noncomputable def diskExpAction (z : ℂ) : Moebius :=
+  diskDiagonalMoebiusHom (expUnit z)
+
+@[simp] theorem diskExpAction_zero : diskExpAction 0 = 1 := by
+  rw [diskExpAction, expUnit_zero, map_one]
+
+theorem diskExpAction_add (z w : ℂ) :
+    diskExpAction (z + w) = diskExpAction z * diskExpAction w := by
+  unfold diskExpAction
+  rw [expUnit_add, map_mul]
 
 /-- The Cayley-conjugated real action before projectivization. -/
 def cayleyConjMoebiusGL : GL (Fin 2) ℝ →* Moebius :=

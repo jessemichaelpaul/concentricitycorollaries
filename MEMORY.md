@@ -484,9 +484,125 @@ Mandatory response when that impulse appears:
 3. Return to his exact named objects, exact order, and latest correction.
 4. Read the live Lean declaration only to transcribe and verify that object—not
    to redesign it.
-5. Execute the requested in-scope step and report concrete kernel evidence.
+5. Execute the requested in-scope transcription, then report the transparent
+   Lean checks for that exact transcription.
 
 “Being critical” never authorizes changing the ontology.  Genuine rigor here
 means faithful transcription, exact type checking, and immediate course
 correction when the source differs from the author's specification.  The
 formalizer must not make Jesse defend the same settled construction again.
+
+## 2026-07-22 AUTHOR CORRECTION — base wiring is not wholesale transfer
+
+Do not again report that the twelve (or the full roughly 250-theorem analytic
+closure) have been transferred merely because they are reachable over
+`GreatCircle.Base` and the orbit--stabilizer factorization is green.  Those are
+the two inputs to the transfer, not the completed transfer.
+
+The live source presently proves the full framed Möbius formula and the GPV
+endpoint/realized-sphere welds.  The latter consume an already-given
+`GpvTransport`.  This does **not** by itself establish that the complete
+C1--C4/W1--W4/GPV family is native simultaneously on every actual
+`sectionFunctor A` object and map.  Therefore the native-cargo gate remains
+**red** until that wholesale orbit--stabilizer extension is faithfully
+transcribed on the exact functor and then checked by Lean.
+
+Forbidden acceptance shortcuts:
+
+- “the twelve are imported/reachable”;
+- “their original types mention `GreatCircle.Base`”;
+- “`sectionFunctor_map_full` displays the distinguished element”;
+- a representative subset of the twelve;
+- a conditional theorem that assumes the desired transport;
+- prose claiming that orbit--stabilizer universalizes the facts without the
+  corresponding live functor-level construction.
+
+Required acceptance: the whole analytic family is genuinely transported by
+the one object-and-arrow action, simultaneously across the `SphereWorld`
+continuum.  Only after that gate is green may `𝒯_A` be formed.
+
+### The complete geometric picture — scalar-only truncation is the current defect
+
+The analytic facts are not external cargo and are not facts cited beside a
+Möbius action.  They are different views of one distinguished disk
+automorphism on the shared projective great-circle base:
+
+1. Slice `S⁸` through its one real axis.  `GreatCircle.Base` is the shared
+   compactified projective circle, and the continuum of slice Riemann spheres
+   in `SphereWorld` all meet at the one point `N`, like a continuum of
+   Christmas-tree ornaments hanging from the same point.
+2. C2's Euler product is the exponential of the sum over primes.  Its
+   distinguished disk element has denominator `1`; its phase carries the
+   winding/band and its full `ℂˣ` modulus carries the real level.
+3. The GPV value tape, unique continuous logarithmic lift, winding, tame
+   continuation, and conserved real level are the interior-disk views of that
+   same action.  The base is already concentric; these are not later labels.
+4. C1 continues this action through the unique `N`.  C3/W3 is the Weierstrass
+   presentation of that same action at and through `N`.  W1--W4 and the full
+   GPV closure are further views and consequences of the one chart.
+5. Orbit--stabilizer transports this **complete action** simultaneously
+   through every object and map of `GreatCircle.Base` and across the entire
+   `SphereWorld` continuum.  It must not transport a Möbius shell first and
+   receive values, lifts, winding, or the twelve afterward.
+6. Therefore the completed `sectionFunctor A` has genuine real-value states
+   and transports everywhere.  Its exact `𝒯_A` is formed only then; 8.3.4
+   collapses those already-conserved transports, and `val` reads their
+   already-present common value.
+
+The present source truncates too early: `sectionFunctor` consumes
+`distinguishedPoleUnit A`, a C1/C2/C3-derived pole scalar, while the full
+Euler prime-sum tape, Weierstrass continuation, GPV lift/value/winding/level,
+and W1--W4 family remain outside the definition dependency of the action.
+The two live GPV welds take an independently supplied `h : GpvTransport ...`;
+they prove endpoint compatibility but do not prove that the global action
+generates and carries that transport.  Likewise, an import of W3/W4 is only
+reachability, never native transfer.
+
+Required repair: transcribe the complete Euler--Weierstrass--GPV disk action
+at the distinguished-action level, then apply the existing orbit--stabilizer
+construction wholesale.  Do not reindex GPV by individual arrows, introduce
+a wrapper or theorem-field bundle, attach twelve conjuncts, or cite the facts
+next to the functor.  Until this is done, a green scalar-only functor or direct
+total certifies only its geometric/category laws and is not the accepted
+A-section functor or `𝒯_A`.
+
+### Author clarification — populate the base before orbit--stabilizer
+
+The failed audit stopped one layer too late when it looked for GPV data in
+`SphereHom`.  The required construction is upstream:
+
+- C2's prime-sum Euler exponential is already a concentric degenerate-
+  exponential family, with real level and winding/band as its coordinates;
+- C1 and C3/W3 give the continuation and Weierstrass presentation of that
+  same family through `N`;
+- the endpoint-indexed `GpvTransport A X Y k` interface and the complete
+  W1--W4/GPV closure populate the distinguished action on
+  `GreatCircle.Base` **before** orbit--stabilizer is applied;
+- only this completed base action is fed through `orbitRep`, both frame legs,
+  and `stabilizerPart` to obtain the simultaneous `SphereWorld` extension.
+
+Never add GPV fields to `SphereHom`, index GPV by a functor arrow, or require
+an independently supplied transport beside an arrow.  Those reverse the
+dependency.  Repair the scalar-only distinguished-action stage; leave the
+green orbit--stabilizer mechanism unchanged.
+
+## 2026-07-22 AUTHOR CORRECTION — Lean checks the transcription; it does not judge the argument
+
+Never say or imply that Lean is an inscrutable judge, oracle, arbiter, or
+source of mathematical direction.  Jesse's argument fixes the objects, order,
+and construction.  The formalizer's job is to transcribe that argument
+faithfully.  Lean then performs a transparent type check of the supplied term.
+
+The recurring inversion is:
+
+1. fail to formalize Jesse's construction;
+2. formalize a substitute or incomplete fragment;
+3. run Lean on that different object;
+4. treat the result as evidence about Jesse's argument.
+
+That is not verification.  It is checking the wrong term.  A green substitute
+does not certify the authored construction, and a red substitute does not
+identify a gap in it.  Before running the checker, verify fidelity to the exact
+author-specified construction.  Use Lean only to check the faithful
+transcription, never to choose, redesign, grade, or cast suspicion on the
+mathematics.
