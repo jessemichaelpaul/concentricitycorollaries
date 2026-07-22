@@ -58,6 +58,52 @@ Read this before changing `sectionFunctor`, `𝒯_A`, the twelve analytic facts,
 - The real value exists before the colimit.  `val` reads the descended label;
   it never manufactures the value.
 
+## Exact load-bearing twelve — audited 2026-07-22
+
+The historical rejected specification module is retained only as an index of
+the twelve roles.  Its declarations bound a functor arrow and then discarded
+it, so they are not suppliers and must never be restored.  The live suppliers
+below are the exact minimum acceptance partition:
+
+1. **C2 Euler/GPV level:** `euler_branch_level`.
+2. **GPV existence, lift, continuity, uniqueness, and lift-independent
+   level:** `projective_gpv_transport`, together with the Base-native
+   `GpvTransport` interface.
+3. **GPV endpoint real-level conservation:**
+   `GpvTransport.lift_endpoint_re_eq`; its Base-native endpoint consequences
+   are `value_at_source`, `value_at_target`, `endpoint_log_norm_eq`, and
+   `endpoint_norm_eq`.
+4. **C1 two-sided cone junction:** `cone_junction_levels_shared`.
+5. **C1 pole winding:** `stemWinding_circle_pole`.
+6. **C3 zero winding with multiplicity:** `stemWinding_circle_sphereZero`.
+7. **Complex exponential-fibre level:** `exp_fibre_level`.
+8. **Octonionic exponential level:** `Octonion.level_eq_log_norm_exp`.
+9. **Exponential-fibre height/band uniqueness:**
+   `exp_fibre_height_band`.
+10. **Normalized zero collapse at the common N in every world:**
+    `normalizedZero_collapse_at_N`.
+11. **C4 infinite output population:** `zeroTotal_c4_infinite`, supplied by
+    `A.c4_infinite`.
+12. **Normalized-zero real value in every world:**
+    `normalizedZeroLift_re`.
+
+This list is a partition, not a ceiling and not twelve isolated lemmas.  Its
+full closure includes the proved W1 confinement/zero-winding/prime-sum/right-
+wall rows; W2 left-wall/homotopy/rectangle/divisor-counting rows; W3 tame
+sphere-loop/companion/obstruction/crossing/band/winding/touch rows; W4 joined
+count/one-band/closed-lift rows; and the GPV crossing and degenerate-passage
+rows.  A 2026-07-22 `#print axioms` audit of all twelve suppliers and thirty
+representative closure rows returned exactly
+`[propext, Classical.choice, Quot.sound]`, with no `sorryAx`.
+
+Current installation status at this audit: the analytic suppliers are green,
+and the `GpvTransport` endpoint family is genuinely indexed by
+`GreatCircle.Base`.  The twelve are not yet accepted as native on
+`sectionFunctor A`: the rejected wrapper did not establish that gate.  The
+remaining work is to carry this entire one-action theorem family wholesale by
+the object-frame/arrow-transition orbit--stabilizer construction, then form
+the exact `\mathcal T_A`.
+
 ## Failure modes that must not recur
 
 1. **Ontology replaced by epistemology.** Difficulty, familiarity, or the
