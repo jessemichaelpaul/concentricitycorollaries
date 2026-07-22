@@ -29,17 +29,18 @@ open CategoryTheory
 namespace ASection
 
 /-- The action of the completed direct A-section functor on the
-`SphereWorld` continuum.  Its arrow map is obtained only by feeding the
-Möbius leg of `(sectionFunctor A).map f` into the already-proved distinguished
-world action. -/
+`SphereWorld` continuum.  Its arrow map is the same framed
+source/stabilizer/target transition that defines `(sectionFunctor A).map f`;
+the object frame and arrow transition are consumed as one construction. -/
 def sectionAction (A : ASection) : GreatCircle.Base ⥤ Grpd.{0, 0} where
   obj _ := Grpd.of SphereWorld
-  map f := distinguishedWorldAction ((sectionFunctor A).map f).mob
+  map f := projectiveTransition A f
   map_id X := by
-    rw [sectionFunctor_map_mob, projectiveArrowElement_id]
+    rw [projectiveTransition_eq, projectiveArrowElement_id]
     exact distinguishedWorldAction_one
   map_comp f g := by
-    rw [sectionFunctor_map_mob, projectiveArrowElement_comp]
+    rw [projectiveTransition_eq, projectiveTransition_eq,
+      projectiveTransition_eq, projectiveArrowElement_comp]
     exact (distinguishedWorldAction_comp
       (projectiveArrowElement A f) (projectiveArrowElement A g)).symm
 
@@ -48,7 +49,9 @@ the direct sphere-valued A-section functor. -/
 theorem sectionAction_map (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     (sectionAction A).map f =
-      distinguishedWorldAction ((sectionFunctor A).map f).mob := rfl
+      distinguishedWorldAction ((sectionFunctor A).map f).mob := by
+  rw [sectionFunctor_map_mob]
+  exact projectiveTransition_eq A f
 
 /-- Every sphere-world transport used by the total is literally the direct
 A-section arrow acting on the incoming transport. -/
@@ -58,6 +61,7 @@ theorem sectionAction_transport_mob (A : ASection)
     (((sectionAction A).map f).map φ).mob =
       projectiveArrowElement A f * φ.mob *
         (projectiveArrowElement A f)⁻¹ := by
+  rw [sectionAction_map]
   rfl
 
 /-- Expanded structural gate for every genuine transport in `A.TotalA`:
