@@ -123,13 +123,11 @@ rows.  A 2026-07-22 `#print axioms` audit of all twelve suppliers and thirty
 representative closure rows returned exactly
 `[propext, Classical.choice, Quot.sound]`, with no `sorryAx`.
 
-Current installation status at this audit: the analytic suppliers are green,
-and the `GpvTransport` endpoint family is genuinely indexed by
-`GreatCircle.Base`.  The twelve are not yet accepted as native on
-`sectionFunctor A`: the rejected wrapper did not establish that gate.  The
-remaining work is to carry this entire one-action theorem family wholesale by
-the object-frame/arrow-transition orbit--stabilizer construction, then form
-the exact `\mathcal T_A`.
+Historical status at the first audit: the analytic suppliers were green and
+the `GpvTransport` endpoint family was indexed by `GreatCircle.Base`, but the
+object/arrow transfer had not yet passed its geometric Cayley-chart check.
+The later “Cayley-disk/orbit--stabilizer weld” and “native-cargo acceptance”
+blocks below supersede that interim status.
 
 ## Failure modes that must not recur
 
@@ -272,13 +270,12 @@ Deleting that analytic cargo must break the final theorem.
 - Commit `e848931` restored the canonical Euler half-space GPV transport. Its
   lift is definitionally the prime sum; it uses no per-arrow or per-zero choice.
 - Commit `b25a4a3` reconnected the compactified `N`-transport suppliers.
-- The live `sectionFunctor A : GreatCircle.Base ⥤ SphereWorld` has the correct
-  external type, but it is not yet accepted: its object map is definitionally
-  constant at `baseWorld`, and its map is still the scalar/pole shadow rather
-  than the full Euler--Weierstrass--GPV action.
-- Consequently the existing `Total A` and readout declarations are provisional
-  even where green. Their types may be retained only after they are shown to
-  consume the repaired exact action.
+- At this historical checkpoint the live
+  `sectionFunctor A : GreatCircle.Base ⥤ SphereWorld` had the correct external
+  type but had not yet passed the Cayley-chart/native-cargo audit.  The later
+  acceptance blocks below supersede this interim status.
+- The readout remains provisional; `TotalA` itself is accepted after the later
+  audit showed it consumes the exact repaired action definitionally.
 
 ### Evidence-backed acceptance gates
 
@@ -357,3 +354,43 @@ The new Cayley, object-frame, footpoint, GPV-domain, realized-sphere, and total
 transport rows all report exactly `[propext, Classical.choice, Quot.sound]`.
 This checkpoint establishes the geometric native weld; it does not by itself
 claim that the entire W1--W4/GPV closure or the final readout is complete.
+
+## 2026-07-22 native-cargo acceptance — all twelve and their closure
+
+The Cayley weld above, combined with the already-native disk/Base theorem
+family, completes the upstream transfer gate.  The correction is decisive:
+
+- all twelve and the W1--W4/GPV closure are already facts **on the
+  distinguished disk automorphism over `GreatCircle.Base`**;
+- orbit--stabilizer extends that one action wholesale through every
+  `projectiveObjectFrame A X` and `projectiveArrowElement A f`;
+- `sectionAction_transport_full` displays the full `ℂˣ` element, both orbit
+  representatives, the stabilizer, and the incoming sphere transport in
+  every map used by `TotalA`;
+- therefore no new `Fstar` equivariance theorem, per-map GPV path, twelve-row
+  wrapper, proof-field bundle, or conjunction is part of the transfer.
+
+Do not repeat the 2026-07-22 inversion that asked for a new equation between
+`Fstar` and each Möbius leg.  That incorrectly pulled the native disk/Base
+facts back out of the global action and atomized the orbit--stabilizer
+extension.  The transfer theorem is the full universal factorization already
+present in the action, consumed together with the native suppliers.
+
+Kernel verification covered the exact twelve, twenty-nine representative
+W1--W4/GPV closure rows, `orbitRep_spec`, `orbit_stabilizer_factor`, the object
+frame and arrow footpoint laws, `sectionFunctor_map_full`, the native GPV
+domain/realized-sphere rows, and `sectionAction_transport_full`.  Every row
+reported exactly `[propext, Classical.choice, Quot.sound]`.  The printed live
+types also confirmed:
+
+```lean
+sectionFunctor A : GreatCircle.Base ⥤ SphereWorld
+sectionAction A : GreatCircle.Base ⥤ Grpd
+TotalA A : Type
+zeroTotal A n I : TotalA A
+```
+
+Accordingly the action-supplier, object/arrow, native-cargo, and exact-total
+gates are accepted.  `labelCocone`, `val`, and the replacement of the
+provisional indexed readout remain downstream and were not touched by this
+audit.

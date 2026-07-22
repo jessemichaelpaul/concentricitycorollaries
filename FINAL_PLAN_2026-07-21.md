@@ -141,13 +141,26 @@ Green and reusable:
   `orbit_stabilizer_factor`, and the identity/composition laws;
 - `projectiveObjectFrame`, `projectiveArrowElement`, and their compatibility.
 
-Not accepted or not yet completed:
+Accepted by the 2026-07-22 native-cargo audit:
 
-- the live `sectionFunctor`/`TotalA` pair does not yet satisfy the authored
-  object-and-arrow acceptance gate;
-- `sectionFunctor.obj` currently reduces to the same `baseWorld` for every
-  projective object, and its arrow action still exposes only the fixed
-  pole-unit scalar rather than the full Euler--Weierstrass--GPV transport;
+- `sectionFunctor A : GreatCircle.Base ⥤ SphereWorld` is the authored
+  A-specialized orbit--stabilizer action: its object frame and arrow
+  transition are the two faces of the same construction;
+- the underlying world direction remains `baseWorld` because the
+  distinguished action is internal to each represented Riemann sphere; this
+  is not constancy of the transition action;
+- the complete native twelve and the proved W1--W4/GPV closure are facts of
+  the distinguished disk action over `GreatCircle.Base` and are extended
+  wholesale by `projectiveObjectFrame`, `projectiveArrowElement`, and
+  `sectionAction_transport_full`;
+- `TotalA` is formed definitionally from that exact action, and its C3/C4
+  zero outputs retain their projective footpoints and sphere worlds;
+- a kernel audit of the twelve, twenty-nine representative closure rows, the
+  orbit--stabilizer extension, `sectionFunctor`, and `TotalA` returned exactly
+  `[propext, Classical.choice, Quot.sound]`.
+
+Not yet completed:
+
 - the current `ConcentricityReadout.zeroColimitClass_eq_north` explicitly
   applies `GreatCircle.toNHom (A.sphereZero n).re` for each `n`; this is the
   rejected per-index connector route, not yet the wholesale colimit result;
@@ -157,8 +170,6 @@ Not accepted or not yet completed:
   the historical phrase "one remaining `sorry`" is not a live status report;
 - `ProjectiveSpecification.lean` is the rejected wrapper layer and must not be
   imported;
-- the twelve have not been accepted merely because a theorem binds and then
-  discards a transport;
 - `labelCocone`, `val`, and the literal `∃ c` finale are downstream of the
   completed A-section functor.
 
