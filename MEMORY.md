@@ -161,6 +161,29 @@ constructions:
   `Grpd.of SphereWorld` is not upgraded into the intended total merely because
   its maps mention `sectionFunctor A`.
 
+### Why the development appeared upside down
+
+- The author's intent was never to prove twelve detached analytic lemmas and
+  later decorate a category with them.  The intended register for the whole
+  analytic development--in practice the hundreds of C/W/GPV consequences--was
+  the distinguished Möbius action over `GreatCircle.Base`, acting through
+  `SphereWorld`.  This is why those two groupoids were constructed.
+- Much of the live theorem stack was formalized first over local paths, bare
+  points, slice charts, or other upstream analytic registers.  The categorical
+  layer was then assembled afterward, and at one stage a static generic
+  packaging was used.  That reversed implementation order made the genuine
+  theorems look like cargo waiting to be attached, although mathematically
+  they had always been facts of the projective distinguished action.
+- Correcting the inversion means re-expressing every consumed transport
+  theorem in the `GreatCircle.Base` register and letting orbit--stabilizer carry
+  the entire theorem family wholesale.  "The twelve" names the essential
+  acceptance partition; it does not authorize dropping the rest of the proved
+  analytic geometry.
+- Never infer the author's intended ontology from the accidental register in
+  which an older Lean supplier was first proved.  Its detached type records the
+  historical formalization order, not a separate mathematical phase in the
+  Concentricity construction.
+
 This is why the analytic theorems are wholesale properties of the exact
 action. W1--W4, the GPV facts, the Euler/Weierstrass comparison, the degenerate
 exponential facts, tameness, uniqueness, and the real-value transports are not
