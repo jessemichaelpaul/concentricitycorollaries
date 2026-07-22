@@ -190,6 +190,19 @@ theorem diskExpAction_distinguishedPoleLog (A : ASection) :
   unfold GreatCircle.diskExpAction
   rw [A.expUnit_distinguishedPoleLog]
 
+/-- The one C1--C3 Euler--Weierstrass--GPV disk action carried from the
+projective north chart.  Its parameter is the complete nonzero complex unit:
+the phase retains the winding/band and the modulus retains the real level. -/
+noncomputable def distinguishedDiskAction (A : ASection) : Moebius :=
+  GreatCircle.diskExpAction A.distinguishedPoleLog
+
+/-- The distinguished disk action retains the full `ℂˣ` multiplier supplied
+by the C1 continuation and its C2/C3 presentations. -/
+theorem distinguishedDiskAction_eq_fullMultiplier (A : ASection) :
+    A.distinguishedDiskAction =
+      GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit := by
+  exact A.diskExpAction_distinguishedPoleLog
+
 /-! ## C2 populates the distinguished projective-base action -/
 
 /-- C2's canonical prime-sum logarithmic coordinate. -/
@@ -497,5 +510,35 @@ theorem projective_gpv_transport (A : ASection)
       (fun t => (hΓ' t).trans (hγval t).symm) h0
   · intro Γ' hΓ'lift t
     rw [htape t, ← hΓ'lift t, Complex.norm_exp, Real.log_exp]
+
+/-- The A-section itself generates the complete GPV logarithmic disk action
+along every pole-avoiding, zero-free projective-base path.  No transport datum
+is supplied independently: the value tape is `A.F ∘ δ`, the lift is produced by
+GPV continuation, and its exponential is definitionally read by the same
+`diskExpAction` used by the distinguished action. -/
+theorem projective_gpv_disk_action (A : ASection)
+    (δ : C(unitInterval, ℂ))
+    (hp : ∀ t, δ t ≠ (A.pole : ℂ))
+    (hne : ∀ t, A.F (δ t) ≠ 0) :
+    ∃ Γ : C(unitInterval, ℂ),
+      (∀ t, GreatCircle.diskExpAction (Γ t) =
+        GreatCircle.diskDiagonalMoebiusHom
+          (Units.mk0 (A.F (δ t)) (hne t))) ∧
+      (∀ t, (Γ t).re = Real.log ‖A.F (δ t)‖) ∧
+      (Continuous fun t => (Γ t).re) ∧
+      (∀ Γ' : C(unitInterval, ℂ),
+        (∀ t, Complex.exp (Γ' t) = A.F (δ t)) →
+          Γ' 0 = Γ 0 → Γ' = Γ) ∧
+      (∀ Γ' : C(unitInterval, ℂ),
+        (∀ t, Complex.exp (Γ' t) = A.F (δ t)) →
+          ∀ t, (Γ' t).re = (Γ t).re) := by
+  obtain ⟨Γ, hlift, hlevel, hcontinuous, hunique, hindependent⟩ :=
+    A.projective_gpv_transport δ hp hne
+  refine ⟨Γ, ?_, hlevel, hcontinuous, hunique, hindependent⟩
+  intro t
+  unfold GreatCircle.diskExpAction GreatCircle.expUnit
+  apply congrArg GreatCircle.diskDiagonalMoebiusHom
+  apply Units.ext
+  exact hlift t
 
 end ASection

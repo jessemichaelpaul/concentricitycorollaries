@@ -197,7 +197,7 @@ theorem distinguishedWorldAction_comp (m n : Moebius) :
 complete exponential/GPV logarithmic action.  C2 supplies the prime-sum
 coordinate; C1 and C3/W3 identify its continuation at `N`. -/
 def distinguishedPoleElement (A : ASection) : Moebius :=
-  GreatCircle.diskExpAction A.distinguishedPoleLog
+  A.distinguishedDiskAction
 
 /-- A's own distinguished C1/C2/C3 Euler–Weierstrass disk element fixes the
 one shared north pole.  The element here is specifically
@@ -209,7 +209,7 @@ one shared north pole.  The element here is specifically
       GreatCircle.cayleyCoord
         (OnePoint.infty : GreatCircle.Point) := by
   unfold distinguishedPoleElement
-  rw [A.diskExpAction_distinguishedPoleLog]
+  rw [A.distinguishedDiskAction_eq_fullMultiplier]
   exact GreatCircle.diskDiagonalMoebiusHom_fixes_cayley_infty
     A.distinguishedPoleUnit
 
@@ -420,9 +420,9 @@ theorem projectiveArrowElement_eq_full_factorization (A : ASection)
       GreatCircle.cayleyProjective
           (GreatCircle.orbitRep
             (CategoryTheory.ActionCategory.back Y)) *
-        GreatCircle.diskExpAction A.distinguishedPoleLog *
+        A.distinguishedDiskAction *
         GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
-        (GreatCircle.diskExpAction A.distinguishedPoleLog)⁻¹ *
+        A.distinguishedDiskAction⁻¹ *
         (GreatCircle.cayleyProjective
           (GreatCircle.orbitRep
             (CategoryTheory.ActionCategory.back X)))⁻¹ := by
@@ -445,17 +445,6 @@ orbit--stabilizer transition generated from its source and target frames. -/
     {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     ((sectionFunctor A).map f).mob = projectiveArrowElement A f := rfl
 
-/-- Every GPV transport over a base arrow has exactly the endpoints carried
-by that arrow's genuine A-section disk automorphism.  This is the native weld:
-the GPV endpoint data and the orbit--stabilizer action inhabit the same Cayley
-chart, with no separately chosen connector. -/
-theorem GpvTransport.sectionFunctor_map_domain {A : ASection}
-    {X Y : GreatCircle.Base} {k : ℤ} (f : X ⟶ Y)
-    (h : GpvTransport A X Y k) :
-    (((sectionFunctor A).map f).mob).val (h.domain 0) = h.domain 1 := by
-  rw [h.domain_zero, h.domain_one, sectionFunctor_map_mob]
-  exact projectiveArrowElement_maps_footpoint A f
-
 /-- The direct sphere-world arrow displays A's diagonal Euler--Weierstrass
 element, both orbit representatives, and the residual stabilizer. -/
 theorem sectionFunctor_map_full (A : ASection)
@@ -465,9 +454,9 @@ theorem sectionFunctor_map_full (A : ASection)
           GreatCircle.cayleyProjective
             (GreatCircle.orbitRep
               (CategoryTheory.ActionCategory.back Y)) *
-          GreatCircle.diskExpAction A.distinguishedPoleLog *
+          A.distinguishedDiskAction *
           GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
-          (GreatCircle.diskExpAction A.distinguishedPoleLog)⁻¹ *
+          A.distinguishedDiskAction⁻¹ *
           (GreatCircle.cayleyProjective
             (GreatCircle.orbitRep
               (CategoryTheory.ActionCategory.back X)))⁻¹⟩ := by
@@ -485,20 +474,6 @@ theorem sectionFunctor_map_realize (A : ASection)
       spherePt ((sectionFunctor A).obj Y).val
         ((projectiveArrowElement A f).val z) := by
   rw [SphereHom.realize_sphereChartPoint, sectionFunctor_map_mob]
-
-/-- The same native weld realized on the actual source and target Riemann
-spheres: a GPV source endpoint is transported to its target endpoint by the
-exact `sectionFunctor A` arrow. -/
-theorem GpvTransport.sectionFunctor_map_realize {A : ASection}
-    {X Y : GreatCircle.Base} {k : ℤ} (f : X ⟶ Y)
-    (h : GpvTransport A X Y k) :
-    (((sectionFunctor A).map f).realize
-        (sphereChartPoint ((sectionFunctor A).obj X) (h.domain 0))).val =
-      spherePt ((sectionFunctor A).obj Y).val (h.domain 1) := by
-  rw [ASection.sectionFunctor_map_realize]
-  apply congrArg (spherePt ((sectionFunctor A).obj Y).val)
-  simpa only [sectionFunctor_map_mob] using
-    h.sectionFunctor_map_domain f
 
 /-- At the projective north object, A's object frame sends the common north
 pole to itself: the authored `N ↦ N` gate. -/

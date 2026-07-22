@@ -94,8 +94,10 @@ below are the exact minimum acceptance partition:
 
 1. **C2 Euler/GPV level:** `euler_branch_level`.
 2. **GPV existence, lift, continuity, uniqueness, and lift-independent
-   level:** `projective_gpv_transport`, together with the Base-native
-   `GpvTransport` interface.
+   level on the disk action:** `projective_gpv_disk_action`, generated from
+   `A` and its value path; `projective_gpv_transport` is its analytic lift
+   supplier and the Base-native `GpvTransport` interface records the resulting
+   consequences.
 3. **GPV endpoint real-level conservation:**
    `GpvTransport.lift_endpoint_re_eq`; its Base-native endpoint consequences
    are `value_at_source`, `value_at_target`, `endpoint_log_norm_eq`, and
@@ -606,3 +608,39 @@ identify a gap in it.  Before running the checker, verify fidelity to the exact
 author-specified construction.  Use Lean only to check the faithful
 transcription, never to choose, redesign, grade, or cast suspicion on the
 mathematics.
+
+## 2026-07-22 generated-action completion — no independent GPV weld
+
+The scalar-only truncation and the independent-transport weld have now been
+removed at the distinguished-action boundary.
+
+- `A.distinguishedDiskAction` is the one C1--C3 continued
+  Euler--Weierstrass--GPV disk action.  Its theorem
+  `distinguishedDiskAction_eq_fullMultiplier` identifies it with
+  `diskDiagonalMoebiusHom A.distinguishedPoleUnit`, so the complete `ℂˣ`
+  multiplier remains present: phase carries winding/band and modulus carries
+  real level.
+- `A.projective_gpv_disk_action` is generated directly from `A` and its value
+  path.  GPV continuation supplies the logarithmic lift, continuous and
+  lift-independent real level, and the equality between the lift's
+  `diskExpAction` and A's own nonzero value multiplier.  It accepts no
+  independently supplied `GpvTransport`.
+- The two former welds that bound an arbitrary base arrow beside an unrelated
+  `h : GpvTransport ...` were deleted.  Generic `GpvTransport` lemmas remain
+  valid analytic consequences, but they no longer masquerade as the
+  functorial construction.
+- `sectionFunctor_map_full` retains the existing orbit--stabilizer
+  factorization unchanged, now with `A.distinguishedDiskAction` in both frame
+  legs.
+- `totalTransport` now carries the literal Möbius leg of
+  `(sectionFunctor A).map f`.  The former implementation applied the action to
+  an identity sphere arrow and visibly reduced its Möbius leg to the identity.
+  `totalTransport_full` prints the full distinguished action, both orbit
+  representatives, and `stabilizerPart f` in the canonical arrow of `𝒯_A`.
+
+Verification: `lake build Concentricity.ProjectiveTotal` completed 3652 jobs.
+The action supplier, generated GPV action, `sectionFunctor_map_full`,
+`totalTransport_full`, and every member of the exact load-bearing twelve each
+printed exactly `[propext, Classical.choice, Quot.sound]`.  A source search
+found no remaining theorem that accepts a functor arrow and an independently
+supplied `GpvTransport` side by side.

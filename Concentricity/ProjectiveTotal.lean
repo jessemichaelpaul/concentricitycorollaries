@@ -218,8 +218,38 @@ def northTotal (A : ASection) (I : SphereWorld) : A.TotalA :=
 
 /-- The wholesale total transport induced by a base arrow. -/
 def totalTransport (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y)
-    (I : SphereWorld) : totalMk A X I ⟶ totalMk A Y I :=
-  totalHomMk A f (𝟙 I)
+    (I : SphereWorld) : totalMk A X I ⟶ totalMk A Y I := by
+  refine ⟨f, ?_⟩
+  change I ⟶ I
+  exact ⟨1, one_smul G2 I.val, ((sectionFunctor A).map f).mob⟩
+
+@[simp] theorem totalTransport_base (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y) (I : SphereWorld) :
+    (totalTransport A f I).base = f := rfl
+
+/-- The canonical transport in the exact total retains, rather than erases,
+the complete Möbius leg of the A-section functor map. -/
+@[simp] theorem totalTransport_fiber_mob (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y) (I : SphereWorld) :
+    (totalTransport A f I).fiber.mob = ((sectionFunctor A).map f).mob := rfl
+
+/-- Expanded form of every canonical transport in `𝒯_A`: the full
+Euler--Weierstrass--GPV disk action, both orbit representatives, and the
+residual stabilizer are present in the total arrow itself. -/
+theorem totalTransport_full (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y) (I : SphereWorld) :
+    (totalTransport A f I).fiber.mob =
+      GreatCircle.cayleyProjective
+          (GreatCircle.orbitRep
+            (CategoryTheory.ActionCategory.back Y)) *
+        A.distinguishedDiskAction *
+        GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
+        A.distinguishedDiskAction⁻¹ *
+        (GreatCircle.cayleyProjective
+          (GreatCircle.orbitRep
+            (CategoryTheory.ActionCategory.back X)))⁻¹ := by
+  rw [totalTransport_fiber_mob, sectionFunctor_map_mob,
+    projectiveArrowElement_eq_full_factorization]
 
 /-- C3 supplies every indexed zero output in every sphere world. -/
 theorem zeroTotal_populated (A : ASection) (n : ℕ) (I : SphereWorld) :
