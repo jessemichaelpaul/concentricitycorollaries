@@ -134,6 +134,33 @@ constructions:
   that same extension, so `F.obj` and `F.map` must be built together and
   `N ↦ N` is part of the construction.
 
+### Base-native transport rule
+
+- The distinguished `ℂˣ` element with denominator `1` is C2 on the Euler
+  half-space and, after C1 continuation, is that same element in its C3
+  Weierstrass presentation at `N`.  C2 and C3 are not two actions.
+- Slice preservation supplies the commuting geometric/analytic chart.  The
+  domain motion, value tape, logarithmic lift, winding, and real level are
+  different views of this one inner-disk action.
+- The GPV transport interface consumed by the functor must therefore be stated
+  over `GreatCircle.Base`, because that is the base on which
+  `orbitRep`/`stabilizerPart` extend the action.  A transport theorem left over
+  bare `GreatCircle.Point` endpoints, or over a detached path with no
+  projective-base realization, is only an upstream supplier; it is not yet a
+  native theorem of the extended action.
+- Orbit--stabilizer carries the whole commuting action and its complete theorem
+  family through every `F.obj` and `F.map` simultaneously.  It does not carry a
+  Möbius shell first and receive endpoint equalities or the twelve as later
+  attachments.
+- The twelve are the known minimum cargo, not an artificial ceiling.  Any
+  additional proved GPV/W consequences required by naturality,
+  `labelCocone`, or `val` remain native consequences of the same action and
+  travel with it.
+- Only after that Base-native gate passes may the exact `𝒯_A` be formed.
+  A layer whose object definition is the static placeholder
+  `Grpd.of SphereWorld` is not upgraded into the intended total merely because
+  its maps mention `sectionFunctor A`.
+
 This is why the analytic theorems are wholesale properties of the exact
 action. W1--W4, the GPV facts, the Euler/Weierstrass comparison, the degenerate
 exponential facts, tameness, uniqueness, and the real-value transports are not
