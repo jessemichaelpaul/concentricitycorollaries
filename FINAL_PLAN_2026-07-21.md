@@ -52,6 +52,26 @@ functor, carrier, base, or total object.
 - **GPV/W/D** give the lift, winding, real-level, world-independence, and band
   properties of this one action.
 
+The native-cargo gate means **all** of the proved W1--W4 stack, not a
+representative GPV lemma:
+
+- **W1:** Euler-factor confinement, zero winding on the C2 half-space,
+  the canonical prime-sum lift, and right-wall argument control;
+- **W2:** the zero-free left wall, homotopy/rectangle winding, and the full
+  divisor-counting weld;
+- **W3:** tame sphere loops, companion and obstruction data, the band
+  reading, degenerate-fibre concentricity, and the touch;
+- **W4:** the joined two-side count and the unique closed lift through the C1
+  cone onto the one band;
+- **GPV:** existence, basepoint uniqueness, tameness, continuous and
+  lift-independent real level, winding, crossing, and degenerate-passage
+  consequences.
+
+Only proved supplier rows are used.  Historical receipt declarations carrying
+`sorry` are not part of the construction.  C3-at-`N` remains upstream: it is
+the through-`N` Weierstrass presentation of the same exponential
+distinguished action supplied by C2, not a later zero-object attachment.
+
 The fractional/band part is the \(U(1)\) motion.  Do not discard the full
 nonzero Euler multiplier: `distinguishedPoleUnit A : ℂˣ` carries both phase and
 modulus.  The phase records band/winding; the modulus records the real level

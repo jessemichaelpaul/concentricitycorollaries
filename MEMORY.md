@@ -23,6 +23,17 @@ Read this before changing `sectionFunctor`, `𝒯_A`, the twelve analytic facts,
 - The C3 zero-spheres and C4 infinitude are outputs of the completed action.
 - The twelve stay in their native quantifiers.  They are faces of the one
   distinguished action transported wholesale, not a new specification layer.
+- "All analytic facts" is literal: retain the complete proved W1 Euler
+  winding/right-wall stack, W2 left-wall/homotopy/counting stack, W3 tame
+  sphere-loop/band/degenerate-touch stack, W4 joined-count/unique-closed-lift
+  stack, and every GPV existence, uniqueness, tameness, continuity, level,
+  winding, crossing, and degenerate-passage consequence.  Never reduce this
+  gate to `gpvBase_transport`, endpoint real-part equality, or any other
+  representative lemma.  Historical receipt theorems containing `sorry` are
+  not suppliers; their proved constituent rows are.
+- C3-at-`N` is part of the upstream distinguished action: the Weierstrass
+  form there continues the same C2 Euler exponential through `N`.  Its divisor
+  subsequently produces the C3/C4 zero spheres as outputs.
 - Instantiate 8.3.4 only on Jesse's completed A-section functor.  Never infer
   the author's object from the generic theorem's binder.
 
