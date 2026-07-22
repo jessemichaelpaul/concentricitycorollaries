@@ -62,12 +62,8 @@ every tame sphere-enclosing loop's value data touches `lem:exp-degenerate`'s
 fibre at some −r, whose octonionic fibre carries the ONE level log r
 (`ASection.sphereLoop_touches_degenerate`).
 
-THE RECEIPT (the file's ONE `sorry`, R6/R8 — the exact resisting goal):
-`ASection.concentricity_via_weldW3` at `⊢ False` with the complete W3
-[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
-consistency note. The imported root ledger is untouched.
-
-`sorry` marks UNFORMALIZED, never UNSOUND (R8).
+The historical target-level receipt has been retired.  The proved W3 supplier
+rows above remain; no target theorem or `sorry` is declared in this file.
 -/
 import Concentricity.SigmaE3
 
@@ -591,7 +587,7 @@ theorem sphereLoop_touches_degenerate (A : ASection) (n : ℕ) :
 
 /-! ## The receipt — the W3 board fed at the target -/
 
-/-- **W3 — THE DRIVE** (the limb's target: the repository's one open node,
+/- **W3 — THE DRIVE** (the limb's target: the repository's one open node,
 `ASection.concentricity`, Theorem.lean). Every possession fed below is
 PROVED in this file or on the certified board:
 
@@ -636,35 +632,4 @@ continuous extension exists to carry it; its stem shadow (closure,
 `stemWinding_eq_zero_iff`; the crossing ledger, SigmaE3 §C) is already
 PROVED and level-blind. The `sorry` is the ROUTE RECEIPT (unimported
 artifact; R8), not a queue item. -/
-theorem concentricity_via_weldW3 (A : ASection) :
-    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
-  by_contra hno
-  have hpair : ∃ n m : ℕ, (A.sphereZero n).re ≠ (A.sphereZero m).re := by
-    by_contra hall
-    refine hno ⟨(A.sphereZero 0).re, fun n => ?_⟩
-    by_contra hk
-    exact hall ⟨n, 0, hk⟩
-  obtain ⟨n, m, hnm⟩ := hpair
-  -- (a) the octonionic difference — PROVED
-  have ha := @Octonion.direction_path_to_neg
-  have ha' := stem_direction_disconnected
-  -- (b) the tame sphere-enclosing loops — PROVED
-  have hb := @A.sphereLoop_tame
-  have hb' := @A.sphereLoop_obstruction_empty
-  have hb'' := @A.sphereLoop_crossing_isEmpty
-  have hb''' := @A.sphereLoop_domain_winding_zero
-  -- (c) the band reading — PROVED
-  have hc := @Octonion.exp_fibre_concentric
-  have hc' := Octonion.exp_kernel_unit_imaginary
-  have hc'' := A.sphereLoop_value_band
-  -- (d) the touch — PROVED
-  have hd := @A.sphereLoop_value_winding
-  have hd' := @stemWinding_pos_meets_neg_real
-  have hd'' := A.sphereLoop_touches_degenerate
-  have hd''' := A.shared_ladder_encounters n m
-  -- RECEIPT: ⊢ False — the W3 rows pin value-side levels and domain-side
-  -- directions; the goal needs the domain-side LEVELS; the identification
-  -- of the two registers is eq:placement-set itself.
-  sorry
-
 end ASection

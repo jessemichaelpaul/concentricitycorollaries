@@ -36,6 +36,16 @@ Read this before changing `sectionFunctor`, `𝒯_A`, the twelve analytic facts,
   subsequently produces the C3/C4 zero spheres as outputs.
 - Instantiate 8.3.4 only on Jesse's completed A-section functor.  Never infer
   the author's object from the generic theorem's binder.
+- **Never say or plan "prove the `Grpd` diagram."**  The project diagram is
+  the exact `𝒯_A` produced from the completed sphere-valued functor
+  `sectionFunctor A : GreatCircle.Base ⥤ SphereWorld`, after C1--C4,
+  C3-at-`N`, all W1--W4, and GPV are native in its real-value states and
+  transports.  `Grpd` is only implementation vocabulary inside the reusable
+  statement of 8.3.4.  Its generic binder must never be promoted into the
+  A-section functor, the project diagram, or a construction target.  The live
+  `sectionAction`/`Grpd.of SphereWorld` layer remains provisional until the
+  exact `𝒯_A` recipe is shown to arise from that completed functor and nothing
+  else.
 
 ## The element and its value
 
