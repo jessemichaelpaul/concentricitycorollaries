@@ -43,6 +43,50 @@ def totalDiagram (A : ASection) :
     exact (distinguishedWorldAction_comp
       (projectiveArrowElement A f) (projectiveArrowElement A g)).symm
 
+/-- Every fibre transport in the total is the direct A-section arrow acting
+on the incoming sphere-world morphism.  This is the structural gate by which
+the distinguished Euler--Weierstrass action, already carrying the analytic
+facts, is extended wholesale over the projective base. -/
+theorem totalDiagram_transport_mob (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y)
+    {I J : SphereWorld} (φ : I ⟶ J) :
+    (((totalDiagram A).map f).map φ).mob =
+      projectiveArrowElement A f * φ.mob *
+        (projectiveArrowElement A f)⁻¹ := by
+  rfl
+
+/-- Expanded structural form of every genuine transport in `𝒯_A`: A's full
+`ℂˣ` distinguished element, both orbit representatives, the residual
+stabilizer, and the incoming Möbius leg all occur in the arrow itself. -/
+theorem totalDiagram_transport_full (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y)
+    {I J : SphereWorld} (φ : I ⟶ J) :
+    ((totalDiagram A).map f).map φ =
+      ⟨φ.rot, φ.rot_eq,
+        (GreatCircle.cayleyProjective
+            (GreatCircle.orbitRep
+              (CategoryTheory.ActionCategory.back Y)) *
+          GreatCircle.diagonalMoebiusHom A.distinguishedPoleUnit *
+          GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
+          (GreatCircle.diagonalMoebiusHom A.distinguishedPoleUnit)⁻¹ *
+          (GreatCircle.cayleyProjective
+            (GreatCircle.orbitRep
+              (CategoryTheory.ActionCategory.back X)))⁻¹) *
+        φ.mob *
+        (GreatCircle.cayleyProjective
+            (GreatCircle.orbitRep
+              (CategoryTheory.ActionCategory.back Y)) *
+          GreatCircle.diagonalMoebiusHom A.distinguishedPoleUnit *
+          GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
+          (GreatCircle.diagonalMoebiusHom A.distinguishedPoleUnit)⁻¹ *
+          (GreatCircle.cayleyProjective
+            (GreatCircle.orbitRep
+              (CategoryTheory.ActionCategory.back X)))⁻¹)⁻¹⟩ := by
+  apply SphereHom.ext
+  · rfl
+  · rw [totalDiagram_transport_mob,
+        projectiveArrowElement_eq_full_factorization]
+
 end sectionFunctor
 
 /-- The intended total `𝒯_A`, formed only after the authored direct
