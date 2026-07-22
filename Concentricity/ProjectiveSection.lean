@@ -378,8 +378,24 @@ the A-positioned frame.  Every base arrow is carried by the matching full
 orbit--stabilizer Möbius transition.  Object and arrow are therefore the two
 faces of the same A-specialized action. -/
 def sectionFunctor (A : ASection) : GreatCircle.Base ⥤ SphereWorld where
-  obj X := (projectiveObjectAction A X).obj baseWorld
-  map f := projectiveArrowHom A f
+  obj X :=
+    (distinguishedWorldAction
+      (GreatCircle.cayleyProjective
+          (GreatCircle.orbitRep
+            (CategoryTheory.ActionCategory.back X)) *
+        GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit)).obj
+      baseWorld
+  map {X Y} f :=
+    ⟨1, one_smul G2 baseWorld.val,
+      (GreatCircle.cayleyProjective
+          (GreatCircle.orbitRep
+            (CategoryTheory.ActionCategory.back Y)) *
+        GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit) *
+      GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
+      (GreatCircle.cayleyProjective
+          (GreatCircle.orbitRep
+            (CategoryTheory.ActionCategory.back X)) *
+        GreatCircle.diskDiagonalMoebiusHom A.distinguishedPoleUnit)⁻¹⟩
   map_id X := by
     apply SphereHom.ext
     · rfl
