@@ -18,7 +18,7 @@ projective groupoid `GreatCircle.Base`.
 
 noncomputable section
 
-open Complex Filter CategoryTheory
+open Complex Filter
 
 namespace ASection
 
@@ -168,8 +168,8 @@ noncomputable def distinguishedPoleUnit (A : ASection) : ℂˣ :=
 /-- A compactified GPV value transport between two objects of the one
 projective great-circle base.  The endpoints are genuine objects of
 `GreatCircle.Base`, not bare points later wrapped into that groupoid. -/
-structure GpvTransport (A : ASection) {X Y : GreatCircle.Base}
-    (f : X ⟶ Y) (k : ℤ) : Type where
+structure GpvTransport (A : ASection)
+    (X Y : GreatCircle.Base) (k : ℤ) : Type where
   domain : C(unitInterval, OnePoint ℂ)
   value : C(unitInterval, ℂ)
   lift : C(unitInterval, ℂ)
@@ -185,8 +185,7 @@ structure GpvTransport (A : ASection) {X Y : GreatCircle.Base}
 /-- GPV winding changes only height, so the transported real level is the
 same at both endpoints. -/
 theorem GpvTransport.lift_endpoint_re_eq {A : ASection}
-    {X Y : GreatCircle.Base} {f : X ⟶ Y} {k : ℤ}
-    (h : GpvTransport A f k) :
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
     (h.lift 0).re = (h.lift 1).re := by
   have hw := congrArg Complex.re h.winding
   norm_num [Complex.mul_re] at hw
@@ -195,8 +194,7 @@ theorem GpvTransport.lift_endpoint_re_eq {A : ASection}
 /-- The real level carried at every instant by a projective-base transport is
 the logarithm of the norm of its own value tape. -/
 theorem GpvTransport.level {A : ASection}
-    {X Y : GreatCircle.Base} {f : X ⟶ Y} {k : ℤ}
-    (h : GpvTransport A f k)
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k)
     (t : unitInterval) :
     (h.lift t).re = Real.log ‖h.value t‖ := by
   rw [← h.lift_exp t, Complex.norm_exp, Real.log_exp]
@@ -204,16 +202,14 @@ theorem GpvTransport.level {A : ASection}
 /-- The transported real level varies continuously along every genuine
 projective-base transport. -/
 theorem GpvTransport.continuous_level {A : ASection}
-    {X Y : GreatCircle.Base} {f : X ⟶ Y} {k : ℤ}
-    (h : GpvTransport A f k) :
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
     Continuous fun t => (h.lift t).re :=
   Complex.continuous_re.comp (map_continuous h.lift)
 
 /-- A second logarithmic lift of the same projective-base value tape is
 uniquely determined by its initial value. -/
 theorem GpvTransport.lift_unique {A : ASection}
-    {X Y : GreatCircle.Base} {f : X ⟶ Y} {k : ℤ}
-    (h : GpvTransport A f k)
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k)
     (lift' : C(unitInterval, ℂ))
     (hlift' : ∀ t, Complex.exp (lift' t) = h.value t)
     (hzero : lift' 0 = h.lift 0) :
@@ -225,8 +221,7 @@ theorem GpvTransport.lift_unique {A : ASection}
 choice of logarithmic lift: every lift of the same value tape has the same
 real part at every instant. -/
 theorem GpvTransport.level_independent {A : ASection}
-    {X Y : GreatCircle.Base} {f : X ⟶ Y} {k : ℤ}
-    (h : GpvTransport A f k)
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k)
     (lift' : C(unitInterval, ℂ))
     (hlift' : ∀ t, Complex.exp (lift' t) = h.value t)
     (t : unitInterval) :
@@ -236,8 +231,7 @@ theorem GpvTransport.level_independent {A : ASection}
 /-- At the source object, the GPV value tape is exactly the compactified
 `A`-value at that projective-base footpoint. -/
 theorem GpvTransport.value_at_source {A : ASection}
-    {X Y : GreatCircle.Base} {f : X ⟶ Y} {k : ℤ}
-    (h : GpvTransport A f k) :
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
     ((h.value 0 : ℂ) : OnePoint ℂ) =
       A.Fstar (GreatCircle.cayleyCoord
         (CategoryTheory.ActionCategory.back X)) := by
@@ -251,8 +245,7 @@ theorem GpvTransport.value_at_source {A : ASection}
 /-- At the target object, the GPV value tape is exactly the compactified
 `A`-value at that projective-base footpoint. -/
 theorem GpvTransport.value_at_target {A : ASection}
-    {X Y : GreatCircle.Base} {f : X ⟶ Y} {k : ℤ}
-    (h : GpvTransport A f k) :
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
     ((h.value 1 : ℂ) : OnePoint ℂ) =
       A.Fstar (GreatCircle.cayleyCoord
         (CategoryTheory.ActionCategory.back Y)) := by
@@ -266,8 +259,7 @@ theorem GpvTransport.value_at_target {A : ASection}
 /-- A genuine GPV transport over the projective base preserves the logarithm
 of the norm between its source and target value states. -/
 theorem GpvTransport.endpoint_log_norm_eq {A : ASection}
-    {X Y : GreatCircle.Base} {f : X ⟶ Y} {k : ℤ}
-    (h : GpvTransport A f k) :
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
     Real.log ‖h.value 0‖ = Real.log ‖h.value 1‖ := by
   calc
     Real.log ‖h.value 0‖ = (h.lift 0).re := (h.level 0).symm
@@ -277,8 +269,7 @@ theorem GpvTransport.endpoint_log_norm_eq {A : ASection}
 /-- Since the GPV value tape never vanishes, preservation of its logarithmic
 real level is equivalently preservation of the endpoint norm itself. -/
 theorem GpvTransport.endpoint_norm_eq {A : ASection}
-    {X Y : GreatCircle.Base} {f : X ⟶ Y} {k : ℤ}
-    (h : GpvTransport A f k) :
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
     ‖h.value 0‖ = ‖h.value 1‖ := by
   apply Real.log_injOn_pos
   · exact Set.mem_Ioi.mpr (norm_pos_iff.mpr (h.value_ne_zero 0))
@@ -289,9 +280,8 @@ theorem GpvTransport.endpoint_norm_eq {A : ASection}
 negates its winding.  The value and lift tapes are the same tapes read in
 the opposite direction. -/
 noncomputable def GpvTransport.inv {A : ASection}
-    {X Y : GreatCircle.Base} {f : X ⟶ Y} {k : ℤ}
-    (h : GpvTransport A f k) :
-    GpvTransport A (CategoryTheory.Groupoid.inv f) (-k) := by
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
+    GpvTransport A Y X (-k) := by
   let rev : C(unitInterval, unitInterval) :=
     ⟨unitInterval.symm, unitInterval.continuous_symm⟩
   refine
@@ -344,7 +334,7 @@ noncomputable def GpvTransport.ofEulerHalfSpaceLoop (A : ASection)
     (hloop : δ 0 = δ 1)
     (hpole : ∀ t, δ t ≠ (A.pole : ℂ))
     (hhalf : ∀ t, A.Ω₀ < (δ t).re) :
-    GpvTransport A (𝟙 X) 0 := by
+    GpvTransport A X X 0 := by
   let value : C(unitInterval, ℂ) := A.projectiveValuePath δ hpole
   have hvalue : ∀ t, value t = A.F (δ t) := fun _ => rfl
   have hne : ∀ t, value t ≠ 0 := fun t => by
