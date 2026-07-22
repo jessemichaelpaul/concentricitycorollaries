@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jesse Michael Paul
 -/
 import Concentricity.ProjectiveSection
+import Concentricity.NormalizedBase
 
 /-!
 # The direct total of the A-section action
