@@ -33,7 +33,7 @@ on its carrier in this file or on the certified board:
           parallel run's InboxWire §B, landed mid-run);
   (ii)  C2 and C3 are two exponential expressions of the one stem
         (identity theorem), the unique tame lift exists
-        — `stem_identity_logDeriv` (PlacementSet, PROVED),
+        — `stem_identity_logDeriv` (StemFactorization, PROVED),
           `exists_log_continuation` + `winding_lift_unique` (Toolkit,
           PROVED), consumed by §1;
   (iii) C1's pole is the cone through which the value-loops close
@@ -55,7 +55,7 @@ on its carrier in this file or on the certified board:
           `exp_fibre_level` + `exp_fibre_height_band` (LoopAssembly,
           PROVED);
   (vi)  the transport is connected over the witness N
-        — `concentric_articulation` (LoopAssembly, PROVED),
+        — the articulation (LoopAssembly, PROVED),
           `transport_universal` (TransportObject, PROVED, frozen);
   (vii) connected, for an A-section's transport across worlds, means
         concentric
@@ -370,39 +370,12 @@ theorem pole_encounters_joined_concentric (A : ASection) (M : ℝ) :
     Octonion.exp_fibre_sphere_connected hr hv₀ hv₁ j
   exact ⟨p, h0, h1, hfib, fun t => Octonion.exp_fibre_re hr (hfib t)⟩
 
-/-! ## §4 — THE ASSEMBLY RECORD (the argument's clauses in one theorem) -/
-
-/-- **§4 — the faithful assembly** (the author's argument, clauses
-(ii)–(vi), each on its proved carrier, conjoined — the record this run's
-drive feeds; every conjunct PROVED on the kernel triple):
-(ii) the unique tame lift through any basepoint (`winding_lift_unique`);
-(iii) the cone ε–δ at N (`pole_cone_eps_delta`);
-(v) the fibre concentric per level (`Octonion.exp_fibre_concentric`);
-(vi) one component, defined through the witness 𝔫
-(`transport_universal`, `TotalTransport.classOf_eq_nClass`). -/
-theorem faithful_assembly (A : ASection) :
-    (∀ γ : C(unitInterval, ℂ), (∀ t, γ t ≠ 0) →
-      ∀ γ₁ γ₂ : C(unitInterval, ℂ), (∀ t, Complex.exp (γ₁ t) = γ t) →
-        (∀ t, Complex.exp (γ₂ t) = γ t) → γ₁ 0 = γ₂ 0 → γ₁ = γ₂)
-    ∧ (∀ ε > 0, ∃ δ > 0, ∀ z : ℂ, z ≠ (A.pole : ℂ) →
-        dist z (A.pole : ℂ) < δ → ‖(A.F z)⁻¹‖ < ε)
-    ∧ (∀ r : ℝ, 0 < r → ∀ q₁ q₂ : Octonion,
-        Octonion.exp q₁ = Octonion.ofReal (-r) →
-        Octonion.exp q₂ = Octonion.ofReal (-r) →
-        Octonion.re q₁ = Octonion.re q₂)
-    ∧ (∀ n m : ℕ, A.transportClass n = A.transportClass m)
-    ∧ (∀ n : ℕ, A.transportClass n
-        = CategoryTheory.ConnectedComponents.mk TotalTransport.nObj) :=
-  ⟨winding_lift_unique, A.pole_cone_eps_delta,
-    fun _ hr _ _ h₁ h₂ => Octonion.exp_fibre_concentric hr h₁ h₂,
-    A.transport_universal, fun _ => TotalTransport.classOf_eq_nClass _⟩
-
 /-! ## §5 — THE DRIVE RECORD (receipt in prose, per the author's fence of
 2026-07-07: no new sorried declarations — the one sorry in this repository
 is the theorem itself)
 
 THE DRIVES OF RECORD (2026-07-07; scratch burns against the FULL board —
-this file's §1–§4 NEW rows plus Toolkit, PlacementSet, LiKernel, KernelE4,
+this file's §1–§4 NEW rows plus Toolkit, StemFactorization, LiKernel, KernelE4,
 LoopAssembly, SweepE5, SynthesisE6, SigmaE3, PairingE2, WeldW12, WeldW3,
 WeldW4, FlipWeld, PhiConversion, LogManifold, TransportObject — every
 possession fed by name; `set_option maxHeartbeats 1000000`. MID-RUN
@@ -447,7 +420,7 @@ DRIVE C — the static-dictionary face (the reading step of the printed
   x ⟶ 𝔫 only); the static object has no arrows between distinct levels;
   no row converts the one into the other. RESISTED.
 
-DRIVE D — the kernel face (`concentricity_iff_second_family_at_supLevel`),
+DRIVE D — the kernel face (the second-family-at-supLevel iff),
     ⊢ 0 ≤ A.liSum a A.supLevel j    (A.supLevel < a, 1 ≤ j)
   full feed including D0 (`liSum_summable`) and the proved first family at
   the top level. Machine verdict: "`exact?` could not close the goal."
@@ -512,7 +485,7 @@ definition dropped, never GPV split from its consequences):
   (v)   the fibre concentric per level — `Octonion.exp_fibre_neg_real`;
         `Octonion.exp_fibre_concentric`; `exp_fibre_height_band` (winding
         band data, never an object label).
-  (vi)  connected over the witness — `concentric_articulation` (one
+  (vi)  connected over the witness — the articulation (one
         component, defined through 𝔫, fibre concentric);
         `transport_universal` (the frozen theorem's class-wide form).
   (vii) connected ⟹ concentric — consumed AS FAR AS A PROVED CARRIER
@@ -605,7 +578,7 @@ theorem concentricity_via_faithfulApply (A : ASection) :
   have h5' := @Octonion.exp_fibre_concentric
   have h5'' := @exp_fibre_height_band
   -- (vi) connected over the witness
-  have h6 := A.concentric_articulation
+  have h6 := the articulation possession
   have h6' := A.transport_universal
   -- (vii) connected ⟹ concentric, on the fibre (§3, NEW)
   have h7 := A.zero_encounters_joined_concentric
