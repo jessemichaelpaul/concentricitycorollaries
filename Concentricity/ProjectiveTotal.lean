@@ -113,8 +113,7 @@ def totalMk (A : ASection) (b : GreatCircle.Base) (I : SphereWorld) :
 
 /-- The C3 n-th zero output in world `I`, at its own projective footpoint. -/
 def zeroTotal (A : ASection) (n : ℕ) (I : SphereWorld) : A.TotalA :=
-  totalMk A
-    (GreatCircle.pointObj (normalizedFootpoint (A.sphereZero n).re)) I
+  totalMk A (normalizedFootpoint (A.sphereZero n).re) I
 
 /-- The common compactified witness in world `I`. -/
 def northTotal (A : ASection) (I : SphereWorld) : A.TotalA :=
@@ -123,8 +122,7 @@ def northTotal (A : ASection) (I : SphereWorld) : A.TotalA :=
 
 @[simp] theorem zeroTotal_base (A : ASection) (n : ℕ) (I : SphereWorld) :
     (zeroTotal A n I).base =
-      GreatCircle.pointObj
-        (normalizedFootpoint (A.sphereZero n).re) := rfl
+      normalizedFootpoint (A.sphereZero n).re := rfl
 
 @[simp] theorem zeroTotal_world (A : ASection) (n : ℕ) (I : SphereWorld) :
     (zeroTotal A n I).fiber = I := rfl

@@ -17,7 +17,8 @@ def NormalizedNLeg.source (A : ASection) (n : ℕ) (I : SphereWorld) :
     NormalizedZeroObject A := A.normalizedZero n I
 
 /-- The common compactified target of every normalized witness leg. -/
-def NormalizedNLeg.target : NormalizedCircleBase := OnePoint.infty
+def NormalizedNLeg.target : NormalizedCircleBase :=
+  (OnePoint.infty : GreatCircle.Point)
 
 /-- Analytic certificate carried by the normalized leg: the C3 zero loop and
 the multiplicity-corrected C1 pole loop admit a common closed logarithmic
@@ -44,6 +45,7 @@ def normalizedNLeg (A : ASection) (n : ℕ) (I : SphereWorld) :
       (A.sphereZero n).re := rfl
 
 @[simp] theorem normalizedNLeg_target_is_N :
-    NormalizedNLeg.target = (OnePoint.infty : GreatCircle.Point) := rfl
+    CategoryTheory.ActionCategory.back NormalizedNLeg.target =
+      (OnePoint.infty : GreatCircle.Point) := rfl
 
 end ASection

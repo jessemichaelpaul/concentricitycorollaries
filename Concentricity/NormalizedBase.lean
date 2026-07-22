@@ -1,11 +1,9 @@
 /-
 Concentricity/NormalizedBase.lean
 
-Step 1 of the normalized section construction: the compactified circle and
-its zero-sphere objects. This is deliberately separate from the older
-non-singular GPV transport base. The carrier is the locked projective great
-circle `GreatCircle.Point = OnePoint ℝ`, including the common compactified
-point N.
+Step 1 of the normalized section construction: the projective great-circle
+groupoid and its zero-sphere outputs.  Each footpoint is born as an object of
+`GreatCircle.Base`; it is never stored as a bare point and promoted later.
 -/
 import Concentricity.ProjectiveBase
 import Concentricity.SliceSphereWorld
@@ -15,17 +13,17 @@ noncomputable section
 
 namespace ASection
 
-/-- The full compactified great-circle base of the normalized section action.
-Unlike `A.Base`, no finite-value or nonzero restriction is imposed here. -/
-abbrev NormalizedCircleBase := GreatCircle.Point
+/-- The projective groupoid base of the normalized section action. -/
+abbrev NormalizedCircleBase := GreatCircle.Base
 
-/-- The real-circle footpoint at a finite real label. -/
-def normalizedFootpoint (x : ℝ) : NormalizedCircleBase := (x : OnePoint ℝ)
+/-- The projective-base object at a finite real label. -/
+def normalizedFootpoint (x : ℝ) : NormalizedCircleBase :=
+  (x : OnePoint ℝ)
 
 /-- A normalized C-residue zero object consists of its index, an arbitrary
-slice sphere from the continuum of worlds, and its common real-circle
-footpoint. The same label occurs in every world because all slice spheres
-share the compactified real circle. -/
+slice sphere from the continuum of worlds, and its projective-base footpoint.
+The same label occurs in every world because all slice spheres share the
+compactified real circle. -/
 structure NormalizedZeroObject (A : ASection) where
   index : ℕ
   world : SphereWorld
