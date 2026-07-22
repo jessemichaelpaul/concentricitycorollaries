@@ -51,6 +51,11 @@ and its third proof (same page):
 
 (location: section 8.3, book p. 101 = PDF page 117; proof on book p. 102.)
 
+### The category-of-elements/colimit identity (inside the proof of Lemma 8.3.4; book p. 102 = PDF page 118 — top-up 2026-07-13)
+> For the converse, first note that for any X : C -> Set, there is an isomorphism pi_0(el X) ≅ colim_C X because each arrow connecting two objects in el X corresponds to a condition demanding that these elements are identified in any cone under X.
+
+(Extracted 2026-07-13 from the inbox copy `inbox/cathtpy.pdf`, pypdf text layer, PDF p. 118 — the identical passage in the free PDF. Commentary, not citation: this identity is literature backing for how a colimit imposes identifications; it is not project architecture. Independent value diagrams, categories of elements used as project objects, discrete-real targets, comparison functors, and bridges are retracted from the project argument. The architecture of record is `sectionFunctor A : GreatCircle.Base ⥤ SphereWorld`, its exact `𝒯_A`, and the certified readout instantiated on that exact construction. Lean pins are retained for reference only: `Functor.Elements` Hom subtype (Elements.lean:63), `map_snd` (:101), `any_functor_const_on_obj` (IsConnected.lean:116), `constant_of_preserves_morphisms` (:148), `colimitEquivColimitType` (Limits/Types/Colimits.lean:163).)
+
 ### Remark 8.3.5 (connectedness, zig-zags, and pi_0; book p. 102)
 > Remark 8.3.5. A category is **connected** just when any pair of objects can be joined by a finite zig-zag of arrows. Let pi_0 : Cat -> Set be the "path components" functor that sends a category to its collection of objects up to such zig-zags. This functor is left adjoint to the inclusion Set -> Cat, whose right adjoint is the functor that takes a category to its underlying set of objects. A category C is non-empty and connected if and only if pi_0 C is the singleton set.
 

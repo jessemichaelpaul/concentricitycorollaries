@@ -1,64 +1,85 @@
-# HANDOFF — islands phase: Part 1/Part 2 fan-out + Island P (replaces ALL earlier handoffs; 2026-07-05, night)
+# HANDOFF — accepted row-by-row A-section plan
 
-**Read order:** (1) CLAUDE.md. (2) This file. (3) `PLAN_islands_part1_part2_2026-07-05.md`
-— the CONFIRMED delineation (islands, Island P, the author's standing reservation, the
-Juncture Protocol). (4) `PLAN_two_index_bricks.md` + `DESIGN_B2_2_kernels.md` — P-route 1.
-Standing rule (author, 2026-07-05): **dialogue before execution** — every phase's plan is
-drafted with the author in conversation before any Lean or commits.
+**Author:** Jesse Michael Paul
+**Accepted:** 2026-07-22, after final Opus review
 
-## The locked centre (unchanged)
+## Sole execution authority
 
-`ASection.concentricity_transport` (master `thm:concentricity`) — PROVED, kernel
-certificate verbatim:
+Read and execute:
 
-    'ASection.concentricity_transport' depends on axioms: [propext, Classical.choice, Quot.sound]
+1. `AGENTS.md`
+2. `/Users/jessepaul/.codex/skills/concentricity-functorial-register/SKILL.md`
+3. `PLAN_TWELVE_ON_THE_DISK_ACTION_2026-07-22.md`
+4. the exact live Lean declarations named by the current pass
 
-Nothing in this phase may modify TransportObject.lean, its statements, or its cone.
+The accepted plan supersedes every older build sequence, handoff, close-out
+plan, document map, and status paragraph.
 
-## Ledger — exact
+## Type lock
 
-Imported root: **2 sorries / 0 axioms** — the ONE welded node = **Island P, the
-One-Hyperplane Theorem** (`placement_set` PlacementSet.lean:46 ≡
-`transportLevel_placement` Theorem.lean:213, welded by proved `placement_set_iff`;
-master `eq:placement-set`). Gates only `cor:nontrivial` → `cor:rh`.
+The A-section functor is exactly:
 
-## The map of record (2026-07-05 evening dialogue; PLAN_islands §0, §3.5)
+```lean
+sectionFunctor A : GreatCircle.Base ⥤ SphereWorld
+```
 
-- **The theorem:** 𝓡's base is disconnected — levels, dust, by construction (π₀(𝓑) = ℝ,
-  PROVED). The A-section's transport connects it at N (PROVED, certificate). The
-  connection is level-blind by design (Pin 2, PROVED): in 𝕆* every hyperplane {Re = σ}
-  meets every other at the single point N.
-- **Island P — the One-Hyperplane Theorem:** any two upper-half stem zeros share one real
-  part. The ONLY open mathematics in the repo. Not derivable from the theorem (Pin 2; the
-  0.3/0.7 litmus). Routes: (1) bricks B2.2 (Brick 1 + B2.1 PROVED); (2) preimage-at-N
-  (design pending, dialogue-drafted). Naming fences: no "concentric", no "connect",
-  member-free.
-- **AUTHOR'S STANDING RESERVATION (unresolved, on the record):** the author suspects a
-  simpler, direct connected→concentric translation route may make Island P unnecessary as
-  framed (each zero 6-sphere its own closed point; the dictionary; "the A-section
-  connected the levels"). To be rendered and examined FIRST in the next design dialogue —
-  outcome is either the new content that discharges P, or the exact goal where the route
-  lands on P. Lake decides; until then P stands as the address of record
-  (PLAN_islands §3.5, the reservation block).
-- **Hardy:** no Lean row of any kind (author ruling; load-bearing nowhere).
+It has no projection into another functor register and no substitute
+categorical codomain. Its objects and arrows are built together from the
+complete A-generated disk action by the existing orbit–stabilizer mechanism.
 
-## Execution sequence (dialogue-gated at each phase boundary)
+## Current execution order
 
-Islands, in order: **A1 → A2** (ZetaCstar.lean: `zetaC` + zero-preservation) → **R5
-sweep** (coverage REPORT on the riemannZeta cluster + in-repo ξ stock BEFORE anything
-closes) → **B1–B7** (ZetaOctonion.lean, ZeroSpheres.lean) → **C1** fields cheapest-first
-(ZetaSection.lean) → **C2/C3** landed GATED (Corollaries.lean; never reported "proved"
-before project-wide 0/0). Per commit report: hash · files · imported ledger ·
-`#print axioms` per newly closed row. Bricks toward Island P in parallel — the long pole.
-Housekeeping (attic move, docstring scrub, H4 line) DEFERRED to cleanup-on-green.
-**PUSH DEFERRED** (author): main stays ahead of origin until the runway's quiet-push
-step. Announcement gate: project-wide 0/0; before it, only the theorem + certificate are
-claimed.
+```text
+4 -> 5 -> 6 -> 1 -> 2 -> 3 -> 7 -> 8 -> 9 -> 10 -> 12
+-> functor acceptance -> exact 𝒯_A -> 11
+-> 8.3.4 -> π₀ -> labelCocone -> val -> ∃ c
+```
 
-## Standing
+Each row is one complete vertical slice:
 
-R1–R11; R8 (`sorry` = UNFORMALIZED, never UNSOUND); frozen rows stay frozen; zeros are
-output, never input; R5 live-verify every Mathlib name; R6-stop with the exact goal on
-any resist; Juncture Protocol (PLAN_islands §6) at every phase boundary — HANDOFF
-replaced, OPENER refreshed, CLAUDE.md diff author-reviewed, superseded docs archived with
-banners.
+```text
+prove the fact natively on the complete disk action
+-> immediately extend that same fact wholesale by orbit–stabilizer
+-> verify it simultaneously at every object and along every arrow
+-> stop for Jesse's acceptance
+```
+
+There is no deferred bulk-transfer phase.
+
+## Current first pass
+
+Begin only with Pass 4, `cone_junction_levels_shared`. Do not begin Pass 5
+until Jesse accepts both the disk-action declaration and its immediate
+orbit–stabilizer extension.
+
+The core C2 supplier is preserved and already live:
+
+- `eulerPrimeSum`
+- `eulerDiskAction`
+- `eulerDiskAction_eq_value`
+
+It is not rebuilt before Passes 4–6.
+
+## Quarantine
+
+Never construct a naturality cone or a project-level component diagram at any
+stage. If `sectionFunctor A` and the exact `𝒯_A` are built correctly, their own
+machinery detects that every genuine transport is pulled to the one common
+witness `N`.
+
+Until all twelve vertical slices, the functor-acceptance gate, and the exact
+`𝒯_A` are complete, do not inspect or use 8.3.4, π₀, `labelCocone`, or `val` to
+decide anything upstream.
+
+Do not introduce:
+
+- another groupoid or generic carrier;
+- a wrapper or theorem-field specification layer;
+- an independently supplied GPV transport beside an arrow;
+- a per-arrow or per-index connector;
+- a scalar bridge, quotient section, or `Disc ℝ`;
+- a replacement of the full `ℂˣ` multiplier by `Circle`.
+
+The dirty tree and every accepted supplier are preserved. Make one narrow
+row edit at a time. Run no build unless Jesse directs it, and never run more
+than one build serially.

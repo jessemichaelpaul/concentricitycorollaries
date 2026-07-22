@@ -1,7 +1,9 @@
 # MEMORY — durable lessons from the A-section build
 
-Read this before changing `sectionFunctor`, `𝒯_A`, the twelve analytic facts,
-8.3.4, `labelCocone`, `val`, or the Concentricity finale.
+This file is a historical lesson ledger, not an execution plan. Before changing
+`sectionFunctor`, `𝒯_A`, or the twelve, read the accepted
+`PLAN_TWELVE_ON_THE_DISK_ACTION_2026-07-22.md` and `HANDOFF.md`; they supersede
+every conflicting status or sequence below.
 
 ## The mathematical register
 
@@ -36,50 +38,23 @@ Read this before changing `sectionFunctor`, `𝒯_A`, the twelve analytic facts,
   subsequently produces the C3/C4 zero spheres as outputs.
 - Instantiate 8.3.4 only on Jesse's completed A-section functor.  Never infer
   the author's object from the generic theorem's binder.
-- **Never say or plan "prove the `Grpd` diagram."**  The project diagram is
-  the exact `𝒯_A` produced from the completed sphere-valued functor
-  `sectionFunctor A : GreatCircle.Base ⥤ SphereWorld`, after C1--C4,
-  C3-at-`N`, all W1--W4, and GPV are native in its real-value states and
-  transports.  `Grpd` is only implementation vocabulary inside the reusable
-  statement of 8.3.4.  Its generic binder must never be promoted into the
-  A-section functor, the project diagram, or a construction target.  The live
-  `sectionAction`/`Grpd.of SphereWorld` layer is accepted only when its maps
-  arise definitionally from the completed `sectionFunctor A` and nothing
-  else.
-
-### Constant carrier is not a constant action — correction 2026-07-22
-
-Do not conflate these two statements again:
-
-- The intended total has objects `(b, I)` for every
-  `b : GreatCircle.Base` and every `I : SphereWorld`.  Consequently the
-  underlying fibre carrier over each `b` is the same whole `SphereWorld`.
-  This is the carrier of the continuum, not a constant A-section.
-- The transition functors are not constant: definitionally,
-  `(sectionAction A).map f = distinguishedWorldAction
-  ((sectionFunctor A).map f).mob`.  Those maps contain A's full `ℂˣ`
-  distinguished element, both orbit representatives, and
-  `stabilizerPart f`.
-- `distinguishedWorldAction` acts inside each represented Riemann sphere; it
-  does not relabel the unit-imaginary direction indexing that sphere.  Thus
-  the underlying direction of `sectionFunctor.obj` may reduce to
-  `baseWorld` while `projectiveObjectFrame A X` is still the object-side face
-  of the same framed action used by `map`.
-
-The rejected construction used `obj _ := Grpd.of SphereWorld` *instead of*
-the authored sphere-valued functor and supplied generic/value-free maps.  The
-same carrier is legitimate only in the induced action after
-`sectionFunctor A : GreatCircle.Base ⥤ SphereWorld` is built and only because
-its map is definitionally induced from that exact functor.  Never report the
-carrier's constancy as constancy of the A-action, and never report an
-A-specific map alone as proof of the object/frame gate.
+- The A-section functor has exactly the direct type
+  `sectionFunctor A : GreatCircle.Base ⥤ SphereWorld`. Generic categorical
+  binders belong only to reusable readout suppliers and must never become a
+  project functor, projection, intermediary diagram, or construction target.
+- The accepted execution is row-by-row, not action-first and not a deferred
+  bulk transfer: `4 → 5 → 6 → 1 → 2 → 3 → 7 → 8 → 9 → 10 → 12`, with each
+  disk-action fact immediately extended wholesale by orbit–stabilizer. Then
+  the functor is accepted, its exact total is formed, and output Pass 11 is
+  completed. Only afterward may 8.3.4, π₀, `labelCocone`, and `val` appear.
 
 ## The element and its value
 
-- `distinguishedPoleUnit A : ℂˣ`, not `Circle`.
-- The `U(1)` phase carries the band and winding; the modulus carries the real
-  GPV level.  Same diagonal matrix shape does not imply the same parameter
-  type.
+- `distinguishedPoleUnit A : ℂˣ`, not `Circle`, but it is only the pole
+  coordinate of the full function-valued action.
+- Across the complete C2 action, the `U(1)` phase carries band/winding and the
+  varying modulus carries the GPV level. Same diagonal matrix shape does not
+  imply the same parameter type or collapse the action to its pole value.
 - The Euler and Weierstrass presentations are two presentations of the same
   action across `N`.  Do not split them into detached phases of construction.
 - The real value exists before the colimit.  `val` reads the descended label;
@@ -225,15 +200,14 @@ constructions:
   family through every `F.obj` and `F.map` simultaneously.  It does not carry a
   Möbius shell first and receive endpoint equalities or the twelve as later
   attachments.
-- The twelve are the known minimum cargo, not an artificial ceiling.  Any
-  additional proved GPV/W consequences required by naturality,
-  `labelCocone`, or `val` remain native consequences of the same action and
-  travel with it.
+- The twelve are the known minimum acceptance partition, not an artificial
+  ceiling. Their completeness is fixed upstream by C1--C4/W/GPV, never by a
+  later naturality, `labelCocone`, or `val` obligation.
 - Only after that Base-native gate passes may the exact `𝒯_A` be formed.
-  A layer with carrier `Grpd.of SphereWorld` is not upgraded merely because
-  its maps mention `sectionFunctor A`; its maps must be definitionally induced
-  from the completed A-specific functor, and the full object-frame/arrow-
-  transition gate must already have passed.
+  No intermediary carrier or projected diagram is upgraded merely because
+  its maps mention `sectionFunctor A`; the exact total must be induced from
+  the completed A-specific functor after the full object-frame/arrow-
+  transition gate has passed.
 
 ### Why the development appeared upside down
 
@@ -262,7 +236,7 @@ This is why the analytic theorems are wholesale properties of the exact
 action. W1--W4, the GPV facts, the Euler/Weierstrass comparison, the degenerate
 exponential facts, tameness, uniqueness, and the real-value transports are not
 fields placed beside a value-free functor and are not reattached afterward.
-Deleting that analytic cargo must break the final theorem.
+Deleting those native action properties must break the final theorem.
 
 ### Verified source state at this checkpoint
 
@@ -274,10 +248,10 @@ Deleting that analytic cargo must break the final theorem.
 - Commit `b25a4a3` reconnected the compactified `N`-transport suppliers.
 - At this historical checkpoint the live
   `sectionFunctor A : GreatCircle.Base ⥤ SphereWorld` had the correct external
-  type but had not yet passed the Cayley-chart/native-cargo audit.  The later
+  type but had not yet passed the required vertical-pass audit. The later
   acceptance blocks below supersede this interim status.
-- The readout remains provisional; `TotalA` itself is accepted after the later
-  audit showed it consumes the exact repaired action definitionally.
+- The readout and `TotalA` remain provisional. Neither is accepted before all
+  disk/action passes and the functor gate.
 
 ### Evidence-backed acceptance gates
 
@@ -292,10 +266,10 @@ type or a definitional reduction.
    `projectiveArrowElement A f` in `map` as one orbit--stabilizer construction.
    The identity and composition laws come from that action, and the infinity
    object is sent to the authored `N`-sphere.
-3. **Native-cargo gate.** All twelve certified facts, and any further suppliers
-   actually needed, are theorems of those real-value states and transports
-   everywhere in the functor. No generic carrier, conjunction wrapper,
-   theorem-field bundle, or after-the-fact preservation clause is allowed.
+3. **Vertical-pass gate.** Every one of the twelve is first proved on the
+   complete disk action and immediately extended by orbit--stabilizer across
+   the authored objects and arrows. No generic carrier, conjunction wrapper,
+   theorem-field bundle, after-the-fact clause, or deferred batch is allowed.
 4. **Exact-total gate.** `𝒯_A` is formed from that repaired functor and nothing
    else. Its zero objects retain the normalized projective footpoint determined
    by `(A.sphereZero n).re`; the continuum and all its maps are consumed at
@@ -323,12 +297,12 @@ construction, and then plug that exact construction into 8.3.4 and `val`. The
 public announcement should present Concentricity, its three Lean axioms, and the
 already-formalized RH corollary without redesigning or weakening the proof.
 
-Canonical execution plan: `FINAL_PLAN_2026-07-21.md`.
+Canonical execution plan: `PLAN_TWELVE_ON_THE_DISK_ACTION_2026-07-22.md`.
 
-## 2026-07-22 Cayley-disk/orbit--stabilizer weld
+## 2026-07-22 historical Cayley-disk/orbit--stabilizer checkpoint
 
-The first native-cargo seam is now a live geometric theorem, not prose or a
-wrapper.
+This checkpoint produced a live geometric theorem rather than prose or a
+wrapper, but it did not complete any later vertical-pass acceptance by itself.
 
 - `diskDiagonalMoebiusHom : ℂˣ →* Moebius` is the full-modulus distinguished
   diagonal action conjugated into the same Cayley chart used by
@@ -357,115 +331,21 @@ transport rows all report exactly `[propext, Classical.choice, Quot.sound]`.
 This checkpoint establishes the geometric native weld; it does not by itself
 claim that the entire W1--W4/GPV closure or the final readout is complete.
 
-## 2026-07-22 native-cargo acceptance — all twelve and their closure
+## 2026-07-22 false native-cargo acceptance — removed
 
-The Cayley weld above, combined with the already-native disk/Base theorem
-family, completes the upstream transfer gate.  The correction is decisive:
+An earlier version of this memory treated a substitute intermediary diagram
+and a clean axiom audit as evidence that all twelve had already been
+transported. That register and its signatures have been removed. The audit
+proved only the declarations it checked, not the authorial fidelity of their
+construction.
 
-- all twelve and the W1--W4/GPV closure are already facts **on the
-  distinguished disk automorphism over `GreatCircle.Base`**;
-- orbit--stabilizer extends that one action wholesale through every
-  `projectiveObjectFrame A X` and `projectiveArrowElement A f`;
-- `sectionAction_transport_full` displays the full `ℂˣ` element, both orbit
-  representatives, the stabilizer, and the incoming sphere transport in
-  every map used by `TotalA`;
-- therefore no new `Fstar` equivariance theorem, per-map GPV path, twelve-row
-  wrapper, proof-field bundle, or conjunction is part of the transfer.
-
-Do not repeat the 2026-07-22 inversion that asked for a new equation between
-`Fstar` and each Möbius leg.  That incorrectly pulled the native disk/Base
-facts back out of the global action and atomized the orbit--stabilizer
-extension.  The transfer theorem is the full universal factorization already
-present in the action, consumed together with the native suppliers.
-
-Kernel verification covered the exact twelve, twenty-nine representative
-W1--W4/GPV closure rows, `orbitRep_spec`, `orbit_stabilizer_factor`, the object
-frame and arrow footpoint laws, `sectionFunctor_map_full`, the native GPV
-domain/realized-sphere rows, and `sectionAction_transport_full`.  Every row
-reported exactly `[propext, Classical.choice, Quot.sound]`.  The printed live
-types also confirmed:
-
-```lean
-sectionFunctor A : GreatCircle.Base ⥤ SphereWorld
-sectionAction A : GreatCircle.Base ⥤ Grpd
-TotalA A : Type
-zeroTotal A n I : TotalA A
-```
-
-The acceptance sentence that previously followed this audit is **superseded**
-by the correction below.  Triple-axiom reports certify the declarations that
-were checked; they do not certify that those declarations are the author's
-intended construction.
-
-## 2026-07-22 AUTHOR CORRECTION — never define the readout before the functor
-
-The construction order is absolute:
-
-```text
-1. define and verify sectionFunctor A : GreatCircle.Base ⟶ SphereWorld
-2. form the exact 𝒯_A from that completed functor
-3. instantiate 8.3.4 and π₀ on that exact 𝒯_A
-4. the instantiation determines the component diagram
-5. labelCocone → val := colimit.desc labelCocone → ASection.concentricity
-```
-
-`ComponentDiagram A` is **not a construction the formalizer chooses or defines
-up front**.  It is downstream notation for the diagram produced when 8.3.4 is
-instantiated on the already-completed authored functor and its exact total.
-Never use a provisional component diagram to infer, constrain, or reconstruct
-`sectionFunctor A` or `𝒯_A`.
-
-### Live failure found after the false acceptance
-
-The current source has not passed the authored object/arrow gate: the live
-`obj` was publicly erased by simp lemmas.  Two now-deleted simp theorems had
-explicitly advertised the broken reductions
-`(projectiveObjectAction A X).obj I = I` and
-`(sectionFunctor A).obj X = baseWorld`.  Their removal leaves the authored
-object expression `(projectiveObjectAction A X).obj baseWorld` as the public
-functor interface; its acceptance must be checked jointly with the framed
-arrow transition, never replaced downstream by its erased normal form.  The
-current downstream action
-then repeats the forbidden generic packaging:
-
-```lean
-sectionAction.obj _ := Grpd.of SphereWorld
-```
-
-and the resulting component map fixes every represented sphere component by
-`rfl`.  Therefore the live `sectionAction`, `TotalA`, `ComponentDiagram`, and
-`projectiveReadout` are **not accepted** merely because they elaborate or have
-axioms `[propext, Classical.choice, Quot.sound]`.  They are frozen until the
-direct functor's `F.obj` and `F.map` are verified together as the one authored
-orbit--stabilizer construction.
-
-The prior native-cargo inference was also too strong:
-`sectionAction_transport_full` prints an equality of `SphereHom`s.  The live
-theorems `GpvTransport.sectionFunctor_map_domain` and
-`GpvTransport.sectionFunctor_map_realize` consume an already-given
-`GpvTransport`; they do not by themselves construct the wholesale real-value
-transport from every functor arrow.  Do not report the real-value population
-complete from those types alone.
-
-### Recorded failure mode and mandatory prevention
-
-**Failure mode:** downstream-first inversion.  The formalizer sees the generic
-binder of Grothendieck/8.3.4, creates `sectionAction`, `TotalA`, or
-`ComponentDiagram` to fit that binder, observes that the substitute elaborates,
-and then retroactively calls `sectionFunctor A` complete.  This is the same
-template-substitution error in a more convincing categorical disguise.
-
-**Prevention:** before naming any downstream object, print and reduce both
-halves of the direct functor.  The gate is not the external type alone.  Verify
-that `F.obj X` retains the authored object-side orbit--stabilizer construction,
-that `F.map f` is its matching transition, and that the real-value transports
-are native theorems of those exact maps.  If `F.obj X` reduces to a static
-object, stop there.  Do not create `𝒯_A`, a component diagram, a cocone, or an
-indexed workaround.  Correct the functor first.
-
-This correction supersedes every earlier statement in this file calling
-`sectionAction`, `TotalA`, or the readout accepted.  Jesse should never have to
-repeat this ordering again.
+The permanent correction is the accepted vertical plan: each named fact is
+first a native coordinate of the complete disk action and is then immediately
+extended wholesale through `projectiveObjectFrame`,
+`projectiveArrowElement`, `orbitRep`, and `stabilizerPart` in the same pass.
+No total, component readout, cocone, or downstream theorem is named until all
+of those passes have been accepted and the direct sphere-valued functor is
+complete.
 
 ## 2026-07-22 AUTHOR CORRECTION — unwarranted bias is not critical scrutiny
 
@@ -505,9 +385,9 @@ The live source presently proves the full framed Möbius formula and the GPV
 endpoint/realized-sphere welds.  The latter consume an already-given
 `GpvTransport`.  This does **not** by itself establish that the complete
 C1--C4/W1--W4/GPV family is native simultaneously on every actual
-`sectionFunctor A` object and map.  Therefore the native-cargo gate remains
-**red** until that wholesale orbit--stabilizer extension is faithfully
-transcribed on the exact functor and then checked by Lean.
+`sectionFunctor A` object and map. Therefore the vertical-pass gate remains
+**red** until every fact has its own immediate orbit--stabilizer extension and
+accepted Lean check.
 
 Forbidden acceptance shortcuts:
 
@@ -560,9 +440,9 @@ they prove endpoint compatibility but do not prove that the global action
 generates and carries that transport.  Likewise, an import of W3/W4 is only
 reachability, never native transfer.
 
-Required repair: transcribe the complete Euler--Weierstrass--GPV disk action
-at the distinguished-action level, then apply the existing orbit--stabilizer
-construction wholesale.  Do not reindex GPV by individual arrows, introduce
+Required repair: for each accepted row, prove the native coordinate of the
+complete Euler--Weierstrass--GPV disk action and immediately apply the existing
+orbit--stabilizer construction wholesale to that same fact. Do not reindex GPV by individual arrows, introduce
 a wrapper or theorem-field bundle, attach twelve conjuncts, or cite the facts
 next to the functor.  Until this is done, a green scalar-only functor or direct
 total certifies only its geometric/category laws and is not the accepted
@@ -577,11 +457,10 @@ The failed audit stopped one layer too late when it looked for GPV data in
   exponential family, with real level and winding/band as its coordinates;
 - C1 and C3/W3 give the continuation and Weierstrass presentation of that
   same family through `N`;
-- the endpoint-indexed `GpvTransport A X Y k` interface and the complete
-  W1--W4/GPV closure populate the distinguished action on
-  `GreatCircle.Base` **before** orbit--stabilizer is applied;
-- only this completed base action is fed through `orbitRep`, both frame legs,
-  and `stabilizerPart` to obtain the simultaneous `SphereWorld` extension.
+- each native W/GPV fact is established on the complete disk action and, in
+  that same pass, is immediately fed through `orbitRep`, both frame legs, and
+  `stabilizerPart` to obtain its simultaneous `SphereWorld` extension;
+- no later phase waits to transport the completed family in bulk.
 
 Never add GPV fields to `SphereHom`, index GPV by a functor arrow, or require
 an independently supplied transport beside an arrow.  Those reverse the
@@ -609,41 +488,15 @@ author-specified construction.  Use Lean only to check the faithful
 transcription, never to choose, redesign, grade, or cast suspicion on the
 mathematics.
 
-## 2026-07-22 generated-action completion — no independent GPV weld
+## 2026-07-22 false generated-action completion — superseded
 
-The scalar-only truncation and the independent-transport weld have now been
-removed at the distinguished-action boundary.
-
-- `A.distinguishedDiskAction` is the one C1--C3 continued
-  Euler--Weierstrass--GPV disk action.  Its theorem
-  `distinguishedDiskAction_eq_fullMultiplier` identifies it with
-  `diskDiagonalMoebiusHom A.distinguishedPoleUnit`, so the complete `ℂˣ`
-  multiplier remains present: phase carries winding/band and modulus carries
-  real level.
-- `A.projective_gpv_disk_action` is generated directly from `A` and its value
-  path.  GPV continuation supplies the logarithmic lift, continuous and
-  lift-independent real level, and the equality between the lift's
-  `diskExpAction` and A's own nonzero value multiplier.  It accepts no
-  independently supplied `GpvTransport`.
-- The two former welds that bound an arbitrary base arrow beside an unrelated
-  `h : GpvTransport ...` were deleted.  Generic `GpvTransport` lemmas remain
-  valid analytic consequences, but they no longer masquerade as the
-  functorial construction.
-- `sectionFunctor_map_full` retains the existing orbit--stabilizer
-  factorization unchanged, now with `A.distinguishedDiskAction` in both frame
-  legs.
-- `totalTransport` now carries the literal Möbius leg of
-  `(sectionFunctor A).map f`.  The former implementation applied the action to
-  an identity sphere arrow and visibly reduced its Möbius leg to the identity.
-  `totalTransport_full` prints the full distinguished action, both orbit
-  representatives, and `stabilizerPart f` in the canonical arrow of `𝒯_A`.
-
-Verification: `lake build Concentricity.ProjectiveTotal` completed 3652 jobs.
-The action supplier, generated GPV action, `sectionFunctor_map_full`,
-`totalTransport_full`, and every member of the exact load-bearing twelve each
-printed exactly `[propext, Classical.choice, Quot.sound]`.  A source search
-found no remaining theorem that accepts a functor arrow and an independently
-supplied `GpvTransport` side by side.
+This checkpoint compiled, but its completion claim was false.
+`distinguishedDiskAction A` remained the single pole-value action and therefore
+did not replace `eulerDiskAction A z`, the complete C2 function-valued action.
+The checker certified the supplied declarations, not the rejected architectural
+identification. Preserve the useful green suppliers, but execute Plan 12's
+row-by-row disk proof and immediate orbit–stabilizer extension before accepting
+`sectionFunctor A` or its total.
 
 ## 2026-07-22 SESSION FAILURE LEDGER — moving gates and confusing data with properties
 
@@ -682,15 +535,15 @@ The twelve and W/GPV closure remain native theorem-properties and coordinates
 of the complete action; they must not be inserted as fields, wrappers, twelve
 conjuncts, or independently chosen transports.  But it is equally wrong to
 call the scalar pole-value action complete merely because those theorems can
-later be cited.  First feed the full action into orbit--stabilizer; then form
-the exact total; only then may downstream consume it.
+later be cited. Complete each disk fact and its global extension before the
+next row; then form the exact total; only then may downstream consume it.
 
 The locked forward chain is:
 
 ```text
 C1--C4 / W1--W4 / GPV
   -> one full Euler--Weierstrass--GPV disk action in ℂˣ
-  -> its wholesale orbitRep / stabilizerPart extension
+  -> for each fact: disk proof -> immediate wholesale orbit--stabilizer extension -> stop
   -> sectionFunctor A : GreatCircle.Base ⥤ SphereWorld
   -> the exact 𝒯_A formed from that functor
   -> 8.3.4 and π₀ on that exact construction
@@ -734,12 +587,13 @@ functor merely to make their presence syntactically visible.
    extended by the single orbit--stabilizer construction; never reindex or
    choose it per arrow.
 
-5. **I demanded that every native fact be restated with `sectionFunctor` in
-   its surface syntax.**  Jesse explicitly said the facts remain in their
-   native quantifiers because they are partitions/views of the one action
-   transported wholesale.  **Stop rule:** no duplicate functor-level versions
-   and no `ProjectiveSpecification`-style wrapper.  Cite the native supplier
-   at the exact downstream naturality obligation.
+5. **I confused an immediate global extension with a theorem-field restatement.**
+   The facts keep their native quantifiers, but every row still requires an
+   exact orbit-stabilized declaration about the same object-and-arrow action.
+   **Stop rule:** produce the disk declaration and its immediate global
+   declaration; never replace either with a wrapper, postpone the fact, or
+   construct a naturality cone downstream. The exact total already carries the
+   pull to the common `N`.
 
 6. **I mistook syntactic visibility for mathematical carriage in the total.**
    I called an identity-looking fibre leg an “erasure” and changed
@@ -764,7 +618,7 @@ functor merely to make their presence syntactically visible.
 
 9. **I reported absence or awkwardness in a substitute representation as a
    problem in Jesse's construction.**  Examples across the thread included a
-   `Grpd`-valued functor, `ComponentDiagram`, a constant fibre, an object-frame
+   a generic categorical functor, a substitute component diagram, a constant fibre, an object-frame
    coercion question, theorem-field cargo, and arrow-indexed GPV.  **Stop
    rule:** the closed object list is absolute.  An obstruction in an invented
    object is discarded with that object and is never reported as a seam.
@@ -785,10 +639,11 @@ independent `f`/`h` welds.  However, `distinguishedDiskAction` and the current
 A-section action: the former is one pole-value element and the latter consumes
 that scalar element instead of the full C2 action.
 
-The next implementation task is upstream and exact: make the complete
-`z`-dependent Euler--Weierstrass--GPV disk action be what orbit--stabilizer
-carries.  Do not decide its shape from `𝒯_A`, `labelCocone`, `val`, or any
-downstream goal.  Do not add proof fields or per-arrow transports.
+The next implementation task is upstream and exact: begin Pass 4, prove its
+native statement on the complete `z`-dependent Euler--Weierstrass--GPV disk
+action, and immediately extend that same fact by orbit--stabilizer. Do not
+decide its shape from `𝒯_A`, `labelCocone`, `val`, or any downstream goal. Do
+not add proof fields or per-arrow transports.
 
 Separately, commit `2bc5211` changed `totalTransport` because of the rejected
 claim that an identity-looking fibre leg erased the action.  That later change

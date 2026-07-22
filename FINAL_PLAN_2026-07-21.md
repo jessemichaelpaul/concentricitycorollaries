@@ -1,9 +1,12 @@
 # FINAL PLAN — the authored A-section construction to 0/0
 
-**Author and mathematical authority: Jesse Michael Paul.**  Locked 2026-07-21.
-This file supersedes every conflicting build plan, handoff, status banner, or
-formalizer reconstruction.  Live Lean declarations still determine what has
-actually been implemented; prose never upgrades an unbuilt object to green.
+**Author and mathematical authority: Jesse Michael Paul.** Locked 2026-07-21.
+This file records the global mathematical chain. The accepted execution order
+and live construction status are now governed by
+`PLAN_TWELVE_ON_THE_DISK_ACTION_2026-07-22.md` and `HANDOFF.md`, which supersede
+Sections 6–7 of the earlier version. Live Lean declarations still determine
+what has actually been implemented; prose never upgrades an unbuilt object to
+green.
 
 ## 1. The one constructible chain
 
@@ -52,8 +55,9 @@ functor, carrier, base, or total object.
 - **GPV/W/D** give the lift, winding, real-level, world-independence, and band
   properties of this one action.
 
-The native-cargo gate means **all** of the proved W1--W4 stack, not a
-representative GPV lemma:
+The native-action acceptance means **all** of the proved W1--W4 stack, not a
+representative GPV lemma. The current execution handles the twelve required
+rows one vertical pass at a time, with immediate orbit–stabilizer extension:
 
 - **W1:** Euler-factor confinement, zero winding on the C2 half-space,
   the canonical prime-sum lift, and right-wall argument control;
@@ -72,11 +76,12 @@ Only proved supplier rows are used.  Historical receipt declarations carrying
 the through-`N` Weierstrass presentation of the same exponential
 distinguished action supplied by C2, not a later zero-object attachment.
 
-The fractional/band part is the \(U(1)\) motion.  Do not discard the full
-nonzero Euler multiplier: `distinguishedPoleUnit A : ℂˣ` carries both phase and
-modulus.  The phase records band/winding; the modulus records the real level
-read at the end.  `Circle` and `ℂˣ` have the same diagonal matrix shape only
-after inclusion; they are not interchangeable types.
+The fractional/band part is the \(U(1)\) motion. Do not discard the full
+nonzero Euler multiplier varying with `A.F z`: its phase records band/winding
+and its modulus records the real level. `distinguishedPoleUnit A : ℂˣ` is the
+pole coordinate of that action, not a replacement for its function-valued
+dependence. `Circle` and `ℂˣ` have the same diagonal matrix shape only after
+inclusion; they are not interchangeable types.
 
 ## 3. Orbit--stabilizer builds the A-section functor
 
@@ -128,67 +133,36 @@ type of the Concentricity theorem itself,
 ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c
 ```
 
-## 6. Verified live state before execution
+## 6. Live execution state
 
-Green and reusable:
+Green and preserved are the analytic suppliers, the general distinguished
+Möbius action and group laws, and the complete orbit–stabilizer vehicle:
+`orbitRep`, `orbitRep_spec`, `orbitRep_infty`, `stabilizerPart`,
+`orbit_stabilizer_factor`, and their identity/composition laws.
 
-- the full distinguished Möbius family and its group law;
-- `diagonalMoebiusHom : ℂˣ →* Moebius`;
-- the C1/C2/C3 `distinguishedPoleFactor` presentations and
-  `distinguishedPoleUnit`;
-- `distinguishedWorldAction` and its identity/composition laws;
-- `orbitRep`, `orbitRep_spec`, `orbitRep_infty`, `stabilizerPart`,
-  `orbit_stabilizer_factor`, and the identity/composition laws;
-- `projectiveObjectFrame`, `projectiveArrowElement`, and their compatibility.
+The A-section functor and its total are not accepted yet. The current frame
+still carries one pole-value element rather than the complete function-valued
+action. The twelve must be completed as native disk-action properties and
+immediately transported row-by-row before the functor and total gates close.
 
-Accepted by the 2026-07-22 native-cargo audit:
+## 7. Accepted execution order
 
-- `sectionFunctor A : GreatCircle.Base ⥤ SphereWorld` is the authored
-  A-specialized orbit--stabilizer action: its object frame and arrow
-  transition are the two faces of the same construction;
-- the underlying world direction remains `baseWorld` because the
-  distinguished action is internal to each represented Riemann sphere; this
-  is not constancy of the transition action;
-- the complete native twelve and the proved W1--W4/GPV closure are facts of
-  the distinguished disk action over `GreatCircle.Base` and are extended
-  wholesale by `projectiveObjectFrame`, `projectiveArrowElement`, and
-  `sectionAction_transport_full`;
-- `TotalA` is formed definitionally from that exact action, and its C3/C4
-  zero outputs retain their projective footpoints and sphere worlds;
-- a kernel audit of the twelve, twenty-nine representative closure rows, the
-  orbit--stabilizer extension, `sectionFunctor`, and `TotalA` returned exactly
-  `[propext, Classical.choice, Quot.sound]`.
+Execute `PLAN_TWELVE_ON_THE_DISK_ACTION_2026-07-22.md` exactly:
 
-Not yet completed:
+```text
+4 -> 5 -> 6 -> 1 -> 2 -> 3 -> 7 -> 8 -> 9 -> 10 -> 12
+-> sectionFunctor acceptance -> exact 𝒯_A -> 11
+-> 8.3.4 -> π₀ -> labelCocone -> val -> ∃ c
+```
 
-- the current `ConcentricityReadout.zeroColimitClass_eq_north` explicitly
-  applies `GreatCircle.toNHom (A.sphereZero n).re` for each `n`; this is the
-  rejected per-index connector route, not yet the wholesale colimit result;
-- no live declaration named `ASection.concentricity` or
-  `concentricity_theorem` presently exists, and the root `Concentricity.lean`
-  does not yet import `ProjectiveTotal` or `ConcentricityReadout`; therefore
-  the historical phrase "one remaining `sorry`" is not a live status report;
-- `ProjectiveSpecification.lean` is the rejected wrapper layer and must not be
-  imported;
-- `labelCocone`, `val`, and the literal `∃ c` finale are downstream of the
-  completed A-section functor.
+Each analytic pass includes its immediate wholesale orbit–stabilizer
+extension and verification. No fact waits for a later batch transfer. No
+downstream naturality, cocone, component diagram, or readout consideration
+may determine an upstream declaration.
 
-## 7. Execution order
-
-1. Remove the rejected specification import/file.
-2. Expose the C2 prime-sum transport and its C3/W3 continuation through `N` as
-   the same native `ℂˣ` action, retaining both winding and real level.
-3. Build the A-section functor from that distinguished C1--C4 action by the
-   green orbit--stabilizer construction, with `F.obj` and `F.map` together.
-4. Verify \(N\mapsto N\) and verify that removing the A-specialization breaks
-   the functor itself.
-5. Confirm the twelve native facts are the analytic content of that action;
-   write no wrapper layer.
-6. Form the one intended `𝒯_A` and populate its C3/C4 outputs.
-7. Instantiate 8.3.4 on that exact functor without an indexed connector;
-   construct `labelCocone`, `val`, and
-   `c := val κ`; close the literal concentricity conclusion.
-8. Run one serial build and print the theorem, its axioms, and the sorry audit.
+Never construct a naturality cone. Once the functor and total are correct,
+8.3.4 and π₀ detect that their genuine transports pull to the one common
+witness `N`.
 
 Terminal 0/0 means: full build green, no executable `sorry`, no `sorryAx`, the
 agreed axiom set only, and the literal `∃ c` conclusion in the theorem's type.

@@ -139,6 +139,51 @@ Bridge prose introducing the general case (context, ar5iv paragraph id `S5.p21`)
 Prose immediately before Corollary 5.21 (context, ar5iv paragraph id `S5.p26` — the paper's other name for σᶜ):
 > To define the winding number for a closed curve we have to take into account also the last interval $I_{m}$ and hence consider the closed signature.
 
+### Section 4 lift existence/uniqueness cluster (top-up 2026-07-11 — the sources for Lean GAP-1/F4, the unique tame winding lift)
+
+Fetched fresh 2026-07-11 (ar5iv HTML re-downloaded via curl, 3,078,715 bytes — byte-identical
+size to the 2026-07-03 fetch; mathematics from MathML `alttext`). Extracted from element ids
+`S4.Thmtheo2`, `S4.Thmtheo3`, `S4.Thmtheo4`, `S4.Thmtheo12`, `S4.Thmtheo13`, `S4.Thmtheo16`,
+`S4.Thmtheo27`. These are the statements the functor phase's canonicity obligations (GAP-1,
+F4 — `A.map` well-definedness) formalize; the author's pointer "the unique tame winding lift
+theorems are in the literature in the inbox" resolves HERE (the winding paper, Section 4),
+not in the log-manifolds paper (VS supplies the environment $\mathcal{E}^{+}$, SOURCES/VS.md).
+
+#### Proposition 4.2 (the lift ⟺ logarithm-continuation equivalence — the master's `thm:winding-lift` cite alongside Def 5.11)
+> **Proposition 4.2.** Let $\gamma:[a,b]\subset\mathbb{R}\rightarrow\mathbb{K}\setminus\{0\}$ be a path. Then, there exists a lift of $\gamma$ to $\mathcal{E}_{\mathbb{K}}^{+}$ if, and only if, there exists a continuation of the logarithm along $\gamma$.
+
+(location: `S4.Thmtheo2`. The domain typeset "$[a,b]\subset\mathbb{R}\rightarrow$" — as printed.)
+
+#### Proposition 4.3 (EXISTENCE AND UNIQUENESS off the real axis — "one, and only one"; "the unique continuation")
+> **Proposition 4.3.** Assume the path $\gamma:[a,b]\rightarrow\mathbb{K}\setminus\{0\}$ is such that $\gamma([a,b])\cap\mathbb{R}=\varnothing$, and let $\gamma(t)=x(t)+{\mathcal{I}}(t)y(t)$ with $y(t)>0$ for all $t\in[a,b]$. Then, for any $k\in\mathbb{Z}$, there exists one, and only one, lift $\Gamma_{k}$ of $\gamma$ to $E(D_{2k})\subset\mathscr{E}_{\mathbb{K}}^{+}$ with initial point $\Gamma_{k}(a)=(\gamma(a),\textnormal{Arg}_{2k}(\gamma(a))).$ Namely, for all $t\in[a,b]$, we have $\Gamma_{k}(t):=(\gamma(t),\textnormal{Arg}_{2k}(\gamma(t)))\in E(D_{2k}).$ Finally, for all $k\in\mathbb{Z}$, the map defined on the interval $[a,b]$ by (4.2) $(\log_{k}\circ\gamma)(t):=(L\circ\Gamma_{k})(t)=\log|\gamma(t)|+\textnormal{Arg}_{2k}(\gamma(t))$ is the unique continuation of the hypercomplex logarithm along $\gamma$ with initial point $\log|\gamma(a)|+\textnormal{Arg}_{2k}(\gamma(a))$, and is called the $k$-th branch of the hypercomplex logarithm along $\gamma$ with initial point $\log|\gamma(a)|+\textnormal{Arg}_{2k}(\gamma(a))$.
+
+(location: `S4.Thmtheo3`. The environment prints $\mathscr{E}_{\mathbb{K}}^{+}$ (script E) here where Definition 4.1 prints $\mathcal{E}_{\mathbb{K}}^{+}$ (cal E) — as printed, not my correction.)
+
+#### Corollary 4.4 (loops off the real axis: every $\Gamma_k$ is a loop)
+> **Corollary 4.4.** Assume the loop $\gamma:[a,b]\rightarrow\mathbb{K}\setminus\{0\}$ is such that $\gamma([a,b])\cap\mathbb{R}=\varnothing$. Then for each $k\in\mathbb{Z}$, the lift $\Gamma_{k}$ found in Proposition 4.3 is a loop. As a consequence, for each $k\in\mathbb{Z}$, $\log_{k}(\gamma(a))=\log_{k}(\gamma(b))$ Among the initial cases, there is the one corresponding to what is stated in Remark 2.1.
+
+(location: `S4.Thmtheo4`. The missing period after "$\log_{k}(\gamma(a))=\log_{k}(\gamma(b))$" and the sentence "Among the initial cases…" — as printed.)
+
+#### Proposition 4.12 (the companion case: the $\mathfrak{I}^{\gamma}$-lift and the ℤ-indexed branch family)
+> **Proposition 4.12.** Let $\gamma:[a,b]\rightarrow\mathbb{K}\setminus\{0\}$ be a path with companion $\mathfrak{I}^{\gamma}:[a,b]\rightarrow\mathbb{S}/\{\pm\operatorname{Id}\}$. Then there exist • a path $\mathcal{I}^{\gamma}:[a,b]\to\mathbb{S}$ with $[\mathcal{I}^{\gamma}(t)]=\mathfrak{I}^{\gamma}(t)$, for all $t\in[a,b]$, • a path $\arg^{\gamma}:[a,b]\to\mathbb{R}$, such that, after setting $\textnormal{Arg}^{\gamma}=\mathcal{I}^{\gamma}\arg^{\gamma}:[a,b]\to{\rm Im}(\mathbb{H})$, the path $\Gamma(t)=(\gamma(t),\textnormal{Arg}^{\gamma}(t))$ is a lift of $\gamma$ to $\mathcal{E}^{+}_{\mathbb{K}}$ with $\arg^{\gamma}(a)\in[0,\pi]$, called a $\mathfrak{I}^{\gamma}$-lift of $\gamma$. If, as in Definition 3.5, for every $k\in\mathbb{Z}$ we set $\arg^{\gamma}_{2k}:=\arg^{\gamma}+2k\pi$ and $\textnormal{Arg}_{2k}^{\gamma}:=\mathcal{I}^{\gamma}\arg_{2k}^{\gamma}$, then the path $\Gamma_{k}(t)=(\gamma(t),\textnormal{Arg}_{2k}^{\gamma}(t))$ is a $\mathfrak{I}^{\gamma}$-lift of $\gamma$ to $\mathcal{E}^{+}_{\mathbb{K}}$ with $\arg^{\gamma}_{2k}(a)\in[2k\pi,(2k+1)\pi]$.
+
+(location: `S4.Thmtheo12`. The codomain of $\textnormal{Arg}^{\gamma}$ prints ${\rm Im}(\mathbb{H})$ — ℍ, not 𝕂 — as printed (sic).)
+
+#### Corollary 4.13 (k-th branches of the hypercomplex logarithm along γ, companion case)
+> **Corollary 4.13.** Let $\gamma:[a,b]\rightarrow\mathbb{K}\setminus\{0\}$ be a path with companion $\mathfrak{I}^{\gamma}:[a,b]\rightarrow\mathbb{S}/\{\pm\operatorname{Id}\}$. For every $k\in\mathbb{Z}$, let $\Gamma_{k}=(\gamma,\textnormal{Arg}_{2k}^{\gamma})$ be a $\mathfrak{I}^{\gamma}$-lift of $\gamma$ to $\mathcal{E}^{+}_{\mathbb{K}}$ with $\arg^{\gamma}_{2k}(a)\in[2k\pi,(2k+1)\pi]$. Then, the map defined on the interval $[a,b]$ by $(\log_{k}\circ\gamma)(t):=(L\circ\Gamma_{k})(t)=\log|\gamma(t)|+\textnormal{Arg}_{2k}(\gamma(t))$ is a continuation of the hypercomplex logarithm along $\gamma$ with initial point $\log|\gamma(a)|+\textnormal{Arg}_{2k}(\gamma(a))$. This map is called a $k$-th branch of the hypercomplex logarithm along $\gamma$ with initial point $\log|\gamma(a)|+\textnormal{Arg}_{2k}(\gamma(a))$.
+
+(location: `S4.Thmtheo13`.)
+
+#### Remark 4.16 (slice paths: the constant companion; twisted loops must cross ℝ)
+> **Remark 4.16.** For any fixed $I\in\mathbb{S}$, let $\gamma:[a,b]\to\mathbb{K}\setminus\{0\}$ be a path lying in the complex slice $\mathbb{C}_{I}$. The path $\gamma$ has always a particularly simple companion, namely $\mathfrak{I}^{\gamma}:[a,b]\to\mathbb{S}/\{\pm\operatorname{Id}\}$ constantly equal to $[I]$. Moreover, the two different lifts of $\mathfrak{I}^{\gamma}$ to $\mathbb{S}$ are both constantly equal to $I$ or $-I$, respectively. As a consequence, if the given path $\gamma$ is closed and tame, it is a tame loop and is untwisted. A twisted loop necessarily intersects the real axis.
+
+(location: `S4.Thmtheo16`.)
+
+#### Theorem 4.27 (winding classifies untwisted tame loops up to c-homotopy)
+> **Theorem 4.27.** Let $\gamma,\delta:[a,b]\rightarrow\mathbb{K}\setminus\{0\}$ be two untwisted, tame loops. Then $\gamma$ and $\delta$ are c-homotopic if, and only if, $\emph{wind}(\gamma)=\emph{wind}(\delta)$.
+
+(location: `S4.Thmtheo27` — Section 4's only Theorem-class statement among items 4.1–4.27.)
+
 ## Provenance
 - Fetched from:
   - https://ar5iv.labs.arxiv.org/html/2307.14047 (full HTML, 3.08 MB, downloaded via curl 2026-07-02 into the session scratchpad as `gpvwind_ar5iv.html`; statements extracted from element ids `S2.Thmtheo1`, `S4.Thmtheo1`, `S4.Thmtheo7`, `S4.Thmtheo20`, `S5.Thmtheo1`, `S5.Thmtheo2`, `S5.Thmtheo11`, `S5.Thmtheo13`, `S5.Thmtheo21`, `S5.Thmtheo22`, plus paragraph `S3.p4` for the FLAGS quote; mathematics from MathML `alttext`)
