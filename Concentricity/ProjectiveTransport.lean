@@ -228,6 +228,54 @@ theorem GpvTransport.level_independent {A : ASection}
     (lift' t).re = (h.lift t).re := by
   rw [h.level t, ← hlift' t, Complex.norm_exp, Real.log_exp]
 
+/-- At the source object, the GPV value tape is exactly the compactified
+`A`-value at that projective-base footpoint. -/
+theorem GpvTransport.value_at_source {A : ASection}
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
+    ((h.value 0 : ℂ) : OnePoint ℂ) =
+      A.Fstar (GreatCircle.complexPoint
+        (CategoryTheory.ActionCategory.back X)) := by
+  calc
+    ((h.value 0 : ℂ) : OnePoint ℂ) = A.Fstar (h.domain 0) :=
+      h.value_compact 0
+    _ = A.Fstar (GreatCircle.complexPoint
+        (CategoryTheory.ActionCategory.back X)) :=
+      congrArg A.Fstar h.domain_zero
+
+/-- At the target object, the GPV value tape is exactly the compactified
+`A`-value at that projective-base footpoint. -/
+theorem GpvTransport.value_at_target {A : ASection}
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
+    ((h.value 1 : ℂ) : OnePoint ℂ) =
+      A.Fstar (GreatCircle.complexPoint
+        (CategoryTheory.ActionCategory.back Y)) := by
+  calc
+    ((h.value 1 : ℂ) : OnePoint ℂ) = A.Fstar (h.domain 1) :=
+      h.value_compact 1
+    _ = A.Fstar (GreatCircle.complexPoint
+        (CategoryTheory.ActionCategory.back Y)) :=
+      congrArg A.Fstar h.domain_one
+
+/-- A genuine GPV transport over the projective base preserves the logarithm
+of the norm between its source and target value states. -/
+theorem GpvTransport.endpoint_log_norm_eq {A : ASection}
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
+    Real.log ‖h.value 0‖ = Real.log ‖h.value 1‖ := by
+  calc
+    Real.log ‖h.value 0‖ = (h.lift 0).re := (h.level 0).symm
+    _ = (h.lift 1).re := h.lift_endpoint_re_eq
+    _ = Real.log ‖h.value 1‖ := h.level 1
+
+/-- Since the GPV value tape never vanishes, preservation of its logarithmic
+real level is equivalently preservation of the endpoint norm itself. -/
+theorem GpvTransport.endpoint_norm_eq {A : ASection}
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
+    ‖h.value 0‖ = ‖h.value 1‖ := by
+  apply Real.log_injOn_pos
+  · exact Set.mem_Ioi.mpr (norm_pos_iff.mpr (h.value_ne_zero 0))
+  · exact Set.mem_Ioi.mpr (norm_pos_iff.mpr (h.value_ne_zero 1))
+  · exact h.endpoint_log_norm_eq
+
 /-- Reversing a compactified GPV transport reverses its base path and
 negates its winding.  The value and lift tapes are the same tapes read in
 the opposite direction. -/
