@@ -65,8 +65,9 @@ build: helpers never sorried, receipts never landed — any resistance is
 prose in the run report, never a Lean row). `sorry` marks UNFORMALIZED,
 never UNSOUND (R8); this file carries NONE.
 -/
-import Concentricity.TransportObject
+import Concentricity.G2
 import Concentricity.ZeroSpheres
+import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 import Mathlib.Topology.Compactification.OnePoint.ProjectiveLine
 
 noncomputable section
@@ -295,38 +296,36 @@ def baseWorld : SphereWorld :=
   ⟨((0 : Quaternion ℝ), (1 : Quaternion ℝ)),
     ⟨rfl, by simp [Octonion.normSq]⟩⟩
 
-/-! ## §3 — The charts and the ONE great circle (the gluing geometry)
+/-! ## §3 — The native realization of each sphere world
 
-Author's dictation (verbatim): "THERE IS ONE GREAT CIRCLE IN ALL WORLDS.
-The S¹ = ℝ ∪ {N} is the SAME circle in the domain 𝕆*, in every slice
-Riemann sphere S²_I of 𝒮₂, and in the landed range 𝕆* — one circle shared
-across every world the round trip touches." The spheres are glued along
-it; the correction of 2026-07-07: all the 2-spheres COME FROM the great
-circle, and the GPV base lives ON it. -/
+`SphereWorld` uses a unit imaginary direction as the index of the
+corresponding slice Riemann sphere.  The chart below is the certified
+identification of that represented object with its actual carrier in
+`OnePoint Octonion`.  It also turns every `SphereHom.mob` into an honest
+map of the represented source sphere to the represented target sphere.
+-/
 
-/-- The chart of the world I: the compactified slice embedding
-OnePoint ℂ → 𝕆*, ∞ ↦ N, ζ ↦ φ_I(ζ) (master `def:slices`: "Its one-point
-compactification is the slice Riemann sphere ℂ_v* := ℂ_v ∪ {∞} = S²_v"). -/
+/-- The compactified slice chart of the sphere world indexed by `v`. -/
 def spherePt (v : Octonion) : OnePoint ℂ → OnePoint Octonion :=
   OnePoint.map (sliceEmbed v)
 
-theorem spherePt_infty (v : Octonion) :
+@[simp] theorem spherePt_infty (v : Octonion) :
     spherePt v OnePoint.infty = OnePoint.infty := rfl
 
-theorem spherePt_coe (v : Octonion) (ζ : ℂ) :
-    spherePt v (ζ : OnePoint ℂ) = ((sliceEmbed v ζ : Octonion) : OnePoint Octonion) := rfl
+@[simp] theorem spherePt_coe (v : Octonion) (ζ : ℂ) :
+    spherePt v (ζ : OnePoint ℂ) =
+      ((sliceEmbed v ζ : Octonion) : OnePoint Octonion) := rfl
 
-/-- The slice embedding is injective along a unit imaginary direction
-(the chart is faithful; `re_sliceEmbed`/`im_sliceEmbed` + unit length). -/
+/-- The slice chart is faithful along a unit imaginary direction. -/
 theorem sliceEmbed_injective {v : Octonion} (hv : v ∈ unitImaginarySphere) :
     Function.Injective (sliceEmbed v) := by
   intro ζ ζ' h
   have hre : ζ.re = ζ'.re := by
-    have := congrArg re h
-    rwa [re_sliceEmbed hv, re_sliceEmbed hv] at this
+    have h' := congrArg re h
+    rwa [re_sliceEmbed hv, re_sliceEmbed hv] at h'
   have him' : ζ.im • v = ζ'.im • v := by
-    have := congrArg im h
-    rwa [im_sliceEmbed hv, im_sliceEmbed hv] at this
+    have h' := congrArg im h
+    rwa [im_sliceEmbed hv, im_sliceEmbed hv] at h'
   have him : ζ.im = ζ'.im := by
     by_contra hne
     have hsub : (ζ.im - ζ'.im) • v = 0 := by
@@ -334,951 +333,157 @@ theorem sliceEmbed_injective {v : Octonion} (hv : v ∈ unitImaginarySphere) :
     have hv0 : v = 0 := by
       have h1 := congrArg (fun t => (ζ.im - ζ'.im)⁻¹ • t) hsub
       simpa [smul_smul, inv_mul_cancel₀ (sub_ne_zero.mpr hne)] using h1
-    have := hv.2
-    rw [hv0, normSq_zero] at this
-    norm_num at this
+    have hunit := hv.2
+    rw [hv0, normSq_zero] at hunit
+    norm_num at hunit
   exact Complex.ext hre him
 
-/-- The chart is injective. -/
+/-- The compactified chart is injective. -/
 theorem spherePt_injective {v : Octonion} (hv : v ∈ unitImaginarySphere) :
     Function.Injective (spherePt v) := by
   intro z z' h
   induction z using OnePoint.rec with
   | infty =>
-    induction z' using OnePoint.rec with
-    | infty => rfl
-    | coe ζ' => exact absurd h.symm (OnePoint.coe_ne_infty _)
+      induction z' using OnePoint.rec with
+      | infty => rfl
+      | coe ζ' => exact absurd h.symm (OnePoint.coe_ne_infty _)
   | coe ζ =>
-    induction z' using OnePoint.rec with
-    | infty => exact absurd h (OnePoint.coe_ne_infty _)
-    | coe ζ' =>
-      rw [spherePt_coe, spherePt_coe, OnePoint.coe_eq_coe] at h
-      rw [sliceEmbed_injective hv h]
+      induction z' using OnePoint.rec with
+      | infty => exact absurd h (OnePoint.coe_ne_infty _)
+      | coe ζ' =>
+          rw [spherePt_coe, spherePt_coe, OnePoint.coe_eq_coe] at h
+          rw [sliceEmbed_injective hv h]
 
-/-- The chart's range is exactly the slice Riemann sphere: the world S²_I
-IS the image of the standard sphere under the chart. -/
-theorem range_spherePt (v : Octonion) : Set.range (spherePt v) = sliceSphere v := by
+/-- The chart image is exactly the represented slice Riemann sphere. -/
+theorem range_spherePt (v : Octonion) :
+    Set.range (spherePt v) = sliceSphere v := by
   ext q
   constructor
   · rintro ⟨z, rfl⟩
     induction z using OnePoint.rec with
     | infty => exact Set.mem_insert _ _
-    | coe ζ => exact Set.mem_insert_of_mem _ ⟨sliceEmbed v ζ, ⟨ζ, rfl⟩, rfl⟩
+    | coe ζ =>
+        exact Set.mem_insert_of_mem _
+          ⟨sliceEmbed v ζ, ⟨ζ, rfl⟩, rfl⟩
   · intro hq
     rcases Set.mem_insert_iff.mp hq with rfl | ⟨x, ⟨ζ, rfl⟩, rfl⟩
     · exact ⟨OnePoint.infty, rfl⟩
     · exact ⟨(ζ : OnePoint ℂ), rfl⟩
 
-/-- The inner product of a unit imaginary octonion with itself is 1 (from
-the polarization definition of `innerO` and `normSq_smul`). -/
+/-- A unit imaginary octonion has unit self-inner-product. -/
 theorem innerO_self_of_unit {v : Octonion} (hv : v ∈ unitImaginarySphere) :
     innerO v v = 1 := by
   have h2 : v + v = (2 : ℝ) • v := by rw [two_smul]
   rw [innerO, h2, normSq_smul, hv.2]
   norm_num
 
-/-- The chart coordinate read on 𝕆*: at a finite point x the pair
-(re x, ⟨im x, v⟩) — the honest inverse of the chart on its world (the
-signed height along the world's own direction; junk elsewhere, never
-consumed off the sphere). -/
+/-- The inverse chart coordinate on the represented sphere. -/
 def coordAt (v : Octonion) : OnePoint Octonion → OnePoint ℂ :=
   OnePoint.map fun x => ⟨re x, innerO (im x) v⟩
 
-theorem coordAt_infty (v : Octonion) :
+@[simp] theorem coordAt_infty (v : Octonion) :
     coordAt v OnePoint.infty = OnePoint.infty := rfl
 
-theorem coordAt_coe (v : Octonion) (x : Octonion) :
-    coordAt v (x : OnePoint Octonion) = ((⟨re x, innerO (im x) v⟩ : ℂ) : OnePoint ℂ) := rfl
+@[simp] theorem coordAt_coe (v : Octonion) (x : Octonion) :
+    coordAt v (x : OnePoint Octonion) =
+      ((⟨re x, innerO (im x) v⟩ : ℂ) : OnePoint ℂ) := rfl
 
-/-- Chart round trip, coordinate side: the coordinate of a chart point is
-the chart parameter (unconditional). -/
-theorem coordAt_spherePt {v : Octonion} (hv : v ∈ unitImaginarySphere)
-    (z : OnePoint ℂ) : coordAt v (spherePt v z) = z := by
+/-- Coordinate-chart round trip. -/
+@[simp] theorem coordAt_spherePt {v : Octonion}
+    (hv : v ∈ unitImaginarySphere) (z : OnePoint ℂ) :
+    coordAt v (spherePt v z) = z := by
   induction z using OnePoint.rec with
   | infty => rfl
   | coe ζ =>
-    rw [spherePt_coe, coordAt_coe, OnePoint.coe_eq_coe]
-    apply Complex.ext
-    · exact re_sliceEmbed hv ζ
-    · show innerO (im (sliceEmbed v ζ)) v = ζ.im
-      rw [im_sliceEmbed hv, innerO_smul_left, innerO_self_of_unit hv, _root_.mul_one]
+      rw [spherePt_coe, coordAt_coe, OnePoint.coe_eq_coe]
+      apply Complex.ext
+      · exact re_sliceEmbed hv ζ
+      · show innerO (im (sliceEmbed v ζ)) v = ζ.im
+        rw [im_sliceEmbed hv, innerO_smul_left,
+          innerO_self_of_unit hv, _root_.mul_one]
 
-/-- Chart round trip, point side: on its own sphere the chart inverts the
-coordinate read. -/
-theorem spherePt_coordAt {v : Octonion} (hv : v ∈ unitImaginarySphere)
-    {q : OnePoint Octonion} (hq : q ∈ sliceSphere v) :
+/-- Chart-coordinate round trip on the represented sphere. -/
+@[simp] theorem spherePt_coordAt {v : Octonion}
+    (hv : v ∈ unitImaginarySphere) {q : OnePoint Octonion}
+    (hq : q ∈ sliceSphere v) :
     spherePt v (coordAt v q) = q := by
   rw [← range_spherePt] at hq
   obtain ⟨z, rfl⟩ := hq
   rw [coordAt_spherePt hv]
 
-/-- The chart is direction-equivariant: g ∘ φ_I = φ_{g·I} on the whole
-compactified sphere (`G2.smul_sliceEmbed`; N is G₂-fixed) — the worlds are
-relabelled, the chart parameters untouched. -/
+/-- The sphere charts are equivariant under the direction action. -/
 theorem smul_spherePt (g : G2) (v : Octonion) (z : OnePoint ℂ) :
     g • spherePt v z = spherePt (g • v) z := by
   induction z using OnePoint.rec with
   | infty => rfl
   | coe ζ =>
-    rw [spherePt_coe, spherePt_coe, G2.smul_onePoint_coe, G2.smul_sliceEmbed]
+      rw [spherePt_coe, spherePt_coe,
+        G2.smul_onePoint_coe, G2.smul_sliceEmbed]
 
-/-- G₂ carries worlds to worlds: the sphere of I goes to the sphere of
-g·I. -/
-theorem smul_mem_sliceSphere {v : Octonion} {q : OnePoint Octonion} (g : G2)
-    (hq : q ∈ sliceSphere v) : g • q ∈ sliceSphere (g • v) := by
+/-- The direction action carries each represented sphere to its target. -/
+theorem smul_mem_sliceSphere {v : Octonion} {q : OnePoint Octonion}
+    (g : G2) (hq : q ∈ sliceSphere v) :
+    g • q ∈ sliceSphere (g • v) := by
   rw [← range_spherePt] at hq
   obtain ⟨z, rfl⟩ := hq
   rw [smul_spherePt, ← range_spherePt]
   exact ⟨z, rfl⟩
 
-/-- G₂ preserves the inner product (polarization + the isometry block
-`G2.smul_normSq`/`smul_add`). -/
-theorem G2.smul_innerO (g : G2) (x y : Octonion) :
-    innerO (g • x) (g • y) = innerO x y := by
-  rw [innerO, innerO, ← G2.smul_add, G2.smul_normSq, G2.smul_normSq, G2.smul_normSq]
+/-- A chart point of a represented sphere, packaged in its carrier. -/
+def sphereChartPoint (I : SphereWorld) (z : OnePoint ℂ) :
+    ↑(Octonion.sliceSphere I.val) :=
+  ⟨spherePt I.val z, by
+    rw [← range_spherePt]
+    exact ⟨z, rfl⟩⟩
 
-/-- The coordinate read is direction-equivariant: the coordinate of the
-relabelled point in the relabelled world is the original coordinate
-(`G2.smul_re`, `G2.smul_im`, `G2.smul_innerO`). -/
-theorem coordAt_smul (g : G2) (v : Octonion) (q : OnePoint Octonion) :
-    coordAt (g • v) (g • q) = coordAt v q := by
-  induction q using OnePoint.rec with
-  | infty => rfl
-  | coe x =>
-    rw [G2.smul_onePoint_coe, coordAt_coe, coordAt_coe, OnePoint.coe_eq_coe]
-    apply Complex.ext
-    · exact G2.smul_re g x
-    · show innerO (im (g • x)) (g • v) = innerO (im x) v
-      rw [G2.smul_im, G2.smul_innerO]
+/-- The genuine point-map represented by a `SphereWorld` morphism.
+The Möbius leg acts in the source chart and the result lands in the target
+slice sphere; the direction leg identifies that target chart geometrically. -/
+def SphereHom.realize {I J : SphereWorld} (f : I ⟶ J)
+    (q : ↑(Octonion.sliceSphere I.val)) :
+    ↑(Octonion.sliceSphere J.val) :=
+  ⟨spherePt J.val (f.mob.val (coordAt I.val q.val)), by
+    rw [← range_spherePt]
+    exact ⟨f.mob.val (coordAt I.val q.val), rfl⟩⟩
 
-/-! ### The ONE great circle -/
+/-- On chart points, `SphereHom.realize` is exactly the Möbius action. -/
+@[simp] theorem SphereHom.realize_sphereChartPoint
+    {I J : SphereWorld} (f : I ⟶ J) (z : OnePoint ℂ) :
+    (f.realize (sphereChartPoint I z)).val =
+      spherePt J.val (f.mob.val z) := by
+  change spherePt J.val
+      (f.mob.val (coordAt I.val (spherePt I.val z))) =
+    spherePt J.val (f.mob.val z)
+  rw [coordAt_spherePt I.prop]
 
-/-- **The one great circle** S¹ = ℝ ∪ {N} ⊂ 𝕆* (master `def:carrier`,
-~line 653: "ℝ ∪ {N} is one great circle through the single N"; the
-author's dictation: "THERE IS ONE GREAT CIRCLE IN ALL WORLDS"). The same
-set as the unimported route artifact's `greatCircle`
-(GreatCircleRoute.lean), re-derived here on the clean import chain. -/
-def oneGreatCircle : Set (OnePoint Octonion) :=
-  insert OnePoint.infty ((↑) '' Set.range ofReal)
+/-- The realized target chart agrees with the direction relabelling. -/
+theorem SphereHom.realize_sphereChartPoint_eq_rot
+    {I J : SphereWorld} (f : I ⟶ J) (z : OnePoint ℂ) :
+    (f.realize (sphereChartPoint I z)).val =
+      f.rot • spherePt I.val (f.mob.val z) := by
+  rw [SphereHom.realize_sphereChartPoint, smul_spherePt, f.rot_eq]
 
-theorem infty_mem_oneGreatCircle :
-    (OnePoint.infty : OnePoint Octonion) ∈ oneGreatCircle :=
-  Set.mem_insert _ _
+/-- Identity morphisms realize as identity maps of the represented sphere. -/
+@[simp] theorem SphereHom.realize_id (I : SphereWorld)
+    (q : ↑(Octonion.sliceSphere I.val)) :
+    SphereHom.realize (𝟙 I) q = q := by
+  apply Subtype.ext
+  change spherePt I.val (coordAt I.val q.val) = q.val
+  exact spherePt_coordAt I.prop q.prop
 
-theorem ofReal_mem_oneGreatCircle (r : ℝ) :
-    ((ofReal r : Octonion) : OnePoint Octonion) ∈ oneGreatCircle :=
-  Set.mem_insert_of_mem _ ⟨ofReal r, ⟨r, rfl⟩, rfl⟩
-
-/-- The circle lies on EVERY sphere: every world contains the one great
-circle (all slices share ℝ and the single ∞ — master `def:slices`; the
-gluing clause of the author's dictation). -/
-theorem oneGreatCircle_subset_sliceSphere (v : Octonion) :
-    oneGreatCircle ⊆ sliceSphere v := by
-  rintro x hx
-  rcases Set.mem_insert_iff.mp hx with rfl | ⟨y, ⟨r, rfl⟩, rfl⟩
-  · exact Set.mem_insert _ _
-  · exact Set.mem_insert_of_mem _
-      ⟨ofReal r, ⟨(r : ℂ), sliceEmbed_ofReal v r⟩, rfl⟩
-
-/-- The standard circle of the model sphere: ℝ ∪ {∞} ⊂ ℂ ∪ {∞}. -/
-def stdCircle : Set (OnePoint ℂ) :=
-  insert OnePoint.infty ((↑) '' Set.range (Complex.ofReal))
-
-/-- **The same circle in ALL worlds**: every chart carries the standard
-circle of the model sphere onto the ONE great circle — not a copy per
-world, the one circle itself (`sliceEmbed_ofReal`: φ_v is the identity on
-ℝ, for every v). -/
-theorem spherePt_image_stdCircle (v : Octonion) :
-    spherePt v '' stdCircle = oneGreatCircle := by
-  ext q
-  constructor
-  · rintro ⟨z, hz, rfl⟩
-    rcases Set.mem_insert_iff.mp hz with rfl | ⟨y, ⟨r, rfl⟩, rfl⟩
-    · exact infty_mem_oneGreatCircle
-    · rw [spherePt_coe, sliceEmbed_ofReal]
-      exact ofReal_mem_oneGreatCircle r
-  · intro hq
-    rcases Set.mem_insert_iff.mp hq with rfl | ⟨y, ⟨r, rfl⟩, rfl⟩
-    · exact ⟨OnePoint.infty, Set.mem_insert _ _, rfl⟩
-    · refine ⟨((r : ℂ) : OnePoint ℂ),
-        Set.mem_insert_of_mem _ ⟨(r : ℂ), ⟨r, rfl⟩, rfl⟩, ?_⟩
-      rw [spherePt_coe, sliceEmbed_ofReal]
-
-/-- Real-scalar rigidity on unit imaginaries: a•w = b•v with v, w units
-and b ≠ 0 forces v = ±w (re-derived from the unimported route artifact's
-PROVED row, GreatCircleRoute.lean `unit_smul_eq_unit_smul`). -/
-theorem unit_smul_eq_unit_smul' {v w : Octonion} (hv : v ∈ unitImaginarySphere)
-    (hw : w ∈ unitImaginarySphere) {a b : ℝ} (hb : b ≠ 0)
-    (h : a • w = b • v) : v = w ∨ v = -w := by
-  have hv' : v = (b⁻¹ * a) • w := by
-    rw [mul_smul, h, smul_smul, inv_mul_cancel₀ hb, one_smul]
-  have hnorm : (b⁻¹ * a) ^ 2 = 1 := by
-    have h1 := congrArg normSq hv'
-    rw [Octonion.normSq_smul, hw.2, hv.2] at h1
-    linear_combination -h1
-  have hcase : b⁻¹ * a = 1 ∨ b⁻¹ * a = -1 := by
-    have h2 : (b⁻¹ * a - 1) * (b⁻¹ * a + 1) = 0 := by nlinarith
-    rcases mul_eq_zero.mp h2 with h3 | h3
-    · left; linarith
-    · right; linarith
-  rcases hcase with h3 | h3
-  · left
-    rw [hv', h3, one_smul]
-  · right
-    rw [hv', h3, neg_smul, one_smul]
-
-/-- **The gluing is EXACT** (the play's `lem:great-circle`, intersection
-clause; re-derived from GreatCircleRoute.lean's PROVED `sliceSphere_inter`
-on the clean chain): worlds of independent directions (v ≠ ±w) meet
-EXACTLY in the one great circle — the spheres emanate from the circle and
-share nothing else. -/
-theorem sliceSphere_inter' {v w : Octonion} (hv : v ∈ unitImaginarySphere)
-    (hw : w ∈ unitImaginarySphere) (hvw : v ≠ w) (hvw' : v ≠ -w) :
-    sliceSphere v ∩ sliceSphere w = oneGreatCircle := by
-  ext x
-  constructor
-  · rintro ⟨hxv, hxw⟩
-    rcases Set.mem_insert_iff.mp hxv with rfl | ⟨y, ⟨ζ, rfl⟩, rfl⟩
-    · exact infty_mem_oneGreatCircle
-    · rcases Set.mem_insert_iff.mp hxw with hInf | ⟨y', ⟨ζ', hy'⟩, hcoe⟩
-      · exact absurd hInf (OnePoint.coe_ne_infty _)
-      · have hyy : sliceEmbed w ζ' = sliceEmbed v ζ := by
-          rw [hy']
-          exact OnePoint.coe_injective hcoe
-        have him := congrArg im hyy
-        rw [im_sliceEmbed hw, im_sliceEmbed hv] at him
-        by_cases hζim : ζ.im = 0
-        · obtain ⟨σ, rfl⟩ : ∃ σ : ℝ, ((σ : ℝ) : ℂ) = ζ :=
-            ⟨ζ.re, Complex.ext (Complex.ofReal_re _)
-              (by rw [Complex.ofReal_im]; exact hζim.symm)⟩
-          rw [sliceEmbed_ofReal]
-          exact ofReal_mem_oneGreatCircle σ
-        · exfalso
-          rcases unit_smul_eq_unit_smul' hv hw hζim him with h | h
-          · exact hvw h
-          · exact hvw' h
-  · intro hx
-    exact ⟨oneGreatCircle_subset_sliceSphere v hx,
-      oneGreatCircle_subset_sliceSphere w hx⟩
-
-/-- **The fixed locus** (the author: "G₂ fixes ℝ ∪ {∞} in 𝕆* and
-everything else is imaginary"; re-derived from GreatCircleRoute.lean's
-PROVED `greatCircle_eq_fixedLocus` on the clean chain): the one great
-circle is precisely the G₂-fixed locus of 𝕆* — the base 𝓑 lives on a
-circle every direction morphism of 𝒮₂ fixes POINTWISE. -/
-theorem oneGreatCircle_eq_fixedLocus :
-    oneGreatCircle = {x : OnePoint Octonion | ∀ g : G2, g • x = x} := by
-  ext x
-  constructor
-  · intro hx g
-    rcases Set.mem_insert_iff.mp hx with rfl | ⟨y, ⟨r, rfl⟩, rfl⟩
-    · exact G2.smul_onePoint_infty g
-    · rw [G2.smul_onePoint_coe, G2.smul_ofReal]
-  · intro hfix
-    by_contra hx
-    induction x using OnePoint.rec with
-    | infty => exact hx infty_mem_oneGreatCircle
-    | coe y =>
-      have hyim : im y ≠ 0 := by
-        intro h0
-        rw [Octonion.eq_ofReal_of_im_eq_zero h0] at hx
-        exact hx (ofReal_mem_oneGreatCircle (re y))
-      have hdir := dir_mem_unitImaginarySphere hyim
-      have hneg := Octonion.neg_mem_unitImaginarySphere hdir
-      obtain ⟨g, hg⟩ := G2.exists_smul_eq_of_mem_unitImaginarySphere hdir hneg
-      have hfixy := hfix g
-      rw [G2.smul_onePoint_coe, OnePoint.coe_eq_coe] at hfixy
-      have hdisp := sliceEmbed_dir_sliceCoord y
-      have hsmul : g • y = sliceEmbed (-(dir y)) (sliceCoord y) := by
-        conv_lhs => rw [← hdisp]
-        rw [G2.smul_sliceEmbed, hg]
-      have him1 : im (g • y) = (sliceCoord y).im • -(dir y) := by
-        rw [hsmul, im_sliceEmbed hneg]
-      have him2 : im y = (sliceCoord y).im • dir y := by
-        conv_lhs => rw [← hdisp]
-        rw [im_sliceEmbed hdir]
-      have him : (sliceCoord y).im • -(dir y) = (sliceCoord y).im • dir y := by
-        rw [← him1, ← him2, hfixy]
-      have hcoord_im : (sliceCoord y).im ≠ 0 := by
-        show Octonion.norm (im y) ≠ 0
-        exact ne_of_gt (norm_pos_of_ne_zero hyim)
-      have hdir0 : dir y ≠ 0 := by
-        intro h
-        have h2 := hdir.2
-        rw [h, normSq_zero] at h2
-        norm_num at h2
-      apply hdir0
-      rw [smul_neg] at him
-      have h4 : (sliceCoord y).im • dir y + (sliceCoord y).im • dir y = 0 :=
-        add_eq_zero_iff_eq_neg.mpr him.symm
-      have h5 : (sliceCoord y).im • dir y = 0 := by
-        have h6 : (2 : ℝ) • ((sliceCoord y).im • dir y) = 0 := by
-          rw [two_smul]
-          exact h4
-        have h7 := congrArg (fun t => (2⁻¹ : ℝ) • t) h6
-        simpa [smul_smul] using h7
-      have h8 := congrArg (fun t => ((sliceCoord y).im)⁻¹ • t) h5
-      simpa [smul_smul, inv_mul_cancel₀ hcoord_im] using h8
-
-/-- **The carrier of the base IS the circle** (the author's correction of
-2026-07-07: "the GPV base is ON THE GREAT CIRCLE — that's it"): the
-compactified base 𝓑^𝔫 = OnePoint ℝ (TransportObject.lean `BaseC` — the
-levels plus the one 𝔫) is in canonical bijection with the one great
-circle: level c ↔ the real point c of the circle, 𝔫 ↔ the one N. -/
-def circleBase : BaseC ≃ ↥oneGreatCircle where
-  toFun x :=
-    OnePoint.rec ⟨OnePoint.infty, infty_mem_oneGreatCircle⟩
-      (fun c => ⟨((ofReal c : Octonion) : OnePoint Octonion),
-        ofReal_mem_oneGreatCircle c⟩) x
-  invFun q :=
-    OnePoint.rec BaseC.nPt (fun y => BaseC.lvl (re y)) q.val
-  left_inv x := by
-    induction x using OnePoint.rec with
-    | infty => rfl
-    | coe c =>
-      show BaseC.lvl (re (ofReal c)) = BaseC.lvl c
-      rw [re_ofReal]
-  right_inv q := by
-    obtain ⟨x, hx⟩ := q
-    rcases Set.mem_insert_iff.mp hx with rfl | ⟨y, ⟨r, rfl⟩, rfl⟩
-    · rfl
-    · exact Subtype.ext (by
-        show ((ofReal (re (ofReal r)) : Octonion) : OnePoint Octonion)
-          = ((ofReal r : Octonion) : OnePoint Octonion)
-        rw [re_ofReal])
-
-theorem circleBase_lvl (c : ℝ) :
-    (circleBase (BaseC.lvl c)).val = ((ofReal c : Octonion) : OnePoint Octonion) := rfl
-
-theorem circleBase_nPt :
-    (circleBase BaseC.nPt).val = (OnePoint.infty : OnePoint Octonion) := rfl
-
-/-! ## The section on the world: slice preservation (green stock) and THE
-LANDING — the one great circle is section-invariant -/
-
-namespace ASection
-
-/-- **THE LANDING ON THE BASE** (the round trip closed on the circle): the
-A-section carries THE ONE GREAT CIRCLE into itself — a real point's value
-is real (`real_on_real`, intrinsicality: the imaginary component of the
-realization vanishes on ℝ regardless of direction), the pole goes to ∞
-(still on the circle), and ∞ goes to its compactified value, real or ∞
-(`valueAtInfinity`). The GPV base lives ON the circle; the circle is
-section-invariant: the airplane's flight restricted to the base stays on
-the base. Sphere preservation is the already-proved
-`realize_mem_sliceSphere` (Slice.lean, `def:section-map`(i)) — together:
-the section preserves every world AND the one circle they share. -/
-theorem realize_circle_to_circle (A : ASection) {x : OnePoint Octonion}
-    (hx : x ∈ oneGreatCircle) : A.realize x ∈ oneGreatCircle := by
-  rcases Set.mem_insert_iff.mp hx with rfl | ⟨y, ⟨c, rfl⟩, rfl⟩
-  · -- ∞ ↦ the compactified value, real or ∞ — on the circle either way
-    rw [realize_infty]
-    induction A.valueAtInfinity using OnePoint.rec with
-    | infty =>
-        simp only [OnePoint.map_infty]
-        exact Set.mem_insert _ _
-    | coe z =>
-        simp only [OnePoint.map_some]
-        exact Set.mem_insert_iff.mpr
-          (Or.inr ⟨Octonion.ofReal z.re, ⟨z.re, rfl⟩, rfl⟩)
-  · -- a real point ↦ its real value (or ∞ at the pole)
-    rw [realize_coe]
-    split_ifs with h
-    · have hcoord : Octonion.sliceCoord (Octonion.ofReal c) = (c : ℂ) := by
-        unfold Octonion.sliceCoord
-        rw [Octonion.im_ofReal, Octonion.norm_zero, Octonion.re_ofReal]
-        exact Complex.ext rfl (Complex.ofReal_im c).symm
-      have him : (A.F (c : ℂ)).im = 0 := A.real_on_real c
-      have hembed : Octonion.sliceEmbed (Octonion.dir (Octonion.ofReal c))
-          (A.F (Octonion.sliceCoord (Octonion.ofReal c)))
-          = Octonion.ofReal ((A.F (c : ℂ)).re) := by
-        rw [hcoord]
-        unfold Octonion.sliceEmbed
-        rw [him, zero_smul, add_zero]
-      rw [hembed]
-      exact Set.mem_insert_iff.mpr
-        (Or.inr ⟨Octonion.ofReal ((A.F (c : ℂ)).re), ⟨(A.F (c : ℂ)).re, rfl⟩, rfl⟩)
-    · exact Set.mem_insert _ _
-
-end ASection
-
-/-! ## The round trip on the base: the flight as a self-map of 𝓑 -/
-
-namespace ASection
-
-/-- The circle-restricted flight: the section's action on the one great
-circle, landed (via `realize_circle_to_circle`) as a self-map of the
-circle's own points. -/
-def circleFlight (A : ASection) (p : ↥oneGreatCircle) : ↥oneGreatCircle :=
-  ⟨A.realize p.val, A.realize_circle_to_circle p.property⟩
-
-/-- **THE ROUND TRIP ON THE BASE** (the landing readout): through
-`circleBase` — the GPV base IS the one great circle — the section's
-flight restricted to the circle is a self-map of the transport's base 𝓑
-itself. The airplane takes off from the base, flies through the sphere
-world (every world preserved, `realize_mem_sliceSphere`), and lands on
-the base. -/
-def baseFlight (A : ASection) : BaseC → BaseC :=
-  fun b => circleBase.symm (A.circleFlight (circleBase b))
-
-end ASection
-
-namespace ASection
-
-/-- The flight lands a level at its VALUE's level: at an analytic real
-point c, the flight reads lvl c ↦ lvl ((F c).re) — the section's real
-values steering the base (the value is real by `real_on_real`, so its
-level IS its real part). -/
-theorem baseFlight_lvl (A : ASection) (c : ℝ)
-    (h : AnalyticAt ℂ A.F (Octonion.sliceCoord (Octonion.ofReal c))) :
-    A.baseFlight (BaseC.lvl c) = BaseC.lvl ((A.F (c : ℂ)).re) := by
-  unfold baseFlight circleFlight
-  have hcoord : Octonion.sliceCoord (Octonion.ofReal c) = (c : ℂ) := by
-    unfold Octonion.sliceCoord
-    rw [Octonion.im_ofReal, Octonion.norm_zero, Octonion.re_ofReal]
-    exact Complex.ext rfl (Complex.ofReal_im c).symm
-  have him : (A.F (c : ℂ)).im = 0 := A.real_on_real c
-  have hval : A.realize ((circleBase (BaseC.lvl c)).val)
-      = ((Octonion.ofReal ((A.F (c : ℂ)).re) : Octonion) : OnePoint Octonion) := by
-    rw [circleBase_lvl, realize_coe, if_pos h, hcoord]
-    congr 1
-    unfold Octonion.sliceEmbed
-    rw [him, zero_smul, add_zero]
-  simp only [hval]
-  show BaseC.lvl (Octonion.re (Octonion.ofReal ((A.F (c : ℂ)).re)))
-      = BaseC.lvl ((A.F (c : ℂ)).re)
-  rw [Octonion.re_ofReal]
-
-/-- The flight lands the pole at 𝔫: C1's simple pole forbids analyticity
-at the pole's slice coordinate, so the realization there is ∞ — the
-flight carries the pole's level to the witness point. The cone of the
-transport IS the flight's landing at the pole. -/
-theorem baseFlight_pole (A : ASection) :
-    A.baseFlight (BaseC.lvl A.pole) = BaseC.nPt := by
-  unfold baseFlight circleFlight
-  have hcoord : Octonion.sliceCoord (Octonion.ofReal A.pole) = (A.pole : ℂ) := by
-    unfold Octonion.sliceCoord
-    rw [Octonion.im_ofReal, Octonion.norm_zero, Octonion.re_ofReal]
-    exact Complex.ext rfl (Complex.ofReal_im _).symm
-  have hnot : ¬ AnalyticAt ℂ A.F (Octonion.sliceCoord (Octonion.ofReal A.pole)) := by
-    rw [hcoord]
-    intro han
-    have h0 := han.meromorphicOrderAt_nonneg
-    rw [A.c1_simple] at h0
-    have h1 : (0 : ℤ) ≤ (-1 : ℤ) := by exact_mod_cast h0
-    norm_num at h1
-  have hval : A.realize ((circleBase (BaseC.lvl A.pole)).val) = OnePoint.infty := by
-    rw [circleBase_lvl, realize_coe, if_neg hnot]
-  simp only [hval]
+/-- Composition in `SphereWorld` realizes as composition of point maps. -/
+theorem SphereHom.realize_comp {I J K : SphereWorld}
+    (f : I ⟶ J) (g : J ⟶ K)
+    (q : ↑(Octonion.sliceSphere I.val)) :
+    SphereHom.realize (f ≫ g) q =
+      SphereHom.realize g (SphereHom.realize f q) := by
+  apply Subtype.ext
+  change spherePt K.val
+      ((g.mob * f.mob).val (coordAt I.val q.val)) =
+    spherePt K.val
+      (g.mob.val (coordAt J.val
+        (spherePt J.val (f.mob.val (coordAt I.val q.val)))))
+  rw [coordAt_spherePt J.prop]
   rfl
 
-end ASection
-
-/-! ## Φ at sphere level: the section's self-map datum on each world
-
-Author's dictation (DESIGN_S2, verbatim): "The A-section is slice
-preserving — this is part of its DEFINITION: it carries each S²_I into
-itself (`def:slice-preserving`, `def:R`); the section functor Φ must
-therefore act at SPHERE level (object S²_I ↦ object S²_I with the
-section's restriction as the sphere self-map data), not at point level." -/
-
-namespace ASection
-
-/-- **Φ AT SPHERE LEVEL** — the self-map datum of the section on the world
-I: the realization restricted to the sphere carrier of I, landed by the
-proved slice preservation (`realize_mem_sliceSphere`,
-`def:section-map`(i)). Object S²_I ↦ object S²_I with the section's
-restriction as the sphere self-map data — the author's dictation
-verbatim. -/
-def sphereMap (A : ASection) (I : SphereWorld) :
-    ↥(Octonion.sliceSphere I.val) → ↥(Octonion.sliceSphere I.val) :=
-  fun q => ⟨A.realize q.val, A.realize_mem_sliceSphere I.prop q.prop⟩
-
-@[simp] theorem sphereMap_val (A : ASection) (I : SphereWorld)
-    (q : ↥(Octonion.sliceSphere I.val)) :
-    (A.sphereMap I q).val = A.realize q.val := rfl
-
-/-- **The direction-naturality square of Φ** (Wang Rem 2.11 through the
-proved `realize_equivariant`): the section's sphere-level datum commutes
-with the direction relabelling of worlds — relabel-then-apply equals
-apply-then-relabel, on every point of every world. -/
-theorem sphereMap_dir_natural (A : ASection) (g : G2) (I : SphereWorld)
-    (q : ↥(Octonion.sliceSphere I.val)) :
-    (A.sphereMap ⟨g • I.val, G2.smul_mem_unitImaginarySphere g I.prop⟩
-        ⟨g • q.val, smul_mem_sliceSphere g q.prop⟩).val
-      = g • (A.sphereMap I q).val :=
-  A.realize_equivariant g q.val
-
-end ASection
-
-/-! ## The GPV base ON the circle: the degenerate fibre in each world's chart
-
-The author's correction of 2026-07-07: "THE GPV BASE IS ON THE GREAT
-CIRCLE — the base 𝓑 lives on the ONE circle S¹ = ℝ ∪ {N}." The degenerate
-values −r (r > 0) are the circle's own negative-real points; each world
-S²_I hangs its degenerate fibre off the circle at the SINGLE level log r
-(`lem:exp-degenerate` read in the world's chart), all remaining freedom
-band data (the odd heights); and the level point is a point OF the circle,
-the same one for every world. -/
-
-namespace Octonion
-
-/-- The stem fibre formula in level/height coordinates (master
-`lem:exp-degenerate` on the stem; re-derivation of the unimported
-LoopAssembly §B row `exp_eq_neg_real_iff` on the clean import chain):
-exp ζ = −r (r > 0) exactly at the ONE level log r and an odd height
-(2k+1)π. -/
-theorem complex_exp_eq_neg_real_iff {r : ℝ} (hr : 0 < r) (ζ : ℂ) :
-    Complex.exp ζ = ((-r : ℝ) : ℂ)
-      ↔ ζ.re = Real.log r ∧ ∃ k : ℤ, ζ.im = ((2 * k + 1 : ℤ) : ℝ) * Real.pi := by
-  constructor
-  · intro h
-    have hlevel : ζ.re = Real.log r := by
-      have hnorm := congrArg Norm.norm h
-      rw [Complex.norm_exp, Complex.ofReal_neg, norm_neg, Complex.norm_real,
-        Real.norm_eq_abs, abs_of_pos hr] at hnorm
-      rw [← hnorm, Real.log_exp]
-    have him0 : Real.exp ζ.re * Real.sin ζ.im = 0 := by
-      have h1 := congrArg Complex.im h
-      rwa [Complex.exp_im, Complex.ofReal_im] at h1
-    have hsin : Real.sin ζ.im = 0 := by
-      rcases mul_eq_zero.mp him0 with h' | h'
-      · exact absurd h' (ne_of_gt (Real.exp_pos _))
-      · exact h'
-    obtain ⟨n, hn⟩ := Real.sin_eq_zero_iff.mp hsin
-    have hre0 : Real.exp ζ.re * Real.cos ζ.im = -r := by
-      have h1 := congrArg Complex.re h
-      rwa [Complex.exp_re, Complex.ofReal_re] at h1
-    rw [← hn, Real.cos_int_mul_pi] at hre0
-    rcases Int.even_or_odd n with he | ho
-    · exfalso
-      rw [Even.neg_one_zpow he, _root_.mul_one] at hre0
-      have := Real.exp_pos ζ.re
-      linarith
-    · obtain ⟨k, hk⟩ := ho
-      refine ⟨hlevel, k, ?_⟩
-      rw [← hn, hk]
-  · rintro ⟨hre, k, him⟩
-    apply Complex.ext
-    · rw [Complex.exp_re, Complex.ofReal_re, hre, him, Real.exp_log hr,
-        Real.cos_int_mul_pi, Odd.neg_one_zpow (⟨k, by ring⟩ : Odd (2 * k + 1))]
-      ring
-    · rw [Complex.exp_im, Complex.ofReal_im, him, Real.sin_int_mul_pi, mul_zero]
-
-/-- A chart point lands on the real axis iff its coordinate is real: the
-slice embedding along a unit direction hits `ofReal s` exactly at the real
-coordinate s (the chart is faithful over the circle). -/
-theorem sliceEmbed_eq_ofReal_iff {v : Octonion} (hv : v ∈ unitImaginarySphere)
-    (w : ℂ) (s : ℝ) : sliceEmbed v w = ofReal s ↔ w = (s : ℂ) := by
-  constructor
-  · intro h
-    have hre := congrArg re h
-    rw [re_sliceEmbed hv, re_ofReal] at hre
-    have him := congrArg im h
-    rw [im_sliceEmbed hv, im_ofReal] at him
-    have him0 : w.im = 0 := by
-      have h2 := congrArg normSq him
-      rw [normSq_smul, hv.2, _root_.mul_one, normSq_zero] at h2
-      exact pow_eq_zero_iff two_ne_zero |>.mp h2
-    exact Complex.ext (by rw [hre, Complex.ofReal_re])
-      (by rw [him0, Complex.ofReal_im])
-  · rintro rfl
-    exact sliceEmbed_ofReal v s
-
-/-- **The degenerate fibre in the world's chart** (`lem:exp-degenerate`
-read in the chart of the world S²_I): the slice exponential carries the
-chart point ζ of the world I to the degenerate value −r (r > 0) iff ζ sits
-at THE single level log r with an odd height (2k+1)π. One level per fibre;
-all remaining multiplicity in the winding band. -/
-theorem exp_slice_fibre_iff {v : Octonion} (hv : v ∈ unitImaginarySphere)
-    {r : ℝ} (hr : 0 < r) (ζ : ℂ) :
-    exp (sliceEmbed v ζ) = ofReal (-r)
-      ↔ ζ.re = Real.log r ∧ ∃ k : ℤ, ζ.im = ((2 * k + 1 : ℤ) : ℝ) * Real.pi := by
-  rw [exp_sliceEmbed' hv, show (ofReal (-r) : Octonion) = ofReal ((-r : ℝ)) from rfl,
-    sliceEmbed_eq_ofReal_iff hv]
-  exact complex_exp_eq_neg_real_iff hr ζ
-
-/-- The level clause: every degenerate chart point of every world carries
-the ONE level log r ("The fibre is thus indexed by the single real level
-log r = log|−r|", master `lem:exp-degenerate`). -/
-theorem exp_slice_fibre_level {v : Octonion} (hv : v ∈ unitImaginarySphere)
-    {r : ℝ} (hr : 0 < r) {ζ : ℂ}
-    (h : exp (sliceEmbed v ζ) = ofReal (-r)) : ζ.re = Real.log r :=
-  ((exp_slice_fibre_iff hv hr ζ).mp h).1
-
-/-- The band clause: the remaining freedom of a degenerate chart point is
-the odd winding height — band data, never an object label (master
-`def:base`). -/
-theorem exp_slice_fibre_band {v : Octonion} (hv : v ∈ unitImaginarySphere)
-    {r : ℝ} (hr : 0 < r) {ζ : ℂ}
-    (h : exp (sliceEmbed v ζ) = ofReal (-r)) :
-    ∃ k : ℤ, ζ.im = ((2 * k + 1 : ℤ) : ℝ) * Real.pi :=
-  ((exp_slice_fibre_iff hv hr ζ).mp h).2
-
-/-- **The level point lies ON the circle**: the single level log r of the
-fibre is a point of the one great circle — the base 𝓑 lives on it (the
-author's correction of 2026-07-07). -/
-theorem fibre_level_mem_circle (r : ℝ) :
-    ((ofReal (Real.log r) : Octonion) : OnePoint Octonion) ∈ oneGreatCircle :=
-  ofReal_mem_oneGreatCircle _
-
-/-- **The level point is the SAME point for all worlds**: the circle is
-pointwise G₂-fixed (`oneGreatCircle_eq_fixedLocus`), so no direction
-relabelling moves the level — one level, one point, every world. -/
-theorem fibre_level_shared (g : G2) (r : ℝ) :
-    g • ((ofReal (Real.log r) : Octonion) : OnePoint Octonion)
-      = ((ofReal (Real.log r) : Octonion) : OnePoint Octonion) := by
-  rw [G2.smul_onePoint_coe, G2.smul_ofReal]
-
-end Octonion
-
-/-! ## The takeoff: every point of 𝕆* boards at its own world -/
-
-open Classical in
-/-- The world through a point of 𝕆* (the takeoff assignment): the sphere
-S²_{I(x)} of the point's own direction for non-real finite x; for the
-circle's own points — the real axis and the one N, which lie on EVERY
-world — the basepoint world. -/
-def sphereOfPt (q : OnePoint Octonion) : SphereWorld :=
-  OnePoint.rec baseWorld
-    (fun x => if h : Octonion.im x = 0 then baseWorld
-      else ⟨Octonion.dir x, Octonion.dir_mem_unitImaginarySphere h⟩) q
-
-theorem sphereOfPt_infty : sphereOfPt OnePoint.infty = baseWorld := rfl
-
-open Classical in
-theorem sphereOfPt_coe (x : Octonion) :
-    sphereOfPt (x : OnePoint Octonion)
-      = if h : Octonion.im x = 0 then baseWorld
-        else ⟨Octonion.dir x, Octonion.dir_mem_unitImaginarySphere h⟩ := rfl
-
-/-- **THE TAKEOFF**: every point of 𝕆* lies on its own world's sphere —
-the domain point boards the airplane at its own slice Riemann sphere. -/
-theorem takeoff (q : OnePoint Octonion) :
-    q ∈ Octonion.sliceSphere (sphereOfPt q).val := by
-  induction q using OnePoint.rec with
-  | infty => exact Set.mem_insert _ _
-  | coe x =>
-    rw [sphereOfPt_coe]
-    by_cases h : Octonion.im x = 0
-    · rw [dif_pos h]
-      exact Set.mem_insert_of_mem _
-        ⟨x, ⟨((Octonion.re x : ℝ) : ℂ), by
-          rw [Octonion.sliceEmbed_ofReal]
-          exact (Octonion.eq_ofReal_of_im_eq_zero h).symm⟩, rfl⟩
-    · rw [dif_neg h]
-      exact Set.mem_insert_of_mem _
-        ⟨x, ⟨Octonion.sliceCoord x, Octonion.sliceEmbed_dir_sliceCoord x⟩, rfl⟩
-
-/-! ## The flight: the round trip 𝕆* → 𝒮₂ → 𝕆* -/
-
-namespace ASection
-
-/-- **THE FLIGHT** — the functorial airplane's round trip: take off at the
-point's own world (`takeoff`), apply the section's sphere-level self-map
-datum there (`sphereMap` — the slice-world leg), land back in 𝕆* by the
-sphere's inclusion. -/
-def flight (A : ASection) (q : OnePoint Octonion) : OnePoint Octonion :=
-  (A.sphereMap (sphereOfPt q) ⟨q, takeoff q⟩).val
-
-/-- **THE COMPOSITE IS THE REALIZATION** (the author's round-trip clause):
-the airplane's full trip through the true 𝒮₂ returns exactly the section's
-realization on 𝕆* — definitionally. -/
-theorem flight_eq_realize (A : ASection) (q : OnePoint Octonion) :
-    A.flight q = A.realize q := rfl
-
-/-- **The one circle is closed under the whole trip**: the flight of any
-point of the one great circle stays on the one great circle. -/
-theorem flight_mem_oneGreatCircle (A : ASection) {q : OnePoint Octonion}
-    (hq : q ∈ oneGreatCircle) : A.flight q ∈ oneGreatCircle := by
-  rw [flight_eq_realize]
-  exact A.realize_circle_to_circle hq
-
-end ASection
-
-/-! ## The glued transport: the original argument on the corrected object
-
-𝒯 = ∫_{𝓑^𝔫} (const 𝒮₂): base = the circle-base 𝓑^𝔫 (TransportObject's
-`BaseC` — the levels plus the one 𝔫, with the closing arrows c ⟶ 𝔫: C1's
-cone through the one N), fibre = the TRUE sphere world everywhere. The
-cone/witness pattern of the frozen `concentricity_transport` runs verbatim
-on the corrected object. -/
-
-/-- The constant world functor on the compactified base: every point of
-the circle carries the whole true 𝒮₂ as its fibre. -/
-def worldFunctorC : BaseC ⥤ Grpd :=
-  (Functor.const BaseC).obj (Grpd.of SphereWorld)
-
-/-- **𝒯 = ∫_{𝓑^𝔫} (const 𝒮₂)** — the glued transport on the corrected
-range object. -/
-def GluedTransport := Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat)
-
-instance : CategoryTheory.Category GluedTransport :=
-  inferInstanceAs
-    (CategoryTheory.Category (Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat)))
-
-namespace GluedTransport
-
-/-- The object of the glued transport over a base point, carrying a
-world. -/
-def ofBase (x : BaseC) (I : SphereWorld) : GluedTransport :=
-  Grothendieck.mk (F := worldFunctorC ⋙ Grpd.forgetToCat) x I
-
-/-- The apex: the one 𝔫 of the circle, carrying the basepoint world. -/
-def nObj : GluedTransport := ofBase BaseC.nPt baseWorld
-
-/-- The closing arrow of the glued transport over x ⟶ 𝔫: base leg the
-circle's closing (C1's cone through the one N), fibre leg a direction
-morphism into the basepoint world (the sphere world is connected — G₂ is
-transitive on S⁶, `G2.exists_smul_eq_of_mem_unitImaginarySphere`). -/
-def toNHom (x : BaseC) (I : SphereWorld) : ofBase x I ⟶ nObj where
-  base := homOfLE (BaseC.le_nPt x)
-  fiber := dirHomTo
-    (G2.exists_smul_eq_of_mem_unitImaginarySphere I.prop baseWorld.prop).choose
-    (G2.exists_smul_eq_of_mem_unitImaginarySphere I.prop baseWorld.prop).choose_spec
-
-/-- The small argument on the corrected object: every object closes into
-𝔫's zigzag class. -/
-theorem zigzag_to_n (x : BaseC) (I : SphereWorld) :
-    CategoryTheory.Zigzag (ofBase x I) nObj :=
-  CategoryTheory.Zigzag.of_hom (toNHom x I)
-
-/-- Class read: every object's component is the apex's. -/
-theorem classOf_eq_nClass (x : BaseC) (I : SphereWorld) :
-    CategoryTheory.ConnectedComponents.mk (ofBase x I)
-      = CategoryTheory.ConnectedComponents.mk nObj :=
-  _root_.Quotient.sound' (zigzag_to_n x I)
-
-/-- HONESTY PIN (the frozen Pin 2 carried to the corrected object): the
-glued transport separates NO levels — every two objects share the apex's
-component, so no centre readout exists HERE. The σ-crossing (the enriched
-witness, Concentricity/Landing.lean) is where the level datum rides. -/
-theorem not_level_separating (x y : BaseC) (I J : SphereWorld) :
-    CategoryTheory.ConnectedComponents.mk (ofBase x I)
-      = CategoryTheory.ConnectedComponents.mk (ofBase y J) :=
-  (classOf_eq_nClass x I).trans (classOf_eq_nClass y J).symm
-
-end GluedTransport
-
-/-- **The band lives inside the sphere world** (the author's clause "S¹
-and U(1) live there too"): the band groupoid — the fibre of the frozen
-𝒯^𝔫 — maps into the true 𝒮₂ at any world, by the band's own Möbius phases
-(`bandEnd`). -/
-def bandToWorld (I : SphereWorld) : SingleObj Circle ⥤ SphereWorld :=
-  SingleObj.functor (bandEnd I)
-
-/-- The band-to-world comparison at the level of the base diagrams: the
-frozen band fibre maps into the constant world fibre, naturally over the
-compactified base. -/
-def bandToWorldGrpd : bandFunctorC ⟶ worldFunctorC where
-  app _ := bandToWorld baseWorld
-  naturality _ _ _ := by
-    simp [bandFunctorC, worldFunctorC]
-    rfl
-
-/-- **The frozen 𝒯^𝔫 maps into the glued transport**: over the identity of
-the circle-base, fibre-wise the band into the basepoint world. The frozen
-theorem's object sits INSIDE the corrected object. -/
-def transportToGlued : TotalTransport ⥤ GluedTransport :=
-  Grothendieck.map (Functor.whiskerRight bandToWorldGrpd Grpd.forgetToCat)
-
-/-- The frozen object lands where expected (anti-vacuity, definitional). -/
-theorem transportToGlued_obj_ofBase (x : BaseC) :
-    transportToGlued.obj (TotalTransport.ofBase x)
-      = GluedTransport.ofBase x baseWorld := rfl
-
-/-- **The cone/witness pattern of the frozen theorem, verbatim on the
-corrected object** (`ASection.concentricity_transport`'s shape): the
-residue-ℂ zero levels of an A-section arrive in ONE connected component of
-the glued transport — connected at 𝔫 by the closing arrows, every world of
-the true 𝒮₂ riding the fibre. -/
-theorem ASection.glued_concentricity_transport (A : ASection) (n m : ℕ)
-    (I J : SphereWorld) :
-    CategoryTheory.ConnectedComponents.mk
-        (GluedTransport.ofBase (BaseC.lvl (A.transportLevel n)) I)
-      = CategoryTheory.ConnectedComponents.mk
-        (GluedTransport.ofBase (BaseC.lvl (A.transportLevel m)) J) :=
-  GluedTransport.not_level_separating _ _ I J
-
-/-! ## The static dictionary on the corrected object: one component = one
-level = one point of the one circle -/
-
-/-- The static world functor: the same fibre (the true 𝒮₂) over the
-DISCRETE circle-base — no closing arrows (master `def:base`, static
-clause: "no morphisms between distinct levels"). -/
-def staticWorldFunctor : Discrete BaseC ⥤ Grpd :=
-  (Functor.const (Discrete BaseC)).obj (Grpd.of SphereWorld)
-
-/-- The static glued object ∫ (const 𝒮₂) over the discrete circle-base. -/
-def StaticGlued := Grothendieck (staticWorldFunctor ⋙ Grpd.forgetToCat)
-
-instance : CategoryTheory.Category StaticGlued :=
-  inferInstanceAs
-    (CategoryTheory.Category (Grothendieck (staticWorldFunctor ⋙ Grpd.forgetToCat)))
-
-namespace StaticGlued
-
-/-- The static object over a base point, carrying a world. -/
-def ofBase (x : BaseC) (I : SphereWorld) : StaticGlued :=
-  Grothendieck.mk (F := staticWorldFunctor ⋙ Grpd.forgetToCat) ⟨x⟩ I
-
-/-- The base-point read-off. -/
-def basePt (X : StaticGlued) : BaseC := X.base.as
-
-/-- The base point is conserved along every zigzag (the static clause of
-master `def:base`: distinct base points have no morphisms between them). -/
-theorem basePt_eq_of_zigzag {X Y : StaticGlued} (h : CategoryTheory.Zigzag X Y) :
-    X.basePt = Y.basePt :=
-  CategoryTheory.eq_of_zigzag BaseC
-    (CategoryTheory.zigzag_obj_of_zigzag
-      (Grothendieck.forget (staticWorldFunctor ⋙ Grpd.forgetToCat)) h)
-
-/-- Every object joins the canonical object of its base point: the fibre —
-the true 𝒮₂ — is one glued world (`sphereWorld_zigzag`). -/
-theorem zigzag_ofBase_basePt (X : StaticGlued) :
-    CategoryTheory.Zigzag X (ofBase X.basePt baseWorld) :=
-  CategoryTheory.zigzag_obj_of_zigzag
-    (Grothendieck.ι (staticWorldFunctor ⋙ Grpd.forgetToCat) X.base)
-    (sphereWorld_zigzag X.fiber baseWorld)
-
-/-- **THE STATIC DICTIONARY on the corrected object**: the components of
-the static glued object are exactly the points of the circle-base — one
-component = one level (or the one 𝔫). Forward the conserved base read
-(`basePt_eq_of_zigzag`); inverse the canonical object; each fibre
-collapses to a point because the true 𝒮₂ is connected. -/
-def staticBaseClass : CategoryTheory.ConnectedComponents StaticGlued ≃ BaseC where
-  toFun := _root_.Quotient.lift basePt fun _ _ h => basePt_eq_of_zigzag h
-  invFun x := CategoryTheory.ConnectedComponents.mk (ofBase x baseWorld)
-  left_inv := _root_.Quotient.ind fun X =>
-    (_root_.Quotient.sound' (zigzag_ofBase_basePt X)).symm
-  right_inv _ := rfl
-
-end StaticGlued
-
-/-- **One component = one level = ONE POINT OF THE ONE CIRCLE** (the
-author's dictation closed into the dictionary): through `circleBase` — the
-carrier of the base IS the circle — the static components read off as the
-points of the one great circle itself. -/
-def staticLevelClass :
-    CategoryTheory.ConnectedComponents StaticGlued ≃ ↥oneGreatCircle :=
-  StaticGlued.staticBaseClass.trans circleBase
-
-/-! ## THE READOUT SPEC (the author, 2026-07-07): σ MAPS TO ITSELF — σ = c
-FROM THE WINDING. The level of each zero's transport datum is the flight's
-FIXED datum (not a value-read): conserved along every zigzag
-(`TotalObject.level_eq_of_zigzag`), closed by every lift
-(`winding_loop_defect_level_zero`), one per fibre (`exp_fibre_level`).
-The full airplane carries: one component through 𝔫 (`classOf_eq_nClass` /
-`transport_universal`), the cone as the flight's own landing
-(`baseFlight_pole`), every world and the circle preserved
-(`realize_mem_sliceSphere`, `realize_circle_to_circle`), the winding
-tallies at the zeros (SigmaE3/WeldW12), the fibre joins
-(`zero_encounters_joined_concentric`). The readout to be driven: the one
-connected component's self-mapped σ IS the one centre —
-`ASection.concentricity`. -/
-
-/-! ## FINALITY AT 𝔫 (Riehl CHT §8.3, the author's pointer of record —
-inbox/cathtpy.pdf, printed pp. 100–101)
-
-SOURCED (verbatim, Riehl, *Categorical Homotopy Theory*, §8.3):
-- Definition 8.3.2: "A functor K : C → D is final if for any functor
-  F : D → M, the canonical map colim_C FK → colim_D F is an isomorphism,
-  both sides existing if either does."
-- Lemma 8.3.4: "A functor K : C → D is final if and only if for each
-  d ∈ D, the slice category d/K is non-empty and connected."
-- Lemma 8.3.1: "If D has a terminal object t and F : D → M, then
-  colim_D F ≅ Ft."
-
-DERIVED here: the ONE-OBJECT FULL subcategory at the apex 𝔫 — carrying
-𝔫's endomorphisms, the band/Möbius/direction self-maps of the basepoint
-world — is FINAL in the glued transport (`apexInclusion_final`), by
-Lemma 8.3.4: each slice X/K is non-empty (the cone arrow `toNRaw`, C1's
-closing through the one N) and connected (`arrows_to_n_join`: any two
-arrows into 𝔫 differ by an endomorphism of 𝔫, because the fibre is a
-groupoid). 𝔫 is NOT terminal — the slice has many objects — finality
-through the endomorphisms is exactly what the groupoid buys.
-(`Functor.fromPUnit` would carry NO endomorphisms and its slices would
-be discrete; the FULL subcategory inclusion is the correct K.)
-
-Consequence (Def 8.3.2): every colimit over the glued transport
-restricts to the apex — the component's readout is a readout AT 𝔫. -/
-
-namespace GluedTransport
-
-/-- The apex 𝔫 at the raw Grothendieck type (the identical term to
-`nObj`; the raw type lets the Grothendieck simp lemmas and `ext` fire
-syntactically). -/
-noncomputable def nRaw : Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat) :=
-  Grothendieck.mk (F := worldFunctorC ⋙ Grpd.forgetToCat) BaseC.nPt baseWorld
-
-/-- The groupoid cancel at the world, in the exact tree shape of the
-Grothendieck composite (the eqToHom legs are definitionally identities:
-the circle base is thin with proof-irrelevant homs, so all base-leg
-transports are definitional). -/
-theorem worldCancel (a : SphereWorld) (f g : a ⟶ baseWorld) :
-    𝟙 a ≫ 𝟙 a ≫ f ≫ (Groupoid.inv f ≫ g) = g := by
-  rw [Category.id_comp, Category.id_comp, ← Category.assoc,
-    Groupoid.comp_inv, Category.id_comp]
-
-/-- **The join at 𝔫** (the connectivity half of Riehl 8.3.4, morphism
-form): any two arrows into the apex differ by an ENDOMORPHISM of the
-apex — the world fibre is a groupoid, so the discrepancy
-`(φ.fiber)⁻¹ ≫ ψ.fiber` is itself a self-map of the basepoint world. -/
-theorem arrows_to_n_join
-    (X : Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat))
-    (φ ψ : X ⟶ nRaw) : ∃ e : nRaw ⟶ nRaw, φ ≫ e = ψ := by
-  refine ⟨⟨𝟙 _, show (baseWorld : SphereWorld) ⟶ baseWorld from
-    Groupoid.inv (show (X.fiber : SphereWorld) ⟶ baseWorld from φ.fiber) ≫
-      (show (X.fiber : SphereWorld) ⟶ baseWorld from ψ.fiber)⟩, ?_⟩
-  refine Grothendieck.ext _ _ (Subsingleton.elim _ _) ?_
-  exact worldCancel (X.fiber) φ.fiber ψ.fiber
-
-/-- The object property "is the apex". -/
-def isApex : ObjectProperty (Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat)) :=
-  fun Y => Y = nRaw
-
-/-- **K of Riehl 8.3**: the one-object FULL subcategory inclusion at 𝔫.
-It carries 𝔫's endomorphisms (the band/Möbius/direction self-maps of the
-basepoint world) — which is exactly what makes the slices X/K connected. -/
-noncomputable def apexInclusion :
-    isApex.FullSubcategory ⥤ Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat) :=
-  isApex.ι
-
-/-- Every object flies into the apex at the raw type: C1's cone on the
-base leg, a G₂ direction morphism on the world leg (`toNHom`). -/
-noncomputable def toNRaw (X : Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat)) :
-    X ⟶ nRaw :=
-  toNHom X.base X.fiber
-
-/-- Any two objects of the slice X/K are DIRECTLY connected by a
-morphism: the join `arrows_to_n_join`, transported through the
-subcategory's object equalities. -/
-theorem structuredArrow_hom (X : Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat))
-    (f g : StructuredArrow X apexInclusion) : Nonempty (f ⟶ g) := by
-  have hf : f.right.obj = nRaw := f.right.property
-  have hg : g.right.obj = nRaw := g.right.property
-  obtain ⟨e₀, he₀⟩ := arrows_to_n_join X (f.hom ≫ eqToHom hf) (g.hom ≫ eqToHom hg)
-  refine ⟨StructuredArrow.homMk
-    (InducedCategory.homMk (eqToHom hf ≫ e₀ ≫ eqToHom hg.symm)) ?_⟩
-  show f.hom ≫ (eqToHom hf ≫ e₀ ≫ eqToHom hg.symm) = g.hom
-  calc f.hom ≫ (eqToHom hf ≫ e₀ ≫ eqToHom hg.symm)
-      = ((f.hom ≫ eqToHom hf) ≫ e₀) ≫ eqToHom hg.symm := by simp [Category.assoc]
-    _ = (g.hom ≫ eqToHom hg) ≫ eqToHom hg.symm := by rw [he₀]
-    _ = g.hom := by simp [apexInclusion]
-
-/-- **Riehl 8.3.4's criterion at 𝔫, DERIVED**: every slice X/K is
-non-empty (the cone arrow) and connected (the join). -/
-theorem structuredArrow_connected (X : Grothendieck (worldFunctorC ⋙ Grpd.forgetToCat)) :
-    IsConnected (StructuredArrow X apexInclusion) := by
-  have : Nonempty (StructuredArrow X apexInclusion) :=
-    ⟨StructuredArrow.mk (show X ⟶ apexInclusion.obj ⟨nRaw, rfl⟩ from toNRaw X)⟩
-  exact zigzag_isConnected fun f g => Zigzag.of_hom (structuredArrow_hom X f g).some
-
-/-- **𝔫 IS FINAL** (Riehl Def 8.3.2, established via Lemma 8.3.4): the
-one-object full subcategory at the apex is a final subcategory of the
-glued transport. Every colimit over the glued transport is computed at
-𝔫 — the component's value lives at the apex. -/
-instance apexInclusion_final : CategoryTheory.Functor.Final apexInclusion :=
-  ⟨structuredArrow_connected⟩
-
-end GluedTransport
+end
