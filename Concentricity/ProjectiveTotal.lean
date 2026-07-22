@@ -34,13 +34,13 @@ source/stabilizer/target transition that defines `(sectionFunctor A).map f`;
 the object frame and arrow transition are consumed as one construction. -/
 def sectionAction (A : ASection) : GreatCircle.Base ⥤ Grpd.{0, 0} where
   obj _ := Grpd.of SphereWorld
-  map f := projectiveTransition A f
+  map f := distinguishedWorldAction ((sectionFunctor A).map f).mob
   map_id X := by
-    rw [projectiveTransition_eq, projectiveArrowElement_id]
+    rw [sectionFunctor_map_mob, projectiveArrowElement_id]
     exact distinguishedWorldAction_one
   map_comp f g := by
-    rw [projectiveTransition_eq, projectiveTransition_eq,
-      projectiveTransition_eq, projectiveArrowElement_comp]
+    rw [sectionFunctor_map_mob, sectionFunctor_map_mob,
+      sectionFunctor_map_mob, projectiveArrowElement_comp]
     exact (distinguishedWorldAction_comp
       (projectiveArrowElement A f) (projectiveArrowElement A g)).symm
 
@@ -49,9 +49,7 @@ the direct sphere-valued A-section functor. -/
 theorem sectionAction_map (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     (sectionAction A).map f =
-      distinguishedWorldAction ((sectionFunctor A).map f).mob := by
-  rw [sectionFunctor_map_mob]
-  exact projectiveTransition_eq A f
+      distinguishedWorldAction ((sectionFunctor A).map f).mob := rfl
 
 /-- Every sphere-world transport used by the total is literally the direct
 A-section arrow acting on the incoming transport. -/
