@@ -303,6 +303,10 @@ No enumeration or new arrow populates this subgroupoid.
 > naturality square. See `register/70-whole-square.md` §10 and
 > `register/60-failure-audit.md` §6j.
 
+> ✅ **CLOSED at `57384ae`.** Historical. The certified landing receipt is the
+> private `ASection.cResidue_lands`; there is no substantive preservation
+> theorem, and none was ever owed (`register/70` §§9–10).
+
 If the representation uses `ObjectProperty.lift`, its formal landing receipt
 may retain the registered name:
 
@@ -496,6 +500,13 @@ Keep these names active through the implementation loop so no generic slot becom
 the subject:
 
 **RATIFIED (Jesse, 2026-07-26) — the `ι_A` checkpoint. These four names only.**
+
+> ✅ **CLOSED at `57384ae` (2026-07-27).** Historical record. One deviation in
+> the certified implementation: the landing receipt is the private
+> `ASection.cResidue_lands` in `ASectionCResidueDiagram.lean`, not a public
+> `cResidue_preserved` — under the ratified preimage (base arrow held as
+> data) it lands by composition `g ≫ f`, so it is machinery, exactly as
+> `register/70` §9 predicted. The other three names are as ratified.
 
 | mathematical object | Lean name |
 |---|---|

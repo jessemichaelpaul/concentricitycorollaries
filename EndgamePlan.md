@@ -30,8 +30,9 @@ installed later.
 `F_A = AsectionActionDiagram A`, its framewise value `F_A(X)`, and its
 Grothendieck total are triple-certified. `CResidueZeroLocus A` is live and
 certified at its semantic C3--C4 type. Its framewise inverse image
-`InverseImageCResidueStateWorldGroupoid A X` is also triple-certified. The
-open checkpoint is the exact A-specific natural restriction:
+`InverseImageCResidueStateWorldGroupoid A X` is also triple-certified.
+**CLOSED 2026-07-27, commit `57384ae`** — the exact A-specific natural
+restriction is certified, with naturality by `rfl`:
 
 ```lean
 AsectionCResidueDiagram A : GreatCircle.Base ⥤ Grpd
@@ -54,7 +55,8 @@ certifies its component inclusions and naturality square.
 > generic full-subcategory inclusion into the Grothendieck total. It does not
 > have type `AsectionCResidueDiagram A ⟶ AsectionActionDiagram A`, does not
 > expose `𝓡_A(f)`, and does not certify Jesse's `ι_A`. It is retained as a
-> packaging checkpoint; the `ι_A` checkpoint remains open.
+> packaging checkpoint. The `ι_A` checkpoint itself is **CLOSED** at commit
+> `57384ae` (2026-07-27 evening); `52bde67` is still not the certificate.
 
 > **2026-07-27 — superseded framing.** See `register/70-whole-square.md`
 > §10 for the exact Lean ruling (§9 is the preceding semantic ruling): the
@@ -459,7 +461,11 @@ The sharpened semantic gate order is therefore locked:
    `𝓡_A(X) = InverseImageCResidueStateWorldGroupoid A X` as the full
    preimage of `CResidueZeroLocus A` under the whole distinguished action
    inside the already-certified `F_A(X)`, without an enumerated carrier;
-5. OPEN — use the vertical/horizontal first-isomorphism comparisons, the existing
+5. CLOSED 2026-07-27 (`57384ae`) — **and its framing is superseded by
+   `register/70-whole-square.md` §§9–10**: closure is structural in the action
+   groupoid, carried by the base arrow held as data in the preimage, not a
+   preservation theorem. Historical statement retained below.
+   Use the vertical/horizontal first-isomorphism comparisons, the existing
    whole-action middle square, the C3--C4 GPV factorization through the
    common north/degenerate kernel, and `stabilizerPart_unique` to prove that
    the whole action preserves this framewise inverse image, using rfl-level
@@ -467,9 +473,9 @@ The sharpened semantic gate order is therefore locked:
    orientation, the all-t orbit--stabilizer/GPV middle square, the unique
    vertical GPV-to-N tape, level, north, input, positioned, and evaluated
    output faces simultaneously;
-6. FORCED AFTER STEP 5 — define `𝓡_A(f)` literally by restricting `F_A(f)`, assemble `𝓡_A` and
-   its natural inclusion, and prove the
-   categorical square;
+6. CLOSED 2026-07-27 (`57384ae`) — `𝓡_A(f)` is literally `ObjectProperty.lift`
+   of `F_A(f)`; `𝓡_A` and its natural inclusion are assembled and the
+   categorical square holds by `rfl`;
 7. apply Grothendieck.map to obtain the map of totals over 𝓑;
 8. use the complete vertical/horizontal first-isomorphism and
    orbit--stabilizer quotient to recognize the residue total as the

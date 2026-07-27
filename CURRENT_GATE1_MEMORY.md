@@ -57,7 +57,10 @@ handoffs, and architecture narratives when they conflict with it.
 > with object, arrow, component, and naturality receipts at free `X`, `Y`,
 > and `f`. Commit `52bde67` instead certifies a true generic full-subcategory
 > functor into `TotalActionStateWorld A`; it is a packaging checkpoint, not
-> Jesse's `ι_A`, and the `ι_A` gate remains open.
+> Jesse's `ι_A`. **The `ι_A` gate is CLOSED at commit `57384ae`
+> (2026-07-27 evening)**, at the ratified type, with naturality by `rfl` and
+> axiom surface `[propext, Classical.choice, Quot.sound]` on all five
+> declarations.
 
 > **2026-07-27.** For the residue gate, the author's exact Lean reading of
 > record is `register/70-whole-square.md` §10 (with §9 retained as the
@@ -926,16 +929,21 @@ The residue-subdiagram gate has the following exact status:
 
 2. CLOSED — triple-certify that exact inverse-image groupoid;
 
-3. OPEN — use the ordinary first-isomorphism/orbit--stabilizer theorem vertically
+3. CLOSED 2026-07-27 (`57384ae`) — **framing superseded by
+   `register/70-whole-square.md` §§9–10**: the preimage carries its base
+   arrow as data, so cross-frame closure is composition `g ≫ f` in the base
+   groupoid and no preservation theorem occurs. Historical statement below.
+   Use the ordinary first-isomorphism/orbit--stabilizer theorem vertically
    for G₂ and horizontally for PGL(2,ℝ), together with the existing all-t
    middle square, unique continuous GPV lift, and stabilizerPart_unique, to
    prove
      x ∈ 𝓡_A(X) → F_A(f)(x) ∈ 𝓡_A(Y);
 
-4. FORCED AFTER STEP 3 — define 𝓡_A(f) literally as the restriction of the already-certified
-   F_A(f), inherit identity and composition, and assemble
+4. CLOSED 2026-07-27 (`57384ae`) — 𝓡_A(f) is literally `ObjectProperty.lift`
+   of the already-certified F_A(f), identity and composition are inherited,
+   and
      𝓡_A : 𝓑 ⥤ Grpd
-   with its natural inclusion ι_A : 𝓡_A ⟶ F_A.
+   is assembled with its natural inclusion ι_A : 𝓡_A ⟶ F_A.
 ```
 
 This gate creates no new action and proves no new speculative RH theorem.

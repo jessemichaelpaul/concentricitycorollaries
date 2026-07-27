@@ -17,11 +17,21 @@ Gates 1 and 2 are certified. The canonical total is
 `(AsectionActionDiagram A).obj X` and the semantic
 `CResidueZeroLocus A` are certified.
 
-The `ι_A` certificate is **not** closed. Commit `52bde67` proves a valid
-generic full-subcategory inclusion into `TotalActionStateWorld A`, but that
-declaration has the wrong categorical type for this gate and does not
-instantiate the naturality square of Jesse's diagram. Do not cite it as the
-`ι_A` certificate.
+**The `ι_A` certificate is CLOSED**, commit `57384ae` (2026-07-27 evening):
+
+```lean
+AsectionCResidueInclusion A :
+  AsectionCResidueDiagram A ⟶ AsectionActionDiagram A
+```
+
+at the ratified type, with naturality by `rfl` and axiom surface
+`[propext, Classical.choice, Quot.sound]` on all five declarations,
+independently verified by two auditors including a deletion tripwire.
+
+Commit `52bde67` proves a valid generic full-subcategory inclusion into
+`TotalActionStateWorld A`, but that declaration has the wrong categorical
+type for this gate and does not instantiate the naturality square of Jesse's
+diagram. Do not cite `52bde67` as the `ι_A` certificate.
 
 Categorical wording invariant: `𝓡_A(X)` and `F_A(X)` are separately bundled
 groupoids. Do not write `𝓡_A(X) ⊆ F_A(X)`. The relationship is the fully
@@ -36,6 +46,11 @@ documents on disk are newer than their staging-time versions in that
 commit; they remain scheduled for the separate governing-document commit.
 
 ## Next open gate
+
+**CLOSED 2026-07-27 (`57384ae`).** This section states the `ι_A` gate, which
+is now certified; it is retained as the specification the certificate met.
+The next open gate is `Grothendieck.map ι_A` and the ladder in
+`register/70-whole-square.md` §7.
 
 Absolute lock: the next gate never leaves
 `natural transformation → orbit subgroupoid → groupoid preimage →

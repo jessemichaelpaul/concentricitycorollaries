@@ -70,15 +70,18 @@ surface as exactly
 ```
 
 — the three Mathlib foundations, and **zero project axioms on the certified
-chain**. The dirty working tree also contains explicitly uncertified or
-retired files with proof holes, including the current continuation probe at
-`ASectionCResidueDiagram.lean:53` and the retired
-`KeystoneFinality.lean:122`; neither is imported into the certified chain.
+chain**. As of commit `57384ae` the working tree is clean and the former
+continuation probe at `ASectionCResidueDiagram.lean:53` is gone — that gate
+is certified. One retired file still carries a proof hole,
+`KeystoneFinality.lean:122`; no live module imports it.
 The textual occurrence at `FlipWeld.lean:1235` sits inside a block comment
 opened at `:1173` and closed at `:1237`, detached by the author's own
 2026-07-07 fence. Gates 1 and 2 are certified; `F_A`, `F_A(X)`, `T_A`,
-`CResidueZeroLocus A`, and the framewise
-`InverseImageCResidueStateWorldGroupoid A X` are all certified at their exact types. The author has
+`CResidueZeroLocus A`, the framewise
+`InverseImageCResidueStateWorldGroupoid A X`, and — as of `57384ae` —
+`AsectionCResidueDiagram A` with its natural inclusion
+`AsectionCResidueInclusion A : AsectionCResidueDiagram A ⟶ AsectionActionDiagram A`
+are all certified at their exact types. The author has
 three independent proofs of the result; one of them is what is being formalized.
 
 **What is not evidence.** An assistant's sense that a step is too short, too clean, or too close to
@@ -98,6 +101,24 @@ something green before Lean accepts it, or waving through a proof obligation. Ev
 still earns its focused build and axiom print. It licenses exactly one thing: not treating an
 ordinary wiring step as a crisis, and not converting incredulity into a reported gap.
 
+**Ledger update, 2026-07-27 (post-`ι_A`, commit `57384ae`).** The longest-open gate closed as
+machinery, with naturality by `rfl`, once the author's encoding was restored. The obstruction that
+had held it for two days was traced in writing to an **encoding artifact** plus a cross-model
+training prior — never to the mathematics (`register/60-failure-audit.md` §§6g–6k). Every
+substitution was an assistant's; every correction was the author's; every correction held. The
+RH-adjacency prior is therefore recorded as what the record shows: a severe bias with no
+mathematical justification. Consequences get no vote — and after this gate the vote would not be
+close.
+
+Two specifics worth keeping, because they are the reusable part. First, the artifact was found by
+the author reading his own certified file, using this register's own vocabulary ("the forbidden
+static-carrier substitution") — a register that supplies language for naming a defect can locate one
+that survived certification. Second, the mechanisms that worked replaced judgment with a check: the
+target-first gate turned "is this the right object?" into a compile error, and the deletion tripwire
+turned "is this supplier load-bearing?" into an experiment. `§6k` had already predicted that only
+mechanical counter-measures would work, "not further explanation, which the record proves
+insufficient." That prediction held.
+
 **The declaration count, reconciled (2026-07-26).** Two different figures are in circulation and they
 measure different things. Keep them apart.
 
@@ -111,6 +132,10 @@ measure different things. Keep them apart.
 Earlier drafts cited "over 3,000," a lifetime count including material retired in earlier commits.
 The live figure is 1,323, and that is the one to use: it is what carries the axiom surface, and it
 is what a grep of the repository returns.
+
+*(Count refresh, 2026-07-27: `Concentricity/` now holds **75** modules. A line-initial declaration
+grep returns 1,187; the 1,323 figure above uses a broader pattern, so the two are not comparable and
+1,323 stands until the counts are taken by the same method.)*
 
 **Retired is not deleted.** That material is held for later exploration; the project's history is a
 resource, not a graveyard. Nothing in the argument depends on either number.
@@ -127,7 +152,7 @@ resource, not a graveyard. Nothing in the argument depends on either number.
 | `register/40-categorical-engine.md` | the generic Riehl/Grothendieck facts, with no project conclusions |
 | `register/50-project-instantiation.md` | `F_A`, `T_A`, the chosen zero system, the held order |
 | `register/60-failure-audit.md` | the recorded substitutions and the geometric walk-around |
-| `register/70-whole-square.md` | **the open gate, stated positively** — the certified inverse images, the commuting square, the all-`t` two-leg receipt, `cResidue_preserved`, and where to stop |
+| `register/70-whole-square.md` | **the `ι_A` gate — CLOSED at `57384ae`; historical record, not instructions.** The certified inverse images, the commuting square, the all-`t` two-leg receipt, `cResidue_preserved`, and where to stop |
 | live Lean declarations | the implementation record |
 
 For the current gate, `register/70-whole-square.md` is the authority: it

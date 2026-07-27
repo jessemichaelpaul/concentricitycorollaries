@@ -583,6 +583,16 @@ the goal's surface syntax.
 
 ### Execution lock
 
+> ⛔ **SPENT — this lock governed the `ι_A` implementation turn, which closed
+> at commit `57384ae` (2026-07-27).** Everything below names a gate that no
+> longer exists: the four ratified declaration names, the `cResidue_preserved`
+> first-proof-action requirement, the two-file write set, the `sorry` at
+> `ASectionCResidueDiagram.lean:53`, and the PILOT hard stop are all
+> **historical record, not instructions.** Do not execute any of it. The
+> standing rules that survive independently of this gate are: no scratch or
+> temporary Lean files anywhere, focused builds only, and no write-set until
+> Jesse approves exact paths and commands.
+
 This section governs the implementation turn.
 
 - Until Jesse approves exact implementation paths and exact focused build
@@ -792,9 +802,26 @@ The reading of record, complete:
 1. **`𝓡_A` is the certified semantic preimage** — a separately bundled
    fibrewise full preimage groupoid in the kernel of the author's own
    action. It is not a set-theoretic subset of `F_A(X)`. Semantic selection
-   by equation is what keeps the colimit argument non-circular. The object
-   is untouched. No orbit-saturated or enumerated replacement is permitted;
-   `ASectionCResidueInverseImage.lean` stays certified and read-only.
+   by equation is what keeps the colimit argument non-circular.
+
+   ⛔ **Reversed by the author, 2026-07-27 evening (`57384ae`).** This point
+   previously read "the object is untouched; no orbit-saturated or enumerated
+   replacement is permitted; `ASectionCResidueInverseImage.lean` stays
+   certified and read-only." Jesse then diagnosed that file himself: *"I
+   separated the preimage from the very functor that defines `F_A(X)` — the
+   forbidden static-carrier substitution again."* Membership had been defined
+   through the external projection `positioned.back.coordinate` into a fixed
+   set, and **that encoding is what manufactured the false "Möbius image
+   preserves the zero set" obligation.** He re-authorized the write and
+   ruled: the preimage lives **under the functor that defines `F_A(X)`**,
+   `N`-anchored, with the base arrow held as data. What he struck as circular
+   was an *enumerated / orbit-saturated* carrier — not a preimage taken under
+   his own action. Semantic selection by equation still happens at exactly
+   one place, the whole `0`-to-`N` frame, where
+   `projectiveObjectFrame_north : projectiveObjectFrame A (pointObj ∞) =
+   distinguishedDiskAction A` — the frame **is** the element, both boundary
+   faces held. **Do not re-raise the read-only clause against the certified
+   code; this text was the stale side of that collision (§6c).**
 2. **The preimage square at `0`/`N` already commutes.** The unique winding —
    `winding_lift_unique`, the tape's `lift_unique`, `lift_closed`, the
    element fixing both boundary points — means the two ways around were
@@ -944,7 +971,16 @@ Those declarations are true generic total-level packaging. They are not the
 natural transformation above: they contain no `𝓡_A(f)`, no componentwise
 `ι_X`/`ι_Y`, and no naturality square against
 `AsectionActionTransport A f`. Consequently `52bde67` is not the `ι_A`
-certificate and the checkpoint remains open.
+certificate.
+
+**The checkpoint is CLOSED at commit `57384ae` (2026-07-27 evening).** The
+certified declarations are `AsectionCResidueTransport`,
+`AsectionCResidueDiagram`, and `AsectionCResidueInclusion` at the ratified
+types above, with naturality by `rfl`, all seven consumers instantiated at
+free `X`, `Y`, `f` in `_GateCResidueDiagramAudit.lean`, and axiom surface
+`[propext, Classical.choice, Quot.sound]` on all five declarations —
+independently reproduced by a second auditor plus a deletion tripwire. The
+next open gate is `Grothendieck.map ι_A` and the ladder in §7.
 
 ### Replacement pre-flight
 

@@ -180,16 +180,29 @@ factorization (`orbit_stabilizer_factor`, `stabilizerPart_unique`); total
    `ObjectProperty.ι`, `fullyFaithfulι`, `liftCompιIso`); totalized by
    `Grothendieck.map` with `functor_comp_forget` (CTIC is `Set`-valued
    conceptual source; Mathlib is the groupoid-valued implementation).
-5. **One component through `N` — the ONE substantive remaining theorem.**
-   The tapes join every selected orbit through the anchor; suppliers green:
-   `normalizedNBaseHom`, `normalizedNActionSquare` (its `commutes` consumes
-   `lift_closed`), `lift_unique`/`winding_lift_unique`, `orbitHomToNorth`,
-   the `positionedOrbitSquare` family. Then CHT Rem. 8.3.5 (p. 102,
+5. **One component — recognition, not a tape-joining theorem.**
+   ⛔ **CORRECTED 2026-07-27 by the author.** This row previously read "the
+   ONE substantive remaining theorem — the tapes join every selected orbit
+   through the anchor." That framing is retired: it reads a later step as
+   harder than the author states it, and it was acted on once. His ruling:
+   *"we apply 8.3.5 first and the categorified orbit–stabilizer theorem to
+   the `ι_A` (as `R_A`) and we get the singleton after a chain of one or two
+   theorems tops (including `val`)."*
+
+   The residue total **is** the action groupoid already built (CTIC
+   Ex. 1.5.19 p. 37, Ex. 2.4.10 p. 75); its transitivity gives categorical
+   connectedness with stabilizers retained. Then CHT Rem. 8.3.5 (p. 102,
    verbatim in `SOURCES/Riehl.md`): nonempty + zigzag-connected ⟺ `π₀`
-   singleton. Lean: `ConnectedComponents = Quotient (Zigzag.setoid)`,
-   `isPreconnected_zigzag`; the anonymous transitive-action instance
-   (`Action.lean:128`) by resolution only. Categorical connectedness, never
-   topological.
+   singleton — the certified inverse image already has inhabitants, so
+   nonemptiness is not a build step and C4 is stronger than needed. Lean:
+   `ConnectedComponents = Quotient (Zigzag.setoid)`, `isPreconnected_zigzag`;
+   the anonymous transitive-action instance (`Action.lean:128`) by
+   resolution only. Categorical connectedness, never topological.
+
+   ⚠️ **Do not claim contractibility.** CTIC Ex. 2.4.10 gives that only for a
+   **free and transitive** action; this action is transitive and *not* free —
+   the stabilizers are retained on purpose. Connected-with-stabilizers is the
+   claim, and it is exactly what Rem. 8.3.5 consumes.
 6. **Components comparison** — the el-identity (CHT p. 102):
    `π₀(∫𝓡_A) ≃ colim(π₀ ∘ 𝓡_A)` — in-repo `pi0GrothendieckEquiv`
    (`Theorem.lean:108`).
@@ -200,9 +213,76 @@ factorization (`orbit_stabilizer_factor`, `stabilizerPart_unique`); total
 
 Generic and already implemented at the pins: steps 1, 2, 4, 6, and the
 8.3.5 half of 5. The author's: step 0 (certified), step 3 (certified
-selection), the tape half of step 5 (suppliers certified; one theorem to
-assemble), and step 7 (his invariant). **There is nothing else in this
+selection), the recognition half of step 5, and step 7 (his invariant).
+**Step 4 is CLOSED at commit `57384ae`.** **There is nothing else in this
 project.**
+
+## The collapse steps, precisely cited (2026-07-27, post-ι_A)
+
+For the remaining ladder rows 2–5, each generic statement with its exact
+source and its Lean match. All CTIC/CHT quotations are verbatim-transcribed
+in `SOURCES/Riehl-CTIC.md` and `SOURCES/Riehl.md`.
+
+**Step 2 — recognize `∫𝓡_A` through the action groupoid; connectedness.**
+
+- CTIC Ex. 1.5.19 (book p. 37): the action groupoid `X⫽G`; *components are
+  orbits*; *vertex automorphisms are stabilizers*; the hom-sets out of `x`
+  decompose over `O_x`.
+- CTIC Ex. 2.4.10 (book p. 75): `∫X ≅ X⫽G` — the category of elements of an
+  action IS its action groupoid. Its second paragraph carries the exact
+  connectedness dichotomy, recorded in the SOURCES note: **"free and
+  transitive" gives a contractible groupoid; "a transitive action that is
+  not free gives a connected groupoid retaining a nontrivial stabilizer."**
+  The project case is the second: connected, stabilizers retained.
+- Mathlib: the anonymous instance at `Action.lean:128`
+  (`[IsPretransitive M X] [Nonempty X] : IsConnected (ActionCategory M X)`),
+  obtained by resolution only; it does not auto-resolve for
+  `InducedCategory`/`FullSubcategory`/`Grothendieck`, so the project's
+  connectedness receipt is an internal proof from the inherited arrows.
+
+**The skeleton warning, and why this project passes it.** Riehl warns
+immediately before Ex. 1.5.19 (book p. 37) that choosing skeletal
+representatives is not in general functorial, and what `π₀` collapses to
+**depends on the diagram fed in**. The project feeds the *defined preimage* —
+`IsNorthCResidueState` selecting by the semantic equation at the 0-to-N
+frame, spread by the action with the witness arrow as data — never a chosen
+skeleton, never picked representatives. The singleton, when it arrives, is a
+computation about that certified diagram, not an artifact of a choice.
+
+**Step 3 — CHT Remark 8.3.5 (book p. 102, verbatim in `SOURCES/Riehl.md`).**
+
+> "A category is **connected** just when any pair of objects can be joined
+> by a finite zig-zag of arrows… A category `C` is non-empty and connected
+> if and only if `π₀ C` is the singleton set."
+
+- Nonempty: the certified inhabitant receipts (locus point → north state →
+  member at every frame).
+- Connected: step 2's receipt. Categorical zigzags only — never topology.
+- Carrier: Mathlib `ConnectedComponents = Quotient (Zigzag.setoid C)`;
+  the singleton receipt is quotient induction +
+  `Quotient.sound (isPreconnected_zigzag x y)` (the dictionary's recipe).
+- The carrier and its unique class receive **project names at the
+  checkpoint** (never abbreviated `1`), per the author's standing rule.
+
+**Step 4 — the components comparison.**
+
+- The el-identity `π₀(el X) ≅ colim X`: CHT book p. 102, inside the proof
+  of Lemma 8.3.4 — used as the *mechanism*; 8.3.4 itself is not
+  instantiated on the locked route.
+- In-repo `Grpd`-valued extension: `pi0GrothendieckEquiv`
+  (`Theorem.lean:108`), whose argument type `B ⥤ Grpd` matches
+  `AsectionCResidueDiagram A : GreatCircle.Base ⥤ Grpd` with zero
+  adaptation.
+- Over-base identification feeding it: CTIC Prop. 2.4.14 (book p. 77) as
+  conceptual source; Mathlib `Grothendieck.map` + `functor_comp_forget` as
+  implementation.
+
+**Step 5 — the descent.** Generic: `Quotient.lift` well-definedness on the
+component quotient (every `ConnectedComponents` elimination in Mathlib).
+The author's: the exact live `ℝ`-valued real-level invariant and the names
+`val_A`, `k_A`, `c := val_A k_A` — **named by the author at the checkpoint**
+(the two namings requested in the endgame table), with the codomain fixed by
+the invariant being descended, never chosen by a cone.
 
 ## Secondary implementation sources
 

@@ -119,6 +119,14 @@ Any proposed term outside this categorical register is rejected immediately,
 even if it elaborates. Return to the exact outer natural-transformation type;
 do not investigate or repair the substitute.
 
+> **STATUS, 2026-07-27 (`57384ae`): `ι_A` is CERTIFIED.** The outer type above
+> is the specification it met, retained as the standard for the remaining
+> checkpoints — it is no longer the open gate. The live gate is the collapse
+> ladder (`Grothendieck.map ι_A` → action-groupoid recognition → CHT
+> Rem. 8.3.5 → `pi0GrothendieckEquiv` → `val_A` → `c`). The write-set,
+> scratch-file, and whole-square locks below remain standing rules and are
+> **not** superseded by that closure.
+
 - The write-set and build-target set are empty until Jesse explicitly
   approves their exact paths and commands.
 - Do not create scratch Lean files, temporary proof files, new directories,
