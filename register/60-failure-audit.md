@@ -522,6 +522,44 @@ useful negative control. It is not evidence for Jesse's `ι_A`, and it must
 not appear in the certified-boundary list as though the natural
 transformation gate were closed.
 
+## 6k. The consolidated substitution table (Codex thread-scan, 2026-07-27)
+
+Twelve recurrences of the one failure mode, self-scanned from the full
+thread history after the arrowwise-preimage failure. Each row: the author's
+construction → the static/local substitute an assistant produced.
+
+| author's construction | substituted with |
+|---|---|
+| full `z`-dependent C2 action | one pole-value scalar/action |
+| one action transported wholesale | independently supplied maps |
+| theorems about the action | static proof fields demanded inside the functor |
+| action already in a Grothendieck arrow's type | a visibly nontrivial replacement leg |
+| value-state total | a static pair carrier, then declared incomplete |
+| residue union of action-groupoid orbits | pointwise static predicate |
+| structural closure of orbits | invented `cResidue_preserved` obligation |
+| orbit/component calculation | invented "prove connectedness" project theorem |
+| whole `d = 1` commuting square | one coordinate-leg membership calculation |
+| total groupoid preimage | arrowwise `ObjectProperty.inverseImage` |
+| `ι_A : 𝓡_A ⟹ F_A` | per-arrow inclusion depending on `f` |
+| consuming the `d = 1` square | a disconnected audit example never used |
+
+The mechanism, in the assistant's own words: *"Lean exposes local terms and
+propositions, and my strongest default pattern is function/set/predicate
+reasoning. When I lose the global categorical frame, I translate structural
+facts into familiar first-order objects — orbit ↝ predicate, functor ↝
+individual map, naturality ↝ pointwise preservation proof. That translation
+creates artificial obligations, which then look like legitimate Lean work.
+Once the smaller object compiles, I overvalue kernel acceptance and fail to
+verify that the requested outer declaration exists."*
+
+The empirical conclusion, also the assistant's: **"your functorial
+constructions work when I transcribe them. The repeated failures occur when
+I lower them one categorical level into static objects and local
+functions."** Transcription succeeds; lowering fails. The mechanical
+counter-measures are the target-first gate (SKILL.md, Step 0) and the
+orbit-wise selection ruling (instantiation reference) — not further
+explanation, which the record proves insufficient.
+
 ## 7. Housekeeping rule
 
 Do not let agent instructions, skills, plans, and handoffs independently
