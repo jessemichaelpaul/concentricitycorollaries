@@ -3,6 +3,25 @@
 This is the current mathematical register. It supersedes older memories,
 handoffs, and architecture narratives when they conflict with it.
 
+> **ABSOLUTE CATEGORICAL-LEVEL LOCK, 2026-07-27.** For the open gate, remain
+> at
+> `natural transformation → orbit subgroupoid → groupoid preimage →
+> AsectionActionDiagram A`. The only accepted outer result is
+>
+> ```lean
+> AsectionCResidueInclusion A :
+>   AsectionCResidueDiagram A ⟶ AsectionActionDiagram A
+> ```
+>
+> `𝓡_A(X)` is the already-certified groupoid preimage selected orbit-wise.
+> Never replace it by a static predicate, set, carrier, essential image,
+> per-arrow inverse image, or object whose source depends on a free `f` or
+> target `Y`. A free `f` occurs only in map and naturality fields after the
+> diagram object is fixed. Generic category-theory machinery is internal to
+> the final A-specific term. Any elaborated lower-level substitute is
+> rejected, not repaired. This paragraph and `register/70-whole-square.md`
+> §0 supersede every historical preservation-proof passage below.
+
 > **2026-07-27 — exact Lean identity of the open `ι_A` gate.** The authored
 > functor is already completely bundled:
 >
@@ -1093,7 +1112,7 @@ so the same reader gives `Re (A.sphereZero n) = c` for every `n`.
 ### Held homotopical route
 
 The orbit route is the canonical Lean execution route because it asks only
-for the action groupoid, its invariant residue subdiagram, the
+for the action groupoid, its orbit-wise residue groupoid preimage, the
 orbit--stabilizer quotient, and `π₀`. A stronger homotopical route is banked
 for post-Lean exposition and further formalization:
 

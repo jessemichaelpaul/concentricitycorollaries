@@ -11,6 +11,40 @@ This skill holds no architecture. The tracked project register is the shared
 authority for Codex, Claude, and every clone. Do not restate or cache its
 gate boundary here.
 
+## Absolute categorical-level lock
+
+For the current residue endgame, never leave:
+
+```text
+natural transformation
+  → orbit subgroupoid
+  → groupoid preimage
+  → the certified A-specific action diagram.
+```
+
+Require the outer term first:
+
+```lean
+example (A : ASection) :
+    AsectionCResidueDiagram A ⟶ AsectionActionDiagram A :=
+  AsectionCResidueInclusion A
+```
+
+Reject any candidate before elaborating helpers when:
+
+- `𝓡_A(X)` or an inclusion component is redefined as a static predicate,
+  set, carrier, essential image, or per-arrow inverse image;
+- an object or component source depends on a free `f` or target `Y`;
+- the authored functor or natural transformation is replaced by an
+  individual map;
+- a pointwise goal is promoted to the proof subject;
+- the literal `d = 1` square is checked beside the construction rather than
+  consumed by the final A-specific term.
+
+Generic `ObjectProperty` and full-subcategory declarations may occur only as
+internal machinery of the exact final natural transformation. They never
+authorize another object, another theorem, or another register.
+
 ## Read first
 
 1. `register/00-register.md`

@@ -1,4 +1,59 @@
-# The whole square — the positive register for the residue-preservation gate
+# The whole square — the positive register for the residue natural-inclusion gate
+
+## 0. Absolute categorical-level lock — supersedes every lower-level reading
+
+The current subject may never leave:
+
+```text
+natural transformation
+  → orbit subgroupoid
+  → groupoid preimage
+  → AsectionActionDiagram A.
+```
+
+The mandatory outer declarations are:
+
+```lean
+AsectionCResidueDiagram A : GreatCircle.Base ⥤ Grpd
+AsectionCResidueInclusion A :
+  AsectionCResidueDiagram A ⟶ AsectionActionDiagram A
+```
+
+This is a hard rejection rule:
+
+- `𝓡_A(X)` is the certified
+  `InverseImageCResidueStateWorldGroupoid A X`, read orbit-wise inside the
+  action groupoid. Do not define another object.
+- No `𝓡_A(X)`, inclusion component, or component source may depend on a free
+  arrow `f` or target `Y`. In particular,
+  `AsectionCResiduePreimage A f` and any arrowwise
+  `ObjectProperty.inverseImage ... (AsectionActionTransport A f)` are
+  forbidden substitutes.
+- No static predicate, set, carrier, essential image, coordinate condition,
+  preservation theorem, invariance theorem, or stabilizer theorem may
+  replace the orbit-subgroupoid/groupoid-preimage subject.
+- Generic full-subcategory or `ObjectProperty` machinery may occur only
+  internally in the final A-specific diagram and natural transformation.
+- The literal `positionedOrbitSquare A f (1 : Moebius)` must be consumed by
+  that construction. A detached audit example does not count.
+- Before any helper declaration or subsidiary receipt counts, Lean must
+  consume:
+
+  ```lean
+  example (A : ASection) :
+      AsectionCResidueDiagram A ⟶ AsectionActionDiagram A :=
+    AsectionCResidueInclusion A
+  ```
+
+Any elaborated term outside this register is a rejected substitute, not
+partial progress. Return immediately to the outer natural-transformation
+type and do not investigate the substitute.
+
+Sections below record supplier history and earlier framings. Wherever they
+describe an objectwise static selection or a substantive
+`cResidue_preserved` theorem, this §0 and §§9–10 govern instead: selection is
+orbit-wise, closure is structural in the action groupoid, and the open work
+is categorical packaging of the already-built A-specific action.
 
 This file is the concise positive authority for the one open gate. Every
 entry states what is **supplied**, with the exact live declaration that

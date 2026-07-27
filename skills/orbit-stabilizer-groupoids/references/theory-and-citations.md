@@ -1,5 +1,14 @@
 # Orbit–stabilizer groupoids: theory and citations
 
+> **Concentricity gate warning.** The abstract restriction criterion recorded
+> below is background theory only. For the live project, do not begin from a
+> predicate or the pointwise implication `P_X(x) → P_Y(F(f)(x))`. Begin from
+> the already-certified orbit subgroupoid/groupoid preimage and require the
+> exact A-specific natural transformation
+> `AsectionCResidueDiagram A ⟶ AsectionActionDiagram A`. The categorical
+> lock in the parent `SKILL.md` overrides any lower-level reading of this
+> reference.
+
 ## Primary categorical source
 
 Emily Riehl, *Category Theory in Context*, Dover Publications, 2016.
@@ -77,7 +86,12 @@ P_X(x) → P_Y(F(f)(x))
 
 produces the restricted diagram. Its inclusion is natural, and the induced
 map of categories of elements or Grothendieck totals lies over the original
-base.
+base. **For a subsystem selected orbit-wise — a union of components — this
+transition condition is vacuously satisfied:** arrows of an action groupoid
+cannot leave the orbit of their domain (Ex. 1.5.19's hom-set
+decomposition), and stabilizer arrows are vertex automorphisms. The
+condition has content only for objectwise static selections, which the
+Concentricity lock forbids as the gate's subject.
 
 ## Master-writing cautions
 
@@ -133,6 +147,62 @@ inclusion of the separately bundled residue total into the ambient total,
 over the same base — not a subset inclusion. This is the preimage for the
 total Grothendieck construction consumed by CHT Remark 8.3.5. No invariance
 theorem occurs anywhere in this process.
+
+## The applied chain from `F_A` to `c` (2026-07-27 — the whole remaining project, cited)
+
+**Step 0 — certified, the author's.** `F_A = AsectionActionDiagram A` with
+`obj X = AsectionActionFiber A X`, `map f = AsectionActionTransport A f`
+(the `d = 1` orbit–stabilizer square applied; laws `_id`/`_comp` at
+`ASectionActionDiagram.lean:306/:313`, consumed as the functor's own
+fields); base `ActionCategory PGL(2,ℝ) (OnePoint ℝ)`, anchor `N`, unique
+factorization (`orbit_stabilizer_factor`, `stabilizerPart_unique`); total
+`T_A` the literal Grothendieck construction (Gate 2).
+
+1. **Action groupoid structure** — CTIC Ex. 1.5.19 (p. 37): components ARE
+   orbits; stabilizers ARE vertex automorphisms; the hom-sets out of `x`
+   land only in `O_x` — **arrows cannot leave orbits**. Lean:
+   `ActionCategory.stabilizerIsoEnd`,
+   `MulAction.orbitEquivQuotientStabilizer`; in-repo vertical instance
+   `zeroSphere_eq_orbit` (`ZeroSpheres.lean:70`).
+2. **The total is the action groupoid of the induced action** — CTIC
+   Ex. 2.4.10 (p. 75) applied at the top; Mathlib `Grothendieck`; certified.
+3. **The selection — semantic, the author's.** `CResidueZeroLocus A` (C3
+   sound and complete both directions, C4 infinite — certified) names the
+   orbits of the certified inhabitants (`residueActionState`,
+   `residueTotal`). Orbit-wise selection ⟹ CTIC Ex. 2.1.iv's restriction
+   clause (p. 59) is **vacuous** by step 1. No preservation theorem exists.
+   `𝓡_A(X)` depends only on `A` and `X`.
+4. **The inclusion** — CTIC Prop. 2.4.14 (p. 77): a natural transformation
+   of diagrams IS a functor of totals over the base. Outer type,
+   non-negotiable:
+   `AsectionCResidueInclusion A : AsectionCResidueDiagram A ⟶
+   AsectionActionDiagram A`; components fully faithful (Mathlib
+   `ObjectProperty.ι`, `fullyFaithfulι`, `liftCompιIso`); totalized by
+   `Grothendieck.map` with `functor_comp_forget` (CTIC is `Set`-valued
+   conceptual source; Mathlib is the groupoid-valued implementation).
+5. **One component through `N` — the ONE substantive remaining theorem.**
+   The tapes join every selected orbit through the anchor; suppliers green:
+   `normalizedNBaseHom`, `normalizedNActionSquare` (its `commutes` consumes
+   `lift_closed`), `lift_unique`/`winding_lift_unique`, `orbitHomToNorth`,
+   the `positionedOrbitSquare` family. Then CHT Rem. 8.3.5 (p. 102,
+   verbatim in `SOURCES/Riehl.md`): nonempty + zigzag-connected ⟺ `π₀`
+   singleton. Lean: `ConnectedComponents = Quotient (Zigzag.setoid)`,
+   `isPreconnected_zigzag`; the anonymous transitive-action instance
+   (`Action.lean:128`) by resolution only. Categorical connectedness, never
+   topological.
+6. **Components comparison** — the el-identity (CHT p. 102):
+   `π₀(∫𝓡_A) ≃ colim(π₀ ∘ 𝓡_A)` — in-repo `pi0GrothendieckEquiv`
+   (`Theorem.lean:108`).
+7. **Descent — the author's.** The `ℝ`-valued real-level orbit invariant is
+   constant on the one component; it descends to `val_A`;
+   `c := val_A k_A`; `ASection.concentricity`; the corollaries fire through
+   the certified equivalence.
+
+Generic and already implemented at the pins: steps 1, 2, 4, 6, and the
+8.3.5 half of 5. The author's: step 0 (certified), step 3 (certified
+selection), the tape half of step 5 (suppliers certified; one theorem to
+assemble), and step 7 (his invariant). **There is nothing else in this
+project.**
 
 ## Secondary implementation sources
 

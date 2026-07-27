@@ -99,6 +99,15 @@ P.ι_obj_lift_map
 
 ### Standard restriction pattern
 
+> **Concentricity gate warning (2026-07-27).** The pattern below is generic
+> background for objectwise selections. In the live project it may occur
+> only INSIDE the final A-specific construction — never as the subject, and
+> never as an instruction to begin from an objectwise predicate and prove
+> `hT`. For orbit-wise selections the `hT` clause is **vacuous**: arrows of
+> an action groupoid cannot leave the orbit of their domain (CTIC
+> Ex. 1.5.19). The categorical lock in the parent `SKILL.md` overrides any
+> lower-level reading of this section.
+
 For object properties `P_X` and `P_Y`, an ambient functor
 `T : D_X ⥤ D_Y`, and a preservation proof:
 

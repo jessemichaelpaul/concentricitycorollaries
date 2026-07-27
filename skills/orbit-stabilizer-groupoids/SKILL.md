@@ -1,6 +1,6 @@
 ---
 name: orbit-stabilizer-groupoids
-description: Apply orbit–stabilizer theory through action groupoids in Lean and in the Concentricity project. Use for action categories, groupoid components and stabilizers, quotient–orbit equivalences, invariant full subgroupoids, ObjectProperty.lift, natural inclusion squares, G₂ transport, GL/PGL/Möbius actions in SphereWorld, the residue-subdiagram preservation gate, Riehl Remark 8.3.5, connected components, pi0GrothendieckEquiv, and the concentricity readout.
+description: Apply orbit–stabilizer theory through action groupoids in Lean and in the Concentricity project. Use for action categories, groupoid components and stabilizers, quotient–orbit equivalences, orbit subgroupoids, groupoid preimages, natural transformations, G₂ transport, GL/PGL/Möbius actions in SphereWorld, the A-specific residue natural-inclusion gate, Riehl Remark 8.3.5, connected components, pi0GrothendieckEquiv, and the concentricity readout.
 ---
 
 # Orbit–stabilizer groupoids
@@ -13,6 +13,46 @@ For Concentricity work, first read `register/00-register.md`,
 `CURRENT_GATE1_MEMORY.md`, and `EndgamePlan.md`. The project register fixes
 the subject and gate. This skill supplies the generic theory, the Lean
 dictionary, and the exact instantiation; it never replaces the register.
+
+## Absolute categorical-level lock for Concentricity
+
+Remain inside this exact register:
+
+```text
+natural transformation
+  → orbit subgroupoid
+  → groupoid preimage
+  → AsectionActionDiagram A.
+```
+
+The current outer target is:
+
+```lean
+AsectionCResidueInclusion A :
+  AsectionCResidueDiagram A ⟶ AsectionActionDiagram A
+```
+
+This rule is unconditional:
+
+1. `𝓡_A(X)` is the already-certified groupoid preimage selected orbit-wise
+   inside the action groupoid. Never replace or re-express it as a new
+   static predicate, set, carrier, essential image, or arrow-indexed
+   inverse image.
+2. An object assignment or component source may depend only on `A` and `X`,
+   never on a free `f` or target `Y`. A free `f` belongs only to the diagram
+   map and naturality fields after the objects are fixed.
+3. Never turn structural orbit closure into a preservation, invariance, or
+   stabilizer theorem. Action-groupoid arrows remain in their orbits and
+   stabilizers are vertex automorphisms.
+4. Generic `ObjectProperty.lift`, full-subcategory, and inverse-image
+   machinery may occur only inside the final A-specific diagram and natural
+   transformation. None may become the subject.
+5. The literal `positionedOrbitSquare A f (1 : Moebius)` must be consumed by
+   the final registered construction. A neighboring `example` does not
+   count.
+6. If any proposed term leaves this register, reject it even when it
+   elaborates. Resume from the outer natural-transformation type; do not
+   diagnose or repair the substitute.
 
 ## Read the targeted references
 
@@ -245,36 +285,21 @@ failure and must not be promoted.
    `MulAction.orbitEquivQuotientStabilizer` for the set-level quotient–orbit
    equivalence and `ActionCategory.stabilizerIsoEnd` for the groupoid-level
    vertex group.
-4. Define an invariant subsystem objectwise as an `ObjectProperty` and its
-   `FullSubcategory`. Preserve its provenance as an inverse image when that
-   is how it is obtained.
-5. Supply the formal landing receipt required by the chosen restriction
-   representation:
-
-   ```text
-   P_X(x) → P_Y(F(f)(x)).
-   ```
-
-   For the Concentricity `ι_A` checkpoint, this is packaging of the
-   author's chosen preimage under the already-certified
-   `AsectionActionTransport A f`; it is not a new analytic theorem. Do not
-   unfold a zero set, install invariance by saturation, or redefine the
-   authored functor during this step.
-
-   ⛔ **When `P` is a membership, the witness is an output of the square,
-   never an input to it.** Opening the hypothesis and offering its own
-   witness back for the target — `refine ⟨z, hz, ?_⟩` — asserts that the
-   transported point is the point it started at. That replaces preservation
-   with a **fixed-point** claim and leaves a false residual goal of the form
-   "the left leg fixes `z`". Consume the provenance field and the square's
-   `commutes` first; take whatever witness they produce. The transported
-   point is generally a *different* element of the same invariant set.
-6. Give that witness to `ObjectProperty.lift`. Take the inclusion square
-   from `liftCompιIso`; do not rebuild `map_id`, `map_comp`, fullness, or
-   faithfulness.
-7. Assemble the objectwise lifts into the subdiagram and its natural
-   inclusion. Use functor composition `⋙`; remember that action-category
-   labels compose in reverse multiplication order.
+4. For Concentricity, keep the already-certified
+   `InverseImageCResidueStateWorldGroupoid A X` as the orbit-wise groupoid
+   preimage. Do not define another subsystem.
+5. Instantiate the previously certified categorical construction directly
+   at `AsectionActionDiagram A`. Any formal `ObjectProperty.lift` argument
+   is an internal packaging field supplied in that instantiation, never a
+   new pointwise theorem to analyze.
+6. Assemble the fixed diagram and its natural inclusion at the required
+   outer types. Take identity, composition, fullness, faithfulness, and the
+   inclusion square from the existing functorial machinery; do not rebuild
+   them.
+7. Audit the bundled natural transformation first. Only afterward inspect
+   its component at free `X` and naturality at free `f`. Use functor
+   composition `⋙`; remember that action-category labels compose in reverse
+   multiplication order.
 8. Apply `Grothendieck.map` only after the subdiagram and natural inclusion
    are certified.
 9. Recognize the resulting residue total through the already-built action

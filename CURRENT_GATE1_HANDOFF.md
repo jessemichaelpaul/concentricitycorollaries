@@ -37,8 +37,11 @@ commit; they remain scheduled for the separate governing-document commit.
 
 ## Next open gate
 
-The next gate is the A-specific restriction of the already-certified action
-diagram. The exact live functor is:
+Absolute lock: the next gate never leaves
+`natural transformation → orbit subgroupoid → groupoid preimage →
+AsectionActionDiagram A`. Any object or component source depending on a
+free `f` or target `Y`, any new static predicate/carrier, or any generic
+substitute is rejected even if it elaborates. The exact live functor is:
 
 ```lean
 (AsectionActionDiagram A).obj X = AsectionActionFiber A X
@@ -49,10 +52,10 @@ AsectionActionTransport A f :
 ```
 
 The source and target are already the exact fibres `F_A(X)` and `F_A(Y)`;
-the functor already acts on their objects and arrows. Choose the residue
-preimage fibrewise, restrict this existing functor to it, assemble the
-restricted diagram, and expose the component inclusions. The required output
-types are:
+the functor already acts on their objects and arrows. Keep the certified
+orbit-wise groupoid preimage `InverseImageCResidueStateWorldGroupoid A X`,
+assemble the fixed diagram, and expose its component inclusions. The
+required output types are:
 
 ```lean
 AsectionCResidueDiagram A : GreatCircle.Base ⥤ Grpd
@@ -70,10 +73,11 @@ F_A(X), F_A(Y), F_A(f),
 
 The top map is the restriction of the already-certified
 `AsectionActionTransport A f`; its compatibility with the component
-inclusions is supplied by `liftCompιIso`. A formal landing term required by
-`ObjectProperty.lift` is a definitional packaging receipt for the chosen
-preimage, never a new analytic invariance theorem. Do not unfold or analyze
-the zero locus during this checkpoint.
+inclusions is supplied by the existing categorical machinery. Any
+`ObjectProperty.lift` term is internal to the exact A-specific bundled
+construction; it is never a separate proof subject or permission to define
+another preimage. Do not unfold or analyze the zero locus during this
+checkpoint.
 
 The literal `positionedOrbitSquare A f (1 : Moebius)` receipt identifies the
 native member of the existing all-`d` family underlying the same action. It

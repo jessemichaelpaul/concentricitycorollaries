@@ -141,6 +141,15 @@ architecture of its own.
 
 ## Standing rules
 
+- **Absolute categorical-level lock for the open gate:** never leave
+  `natural transformation → orbit subgroupoid → groupoid preimage →
+  AsectionActionDiagram A`. `𝓡_A(X)` is the already-certified groupoid
+  preimage selected orbit-wise. It may not be replaced by a new static
+  predicate, set, carrier, essential image, or per-arrow inverse image.
+  No component source may depend on a free `f` or `Y`; `f` appears only in
+  map and naturality fields after the diagram object is fixed. Generic
+  category-theory machinery is internal to the final A-specific term and
+  never becomes the subject.
 - Values are inherited by evaluation. Outputs are never installed.
 - Nothing in the intended exponential action is semantically constant.
 - A green declaration certifies its literal type, never a gate.

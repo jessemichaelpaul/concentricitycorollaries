@@ -60,10 +60,19 @@ Gates 1 and 2 are certified. The canonical total is
 `TotalActionStateWorld A`. The exact framewise `F_A(X)` and the semantic
 `CResidueZeroLocus A` are certified. The framewise
 `InverseImageCResidueStateWorldGroupoid A X` is now also triple-certified.
-The next open theorem proves that the whole action preserves semantic residue
-and thereby assembles those already-certified fibres into a diagram. The
-remaining readout and corollary work follows it as the unified endgame gate,
-with internal kernel checkpoints in `register/70-whole-square.md`.
+The next open gate is only the A-specific diagram and natural inclusion:
+
+```lean
+AsectionCResidueDiagram A : GreatCircle.Base ⥤ Grpd
+AsectionCResidueInclusion A :
+  AsectionCResidueDiagram A ⟶ AsectionActionDiagram A
+```
+
+The residue system is selected orbit-wise inside the existing action
+groupoids. Closure is structural; no new preservation, invariance, or
+stabilizer theorem is an open mathematical obligation. The remaining
+readout and corollary work follows this natural-transformation gate in the
+order recorded in `register/70-whole-square.md`.
 
 Do not implement any further preimage until its exact A-specific type has
 completed the geometric, categorical, and kernel walk-around and been
@@ -73,8 +82,42 @@ Do not edit `Octonionic_RH_master.tex` during this Lean phase.
 
 ## Active-gate execution lock
 
-For the residue-preservation gate, `register/70-whole-square.md` is the
+For the residue natural-transformation gate, `register/70-whole-square.md` is the
 execution authority.
+
+### Absolute categorical-level lock
+
+Never lower the current subject below this chain:
+
+```text
+natural transformation
+  → orbit subgroupoid
+  → groupoid preimage
+  → the certified A-specific action diagram.
+```
+
+- `𝓡_A(X)` is the already-certified groupoid preimage/orbit subgroupoid.
+  Never redefine it as a new `Set`, `ObjectProperty`, static carrier,
+  essential image, or per-arrow inverse image.
+- No object assignment, inclusion component, or component source may depend
+  on a free arrow `f` or target `Y`. A free `f` may appear only in the map
+  and naturality fields after the diagram object is fixed.
+- `ObjectProperty.lift`, if the final implementation uses it, is internal
+  machinery inside the exact A-specific natural-transformation term. It may
+  not become the proof subject or create a new semantic obligation.
+- A generic theorem, isolated `d = 1` example, pointwise membership proof,
+  or arrowwise square cannot certify this gate.
+- Before any helper or audit receipt counts, Lean must consume:
+
+  ```lean
+  example (A : ASection) :
+      AsectionCResidueDiagram A ⟶ AsectionActionDiagram A :=
+    AsectionCResidueInclusion A
+  ```
+
+Any proposed term outside this categorical register is rejected immediately,
+even if it elaborates. Return to the exact outer natural-transformation type;
+do not investigate or repair the substitute.
 
 - The write-set and build-target set are empty until Jesse explicitly
   approves their exact paths and commands.

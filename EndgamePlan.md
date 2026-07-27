@@ -3,6 +3,17 @@
 The live Lean declarations are the implementation record. This file governs
 execution order.
 
+> **Absolute open-gate lock.** Execution begins and remains at
+> `AsectionCResidueInclusion A :
+> AsectionCResidueDiagram A ⟶ AsectionActionDiagram A`, through the chain
+> `natural transformation → orbit subgroupoid → groupoid preimage →
+> AsectionActionDiagram A`. No new static carrier, pointwise preservation
+> theorem, per-arrow inverse image, generic replacement, or component source
+> depending on free `f`/`Y` is admissible. Generic machinery may appear only
+> inside that exact A-specific bundled term. This rule and
+> `register/70-whole-square.md` §0 supersede all historical preservation
+> language later in this file.
+
 ## The theorem
 
 ```lean
