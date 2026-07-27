@@ -45,8 +45,9 @@ certifies its component inclusions and naturality square.
 > expose `𝓡_A(f)`, and does not certify Jesse's `ι_A`. It is retained as a
 > packaging checkpoint; the `ι_A` checkpoint remains open.
 
-> **2026-07-27 — superseded framing.** See `register/70-whole-square.md` §9,
-> the author's reading of record: the lift input is read off the
+> **2026-07-27 — superseded framing.** See `register/70-whole-square.md`
+> §10 for the exact Lean ruling (§9 is the preceding semantic ruling): the
+> lift input is read off the
 > already-commuting `0`/`N` preimage square (unique winding) and the round
 > trip; it is not a substantive transport theorem. `ι_A` is machinery;
 > CHT 8.3.5 consumes what `ι_A` does to the preimage. Restriction then

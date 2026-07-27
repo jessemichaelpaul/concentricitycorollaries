@@ -90,12 +90,13 @@ and the third is the normal case here.**
    **its register statement plus its live Lean supplier chain**, never by a
    citation.
 
-⛔ **Do not require a textbook row for an authored fact.** That the whole
-A-action preserves its own semantic residue kernel is not a theorem of any
-external text and cannot be, because the object is the author's. Demanding a
-citation for it sends the reader hunting for a generic theorem that does not
-exist — and an agent that cannot fill a required field will either manufacture
-a citation or report a gap. Both are the recorded failure mode.
+⛔ **Do not require a textbook row for an authored fact.** In the current
+`ι_A` checkpoint, the exact authored input is already the functor
+`AsectionActionDiagram A`, whose object map is `AsectionActionFiber A X` and
+whose arrow map is `AsectionActionTransport A f`. Demanding a separate
+invariance citation or theorem after that functor has been built sends the
+reader hunting for a generic result that does not exist and replaces the
+restriction gate with a pointwise strawman.
 
 The literature supplies general forms; the author's constructions supply the
 particular objects and the load-bearing hypotheses. For A-specific steps,
@@ -214,14 +215,18 @@ failure and must not be promoted.
 4. Define an invariant subsystem objectwise as an `ObjectProperty` and its
    `FullSubcategory`. Preserve its provenance as an inverse image when that
    is how it is obtained.
-5. Prove the single restriction witness:
+5. Supply the formal landing receipt required by the chosen restriction
+   representation:
 
    ```text
    P_X(x) → P_Y(F(f)(x)).
    ```
 
-   Compose existing action/naturality squares. Do not install invariance by
-   saturation or redefine the property during the proof.
+   For the Concentricity `ι_A` checkpoint, this is packaging of the
+   author's chosen preimage under the already-certified
+   `AsectionActionTransport A f`; it is not a new analytic theorem. Do not
+   unfold a zero set, install invariance by saturation, or redefine the
+   authored functor during this step.
 
    ⛔ **When `P` is a membership, the witness is an output of the square,
    never an input to it.** Opening the hypothesis and offering its own
@@ -270,8 +275,11 @@ failure and must not be promoted.
 Before reporting completion:
 
 1. show the exact acting groups, action groupoids, orbit, and stabilizer;
-2. show the preservation witness with free `X`, `Y`, `f`, and `x`;
-3. show the `ObjectProperty.lift` restriction and `liftCompιIso` square;
+2. show with free `X`, `Y`, and `f` that
+   `F_A.obj X = AsectionActionFiber A X` and
+   `F_A.map f = AsectionActionTransport A f`;
+3. show the A-specific restricted map, both inclusion components, and the
+   `liftCompιIso` naturality square;
 4. identify the exact action groupoid, orbit, stabilizer, and named
    component carrier used for Remark 8.3.5;
 5. distinguish categorical connectedness from topological connectedness;

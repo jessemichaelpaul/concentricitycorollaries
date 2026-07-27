@@ -40,8 +40,9 @@ handoffs, and architecture narratives when they conflict with it.
 > functor into `TotalActionStateWorld A`; it is a packaging checkpoint, not
 > Jesse's `ι_A`, and the `ι_A` gate remains open.
 
-> **2026-07-27.** For the residue gate, the author's reading of record is
-> `register/70-whole-square.md` §9, and it supersedes the preservation-proof
+> **2026-07-27.** For the residue gate, the author's exact Lean reading of
+> record is `register/70-whole-square.md` §10 (with §9 retained as the
+> preceding semantic ruling), and it supersedes the preservation-proof
 > spine passages below (the "locked preservation walk-around", the step-5
 > obligation language, and the "exact implication" passages) wherever they
 > frame the lift input as a substantive theorem. The `0`/`N` preimage square

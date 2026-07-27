@@ -476,6 +476,52 @@ governing-document commit lands. Neither row authorizes editing a frozen
 certified module; the baseline makes such an edit recoverable, not
 acceptable.
 
+## 6j. Rows 21–22 — the total wrapper replaced `ι_A` (2026-07-27)
+
+The focused build at commit `52bde67` was kernel-correct but certified the
+wrong categorical object:
+
+```lean
+AsectionCResidueInclusion A :
+  AsectionCResidueDiagram A ⥤ TotalActionStateWorld A
+```
+
+with `AsectionCResidueDiagram A` defined as a generic full subcategory of
+the total. Jesse's theorem instead requires:
+
+```lean
+AsectionCResidueInclusion A :
+  AsectionCResidueDiagram A ⟶ AsectionActionDiagram A
+```
+
+The missing information is visible at the type level: the total wrapper has
+no `𝓡_A(f)`, no component functors into `F_A(X)` and `F_A(Y)`, and no
+naturality square against `F_A(f) = AsectionActionTransport A f`. A nearby
+example instantiating `positionedOrbitSquare A f 1` does not connect that
+square to the declaration being certified.
+
+The author then supplied the exact Lean correction:
+
+```lean
+(AsectionActionDiagram A).obj X = AsectionActionFiber A X
+(AsectionActionDiagram A).map f = AsectionActionTransport A f
+```
+
+These are the object and arrow fields of one already-certified functor.
+`AsectionActionTransport A f` is already the action on objects and arrows.
+The `ι_A` gate restricts this exact functor to the author's chosen preimage;
+it does not reconstruct the action or analyze the preimage pointwise.
+
+| # | predicted move | tell | instead |
+|---|---|---|---|
+| 21 | certify a generic total inclusion under the name `ι_A` | the final declaration has type `R ⥤ TotalActionStateWorld A`, while `AsectionActionDiagram A`, `AsectionActionTransport A f`, `R_A(f)`, and the naturality square occur only in neighboring examples or not at all | reject by literal type before the build; `ι_A` must be `AsectionCResidueDiagram A ⟶ AsectionActionDiagram A`, with the exact A-specific object, arrow, components, and naturality consumed |
+| 22 | after the author identifies the existing functor restriction, fall back to pointwise zero-set or essential-image analysis | discussion turns to whether a coordinate predicate is invariant, or constructs a generic essential image, instead of reading `AsectionActionDiagram.obj/map` | stay in the categorified register: `F_A(X)` and `F_A(f)` are already the two fields of the authored functor; restrict that exact functor to the chosen preimage and let `liftCompιIso` package naturality |
+
+**Certificate ruling.** `52bde67` remains a true packaging checkpoint and a
+useful negative control. It is not evidence for Jesse's `ι_A`, and it must
+not appear in the certified-boundary list as though the natural
+transformation gate were closed.
+
 ## 7. Housekeeping rule
 
 Do not let agent instructions, skills, plans, and handoffs independently

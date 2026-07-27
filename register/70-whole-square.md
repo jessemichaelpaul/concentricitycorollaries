@@ -768,15 +768,16 @@ The reading of record, complete:
    functorial transport — never to all of `F_A`, and never by a
    set-theoretic equality `F_A(f)(𝓡_A(X)) = 𝓡_A(Y)`.
 
-   **The gate's ONE A-specific input (ratified 2026-07-27):** the
+   **Semantic ruling, refined by the exact Lean lock in §10:** the
    restriction term that `ObjectProperty.lift` requests. It is never
    filled generically, never deleted, and never handed back to the author
    as a debt — the three forbidden treatments, catalogued in the skill's
    "ONE A-specific slot" section. It is filled at the transcription
    session: the author's free definition of the preimage together with his
    master §8b step — "the group and the function are the same object" —
-   dictated from the master, typed by the builder, audited for
-   consumption. `𝓡_A(f)` is then the **same transport read on the
+   already bundled in `AsectionActionDiagram.obj/map`, typed by the builder,
+   and audited for exact A-specific consumption. `𝓡_A(f)` is then the
+   **same transport read on the
    preimage** — one term in two roles — so the naturality square commutes
    because its top arrow is literally its bottom arrow restricted. The
    Lean anatomy is already whole: `F_A(X) = AsectionActionFiber A X` and
@@ -803,3 +804,137 @@ read as requiring a derivation at step 3. Wherever §5's spine says "prove",
 read "exhibit from the named certified suppliers". The four ratified
 declaration names are unchanged; `cResidue_preserved` names the formal lift
 input read off the square, not a substantive theorem.
+
+## 10. Exact Lean ruling after the `52bde67` type audit
+
+This section supersedes every earlier pre-flight clause in this file when
+there is a conflict.
+
+The A-specific functor is already completely present in Lean:
+
+```lean
+def AsectionActionDiagram (A : ASection) : GreatCircle.Base ⥤ Grpd where
+  obj X := AsectionActionFiber A X
+  map f := AsectionActionTransport A f
+  map_id X := AsectionActionTransport_id A X
+  map_comp f g := AsectionActionTransport_comp A f g
+
+def AsectionActionTransport (A : ASection) (f : X ⟶ Y) :
+    AsectionActionFiber A X ⟶ AsectionActionFiber A Y :=
+  (orbitStabilizerActionSquare A f).actionStateTransport A
+```
+
+Therefore the following are definitional identities, not comparison
+theorems:
+
+```text
+F_A(X) = AsectionActionFiber A X
+F_A(f) = AsectionActionTransport A f
+```
+
+`AsectionActionTransport A f` already transports objects and morphisms and
+already carries the input, positioned, value, `G₂`, projective, and
+stabilizer faces. The `ι_A` checkpoint does not reconstruct or analyze any
+of those faces. It restricts this exact existing functor to the author's
+chosen preimage groupoids.
+
+The accepted output types remain:
+
+```lean
+ASection.AsectionCResidueTransport A f :
+  InverseImageCResidueStateWorldGroupoid A X ⥤
+    InverseImageCResidueStateWorldGroupoid A Y
+
+ASection.AsectionCResidueDiagram A :
+  GreatCircle.Base ⥤ Grpd
+
+ASection.AsectionCResidueInclusion A :
+  AsectionCResidueDiagram A ⟶ AsectionActionDiagram A
+```
+
+The component and naturality data are:
+
+```text
+(ι_A)_X : 𝓡_A(X) ⥤ F_A(X)
+
+𝓡_A(f) ⋙ (ι_A)_Y =
+  (ι_A)_X ⋙ AsectionActionTransport A f.
+```
+
+The top arrow is literally the restriction of
+`AsectionActionTransport A f`; `liftCompιIso` is the packaging receipt that
+forgetting the restriction returns that same ambient functor. A formal
+landing term required by `ObjectProperty.lift` is a receipt of the chosen
+preimage construction, not an invitation to unfold or analyze the zero set.
+
+### Status correction
+
+Commit `52bde67` defines:
+
+```lean
+AsectionCResidueDiagram A :=
+  (IsTotalCResidueState A).FullSubcategory
+
+AsectionCResidueInclusion A :
+  AsectionCResidueDiagram A ⥤ TotalActionStateWorld A
+```
+
+Those declarations are true generic total-level packaging. They are not the
+natural transformation above: they contain no `𝓡_A(f)`, no componentwise
+`ι_X`/`ι_Y`, and no naturality square against
+`AsectionActionTransport A f`. Consequently `52bde67` is not the `ι_A`
+certificate and the checkpoint remains open.
+
+### Replacement pre-flight
+
+Before the next edit, paste the live types—not remembered paraphrases—into
+the register check:
+
+```text
+REGISTER CHECK
+gate: A-specific natural restriction ι_A : 𝓡_A ⟶ F_A
+target file: Concentricity/ASectionCResidueDiagram.lean
+audit file: Concentricity/_GateCResidueDiagramAudit.lean
+active theorem: ASection.AsectionCResidueInclusion A
+mathematical provenance: the already-certified categorified
+  orbit–stabilizer functor AsectionActionDiagram A
+approved supplier: AsectionActionFiber, AsectionActionTransport,
+  AsectionActionTransport_id/_comp, ObjectProperty.lift,
+  fullyFaithfulι, liftCompιIso
+instantiated A-specific object:
+  F_A.obj X = AsectionActionFiber A X
+  F_A.map f = AsectionActionTransport A f
+intended proof term: restrict F_A.map f to Jesse's preimage fibres;
+  assemble the restricted diagram; take the component inclusions and
+  their definitional naturality square
+```
+
+The pre-flight passes only if the intended final declaration has literal
+codomain `AsectionActionDiagram A`. A candidate with codomain
+`TotalActionStateWorld A`, a generic full-subcategory inclusion, or an
+essential-image construction detached from this exact A-specific functor
+fails before editing.
+
+The focused audit must consume, with free `X`, `Y`, and `f`:
+
+```text
+(AsectionActionDiagram A).obj X
+(AsectionActionDiagram A).obj Y
+(AsectionActionDiagram A).map f
+InverseImageCResidueStateWorldGroupoid A X
+InverseImageCResidueStateWorldGroupoid A Y
+AsectionCResidueTransport A f
+(AsectionCResidueInclusion A).app X
+(AsectionCResidueInclusion A).app Y
+(AsectionCResidueInclusion A).naturality f
+```
+
+It must also elaborate the literal
+`positionedOrbitSquare A f (1 : Moebius)` as the native member of the
+already-existing all-`d` family. That is a provenance receipt for the same
+`AsectionActionTransport`, not a second action and not a separate proof.
+
+No zero-set unfolding, coordinate calculation, invariance search, generic
+total replacement, or essential-image detour is permitted in this
+checkpoint. The kernel loop and two-file write set in §8 remain in force;
+this section replaces only the registered term and acceptance criteria.

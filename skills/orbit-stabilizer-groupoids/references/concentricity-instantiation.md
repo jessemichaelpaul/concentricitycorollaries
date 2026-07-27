@@ -127,10 +127,11 @@ mob ↦ m * mob * m⁻¹.
 This is the explicit conjugation of Möbius viewpoints while retaining the
 `G₂` direction.
 
-## The two-level instantiation and the ONE A-specific slot (2026-07-27)
+## The two-level instantiation and the exact A-specific restriction (2026-07-27)
 
 The tower is the categorified orbit–stabilizer theory applied twice, and the
-machinery has exactly one A-specific input.
+already-certified A-specific functor is what the restriction machinery
+consumes.
 
 - **Level 0:** `𝓑 = ActionCategory PGL(2,ℝ) (OnePoint ℝ)` is CTIC 1.5.19's
   translation groupoid: one orbit (transitive), anchor `N`, vertex group
@@ -145,15 +146,22 @@ machinery has exactly one A-specific input.
   action groupoid of the induced action of the base's arrows on the total
   value states — an arrow of `T_A` is literally the element moving a state.
 
-**The gate is CTIC 2.1.iv at this tower:** a subfunctor of an action is an
-invariant subsystem; the restriction condition is the machinery's ONE
-hypothesis slot. Everything else — `𝓡_A(f)` as restriction, `ι_A`
-componentwise fully faithful with free naturality (`liftCompιIso`),
-`Grothendieck.map ι_A` (2.4.14), the 8.3.5 collapse, the `val` descent — is
-generic machinery that instantiates with no further A-specific input.
+**The gate is CTIC 2.1.iv instantiated at Jesse's already-built functor:**
 
-**The three forbidden treatments of the slot** (all three ran on
-2026-07-27; see `register/60-failure-audit.md` §6h):
+```lean
+(AsectionActionDiagram A).obj X = AsectionActionFiber A X
+(AsectionActionDiagram A).map f = AsectionActionTransport A f
+```
+
+`AsectionActionTransport A f` already is the categorified action on objects
+and arrows. The checkpoint chooses the author's preimage groupoids and
+restricts this exact functor to them. `𝓡_A(f)`, the componentwise fully
+faithful `ι_A`, and its naturality (`liftCompιIso`) are the restriction
+machinery applied at that A-specific object. No analytic zero-set argument
+or reconstructed action is an input to this checkpoint.
+
+**The forbidden treatments of the restriction** (all ran on 2026-07-27;
+see `register/60-failure-audit.md` §§6h, 6j):
 
 1. **fill-by-hunt** — search for a generic invariance lemma. None exists
    and none can; `exact?`/`apply?` returned empty on record.
@@ -163,21 +171,25 @@ generic machinery that instantiates with no further A-specific input.
    checkpoint, NOT the `ι_A` gate).
 3. **slot-as-burden** — hand the slot back to the author as a new proof
    debt.
+4. **pointwise regression** — after the exact functor has been identified,
+   analyze a zero predicate or generic essential image instead of restricting
+   `AsectionActionTransport A f`.
 
-**The correct treatment — fill-by-plugging.** Master §8b, verbatim: *"An
-invariant subset is normally a hypothesis one assumes. Here it is forced,
-because the group and the function are the same object… Making the residue
-zero set into an invariant subset of an action groupoid IS the theorem."*
-The slot's filler is the author's already-proved core step, **transcribed
-from the master with the author reading**, at its named live suppliers:
-`eulerDiskAction_eq_value` (function = group element), the two boundary
-presentations (`distinguishedDiskAction_fixes_cayley_zero`/`_N`), the
-unique prime-indexed lift through `N` (`lift_unique`,
-`winding_lift_unique`, `reindexAsectionPresentation` carrying the tape
-verbatim), `stabilizerPart_unique`, and output naturality
-(`output_commutes`) — states carrying their whole presentation, moved as
-wholes. Kind-3 authored provenance; the kernel adjudicates the term; no
-assistant invents the route and no assistant deletes the slot.
+**The correct treatment — restrict the live functor.** The authored
+construction has already filled the categorical action slot:
+
+```lean
+AsectionActionTransport A f :
+  AsectionActionFiber A X ⟶ AsectionActionFiber A Y
+```
+
+Its definition is
+`(orbitStabilizerActionSquare A f).actionStateTransport A`; its object,
+arrow, identity, and composition behavior is already certified. The formal
+landing argument required by `ObjectProperty.lift` is a packaging receipt
+for the author's chosen preimage, not a new theorem about a static carrier.
+The kernel checkpoint must consume this exact functor, its restricted map,
+both inclusion components, and the naturality square.
 
 ## Generic-to-project dictionary
 
@@ -265,15 +277,16 @@ No enumeration or new arrow populates this subgroupoid.
 
 ## Exact open gate
 
-> **2026-07-27:** `cResidue_preserved` is the **formal lift input**, read off
-> the already-commuting `0`/`N` preimage square (unique winding —
-> `winding_lift_unique`, the tape's `lift_unique`, `lift_closed`, the
-> element's boundary fixes) and the round trip (`AsectionEquivariant`,
-> `AsectionState_input_then_equivariant`) — **not a substantive theorem**.
-> Author's reading of record: `register/70-whole-square.md` §9; anatomy of
-> the retired framing: `register/60-failure-audit.md` §6g (row 18).
+> **2026-07-27 exact Lean ruling:** the subject is already the functor
+> `AsectionActionDiagram A`, with object map
+> `AsectionActionFiber A X` and arrow map
+> `AsectionActionTransport A f`. The open gate restricts those exact maps to
+> the author's chosen preimage and packages the component inclusions and
+> naturality square. See `register/70-whole-square.md` §10 and
+> `register/60-failure-audit.md` §6j.
 
-The formal lift input is:
+If the representation uses `ObjectProperty.lift`, its formal landing receipt
+may retain the registered name:
 
 ```lean
 theorem cResidue_preserved
@@ -295,10 +308,11 @@ positionedOrbitSquare A f
   (diskExpAction ((p.gpv δ hp hne).lift t)).
 ```
 
-Its identity and composition laws are green. The accepted state transport
-is separately `AsectionActionTransport A f`. No live theorem yet compares
-them at the two certified residue inverse images. That comparison is the
-proof content of `cResidue_preserved`, not another action or another gate.
+Its identity and composition laws are green. The accepted state transport is
+already `AsectionActionTransport A f`; do not replace it with the
+presentation supplier or unpack it into pointwise coordinate conditions.
+The `ι_A` certificate is the restriction of that transport and the
+naturality of its component inclusions.
 
 **The gate is one instantiation wide.** `positionedOrbitSquare A f d` is
 defined for arbitrary `d`, so instantiate it directly at `d = 1`; that gives
@@ -467,7 +481,7 @@ the subject:
 
 | mathematical object | Lean name |
 |---|---|
-| preservation witness | `ASection.cResidue_preserved` |
+| formal restriction landing receipt | `ASection.cResidue_preserved` |
 | restricted arrow `𝓡_A(f)` | `ASection.AsectionCResidueTransport A f` |
 | residue diagram `𝓡_A` | `ASection.AsectionCResidueDiagram A` |
 | natural inclusion `ι_A : 𝓡_A ⟹ F_A` | `ASection.AsectionCResidueInclusion A` |
