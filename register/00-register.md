@@ -69,10 +69,15 @@ surface as exactly
 [propext, Classical.choice, Quot.sound]
 ```
 
-— the three Mathlib foundations, and **zero project axioms**. There is no live `sorry` or `admit` on
-any path: the single textual occurrence, at `FlipWeld.lean:1235`, sits inside a block comment opened
-at `:1173` and closed at `:1237`, detached by the author's own 2026-07-07 fence. Gates 1 and 2 are
-certified; `F_A`, `F_A(X)`, `T_A`, `CResidueZeroLocus A`, and the framewise
+— the three Mathlib foundations, and **zero project axioms on the certified
+chain**. The dirty working tree also contains explicitly uncertified or
+retired files with proof holes, including the current continuation probe at
+`ASectionCResidueDiagram.lean:53` and the retired
+`KeystoneFinality.lean:122`; neither is imported into the certified chain.
+The textual occurrence at `FlipWeld.lean:1235` sits inside a block comment
+opened at `:1173` and closed at `:1237`, detached by the author's own
+2026-07-07 fence. Gates 1 and 2 are certified; `F_A`, `F_A(X)`, `T_A`,
+`CResidueZeroLocus A`, and the framewise
 `InverseImageCResidueStateWorldGroupoid A X` are all certified at their exact types. The author has
 three independent proofs of the result; one of them is what is being formalized.
 

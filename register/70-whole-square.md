@@ -145,6 +145,12 @@ So:
   `lift t = 0`, and `AsectionGpvLift` imposes no such condition. Nothing
   here needs it.
 
+The full object is instantiated through the `N`-anchored presentation, and
+`0` is the other fixed boundary face of the same diagonal element. Setting
+the extra parameter to `d = 1` does not remove the distinguished action:
+`projectiveObjectFrame A X` already contains
+`A.distinguishedDiskAction`.
+
 Functoriality of the family is carried by `positionedOrbitSquare_id`
 (`:744`) and `_comp` (`:758`).
 
@@ -390,6 +396,18 @@ Starting from certified `𝓡_A(X)`, `𝓡_A(Y)`, and `F_A(f)`:
 
 ### Triple-kernel certificate for this gate
 
+The focused receipts are kernel instantiations of Jesse's exact functorial
+objects, not generic or illustrative category-theory examples. Lean may use
+`example` as command syntax, but the certificate subject remains the
+categorified orbit--stabilizer diagram. With free `X`, `Y`, and `f`, it must
+visibly instantiate
+
+```text
+F_A(X), F_A(Y), F_A(f),
+𝓡_A(X), 𝓡_A(Y), 𝓡_A(f),
+ι_X, ι_Y, and the naturality square of ι_A at f.
+```
+
 The focused receipt must show:
 
 - `cResidue_preserved` with free `X`, `Y`, `f`, and `x`;
@@ -475,25 +493,32 @@ collide at exactly the moment of instantiation, and a doc-vs-code collision
 is a logged trigger (`register/60-failure-audit.md` §6c). Seeing this name
 inside `pi0GrothendieckEquiv` is expected and is not cause to stop.
 
-## 8. Automatic register checkpoint
+## 8. Continuous register checkpoint
 
-After the first proof action and before the second, and again immediately
-before every kernel certificate, state:
+Keep this checkpoint active from the real theorem term through its focused
+certificate. State it when that term is fixed and again immediately before
+certification; do not treat it as a pause:
 
 ```text
 REGISTER CHECK
 gate:
 target file:
 active theorem:
+mathematical provenance:
 approved supplier:
 instantiated A-specific object:
+intended proof term:
 ```
 
 Each entry must occur in
 `skills/orbit-stabilizer-groupoids/references/concentricity-instantiation.md`.
-If not, stop, return to the project skill/register, classify the drift
-through `register/60-failure-audit.md`, and resume from the last approved
-supplier. A drift is a process failure, not a mathematical result.
+If not, classify the drift through `register/60-failure-audit.md`, return to
+the last approved supplier, and resume the same theorem. A drift is a process
+failure, not a mathematical result.
+
+An elaborator goal is never promoted to a new problem statement. It remains a
+projection of the registered functorial term. Resume from that term, not from
+the goal's surface syntax.
 
 ### Execution lock
 
@@ -504,16 +529,24 @@ This section governs the implementation turn.
 - No scratch Lean file, temporary proof module, new directory, alternate
   route, or parallel implementation may be created in the repository,
   `/tmp`, or any other location.
-- The first proof action is Step 1 above: instantiate the existing
-  `positionedOrbitSquare A f` at `d = 1`.
+- The first proof action is Step 1 above: the literal term
+  `positionedOrbitSquare A f (1 : Moebius)` must occur in the real
+  `cResidue_preserved` theorem and be elaborated there. Merely checking its
+  name or consuming only `orbitStabilizerActionSquare A f` does not discharge
+  this requirement.
 - Every subsequent proof action must remain in the seven-step residue-square
   order and then the unified endgame ladder above.
 - A need for any unlisted file, theorem, command, or route is a stop
   condition requiring Jesse's explicit approval.
 
-#### LOCK DATA — the `ι_A` checkpoint (Jesse, 2026-07-26)
+#### LOCK DATA — the `ι_A` checkpoint
 
-This is the complete approved set for this checkpoint. Nothing outside it.
+Declaration names and paths were fixed by Jesse on 2026-07-26. The continuous
+command loop below is the 2026-07-27 housekeeping revision; editing this
+record does not itself release Lean execution.
+
+This is the complete proposed continuation set for this checkpoint. Nothing
+outside it.
 
 **(1) Declaration names — four, in this order.**
 
@@ -524,11 +557,11 @@ ASection.AsectionCResidueDiagram     -- 𝓡_A : GreatCircle.Base ⥤ Grpd
 ASection.AsectionCResidueInclusion   -- ι_A : AsectionCResidueDiagram A ⟶ AsectionActionDiagram A
 ```
 
-**(2) Write-set — two files, both new.**
+**(2) Write-set — these two files only.**
 
 ```text
 Concentricity/ASectionCResidueDiagram.lean       the four declarations above
-Concentricity/_GateCResidueDiagramAudit.lean     checkpoint audit = the pre-flight
+Concentricity/_GateCResidueDiagramAudit.lean     one stable checkpoint audit
 ```
 
 Two files, because the repository's convention (`_GateCResidueInverseImageAudit.lean`)
@@ -537,26 +570,29 @@ in a separate `_Gate*Audit.lean`. Every other module, `ASectionCResidueInverseIm
 included, is **read-only** here; an edit to a certified module during this step
 is the tell that the proof is being made true by redefinition.
 
-**(3) Two commands, in this order.**
+**(3) One uninterrupted command loop, in this order.**
 
-Phase A — pre-flight, before any implementation exists. The audit file imports
-only suppliers and contains only the `#check`s in (4):
+Put the intended bundled term in the real theorem and elaborate the
+implementation file immediately. Repeat this same focused elaboration while
+closing that theorem:
 
 ```bash
-lake env lean Concentricity/_GateCResidueDiagramAudit.lean
+lake env lean Concentricity/ASectionCResidueDiagram.lean
 ```
 
-Phase B — certificate, after the implementation lands. The same audit file
-gains `import Concentricity.ASectionCResidueDiagram`, its `example`s, and
-`#print axioms`:
+Once all four declarations close, complete the stable audit file with its
+exact-object kernel instantiation receipts and `#print axioms`, then run:
 
 ```bash
 lake build Concentricity._GateCResidueDiagramAudit
 ```
 
-No other command. No root build, no bare `lake build`.
+There is no separately completable supplier phase and no pre-flight-only
+audit state. Supplier resolution, implementation elaboration, consumer
+instantiations, and axiom printing are one registered kernel loop. No other
+command; no root build and no bare `lake build`.
 
-**(4) Phase-A supplier checks — the six this checkpoint consumes, and only these.**
+**(4) Ratified supplier interface floor — these six checks.**
 
 ```lean
 import Concentricity.ASectionCResidueInverseImage
@@ -579,14 +615,20 @@ frame calculation actually lives in.
 `GreatCircle.stabilizerPart_unique`,
 `ASection.reindexAsectionPresentation`, and
 `ASection.AsectionState.smul_coordinate` are consumed inside the proof rather
-than by the checkpoint's interface; add them to Phase A only if the proof
-reaches for them.
+than presumed by the checkpoint's interface. The same rule governs the six
+additional checks currently written in the audit
+(`distinguishedDiskAction`, `distinguishedDiskAction_eq_fullMultiplier`, the
+two fixed-face lemmas, `eulerDiskAction_eq_value`, and the canonical
+continuous-level theorem): retain each exactly when the elaborated proof term
+consumes it. A written menu does not ratify a supplier. The exact-object
+kernel receipts, not the `#check` list alone, certify instantiated use in the
+authored functorial construction.
 
 **Fill the REGISTER CHECK from `#check` output, not from memory.** A field
 recalled can be filled with a confident wrong answer; a field pasted from the
 elaborator cannot — it has no view about which supplier the register approved.
-A failing `#check` in Phase A is a **name fact**, answered by the type checker.
-It is not a mathematical event and is never a reason to open another route.
+A failing `#check` is a **name fact**, answered by the type checker. It is not
+a mathematical event and is never a reason to open another route.
 
 Before any supplier-insufficiency report, also fill the `WHOLE-SQUARE CHECK`
 from `register/60-failure-audit.md` §6f. Binding
@@ -596,10 +638,14 @@ until its `commutes` field, both `positioned_by_action` provenance fields, and
 the arbitrary-`d_t` reindexing supplier have occurred in the proof term. If
 they have not, resume from the square without searching another folder.
 
-**Pre-repeat hold.** `NormalizedNActionTape` must first expose and
-focused-certify its GPV basepoint-uniqueness field, derived from
-`winding_lift_unique` as recorded in the A-specific instantiation reference.
-The `ι_A` pilot does not resume until that exact live projection resolves.
+**Former pre-repeat hold — discharged.** `NormalizedNActionTape.lift_unique`
+is live, derived from `winding_lift_unique`, and focused-certified by
+`_GateNormalizedNActionTapeUniquenessAudit`.
+
+The current continuation probe in
+`Concentricity/ASectionCResidueDiagram.lean` ends in an uncertified `sorry` at
+line 53. That is the exact implementation hole this loop must close; it is not
+part of the certified chain and is not evidence against the gate.
 
 **Out of scope at this checkpoint**, explicitly: `Grothendieck.map`, the
 residue total, its component receipt, Remark 8.3.5, `π₀`,
@@ -616,26 +662,24 @@ an output turns into a gate and then acquires a proof obligation nobody owed.
 Auditing any of this before `ι_A` exists is the location error this protocol
 prevents.
 
-#### This checkpoint is the PILOT — reviewed here, then a hard stop
+#### This checkpoint is the PILOT — one loop, then a hard stop
 
-Phase A and Phase B are the **internal** protocol for every endgame checkpoint.
-The cadence, per checkpoint, is:
+The internal protocol for every endgame checkpoint is a single registered
+build–certificate loop. Supplier resolution is not a stopping point: the
+builder edits the actual theorem, immediately elaborates it, completes the
+exact-object audit when it closes, and immediately runs the focused
+certificate.
+Report at each certificate — declaration, literal type, axiom surface, and
+next locked instantiation — but do not create an intermediate success state.
 
-```text
-Phase A   pre-flight — the suppliers resolve at their real names
-Phase B   write the approved declarations
-          triple certificate at that kernel gate
-          → move on to the next checkpoint, and repeat
-```
+The role split is orthogonal to that loop: Sol owns the implementation and
+focused certificate; Fable audits the resulting stable kernel state. An audit
+handoff is not a phase boundary and never occurs between supplier resolution
+and elaboration of the real theorem.
 
-The agent runs that loop without stopping to ask, because the unified gate is
-one gate; asking between rows is what let ordinary wiring be re-read as a
-crisis. Report at each certificate — declaration, literal type, axiom surface,
-next locked instantiation — but report, do not halt.
-
-`ι_A` is the one exception. Here both phases are reviewed by Jesse, and
-execution **stops after Phase B and its certificate** — before
-`Grothendieck.map` or anything else in the ladder.
+For `ι_A`, execution **stops after that focused certificate** — before
+`Grothendieck.map` or anything else in the ladder — so Jesse and Fable can
+review the pilot.
 
 The reason is that this checkpoint is not only proving `ι_A`. It is testing
 whether the skill-to-Lean supplier protocol actually minimizes location error.
@@ -660,10 +704,85 @@ Item 6 is the thing under test. The others are hygiene; that one is the
 disease. A run that satisfies 1–5 and fails 6 is a failed pilot, and the
 protocol needs another pass before the remaining checkpoints run internally.
 
-Note that the first Phase-A run already exercised this: a supplier
+The earlier supplier-only run did correctly catch one name-location error: a supplier
 (`AsectionFunctor_map_uses_two_legs`, in the quarantined
 `JuxtapositionPreflight` namespace at `ASectionFunctor.lean:929–1082`) failed
 its `#check`, was classified as wrong-library drift, and nothing was written or
-investigated. That is item 2 working, and it is why the two legs are now read
-off the fields of `positionedOrbitSquare` — where they were definitional all
-along.
+investigated. That protection remains. What is retired is treating that
+supplier resolution as a completed phase before the actual functorial term is
+elaborated. The two legs are read off the fields of `positionedOrbitSquare`,
+where they were definitional all along.
+
+## 9. 2026-07-27 — the author's reading of record (supersedes the witness-as-theorem framing)
+
+The sections above were written around `cResidue_preserved` as the one
+substantive obligation. The author has ruled that framing an artifact. The
+anatomy, in his words: it was **"a model trying to sneak the output of zeros
+into the input"** — the membership map tested transported coordinates against
+the zero set as a static input-side carrier, when the zeros are **outputs**
+of the round trip. Values are inherited, never installed. An A-section is not
+pre-defined — it is **built** by C1–C4 and slice-preservation theory, and
+what makes it well defined is already orbit–stabilizer, held across the whole
+`SphereWorld` continuum inside the certified `F_A` and `F_A(X)`. No further
+well-definedness (= "preservation") theorem exists.
+
+The reading of record, complete:
+
+1. **`𝓡_A` is the certified semantic preimage** — a separately bundled
+   fibrewise full preimage groupoid in the kernel of the author's own
+   action. It is not a set-theoretic subset of `F_A(X)`. Semantic selection
+   by equation is what keeps the colimit argument non-circular. The object
+   is untouched. No orbit-saturated or enumerated replacement is permitted;
+   `ASectionCResidueInverseImage.lean` stays certified and read-only.
+2. **The preimage square at `0`/`N` already commutes.** The unique winding —
+   `winding_lift_unique`, the tape's `lift_unique`, `lift_closed`, the
+   element fixing both boundary points — means the two ways around were
+   never two things. This is an observation read off certified declarations,
+   never a proof obligation.
+3. **`ι_A` is the functorial inclusion**, supplied entirely by machinery:
+   `ObjectProperty.lift`, `fullyFaithfulι`,
+   `liftCompιIso = Iso.refl _`. Its precise type is a natural
+   transformation
+
+   ```text
+   ι_A : 𝓡_A ⟶ F_A
+   ```
+
+   whose components
+
+   ```text
+   (ι_A)_X : 𝓡_A(X) ⥤ F_A(X)
+   ```
+
+   are fully faithful inclusion functors. The domain is a separately
+   bundled full preimage groupoid, not a subset of the codomain. For every
+   `f : X ⟶ Y`, `𝓡_A(f)` is literally the restriction of `F_A(f)`, and
+   `liftCompιIso` gives the naturality square
+
+   ```text
+   𝓡_A(f) ⋙ (ι_A)_Y ≅ (ι_A)_X ⋙ F_A(f).
+   ```
+
+   Since the base is a groupoid, `f⁻¹` supplies the inverse restricted
+   transport. Thus `𝓡_A` is naturally isomorphic to the image of its own
+   functorial transport — never to all of `F_A`, and never by a
+   set-theoretic equality `F_A(f)(𝓡_A(X)) = 𝓡_A(Y)`.
+
+   The formal lift input Mathlib's signature requires is discharged by
+   reading the already-commuting square and the round trip
+   (`AsectionEquivariant`, `AsectionState_input_then_equivariant`); it is
+   not a theorem to derive, and no invariance lemma exists or is needed
+   (`register/60-failure-audit.md` rows 17–18).
+4. **CHT Remark 8.3.5 consumes what `ι_A` does to the preimage.**
+   `Grothendieck.map ι_A` is the induced functorial inclusion of the
+   separately bundled residue total into the certified ambient total, over
+   the same base; it is not a subset inclusion. The collapse through the
+   common `N` names the singleton;
+   `pi0GrothendieckEquiv` is the last comparison; the real-level invariant
+   descends to `val_A`; `c := val_A k_A`.
+
+No pre-flight instruction, checklist row, or proof spine in this file may be
+read as requiring a derivation at step 3. Wherever §5's spine says "prove",
+read "exhibit from the named certified suppliers". The four ratified
+declaration names are unchanged; `cResidue_preserved` names the formal lift
+input read off the square, not a substantive theorem.

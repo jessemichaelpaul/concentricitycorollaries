@@ -1,4 +1,4 @@
 interface:
   display_name: "Orbit–Stabilizer Groupoids"
-  short_description: "Categorify orbit–stabilizer in Lean"
-  default_prompt: "Use $orbit-stabilizer-groupoids to wire an invariant full subgroupoid and its natural inclusion from an existing group action."
+  short_description: "Wire action groupoids through π₀ in Lean"
+  default_prompt: "Use $orbit-stabilizer-groupoids to stay in the approved action-groupoid library, wire the invariant residue subdiagram, and carry its categorical component calculation through Remark 8.3.5 and pi0GrothendieckEquiv."

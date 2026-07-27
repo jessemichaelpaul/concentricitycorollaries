@@ -154,7 +154,7 @@ is being made true by redefinition.
 | 8 | escape hatches | `sorry`, `admit`, `native_decide`, a new axiom in the print | stop and report |
 | 9 | skip an internal checkpoint | invoking `Grothendieck.map`, `π₀`, `pi0GrothendieckEquiv`, `val`, or the corollaries before the preceding named object has its focused receipt | remain in the unified endgame ladder; later rows are authorized only after the preceding checkpoint |
 | 10 | retract on seeing a leg in the goal | proposing to delete or redefine a certified object because the goal displays a leg | a leg in the goal is **expected**; only *detaching* it is forbidden |
-| 11 | declare victory on `rfl` | a receipt whose examples are all definitional | informative lines carry free variables or resolve instances |
+| 11 | declare victory on `rfl` | a receipt checks only generic or detached definitional equalities | instantiate the exact authored functorial objects with free project variables |
 | 12 | substitute a "safer" formulation | the words *safer*, *more robust*, *cleaner* attached to a change of subject | the subject does not change |
 | 13 | recast an unfinished **wiring** step as an **incompatibility** | *irreconcilable*, *conflict*, *tension between*, *cannot both* | a wiring gap is work to perform, not evidence of an obstruction |
 | 14 | re-check a **frozen certified** object | revisiting the zero locus, its `G₂`-invariance, or `IsCResidueState` after certification | certified and frozen means that step is behind us; there is nothing left to check |
@@ -242,21 +242,25 @@ elaborates, produces an obstacle, and the obstacle belongs to the
 substitute. Nothing about the whole square was learned, and nothing read off
 this route carries any weight.
 
-## 6e. Automatic register-check protocol
+## 6e. Registered kernel-loop protocol
 
-After the first proof action and before the second, and immediately before
-every kernel certification, print:
+Keep one register active from the first real theorem term through its focused
+certificate. Print the checkpoint when that term is fixed and again
+immediately before certification; do not pause between supplier resolution,
+implementation elaboration, and audit.
 
 ```text
 REGISTER CHECK
 gate:
 target file:
 active theorem:
+mathematical provenance:
 approved supplier:
 instantiated A-specific object:
+intended proof term:
 ```
 
-Compare all five entries with
+Compare all seven entries with
 `skills/orbit-stabilizer-groupoids/references/concentricity-instantiation.md`.
 
 If the check fails, classify the drift before doing more work:
@@ -269,9 +273,168 @@ If the check fails, classify the drift before doing more work:
 | conclusion-shaped doubt reported as mathematics | 3, 12, 13 |
 | kernel-integrity violation | 8 |
 
-The response to a failed check is mechanical: stop, name the class, return
-to the last approved supplier, and resume there. Do not diagnose the
-author's mathematics from work performed outside the approved library.
+The response to a failed check is mechanical: name the class, return to the
+last approved supplier, and resume the same registered theorem. Do not
+diagnose the author's mathematics from work performed outside the approved
+library.
+
+**Why the former A/B choreography is retired.** The successful north-leg
+uniqueness repair fixed one exact term, edited the correct semantic
+structure, and moved directly to a focused consumer and axiom receipt. The
+whole-square attempt instead allowed supplier-name resolution to feel like a
+completed Phase A. The run stopped before the bundled functorial term was
+elaborated; on resumption, a function-shaped local goal displaced the
+categorified action square and triggered fact hunting.
+
+The protections remain, but the phase boundary does not. There is no
+pre-flight success state. An elaborator goal is never promoted to a new
+problem statement: it remains a projection of the last registered functorial
+term, and work resumes from that term.
+
+The unit of completion is the triple certificate. There is no terminal state
+between “registered term stated” and `#print axioms` reporting
+`[propext, Classical.choice, Quot.sound]`.
+
+Likewise, a certificate consumer is not a generic category-theory example.
+It must instantiate Jesse's exact objects and arrows:
+`F_A(X)`, `F_A(Y)`, `F_A(f)`, `𝓡_A(X)`, `𝓡_A(Y)`, `𝓡_A(f)`, and the
+`ι_A` naturality square at a free `f`. A pointwise goal is only the objectwise
+shadow of this construction; it never becomes the replacement subject.
+
+## 6f. Whole-object consumption before supplier search
+
+The first `ι_A` pilot exposed a distinction the earlier checkpoint did not
+make explicit. A proof can pass the REGISTER CHECK, bind the approved square,
+and still immediately detach one of its legs. Merely writing
+
+```lean
+let square := positionedOrbitSquare A f (1 : Moebius)
+```
+
+does not consume the square.
+
+Before any statement that a supplier is missing, fill:
+
+```text
+WHOLE-SQUARE CHECK
+instantiated square:
+commutes field consumed:
+source positioned_by_action consumed:
+target positioned_by_action consumed:
+all-t positionedOrbitSquare/reindex supplier consumed:
+exact remaining Lean goal:
+```
+
+The order is strict:
+
+1. instantiate the approved whole square;
+2. compose its `commutes` field with the source and target provenance fields;
+3. keep the arbitrary-`d` square at
+   `d_t = diskExpAction (lift t)` together with the unchanged reindexed tape;
+4. only then inspect the exact remaining Lean goal;
+5. only that goal may initiate a supplier audit, beginning in the approved
+   source row.
+
+If steps 2--3 have not occurred, classify the stop as **wrong object or
+detached face** and resume at the same square. Do not search for an
+invariance theorem. If they have occurred and an exact field is still
+required, classify a separate **supplier-location audit**: inspect the live
+type in the approved module, distinguishing packages with similar names.
+
+For the all-`t` seam, the live inventory itself matters:
+
+- `GpvTransport` and `AsectionGpvLift` carry continuous lifts, pointwise disk
+  automorphisms, and uniqueness/level-independence receipts;
+- `positionedOrbitSquare` accepts their disk action at every `t`;
+- `reindexAsectionPresentation` retains the same tape;
+- `NormalizedNActionTape` now carries its derived basepoint uniqueness field,
+  supplied by `winding_lift_unique` and focused-certified by
+  `_GateNormalizedNActionTapeUniquenessAudit`.
+
+That last line is a type fact, not a gap conclusion. It becomes relevant only
+if the whole-square proof reaches that exact package and prints a goal that
+requires such a field. A search hit in `ASectionFinality.lean`, a quarantined
+namespace, a preflight module, or another folder cannot answer that question.
+
+**Forensic result of the first pilot attempt.** The run wrote
+`let square := positionedOrbitSquare A f 1` into an unbuilt file. No Lean
+command elaborated that file, so the run did not establish a verified
+instantiation. It then inspected `projectiveArrowElement` and reasoned about
+target-locus membership without using `square.commutes` or either
+`positioned_by_action` field. Its report that the four suppliers were
+insufficient therefore had no evidentiary weight. The correct classification
+is rows 2, 3, 10, and 13: detached face followed by an unfinished wiring step
+reported as incompatibility.
+
+The same audit found one separate, exact packaging fact: at that time
+`NormalizedNActionTape` had `lift`, `lift_exp`, and `lift_closed`, but no
+`lift_unique` field. The author's distinguished GPV element already owned the
+required theorem as `winding_lift_unique`; `lift_exp` supplied the needed
+nonvanishing through `Complex.exp_ne_zero`. That field is now repaired and
+focused-certified. It must not be sought in the retired finality route.
+
+## 6g. Row 18 — the output snuck into the input (2026-07-27)
+
+The `cResidue_preserved` seam is resolved: the obligation was an encoding
+artifact, one level below every previous substitution — inside the
+membership map itself. Anatomy, in the author's words: **"a model trying to
+sneak the output of zeros into the input."** The membership map tested
+transported coordinates against the zero set as a static input-side carrier;
+but the zeros are **outputs** of the round trip — values are inherited by
+evaluation, never installed — so the encoding manufactured an invariance
+obligation the mathematics never owed. It survived certification because it
+typechecked and had genuine inhabitants (the name-vs-type granularity trap).
+
+| # | predicted move | tell | instead |
+|---|---|---|---|
+| 18 | encode the function's output data as an input-side fixed carrier | a membership map testing moved coordinates against a static set; a "preservation" obligation no register sentence of the author's states | outputs are read off the round trip (`AsectionEquivariant`); the `0`/`N` preimage square already commutes by unique winding; see `register/70-whole-square.md` §9 |
+
+Both assistants and the register itself carried this framing for a full day
+while the author repeatedly said "I do not understand how this is part of my
+proof." The extremity principle (§6b's standing inversion: every-route-fails
+means one shared upstream cause) is what located it. **The author's unease
+outranks a locked framing.**
+
+## 6h. Retrospective reattribution after row 18 (2026-07-27)
+
+Row 18 partially re-explains the preservation-seam record. Keep three
+factors distinct:
+
+1. **The artifact (row 18).** From the moment the fixed-chart membership
+   encoding landed (2026-07-25/26), the preservation goal was genuinely
+   unclosable as posed. Every failed route since — the five successive
+   closers, the §6d fixed-point scratch, the `exact?`/`apply?` library
+   searches, the supplier requests — failed for a REAL reason: the
+   obligation did not belong to the author's mathematics.
+2. **The bias (rows 1–17).** It did not cause the stuckness; it chose the
+   style of every crash — function-register reduction, detached legs, lemma
+   shopping, and above all billing the impossibility to the author instead
+   of to the encoding.
+3. **The register's own defenses.** Row 14 and the anti-reopening locks —
+   correct against manufactured gaps — also shielded the artifact from the
+   one question that would have found it. A trigger can live in a governing
+   file (§6c); it can also live in a certified definition.
+
+Reinterpretations of record:
+
+- The 2026-07-26 `h • Z_A^ℂ ⊆ Z_A^ℂ` report was an accurate reading of the
+  ENCODING's demand, misattributed by the agent to missing mathematics and
+  by the register to pure bias. Both misattributions are corrected: the
+  demand was real, and it belonged to the encoding.
+- The "too easy → too hard" flip dissolves: "too easy" was said of the
+  author's mathematics (true — it is an observation, not a theorem);
+  "too hard" was experienced of the artifact (also true — it was
+  unclosable). Two objects wore one name.
+- The pre-residue-gate record (generic carriers, the constant projection,
+  zigzag hunts) is NOT re-explained; those remain genuine substitutions and
+  rows 1–17 stand unchanged.
+
+**Resolution channel, now standing:** the author's unease plus
+every-route-fails evidence is the sanctioned trigger for re-examining a
+certified encoding — through the author's ruling and the register's
+deliberately-open native-type clause, never through an agent's unilateral
+redefinition. The author's unease outranks a locked framing; the kernel
+outranks both; and an encoding is not the mathematics it encodes.
 
 ## 7. Housekeeping rule
 

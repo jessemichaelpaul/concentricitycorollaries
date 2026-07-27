@@ -3,6 +3,15 @@
 This is the current mathematical register. It supersedes older memories,
 handoffs, and architecture narratives when they conflict with it.
 
+> **2026-07-27.** For the residue gate, the author's reading of record is
+> `register/70-whole-square.md` §9, and it supersedes the preservation-proof
+> spine passages below (the "locked preservation walk-around", the step-5
+> obligation language, and the "exact implication" passages) wherever they
+> frame the lift input as a substantive theorem. The `0`/`N` preimage square
+> already commutes by unique winding; `ι_A` is machinery; CHT 8.3.5 consumes
+> what `ι_A` does to the preimage. See also `register/60-failure-audit.md`
+> §6g (row 18: the output snuck into the input).
+
 ## The subject
 
 C1--C4 determine one infinite analytic A-section object:
@@ -491,8 +500,8 @@ over the base. The larger all-zero inverse image may still be recorded as
 ambient structure later; it no longer substitutes for the A-specific
 residue inverse image.
 
-The existing residue declarations are compatible viewpoints and witnesses
-of this prospective subdiagram, not its definition:
+The existing residue declarations are compatible historical viewpoints and
+witnesses of this prospective subdiagram, not its definition:
 
 - `NormalizedZeroObject` and `normalizedZeroLift`;
 - `residueState` and `residueActionState`;
@@ -500,7 +509,7 @@ of this prospective subdiagram, not its definition:
 - `normalizedNActionSquare`;
 - `residueToNorth`.
 
-The existing “middle diagram” is already present at three levels:
+The retired finality route recorded a “middle diagram” at three levels:
 
 ```text
 normalizedNActionSquare_factors_orbitStabilizer
@@ -508,13 +517,15 @@ normalizedNActionSquare_factors_orbitStabilizer
   → residueToNorth.
 ```
 
-The first identifies the GPV north square with the native
-orbit--stabilizer action square, the second lifts that factorization to the
-actual fibre functor, and the third is the resulting arrow in the
-Grothendieck total. At arbitrary frames, `positionedOrbitSquare`, its
-identity/composition laws, `orbitStabilizerActionSquare_output_commutes`,
-and `projectiveGpvActionSquare_output_commutes` provide the corresponding
-transport and value-naturality evidence.
+These names are witness readings, not approved suppliers for the current
+gate: some live in the excluded `ASectionFinality.lean`, and none may be
+imported to close `ι_A`. Their mathematical content is retained through the
+approved live declarations in `ASectionFunctor.lean`:
+`projectiveNorth`, `orbitHomFromNorth`, `orbitHomToNorth`, the canonical
+presentation, `positionedOrbitSquare`, and
+`reindexAsectionPresentation`. At arbitrary frames, those declarations and
+the native `orbitStabilizerActionSquare` provide the corresponding transport
+and value-naturality evidence inside the categorified action.
 
 This is why orbit--stabilizer is the endgame backbone. Conjugation by the
 same distinguished PGL/Möbius element transports the orbit relation, its
@@ -561,9 +572,9 @@ statement that no zero carrier or zero-only diagram is installed is a
 correct guard: the preimage is derived from the whole action. The stopped
 downstream attempt substituted the enumerated witnesses for that derived
 preimage; its genuine GPV north legs are retained as faces of the later
-one-orbit proof.
+action-groupoid component calculation.
 
-At the one-orbit/readout stage, do not identify a residue input with its base
+At the action-groupoid/readout stage, do not identify a residue input with its base
 footpoint. For a residue `ρ`, the octonionic domain point lies in its slice,
 its output is `0`, and only its real coordinate determines
 `normalizedFootpoint ρ.re`. The existing `.re` relation must be promoted to
@@ -584,28 +595,27 @@ The locked post-Gate-1 boundary is now:
    all simultaneous faces, then obtain the restricted functor and inclusion
    square. No separate inverse-map obligation is introduced;
 6. apply Grothendieck.map to the resulting natural inclusion;
-7. use the complete orbit--stabilizer/GPV/G₂/N quotient action to prove the
-   residue system is one categorical orbit; use C4 only for its intrinsic
-   infinite/nonempty population, then apply Remark 8.3.5 and the
-   category-of-elements identity to the precisely named singleton component
-   carrier;
+7. use the complete orbit--stabilizer/GPV/G₂/N quotient action to recognize
+   the residue total as the action groupoid already built; its certified
+   inhabitants are already available and C4 supplies infinitude. Then apply
+   Remark 8.3.5 and the category-of-elements identity to the precisely named
+   singleton component carrier;
 8. apply the separate Grothendieck-components equivalence at 𝓡_A as the
    last comparison;
 9. descend the already-compatible real-level orbit invariant to `val_A`.
 ```
 
-The total holds every value state. The subject of connectedness is the
-intrinsic residue-`ℂ` inverse image with its real-value transports, tied to
-C3 and made infinite by C4. A larger output-zero inverse image may be useful
-ambient structure, but it neither defines nor populates `𝓡_A`. **No `K_A`
-is named in advance** — read the chosen system first, assign generic names
-to it afterwards.
+The total holds every value state. The subject of the categorical
+one-component calculation is the intrinsic residue-`ℂ` inverse image with
+its real-value transports, tied to C3 and made infinite by C4. A larger
+output-zero inverse image may be useful ambient structure, but it neither
+defines nor populates `𝓡_A`. **No `K_A` is named in advance** — read the
+chosen system first, assign generic names to it afterwards.
 
-C4 certifies intrinsic infinitude. It proves neither categorical
-connectedness nor categorical disconnectedness, and topological
-connectedness is not part of this theorem. Categorical connectedness must
-be proved from the whole action: orbit--stabilizer, its unique
-factorization, the GPV-to-`N` transports, and `G₂`.
+C4 certifies intrinsic infinitude. The certified inverse image already has
+inhabitants. Topological connectedness is not part of this theorem. The
+categorical one-component calculation is the orbit--stabilizer action
+groupoid with its unique factorization, GPV-to-`N` transports, and `G₂`.
 
 The orbit--stabilizer/first-isomorphism route is the direct structural
 argument. Once the exact A-specific orbit, coset, stabilizer, north
@@ -873,10 +883,10 @@ The residue-subdiagram gate has the following exact status:
 
 This gate creates no new action and proves no new speculative RH theorem.
 It restricts the already-certified action by standard orbit--stabilizer
-groupoid theory. `Grothendieck.map`, the residue total, the one-orbit
-collapse, Riehl Remark 8.3.5, `pi0GrothendieckEquiv`, the real-level reader,
-and the final definition of `c` remain downstream and held until this
-restriction gate is triple-certified.
+groupoid theory. `Grothendieck.map`, the residue total, the action-groupoid
+component collapse, Riehl Remark 8.3.5, `pi0GrothendieckEquiv`, the
+real-level reader, and the final definition of `c` follow after this
+restriction checkpoint inside the unified endgame gate.
 
 ### Textbook-down identification of this gate
 
@@ -893,14 +903,16 @@ CTIC Exercise 2.1.iv:
 
 CTIC Example 2.4.10:
   the category of elements of a G-set is its action groupoid;
-  transitivity gives connectedness while stabilizers are retained.
+  transitivity gives categorical one-component connectedness while
+  stabilizers are retained.
 
 CTIC Proposition 2.4.14:
   a natural transformation of diagrams induces a functor of their
   categories of elements over the same base.
 
 CHT Remark 8.3.5:
-  a category is nonempty and connected exactly when its π₀ is a singleton.
+  a category is nonempty and categorically connected exactly when its π₀ is
+  a singleton.
 ```
 
 Riehl states the subfunctor and fully-faithful category-of-elements passages
@@ -995,21 +1007,25 @@ the square it belongs to. The coordinate theorem is
 only the immediate vertical `G₂`-invariance receipt; C3--C4 and the whole
 kernel action already supply the residue statement.
 
-### Locked 8.3.5 one-orbit route
+### Locked 8.3.5 action-groupoid component route
 
 Forming `𝓡_A` as a genuine subdiagram internalizes the semantic C-residue
 selection before the component calculation. The project endgame does not
-use Lemma 8.3.4: the complete residue action itself is the one-orbit
-system. The vertical and horizontal first-isomorphism/orbit--stabilizer
-comparisons, the all-`t` middle square, the north action, and unique
-stabilizer factorization prove that this complete residue system is one
-categorical orbit. C4 supplies its nonempty population.
+use Lemma 8.3.4: the complete residue total is recognized as the action
+groupoid already presented by the vertical and horizontal
+first-isomorphism/orbit--stabilizer comparisons, the all-`t` middle square,
+the north action, and unique stabilizer factorization. This is not a new
+action and not an extra theorem that an independently assembled system
+happens to be an orbit. The certified inverse image already has inhabitants;
+C4 supplies the stronger infinitude result.
 
 Riehl's category-of-elements identity
 `π₀(el X) ≅ colim X` records the identifications forced by those existing
-transport arrows. Remark 8.3.5 converts nonempty categorical connectedness
-of that chosen system into the statement that its precisely named `π₀`
-carrier is a singleton. At the exact project types:
+transport arrows. Remark 8.3.5 converts the already-inhabited,
+categorically one-component action groupoid into the statement that its
+precisely named `π₀` carrier is a singleton. This is categorical
+connectedness by zigzags, never topological connectedness. At the exact
+project types:
 
 ```text
 π₀(∫_𝓑 𝓡_A)
@@ -1076,8 +1092,8 @@ groupoid structure, and the axiom surface
 `[propext, Classical.choice, Quot.sound]`.
 
 The conjugation/arrow half remains open. `Grothendieck.map`, the residue
-total, the one-orbit/8.3.5 collapse, and all component/readout work remain
-held.
+total, the action-groupoid/8.3.5 collapse, and all component/readout work
+follow after its internal checkpoint in the unified endgame gate.
 
 ### Exact next task
 
@@ -1148,10 +1164,9 @@ the certified fibres `F_A(X)`, `F_A(Y)` — the square
 simplifications `m_X * 1 = m_X` and `1⁻¹ * r_f * 1 = r_f`.
 
 - `d = 1` **locates** the certified-fibre member of the arbitrary-`d` family.
-- `AsectionFunctor_map_uses_two_legs` (`ASectionFunctor.lean:1047`) supplies
-  the all-`t` provenance at `d_t = diskExpAction (lift t)`, proved
-  `⟨rfl, rfl⟩`; the tape's only contribution is the conjugated stabilizer
-  leg `d_t⁻¹ * r_f * d_t`.
+- The defining fields of `positionedOrbitSquare A f d_t` supply the all-`t`
+  provenance at `d_t = diskExpAction (lift t)` by `rfl`; the tape's only
+  contribution is the conjugated stabilizer leg `d_t⁻¹ * r_f * d_t`.
 - Both share the *identical* left leg `projectiveArrowElement A f` by `rfl`
   — the same term, not a term equal to it.
 - **No claim is made that `d = 1` is an instant of every GPV tape.**

@@ -161,9 +161,11 @@ This total map certifies provenance:
 ∫R ⟶ ∫F
 ```
 
-says that the restricted total consists of the selected value states inside
-the ambient total. It does not itself prove that `π₀(∫R)` is a singleton,
-and it does not replace `pi0GrothendieckEquiv`.
+This is a functor between separately bundled categories, not a
+set-theoretic subset inclusion. It says functorially that the restricted
+total consists of the selected value states in the ambient total. It does
+not itself prove that `π₀(∫R)` is a singleton, and it does not replace
+`pi0GrothendieckEquiv`.
 
 ## Remark 8.3.5: categorical components
 

@@ -90,7 +90,7 @@ mob : Moebius
 changes the world and leaves the complex coordinate definitionally fixed:
 
 ```lean
-AsectionState.smul_coordinate ... := rfl
+ASection.AsectionState.smul_coordinate ... := rfl
 ```
 
 ### Projective/Möbius direction: `GL`, `PGL`, and `Moebius`
@@ -138,8 +138,8 @@ This is the explicit conjugation of Möbius viewpoints while retaining the
 | projective action groupoid | `GreatCircle.Base` |
 | Möbius realization | `cayleyProjective : GreatCircle.Aut →* Moebius` |
 | projective stabilizer | `GreatCircle.NorthStabilizer` |
-| factorization | `orbit_stabilizer_factor` |
-| uniqueness | `stabilizerPart_unique` |
+| factorization | `GreatCircle.orbit_stabilizer_factor` |
+| uniqueness | `GreatCircle.stabilizerPart_unique` |
 | framed action square | `orbitStabilizerActionSquare A f` |
 | all-parameter family | `positionedOrbitSquare A f d` |
 | value-state transport | `AsectionActionTransport A f` |
@@ -154,13 +154,13 @@ f.val
 ```
 
 The fixed representatives force the stabilizer term uniquely by
-`stabilizerPart_unique`.
+`GreatCircle.stabilizerPart_unique`.
 
 ## Approved endgame library
 
-Every implementation action must stay inside this library. The automatic
-register checkpoint in `SKILL.md` names one row before a second proof action
-and again before kernel certification.
+Every implementation action must stay inside this library. The continuous
+register checkpoint in `SKILL.md` fixes one row with the real theorem term
+and keeps it active through kernel certification.
 
 | role | approved source |
 |---|---|
@@ -178,7 +178,7 @@ and again before kernel certification.
 | totalization | pinned `Mathlib/CategoryTheory/Grothendieck.lean` |
 
 The only admissible new Lean modules are the exact gate modules and audit
-targets approved in the endgame pre-flight. A file being nearby, historical,
+targets approved in the registered gate lock. A file being nearby, historical,
 compiled, or apparently useful does not put it in this library.
 
 ## Certified residue objects
@@ -213,7 +213,15 @@ No enumeration or new arrow populates this subgroupoid.
 
 ## Exact open gate
 
-The one substantive witness is:
+> **2026-07-27:** `cResidue_preserved` is the **formal lift input**, read off
+> the already-commuting `0`/`N` preimage square (unique winding —
+> `winding_lift_unique`, the tape's `lift_unique`, `lift_closed`, the
+> element's boundary fixes) and the round trip (`AsectionEquivariant`,
+> `AsectionState_input_then_equivariant`) — **not a substantive theorem**.
+> Author's reading of record: `register/70-whole-square.md` §9; anatomy of
+> the retired framing: `register/60-failure-audit.md` §6g (row 18).
+
+The formal lift input is:
 
 ```lean
 theorem cResidue_preserved
@@ -246,28 +254,62 @@ the native orbit–stabilizer square on the certified fibres — the square
 `AsectionActionTransport A f` is built from — after the routine group
 simplifications `m_X * 1 = m_X` and `1⁻¹ * r_f * 1 = r_f`. So `d = 1`
 **locates** the certified-fibre member of the arbitrary-`d` family, and
-`AsectionFunctor_map_uses_two_legs` supplies the all-`t` provenance at
-`d_t`. **No claim is made that `d = 1` is an instant of every GPV tape** —
+the defining fields of `positionedOrbitSquare A f d_t` supply the all-`t`
+provenance there by `rfl`. **No claim is made that `d = 1` is an instant of
+every GPV tape** —
 `AsectionGpvLift` imposes no such condition, and nothing here needs it. No
 comparison lemma between two squares is required.
 
+The full object is instantiated through the `N`-anchored presentation, while
+`0` is the other fixed boundary face of the same diagonal element. Setting
+the extra parameter to `d = 1` removes no part of the distinguished action:
+that action is already contained in `projectiveObjectFrame A X`.
+
 `positionedOrbitSquare A f d_t` carries the *identical* left leg
 `projectiveArrowElement A f` for every `t` — the same term, not a term
-equal to it. The uniform receipt is green:
-
-```lean
--- ASectionFunctor.lean:1047
-theorem AsectionFunctor_map_uses_two_legs (A) (f : X ⟶ Y)
-    (p : AsectionPresentation A X) (δ) (hp) (hne) (t : unitInterval) :
-    let d := GreatCircle.diskExpAction ((p.gpv δ hp hne).lift t)
-    ((positionedOrbitSquare A f d).left  = projectiveArrowElement A f) ∧
-    ((positionedOrbitSquare A f d).right =
-      d⁻¹ * cayleyProjective (stabilizerPart f).1 * d) :=
-  ⟨rfl, rfl⟩
-```
+equal to it. Both leg equations are the fields of the live definition and
+reduce by `rfl`; no separate theorem is a supplier for this gate.
 
 Instantiate at `d_t` and both legs arrive by `rfl`. The tape's only
 contribution is the conjugated stabilizer leg `d_t⁻¹ * r_f * d_t`.
+
+### Exact all-`t` supplier inventory
+
+Before claiming that continuity, automorphism, or uniqueness is missing,
+inspect the live package at the object actually used:
+
+- `GpvTransport.lift : C(unitInterval, ℂ)` is a continuous lift;
+  `GpvTransport.diskExpAction_eq_value` identifies its disk automorphism at
+  every `t`; `GpvTransport.continuous_level`, `lift_unique`, and
+  `level_independent` supply its continuous and unique real-level data.
+- `AsectionGpvLift.lift : C(unitInterval, ℂ)` is likewise continuous, while
+  its fields `action`, `continuous_level`, `unique`, and
+  `level_independent` are all quantified over the complete tape.
+- `positionedOrbitSquare A f d` accepts arbitrary `d`, so
+  `d = diskExpAction (lift t)` gives the whole square at every `t`.
+- `reindexAsectionPresentation A f` retains `gpv` and `euler_gpv`
+  definitionally and rebuilds `toNorth` from that same all-`t` square.
+
+Do not transfer a field between unlike packages. **Author ruling,
+2026-07-26:** `NormalizedNActionTape` exposes the same basepoint uniqueness
+owned by the distinguished GPV element through the derived field:
+
+```lean
+lift_unique :
+  ∀ lift' : C(unitInterval, ℂ),
+    (∀ t, Complex.exp (lift' t) =
+      (zeroLoop *
+        poleLoop ^ Nat.card {k : ℕ | A.sphereZero k = A.sphereZero n}) t) →
+    lift' 0 = lift 0 →
+    lift' = lift
+```
+
+The approved mathematical supplier is the already-proved
+`winding_lift_unique`. The nonvanishing hypothesis it needs follows from
+`lift_exp` and `Complex.exp_ne_zero` at every `t`. The former packaging
+omission is repaired and focused-certified by
+`_GateNormalizedNActionTapeUniquenessAudit`; do not borrow a theorem from
+`ASectionFinality.lean`.
 
 After `cResidue_preserved`, define the top arrow by:
 
@@ -336,15 +378,37 @@ comparison
 
 is the natural isomorphism supplied by `liftCompιIso`; it is `Iso.refl _`.
 
+### Exact certificate instantiations
+
+The final audit does not certify a generic `ObjectProperty`, generic functor,
+or generic natural transformation. Its kernel receipts instantiate the
+authored action-groupoid tower at free project data:
+
+```text
+X Y : GreatCircle.Base,  f : X ⟶ Y,
+F_A(X) = AsectionActionFiber A X,
+F_A(f) = AsectionActionTransport A f,
+𝓡_A(X) = InverseImageCResidueStateWorldGroupoid A X,
+𝓡_A(f) = AsectionCResidueTransport A f,
+naturality of ι_A at f = the liftCompιIso square.
+```
+
+The category-theory declarations supply the form of these objects and arrows.
+Only the displayed A-specific instantiation is the certificate subject.
+The audit's six ratified interface checks certify the fixed supplier floor.
+Any additional check remains exactly when the elaborated proof term consumes
+that declaration. Neither the floor nor an added supplier check is itself the
+consumer certificate.
+
 The component calculation is not a new proof that a separately assembled
 system happens to be one orbit. It recognizes the categorified
 orbit–stabilizer action already built from the distinguished element.
 Likewise, nonemptiness is not an open task: the certified inverse image
 already has inhabitants, and C4 supplies the stronger infinitude result.
 
-## Pre-flight A-specific naming table
+## Registered A-specific naming table
 
-Use these names in the implementation pre-flight so no generic slot becomes
+Keep these names active through the implementation loop so no generic slot becomes
 the subject:
 
 **RATIFIED (Jesse, 2026-07-26) — the `ι_A` checkpoint. These four names only.**

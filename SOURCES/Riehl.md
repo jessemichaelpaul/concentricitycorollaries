@@ -54,6 +54,17 @@ and its third proof (same page):
 ### The category-of-elements/colimit identity (inside the proof of Lemma 8.3.4; book p. 102 = PDF page 118 — top-up 2026-07-13)
 > For the converse, first note that for any X : C -> Set, there is an isomorphism pi_0(el X) ≅ colim_C X because each arrow connecting two objects in el X corresponds to a condition demanding that these elements are identified in any cone under X.
 
+> ⛔ **COMMENTARY SUPERSEDED 2026-07-25 (author's ruling). The verbatim quotation above is
+> unchanged and remains the citation of record.** Two claims in the note below are retracted:
+> (1) that this identity is "not project architecture" — it is the **mechanism** by which the chosen
+> transport system yields its colimit class, and with Remark 8.3.5 the singleton; the project's
+> `pi0GrothendieckEquiv` is its `Grpd`-valued extension (specialize to discrete fibres and it *is*
+> this identity, via Mathlib's `grothendieckTypeToCat`); (2) that "the architecture of record is
+> `sectionFunctor A : GreatCircle.Base ⥤ SphereWorld`" — that functor is now `AsectionSlice`, the
+> sectional projection, whose object map is constant; the live diagram is `AsectionActionDiagram A`
+> and the total is `TotalActionStateWorld A`. What remains in force: do not *invent* a category of
+> elements and then hunt for its project meaning.
+
 (Extracted 2026-07-13 from the inbox copy `inbox/cathtpy.pdf`, pypdf text layer, PDF p. 118 — the identical passage in the free PDF. Commentary, not citation: this identity is literature backing for how a colimit imposes identifications; it is not project architecture. Independent value diagrams, categories of elements used as project objects, discrete-real targets, comparison functors, and bridges are retracted from the project argument. The architecture of record is `sectionFunctor A : GreatCircle.Base ⥤ SphereWorld`, its exact `𝒯_A`, and the certified readout instantiated on that exact construction. Lean pins are retained for reference only: `Functor.Elements` Hom subtype (Elements.lean:63), `map_snd` (:101), `any_functor_const_on_obj` (IsConnected.lean:116), `constant_of_preserves_morphisms` (:148), `colimitEquivColimitType` (Limits/Types/Colimits.lean:163).)
 
 ### Remark 8.3.5 (connectedness, zig-zags, and pi_0; book p. 102)

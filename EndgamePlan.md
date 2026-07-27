@@ -22,9 +22,16 @@ certified at its semantic C3--C4 type. Its framewise inverse image
 `InverseImageCResidueStateWorldGroupoid A X` is also triple-certified. The
 sole open theorem proves that the whole action transports that existing
 kernel restriction through every projective frame by orbit--stabilizer,
-with the C3--C4 GPV factorization through `N` retained. Restriction then
-forces the residue diagram and inclusion. Every later
-Grothendieck-map/one-orbit/component/readout gate remains held.
+with the C3--C4 GPV factorization through `N` retained.
+
+> **2026-07-27 — superseded framing.** See `register/70-whole-square.md` §9,
+> the author's reading of record: the lift input is read off the
+> already-commuting `0`/`N` preimage square (unique winding) and the round
+> trip; it is not a substantive transport theorem. `ι_A` is machinery;
+> CHT 8.3.5 consumes what `ι_A` does to the preimage. Restriction then
+forces the residue diagram and inclusion. The remaining totalization,
+action-groupoid component calculation, readout, theorem, and corollary
+wiring follow as the unified endgame gate, with internal kernel checkpoints.
 
 ## Gate 1 — certify the global action and its derivative
 
@@ -195,11 +202,11 @@ carried at every instant by `positionedOrbitSquare A f d_t`.
 it directly at `d = 1`; that gives the native orbit--stabilizer square on
 the certified fibres after the routine group simplifications
 `m_X * 1 = m_X` and `1⁻¹ * r_f * 1 = r_f`. So `d = 1` **locates** the
-certified-fibre member of the arbitrary-`d` family, while
-`AsectionFunctor_map_uses_two_legs` (`ASectionFunctor.lean:1047`) supplies
-the all-`t` provenance at `d_t = diskExpAction (lift t)`, both sharing the
-identical left leg `projectiveArrowElement A f` by `rfl`. **No claim is
-made that `d = 1` is an instant of every GPV tape**, and none is needed.
+certified-fibre member of the arbitrary-`d` family, while the defining
+fields of `positionedOrbitSquare A f d_t` supply the all-`t` provenance at
+`d_t = diskExpAction (lift t)` by `rfl`. Both instantiations share the
+identical left leg `projectiveArrowElement A f`. **No claim is made that
+`d = 1` is an instant of every GPV tape**, and none is needed.
 See `register/70-whole-square.md`.
 
 So the constraint is on the **proof**, never on the definition. What is
@@ -432,8 +439,9 @@ The sharpened semantic gate order is therefore locked:
    categorical square;
 7. apply Grothendieck.map to obtain the map of totals over 𝓑;
 8. use the complete vertical/horizontal first-isomorphism and
-   orbit--stabilizer quotient of the residue action to prove it is one
-   categorical orbit; C4 supplies nonemptiness, never connectedness;
+   orbit--stabilizer quotient to recognize the residue total as the
+   categorified action already built; its certified inhabitants are already
+   available and C4 supplies infinitude;
 9. apply **CHT** Remark 8.3.5 to obtain the precisely named singleton component
    carrier, then use the category-of-elements identity and the separate
    `pi0GrothendieckEquiv` at `𝓡_A` to certify
@@ -444,46 +452,65 @@ The sharpened semantic gate order is therefore locked:
 ```
 
 The total holds every value state. `𝓡_A` is the A-specific full inverse
-image of the semantic residue locus and is the subject of connectedness.
+image of the semantic residue locus and is the subject of the categorical
+one-component calculation.
 A larger all-zero inverse image may later be useful as ambient structure,
 but it neither defines nor populates `𝓡_A`.
 
+The natural inclusion is the provenance step:
+
+```text
+ι_A : 𝓡_A ⟹ F_A
+  → Grothendieck.map ι_A : ∫𝓡_A ⟶ TotalActionStateWorld A.
+```
+
+It certifies that the category entering Remark 8.3.5 is the collection of
+residue value states inside the whole action. It is not itself the singleton
+calculation and is not generally an isomorphism `𝓡_A ≅ F_A`. The
+objectwise comparison
+`𝓡_A(f) ⋙ ι_Y ≅ ι_X ⋙ F_A(f)` is the `liftCompιIso` natural isomorphism.
+Remark 8.3.5 then computes `π₀(∫𝓡_A)`, and
+`pi0GrothendieckEquiv 𝓡_A` moves that result to
+`colim (π₀ ∘ 𝓡_A)`.
+
 The exact next task is the whole-action preservation walk-around at step 5:
-start with the already-formed `𝓡_A(X)`, read the first-isomorphism theorem
-vertically and horizontally, instantiate the existing middle square at
-`diskExpAction (lift t)` for arbitrary `t`, use the uniquely forced
-stabilizer factorization, use `reindexAsectionPresentation A f` as the
-green all-`t` presentation transport, and expose its comparison with
-`AsectionActionTransport A f` at the two certified inverse images to prove
+start with the already-formed `𝓡_A(X)` and `𝓡_A(Y)`, instantiate
+`positionedOrbitSquare A f d` directly at `d = 1` to locate the native
+orbit--stabilizer square on the certified fibres, and use the uniquely
+forced stabilizer factorization. The defining fields of
+`positionedOrbitSquare A f d_t` and `reindexAsectionPresentation A f`
+supply the green all-`t` provenance of that same left leg. This proves
 `x ∈ 𝓡_A(X) → F_A(f)(x) ∈ 𝓡_A(Y)`. No component, colimit, or reader work
 begins before that implication and its restricted square are certified.
 
 Once `𝓡_A` has been assembled as a functorial inverse-image subdiagram, the
-project endgame does not use **CHT** Lemma 8.3.4. The baked-in quotient action is
-stronger and more direct: the complete residue action is one orbit. **CHT**
-Remark 8.3.5 turns its nonempty categorical connectedness into its named singleton
-`π₀`; the category-of-elements identity performs the colimit identification,
-and `pi0GrothendieckEquiv` at `𝓡_A` supplies
+project endgame does not use **CHT** Lemma 8.3.4. The next step recognizes
+its total as the action groupoid already presented by the baked-in quotient
+action. **CHT** Remark 8.3.5 turns its already-inhabited, categorically
+one-component action groupoid into its named singleton `π₀`; the
+category-of-elements identity performs the colimit identification, and
+`pi0GrothendieckEquiv` at `𝓡_A` supplies
 
 ```text
 π₀(∫_𝓑 𝓡_A) ≃ colim_𝓑 (π₀ ∘ 𝓡_A) ≃ {k_A}.
 ```
 
 The singleton does not create its real reading. The same action already
-carries an `ℝ`-valued real-level invariant, and the one-orbit proof shows it
-is constant on the relation being quotiented. It therefore descends
+carries an `ℝ`-valued real-level invariant, and the action-groupoid
+calculation shows it is constant on the relation being quotiented. It therefore descends
 uniquely to `val_A`; the associated cocone is the categorical expression of
 that invariant, not a choice of codomain. Then `c := val_A k_A` is
 immediate.
 
-C4 has no vote on categorical connectedness or disconnectedness; it proves
-only intrinsic infinitude and hence nonemptiness. No topological
-connectedness statement is used. The direct structural route is the
+C4 has no vote on the categorical one-component calculation; it proves
+intrinsic infinitude. The certified inverse image already has inhabitants,
+so nonemptiness is not a new build step. No topological connectedness
+statement is used. The direct structural route is the
 orbit--stabilizer/first-isomorphism identification of the precisely named
 coset and orbit objects, with unique stabilizer factorization. Those
 A-specific objects are named from the action and triple-kernel certified
-before **CHT** Remark 8.3.5 and the generic Grothendieck-components equivalence are
-instantiated.
+before **CHT** Remark 8.3.5 and the generic Grothendieck-components
+equivalence are instantiated.
 
 Never abbreviate the resulting project singleton as `1`. Name the exact
 singleton component carrier and its unique class, then retain the induced
@@ -505,7 +532,7 @@ certified; its whole-action preservation and resulting restricted diagram
 are the current authorized gate. Existing GPV north legs are retained as
 genuine evidence to be read inside it.
 
-The one-orbit/readout stage must also certify the exact categorical
+The action-groupoid/readout stage must also certify the exact categorical
 compatibility between a residue's real coordinate and its projective base
 footpoint. The full octonionic residue input is not equal to the real-axis
 point: `normalizedFootpoint ρ.re` records its common real frame. This
@@ -518,8 +545,9 @@ the real-level orbit invariant is proved well defined and descended to
 locked project route. The category-of-elements identity occurs inside its
 proof (**CHT**, book p. 102) and remains the **mechanism** by which the chosen transport system
 yields its colimit class. `pi0GrothendieckEquiv` is the `Grpd`-valued
-extension of that identity, applied after the one-orbit proof and **CHT** Remark
-8.3.5 (book p. 102) have supplied the named singleton component carrier.
+extension of that identity, applied after the action-groupoid recognition
+and **CHT** Remark 8.3.5 (book p. 102) have supplied the named singleton
+component carrier.
 
 Generic category theory allows many cocones with many apices. That generic
 freedom is not a project ambiguity: the completed action already supplies
@@ -568,7 +596,7 @@ Nothing in this section is authorized before the gates above close.
 The master rewrite is deliberately after the Lean theorem and corollary
 receipts. Its central repair will be the now-explicit passage from
 orbit--stabilizer invariance, through a natural subdiagram and
-`Grothendieck.map`, to the one-orbit/**CHT** 8.3.5 component collapse and real-level
+`Grothendieck.map`, to the action-groupoid/**CHT** 8.3.5 component collapse and real-level
 orbit-invariant descent. It may then point to the sourced Thomason route as
 a stronger homotopical follow-up without importing it into the proof.
 During the current Lean phase, the standing prohibition on editing the
@@ -579,7 +607,7 @@ master remains in force.
 - Values are inherited by evaluation.
 - No semantic constancy in the intended exponential action.
 - No generic or conclusion-shaped carrier.
-- No whole-total connectedness substituted for the complete residue
-  action's one-orbit proof.
+- No whole-total or topological connectedness substituted for the exact
+  action-groupoid component calculation.
 - No historical or alternate construction used as current authority.
 - No `Octonionic_RH_master.tex` edit during the Lean endgame.

@@ -7,10 +7,11 @@
 %  Part 3: the Concentricity Theorem. The base is
 %          B = PGL(2,R) \ltimes OnePoint(R) and the sphere world SphereWorld.
 %          Conditions C1--C3 determine one distinguished Mobius/exponential
-%          element; orbit--stabilizer carries it across the base, giving the
-%          A-section functor A : B -> SphereWorld with object and arrow
-%          actions determined together. Then T_A = Int_B A is formed. The
-%          readout is pi_0(T_A) = colim_B(pi_0 . A). The colimit performs the
+%          element; orbit--stabilizer carries its whole O*-valued action
+%          across the base. Its sphere projection is AsectionSlice, while
+%          the value-bearing AsectionFunctor A : B -> Grpd has normalized
+%          A-value states as fibres. Then T_A = Int_B A_A is formed. The
+%          readout is pi_0(T_A) = colim_B(pi_0 . A_A). The colimit performs the
 %          transport-generated identifications and yields one C-residue
 %          real-value singleton {c}, c in R. Hence the populated C-residue
 %          zero 6-spheres have common centre c and are concentric. Classical
@@ -129,11 +130,15 @@ orbit--stabilizer, and categorical homotopy theory. Conditions \textup{(C1)--(C3
 distinguished M\"obius element on the projective base
 $\mathcal B=PGL(2,\RR)\ltimes\operatorname{OnePoint}(\RR)$: the Euler product presenting it at
 $0$, the Weierstrass product at $N$, through the commuting triangle $\pi\circ E=\exp$.
-Orbit--stabilizer carries this one element across the base to the A-section functor
-$A:\mathcal B\to\SphereWorld$, whose Grothendieck construction is the total
-$\mathcal T_A=\int_{\mathcal B}A$; the residue-$\CC$ zero-spheres enter as its
+The slice-preserving normalization is $G_2$-equivariant on $\Ostar$, and
+orbit--stabilizer carries this whole point-valued action across the base. Its
+sphere-world projection records the directions and M\"obius legs; the genuine
+A-section functor
+$\mathcal A_A:\mathcal B\to\mathbf{Grpd}$ has the resulting normalized
+A-value states and their transports as its fibres. Its Grothendieck construction is the total
+$\mathcal T_A=\int_{\mathcal B}\mathcal A_A$; the residue-$\CC$ zero-spheres enter as its
 \textup{(C3)--(C4)} outputs. The readout
-$\pi_0(\mathcal T_A)\cong\operatorname{colim}_{\mathcal B}(\pi_0\circ A)$ collapses the section's
+$\pi_0(\mathcal T_A)\cong\operatorname{colim}_{\mathcal B}(\pi_0\circ\mathcal A_A)$ collapses the section's
 real-value transports to a single component carrying one real value $c\in\RR$, so every
 populated zero $6$-sphere has centre $c$. The theorem asserts a single shared centre $c$;
 naming that number is the task of the corollaries.
@@ -818,9 +823,12 @@ its corollaries.
 From the section's own data we
 read one distinguished M\"obius transformation of the Riemann sphere, presented at its two fixed
 points by the Euler product and the Weierstrass product; orbit--stabilizer carries that single
-transformation across the whole continuum of slice directions, assembling the A-section functor
-$A:\mathcal B\to\SphereWorld$ over the projective base $\mathcal B$. Its Grothendieck construction
-$\mathcal T_A=\int_{\mathcal B}A$ gathers every sphere and every value-transport into one object, and
+transformation across the whole continuum of slice directions. The resulting
+map to $\SphereWorld$ is its geometric projection; lifting the same action to
+the normalized A-value states assembles the genuine A-section functor
+$\mathcal A_A:\mathcal B\to\mathbf{Grpd}$ over the projective base
+$\mathcal B$. Its Grothendieck construction
+$\mathcal T_A=\int_{\mathcal B}\mathcal A_A$ gathers every sphere and every value-transport into one object, and
 the components of that object, computed as a colimit, collapse the transports that carry the zeros
 down to a single class. That one class is one real centre, and the zero-spheres are concentric.
 
@@ -971,14 +979,25 @@ points, through the commuting triangle $\pi\circ E=\exp$. That triangle makes th
 action, and orbit--stabilizer carries it across the base: the M\"obius group law gives the local
 action, orbit--stabilizer extends the element over every orbit, stabilizer compatibility makes
 the result independent of representatives, and the group identity and multiplication give the
-functor laws. This is the A-section functor
+functor laws. Its direction-and-M\"obius projection is
 \[
-  A:\mathcal B\longrightarrow\SphereWorld,
+  A^{\mathrm{slice}}:\mathcal B\longrightarrow\SphereWorld,
 \]
-written \texttt{sectionFunctor\,A} in the Lean source, its object and arrow actions determined
-together. The winding, lift-uniqueness, tameness, crossing, welding, and GPV laws are readings
-of this one action.
-The objects of $A(b)$ are normalized analytic and sphere-world value states, and its arrows are
+written \texttt{AsectionSlice\,A} in the Lean source. This projection is not
+the full A-section functor: it remembers the slice sphere and its M\"obius
+transport, but not yet the normalized point and value produced on that sphere.
+
+The slice-preserving realization on $\Ostar$ is $G_2$-equivariant, hence a
+functor on the octonionic action groupoid. Sweeping that whole point-valued
+action---rather than only its sphere projection---by the same
+orbit--stabilizer factorization gives the genuine A-section functor
+\[
+  \mathcal A_A:\mathcal B\longrightarrow\mathbf{Grpd},
+\]
+written \texttt{AsectionFunctor\,A} in the Lean source. The winding,
+lift-uniqueness, tameness, crossing, welding, and GPV laws are readings of
+this one action. The objects of $\mathcal A_A(b)$ are normalized analytic and
+sphere-world value states produced by the action, and its arrows are
 the actual value transports. \textup{C1} supplies continuation through the unique simple real
 pole of value $N=\infty$; \textup{C2} the Euler exponential channel on its right half-space;
 \textup{C3} the Weierstrass channel over the full divisor; and \textup{C4} the infinite
@@ -989,13 +1008,13 @@ is formed.
 
 The total value-transport category is
 \[
-  \mathcal T_A=\int_{\mathcal B}A.
+  \mathcal T_A=\int_{\mathcal B}\mathcal A_A.
 \]
 An object is a base position together with a normalized A-section value state in its fibre. A
 morphism is a base channel together with the compatible A-section transport supplied by $A$.
 The populated residue-$\CC$ zero-sphere states are the degenerate-fibre outputs of this
 completed construction, produced by \textup{C3--C4}. The associated diagram
-$\pi_0\circ A:\mathcal B\to\mathbf{Set}$ is the components diagram required by the
+$\pi_0\circ\mathcal A_A:\mathcal B\to\mathbf{Set}$ is the components diagram required by the
 Grothendieck/colimit readout (Lemma~\ref{lem:pi0-grothendieck}).
 \end{definition}
 
@@ -1116,8 +1135,9 @@ four properties.
 \uses{def:A-section, def:base, lem:residue-spheres, lem:pi0-grothendieck,
 thm:winding-lift, prop:winding-signature, thm:identity}
 Let $A$ be an $A$-section. The C-residue values transported by the A-section functor
-$A:\mathcal B\to\SphereWorld$, from the projective great-circle base $\mathcal B$ to the
-sphere-world groupoid $\SphereWorld$, form exactly one colimit/component class, and that
+$\mathcal A_A:\mathcal B\to\mathbf{Grpd}$, from the projective great-circle base
+$\mathcal B$ to the A-generated normalized value groupoids, form exactly one
+colimit/component class, and that
 singleton class
 carries one real value
 \[
@@ -1135,10 +1155,15 @@ centered degenerate family with one real level, each lifting uniquely to $N$. Th
 lift-uniqueness, tameness, crossing, welding, and GPV transport laws are readings of that one
 action. Orbit--stabilizer carries the element across the base by M\"obius group laws, its
 object and arrow actions determined together and its identity and composition laws pure group
-algebra; this is the A-section functor $A:\mathcal B\to\SphereWorld$. Its normalized
-states carry their real-value data and its arrows are the actual value transports.
+algebra. The resulting functor
+$A^{\mathrm{slice}}:\mathcal B\to\SphereWorld$ is the geometric projection.
+The $G_2$-equivariant realization on $\Ostar$ lifts this same action to the
+normalized value-state fibres, giving
+$\mathcal A_A:\mathcal B\to\mathbf{Grpd}$. Its normalized states carry their
+real-value data and its arrows are the actual value transports.
 
-Form $P_A=\pi_0\circ A$ and $\mathcal T_A=\int_{\mathcal B}A$. By
+Form $P_A=\pi_0\circ\mathcal A_A$ and
+$\mathcal T_A=\int_{\mathcal B}\mathcal A_A$. By
 Lemma~\ref{lem:pi0-grothendieck},
 \[
   \pi_0(\mathcal T_A)\cong
@@ -1146,7 +1171,7 @@ Lemma~\ref{lem:pi0-grothendieck},
 \]
 Riehl's category-of-elements calculation shows that this colimit imposes exactly the
 identifications generated by the maps of $P_A$, hence by the completed value transports of
-$A$ \cite[p.~102, proof of Lemma~8.3.4]{Riehl}. The A-section functor is global on the
+$\mathcal A_A$ \cite[p.~102, proof of Lemma~8.3.4]{Riehl}. The A-section functor is global on the
 continuum of sphere worlds and its analytic cargo is carried through the one common witness
 $N$. The colimit therefore consumes the entire transport system at once. Condition
 \textup{C4} supplies the nonempty infinite output population, and the completed transports
@@ -1252,7 +1277,7 @@ A word on why the argument takes the shape it does. No one can hold an $8$-dimen
 mind's eye, or draw the continuum of Riemann spheres the section lives on. The epigraph names the
 way through: no single viewpoint sees the whole, but when the viewpoints are multiplied and
 conjugated, a vision appears that none of them held alone. Each slice direction is one such
-viewpoint; the A-section functor gathers all of them over the base, the total object holds them
+viewpoint; the value-bearing A-section functor gathers all of them over the base, the total object holds them
 together, and the colimit conjugates them into a single answer. The concentricity we could not
 picture becomes one component we can compute.
 

@@ -23,6 +23,34 @@ Riehl’s statements in Exercise 2.1.iv and Proposition 2.4.14 are
 source; Mathlib’s full-subcategory and Grothendieck constructions provide
 the implementation.
 
+## Components source
+
+Emily Riehl, *Categorical Homotopy Theory*, Cambridge University Press,
+2014, §8.3.
+
+- Author-hosted PDF:
+  <https://emilyriehl.github.io/files/cathtpy.pdf>
+- Project transcription and verification record:
+  `SOURCES/Riehl.md`
+
+Remark 8.3.5, book p. 102, says that a category is categorically connected
+when every pair of objects is joined by a finite zigzag, and that a category
+is nonempty and categorically connected exactly when its connected-component
+set is a singleton.
+
+Here “connected” is purely categorical. It refers to zigzags in an action
+groupoid and the cardinality of `π₀`; it is not topological connectedness of
+the complex zero locus, an octonionic sphere, or any analytic space.
+
+The category-of-elements identity immediately preceding the remark,
+
+```text
+π₀(el X) ≅ colim X,
+```
+
+is the discrete-fibre case of the in-repo groupoid-valued theorem
+`pi0GrothendieckEquiv`.
+
 ## Citation-ready mathematical capsule
 
 For a group `G` acting on a set `X`, form the action groupoid `X // G`.
@@ -36,8 +64,9 @@ G / Stab_G(x) ≃ Orb_G(x)
 ```
 
 is the set-level shadow of the groupoid presentation. A transitive action
-gives a connected action groupoid while retaining stabilizers; freeness is
-the additional condition needed for contractibility.
+gives a categorically connected action groupoid while retaining
+stabilizers; freeness is the additional condition needed for
+contractibility.
 
 If `P_X` is an invariant object property in each fibre of a diagram `F`,
 the transition condition
@@ -61,9 +90,49 @@ base.
   passage. Say explicitly that the groupoid-valued implementation is
   supplied by Mathlib.
 - Do not claim that transitivity removes stabilizers. Transitivity gives
-  connectedness; free transitivity gives contractibility.
+  categorical connectedness; free transitivity gives contractibility.
 - Do not choose a skeletal representative when naturality matters. The
   action groupoid retains all viewpoints and their stabilizers.
+- Cite Remark 8.3.5 from *Categorical Homotopy Theory*, not *Category
+  Theory in Context*. The two books contain colliding section and statement
+  numbers.
+- Do not use C4 as a component argument. In Concentricity the residue
+  inverse image already has certified inhabitants; C4 supplies the stronger
+  infinitude statement. The action-groupoid orbit calculation supplies
+  categorical connectedness.
+
+## The preimage process for the Grothendieck construction
+
+The residue gate's construction is a standard literature process, not a
+project invention: take a full preimage of an objectwise class inside the
+fibres of a diagram, then include its total into the ambient total — **a
+preimage for the total Grothendieck construction**.
+
+- CTIC Exercise 2.1.iv (book p. 59): an objectwise class whose transition
+  maps restrict is a subfunctor.
+- CTIC Proposition 2.4.14 (book p. 77): a natural transformation of diagrams
+  induces a functor of their categories of elements over the same base;
+  applied to a subfunctor inclusion, this is the inclusion of totals.
+- In fibrational language, this is the full inverse image of a class of
+  objects under the Grothendieck construction: the full subcategory of the
+  total on the selected objects, lying over the same base. Mathlib supplies
+  the pieces at the pinned revision: `ObjectProperty.FullSubcategory`
+  (fibrewise preimage), `CategoryTheory.Grothendieck.map` (totalized
+  inclusion), `Grothendieck.functor_comp_forget` (over the base).
+
+For Concentricity (reading of record, `register/70-whole-square.md` §9):
+`𝓡_A(X)` is the fibrewise full preimage of the semantic C-residue locus in
+the certified `F_A(X)`, but it is a separately bundled groupoid, not a
+set-theoretic subset of `F_A(X)`. The datum is the natural transformation
+`ι_A : 𝓡_A ⟶ F_A`; each component
+`(ι_A)_X : 𝓡_A(X) ⥤ F_A(X)` is a fully faithful inclusion functor, and
+`liftCompιIso = Iso.refl _` supplies its naturality square. Thus `𝓡_A` is
+naturally isomorphic onto the image of its own functorial transport, never
+to all of `F_A`. `Grothendieck.map ι_A` is correspondingly the functorial
+inclusion of the separately bundled residue total into the ambient total,
+over the same base — not a subset inclusion. This is the preimage for the
+total Grothendieck construction consumed by CHT Remark 8.3.5. No invariance
+theorem occurs anywhere in this process.
 
 ## Secondary implementation sources
 

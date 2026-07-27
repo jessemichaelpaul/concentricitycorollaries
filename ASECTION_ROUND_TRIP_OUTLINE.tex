@@ -1,0 +1,327 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb,mathrsfs,mathtools}
+\usepackage{tikz-cd}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+
+\newcommand{\OO}{\mathbb O}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\Ostar}{\OO^{*}}
+\newcommand{\cA}{\mathscr A_A}
+\newcommand{\TA}{\mathcal T_A}
+\newcommand{\In}{\operatorname{In}}
+\newcommand{\Out}{\operatorname{Out}}
+\newcommand{\Grpd}{\mathbf{Grpd}}
+
+\definecolor{deepblue}{RGB}{31,78,121}
+\definecolor{forest}{RGB}{35,105,66}
+\definecolor{warmgray}{RGB}{85,85,85}
+
+\title{\textbf{The Octonionic Round Trip and Its Genuine Total}\\
+\large Insertion outline for the Concentricity proof}
+\author{Jesse Michael Paul}
+\date{24 July 2026}
+
+\begin{document}
+\maketitle
+
+\noindent\textcolor{warmgray}{\textbf{Purpose.}}
+This is a structural insertion outline, not final exposition.  It belongs
+after the slice-wise construction of the distinguished
+Euler--Weierstrass--GPV action and before the application of Riehl 8.3.4,
+$\pi_0$, and $\operatorname{val}$.  Its purpose is to make explicit the
+arrow-level passage from the slice geometry to the genuine total of the
+octonionic round trip.
+
+\section{The three categorical levels}
+
+\subsection{The slice projection}
+
+The slice-wise geometric action is the functor
+\[
+  A_{\mathrm{slice}}\colon
+  \mathrm{GreatCircle.Base}\longrightarrow\mathrm{SphereWorld}.
+\]
+It contains the two-point stabilizer, the unique orbit--stabilizer
+factorization, the full prime-indexed Euler lift, its GPV winding data, and
+the pointwise tame continuous triangles to $N$.  It is essential, but it is
+the sphere/Moebius projection of the action rather than the octonionic
+round trip itself.
+
+\subsection{The octonionic round-trip functor}
+
+The native home of the A-section is $\Ostar$.  Its actual round trip is the
+$G_2$-equivariant endofunctor
+\[
+  A_{\OO}\colon H_1\longrightarrow H_1,
+  \qquad s\longmapsto A.\operatorname{realize}(s).
+\]
+The normalized state world has natural input and output functors, and the
+round trip is their factorization:
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+  \mathrm{StateWorld}_A
+    \arrow[r,"\In"]
+    \arrow[dr,"\Out"']
+  & H_1 \arrow[d,"A_{\OO}"] \\
+  & H_1
+\end{tikzcd}
+\qquad
+\Out=A_{\OO}\circ\In.
+\]
+This triangle is arrow-level data.  It says that the input and output move
+naturally under the same $G_2$ direction transport; it is stronger than the
+object assignment $s\mapsto A.\operatorname{realize}(s)$.
+
+\subsection{The projective indexing diagram}
+
+The complete normalized state and its analytic presentation are then
+curried over the projective base:
+\[
+  \cA\colon \mathrm{GreatCircle.Base}\longrightarrow\Grpd.
+\]
+For a projective object $X$,
+\[
+  \cA(X)
+  =
+  \mathrm{StateWorld}_A
+  \times
+  \mathrm{PresentationWorld}_A(X).
+\]
+The first factor contains the physical input/output round trip.  The second
+contains the full Euler--Weierstrass--GPV tape and all of its pointwise
+triangles to $N$.  Thus $\cA$ is the Grothendieck-indexing diagram of the
+round-trip geometry, not a second octonionic endofunctor.
+
+\section{The distinguished element and the two sweeps}
+
+\subsection{Vertical: the entire prime stack through $N$}
+
+For every Euler path $\delta$ the lift is literally
+\[
+  L_\delta(t)
+  =
+  \sum\nolimits'_{p:A.\iota} A.\ell_p(\delta(t)).
+\]
+The prime index remains internal to the infinite sum.  At every instant,
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+  L_\delta(t)
+    \arrow[r,"\exp"]
+    \arrow[d,rightsquigarrow,
+      "\text{unique tame lift}"']
+  & A.F(\delta(t))
+    \arrow[d,"\text{diagonal Moebius action}"] \\
+  N\text{-positioned lift}
+    \arrow[r,"\text{same action at }N"']
+  & N\text{-positioned value}
+\end{tikzcd}
+\]
+commutes.  The real part of the lift is the level; its imaginary part is
+the winding.  Euler and Weierstrass are two presentations of this one
+element.
+
+\subsection{Horizontal: unique orbit--stabilizer factorization}
+
+Every projective arrow has the unique factorization
+\[
+  f
+  =
+  \operatorname{orbitRep}(Y)\,
+  \operatorname{stab}(f)\,
+  \operatorname{orbitRep}(X)^{-1}.
+\]
+At every instant of every GPV tape it supplies a two-legged commuting
+square:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+  \text{input action at }X
+    \arrow[r,"D_X(t)"]
+    \arrow[d,"{\operatorname{right}(f,t)}"']
+  & \text{A-output at }X
+    \arrow[d,"{\operatorname{left}(f,t)}"] \\
+  \text{input action at }Y
+    \arrow[r,"D_Y(t)"']
+  & \text{A-output at }Y .
+\end{tikzcd}
+\]
+In multiplicative form,
+\[
+  \operatorname{left}(f,t)\,D_X(t)
+  =
+  D_Y(t)\,\operatorname{right}(f,t).
+\]
+The winding lies in the stabilizer factor.  The orbit factor performs the
+horizontal sweep.  Identity and composition of these squares are inherited
+from uniqueness of orbit--stabilizer factorization.
+
+\section{The genuine total is a total of the round trip}
+
+The underlying Grothendieck carrier is
+\[
+  \TA
+  =
+  \int_{\mathrm{GreatCircle.Base}}\cA.
+\]
+An object is a projective base point together with the complete normalized
+physical/presentation state.  A morphism consists of a base arrow and a
+fibre arrow after the corresponding projective reindexing.
+
+\medskip
+\noindent
+This carrier becomes the genuine total of the A-section only when the input
+and output are functors on \emph{total arrows}:
+\[
+  \In_{\TA},\Out_{\TA}\colon\TA\longrightarrow H_1,
+\]
+and the octonionic round trip commutes on the total:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+  \TA
+    \arrow[r,"\In_{\TA}"]
+    \arrow[dr,"\Out_{\TA}"']
+  & H_1 \arrow[d,"A_{\OO}"] \\
+  & H_1 .
+\end{tikzcd}
+\qquad
+\Out_{\TA}=A_{\OO}\circ\In_{\TA}.
+\]
+For a total morphism $\langle f,\varphi\rangle$, the fibre morphism
+$\varphi$ occurs after $\cA(f)$.  The projective/GPV action square is
+precisely the compatibility that makes $\In_{\TA}$ and $\Out_{\TA}$
+functorial on this composite arrow.
+
+\paragraph{Why this is the missing gate.}
+An object function $\operatorname{Ob}(\TA)\to\operatorname{Ob}(H_1)$ can
+store output values, but it cannot express naturality.  A cocone can be
+natural only on a functor.  Therefore the output cocone is native to the
+construction only after $\Out_{\TA}$ acts on arrows and the triangle above
+is proved.
+
+\section{The natural $9+3$ partition}
+
+The twelve readings are not installed as twelve fields and are not
+reintroduced after totalization.
+
+\begin{center}
+\begin{tabular}{p{0.42\textwidth}p{0.49\textwidth}}
+\toprule
+\textbf{Nine action readings} & \textbf{Three codomain/output readings} \\
+\midrule
+Euler level, the complete GPV lift, endpoint real-level conservation,
+winding, complex exponential fibre level and height, the octonionic chart,
+and orbit--stabilizer transport.
+&
+The residue-$\CC$ sphere population, its infinitude, and the intrinsic real
+coordinate of each realized sphere. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The nine readings spread through $\cA$ by the certified action squares.  The
+three output readings occur in the functorial output $\Out_{\TA}$.  Their
+partition is therefore a consequence of one equivariant total, not a later
+conjunction of hypotheses.
+
+\section{The output population and the boundary before 8.3.4}
+
+For every index $n$ and sphere world $I$, the A-action produces a total
+object carrying together:
+\begin{itemize}[leftmargin=2em]
+  \item the normalized octonionic point on the residue-$\CC$ sphere;
+  \item its value under $A_{\OO}$;
+  \item its intrinsic real register;
+  \item the complete Euler--Weierstrass--GPV presentation;
+  \item its native orbit--stabilizer branch to the $N$-positioned state.
+\end{itemize}
+
+No common value at $N$ is included in the carrier.  Before the next theorem
+is applied, the proof has established only the following:
+\[
+\begin{tikzcd}[column sep=huge]
+  \{\text{A-generated residue spheres}\}
+    \arrow[r,hook]
+  & \TA
+    \arrow[r,shift left=0.8ex,"\In_{\TA}"]
+    \arrow[r,shift right=0.8ex,"\Out_{\TA}"']
+  & H_1 .
+\end{tikzcd}
+\]
+The family is now arrow-natural and output-bearing.  Its common component
+and common real centre remain conclusions.
+
+\section{Only now: the categorical readout}
+
+After the total-level triangle is kernel-green, the existing machinery is
+applied in this order:
+\[
+\begin{tikzcd}[column sep=large]
+  \TA
+    \arrow[r,"\pi_0"]
+  & \pi_0(\TA)
+    \arrow[r,"\sim" description,
+      "\text{Riehl 8.3.4}"]
+  & \displaystyle
+    \operatorname*{colim}_{X}
+      \pi_0\bigl(\cA(X)\bigr)
+    \arrow[r,mapsto]
+  & \kappa
+    \arrow[r,"\operatorname{val}"]
+  & c\in\RR .
+\end{tikzcd}
+\]
+Here the component diagram, its cocone, quotient representatives, and
+descent are the internal categorical machinery specialized to the exact
+total.  They are not predeclared replacements.  The atomic conclusion is
+\[
+  \exists c\in\RR,\quad
+  \forall n\in\mathbb N,\quad
+  \operatorname{Re}(A.\operatorname{sphereZero}(n))=c.
+\]
+
+\section{Lean obligations and naming key}
+
+\begin{description}[leftmargin=3.3cm,style=nextline]
+  \item[\texttt{AsectionSlice}]
+    The slice/Moebius projection.  This name is clean and final.
+  \item[\texttt{AsectionEquivariant}]
+    The actual octonionic round-trip functor $H_1\to H_1$.
+  \item[\texttt{AsectionFunctor}]
+    The current name of the projective groupoid-valued indexing diagram,
+    not the octonionic round trip.  A name such as
+    \texttt{AsectionActionDiagram} would expose its role.
+  \item[\texttt{TotalA}]
+    The current Grothendieck carrier.  It remains provisional until
+    total-level naturality is green.
+  \item[\texttt{totalInput}/\texttt{totalOutput}]
+    Current object functions.  They must be promoted to total input/output
+    functors.
+\end{description}
+
+\paragraph{Exact Gate 4 certificate.}
+\begin{verbatim}
+AsectionTotalInput A  : A.TotalA --> H1
+AsectionTotalOutput A : A.TotalA --> H1
+
+AsectionTotalInput A ; AsectionEquivariant A =
+  AsectionTotalOutput A
+\end{verbatim}
+The theorem machinery remains gated until these declarations and their
+projective/GPV arrow naturality compile.
+
+\paragraph{Arrow-level diagnostic.}
+\begin{quote}
+Anything that must act on arrows must be checked to actually act on arrows.
+\end{quote}
+A single endpoint does not retain a continuous lift, and an object function
+does not retain a functor.  Both errors erase the arrow dimension while
+leaving an object-level term that can still type-check.
+
+\end{document}

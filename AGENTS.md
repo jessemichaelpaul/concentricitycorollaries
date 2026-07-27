@@ -61,14 +61,45 @@ Gates 1 and 2 are certified. The canonical total is
 `CResidueZeroLocus A` are certified. The framewise
 `InverseImageCResidueStateWorldGroupoid A X` is now also triple-certified.
 The next open theorem proves that the whole action preserves semantic residue
-and thereby assembles those already-certified fibres into a diagram. Every
-subsequent gate is held.
+and thereby assembles those already-certified fibres into a diagram. The
+remaining readout and corollary work follows it as the unified endgame gate,
+with internal kernel checkpoints in `register/70-whole-square.md`.
 
 Do not implement any further preimage until its exact A-specific type has
 completed the geometric, categorical, and kernel walk-around and been
 approved. The certified framewise residue inverse image named above is
 already closed and must not be reconstructed.
 Do not edit `Octonionic_RH_master.tex` during this Lean phase.
+
+## Active-gate execution lock
+
+For the residue-preservation gate, `register/70-whole-square.md` is the
+execution authority.
+
+- The write-set and build-target set are empty until Jesse explicitly
+  approves their exact paths and commands.
+- Do not create scratch Lean files, temporary proof files, new directories,
+  alternate modules, or parallel proof routes anywhere, including `/tmp`.
+- Do not use an isolated elaboration of one leg as a substitute for the
+  approved whole-square proof.
+- Once paths and targets are approved, write and build only those exact
+  targets. Any additional file, directory, command, theorem, or route
+  requires a new explicit approval.
+- If execution departs from the numbered proof in
+  `register/70-whole-square.md`, stop immediately and report the departure;
+  do not investigate it by opening another route.
+- Run the gate as one uninterrupted registered kernel loop. State the
+  `REGISTER CHECK` when the real theorem and intended bundled term are fixed,
+  and again immediately before every kernel certificate; the check is an
+  invariant, not a stopping boundary. At any elaboration stop, treat the
+  displayed goal as a projection of that registered functorial term and run
+  the `WHOLE-SQUARE CHECK` before any supplier audit. A failed check is
+  classified through `register/60-failure-audit.md` and returns to the last
+  approved supplier in the same loop.
+- Audit consumers must instantiate the exact authored functorial objects
+  `F_A(X)`, `𝓡_A(X)`, `𝓡_A(f)`, and the naturality square of `ι_A`. Generic
+  category-theory examples certify only the construction shape and do not
+  certify this gate.
 
 ## Gate-1 subject
 
@@ -104,10 +135,11 @@ action.
   before the completed action is approved.
 - The zero preimage and its transport/north structure are inherited from the
   completed action.
-- The locked project route proves the complete residue action is one
-  categorical orbit and applies Riehl Remark 8.3.5. Lemma 8.3.4 remains
-  generic background, not a project gate unless a genuine north restriction
-  later requires it.
+- The locked project route recognizes the residue total as the
+  categorified orbit--stabilizer action already built and applies Riehl
+  Remark 8.3.5 to its categorical one-component calculation. This is not
+  topological connectedness. Lemma 8.3.4 remains generic background, not a
+  project gate unless a genuine north restriction later requires it.
 - On the locked orbit route, the real-level face is already an
   `ℝ`-valued orbit invariant. Its descent defines `val_A`; a cocone is the
   categorical expression of that invariant, not a choice of codomain.

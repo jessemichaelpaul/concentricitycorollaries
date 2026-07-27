@@ -24,12 +24,16 @@ dictionary, and the exact instantiation; it never replaces the register.
    `SphereWorld`, `GL`/`PGL`/`Moebius`, `F_A`, `𝓡_A`, and the current
    preservation gate and readout stack.
 
-## Automatic register checkpoint
+## Continuous register checkpoint
 
-For Concentricity proof work, perform this checkpoint twice:
+For Concentricity proof work, keep this checkpoint active throughout one
+uninterrupted registered kernel loop. State it:
 
-1. after the first proof action and before any second proof action;
+1. when the real target, theorem, and intended bundled term are fixed, before
+   the first edit or elaboration;
 2. immediately before every kernel certification.
+
+It is an invariant, not a separate pre-flight phase or a stopping boundary.
 
 State:
 
@@ -48,6 +52,27 @@ All entries must occur in the approved library and naming table in
 `references/concentricity-instantiation.md`. A generic Mathlib theorem may
 appear only together with the exact A-specific object at which it is being
 instantiated.
+
+### Kernel consumers instantiate the authored object
+
+Here, a **consumer** is an object-instantiating kernel receipt, not an
+illustrative example. Lean may use the `example` command as syntax, but every
+such receipt must quantify over and visibly consume the exact authored
+functorial objects:
+
+```text
+F_A(X), F_A(Y), F_A(f),
+𝓡_A(X), 𝓡_A(Y), 𝓡_A(f),
+ι_X, ι_Y, and the naturality square of ι_A at f.
+```
+
+A check of generic `ObjectProperty.lift`, a generic full subcategory, or an
+arbitrary functor does not certify this gate. Generic category theory supplies
+the construction shape; the certificate is its elaborated instantiation at
+Jesse's categorified orbit--stabilizer diagram.
+
+The pointwise goal Lean displays is the objectwise shadow of that functorial
+construction, never the subject replacing it.
 
 **`mathematical provenance` closes the loop to the sources — in three kinds,
 and the third is the normal case here.**
@@ -96,7 +121,7 @@ The trigger is narrow: **if the intended proof term cannot be named at all,
 the obligation is not yet understood.** Then, and only then, work out its
 parts. This is not a licence to decompose by default.
 
-`cited theory fact` may name more than one citation when the term legitimately
+`mathematical provenance` may name more than one source when the term legitimately
 composes several; one line per obligation, not one line per rewrite.
 
 ### Kernel contact precedes diagnosis
@@ -105,6 +130,10 @@ composes several; one line per obligation, not one line per rewrite.
 output.** Writing a term into an unbuilt file is *written*, never
 *instantiated*, *verified*, or *consumed* — use the accurate word. A supplier
 audit may be opened only against a printed goal.
+
+An elaborator goal is never promoted to a new problem statement. It remains a
+projection of the last registered functorial term. Resume from that term, not
+from the goal's surface syntax.
 
 This is stricter than "print the stuck goal and say so": it forbids speaking
 about a goal that has never been produced. A report of supplier insufficiency
@@ -122,6 +151,27 @@ exploration, alternate-tree, or unapproved file:
 
 Do not reinterpret a drift as a mathematical obstruction. Do not continue
 until the checkpoint passes.
+
+## Registered kernel loop
+
+1. Lock the theorem, A-specific object, intended bundled term, implementation
+   file, audit file, and exact focused commands together.
+2. Put the intended term in the real theorem and immediately elaborate that
+   implementation file.
+3. At a stop, quote the exact goal and check that the whole bundle remains
+   present: square, commuting field, source and target provenance, and the
+   arbitrary-parameter reindexing supplier.
+4. Continue the same theorem under the same command. Supplier resolution is
+   part of this loop; it is never a completed phase of its own.
+5. Once the theorem closes, complete the exact-object kernel instantiation
+   receipts and axiom prints immediately. Do not substitute generic or
+   illustrative examples.
+6. Run the focused certificate without switching registers.
+7. Observe any gate-specific hard stop recorded in `register/70-whole-square.md`.
+
+The unit of completion is the triple certificate. There is no terminal state
+between stating the registered term and `#print axioms` reporting the three
+foundations.
 
 ## Whole-structure consumption checkpoint
 
