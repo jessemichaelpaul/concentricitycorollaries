@@ -127,6 +127,58 @@ mob ↦ m * mob * m⁻¹.
 This is the explicit conjugation of Möbius viewpoints while retaining the
 `G₂` direction.
 
+## The two-level instantiation and the ONE A-specific slot (2026-07-27)
+
+The tower is the categorified orbit–stabilizer theory applied twice, and the
+machinery has exactly one A-specific input.
+
+- **Level 0:** `𝓑 = ActionCategory PGL(2,ℝ) (OnePoint ℝ)` is CTIC 1.5.19's
+  translation groupoid: one orbit (transitive), anchor `N`, vertex group
+  `NorthStabilizer`, and the *arrow-level* orbit–stabilizer content is the
+  unique canonical form `orbitRep(Y) · stab · orbitRep(X)⁻¹`
+  (`orbit_stabilizer_factor`, `stabilizerPart_unique`).
+- **Level 1:** each fibre sits over
+  `AsectionStateWorld A = ActionCategory G₂ (AsectionState A)`:
+  components = residue spheres (`zeroSphere_eq_orbit`), vertex groups =
+  direction stabilizers.
+- **Level 2:** by CTIC 2.4.10 applied at the top, `T_A = ∫F_A` **is** the
+  action groupoid of the induced action of the base's arrows on the total
+  value states — an arrow of `T_A` is literally the element moving a state.
+
+**The gate is CTIC 2.1.iv at this tower:** a subfunctor of an action is an
+invariant subsystem; the restriction condition is the machinery's ONE
+hypothesis slot. Everything else — `𝓡_A(f)` as restriction, `ι_A`
+componentwise fully faithful with free naturality (`liftCompιIso`),
+`Grothendieck.map ι_A` (2.4.14), the 8.3.5 collapse, the `val` descent — is
+generic machinery that instantiates with no further A-specific input.
+
+**The three forbidden treatments of the slot** (all three ran on
+2026-07-27; see `register/60-failure-audit.md` §6h):
+
+1. **fill-by-hunt** — search for a generic invariance lemma. None exists
+   and none can; `exact?`/`apply?` returned empty on record.
+2. **slot-deletion** — certify a total-level construction that never
+   consumes the transport (`52bde67`: true generic mathematics, the
+   author's argument in zero conclusions — reclassified as a packaging
+   checkpoint, NOT the `ι_A` gate).
+3. **slot-as-burden** — hand the slot back to the author as a new proof
+   debt.
+
+**The correct treatment — fill-by-plugging.** Master §8b, verbatim: *"An
+invariant subset is normally a hypothesis one assumes. Here it is forced,
+because the group and the function are the same object… Making the residue
+zero set into an invariant subset of an action groupoid IS the theorem."*
+The slot's filler is the author's already-proved core step, **transcribed
+from the master with the author reading**, at its named live suppliers:
+`eulerDiskAction_eq_value` (function = group element), the two boundary
+presentations (`distinguishedDiskAction_fixes_cayley_zero`/`_N`), the
+unique prime-indexed lift through `N` (`lift_unique`,
+`winding_lift_unique`, `reindexAsectionPresentation` carrying the tape
+verbatim), `stabilizerPart_unique`, and output naturality
+(`output_commutes`) — states carrying their whole presentation, moved as
+wholes. Kind-3 authored provenance; the kernel adjudicates the term; no
+assistant invents the route and no assistant deletes the slot.
+
 ## Generic-to-project dictionary
 
 | generic orbit–stabilizer datum | Concentricity datum |

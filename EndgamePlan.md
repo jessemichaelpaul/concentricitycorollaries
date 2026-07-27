@@ -20,9 +20,30 @@ installed later.
 Grothendieck total are triple-certified. `CResidueZeroLocus A` is live and
 certified at its semantic C3--C4 type. Its framewise inverse image
 `InverseImageCResidueStateWorldGroupoid A X` is also triple-certified. The
-sole open theorem proves that the whole action transports that existing
-kernel restriction through every projective frame by orbit--stabilizer,
-with the C3--C4 GPV factorization through `N` retained.
+open checkpoint is the exact A-specific natural restriction:
+
+```lean
+AsectionCResidueDiagram A : GreatCircle.Base ⥤ Grpd
+AsectionCResidueInclusion A :
+  AsectionCResidueDiagram A ⟶ AsectionActionDiagram A
+```
+
+The live action to restrict is already bundled, on both categorical levels:
+
+```lean
+(AsectionActionDiagram A).obj X = AsectionActionFiber A X
+(AsectionActionDiagram A).map f = AsectionActionTransport A f
+```
+
+No new action and no analytic zero-set argument occurs here. The checkpoint
+restricts this existing functor to the author's chosen preimage groupoids and
+certifies its component inclusions and naturality square.
+
+> **Certificate correction, 2026-07-27.** Commit `52bde67` certifies a true
+> generic full-subcategory inclusion into the Grothendieck total. It does not
+> have type `AsectionCResidueDiagram A ⟶ AsectionActionDiagram A`, does not
+> expose `𝓡_A(f)`, and does not certify Jesse's `ι_A`. It is retained as a
+> packaging checkpoint; the `ι_A` checkpoint remains open.
 
 > **2026-07-27 — superseded framing.** See `register/70-whole-square.md` §9,
 > the author's reading of record: the lift input is read off the

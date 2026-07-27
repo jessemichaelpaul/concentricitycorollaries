@@ -768,11 +768,28 @@ The reading of record, complete:
    functorial transport — never to all of `F_A`, and never by a
    set-theoretic equality `F_A(f)(𝓡_A(X)) = 𝓡_A(Y)`.
 
-   The formal lift input Mathlib's signature requires is discharged by
-   reading the already-commuting square and the round trip
-   (`AsectionEquivariant`, `AsectionState_input_then_equivariant`); it is
-   not a theorem to derive, and no invariance lemma exists or is needed
-   (`register/60-failure-audit.md` rows 17–18).
+   **The gate's ONE A-specific input (ratified 2026-07-27):** the
+   restriction term that `ObjectProperty.lift` requests. It is never
+   filled generically, never deleted, and never handed back to the author
+   as a debt — the three forbidden treatments, catalogued in the skill's
+   "ONE A-specific slot" section. It is filled at the transcription
+   session: the author's free definition of the preimage together with his
+   master §8b step — "the group and the function are the same object" —
+   dictated from the master, typed by the builder, audited for
+   consumption. `𝓡_A(f)` is then the **same transport read on the
+   preimage** — one term in two roles — so the naturality square commutes
+   because its top arrow is literally its bottom arrow restricted. The
+   Lean anatomy is already whole: `F_A(X) = AsectionActionFiber A X` and
+   `F_A(f) = AsectionActionTransport A f` are the two fields of
+   `AsectionActionDiagram A`; `ι_A`'s content lives inside the certified
+   functor, awaiting only the restriction.
+
+   **Reclassification:** the `52bde67` total-full-subcategory construction
+   is a true generic packaging checkpoint, NOT this `ι_A`. The rebuilt
+   certificate must exhibit, at free `X Y f`, all seven consumers —
+   `𝓡_A(X)`, `𝓡_A(Y)`, `𝓡_A(f)`, `(ι_A)_X`, `(ι_A)_Y`, the naturality
+   square, and `AsectionActionTransport A f` **in the conclusions** — and
+   it passes only if deleting any supplier breaks it.
 4. **CHT Remark 8.3.5 consumes what `ι_A` does to the preimage.**
    `Grothendieck.map ι_A` is the induced functorial inclusion of the
    separately bundled residue total into the certified ambient total, over

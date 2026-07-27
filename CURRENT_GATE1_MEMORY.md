@@ -3,6 +3,43 @@
 This is the current mathematical register. It supersedes older memories,
 handoffs, and architecture narratives when they conflict with it.
 
+> **2026-07-27 — exact Lean identity of the open `ι_A` gate.** The authored
+> functor is already completely bundled:
+>
+> ```lean
+> (AsectionActionDiagram A).obj X = AsectionActionFiber A X
+> (AsectionActionDiagram A).map f = AsectionActionTransport A f
+> ```
+>
+> and
+>
+> ```lean
+> AsectionActionTransport A f :
+>   AsectionActionFiber A X ⟶ AsectionActionFiber A Y
+> ```
+>
+> is literally
+> `(orbitStabilizerActionSquare A f).actionStateTransport A`. It already
+> acts on objects and arrows, already carries the input/positioned/value
+> faces and inherited `G₂` arrows, and already satisfies identity and
+> composition. The `ι_A` checkpoint therefore restricts this exact existing
+> functor to the author's chosen preimage groupoids. It does not analyze a
+> zero set, prove a new invariance theorem, or reconstruct the distinguished
+> element pointwise.
+>
+> The required result is literally
+>
+> ```lean
+> AsectionCResidueDiagram A : GreatCircle.Base ⥤ Grpd
+> AsectionCResidueInclusion A :
+>   AsectionCResidueDiagram A ⟶ AsectionActionDiagram A
+> ```
+>
+> with object, arrow, component, and naturality receipts at free `X`, `Y`,
+> and `f`. Commit `52bde67` instead certifies a true generic full-subcategory
+> functor into `TotalActionStateWorld A`; it is a packaging checkpoint, not
+> Jesse's `ι_A`, and the `ι_A` gate remains open.
+
 > **2026-07-27.** For the residue gate, the author's reading of record is
 > `register/70-whole-square.md` §9, and it supersedes the preservation-proof
 > spine passages below (the "locked preservation walk-around", the step-5

@@ -17,6 +17,12 @@ Gates 1 and 2 are certified. The canonical total is
 `(AsectionActionDiagram A).obj X` and the semantic
 `CResidueZeroLocus A` are certified.
 
+The `ι_A` certificate is **not** closed. Commit `52bde67` proves a valid
+generic full-subcategory inclusion into `TotalActionStateWorld A`, but that
+declaration has the wrong categorical type for this gate and does not
+instantiate the naturality square of Jesse's diagram. Do not cite it as the
+`ι_A` certificate.
+
 Categorical wording invariant: `𝓡_A(X)` and `F_A(X)` are separately bundled
 groupoids. Do not write `𝓡_A(X) ⊆ F_A(X)`. The relationship is the fully
 faithful component functor `(ι_A)_X : 𝓡_A(X) ⥤ F_A(X)` of the natural
@@ -31,53 +37,47 @@ commit; they remain scheduled for the separate governing-document commit.
 
 ## Next open gate
 
-The external review has approved the next gate as one
-**residue-subdiagram gate** with two inseparable receipts:
-
-1. **Kernel/object receipt — closed:** use the semantic locus to restrict the full
-   `G₂`-invariant C-residue part of the A-action kernel, then name and
-   triple-certify `InverseImageCResidueStateWorldGroupoid A X`.
-2. **Conjugation/arrow receipt — open:** prove whole-action preservation for every
-   `f : X ⟶ Y`, then restrict the existing transport to obtain the diagram
-   arrow and its natural inclusion square.
-
-The preservation theorem's Lean name and type are locked:
+The next gate is the A-specific restriction of the already-certified action
+diagram. The exact live functor is:
 
 ```lean
-theorem cResidue_preserved
-    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y)
-    {x : AsectionActionFiber A X} (hx : IsCResidueState A X x) :
-    IsCResidueState A Y ((AsectionActionTransport A f).obj x)
+(AsectionActionDiagram A).obj X = AsectionActionFiber A X
+(AsectionActionDiagram A).map f = AsectionActionTransport A f
+
+AsectionActionTransport A f :
+  AsectionActionFiber A X ⟶ AsectionActionFiber A Y
 ```
 
-The semantic locus is not tested after an isolated left Möbius map. C3--C4
-factor it through the common north/degenerate kernel; vertically
-`G₂ / Stab(I)` is its residue sphere, horizontally
-`PGL(2,ℝ) / NorthStabilizer` is the projective orbit, and the all-`t` GPV
-square conjugates those two readings.
+The source and target are already the exact fibres `F_A(X)` and `F_A(Y)`;
+the functor already acts on their objects and arrows. Choose the residue
+preimage fibrewise, restrict this existing functor to it, assemble the
+restricted diagram, and expose the component inclusions. The required output
+types are:
 
-The two receipts are the object and arrow parts of one subdiagram. Because the preservation theorem is
-quantified over every arrow, it includes `f⁻¹`; no separate “onto” gate is
-needed.
+```lean
+AsectionCResidueDiagram A : GreatCircle.Base ⥤ Grpd
+AsectionCResidueInclusion A :
+  AsectionCResidueDiagram A ⟶ AsectionActionDiagram A
+```
 
-`GreatCircle.stabilizerPart_unique` is live at the approved exact type and
-orientation and is checked in `_GeometricWalkKernelAudit.lean`. It is a
-green supplier for the preservation receipt, not a pending construction.
-`reindexAsectionPresentation A f` is the exact green arbitrary-frame,
-all-`t` presentation transport: it retains the GPV and Euler data verbatim
-and reindexes every north triangle through `positionedOrbitSquare`, with
-green identity and composition laws.
+At free `X`, `Y`, and `f`, the focused consumer must visibly instantiate:
 
-The accepted state transport remains `AsectionActionTransport A f`. No live
-theorem yet compares these two transports at the certified inverse-image
-groupoids. That comparison is the proof content of `cResidue_preserved`
-itself, not a new action, new condition, or preliminary gate. The
-quarantined Cartesian-product preflight explicitly leaves presentation and
-physical state unbound and is not implementation authority.
+```text
+F_A(X), F_A(Y), F_A(f),
+𝓡_A(X), 𝓡_A(Y), 𝓡_A(f),
+(ι_A)_X, (ι_A)_Y, and the naturality square.
+```
 
-The remaining Lean work composes the existing one-action middle squares and
-retains all simultaneous faces; it must not split the input, positioned,
-output, GPV, real-level, north, or `G₂` viewpoints into competing predicates.
+The top map is the restriction of the already-certified
+`AsectionActionTransport A f`; its compatibility with the component
+inclusions is supplied by `liftCompιIso`. A formal landing term required by
+`ObjectProperty.lift` is a definitional packaging receipt for the chosen
+preimage, never a new analytic invariance theorem. Do not unfold or analyze
+the zero locus during this checkpoint.
+
+The literal `positionedOrbitSquare A f (1 : Moebius)` receipt identifies the
+native member of the existing all-`d` family underlying the same action. It
+is provenance for `AsectionActionTransport`, not a second construction.
 
 ## Unified endgame boundary
 
