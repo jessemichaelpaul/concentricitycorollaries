@@ -103,6 +103,77 @@ thing as a functor of their totals over the base.** Note also that the covariant
 discrete **left** fibration — consistent with the covariant Grothendieck construction being an
 opfibration.
 
+## Deep-dive extraction, 2026-07-27 — the skeleton warning and the contractibility rung
+
+Added at the author's request ("some are clearer than others for this particular application").
+Extracted from the local `inbox/context.pdf` text layer **and** verified against 150-dpi ghostscript
+renders of the same pages read as images — the second pass the GAPS section below previously
+recorded as impossible on this machine. The `≅` signs the text layer drops are restored from the
+renders and marked.
+
+### The skeleton warning (book p. 37 = PDF p. 57) — VERBATIM, replacing the earlier paraphrase
+
+> "no reason that a functor `F : C → D` would necessarily restrict to define a functor between the
+> chosen skeletal subcategories. It is possible to choose a functor `skF : skC → skD` whose
+> inclusion into `D` is naturally isomorphic to the restriction of `F` to `skC`, but these choices
+> **will not be strictly functorial**."
+
+and its footnote 42, on the same page:
+
+> "There is, however, a *pseudofunctor* `sk(−) : CAT → CAT`, but a precise definition of this
+> concept is beyond the scope of this text."
+
+This is the sharpest form of the project's rule against choosing representatives: skeletonization is
+only a **pseudofunctor**. The residue gate's datum is a *natural transformation*, so a skeletal
+choice could not have carried it even in principle.
+
+### Example 1.5.18(i) (book p. 37) — what a skeleton keeps, and what it discards
+
+> "The skeleton of a connected groupoid is the group of automorphisms of any of its objects (see
+> Proposition 1.5.13)."
+
+Read against Ex. 1.5.19's "there are no morphisms between distinct objects in a skeletal groupoid":
+the skeleton of a connected groupoid **retains the stabilizer and discards every arrow witnessing
+the connectedness** — exactly the data the component calculation consumes.
+
+### Proposition 2.4.9 (book p. 75 = PDF p. 95) — where "contractible" actually enters CTIC
+
+> "For any functor `F : C → Set`, the full subcategory of `∫F` spanned by its representations is
+> either empty or a contractible groupoid."
+
+Its proof supplies the operative definition, via Lemma 1.6.16:
+
+> "the subcategory spanned by the initial objects is either empty or is a contractible groupoid:
+> there exists a **unique** (iso)morphism between any two initial objects."
+
+### Example 2.4.10, completed (book p. 75)
+
+> "By Proposition 2.4.9, it follows that `X` is representable if and only if `∫X ≅ X//G` is a
+> contractible groupoid."
+>
+> "If the action of `G` on `X` is free and transitive, then for each pair of elements `x, y ∈ X`,
+> there exists a unique `g ∈ G` so that `g · x = y`. This tells us that there is a **unique**
+> morphism in each hom-set of the action groupoid `X//G` … Thus, these categories are contractible
+> groupoids …"
+
+*(`∫` restored from the text layer's bare `R`, confirmed on the render.)*
+
+### What this settles for the project
+
+The two books give a ladder of collapses, and the project sits on a named rung of it:
+
+| collapse | hypothesis | citation |
+|---|---|---|
+| `π₀` is a singleton | **non-empty + connected** | CHT Rem. 8.3.5, p. 102 |
+| `∫F` contractible (unique iso between any two objects) | action **free** and transitive | CTIC Prop. 2.4.9 + Ex. 2.4.10, p. 75; Lem. 1.6.16 |
+| nerve contractible (`EG`) | translation groupoid: unique morphism per hom-set | CHT Ex. 8.5.4, p. 104 |
+
+**The discriminator is freeness, and the project's action is transitive and not free** — the
+stabilizers (`NorthStabilizer` horizontally, the sphere-direction stabilizer vertically) are
+retained deliberately. So the correct claim is *connected with stabilizers*, which is precisely and
+only what Remark 8.3.5 consumes. **Contractibility must never be asserted here**; it is a strictly
+stronger statement and it is false of this action.
+
 ## How these are used in this project — and how they are not
 
 - Riehl states 2.1.iv and 2.4.14 for **`Set`-valued** diagrams. The project's fibres are groupoids,
@@ -121,10 +192,17 @@ opfibration.
 
 ## GAPS
 
-- Only the four passages above were extracted. The surrounding sections (2.3, the rest of 2.4, and
-  Exercise 2.4.viii, to which 2.4.14 defers its full-faithfulness proof) were not transcribed.
+- **Partly closed 2026-07-27.** The deep-dive section above adds the p. 37 skeleton warning with
+  footnote 42, Example 1.5.18(i), Proposition 2.4.9 with its Lemma 1.6.16 definition, and the
+  remainder of Example 2.4.10. Still not transcribed: section 2.3, Lemma 2.4.7, Propositions 2.4.8
+  and 1.5.13, Lemma 1.6.16's own statement in situ, and Exercise 2.4.viii, to which 2.4.14 defers
+  its full-faithfulness proof.
 - Book page numbers are taken from the free PDF's running headers. The Dover printed edition was not
   consulted; if pinpoint cites to the printed edition are needed, that check is outstanding.
-- Quotes were extracted from the pypdf text layer only. `SOURCES/Riehl.md`'s CHT quotes were
-  additionally verified against page renders; that second pass has **not** been done here, because
-  `pdftoppm` is not installed on this machine.
+- ~~Quotes were extracted from the pypdf text layer only… `pdftoppm` is not installed.~~
+  **Closed 2026-07-27 for pp. 37 and 75.** `pdftoppm` is indeed absent, but ghostscript
+  (`/opt/local/bin/gs`) is present; PDF pp. 57 and 95 were rendered at 150 dpi and read as images,
+  and every quotation from those two pages — including the four original Example 1.5.19 clauses —
+  matches the text layer, with the dropped `≅` signs restored from the renders. The remaining
+  original quotations (Exercise 2.1.iv, PDF p. 79; Proposition 2.4.14, PDF p. 97) are still
+  text-layer only.
