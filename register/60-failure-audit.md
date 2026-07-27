@@ -272,6 +272,7 @@ If the check fails, classify the drift before doing more work:
 | rebuilt categorical plumbing | 7, 11 |
 | conclusion-shaped doubt reported as mathematics | 3, 12, 13 |
 | kernel-integrity violation | 8 |
+| recovery/baseline integrity failure | 19, 20 |
 
 The response to a failed check is mechanical: name the class, return to the
 last approved supplier, and resume the same registered theorem. Do not
@@ -436,6 +437,45 @@ deliberately-open native-type clause, never through an agent's unilateral
 redefinition. The author's unease outranks a locked framing; the kernel
 outranks both; and an encoding is not the mathematics it encodes.
 
+## 6i. Rows 19–20 — missing recovery boundary amplified the drift (2026-07-27)
+
+This explains part, but not all, of the preceding failures.
+
+It does **not** explain why the wrong constructions were proposed. That
+remains the root register failure: a functor or natural transformation was
+projected into function-wise or set-wise language, and the author's bundled
+categorical object was replaced by a strawman.
+
+It **does** explain why one wrong edit became unusually costly. The
+triple-certified modules existed on disk but had no committed project
+baseline containing the complete current chain. Once a certified module was
+overwritten, restoration depended on session-local copies and human memory.
+There was no single immutable recovery boundary against which the live file
+could be compared. That increased the blast radius, made the restore itself
+an audit task, and allowed uncertainty about file state to compound the
+original conceptual drift.
+
+The second issue is distinct: Git commits the staging area, not the current
+working-tree text. Commit `02b5fd3` permanently records the 78-file certified
+chain and the restored semantic residue modules, but the governing documents
+in that commit reflect their earlier staging-time contents. The disk contains
+the later §9, row 18, preimage-process, and functorial-inclusion corrections.
+A second governing-document commit is therefore required to make history
+match the current disk. This is ordinary Git state, not a mathematical or
+kernel discrepancy.
+
+| # | predicted move | tell | instead |
+|---|---|---|---|
+| 19 | edit a certified module before a committed recovery boundary exists | the exact certified file is dirty or untracked and `HEAD` has no canonical copy of its certified state | before opening the next gate, commit the complete certified module-and-audit chain; thereafter restore from the named commit rather than from memory or a session copy |
+| 20 | describe a commit as containing the current governing text when it actually contains older staged text | `git diff` and `git diff --cached` describe different states, or a commit succeeds while current register corrections remain modified on disk | distinguish `HEAD`, index, and working tree explicitly; inspect both diffs; make a second governing-document commit and record its hash |
+
+**Resolution.** Row 19 is structurally closed by baseline commit `02b5fd3`
+(`Checkpoint: certified chain baseline; residue modules restored to the
+semantic preimage`). Row 20 remains open only until the planned
+governing-document commit lands. Neither row authorizes editing a frozen
+certified module; the baseline makes such an edit recoverable, not
+acceptable.
+
 ## 7. Housekeeping rule
 
 Do not let agent instructions, skills, plans, and handoffs independently
@@ -448,3 +488,10 @@ restate the architecture. Keep one shared register:
 
 Other agent documents should point to these rather than paraphrase them at
 length.
+
+Before opening a new implementation gate, name the committed recovery
+boundary for every certified module in scope. After changing governing
+documents, verify separately what is in `HEAD`, what is staged, and what is
+only in the working tree. A kernel certificate, a disk state, an index
+state, and a Git commit are four different records; never report one as
+another.

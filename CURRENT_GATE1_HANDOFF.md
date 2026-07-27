@@ -24,6 +24,11 @@ transformation `ι_A : 𝓡_A ⟶ F_A`; after totalization,
 `Grothendieck.map ι_A` is likewise a functorial inclusion over the base, not
 a subset inclusion.
 
+Recovery boundary: commit `02b5fd3` permanently records the restored
+78-file certified Lean chain and its audit receipts. The governing
+documents on disk are newer than their staging-time versions in that
+commit; they remain scheduled for the separate governing-document commit.
+
 ## Next open gate
 
 The external review has approved the next gate as one
