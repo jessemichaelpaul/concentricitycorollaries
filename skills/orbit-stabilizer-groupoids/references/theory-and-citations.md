@@ -208,7 +208,7 @@ factorization (`orbit_stabilizer_factor`, `stabilizerPart_unique`); total
    (`Theorem.lean:108`).
 7. **Descent — the author's.** The `ℝ`-valued real-level orbit invariant is
    constant on the one component; it descends to `val_A`;
-   `c := val_A k_A`; `ASection.concentricity`; the corollaries fire through
+   `c` is `val_A` at that class; `ASection.concentricity`; the corollaries fire through
    the certified equivalence.
 
 Generic and already implemented at the pins: steps 1, 2, 4, 6, and the
@@ -280,7 +280,7 @@ computation about that certified diagram, not an artifact of a choice.
 **Step 5 — the descent.** Generic: `Quotient.lift` well-definedness on the
 component quotient (every `ConnectedComponents` elimination in Mathlib).
 The author's: the exact live `ℝ`-valued real-level invariant and the names
-`val_A`, `k_A`, `c := val_A k_A` — **named by the author at the checkpoint**
+`val_A`, the unique class, and `c` — **named by the author at the checkpoint**
 (the two namings requested in the endgame table), with the codomain fixed by
 the invariant being descended, never chosen by a cone.
 

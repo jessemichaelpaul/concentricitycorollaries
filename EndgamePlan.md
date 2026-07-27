@@ -484,9 +484,9 @@ The sharpened semantic gate order is therefore locked:
 9. apply **CHT** Remark 8.3.5 to obtain the precisely named singleton component
    carrier, then use the category-of-elements identity and the separate
    `pi0GrothendieckEquiv` at `𝓡_A` to certify
-   `π₀(∫ 𝓡_A) ≃ colim (π₀ ∘ 𝓡_A) ≃ {k_A}`;
+   `π₀(∫ 𝓡_A) ≃ colim (π₀ ∘ 𝓡_A) ≃ {the component class of a certified residue inhabitant}`;
 10. descend the already-compatible `ℝ`-valued real-level orbit invariant to
-    `val_A`, name the exact unique class, define `c := val_A k_A`, and prove
+    `val_A`, name the exact unique class, define `c` as `val_A` at that class, and prove
     the atomic theorem.
 ```
 
@@ -531,14 +531,14 @@ category-of-elements identity performs the colimit identification, and
 `pi0GrothendieckEquiv` at `𝓡_A` supplies
 
 ```text
-π₀(∫_𝓑 𝓡_A) ≃ colim_𝓑 (π₀ ∘ 𝓡_A) ≃ {k_A}.
+π₀(∫_𝓑 𝓡_A) ≃ colim_𝓑 (π₀ ∘ 𝓡_A) ≃ {the component class of a certified residue inhabitant}.
 ```
 
 The singleton does not create its real reading. The same action already
 carries an `ℝ`-valued real-level invariant, and the action-groupoid
 calculation shows it is constant on the relation being quotiented. It therefore descends
 uniquely to `val_A`; the associated cocone is the categorical expression of
-that invariant, not a choice of codomain. Then `c := val_A k_A` is
+that invariant, not a choice of codomain. Then `c`, which is `val_A` at that class, is
 immediate.
 
 C4 has no vote on the categorical one-component calculation; it proves

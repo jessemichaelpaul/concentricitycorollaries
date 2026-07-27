@@ -433,7 +433,7 @@ After the restricted diagram and natural inclusion are certified:
    build step;
 6. instantiate `pi0GrothendieckEquiv` at the exact residue diagram;
 7. descend the existing real-level orbit invariant to `val_A`, name its
-   unique class `k_A`, and define `c := val_A k_A`;
+   unique class, and define `c` as `val_A` at it;
 8. close `ASection.concentricity` and rewire its existing corollaries.
 
 Every use of “connected” in this stack means categorically connected:
@@ -527,12 +527,12 @@ as approval to build them:
 | residue Grothendieck total `∫𝓡_A` | *(unnamed)* |
 | total inclusion `∫ι_A` | *(unnamed)* |
 | `π₀(∫𝓡_A)` | *(unnamed)* |
-| its distinguished unique class `k_A` | *(unnamed)* |
+| its distinguished unique class | *(unnamed — read off a certified inhabitant, never named in advance)* |
 
 Names are ratified one checkpoint at a time, at the checkpoint. A provisional
 name written down early becomes a subject nobody approved.
 | descended real-level reader `val_A` | `cResidueVal A` |
-| centre `c = val_A(k_A)` | `cResidueCentre A` |
+| centre `c`, i.e. `val_A` at that class | `cResidueCentre A` |
 
 Each name denotes the displayed instantiated object, never a new carrier.
 Its declaration is introduced only when the preceding checkpoint has fixed

@@ -504,8 +504,8 @@ After the residue diagram checkpoint:
    infinitude and is not a new build step;
 6. instantiate `pi0GrothendieckEquiv` at the exact residue diagram;
 7. descend the already-compatible real-level orbit invariant to the named
-   `val_A`, keep the unique class `k_A` visible, and set
-   `c := val_A k_A`;
+   `val_A`, keep the unique class visible, and set
+   `c` to `val_A` at it;
 8. close `ASection.concentricity`, rewire its existing corollaries, then run
    the terminal root build and 0/0 audit.
 
@@ -819,8 +819,25 @@ The reading of record, complete:
    his own action. Semantic selection by equation still happens at exactly
    one place, the whole `0`-to-`N` frame, where
    `projectiveObjectFrame_north : projectiveObjectFrame A (pointObj ∞) =
-   distinguishedDiskAction A` — the frame **is** the element, both boundary
-   faces held. **Do not re-raise the read-only clause against the certified
+   distinguishedDiskAction A` — the frame **is** the element, and that element
+   holds *both* boundary faces:
+   `distinguishedDiskAction_fixes_cayley_zero` and
+   `distinguishedDiskAction_fixes_cayley_N`.
+
+   ⛔ **The selected object is the whole `0`-to-`N` square, never "the
+   residues at the north point"** (author, 2026-07-27). Euler presents at
+   `0`, Weierstrass at `N`, and the square spans them; `𝓡_A(X)` is the image
+   of *that square* under the same action functor. The point-reading is
+   strictly weaker than what is triple-certified, and it is not merely
+   imprecise — it manufactures a "join the distinct zeros" obligation the
+   author already struck. If the selected object is the square, there is
+   nothing to join. Two consequences for the component step: the orbit whose
+   image is taken is the orbit of the square, and connectedness and the
+   level's conservation stop being two facts — an axis pinned at both ends by
+   the very element doing the moving cannot slide, so the same square that
+   gives the orbit gives the invariant.
+
+   **Do not re-raise the read-only clause against the certified
    code; this text was the stale side of that collision (§6c).**
 2. **The preimage square at `0`/`N` already commutes.** The unique winding —
    `winding_lift_unique`, the tape's `lift_unique`, `lift_closed`, the
@@ -885,7 +902,7 @@ The reading of record, complete:
    the same base; it is not a subset inclusion. The collapse through the
    common `N` names the singleton;
    `pi0GrothendieckEquiv` is the last comparison; the real-level invariant
-   descends to `val_A`; `c := val_A k_A`.
+   descends to `val_A`; `c` is `val_A` at that class.
 
 No pre-flight instruction, checklist row, or proof spine in this file may be
 read as requiring a derivation at step 3. Wherever §5's spine says "prove",

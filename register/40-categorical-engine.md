@@ -217,6 +217,18 @@ then hunt for its project meaning. Discuss the theory with the generic
 symbols; read the chosen system from the completed action; assign the generic
 name to it afterwards.
 
+> **Extended 2026-07-27 to every case-variant and near-variant.** This ban
+> held for `K_A` — it appears in the register only inside its own
+> prohibitions. A **lowercase** `k_A` nevertheless entered as a placeholder
+> for the unique component class, spread to nineteen occurrences across seven
+> files including both auto-loading skill references, and appeared in **zero**
+> lines of Lean. It was swept the same day. There was never anything for it to
+> name: the unique class is the connected component of an object already
+> certified, read off rather than christened. Treat any single-letter
+> project symbol with a subscript `A` as suspect until a live declaration
+> carries it, and prefer the description ("the component class of a certified
+> residue inhabitant") over a letter until the author names it himself.
+
 ## 10. Thomason's stronger comparison (held)
 
 For a diagram of small categories `F : D ⥤ Cat`, Thomason's theorem compares

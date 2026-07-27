@@ -1095,7 +1095,7 @@ project types:
 ```text
 π₀(∫_𝓑 𝓡_A)
   ≃ colim_𝓑 (π₀ ∘ 𝓡_A)
-  ≃ {the precisely named unique component class k_A}.
+  ≃ {the precisely named unique component class}.
 ```
 
 These are equivalences, not definitional equalities, and the left-hand
@@ -1114,7 +1114,7 @@ val_A : colim_𝓑 (π₀ ∘ 𝓡_A) → ℝ.
 ```
 
 After the exact carrier and its unique class have received project-specific
-names, define `c := val_A k_A`. Every semantic residue represents `k_A`,
+names, define `c` as `val_A` at that class. Every semantic residue represents it,
 so the same reader gives `Re (A.sphereZero n) = c` for every `n`.
 
 ### Held homotopical route

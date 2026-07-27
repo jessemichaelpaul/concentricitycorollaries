@@ -193,7 +193,7 @@ pi0GrothendieckEquiv (the certified C-residue diagram).
 This supplies the comparison
 
 ```text
-π₀(∫_𝓑 𝓡_A) ≃ colim_𝓑 (π₀ ∘ 𝓡_A) ≃ {k_A}.
+π₀(∫_𝓑 𝓡_A) ≃ colim_𝓑 (π₀ ∘ 𝓡_A) ≃ {the component class of a certified residue inhabitant}.
 ```
 
 It is not the source of the categorical one-component property: the action
@@ -227,9 +227,9 @@ completed global action
     calculation + Remark 8.3.5
     → the precisely named singleton component carrier and unique class
   → el-identity + pi0GrothendieckEquiv at the C-residue diagram
-    → π₀(∫𝓡_A) ≃ colim(π₀ ∘ 𝓡_A) ≃ {k_A}
+    → π₀(∫𝓡_A) ≃ colim(π₀ ∘ 𝓡_A) ≃ {the component class of a certified residue inhabitant}
   → the already-compatible ℝ-valued real-level orbit invariant descends to val_A
-  → c := val_A k_A and the atomic theorem.
+  → c := val_A at that class, and the atomic theorem.
 ```
 
 Every remaining generic letter is replaced by an A-specific name and

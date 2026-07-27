@@ -256,9 +256,9 @@ the component calculation. Keep visible:
 
 ```text
 named singleton component carrier
-named unique class k_A
+named unique class
 val_A : named carrier → ℝ
-c := val_A k_A.
+c is val_A at that class.
 ```
 
 Remark 8.3.5 supplies singletonness. `pi0GrothendieckEquiv` supplies the
