@@ -34,8 +34,14 @@ This is a hard rejection rule:
   replace the orbit-subgroupoid/groupoid-preimage subject.
 - Generic full-subcategory or `ObjectProperty` machinery may occur only
   internally in the final A-specific diagram and natural transformation.
-- The literal `positionedOrbitSquare A f (1 : Moebius)` must be consumed by
-  that construction. A detached audit example does not count.
+- **Restated 2026-07-27 (post-certificate; Opus's deletion tripwire + §6c
+  doc-vs-code ruling).** Under the ratified definition — membership carrying
+  the base arrow as data, cross-frame closure by composition — the `d = 1`
+  square has nothing left to do at this gate: the criterion demanding its
+  consumption was written for the retired invariance framing. Its role is
+  **provenance** (the transport IS the square applied — recorded by receipt)
+  and its working role moves to the component/tape step, where the all-`t`
+  family operates. Do not manufacture a consumer to satisfy the old wording.
 - Before any helper declaration or subsidiary receipt counts, Lean must
   consume:
 

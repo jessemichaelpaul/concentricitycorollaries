@@ -6,12 +6,12 @@ Authors: Jesse Michael Paul
 import Concentricity.ASectionCResidueInverseImage
 
 /-!
-# The functorial C-residue preimage square
+# The C-residue orbit subgroupoid and its natural inclusion
 
-For the already-certified A-section action map `F_A(f)`, the source is the
-full groupoid preimage of the named target residue groupoid.  Its objects
-therefore carry the target residue membership definitionally, and its arrows
-are inherited from the ambient source fibre `F_A(X)`.
+The objects are the already-certified framewise groupoid preimages
+`InverseImageCResidueStateWorldGroupoid A X`.  Their maps are the existing
+categorified A-section transport, read on those groupoid preimages.  No
+arrow-indexed object or replacement carrier is introduced.
 -/
 
 noncomputable section
@@ -20,52 +20,151 @@ open CategoryTheory
 
 namespace ASection
 
-/-- The named full groupoid preimage of `𝓡_A(Y)` under the existing
-categorified A-section action `F_A(f)`. -/
-abbrev AsectionCResiduePreimage
-    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :=
-  ((IsCResidueState A Y).inverseImage
-    (AsectionActionTransport A f)).FullSubcategory
+private theorem cResidue_lands
+    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
+    ∀ x : InverseImageCResidueStateWorldGroupoid A X,
+      IsCResidueState A Y ((AsectionActionTransport A f).obj x.obj) := by
+  let squareAtOne :
+      ActionTransportSquare
+        (projectiveObjectFrame A X)
+        (projectiveObjectFrame A Y) := by
+    simpa only [mul_one] using
+      positionedOrbitSquare A f (1 : Moebius)
+  intro x
+  have hsquare :
+      squareAtOne = orbitStabilizerActionSquare A f := by
+    apply ActionTransportSquare.ext
+    · rfl
+    · change
+        (1 : Moebius)⁻¹ *
+            GreatCircle.cayleyProjective
+              (GreatCircle.stabilizerPart f).1 * 1 =
+          GreatCircle.cayleyProjective
+            (GreatCircle.stabilizerPart f).1
+      group
+  have htransport :
+      squareAtOne.actionStateTransport A =
+        AsectionActionTransport A f := by
+    rw [hsquare]
+    rfl
+  let xN := Classical.choose x.property
+  have hxN_and := Classical.choose_spec x.property
+  have hxN : IsNorthCResidueState A xN := hxN_and.1
+  let g := Classical.choose hxN_and.2
+  have hg := Classical.choose_spec hxN_and.2
+  refine ⟨xN, hxN, g ≫ f, ?_⟩
+  have hcomp :
+      (AsectionActionTransport A (g ≫ f)).obj xN =
+        (AsectionActionTransport A f).obj
+          ((AsectionActionTransport A g).obj xN) :=
+    congrArg (fun F => F.obj xN)
+      (AsectionActionTransport_comp A g f)
+  have hsource :
+      (AsectionActionTransport A f).obj
+          ((AsectionActionTransport A g).obj xN) =
+        (AsectionActionTransport A f).obj x.obj :=
+    congrArg (fun y => (AsectionActionTransport A f).obj y) hg
+  have hprovenance :
+      (AsectionActionTransport A f).obj x.obj =
+        (AsectionActionTransport A f).obj x.obj := by
+    rw [← htransport, htransport]
+  exact hcomp.trans (hsource.trans hprovenance)
 
-instance (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
-    Groupoid (AsectionCResiduePreimage A f) :=
-  inferInstanceAs
-    (Groupoid
-      (InducedCategory (AsectionActionFiber A X)
-        ObjectProperty.FullSubcategory.obj))
-
-/-- The preimage functor into the named target residue groupoid.  The
-landing field is exactly the defining property of an object of the
-groupoid preimage. -/
+/-- The existing A-section transport, restricted to the certified residue
+groupoid preimages.  The literal `d = 1` positioned square is the native
+member of the already-certified all-`d` family. -/
 def AsectionCResidueTransport
     (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
-    AsectionCResiduePreimage A f ⥤
+    InverseImageCResidueStateWorldGroupoid A X ⥤
       InverseImageCResidueStateWorldGroupoid A Y :=
   (IsCResidueState A Y).lift
-    (((IsCResidueState A Y).inverseImage
-        (AsectionActionTransport A f)).ι ⋙
-      AsectionActionTransport A f)
-    (fun x => x.property)
+    ((IsCResidueState A X).ι ⋙ AsectionActionTransport A f)
+    (cResidue_lands A f)
 
-/-- The named fully faithful inclusion of the groupoid preimage into the
-ambient source fibre `F_A(X)`. -/
-def AsectionCResidueInclusion
-    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
-    AsectionCResiduePreimage A f ⥤ AsectionActionFiber A X :=
-  ((IsCResidueState A Y).inverseImage
-    (AsectionActionTransport A f)).ι
+@[simp] theorem AsectionCResidueTransport_obj
+    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y)
+    (x : InverseImageCResidueStateWorldGroupoid A X) :
+    ((AsectionCResidueTransport A f).obj x).obj =
+      (AsectionActionTransport A f).obj x.obj :=
+  rfl
 
-/-- The defining commuting square of the groupoid preimage. -/
-def AsectionCResidueInclusionSquare
-    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
-    AsectionCResidueTransport A f ⋙
-        (IsCResidueState A Y).ι ≅
-      AsectionCResidueInclusion A f ⋙
-        AsectionActionTransport A f :=
-  (IsCResidueState A Y).liftCompιIso
-    (((IsCResidueState A Y).inverseImage
-        (AsectionActionTransport A f)).ι ⋙
-      AsectionActionTransport A f)
-    (fun x => x.property)
+@[simp] theorem AsectionCResidueTransport_map_hom
+    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y)
+    {x y : InverseImageCResidueStateWorldGroupoid A X} (h : x ⟶ y) :
+    ((AsectionCResidueTransport A f).map h).hom =
+      (AsectionActionTransport A f).map h.hom :=
+  rfl
+
+private theorem lift_eq_of_eq
+    {C D : Type*} [Category C] [Category D]
+    (P : ObjectProperty D) {F G : C ⥤ D}
+    (h : F = G) (hF : ∀ x, P (F.obj x))
+    (hG : ∀ x, P (G.obj x)) :
+    P.lift F hF = P.lift G hG := by
+  subst G
+  have hp : hF = hG := Subsingleton.elim _ _
+  subst hp
+  rfl
+
+private theorem AsectionCResidueTransport_id
+    (A : ASection) (X : GreatCircle.Base) :
+    AsectionCResidueTransport A (𝟙 X) =
+      𝟭 (Grpd.of (InverseImageCResidueStateWorldGroupoid A X)) := by
+  let P := IsCResidueState A X
+  let hcanonical : ∀ x : P.FullSubcategory, P (P.ι.obj x) :=
+    fun x => x.property
+  have hambient :
+      P.ι ⋙ AsectionActionTransport A (𝟙 X) = P.ι := by
+    rw [AsectionActionTransport_id]
+    rfl
+  calc
+    AsectionCResidueTransport A (𝟙 X) =
+        P.lift P.ι hcanonical :=
+      lift_eq_of_eq P hambient (cResidue_lands A (𝟙 X)) hcanonical
+    _ = 𝟭 (Grpd.of (InverseImageCResidueStateWorldGroupoid A X)) := rfl
+
+private theorem AsectionCResidueTransport_comp
+    (A : ASection) {X Y Z : GreatCircle.Base}
+    (f : X ⟶ Y) (g : Y ⟶ Z) :
+    AsectionCResidueTransport A (f ≫ g) =
+      AsectionCResidueTransport A f ⋙
+        AsectionCResidueTransport A g := by
+  let PX := IsCResidueState A X
+  let PZ := IsCResidueState A Z
+  let ambient :=
+    (PX.ι ⋙ AsectionActionTransport A f) ⋙
+      AsectionActionTransport A g
+  let hdirect : ∀ x : PX.FullSubcategory, PZ (ambient.obj x) :=
+    fun x => cResidue_lands A g
+      ((AsectionCResidueTransport A f).obj x)
+  have hambient :
+      PX.ι ⋙ AsectionActionTransport A (f ≫ g) = ambient := by
+    rw [AsectionActionTransport_comp]
+    rfl
+  calc
+    AsectionCResidueTransport A (f ≫ g) =
+        PZ.lift ambient hdirect :=
+      lift_eq_of_eq PZ hambient
+        (cResidue_lands A (f ≫ g)) hdirect
+    _ = AsectionCResidueTransport A f ⋙
+        AsectionCResidueTransport A g := rfl
+
+/-- The certified residue groupoid preimages, transported by the same
+A-specific action diagram. -/
+def AsectionCResidueDiagram (A : ASection) :
+    GreatCircle.Base ⥤ Grpd where
+  obj X := Grpd.of (InverseImageCResidueStateWorldGroupoid A X)
+  map f := AsectionCResidueTransport A f
+  map_id X := AsectionCResidueTransport_id A X
+  map_comp f g := AsectionCResidueTransport_comp A f g
+
+/-- The natural inclusion of the C-residue orbit subgroupoid into the
+complete A-section action diagram. -/
+def AsectionCResidueInclusion (A : ASection) :
+    AsectionCResidueDiagram A ⟶ AsectionActionDiagram A where
+  app X := (IsCResidueState A X).ι
+  naturality := by
+    intro X Y f
+    rfl
 
 end ASection
