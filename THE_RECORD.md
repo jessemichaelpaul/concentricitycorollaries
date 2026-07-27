@@ -275,6 +275,46 @@ certified — `residueTotal A n I`, which already sits over `normalizedFootpoint
 It is plucked, not named. The lesson generalizes past this one letter: **a symbol introduced before
 its referent exists will find something to mean.**
 
+### 3.6 The "too simple" verdict — the one tell that works on prose
+
+Many models told the author this proof was too simple to be real. The same models then spent two
+months failing to follow functors and groupoids, with him correcting them by hand.
+
+**Those two verdicts cannot both be true.** Calling something trivial requires understanding it;
+failing to follow the construction is a report of not understanding it. When one reader produces
+both, the first is false. What happened is the lowering described in §3.1: the construction gets
+flattened to something predicate-shaped, *that* is understood, *that* is found trivial, and the
+verdict is reported as though it were about the original. No signal available to the model
+distinguishes the two — which is why "too simple" is delivered with the confidence of an assessment.
+It **is** an assessment. Of a substitute.
+
+This also dissolves the flip logged at `register/60` §6h as *"two objects wore one name."* The
+lowering produces both symptoms at once: a functorial statement flattened to a pointwise predicate
+genuinely *is* simple, and it is also genuinely unclosable, because the flattened version is not the
+true one. The dismissal and the stall are one failure reported from two ends.
+
+**The test, and it is the tripwire applied to prose:** ask the reader to state the construction back
+— what is the functor's object map, what is the naturality square. Then delete every categorical
+word from their answer. If nothing changes, they never held the object, and their verdict is about
+something else. Use this at Zulip; it is the only diagnostic in this record that does not need Lean.
+
+### 3.7 "Years of work" — a prior about the field, not about the library
+
+When the author decided to formalize, the models told him it was impossible — years of work. He
+replied: *search the library.* The answer came back that everything needed was already there.
+
+That exchange is the first recorded instance of the project's whole failure mode, and it happened
+before any Lean was written. "Formalizing a novel result takes years" is true on average and says
+nothing about a particular result. The models reasoned from the average instead of looking:
+`Grothendieck`, `ObjectProperty.lift`, `ConnectedComponents`, `MulAction.orbitEquivQuotientStabilizer`,
+`ActionCategory` were all sitting at the pinned revision. They were there because the author had
+found the vantage point from which those are the right tools — which is the Rising Sea working, not
+luck.
+
+The standing rule at `register/00` is the stiff version of what he said in one sentence: **an empty
+grep is a fact about the grep; name-existence questions go to the type checker.** His phrasing is
+better and it is older.
+
 ---
 
 ## 4. What remains
