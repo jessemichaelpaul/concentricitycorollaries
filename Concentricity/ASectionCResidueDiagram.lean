@@ -4,21 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jesse Michael Paul
 -/
 import Concentricity.ASectionCResidueInverseImage
-import Concentricity.ASectionTotalActionState
 
 /-!
-# The functorial C-residue preimage
+# The functorial C-residue preimage square
 
-The already-certified framewise inverse image is a separately bundled
-groupoid.  The distinguished action sends that groupoid to its functorial
-image in the next ambient fibre.  After totalization, the residue-positioned
-objects form the full preimage groupoid in the Grothendieck construction,
-with its literal functorial inclusion into the ambient total.
-
-There is deliberately no theorem asserting that a fixed carrier in the
-source fibre is preserved as the same fixed carrier in the target fibre:
-the zeros are outputs of the action, and the target is the image of the
-source preimage groupoid under that action.
+For the already-certified A-section action map `F_A(f)`, the source is the
+full groupoid preimage of the named target residue groupoid.  Its objects
+therefore carry the target residue membership definitionally, and its arrows
+are inherited from the ambient source fibre `F_A(X)`.
 -/
 
 noncomputable section
@@ -27,40 +20,52 @@ open CategoryTheory
 
 namespace ASection
 
-/-- What the distinguished action does to the separately bundled preimage
-groupoid: include it in its ambient fibre and apply the already-certified
-whole-action transport.  Its codomain is the functorial image in `F_A(Y)`,
-not a second copy of a fixed source carrier. -/
+/-- The named full groupoid preimage of `𝓡_A(Y)` under the existing
+categorified A-section action `F_A(f)`. -/
+abbrev AsectionCResiduePreimage
+    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :=
+  ((IsCResidueState A Y).inverseImage
+    (AsectionActionTransport A f)).FullSubcategory
+
+instance (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
+    Groupoid (AsectionCResiduePreimage A f) :=
+  inferInstanceAs
+    (Groupoid
+      (InducedCategory (AsectionActionFiber A X)
+        ObjectProperty.FullSubcategory.obj))
+
+/-- The preimage functor into the named target residue groupoid.  The
+landing field is exactly the defining property of an object of the
+groupoid preimage. -/
 def AsectionCResidueTransport
     (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
-    InverseImageCResidueStateWorldGroupoid A X ⥤
-      AsectionActionFiber A Y :=
-  (IsCResidueState A X).ι ⋙ AsectionActionTransport A f
+    AsectionCResiduePreimage A f ⥤
+      InverseImageCResidueStateWorldGroupoid A Y :=
+  (IsCResidueState A Y).lift
+    (((IsCResidueState A Y).inverseImage
+        (AsectionActionTransport A f)).ι ⋙
+      AsectionActionTransport A f)
+    (fun x => x.property)
 
-/-- On objects, the residue transport is literally the ambient action
-applied to the object of the preimage groupoid.  This is the definitional
-receipt replacing the spurious fixed-carrier preservation obligation. -/
-@[simp] theorem cResidue_preserved
-    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y)
-    (x : InverseImageCResidueStateWorldGroupoid A X) :
-    (AsectionCResidueTransport A f).obj x =
-      (AsectionActionTransport A f).obj x.obj := rfl
+/-- The named fully faithful inclusion of the groupoid preimage into the
+ambient source fibre `F_A(X)`. -/
+def AsectionCResidueInclusion
+    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
+    AsectionCResiduePreimage A f ⥤ AsectionActionFiber A X :=
+  ((IsCResidueState A Y).inverseImage
+    (AsectionActionTransport A f)).ι
 
-/-- The semantic residue condition on an object of the complete
-Grothendieck total, evaluated in that object's own fibre. -/
-def IsTotalCResidueState (A : ASection) :
-    ObjectProperty (TotalActionStateWorld A) :=
-  fun x => IsCResidueState A x.base x.fiber
-
-/-- The totalized preimage groupoid consumed by the component argument.
-It is separately bundled; it is not identified with the ambient total. -/
-abbrev AsectionCResidueDiagram (A : ASection) :=
-  (IsTotalCResidueState A).FullSubcategory
-
-/-- The literal functorial inclusion of the separately bundled totalized
-preimage into the complete action total. -/
-def AsectionCResidueInclusion (A : ASection) :
-    AsectionCResidueDiagram A ⥤ TotalActionStateWorld A :=
-  (IsTotalCResidueState A).ι
+/-- The defining commuting square of the groupoid preimage. -/
+def AsectionCResidueInclusionSquare
+    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
+    AsectionCResidueTransport A f ⋙
+        (IsCResidueState A Y).ι ≅
+      AsectionCResidueInclusion A f ⋙
+        AsectionActionTransport A f :=
+  (IsCResidueState A Y).liftCompιIso
+    (((IsCResidueState A Y).inverseImage
+        (AsectionActionTransport A f)).ι ⋙
+      AsectionActionTransport A f)
+    (fun x => x.property)
 
 end ASection

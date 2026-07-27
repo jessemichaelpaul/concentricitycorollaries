@@ -191,6 +191,24 @@ for the author's chosen preimage, not a new theorem about a static carrier.
 The kernel checkpoint must consume this exact functor, its restricted map,
 both inclusion components, and the naturality square.
 
+**Theory ruling (2026-07-27, read verbatim from `SOURCES/Riehl-CTIC.md`):**
+Ex. 1.5.19's hom-set decomposition — *"the set of morphisms with domain `x`
+is a disjoint union of hom-sets `Hom(x,y)` where `y` ranges over the orbit
+`O_x`"* — means an arrow of an action groupoid **cannot leave the orbit of
+its domain**, and stabilizer arrows are vertex **automorphisms**.
+Consequently a subsystem selected **orbit-wise** (a union of components)
+satisfies Ex. 2.1.iv's restriction clause **vacuously**: no closure witness,
+no preservation theorem, no stabilizer-stability check exists for it. The
+"slot" arises **only** under object-wise static selection — the encoding
+that generated every phantom obligation of 2026-07-25/27. Division of
+labor: **selection is semantic and the author's** (which orbits, read off
+the zeros — non-circular); **closure is structural and automatic**
+(components); **stabilizers are retained free** (vertex groups). The one
+substantive remaining item is 8.3.5 **connectivity** through `N` (the
+tapes), never closure. Combined with the target-first gate in `SKILL.md`,
+both failure axes — wrong outer object, object-wise encoding — are closed
+mechanically.
+
 ## Generic-to-project dictionary
 
 | generic orbit–stabilizer datum | Concentricity datum |

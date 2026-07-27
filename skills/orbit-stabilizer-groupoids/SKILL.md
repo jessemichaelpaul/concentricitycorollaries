@@ -155,6 +155,39 @@ until the checkpoint passes.
 
 ## Registered kernel loop
 
+**Step 0 — the TARGET-FIRST GATE (mandatory, mechanical, 2026-07-27).** The
+audit file's first content is the requested OUTER declaration consumed at its
+exact ratified type, e.g.:
+
+```lean
+#check ASection.AsectionCResidueDiagram
+
+example (A : ASection) :
+    ASection.AsectionCResidueDiagram A ⟶
+      ASection.AsectionActionDiagram A :=
+  ASection.AsectionCResidueInclusion A
+```
+
+That block must compile before any subsidiary audit counts. Rules:
+
+1. The final declaration's signature is written before its body; no helper
+   construction begins first.
+2. A natural-transformation component at `X` may mention only `A` and `X` in
+   its source type — never a free `f` or `Y`. **No declaration depending on
+   a free arrow can be accepted as `ι_A`.**
+3. A certificate may be announced only when the audit literally consumes the
+   requested declaration at its requested outer type; certifying helper
+   declarations does not count.
+4. The bundled diagram and bundled natural transformation are audited first;
+   the `d = 1` square, `liftCompιIso`, examples, and axiom prints come after.
+5. Previously certified machinery is named in the preflight and visibly
+   consumed by the final term; reimplementing its pattern is forbidden.
+6. If the exact signature fails to elaborate, the only permitted output is
+   Lean's exact goal — never a nearby substitute construction.
+
+The gate is kernel-enforced, not interpretive: neither the author's nor the
+auditor's manual catch is the mechanism.
+
 1. Lock the theorem, A-specific object, intended bundled term, implementation
    file, audit file, and exact focused commands together.
 2. Put the intended term in the real theorem and immediately elaborate that
