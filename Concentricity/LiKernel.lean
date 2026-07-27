@@ -27,7 +27,7 @@ hold.
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
-import Concentricity.PlacementSet
+import Concentricity.StemFactorization
 import Mathlib.Algebra.Order.BigOperators.Group.Multiset
 import Mathlib.Topology.Sequences
 import Mathlib.Topology.MetricSpace.ProperSpace
@@ -371,10 +371,9 @@ theorem finite_BL (S : Multiset ℂ) (β : ℝ) (hS : ∀ z ∈ S, z.im ≠ 0) :
         liKernel_re_nonneg (hS z hzS) (hall z hzS) n
       linarith
 
-/- D2 — the class reduction — is PROVED at the end of this file
-(`ASection.placement_set_iff_liSum`, after the reduction stock it consumes:
-`liSum_summable`, `re_le_upperEdge`, the strip rows, and the `c3_atN`
-density — the same end-of-file pattern as D0 and D3). -/
+/- D2 — the class reduction — its reduction stock is proved at the end of
+this file: `liSum_summable`, `re_le_upperEdge`, the strip rows, and the
+`c3_atN` density — the same end-of-file pattern as D0 and D3. -/
 
 /- D3 — the first side — is PROVED at the end of this file
 (`ASection.liSum_first_side`, after the reduction stock it consumes:
@@ -1293,69 +1292,6 @@ private theorem ASection.exists_liSum_neg (A : ASection) {a β : ℝ} (k₀ : �
   rw [hfinal, ← hhead_eq]
   linarith [htail, hneg, hBE.le, hBE.ge]
 
-/-- **D2 — the class reduction: the adopted (iv) target v0.2, as an iff**
-(DESIGN: via Theorem 2 both-sidedly + D1 + the limit passage; the limit
-passage is the analytic face and may hold an honestly-labeled sorry after
-D1 is proved — that isolates the gap exactly as the ladder prescribes).
-A proved-equivalent restatement of the open node, never a hypothesis.
-
-PROVED (D2 burn, 2026-07-06) — the limit passage is closed; no sorry was
-needed. (⟹): placement puts every enumerated zero on the one mirror line
-`Re = (sphereZero 0).re` (`stem_zero_of_sphereZero` + `c3_sphere_nonreal`),
-and `liKernel_re_nonneg` makes every term of every kernel sum nonnegative,
-both sides. (⟸) by contraposition through the divisor: an enumerated zero
-off the line `Re = β` is strictly wrong-sided for one of the two anchor
-families (`a = β ∓ 1`; the side classification is `a`-independent), and
-`ASection.exists_liSum_neg` — the head/tail limit passage above — drives
-that family's sum negative at a simultaneous return, against the assumed
-positivity; so every enumerated level equals β, and `sphereZero_complete`
-carries the level equality to arbitrary upper-half stem zeros. Junk-tsum
-hygiene (header rider): (⟹) is termwise on the genuine convergent sums
-(`liSum_summable`); (⟸) contradicts positivity with a genuinely convergent
-negative sum — no divergent-tsum branch is touched. -/
-theorem ASection.placement_set_iff_liSum (A : ASection) :
-    (∀ ⦃z w : ℂ⦄, A.F z = 0 → A.F w = 0 → 0 < z.im → 0 < w.im → z.re = w.re)
-      ↔ ∃ β : ℝ, (∀ a : ℝ, a < β → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n)
-          ∧ (∀ a : ℝ, β < a → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n) := by
-  constructor
-  · -- placement ⟹ positivity: all enumerated zeros sit on one mirror line
-    intro hplace
-    refine ⟨(A.sphereZero 0).re, ?_, ?_⟩ <;>
-    · intro a _ n _
-      change (0 : ℝ) ≤ ∑' k, 2 * (liKernel n a ((A.sphereZero 0).re) (A.sphereZero k)).re
-      refine tsum_nonneg fun k => ?_
-      have him : (A.sphereZero k).im ≠ 0 := ne_of_gt (A.c3_sphere_nonreal k)
-      have hre : (A.sphereZero k).re = (A.sphereZero 0).re :=
-        hplace (A.stem_zero_of_sphereZero k) (A.stem_zero_of_sphereZero 0)
-          (A.c3_sphere_nonreal k) (A.c3_sphere_nonreal 0)
-      have h := liKernel_re_nonneg (a := a) him hre n
-      linarith
-  · -- positivity ⟹ placement: an off-line zero is wrong-sided for one
-    -- anchor family, and the negativity engine contradicts it
-    rintro ⟨β, h₁, h₂⟩
-    have hall : ∀ k, (A.sphereZero k).re = β := by
-      intro k
-      by_contra hne
-      rcases lt_or_gt_of_ne hne with hlt | hgt
-      · have hwrong : 0 < (β - (β + 1)) * ((A.sphereZero k).re - β) := by
-          have h : (β - (β + 1)) * ((A.sphereZero k).re - β)
-              = β - (A.sphereZero k).re := by ring
-          rw [h]
-          linarith
-        obtain ⟨n, hn1, hneg⟩ := A.exists_liSum_neg k hwrong
-        exact absurd (h₂ (β + 1) (lt_add_one β) n hn1) (not_le.mpr hneg)
-      · have hwrong : 0 < (β - (β - 1)) * ((A.sphereZero k).re - β) := by
-          have h : (β - (β - 1)) * ((A.sphereZero k).re - β)
-              = (A.sphereZero k).re - β := by ring
-          rw [h]
-          linarith
-        obtain ⟨n, hn1, hneg⟩ := A.exists_liSum_neg k hwrong
-        exact absurd (h₁ (β - 1) (by linarith) n hn1) (not_le.mpr hneg)
-    intro z w hz hw hzim hwim
-    obtain ⟨nz, hnz⟩ := A.sphereZero_complete hz hzim
-    obtain ⟨nw, hnw⟩ := A.sphereZero_complete hw hwim
-    rw [← hnz, ← hnw, hall nz, hall nw]
-
 /-- **The mirror of D3 — the second side at the lower edge, PROVED**: with
 β := βlo − 1 below the strip, every zero is strictly on the near side for
 every anchor a > β — the exact mirror of `liSum_first_side`'s argument,
@@ -1388,17 +1324,3 @@ theorem ASection.liSum_second_side (A : ASection) :
     linarith
   linarith
 
-/-- **The supplier chain, PROVED — "D2 is doing what the keystone assembly
-needs" (author, 2026-07-06)**: the two-sided positivity at one β supplies
-the frozen keystone's level equality outright — D2's (⟸) direction chained
-through the proved weld `placement_set_iff`. The loop assembly, in also
-the pun sense: the loop of unit imaginary octonions (the ℂ-residue
-zero-spheres) connected with the great circle (the ℝ-residue concentric
-base). With this row the ENTIRE remaining mathematics of the repository
-is the single sentence `∃ β` below — everything on both sides of it is
-proved. -/
-theorem ASection.transportLevel_placement_of_two_sided (A : ASection)
-    (h : ∃ β : ℝ, (∀ a : ℝ, a < β → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n)
-        ∧ (∀ a : ℝ, β < a → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n)) :
-    ∀ n m : ℕ, A.transportLevel n = A.transportLevel m :=
-  (A.placement_set_iff).mp ((A.placement_set_iff_liSum).mpr h)

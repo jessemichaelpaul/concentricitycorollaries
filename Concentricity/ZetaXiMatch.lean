@@ -315,7 +315,7 @@ theorem zetaTail_summable (t : Finset ℕ) (w : ℂ) :
     (by linarith [norm_nonneg w]) (not_lt.mp hn1)
 
 /-- The head/tail split of P at a finite index set, at every point (the
-PlacementSet `hsplit` pattern). PROVED helper. -/
+StemFactorization `hsplit` pattern). PROVED helper. -/
 theorem zetaProd_split (t : Finset ℕ) (w : ℂ) :
     zetaProd w = (∏ n ∈ t, spherePrimary n (zetaSphereZero n) w) *
       ∏' n, (if n ∈ t then (1 : ℂ) else spherePrimary n (zetaSphereZero n) w) := by

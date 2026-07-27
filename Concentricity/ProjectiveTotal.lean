@@ -24,6 +24,7 @@ noncomputable section
 open CategoryTheory
 
 namespace ASection
+namespace SliceProjection
 
 /-- The action of the direct sphere-valued arrow is exactly the framed
 source/stabilizer/target transition. -/
@@ -119,13 +120,13 @@ structure TotalA (A : ASection) where
 
 /-- An arrow of `𝒯_A`: a base arrow together with the sphere arrow after the
 matching full orbit--stabilizer transition. -/
-structure TotalHom (A : ASection) (X Y : A.TotalA) where
+structure TotalHom (A : ASection) (X Y : TotalA A) where
   base : X.base ⟶ Y.base
   fiber :
     (distinguishedWorldAction ((sectionFunctor A).map base).mob).obj
         X.fiber ⟶ Y.fiber
 
-theorem TotalHom.ext (A : ASection) {X Y : A.TotalA}
+theorem TotalHom.ext (A : ASection) {X Y : TotalA A}
     (f g : TotalHom A X Y) (hbase : f.base = g.base)
     (hfiber : eqToHom (by rw [hbase]) ≫ f.fiber = g.fiber) : f = g := by
   cases f
@@ -133,18 +134,18 @@ theorem TotalHom.ext (A : ASection) {X Y : A.TotalA}
   cases hbase
   simp_all
 
-private def totalId (A : ASection) (X : A.TotalA) : TotalHom A X X where
+private def totalId (A : ASection) (X : TotalA A) : TotalHom A X X where
   base := 𝟙 X.base
   fiber := 𝟙 X.fiber
 
-private def totalComp (A : ASection) {X Y Z : A.TotalA}
+private def totalComp (A : ASection) {X Y Z : TotalA A}
     (f : TotalHom A X Y) (g : TotalHom A Y Z) : TotalHom A X Z where
   base := f.base ≫ g.base
   fiber :=
     (distinguishedWorldAction
       ((sectionFunctor A).map g.base).mob).map f.fiber ≫ g.fiber
 
-instance (A : ASection) : Category A.TotalA where
+instance (A : ASection) : Category (TotalA A) where
   Hom := TotalHom A
   id X := totalId A X
   comp f g := totalComp A f g
@@ -169,7 +170,7 @@ instance (A : ASection) : Category A.TotalA where
 /-- Objects of `𝒯_A` are precisely a projective footpoint together with a
 sphere world. -/
 def totalMk (A : ASection) (b : GreatCircle.Base) (I : SphereWorld) :
-    A.TotalA :=
+    TotalA A :=
   ⟨b, (projectiveObjectAction A b).obj I⟩
 
 /-- Build a total arrow by applying the exact orbit--stabilizer transition to
@@ -189,11 +190,11 @@ def totalHomMk (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y)
     (totalMk A b I).fiber = (projectiveObjectAction A b).obj I := rfl
 
 /-- The C3 n-th zero output in world `I`, at its own projective footpoint. -/
-def zeroTotal (A : ASection) (n : ℕ) (I : SphereWorld) : A.TotalA :=
+def zeroTotal (A : ASection) (n : ℕ) (I : SphereWorld) : TotalA A :=
   totalMk A (normalizedFootpoint (A.sphereZero n).re) I
 
 /-- The common compactified witness in world `I`. -/
-def northTotal (A : ASection) (I : SphereWorld) : A.TotalA :=
+def northTotal (A : ASection) (I : SphereWorld) : TotalA A :=
   totalMk A
     (GreatCircle.pointObj (OnePoint.infty : GreatCircle.Point)) I
 
@@ -253,7 +254,7 @@ theorem totalTransport_full (A : ASection)
 
 /-- C3 supplies every indexed zero output in every sphere world. -/
 theorem zeroTotal_populated (A : ASection) (n : ℕ) (I : SphereWorld) :
-    ∃ X : A.TotalA, X = zeroTotal A n I :=
+    ∃ X : TotalA A, X = zeroTotal A n I :=
   ⟨zeroTotal A n I, rfl⟩
 
 /-- C4 supplies the infinite output population. -/
@@ -261,4 +262,5 @@ theorem zeroTotal_c4_infinite (A : ASection) :
     (Set.range A.sphereZero).Infinite :=
   A.c4_infinite
 
+end SliceProjection
 end ASection

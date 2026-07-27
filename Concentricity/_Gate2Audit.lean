@@ -1,0 +1,14 @@
+import Concentricity.ASectionGenerated
+
+namespace ASection
+
+#check generatedRealize_eq_realize
+#check generatedRealize_equivariant
+#check AsectionGenerated_eq_equivariant
+#check AsectionGenerated_iso_equivariant
+
+#print axioms ASection.generatedRealize_eq_realize
+#print axioms ASection.generatedRealize_equivariant
+#print axioms ASection.AsectionGenerated_eq_equivariant
+
+end ASection

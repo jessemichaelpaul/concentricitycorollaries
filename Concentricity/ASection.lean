@@ -189,7 +189,10 @@ structure ASection where
   c4_infinite : (Set.range sphereZero).Infinite
   /-- The compactified value at ∞ = N — data of the section as a map on
   𝕆* = S⁸ that the stem alone does not determine (the marked compactification
-  node, `rmk:compactify`; for ζ this is ζ*(∞) = 1, `def:zeta-Cstar`). -/
+  node, `rmk:compactify`). It is fixed not by any special constant but by the
+  section's meromorphic continuation THROUGH the point at infinity: every
+  A-section has its simple pole at a finite real point (C1) and continues through
+  ∞, and that continuation determines the value here. -/
   valueAtInfinity : OnePoint ℂ
   /-- `def:section-map`(ii): "A(N) ∈ ⋂_I ℂ_I* = ℝ ∪ {N} by (i)" — at stem
   level: the value at ∞, when finite, is real. (Derived in the master from

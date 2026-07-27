@@ -12,7 +12,7 @@ integration. The winding of a closed value-loop is DEFINED by the lift
 defect (the proved Toolkit/LoopAssembly rows), is ADDITIVE under pointwise
 products (lifts add along `exp`), vanishes on slit-plane loops
 (`Complex.log` is the single-valued lift), and the C3 local form
-(`stem_local_form`, PlacementSet.lean) then hands every small circle about
+(`stem_local_form`, StemFactorization.lean) then hands every small circle about
 an enumerated zero its exact count — the fiber tally, ≥ 1 — and the pole
 its −1 (`c1_simple` through `meromorphicOrderAt_eq_int_iff`).
 
@@ -51,10 +51,10 @@ conserve it), `winding_height_shift` (Cor 5.21's accounting: height shift
 (**the pole circle winds exactly −1**), `ASection.
 no_closed_lift_around_sphereZero` (the obstruction reading — Cor 5.13's
 criterion FAILS at every zero circle), and the drive
-`ASection.concentricity_via_sigma`.
+the σ-crossing drive.
 
 THE RECEIPT (the file's ONE `sorry`, R6/R8 — the exact resisting goal):
-`concentricity_via_sigma` at `⊢ False` with the complete board fed; see
+the σ-crossing drive at `⊢ False` with the complete board fed; see
 [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 consistency note. The imported root ledger is untouched.
 
@@ -339,7 +339,7 @@ theorem fiber_tally_pos (A : ASection) (n : ℕ) :
 /-- **The local argument principle at an enumerated zero, PROVED**: along
 every sufficiently small circle about `sphereZero n` the value-loop of the
 stem winds exactly the fiber tally — in particular at least once. Route:
-the C3 peel `stem_local_form` (PlacementSet.lean: `F = (z−ρ)^N·G` near ρ,
+the C3 peel `stem_local_form` (StemFactorization.lean: `F = (z−ρ)^N·G` near ρ,
 `G` analytic nonvanishing at ρ) + `stemWinding_mul`/`_pow` + the model row
 (the centred factor winds once per power) + the Rouché-zero row on the
 unit factor (`G` stays within `‖G ρ‖` of `G ρ` on a small circle). The
@@ -999,114 +999,5 @@ theorem no_closed_lift_around_sphereZero (A : ASection) (n : ℕ) :
 end ASection
 
 namespace ASection
-
-/-- **E3 — THE DRIVE** (charter step 3: "connect to the ONE closed tame
-loop through the cone (pole_cone_eps_delta, winding_loop_closed, C1: ONE
-pole) — the loop assembly's counting constraint. Whatever inequality or
-contradiction the counting yields, drive it to the theorem."). Statement =
-the theorem's target (`ASection.concentricity`, Theorem.lean — the
-repository's one open node). Every possession fed below is PROVED:
-
-(0) the supposition names two enumerated zeros at distinct levels;
-(1) THE σ-COUNTING (this file): a vertical line `Re = β` strictly between
-    the levels, circle contours strictly left and right, value-windings =
-    the fiber tallies ≥ 1 on EACH side (`sigma_level_separation` ←
-    `stemWinding_circle_sphereZero` ← the C3 peel + multiplicativity) —
-    hence BOTH side loops are OBSTRUCTED: no closed lift exists on either
-    side of the line (`stemWinding_eq_zero_iff`, Cor 5.13's criterion in
-    its stem-honest closure form);
-(2) C1's pole entry: the pole circle winds exactly −1
-    (`stemWinding_circle_pole` ← `c1_simple`);
-(3) the cone at N and the closure rows (`pole_cone_eps_delta`,
-    `pole_cone_tendsto`, `winding_loop_closed`,
-    `winding_loop_defect_level_zero`, `winding_height_shift`);
-(4) the σ-apparatus rows (`stemSignature_mem_of_pos` — the {0,−1}
-    auto-pass at positive crossings, `crossing_band_ledger`,
-    `arc_band_confined`, the rung parities);
-(5) C2/C3's joint stem data (`stem_identity_logDeriv`,
-    `shared_ladder_encounters`);
-(6) the ladder reduction (`transportLevel_placement_of_two_sided`,
-    `liSum_first_side`, `liSum_second_side`; D2's iff
-    `placement_set_iff_liSum` makes the target the one sentence `∃β`
-    two-sided).
-
-RECEIPT (R6, 2026-07-06): goal at the stop
-  ⊢ False
-and RESISTS. `exact?` at the seam: could not close the goal. THE PRECISE
-MISSING INFERENCE, one sentence: every winding possession above is LOCAL —
-each contour lifts with its own defect, and no fed statement constrains
-the winding integers ACROSS contours; the constraint that would tie them —
-Cor 5.13's σ ∈ {0,−1} criterion on the ONE assembled loop through the cone
-at N — lives on the octonionic direction field (Def 5.2's one-sided limits
-of Y/|Y|), which has NO stem carrier (GPVwind Rem 2.1; the recorded GAP of
-`winding_loop_defect`, Toolkit.lean), and its stem shadow (the closure iff
-of this file) is exactly the register identification `eq:placement-set` in
-[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
-[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
-circles wind ≥ 1 on both sides, its pole −1, all ledgers balance — so no
-assembly of these possessions alone can close `False`; consistent with the
-E1 audit (`auditE1_target_iff_two_sided`: the remaining content is `∃β`)
-and the recorded failure mode of every prior route. The `sorry` is the
-ROUTE RECEIPT (unimported artifact; R8), not a queue item. -/
-theorem concentricity_via_sigma (A : ASection) :
-    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
-  by_contra hno
-  -- (0) the supposition yields two enumerated zeros at distinct levels
-  have hpair : ∃ k : ℕ, (A.sphereZero k).re ≠ (A.sphereZero 0).re := by
-    by_contra hall
-    refine hno ⟨(A.sphereZero 0).re, fun k => ?_⟩
-    by_contra hk
-    exact hall ⟨k, hk⟩
-  obtain ⟨k, hk⟩ := hpair
-  obtain ⟨a, b, hab⟩ : ∃ a b : ℕ, (A.sphereZero a).re < (A.sphereZero b).re := by
-    rcases lt_or_gt_of_ne hk with h | h
-    · exact ⟨k, 0, h⟩
-    · exact ⟨0, k, h⟩
-  -- (1) THE σ-COUNTING (PROVED, this file): a vertical line Re = β strictly
-  --     between the two levels; circle contours strictly left and right of
-  --     it; the value-loops wind the fiber tallies ≥ 1 on EACH side
-  obtain ⟨β, hβa, hβb, ε, hε, hleft, hright, Γa, Γb, hΓaval, hΓbval,
-    hΓane, hΓbne, hwa, hwb⟩ := A.sigma_level_separation hab
-  have hΓaloop : Γa 0 = Γa 1 := by
-    rw [hΓaval 0, hΓaval 1, circleLoop_closed]
-  have hΓbloop : Γb 0 = Γb 1 := by
-    rw [hΓbval 0, hΓbval 1, circleLoop_closed]
-  -- ... so BOTH side loops are obstructed: no closed lift exists for either
-  --     (Cor 5.13's criterion fails on both sides of the line)
-  have hobs_a : ¬ ∃ Γ' : C(unitInterval, ℂ),
-      (∀ t, Complex.exp (Γ' t) = Γa t) ∧ Γ' 1 = Γ' 0 := by
-    intro hclosed
-    have h0 := (stemWinding_eq_zero_iff Γa hΓane hΓaloop).mpr hclosed
-    omega
-  have hobs_b : ¬ ∃ Γ' : C(unitInterval, ℂ),
-      (∀ t, Complex.exp (Γ' t) = Γb t) ∧ Γ' 1 = Γ' 0 := by
-    intro hclosed
-    have h0 := (stemWinding_eq_zero_iff Γb hΓbne hΓbloop).mpr hclosed
-    omega
-  -- (2) the pole's entry: C1's ONE simple pole counts −1 (PROVED)
-  have hpole := A.stemWinding_circle_pole
-  -- (3) the cone at N and the closure rows (PROVED)
-  have hcone := A.pole_cone_eps_delta
-  have hcone' := A.pole_cone_tendsto
-  have hclosure := @winding_loop_closed
-  have hlevel := @winding_loop_defect_level_zero
-  have hshift := @winding_height_shift
-  -- (4) the σ-apparatus rows (PROVED): the {0,−1} auto-pass at positive
-  --     crossings, the crossing ledger, arc confinement, rung parities
-  have hsig := @stemSignature_mem_of_pos
-  have hledger := @crossing_band_ledger
-  have harc := @arc_band_confined
-  have hodd := @crossing_height_odd_of_neg
-  have heven := @crossing_height_even_of_pos
-  -- (5) C2/C3's joint stem data (PROVED): the two-index engine, the shared
-  --     degenerate encounters of the two zeros
-  have hjoint := A.stem_identity_logDeriv
-  have henc := A.shared_ladder_encounters a b
-  -- (6) the ladder reduction (PROVED): the target IS ∃β two-sided
-  have hladder := A.transportLevel_placement_of_two_sided
-  have hfirst := A.liSum_first_side
-  have hsecond := A.liSum_second_side
-  -- RECEIPT
-  sorry
 
 end ASection

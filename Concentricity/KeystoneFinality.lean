@@ -22,7 +22,7 @@ CONCLUSION register only: levels/winding/convergence — no centre, radius,
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
 import Concentricity.Theorem
-import Concentricity.PlacementSet
+import Concentricity.StemFactorization
 
 noncomputable section
 

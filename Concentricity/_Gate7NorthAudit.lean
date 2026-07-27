@@ -1,0 +1,10 @@
+import Concentricity.ASectionFinality
+
+#print axioms ASection.normalizedNActionSquare_factors_orbitStabilizer
+#print axioms ASection.normalizedNActionTransport_factorization
+#print axioms ASection.residueNorthTotal_fiber
+#print axioms ASection.residueNorthTotal_input
+#print axioms ASection.residueNorthTotal_positioned
+#print axioms ASection.residueNorthTotal_value
+#print axioms ASection.residueToNorth
+#print axioms ASection.residueToNorth_level

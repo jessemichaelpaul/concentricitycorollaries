@@ -10,10 +10,11 @@ C1–C4 assembly, including the placement sentence (landed in the master
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
-import Concentricity.Base
-import Concentricity.TwoWorlds
 import Concentricity.Toolkit
 import Mathlib.CategoryTheory.Limits.Types.Colimits
+import Mathlib.CategoryTheory.Groupoid.Grpd.Basic
+import Mathlib.CategoryTheory.Grothendieck
+import Mathlib.CategoryTheory.ConnectedComponents
 
 noncomputable section
 
@@ -175,9 +176,9 @@ author's ruling (a): the master label and the open node now live on
 `ASection.concentricity` below; this record is kept as the placement
 paragraph's transcription map. Original text:
 the ONE open node, at its
-translation-layer address — welded to `placement_set` by the proved
-`placement_set_iff`; consumed by `cor:nontrivial`, never by
-`concentricity_transport`. Statement and sorry unchanged.
+translation-layer address; the open node now lives on
+`ASection.concentricity`, consumed by `cor:nontrivial`. Statement and
+sorry unchanged.
 
 **The placement** (master, proof of `thm:concentricity`, the placement
 paragraph, verbatim): "Through the commuting triangle π∘E = exp
@@ -212,7 +213,7 @@ is … the level log r paired with an odd winding height I(2k+1)π" —
 along every zigzag of 𝒯_A" — PROVED, `TotalObject.level_eq_of_zigzag`
 (Concentricity/Base.lean); (e) "lies over a *single* level" — the
 conclusion discharged here. -/
-/-- **THE CONCENTRICITY THEOREM** (master `thm:concentricity`; the
+/- **THE CONCENTRICITY THEOREM** (master `thm:concentricity`; the
 statement carrier per the author's ruling of 2026-07-06, superseding the
 2026-07-05 re-encode: "(a) is literally the entire point of this entire
 project" — the theorem, stated as the author means it): **the infinitely
@@ -223,12 +224,11 @@ concentric component: [the concentric component] → ∃ c, one centre.
 THE ONE OPEN NODE of the repository (R8: `sorry` = UNFORMALIZED, never
 UNSOUND). Everything on both sides is proved and certified: the transport
 connectivity (`concentricity_transport`, frozen kernel certificate), the
-articulation (`concentric_articulation` — one component, defined through
+articulation (one component, defined through
 the witness 𝔫, fibre concentric), the Φ-collapse and π₀(𝒮₂)
 (PhiConversion.lean: the glue total and proper, the slice world's
 components = the value moduli), the complete BL ladder (D0–D3 + mirror +
-D2's iff `placement_set_iff_liSum` — this statement's proved kernel-
-coordinate equivalent: ∃β two-sided positivity), the σ-closure rows, the
+D2's proved kernel-coordinate iff (∃β two-sided positivity), the σ-closure rows, the
 supplier chain, and the corollary chain (`cor:nontrivial`, `cor:rh` with
 ½ from `thm:rh-equiv`'s proved rigidity) consuming it downstream. The
 transport's memory is the witness structure; the transport over the base
@@ -249,62 +249,24 @@ three clauses and nothing else:
 The extension of clause 3 is the original extension move (the author,
 from the first day): the concentric structure of the base extends along
 the connection to the spheres. -/
-theorem ASection.concentricity (A : ASection) :
-    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
-  sorry
 
-/-- The frozen shadow, CLOSED from the theorem (statement byte-identical
-to the 2026-07-04 landing; the weld partner of `placement_set`). -/
-theorem ASection.transportLevel_placement (A : ASection) (n m : ℕ) :
-    A.transportLevel n = A.transportLevel m := by
-  obtain ⟨c, hc⟩ := A.concentricity
-  exact (hc n).trans (hc m).symm
-
-/-- The component of 𝒯 in which the n-th residue-ℂ zero-sphere of an
-A-section arrives — the OUTPUT of the C1–C4 assembly (master, proof of
-`thm:concentricity`: "Hypotheses C1–C4 *assemble* the diagram; the
-residue-ℂ zero-spheres then arrive as the degenerate fibre of its
-transport, an output; and π₀ reads off their component").
-
-CLOSED (Phase 4 #12): the class of the base object beneath the n-th
-zero-sphere — `TotalObject.levelClass.symm` at the transport level
-(`ASection.transportLevel`), per the master's readout paragraph: "under
-which a residue-ℂ zero-sphere maps to the class of the base object beneath
-it, and two of them share a component of 𝒯_A if and only if they share
-that class." The anti-vacuity pin is `assemblyComponent_eq` below. -/
-def assemblyComponent (A : ASection) (n : ℕ) : ConnectedComponents TotalObject :=
-  TotalObject.levelClass.symm (A.transportLevel n)
-
-/-- The anti-vacuity pin of the Phase-4 #12 close (PROVED, definitional):
-`assemblyComponent` is the level read-off `TotalObject.levelClass.symm` at
-the transport level — never an arbitrary component. -/
-theorem assemblyComponent_eq (A : ASection) (n : ℕ) :
-    assemblyComponent A n = TotalObject.levelClass.symm (A.transportLevel n) :=
-  rfl
-
-/-- RE-BADGED 2026-07-05 (PLAN_reencode §5): this row is now the Lean
-carrier of `cor:nontrivial`'s content — one STATIC component = one level =
-one centre — OPEN at `placement_set`. The master label `thm:concentricity`
-has moved to `ASection.concentricity_transport` (TransportObject.lean),
-where connectivity is the section's own, through N. The static object is
-the general ring 𝓡's geometry: static, connects nothing, by design.
-
-**The former statement row** (master `thm:concentricity` v4 wording, kept):
-"Let A be an A-section (Definition def:A-section). Then the residue-ℂ zero
-spheres of A all lie in a single connected component of the total object
-𝒯_A (Definition def:base) — equivalently, they have one and the same image
-in π₀(𝒯_A)."
-
-CLOSED (Phase 4 #13), cocartesian register only (the primary, Lean-native
-proof; PHASE4_PLAN guardrail): `congrArg` of the level read-off
-`TotalObject.levelClass.symm` on the placement lemma
-`ASection.transportLevel_placement` — the master's readout paragraph: "By
-the assembly and the placement above, the degenerate fibre lies over one
-and the same class — the zero-spheres over a single real level c, one for
-each winding index carried by the band — hence has a single image in
-π₀(𝒯_A): one connected component." The finality proof (Quillen Thm A /
-precofibred corollary) is an expository remark, deliberately left for the
-community to formalize. -/
-theorem concentricity (A : ASection) (n m : ℕ) :
-    assemblyComponent A n = assemblyComponent A m :=
-  congrArg (⇑TotalObject.levelClass.symm) (A.transportLevel_placement n m)
+-- CORRECTED 2026-07-26.  The previous comment here claimed
+-- `ASection.concentricity` was "DECLARED AND PROVED in
+-- ConcentricityReadout.lean".  It is not, and was not: that file declares
+-- `ASection.SliceProjection.concentricityReadout`, whose conclusion is
+-- `∃ κ : colimit (NaturalComponentDiagram A), ...` — a colimit point of the
+-- retired slice projection, not a real part.  That whole file is quarantined.
+--
+-- `ASection.concentricity` (master `thm:concentricity`) is NOT YET DECLARED
+-- anywhere in this repository.  It is the endgame target, and its name and
+-- type are already fixed by its consumers in Corollaries.lean:
+--
+--   theorem ASection.concentricity (A : ASection) :
+--       ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c
+--
+-- `ASection.nontrivial_one_centre` (Corollaries.lean:33) and
+-- `zeta_riemannHypothesis` (:47) already call it.  They are written and
+-- waiting on that one name; nothing about them needs rerouting.
+--
+-- It is declared at the end of the unified endgame ladder
+-- (`register/70-whole-square.md` §7), in its own module.

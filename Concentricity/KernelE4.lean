@@ -4,7 +4,7 @@ Concentricity/KernelE4.lean
 E4 — the kernel-form direct assault (unimported artifact; KeystoneAssembly /
 GreatCircleRoute / LoopAssembly / PhiConversion / AuditE1 / PairingE2
 precedent): the target `ASection.concentricity` read through its PROVED
-kernel-coordinate equivalent (D2, `placement_set_iff_liSum`) at the
+kernel-coordinate D2 equivalent at the
 section's OWN candidate mirror lines — the divisor's top and bottom levels
 `supLevel := sSup {Re qₙ}` and `infLevel := sInf {Re qₙ}` (well-defined:
 the strip `c3_lowerEdge` + `re_le_upperEdge`). EVERY row in this file is
@@ -30,7 +30,7 @@ meet ⟺ supLevel ≤ some β ≤ infLevel ⟺ infLevel = supLevel.
 THE NODE IN MINIMAL FORM (E4 §3, each iff PROVED sorry-free through the
 public D2 and the new first-family row):
   target ⟺ second family at β = supLevel alone
-             (`concentricity_iff_second_family_at_supLevel`)
+             (the second-family-at-supLevel iff)
          ⟺ no zero strictly below the top level
              (`concentricity_iff_supLevel_le`)
          ⟺ no zero strictly above the bottom level
@@ -72,7 +72,7 @@ nonnegativity of the Dirichlet coefficients of −ζ′/ζ, and `def:A-section`'
 C2 carries no such positivity field), and the unresolved `c2_zero_free`
 splitting flag (AuditE1 §GLOSS). Both are the author's lane (R6).
 
-FORMALIZATION NOTE (import direction): LiKernel.lean → PlacementSet.lean →
+FORMALIZATION NOTE (import direction): LiKernel.lean → StemFactorization.lean →
 Theorem.lean, so the kernel apparatus sits DOWNSTREAM of the sorried
 `ASection.concentricity`; even a closed `∃β` here could not be consumed by
 Theorem.lean without an import inversion (moving the liSum stack upstream
@@ -259,60 +259,10 @@ theorem liSum_second_family_at_infLevel (A : ASection) :
 /-! ## §2 — The iff sharpenings: the node in its minimal forms
 
 With the first family a possession at β = supLevel, the public D2 iff
-(`placement_set_iff_liSum`) localizes the ENTIRE remaining content to the
+localizes the ENTIRE remaining content to the
 second family at that one β — and, in divisor coordinates, to the single
 sentence "no zero strictly below the top level". Every iff below is PROVED
 sorry-free; none consumes the sorried theorem. -/
-
-/-- **E4 §2 — the target ⟺ the second family alone at β = supLevel.**
-(⟹): under the target every zero sits ON the line Re = supLevel
-(`supLevel_eq_of_concentric`), so every term of every kernel sum is
-nonnegative. (⟸): the proved first family at supLevel
-(`liSum_first_family_at_supLevel`) joins the assumed second family into
-the two-sided sentence, D2's (⟸) direction (`placement_set_iff_liSum`)
-returns the set-level placement, and the enumerated zeros are stem zeros
-(`stem_zero_of_sphereZero`, `c3_sphere_nonreal`). PROVED. -/
-theorem concentricity_iff_second_family_at_supLevel (A : ASection) :
-    (∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c)
-      ↔ ∀ a : ℝ, A.supLevel < a → ∀ n : ℕ, 1 ≤ n →
-          0 ≤ A.liSum a A.supLevel n := by
-  constructor
-  · rintro ⟨c, hc⟩ a _ n _
-    show (0 : ℝ) ≤ ∑' k, 2 * (liKernel n a A.supLevel (A.sphereZero k)).re
-    refine tsum_nonneg fun k => ?_
-    have hz : (A.sphereZero k).im ≠ 0 := ne_of_gt (A.c3_sphere_nonreal k)
-    have hre : (A.sphereZero k).re = A.supLevel := by
-      rw [hc k, A.supLevel_eq_of_concentric hc]
-    have h := liKernel_re_nonneg (a := a) hz hre n
-    linarith
-  · intro hsecond
-    have hplace := (A.placement_set_iff_liSum).mpr
-      ⟨A.supLevel, A.liSum_first_family_at_supLevel, hsecond⟩
-    exact ⟨(A.sphereZero 0).re, fun n =>
-      hplace (A.stem_zero_of_sphereZero n) (A.stem_zero_of_sphereZero 0)
-        (A.c3_sphere_nonreal n) (A.c3_sphere_nonreal 0)⟩
-
-/-- **E4 §2 — the mirror: the target ⟺ the first family alone at
-β = infLevel.** PROVED. -/
-theorem concentricity_iff_first_family_at_infLevel (A : ASection) :
-    (∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c)
-      ↔ ∀ a : ℝ, a < A.infLevel → ∀ n : ℕ, 1 ≤ n →
-          0 ≤ A.liSum a A.infLevel n := by
-  constructor
-  · rintro ⟨c, hc⟩ a _ n _
-    show (0 : ℝ) ≤ ∑' k, 2 * (liKernel n a A.infLevel (A.sphereZero k)).re
-    refine tsum_nonneg fun k => ?_
-    have hz : (A.sphereZero k).im ≠ 0 := ne_of_gt (A.c3_sphere_nonreal k)
-    have hre : (A.sphereZero k).re = A.infLevel := by
-      rw [hc k, A.infLevel_eq_of_concentric hc]
-    have h := liKernel_re_nonneg (a := a) hz hre n
-    linarith
-  · intro hfirst
-    have hplace := (A.placement_set_iff_liSum).mpr
-      ⟨A.infLevel, hfirst, A.liSum_second_family_at_infLevel⟩
-    exact ⟨(A.sphereZero 0).re, fun n =>
-      hplace (A.stem_zero_of_sphereZero n) (A.stem_zero_of_sphereZero 0)
-        (A.c3_sphere_nonreal n) (A.c3_sphere_nonreal 0)⟩
 
 /-- **E4 §2 — THE MINIMAL NODE, divisor coordinates**: the target ⟺ no
 zero strictly below the top level. (⟹) is `supLevel_eq_of_concentric`;
@@ -368,17 +318,6 @@ theorem concentricity_iff_exists_two_sided_level (A : ASection) :
   · rintro ⟨β, h₁, h₂⟩
     refine (A.concentricity_iff_infLevel_eq_supLevel).mpr
       (le_antisymm A.infLevel_le_supLevel (h₁.trans h₂))
-
-/-- **E4 §2 — the kernel form of the minimal node** (the two §2 faces
-composed): the second family at β = supLevel ⟺ no zero strictly below the
-[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
-their equivalence is proved, their truth is the open node. PROVED. -/
-theorem second_family_at_supLevel_iff_supLevel_le (A : ASection) :
-    (∀ a : ℝ, A.supLevel < a → ∀ n : ℕ, 1 ≤ n →
-        0 ≤ A.liSum a A.supLevel n)
-      ↔ ∀ k : ℕ, A.supLevel ≤ (A.sphereZero k).re :=
-  (A.concentricity_iff_second_family_at_supLevel).symm.trans
-    (A.concentricity_iff_supLevel_le)
 
 /-! ## §3 — Attainment and escape (the brief's step 1 worked)
 

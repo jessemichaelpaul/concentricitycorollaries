@@ -247,6 +247,10 @@ line without changing its base identity. -/
 def complexPoint (x : GreatCircle.Point) : OnePoint ℂ :=
   x.map Complex.ofRealHom
 
+@[simp] theorem complexPoint_zero :
+    complexPoint ((0 : ℝ) : GreatCircle.Point) = ((0 : ℂ) : OnePoint ℂ) := by
+  simp [complexPoint]
+
 /-- Cayley coordinates on the locked base circle. -/
 def cayleyCoord (x : GreatCircle.Point) : OnePoint ℂ :=
   cayleyGL • complexPoint x
@@ -299,6 +303,28 @@ the one projective north point. -/
       (cayleyMoebius.val OnePoint.infty) = OnePoint.infty := by
     exact cayleyMoebius.val.symm_apply_apply OnePoint.infty
   rw [hc, diagonalMoebiusHom_apply_infty]
+
+/-- Every general-modulus diagonal disk multiplier also fixes the Cayley image
+of the projective zero.  Thus `0` and `N` are the two intrinsic fixed boundary
+points of the one diagonal action. -/
+@[simp] theorem diskDiagonalMoebiusHom_fixes_cayley_zero (u : ℂˣ) :
+    (diskDiagonalMoebiusHom u).val
+        (cayleyCoord ((0 : ℝ) : GreatCircle.Point)) =
+      cayleyCoord ((0 : ℝ) : GreatCircle.Point) := by
+  rw [cayleyCoord, complexPoint_zero]
+  change (cayleyMoebius * diagonalMoebiusHom u * cayleyMoebius⁻¹).val
+      (cayleyMoebius.val (((0 : ℂ) : OnePoint ℂ))) =
+    cayleyMoebius.val (((0 : ℂ) : OnePoint ℂ))
+  change cayleyMoebius.val
+      ((diagonalMoebiusHom u).val
+        ((cayleyMoebius⁻¹).val
+          (cayleyMoebius.val (((0 : ℂ) : OnePoint ℂ))))) =
+    cayleyMoebius.val (((0 : ℂ) : OnePoint ℂ))
+  have hc : (cayleyMoebius⁻¹).val
+      (cayleyMoebius.val (((0 : ℂ) : OnePoint ℂ))) =
+        ((0 : ℂ) : OnePoint ℂ) := by
+    exact cayleyMoebius.val.symm_apply_apply _
+  rw [hc, diagonalMoebiusHom_apply_coe, mul_zero]
 
 /-- The finite-chart Cayley formula. -/
 theorem cayleyMoebius_apply_real (x : ℝ) :

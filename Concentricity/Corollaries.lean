@@ -1,21 +1,22 @@
 /-
 Concentricity/Corollaries.lean
 
-The translation corollaries (PLAN_islands §3, the GATED rows; landed per
-the runway rule: never reported "proved" before project-wide 0/0):
-`cor:nontrivial` over the keystone, and `cor:rh` — the final readout,
-with ½ supplied downstream by `thm:rh-equiv`'s proved rigidity
-(RhEquiv.lean; `rmk:half-downstream`). Both rows consume the sorried
-keystone `transportLevel_placement`/`placement_set` (Island P), and
-`cor:rh` additionally the gated `zetaSection` instance (`zetaC3_package`)
-— their certificates carry sorryAx exactly through those named leaves,
-nothing else.
+The translation corollaries: `cor:nontrivial` and `cor:rh` — the final
+readout, with ½ supplied downstream by `thm:rh-equiv`'s proved rigidity
+(RhEquiv.lean; `rmk:half-downstream`). Both cite `ASection.concentricity`
+(the cocartesian theorem) and nothing else: `cor:nontrivial` IS its metric
+conclusion for a general A-section; `cor:rh` reads it on `zetaSection`
+through the proved `zetaSphereZero_surjective` and
+`riemannHypothesis_iff_concentric`, ½ entering via the functional equation
+in RhEquiv.lean. Their certificates carry sorryAx exactly through
+`ASection.concentricity`, nothing else.
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8). This file adds ZERO new
 sorries.
 -/
 import Concentricity.ZetaSection
-import Concentricity.PlacementSet
+import Concentricity.ZetaDivisor
+import Concentricity.ConcentricityReadout
 
 noncomputable section
 
@@ -30,7 +31,7 @@ equality). The sphere realisation, disjointness, and infinitude clauses
 are Island B6 (ZeroSpheres.lean). GATED by the keystone (Island P). -/
 theorem ASection.nontrivial_one_centre (A : ASection) :
     ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c :=
-  ⟨(A.sphereZero 0).re, fun n => A.transportLevel_placement n 0⟩
+  A.concentricity
 
 /-- **`cor:rh`** (master, verbatim): "Every nontrivial zero of the
 classical Riemann zeta function has real part ½; in particular
@@ -43,10 +44,12 @@ exists unconditionally by the proved infinitude — and the
 functional-equation rigidity pins ½. GATED by the keystone (Island P)
 and `zetaC3_package`; ½ enters through RhEquiv.lean alone. -/
 theorem zeta_riemannHypothesis : RiemannHypothesis := by
-  refine riemannHypothesis_iff_concentric.mpr
-    ⟨(zetaSphereZero 0).re, fun σ γ hγ hz => ?_⟩
-  exact zetaSection.placement_set (z := (⟨σ, γ⟩ : ℂ)) (w := zetaSphereZero 0)
-    hz (zetaSphereZero_zero 0) hγ (zetaSphereZero_im_pos 0)
+  obtain ⟨c, hc⟩ := zetaSection.concentricity
+  refine riemannHypothesis_iff_concentric.mpr ⟨c, fun σ γ hγ hz => ?_⟩
+  obtain ⟨n, hn⟩ := zetaSphereZero_surjective (s := (⟨σ, γ⟩ : ℂ)) ⟨hz, hγ⟩
+  have hcn : (zetaSphereZero n).re = c := hc n
+  rw [hn] at hcn
+  exact hcn
 
 /-- `cor:rh`'s "in particular" clause: infinitely many zeros lie on the
 critical line — the proved infinitude pushed through the readout. GATED

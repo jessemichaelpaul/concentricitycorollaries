@@ -9,7 +9,7 @@ at 1) — shaped for the ASection fields `c1_analyticAt`, `meromorphic`,
 `differentiableAt_riemannZeta`, `riemannZeta_residue_one` (the residue is
 1), the removable-singularity extension (`continuousAt_update_same` +
 `Complex.analyticAt_of_differentiable_on_punctured_nhds_of_continuousAt`),
-and the `meromorphicOrderAt_eq_int_iff` reading (the PlacementSet.lean
+and the `meromorphicOrderAt_eq_int_iff` reading (the StemFactorization.lean
 B2.1 pattern, `logDeriv_local_form`/`ledger_orderAt_zero`).
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8). This file targets ZERO

@@ -12,7 +12,7 @@ through the paired (absolutely convergent) form:
   `hasDerivAt_ofReal_cpow_const`), giving the majorant
   ‖pair‖ ≤ ‖s‖·(2k+1)^(−Re s−1) — summable p-series;
 - S is analytic on the half-plane Re > 0 (the §4α Weierstrass-convergence
-  pattern of PlacementSet.lean, `differentiableOn_tsum_of_summable_norm`);
+  pattern of StemFactorization.lean, `differentiableOn_tsum_of_summable_norm`);
 - on Re > 1, S = (1 − 2^{1−s})·ζ(s) (even/odd split of the Dirichlet
   series, `HasSum.even_add_odd`);
 - (1 − 2^{1−s})·ζ(s) continues across the pole as

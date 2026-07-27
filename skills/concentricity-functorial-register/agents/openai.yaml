@@ -1,0 +1,4 @@
+interface:
+  display_name: "Concentricity Functorial Register"
+  short_description: "Load the canonical Concentricity register"
+  default_prompt: "Use $concentricity-functorial-register to continue the current Concentricity gate from the tracked project register."

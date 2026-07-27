@@ -125,6 +125,26 @@ theorem orbit_stabilizer_factor {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     (orbitRep (CategoryTheory.ActionCategory.back X))⁻¹
   group
 
+/-- The residual north-stabilizer factor is uniquely forced by the fixed
+orbit representatives.  This is the uniqueness half of the horizontal
+orbit--stabilizer factorization used by every framed action square. -/
+theorem stabilizerPart_unique {X Y : GreatCircle.Base} (f : X ⟶ Y)
+    (h : GreatCircle.NorthStabilizer)
+    (hf : f.val =
+      GreatCircle.orbitRep (CategoryTheory.ActionCategory.back Y) * h.1 *
+        (GreatCircle.orbitRep
+          (CategoryTheory.ActionCategory.back X))⁻¹) :
+    h = GreatCircle.stabilizerPart f := by
+  apply Subtype.ext
+  change h.1 =
+    (GreatCircle.orbitRep
+      (CategoryTheory.ActionCategory.back Y))⁻¹ *
+      f.val *
+        GreatCircle.orbitRep
+          (CategoryTheory.ActionCategory.back X)
+  rw [hf]
+  group
+
 /-- The residual north-stabilizer element of an identity arrow is the
 identity. -/
 @[simp] theorem stabilizerPart_id (X : GreatCircle.Base) :
@@ -193,24 +213,28 @@ theorem distinguishedWorldAction_comp (m n : Moebius) :
         (n * m) * f.mob * (n * m)⁻¹
     group
 
-/-- The diagonal `w = 0` distinguished element determined by the A-section's
-complete exponential/GPV logarithmic action.  C2 supplies the prime-sum
-coordinate; C1 and C3/W3 identify its continuation at `N`. -/
-def distinguishedPoleElement (A : ASection) : Moebius :=
-  A.distinguishedDiskAction
-
 /-- A's own distinguished C1/C2/C3 Euler–Weierstrass disk element fixes the
-one shared north pole.  The element here is specifically
+one shared north pole.  The element is specifically
 `A.distinguishedPoleUnit`, not an arbitrary replacement multiplier. -/
-@[simp] theorem distinguishedPoleElement_fixes_cayley_N (A : ASection) :
-    (distinguishedPoleElement A).val
+@[simp] theorem distinguishedDiskAction_fixes_cayley_N (A : ASection) :
+    A.distinguishedDiskAction.val
         (GreatCircle.cayleyCoord
           (OnePoint.infty : GreatCircle.Point)) =
       GreatCircle.cayleyCoord
         (OnePoint.infty : GreatCircle.Point) := by
-  unfold distinguishedPoleElement
   rw [A.distinguishedDiskAction_eq_fullMultiplier]
   exact GreatCircle.diskDiagonalMoebiusHom_fixes_cayley_infty
+    A.distinguishedPoleUnit
+
+/-- The same distinguished diagonal action fixes projective zero intrinsically.
+Euler at `0` and Weierstrass at `N` are the two boundary readings of this one
+element, not two actions requiring a comparison theorem. -/
+@[simp] theorem distinguishedDiskAction_fixes_cayley_zero (A : ASection) :
+    A.distinguishedDiskAction.val
+        (GreatCircle.cayleyCoord ((0 : ℝ) : GreatCircle.Point)) =
+      GreatCircle.cayleyCoord ((0 : ℝ) : GreatCircle.Point) := by
+  rw [A.distinguishedDiskAction_eq_fullMultiplier]
+  exact GreatCircle.diskDiagonalMoebiusHom_fixes_cayley_zero
     A.distinguishedPoleUnit
 
 /-- The A-positioned frame over a projective-base object.  The orbit
@@ -219,7 +243,7 @@ the one C1/C2/C3 element supplies A's action in that frame. -/
 def projectiveObjectFrame (A : ASection) (X : GreatCircle.Base) : Moebius :=
   GreatCircle.cayleyProjective
       (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back X)) *
-    distinguishedPoleElement A
+    A.distinguishedDiskAction
 
 /-- The object-side action at a base footpoint.  The orbit representative
 positions A's one distinguished Euler–Weierstrass element at `X`; applying
@@ -236,11 +260,11 @@ object frame is exactly A's distinguished Euler–Weierstrass element. -/
 @[simp] theorem projectiveObjectFrame_north (A : ASection) :
     projectiveObjectFrame A
         (GreatCircle.pointObj (OnePoint.infty : GreatCircle.Point)) =
-      distinguishedPoleElement A := by
+      A.distinguishedDiskAction := by
   unfold projectiveObjectFrame
   change GreatCircle.cayleyProjective
       (GreatCircle.orbitRep (OnePoint.infty : GreatCircle.Point)) *
-        distinguishedPoleElement A = distinguishedPoleElement A
+        A.distinguishedDiskAction = A.distinguishedDiskAction
   rw [GreatCircle.orbitRep_infty, map_one, one_mul]
 
 /-- Every A-positioned object frame carries the one projective north point to
@@ -255,11 +279,11 @@ theorem projectiveObjectFrame_maps_N (A : ASection)
   unfold projectiveObjectFrame
   change (GreatCircle.cayleyProjective
       (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back X))).val
-    ((distinguishedPoleElement A).val
+    (A.distinguishedDiskAction.val
       (GreatCircle.cayleyCoord
         (OnePoint.infty : GreatCircle.Point))) =
     GreatCircle.cayleyCoord (CategoryTheory.ActionCategory.back X)
-  rw [distinguishedPoleElement_fixes_cayley_N,
+  rw [A.distinguishedDiskAction_fixes_cayley_N,
     GreatCircle.cayleyCoord_equivariant, GreatCircle.orbitRep_spec]
 
 /-- The full orbit–stabilizer transition between the A-positioned source and
@@ -355,7 +379,7 @@ theorem projectiveArrowElement_comp (A : ASection)
 /-- The C2/C3 north-pole action of `A`, obtained by specializing the
 already-built distinguished Möbius action at A's pole element. -/
 def northPoleAction (A : ASection) : SphereWorld ⥤ SphereWorld :=
-  distinguishedWorldAction (distinguishedPoleElement A)
+  distinguishedWorldAction A.distinguishedDiskAction
 
 /-- The genuine sphere-world arrow between the A-positioned source and target
 objects.  Its Möbius leg is the full orbit--stabilizer transition, so both
@@ -375,12 +399,16 @@ def projectiveArrowHom (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     (projectiveArrowHom A f).mob = projectiveArrowElement A f := rfl
 
-/-- The authored A-section functor between the two geometric groupoids.
+/-- The slice-level geometric projection of the A-section action.
 At each projective footpoint, the object is the normalized slice sphere under
 the A-positioned frame.  Every base arrow is carried by the matching full
 orbit--stabilizer Möbius transition.  Object and arrow are therefore the two
-faces of the same A-specialized action. -/
-def sectionFunctor (A : ASection) : GreatCircle.Base ⥤ SphereWorld where
+faces of the same A-specialized action.
+
+This is the green sphere-world projection used by the existing projective
+theorems. The canonical octonionic function eye and
+`AsectionActionDiagram` live at the higher categorical levels. -/
+def AsectionSlice (A : ASection) : GreatCircle.Base ⥤ SphereWorld where
   obj X := (projectiveObjectAction A X).obj baseWorld
   map {X Y} f := projectiveArrowHom A f
   map_id X := by
@@ -391,6 +419,12 @@ def sectionFunctor (A : ASection) : GreatCircle.Base ⥤ SphereWorld where
     apply SphereHom.ext
     · rfl
     · exact projectiveArrowElement_comp A f g
+
+/-- Compatibility name for the previously published slice-level functor.
+New construction code should name `AsectionSlice`; this alias is retained
+while the existing green dependency surface is migrated without churn. -/
+abbrev sectionFunctor (A : ASection) : GreatCircle.Base ⥤ SphereWorld :=
+  AsectionSlice A
 
 @[simp] theorem sectionFunctor_map (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) :

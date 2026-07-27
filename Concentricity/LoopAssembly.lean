@@ -39,8 +39,7 @@ data only.
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
 import Concentricity.Theorem
-import Concentricity.PlacementSet
-import Concentricity.TransportObject
+import Concentricity.StemFactorization
 import Concentricity.LiKernel
 import Mathlib.Analysis.Complex.OpenMapping
 
@@ -216,7 +215,7 @@ theorem pole_cone_eps_delta (A : ASection) :
 
 /-- **C3's degenerate encounters, PROVED**: near an enumerated zero the
 stem's values sweep EVERY sufficiently small negative real — the local
-peel `stem_local_form` (PlacementSet.lean, the C3 factorization read at
+peel `stem_local_form` (StemFactorization.lean, the C3 factorization read at
 the zero) forces non-constancy, and the open mapping theorem (pin:
 `AnalyticAt.eventually_constant_or_nhds_le_map_nhds`,
 Mathlib/Analysis/Complex/OpenMapping.lean:119) hands every small value to
@@ -295,170 +294,9 @@ theorem shared_ladder_encounters (A : ASection) (n m : ℕ) :
 
 /-! ## §D — the two draft renders (dual curation; lake's verdicts recorded) -/
 
-/-- **DRAFT I (ε–δ / direct), the render** (author's words, 2026-07-06):
-"For every A-section: the value-loop of the section along the great circle
-closes through the cone at the pole (C1), and its unique tame lift is
-itself a loop (Cor 5.13). Given any arbitrarily small radius of unit
-imaginary octonions about N — where the great circle's degenerate fibre
-and the unit imaginaries connect — there is a radius around the pole in
-the domain such that every degenerate encounter of the closed lift within
-it lies on the ladder of one β: the heights differ by band data only (odd
-π-multiples, lem:exp-degenerate), the level not at all."
-
-Clause-by-clause against the PROVED rows, all FED below: (1) the cone at
-the pole — `pole_cone_eps_delta`/`pole_cone_tendsto` (the ε–δ sentence,
-PROVED); (2) the unique tame lift and its closure —
-`exists_log_continuation` + `winding_lift_unique` (Toolkit, PROVED) +
-`winding_loop_closed` (§A, PROVED); (3) the encounters and the one ladder
-— `shared_ladder_encounters` (§C, PROVED: the two zeros' encounter data
-share one value −r, hence one ladder — level log r exactly, heights band
-data only, `exp_fibre_height_band`); (4) level closure along every closed
-value-loop — `winding_loop_defect_level_zero` (§A, PROVED); (5) C2/C3's
-joint rigidity — `stem_identity_logDeriv` (PlacementSet, PROVED).
-
-RECEIPT (R6, 2026-07-06): with (1)–(5) all fed as proved rows the goal is
-  ⊢ (A.sphereZero n).re = (A.sphereZero m).re
-and RESISTS — every fed level datum is VALUE-side (the ladder level log r,
-the lift level log‖F∘γ‖); the goal names the DOMAIN-side levels Re ρ; no
-fed statement identifies the two registers. The identification is
-`eq:placement-set` itself (master, placement paragraph: that the
-degenerate fibre "lies over a *single* level is the placement, the
-document's one open node"). `exact?` at the seam: could not close the
-[scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
-Pin 2 `transport_not_level_separating`): rows (1), (2), (4) hold verbatim
-for every C1-bearing section, and (3) is likewise level-blind — the shared
-ladder's level log r is the encounters' choice of r, conserved in the
-VALUE fibre at any domain level. The `sorry` is the ROUTE RECEIPT
-(unimported artifact; R8), not a queue item. -/
-theorem transportLevel_placement_draftI (A : ASection) (n m : ℕ) :
-    A.transportLevel n = A.transportLevel m := by
-  change (A.sphereZero n).re = (A.sphereZero m).re
-  -- (1) the cone at the pole (C1): the ε–δ correspondence at N — PROVED
-  have h1 := A.pole_cone_eps_delta
-  have h1' := A.pole_cone_tendsto
-  -- (2) the unique tame lift and its closure (Cor 5.13 stem form) — PROVED
-  have h2 := exists_log_continuation
-  have h2' := winding_lift_unique
-  have h2'' := winding_loop_closed
-  -- (3) the shared ladder: one value −r for both zeros' encounters, one
-  --     level log r, heights band data only — PROVED
-  have h3 := A.shared_ladder_encounters n m
-  have h3' := @exp_fibre_height_band
-  have h3'' := @exp_fibre_level
-  -- (4) level closure along every closed value-loop, unconditional — PROVED
-  have h4 := winding_loop_defect_level_zero
-  -- (5) C2/C3 joint rigidity (the one stem): the two-index engine — PROVED
-  have h5 := A.stem_identity_logDeriv
-  have h5' := @stem_identity
-  -- RECEIPT: ⊢ (A.sphereZero n).re = (A.sphereZero m).re — the fed rows pin
-  -- the VALUE-side ladder; the goal is the DOMAIN-side level equality; the
-  -- identification of the two registers is eq:placement-set itself.
-  sorry
-
-/-- **DRAFT II (quick contradiction), the render** (author's words,
-2026-07-06): "Suppose two ladder families. The infinitely many ℂ-residue
-zeros are already in one connected component (the theorem), and the one
-closed tame lift visits their fibre data through the single cone (C1,
-Cor 5.13). A second family would hand the closed lift a nonzero endpoint
-defect between the two ladders — but closure forces defect zero.
-Contradiction; one family, one β."
-
-Clause-by-clause, all consumable clauses FED as PROVED rows: (a) "Suppose
-two ladder families" — `by_contra`, and the static object reads the
-supposition as disconnection (`level_eq_of_zigzag`, PROVED); (b) "already
-in one connected component (the theorem)" — `transport_universal`
-(TransportObject, PROVED, locked); (c) "the one closed tame lift visits
-their fibre data through the single cone" — `shared_ladder_encounters` +
-`pole_cone_tendsto`/`pole_cone_eps_delta` (§C, PROVED); (d) "closure
-forces defect zero" — IN THE LEVEL, unconditionally:
-`winding_loop_defect_level_zero` (§A, PROVED; the defect is 2πiℤ, pure
-height); in full, by the σ-closure row `winding_loop_closed` once one
-lift closes.
-
-RECEIPT (R6, 2026-07-06): goal at the stop
-  ⊢ False
-and RESISTS — the supposition hne names two DOMAIN levels Re ρₙ ≠ Re ρₘ,
-but no fed statement hands the closed lift endpoint data carrying them:
-the defect (hd''') is 2πiℤ for EVERY closed value-loop, its level part
-zero unconditionally (hd), and the fibre band (he) conserves the
-VALUE-side level log r — so "a nonzero endpoint defect between the two
-ladders" never arrives; hb (one component, populated object) coexists
-with ha (static disconnection) exactly as the OneHyperplaneRoute receipt
-records (Pin 2: the populated connection is level-free). `exact?` at the
-seam: could not close the goal. WIRING PROBE (mission step B, recorded):
-`transportLevel_placement_of_two_sided` (LiKernel, PROVED) reduces the
-goal to `∃ β, (∀ a < β, …0 ≤ liSum…) ∧ (∀ a > β, …)`; the possessions are
-`liSum_first_side` (β₁ = Ω₀ + 1) and `liSum_second_side` (β₂ = βlo − 1) —
-one-sided each at its OWN edge of the strip; no proved row supplies one β
-serving both sides (that sentence is Island P's sharpest machine-checked
-address, LiKernel.lean:1391), and the §A–§C rows are level-blind, so they
-cannot feed it. The `sorry` is the ROUTE RECEIPT (unimported artifact;
-R8), not a queue item. -/
-theorem transportLevel_placement_draftII (A : ASection) (n m : ℕ) :
-    A.transportLevel n = A.transportLevel m := by
-  by_contra hne
-  -- (a) two ladder families named by the supposition; static reading — PROVED
-  have ha : ¬ CategoryTheory.Zigzag (TotalObject.ofLevel (A.transportLevel n))
-      (TotalObject.ofLevel (A.transportLevel m)) :=
-    fun hz => hne (TotalObject.level_eq_of_zigzag hz)
-  -- (b) the theorem: one connected component already (populated) — PROVED
-  have hb := A.transport_universal n m
-  -- (c) the closed tame lift visits the fibre data through the one cone — PROVED
-  have hc := A.shared_ladder_encounters n m
-  have hc' := A.pole_cone_tendsto
-  have hc'' := A.pole_cone_eps_delta
-  -- (d) closure forces defect zero: level face unconditional; full closure
-  --     by the σ-closure row once one lift closes — PROVED
-  have hd := winding_loop_defect_level_zero
-  have hd' := winding_loop_closed
-  have hd'' := @winding_defect_lift_independent
-  have hd''' := winding_loop_defect
-  -- the fibre band: over one value, one level; heights band data only — PROVED
-  have he := @exp_fibre_height_band
-  -- RECEIPT: ⊢ False — no fed statement hands the closed lift endpoint data
-  -- carrying the two DOMAIN levels; the defect is pure height (2πiℤ) for
-  -- every closed value-loop, and the fibre band conserves the VALUE-side
-  -- level only.
-  sorry
-
-/-! ## The articulation (author, 2026-07-06 dialogue — rendered verbatim) -/
-
-/-- **THE ARTICULATION, PROVED** (author's register, 2026-07-06, quoted):
-"The residue-ℂ zero spheres of C3 (i.e., of THE SECTION ITSELF which is
-the forest of C1, C2, C3, and C4) are therefore concentric (because the
-fibre is) because the connected component of the A-section is defined by
-the degenerate fibre through the witness N. You don't need the actual
-centers. … 𝓑 by itself doesn't do anything; the A-section functor (with
-all its conjoined properties and the great circle/Brick 2 argument) is
-what glues these."
-
-The three clauses, each on its proved carrier:
-(i)   ONE COMPONENT — all infinitely many residue-ℂ zero classes coincide
-      in the populated transport (`thm:concentricity`, the frozen
-      certificate; Pin 1's class-wide form).
-(ii)  DEFINED THROUGH THE WITNESS N — every zero class IS the class of 𝔫:
-      the component is the attachment through the witness (the grown
-      arrows of C1's cone; `classOf_eq_nClass`).
-(iii) THE FIBRE IS CONCENTRIC — each degenerate fibre carries exactly ONE
-      level, all multiplicity in the winding band (`lem:exp-degenerate`,
-      stem form; `exp_fibre_level` + `exp_fibre_height_band`).
-
-Register note (Pin 3, TransportObject.lean, stands unchanged): the centre
-readout of `cor:nontrivial` was pinned by the author's 2026-07-05 ruling
-to consume `placement_set`, not this object — so whether the translation
-corollary now rides THIS articulation instead is a master-layer ruling
-(the author's lane, words-before-commits), not a Lean fact this file can
-decide. -/
-theorem concentric_articulation (A : ASection) :
-    (∀ n m : ℕ, A.transportClass n = A.transportClass m)
-    ∧ (∀ n : ℕ, A.transportClass n
-        = CategoryTheory.ConnectedComponents.mk TotalTransport.nObj)
-    ∧ (∀ r : ℝ, 0 < r → ∀ w₁ w₂ : ℂ,
-        Complex.exp w₁ = -(r : ℂ) → Complex.exp w₂ = -(r : ℂ) →
-        w₁.re = w₂.re) := by
-  refine ⟨A.transport_universal, fun n => ?_, fun r hr w₁ w₂ h₁ h₂ => ?_⟩
-  · exact TotalTransport.classOf_eq_nClass _
-  · rw [exp_fibre_level hr h₁, exp_fibre_level hr h₂]
+-- (removed 2026-07-10: `concentric_articulation` — a dead terminal theorem over
+-- the old `TotalTransport` base, consumed by nothing. The concentric readout is
+-- the cocartesian `readout` on `functorA`/`TotalA`, ConcentricityReadout.lean.)
 
 /-! ## The re-encoded corollary chain (author's ruling, 2026-07-06:
 "Pin 3 is now completely irrelevant. All infinitely many ℂ-residue zero
@@ -467,65 +305,5 @@ corollary just notes that ζ_𝕆 is an instantiation of an A-section. Hence
 infinitely many concentric ℂ-residue zeros by the concentricity theorem
 and lemma; the common center is real and is pinned by the functional
 equation.") -/
-
-/-- **`cor:nontrivial`, re-encoded per the ruling** — the common centre
-read from the concentric component (the theorem + the articulation
-lemma), with the full green board additionally in context (the ladder
-D0–D3 + mirror, D2's iff, the supplier chain, the σ-closure and fibre
-rows of this file). RECEIPT at the reading step: the exact goal below is
-where the word *concentric* in "one concentric component" carries its
-weight — the zero-bearing base-shadow of the one component being a
-single level. The articulation's three clauses hold for every C1-bearing
-section by proofs that never touch the divisor, so the reading step is
-the register identification of record (value-side fibre level ↔
-domain-side transport level) — `eq:placement-set` in the ruling's new
-vocabulary. `sorry` = receipt (R8), unimported. -/
-theorem nontrivial_one_centre_via_articulation (A : ASection) :
-    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
-  obtain ⟨h_one, h_witness, h_fibre⟩ := A.concentric_articulation
-  -- the full green board, fed:
-  have h_ladder := A.liSum_summable
-  have h_first := A.liSum_first_side
-  have h_second := A.liSum_second_side
-  have h_iff := A.placement_set_iff_liSum
-  have h_supplier := A.transportLevel_placement_of_two_sided
-  have h_atN := A.c3_atN
-  have h_edge := A.c3_lowerEdge
-  have h_complete := @A.sphereZero_complete
-  -- the reading step: "one concentric component" → the common centre
-  sorry
-
-/-- **`cor:nontrivial`'s printed proof, transcribed** (author's ruling,
-2026-07-06: "the connected concentric, read as one center — that's the
-main theorem, that's all we need; nothing is open because the
-concentricity theorem states: the infinitely many residue-ℂ zero-spheres
-lie in one concentric component"). The master's proof, verbatim: "By
-Theorem thm:concentricity the residue-ℂ zero-spheres lie in one connected
-component of 𝒯_A. By the dictionary (thm:connected-concentric) one
-component of the static base is one real level, hence one real centre c:
-the spheres are concentric about c." The theorem row is
-`transport_universal` (𝒯^𝔫); the dictionary rows are the PROVED
-`TotalObject.levelClass` iso / `level_eq_of_zigzag` (the static object).
-The `sorry` below sits at the proof's composition of the two — the
-reading of the one component in the dictionary — exactly where the
-printed text passes from 𝒯_A to the static base. Receipt (R8),
-unimported. -/
-theorem nontrivial_one_centre_via_dictionary (A : ASection) :
-    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
-  refine ⟨(A.sphereZero 0).re, fun n => ?_⟩
-  -- "By Theorem thm:concentricity … one connected component of 𝒯_A"
-  have h_one : A.transportClass n = A.transportClass 0 :=
-    A.transport_universal n 0
-  -- with the lemma: one CONCENTRIC component
-  obtain ⟨-, h_witness, h_fibre⟩ := A.concentric_articulation
-  -- the populated zigzag the component equality carries
-  have h_zig := Quotient.exact' h_one
-  -- "By the dictionary (thm:connected-concentric) one component of the
-  --  static base is one real level, hence one real centre c" — the
-  --  dictionary rows, fed:
-  have h_dict := @TotalObject.zigzag_iff_level
-  have h_read := @TotalObject.level_eq_of_zigzag
-  -- the composition: the one component, read in the dictionary
-  sorry
 
 end ASection

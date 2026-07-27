@@ -313,7 +313,7 @@ theorem arg_control_right_wall (A : ASection) {a : ℝ} (ha : A.Ω₀ < a) {T₁
 
 /-- **W2(c) — THE LEFT WALL, pointwise form**: the upper-half stem is
 zero-free left of the lower edge — an upper-half zero there would be
-enumerated (`sphereZero_complete`, PlacementSet.lean) with Re ≥ βlo
+enumerated (`sphereZero_complete`, StemFactorization.lean) with Re ≥ βlo
 (`c3_lowerEdge`'s bound, taken as hypothesis in its witness form),
 contradiction. Serves W2(c) and §E: the left edge of every strip-spanning
 counting rectangle is zero-free. PROVED. -/

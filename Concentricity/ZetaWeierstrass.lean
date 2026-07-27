@@ -25,7 +25,7 @@ stays the ONE sorried leaf until stage C closes it.
 sorries.
 -/
 import Concentricity.ZetaDivisor
-import Concentricity.PlacementSet
+import Concentricity.StemFactorization
 
 noncomputable section
 

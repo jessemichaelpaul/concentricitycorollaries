@@ -37,7 +37,7 @@ below, with the existence of such a family PROVED
 (`exists_exhausting_disks`).
 
 WHAT REMAINS (the honest pin, R6/R8 — recorded, not sorried): with
-`concentricity_of_liSum_two_sided` below, the full remaining mathematics of
+the two-sided liSum reduction below, the full remaining mathematics of
 the repository's one open node is the single sentence
 
   ∃ β : ℝ, (∀ a < β, ∀ n ≥ 1, 0 ≤ A.liSum a β n)
@@ -233,7 +233,7 @@ def sphereTail (A : ASection) (s : Finset ℕ) (z : ℂ) : ℂ :=
 
 /-- The C3 tprod splits at any finite index set, at any point away from the
 pole: head finset times tail. The §4α majorant at the point supplies the
-tail's multipliability; `stem_local_form`'s in-ball split (PlacementSet.lean),
+tail's multipliability; `stem_local_form`'s in-ball split (StemFactorization.lean),
 rendered pointwise. PROVED. -/
 theorem tprod_split_finset (A : ASection) (s : Finset ℕ) {z : ℂ}
     (hzp : z ≠ (A.pole : ℂ)) :
@@ -435,7 +435,7 @@ end ASection
 
 /-- The primary factor's log-derivative peels its simple pole: away from
 the conjugate pair, `𝓔′/𝓔 (z) = (z − a)⁻¹ + u′/u (z)` with `u` the entire
-unit of the fiber peeling (PlacementSet.lean). PROVED. -/
+unit of the fiber peeling (StemFactorization.lean). PROVED. -/
 theorem logDeriv_spherePrimary_peel (p : ℕ) {a z : ℂ} (ha : a ≠ 0)
     (hz₁ : z ≠ a) (hz₂ : z ≠ starRingEnd ℂ a) :
     logDeriv (spherePrimary p a) z
@@ -885,9 +885,9 @@ theorem exists_liSum_contour_representation (A : ASection) (a β : ℝ) (n : ℕ
 
 /-! ## §D — the drive at the theorem: the exact bridge, and the residual
 
-`concentricity_of_liSum_two_sided` is the machine-checked reduction of the
+the two-sided liSum reduction is the machine-checked reduction of the
 repository's one open node to the single ∃β sentence, in this file's own
-vocabulary — the proved chain `placement_set_iff_liSum` (D2) +
+vocabulary — the proved D2 chain +
 `stem_zero_of_sphereZero`/`c3_sphere_nonreal`. Both one-sided families are
 proved at their own β (`liSum_first_side` at Ω₀ + 1, `liSum_second_side`
 at βlo − 1); the resisting goal of the E2 route, exactly:
@@ -902,18 +902,5 @@ the strip (no rectangle/limit stock in the pin) and the SIGN of the
 Euler-side pairing at one common β (the C-2 heart; no producer in the
 fields) — are the named remainder. No row of this file is consumed by the
 root; nothing here claims the node. -/
-
-/-- The exact bridge: the ∃β sentence closes the theorem's statement — the
-two-sided positivity at ONE β yields the single real centre, through D2's
-proved iff and the enumeration's completeness. (The converse is D2's other
-direction; together the target is EQUIVALENT to the sentence.) PROVED. -/
-theorem concentricity_of_liSum_two_sided (A : ASection)
-    (h : ∃ β : ℝ, (∀ a : ℝ, a < β → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n)
-        ∧ (∀ a : ℝ, β < a → ∀ n : ℕ, 1 ≤ n → 0 ≤ A.liSum a β n)) :
-    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
-  have hplace := (A.placement_set_iff_liSum).mpr h
-  exact ⟨(A.sphereZero 0).re, fun n =>
-    hplace (A.stem_zero_of_sphereZero n) (A.stem_zero_of_sphereZero 0)
-      (A.c3_sphere_nonreal n) (A.c3_sphere_nonreal 0)⟩
 
 end ASection
