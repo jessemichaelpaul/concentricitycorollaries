@@ -407,8 +407,7 @@ theorem ASection.concentricity (A : ASection) :
           (eqToHom hsrc ≫
             (ASection.AsectionActionTransport A gQ).map ?_ ≫
               eqToHom hgQ)⟩⟩
-      trace_state
-      sorry
+      exact?
     letI := hIsConn
     exact fun P Q => CategoryTheory.isPreconnected_zigzag P Q
   -- THE 8.3.5 COLLAPSE, LOCKED (no sorry): nonempty (hmem) and connected

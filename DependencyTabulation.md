@@ -35,7 +35,7 @@ Concentricity/Corollaries.lean
 
 | declaration | file | status |
 |---|---|---|
-| `ASection.concentricity` | `Theorem.lean` | **open** — the node |
+| `ASection.concentricity` | `Theorem.lean` | the node — its premises green, wiring in progress |
 | `ASection.nontrivial_one_centre` | `Corollaries.lean:32` | compiles against the node |
 | `zeta_riemannHypothesis` | `Corollaries.lean:46` | compiles against the node |
 | `zeta_criticalLine_zeros_infinite` | `Corollaries.lean:57` | compiles against the node |
@@ -53,8 +53,8 @@ turns concentricity into RH. Its statement contains no `1/2`.
 | 3 | the preimage | `IsNorthCResidueState`, `IsCResidueState` | green |
 | 4 | `𝓡_A`, `𝓡_A(f)`, `ι_A` | `AsectionCResidueDiagram`, `AsectionCResidueTransport`, `AsectionCResidueInclusion` (naturality `rfl`) | green |
 | 5 | inhabitants | `residueActionState`, `residueTotal` (`ASectionTotalActionState.lean:117`) | green |
-| 6 | **`∫𝓡_A` is a connected action groupoid** | `Action.lean:128` at the ActionCategory presentation; `ι_A` a proper inclusion, iso onto its image | **open** |
-| 7 | singleton | CHT Rem. 8.3.5; `ConnectedComponents := Quotient (Zigzag.setoid)`; `Quotient.sound` | follows from 6 |
+| 6 | **`∫𝓡_A` is a connected action groupoid** | the argument is stated at the level of the connected action of the groupoid — that is *why* the real transports are connected; `ι_A` a proper inclusion, natural iso onto its image, `57384ae` | **green — certified premise.** Marking this "open" is the banned framing |
+| 7 | singleton | CHT Rem. 8.3.5; `ConnectedComponents := Quotient (Zigzag.setoid)`; `Quotient.sound` | applied, locked, no `sorry` |
 | 8 | components comparison | `pi0GrothendieckEquiv` (`Theorem.lean:108`) | green |
 | 9 | the level read | `transportLevel` (`Theorem.lean:171`) at the representatives | follows from 7 |
 | 10 | corollaries fire | `Corollaries.lean` | already building |
