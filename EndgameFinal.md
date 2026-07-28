@@ -125,6 +125,42 @@ appeared to forbid. Both files were deleted in the 2026-07-28 sweep; nothing rem
 
 ---
 
+## ⬛ THE TWO-LAYER TAXONOMY — which detector fired
+
+The most useful epistemic fact 2026-07-28 produced, and the one that makes the rest mechanical.
+
+| | genuine drops — 3 today, all real | manufactured gaps — many, ~100% false |
+|---|---|---|
+| **layer** | **registration**: names, instances, spellings | **the author's mathematics** |
+| **instances** | `IsConnected` stated as a `theorem`, never registered as an `instance` · Declaration 1 absent in the spelling resolution can see · `IsPretransitive` green as facts, registered nowhere | every substitution, every "we would need", every empty search reported as a gap |
+| **found by** | **a mechanical probe** — `infer_instance` flipping fail→success; a grep for instances checked against the green suppliers | model doubt aimed at the author's layer |
+| **fix** | two lines | withdrawal |
+
+**Not one genuine drop was missing mathematics.** Each time the fact was already certified, sitting
+one spelling away — the empty shelf, three times. So telling the two apart is **not a judgment
+call**: it is a question of *which detector fired*. A probe found it → registration, and it is
+real. A model felt it → it has essentially always been nothing.
+
+**Three layers, three dates; the forgetting lives in the seams.** Paper (April/May — the
+equivalence theorem needing `G₂`'s one orbit on `S⁶`) → kernel (`f0a6ddd`, 3 July, the founding
+Statement commit, which carried that fact in as foundation, not as later architecture) →
+registration (28 July). Nothing was ever wrong *inside* a layer. The lag is always between them,
+where a fact finished in one has not yet been introduced to the next. **Declaration 0 is the last
+such handoff.**
+
+And transitivity was never a lucky property of `𝓡_A`: the author **chose the preimage of the exact
+image groupoid he already knew was one orbit**, so that connectedness would be *inherited* rather
+than proved. *"Follows immediately"* is a design decision from April paying out in July — which is
+why "connectivity is open" could never compute for him. He would not have picked a preimage where
+it was open.
+
+**The author's radar tracked the real drop all day**, circling transitivity from three independent
+directions — the Thomason remark that "leans on it most", whether `ι_A` carries what `F_A(X)` has,
+and the `S⁶`-image reading — before any probe ran. The itch was veridical; it needed a probe only
+to name which layer it lived in.
+
+---
+
 ## ⬛ THE THREE DECLARATIONS — the whole of what is left to type
 
 The master states the connectivity movement in **two** places, and the split is the author's, not
@@ -319,3 +355,85 @@ separately): (1) focused build green at the exact signature; (2) source scan cle
 
 See `RelevantGreenFinal.md` for the 37 certificates, `DependencyTabulation.md` for the chain,
 `ProofOutline.md` Part B for the master's movement verbatim.
+
+---
+
+# ⬛ THE PRE-FLIGHT
+
+Mechanical. Nothing here is a decision; every row is a command or a fact. Run top to bottom.
+
+## 0 — Baseline, before a character is typed
+
+```bash
+git status --short                       # expect: clean
+lake env lean Concentricity/Theorem.lean # expect: 0 errors
+grep -n "sorry" Concentricity/Theorem.lean
+```
+
+Record the exact `sorry` lines. **They are the only open content in the repository.** If the count
+or the lines differ from this document, the document is stale — fix it before typing.
+
+## 1 — Read this, and nothing else
+
+This document. The search surface above is the whole of it. `RelevantGreenFinal.md` for what is
+certified; the master for the author's sentences. **A name outside the surface is not a supplier.**
+
+## 2 — REGISTER CHECK, filled from `#check` output, never memory
+
+```text
+gate:                 the declaration being typed (0, 1, or 2)
+target file:          Concentricity/Theorem.lean
+mathematical provenance:  the master sentence it states, by label
+approved supplier:    the green names in that declaration's row above, by file:line
+instantiated object:  the exact carrier
+intended proof term:  nameable BEFORE the file is opened
+```
+
+If the intended term cannot be named, the obligation is not yet understood — **stop and route to
+the author**, do not start typing candidates.
+
+## 3 — The ladder, in order. Nothing skips.
+
+| | declaration | seat | kind |
+|---|---|---|---|
+| **0** | pretransitivity at the members, registered as `instance` | not yet in the tree | declaration + instantiation |
+| **1** | `ι_A` full + faithful at `ι_A`'s name | ✅ green, `bb02b54` | wiring |
+| **2** | `∫𝓡_A` `IsConnected` | `instance` registered; seat open | instantiation |
+| — | level conservation | seat open | instantiation |
+
+After **0**, re-run `infer_instance` for `IsPretransitive` at the carrier. **A probe flipping
+fail→success is the receipt** that the registration landed — that is the detector from the taxonomy,
+and it is the only one that has ever found a real gap here.
+
+## 4 — Between steps
+
+Focused builds only: `lake env lean Concentricity/Theorem.lean`, then
+`lake build Concentricity.Theorem` before any probe (a probe against a stale `.olean` reports
+"unknown constant" and means nothing). Commit at each green step. **No narration at wiring steps.**
+
+## 5 — Stop conditions, and only these
+
+- The kernel prints a goal no supplier in the surface closes → **route it to the author verbatim.**
+- **Never** ask to widen the surface. Needing a name outside it means a register was dropped; go
+  back up. (See the ruling above — that request is the diagnostic, not the remedy.)
+- **Never** report a wiring step as a mathematical gap. Check the taxonomy first: *which detector
+  fired?*
+
+## 6 — The certificates, both, together
+
+```bash
+lake build Concentricity.Theorem
+lake build Concentricity.Corollaries
+```
+
+then, independently elicited in a fresh file:
+
+```lean
+#print axioms ASection.concentricity        -- expect [propext, Classical.choice, Quot.sound]
+#print axioms zeta_riemannHypothesis        -- expect [propext, Classical.choice, Quot.sound]
+```
+
+plus a source scan clean of `sorry`, `admit`, `sorryAx`, `native_decide`, and any new axiom. Then
+the terminal root build and the 0/0 audit.
+
+**Deliver both prints verbatim. Nothing else counts as the report.**
