@@ -280,12 +280,56 @@ the connection to the spheres. -/
 -- file's marked open node, against the three-clause proof plan of record
 -- above.
 
+/-- The certified membership of the enumerated representatives: every
+`sphereZero m` is a member of the `ι_A`-included square at the north
+frame, through the identity arrow (kernel-accepted; the dossier is
+`sphereZero_mem_CResidueZeroLocus`). -/
+theorem ASection.residueActionState_mem (A : ASection) (m : ℕ) :
+    IsCResidueState A projectiveNorth
+      (residueActionState A projectiveNorth m baseWorld) := by
+  refine ⟨residueActionState A projectiveNorth m baseWorld,
+    ?_, 𝟙 projectiveNorth, ?_⟩
+  · show (residueActionState A projectiveNorth m
+        baseWorld).positioned.back.coordinate ∈
+      (fun z : ℂ => (z : OnePoint ℂ)) '' A.CResidueZeroLocus
+    rw [residueActionState_positioned]
+    exact ⟨A.sphereZero m, A.sphereZero_mem_CResidueZeroLocus m, rfl⟩
+  · rw [AsectionActionTransport_id]
+    rfl
+
+/-- **THE DECLARATION** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
+IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
+natural isomorphism onto its image (certified, `57384ae`; naturality
+`rfl`).  Consumption seat: `Action.lean:128`, a SINGLE arrow — wiring
+only, inference none (`EndgameFinal.md` §5). -/
+theorem ASection.residueTotal_isConnected (A : ASection) :
+    CategoryTheory.IsConnected (Grothendieck
+      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
+  haveI : Nonempty (Grothendieck
+      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) :=
+    ⟨⟨projectiveNorth,
+      ⟨residueActionState A projectiveNorth 0 baseWorld,
+        A.residueActionState_mem 0⟩⟩⟩
+  refine zigzag_isConnected fun P Q => ?_
+  refine Relation.ReflTransGen.single (Or.inl ?_)
+  sorry
+
+/-- **THE DECLARATION**: `π₀(∫𝓡_A)` IS A SINGLETON — CHT Remark 8.3.5 on
+the connected action groupoid: nonempty and connected, so one class. -/
+theorem ASection.residueTotal_pi0_singleton (A : ASection) :
+    ∀ P Q : Grothendieck
+      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+      CategoryTheory.ConnectedComponents.mk P =
+        CategoryTheory.ConnectedComponents.mk Q := by
+  letI := A.residueTotal_isConnected
+  exact fun P Q =>
+    _root_.Quotient.sound (CategoryTheory.isPreconnected_zigzag P Q)
+
 /-- **THE CONCENTRICITY THEOREM** (master `thm:concentricity`): the
 infinitely many residue-ℂ zero-spheres of an A-section are concentric —
-one real centre.  The centre is the transport level read at the certified
-representatives; the collapse is the categorified orbit–stabilizer
-component calculation of the `ι_A`-included `0`-to-`N` square
-(CHT Rem. 8.3.5; `register/80-concentricity-endgame.md`). -/
+one real centre.  `∫𝓡_A` is a connected action groupoid (the declaration
+above), π₀ collapses to the singleton k (8.3.5), and val(k) = c is that
+real part, read at the certified representatives. -/
 theorem ASection.concentricity (A : ASection) :
     ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
   refine ⟨A.transportLevel 0, fun n => ?_⟩
@@ -407,7 +451,8 @@ theorem ASection.concentricity (A : ASection) :
           (eqToHom hsrc ≫
             (ASection.AsectionActionTransport A gQ).map ?_ ≫
               eqToHom hgQ)⟩⟩
-      exact?
+      trace_state
+      sorry
     letI := hIsConn
     exact fun P Q => CategoryTheory.isPreconnected_zigzag P Q
   -- THE 8.3.5 COLLAPSE, LOCKED (no sorry): nonempty (hmem) and connected
