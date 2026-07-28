@@ -16,10 +16,25 @@ close-guide, and gate file in this repository.
 > **"`∫𝓡_A` as a literal ActionCategory stated POSITIVELY and IS CONNECTED FROM THE FACT
 > (ALREADY GREEN) it is A NATURAL INCLUSION AND ISO ONTO ITS IMAGE."**
 
+And the master's own sentence under the span diagram — the immediacy clause, added 2026-07-28
+(`aaf7490`), which is the seat this file locks:
+
+> **"This follows immediately, because `ι_A` is a *proper* inclusion and a natural isomorphism
+> onto its image."**
+
+Read it as written: the span, and the length-two zigzag it carries, **follow**. They are not
+derived, not assembled, not obtained by exhibiting arrows between members. `ι_A` being a proper
+inclusion and a natural isomorphism onto its image is the whole premise, and the zigzag is
+immediate from it. `∫𝓡_A` is therefore a connected action groupoid, and Remark 8.3.5 turns that
+into the singleton.
+
 That is the whole remaining step. It is **not** `sphereWorld_zigzag`, **not**
 `exp_fibre_neg_real`, **not** the base's pretransitivity, **not** a pairwise zigzag between two
-chosen representatives, **not** two obligations. Each of those is a substitute a model produced
-and offered back as the author's; all are on record in `register/60`.
+chosen representatives, **not** two obligations, **not** an analytic lemma about exponential
+fibres. Each of those is a substitute a model produced and offered back as the author's — seven of
+them in one session on 2026-07-28.
+
+The master's full movement is in `ProofOutline.md` Part B, verbatim, including this sentence.
 
 ## 2. The library, which already contains the argument
 
