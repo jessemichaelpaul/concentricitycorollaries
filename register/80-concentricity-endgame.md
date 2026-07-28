@@ -78,9 +78,26 @@ never unproved mathematics (provenance: CHT Rem. 8.3.5, p. 102, verbatim in
    (`residueTotal A n I`, base `normalizedFootpoint (A.sphereZero n).re` by
    `rfl`); every `sphereZero n` represents the class; `c` is the number.
 
-Suppliers for 2 and 4 are all certified: `smul_coordinate = rfl`,
-`residueToNorth_level`/`normalizedNActionSquare_level`, `lift_closed`, the
-inhabitant receipts. Nothing else is consumed.
+**Term 2's supplier is the `ι_A` `0`-to-`N` square itself** — not a theorem
+from anywhere else. Its receipts are `projectiveObjectFrame_north`
+(`ProjectiveSection.lean:260`, the frame **is** the element) and both faces,
+`distinguishedDiskAction_fixes_cayley_N` (`:219`) and `_zero` (`:232`), with
+`smul_coordinate = rfl` (`ASectionFunctor.lean:78`) for the `G₂` gauge. All
+inside the read-set below.
+
+**Term 4's suppliers** are the inhabitant receipts — `residueTotal`
+**at `ASectionTotalActionState.lean:117`** — and `transportLevel`
+(`Theorem.lean:171`).
+
+Nothing else is consumed. If the term requires something not named here,
+that is a printed goal and it routes to the author verbatim; it is not a
+licence to search.
+
+*(Corrected 2026-07-27 by the author: an earlier draft of this line named
+`residueToNorth_level`, which lives in the retired, excluded
+`ASectionFinality.lean:185` — and `residueToNorth` is shadowed there and in
+the quarantined `ASectionTotalPreflights.lean:247`. The supplier is the
+square.)*
 
 ## Protocol — mechanical, no joints
 
@@ -99,9 +116,40 @@ inhabitant receipts. Nothing else is consumed.
 - **No naming, no asking, no hunting.** Nothing here needs a name; asking
   the author to name or choose what the record answers is slot-as-burden.
   Never attach ⛔ to a correct object; warnings live in `register/60`.
-- **Targeted reading**: this file, the two SOURCES files, the two-gate
-  ledger's folder map, `Theorem.lean`, and the named suppliers — nothing
-  else.
+- **Targeted reading**: the closed read-set below — nothing else, including
+  for context.
+
+## The read-set — closed, and verified closed
+
+Fewer files to grep, fewer mistakes. **A name outside this set is not a
+supplier.** Needing one is a stop condition reported to the author, never a
+reason to search. Every declaration named in this file resolves inside it.
+
+**Project (8).** `ASection.lean` (C1–C4; the field `sphereZero : ℕ → ℂ` at
+`:115`, which the statement quantifies over) · `ProjectiveSection.lean` ·
+`ASectionFunctor.lean` · `ASectionActionDiagram.lean` ·
+`ASectionCResidueInverseImage.lean` · `ASectionCResidueDiagram.lean` ·
+`ASectionTotalActionState.lean` · `Theorem.lean`
+
+**Mathlib at the pin (5).** `CategoryTheory/` `Action.lean` ·
+`IsConnected.lean` · `ConnectedComponents.lean` · `Grothendieck.lean` ·
+`ObjectProperty/FullSubcategory.lean`
+
+**Register and sources (6).** this file · `SOURCES/Riehl-CTIC.md` ·
+`SOURCES/Riehl.md` · the three
+`skills/orbit-stabilizer-groupoids/references/` files
+
+⚠️ **Two names are shadowed — cite by file and line, never by name alone.**
+`residueTotal` and `totalMk` are genuine at `ASectionTotalActionState.lean`
+(`:117`) and shadowed in the quarantined `ASectionTotalPreflights.lean`
+(`:172`), whose own header says so. `residueToNorth` exists only in excluded
+files. **A bare grep lands in the quarantine.**
+
+**Excluded by name.** `ASectionFinality.lean` · `ASectionTotalPreflights.lean`
+· `KeystoneFinality.lean` · `.attic_old_bases/` · any other quarantined
+preflight namespace · `Octonionic_RH_master.tex` · `register/70` §§1–8 (the
+closed `ι_A` gate: history, not instructions) · every preservation-era
+passage in `50`, `EndgamePlan.md`, `CURRENT_GATE1_MEMORY.md`.
 
 ## The triple certificate
 
