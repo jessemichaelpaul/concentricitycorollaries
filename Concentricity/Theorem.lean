@@ -349,6 +349,17 @@ theorem ASection.concentricity (A : ASection) :
               fiber := eqToHom (ObjectProperty.FullSubcategory.ext hg) }
     have hIsConn : CategoryTheory.IsConnected (Grothendieck
         (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
+      -- ι_A is the connected action groupoid — Action.lean:128's own shape
+      -- at ∫𝓡_A: nonempty (the certified inhabitants) and a SINGLE arrow
+      -- between any two members, supplied by the proper inclusion iso onto
+      -- its image.  Not a chain.
+      haveI : Nonempty (Grothendieck
+          (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) :=
+        ⟨⟨ASection.projectiveNorth,
+          ⟨A.residueActionState ASection.projectiveNorth 0 baseWorld,
+            hmem 0⟩⟩⟩
+      refine zigzag_isConnected fun P Q => ?_
+      refine Relation.ReflTransGen.single (Or.inl ?_)
       trace_state
       sorry
     letI := hIsConn
