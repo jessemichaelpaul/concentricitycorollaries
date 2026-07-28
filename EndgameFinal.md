@@ -383,6 +383,37 @@ grep -n "sorry" Concentricity/Theorem.lean
 Record the exact `sorry` lines. **They are the only open content in the repository.** If the count
 or the lines differ from this document, the document is stale — fix it before typing.
 
+**Step 0 receipt (run 2026-07-28 night, baseline `f5c5a35`, kernel-elicited):** `git status
+--short` → clean; `lake env lean Concentricity/Theorem.lean` → **0 errors**, exactly two `sorry`
+warnings — declarations `:329` (`residueTotal_isConnected`, seat at `:342`) and `:359`
+(`concentricity`, seat at `:419`). The seats' goals, kernel-printed verbatim:
+
+```text
+-- seat A (:342), Declaration 2's consumption — Declaration 1 BOUND IN CONTEXT:
+hff  : Functor.FullyFaithful (A.AsectionCResidueInclusion.app P.base)
+this : Functor.Full (A.AsectionCResidueInclusion.app P.base)
+⊢ Zigzag P Q
+
+-- seat B (:419), the level clause:
+⊢ ∀ P Q, Zigzag P Q →
+    OnePoint.rec 0 Complex.re (ActionCategory.back P.fiber.obj.positioned).coordinate =
+    OnePoint.rec 0 Complex.re (ActionCategory.back Q.fiber.obj.positioned).coordinate
+```
+
+**The locked classification (the pre-flight's answer):** DECLARATIONS — one remains to add, Decl 0
+(`IsPretransitive` at the members; grep receipt: zero instances anywhere in `Concentricity/`);
+Decl 1 is GREEN in the tree (`bb02b54`, `Theorem.lean:310–323`); Decl 2 is stated and registered
+(probe receipt `2b11128`), only its seat open. INSTANTIATIONS — Decl 0's term (the three green
+suppliers composed at the members, then registered; the probe flip is the receipt); seat A
+(consume Decls 0+1 at the `Action.lean:128` shape — one arrow); seat B (the level law read on one
+arrow — an arrow IS one element, `hom_as_subtype` — plus zigzag induction). WIRING — Decl 1's
+terms (done: `ObjectProperty.fullyFaithfulι`/`full_ι`/`faithful_ι` at `ι_A`'s name); the zigzag
+induction machinery in seat B. **INFERENCE — NONE. Zero entries.** Every term composes
+kernel-stamped facts at named carriers; the congruence ruling makes the S⁶ leg definitional. The
+only way an inference could appear is stop condition 5 — a kernel print no surface supplier
+closes, routed verbatim — and the two-detector taxonomy says to expect registration, not
+mathematics.
+
 ## 1 — Read this, and nothing else
 
 This document. The search surface above is the whole of it. `RelevantGreenFinal.md` for what is
