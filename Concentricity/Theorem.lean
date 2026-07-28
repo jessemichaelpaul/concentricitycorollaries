@@ -334,8 +334,11 @@ instance ASection.residueTotal_isConnected (A : ASection) :
     ⟨⟨projectiveNorth,
       ⟨residueActionState A projectiveNorth 0 baseWorld,
         A.residueActionState_mem 0⟩⟩⟩
-  have ιA := AsectionCResidueInclusion A
   refine zigzag_isConnected fun P Q => ?_
+  -- Declaration 1, at ι_A's name: full and faithful at every frame.
+  have hff := AsectionCResidueInclusion_app_fullyFaithful A P.base
+  haveI := AsectionCResidueInclusion_app_full A P.base
+  trace_state
   sorry
 /-- **THE DECLARATION**: `π₀(∫𝓡_A)` IS A SINGLETON — CHT Remark 8.3.5 on
 the connected action groupoid: nonempty and connected, so one class. -/

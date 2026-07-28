@@ -65,7 +65,7 @@ question. None of them is.
 
 ## The author's movement, triple-certified line by line — certificates beside every check
 
-The end of the master (`thm:concentricity`, from the span diagram at `:1225`), each sentence
+The end of the master (`thm:concentricity`, from the span diagram at `:1218`), each sentence
 against the kernel's certificates:
 
 | The master says | ✅ | The certificate |
@@ -80,10 +80,79 @@ against the kernel's certificates:
 | *"the level read is `ASection.transportLevel` … reading the level on κ returns a single number"* | ✅ | `transportLevel` certified; the read applied and **evaluated green** at the certified representatives — the evaluation computes through the author's receipts (`residueActionState_positioned`, `residueState`) to the conclusion |
 | *"each has centre c. Hence … concentric"* | ✅ | the close `exact hval hk` typechecks; `cor:nontrivial`, `cor:zeta-section` (C1–C4 verified against Part 1, all green), `cor:rh` (½ from the functional equation, one file only) — written, wired, compiling against the theorem's name (3,694 jobs) |
 
-## ⬛ THE TWO DECLARATIONS — the whole of what is left to type
+## ⬛ `∫𝓡_A` IS AN `ActionCategory` BY CONSTRUCTION — both levels, certified
 
-The master states this in **two** places, and the split is the author's, not a decomposition. One
-says what `ι_A` **is**; the other says what **follows**.
+Elicited from the kernel, 2026-07-28. Baseline commit **`02b5fd3`**; all on
+`[propext, Classical.choice, Quot.sound]`; all `@[reducible]`, so they unfold on sight.
+
+```lean
+ASection.AsectionStateWorld       := ActionCategory G2 A.AsectionState
+ASection.AsectionActionStateWorld := fun A m => InducedCategory A.AsectionStateWorld (·.input)
+GreatCircle.Base                  := ActionCategory GreatCircle.Aut GreatCircle.Point
+```
+
+The base **is** an action category; `F_A(X)` is induced from one via `.input`. The author built
+this when he built `F_A(X)`. It is not something to add.
+
+**Why it decides the endgame — the two spellings of "arrow":**
+
+```lean
+Action.lean:92        (p ⟶ q) = { m : M // m • p.back = q.back }   -- an arrow IS ONE group element
+Grothendieck.lean:86  structure Hom where base : … ; fiber : …      -- an arrow IS A PAIR
+```
+
+*"Take any two frames in `𝓡_A` and show one orbit connects them"* is **native** in the
+`ActionCategory` spelling and **foreign** in the `Grothendieck` one — where an arrow is two legs by
+definition. `Action.lean:128` delivers connectedness by a **single arrow** (`ReflTransGen.single`)
+from `[IsPretransitive M X] [Nonempty X]`. `M` and `X` are already named in the tree:
+`G2 ↷ A.AsectionState` in the fibre, `GreatCircle.Aut ↷ GreatCircle.Point` on the base.
+
+**The master states it too**, above the connectivity movement: `:932–935` names the translation
+groupoid and cites `CategoryTheory.ActionCategory` outright; `:965` *"the projective action
+groupoid"*; `:993` *"a functor on the octonionic action groupoid"*; `:1207` *"the whole is an action
+groupoid"*; `:1213` *"the preimage of the total action groupoid"*; `:1262` *"`∫𝓡_A` is a connected
+action groupoid."* And since `97c2335` (2026-07-28) the finale states the arrow dictionary
+**itself** — the two spellings above, the single-orbit sentence, *"in an action groupoid the
+zigzag required has length one"* — so the master and this document now consume the same
+presentation.
+
+⛔ **A prohibition against exhibiting `∫𝓡_A` as an `ActionCategory` was written into `register/80`
+and `register/60` row 26 on 2026-07-27, from a failed `infer_instance` on the `Grothendieck`
+spelling.** It contradicted both the master and the tree, sat in the document both agents read
+first, and pushed every attempt into the pair-spelling — manufacturing the leg-by-leg descent it
+appeared to forbid. Both files were deleted in the 2026-07-28 sweep; nothing remains to obey.
+**A failed synthesis is a fact about a name, never about the object.**
+
+---
+
+## ⬛ THE THREE DECLARATIONS — the whole of what is left to type
+
+The master states the connectivity movement in **two** places, and the split is the author's, not
+a decomposition. One says what `ι_A` **is**; the other says what **follows**. Ahead of both sits
+the hypothesis `:128` consumes — pretransitivity — **checked 2026-07-28 evening: the facts are
+green, and no instance is registered anywhere in the tree.**
+
+### Declaration 0 — the action reaches every member: pretransitivity registered
+
+`Action.lean:128` fires from `[IsPretransitive M X] [Nonempty X]`. Nonempty is certified
+(`residueActionState` + `residueActionState_mem`). Pretransitivity is **another empty shelf**: no
+`IsPretransitive` instance exists in any `Concentricity/` file — while the *facts* were proved
+when the author built `F_A(X)`:
+
+```lean
+ProjectiveSection.lean:83        orbitRep_spec (b) : orbitRep b • ∞ = b    -- the base: every frame reachable
+G2.lean:194                      G2.exists_smul_eq_of_mem_unitImaginarySphere : ∃ g : G2, g • u = v
+ASectionCResidueDiagram.lean:76  AsectionCResidueTransport                 -- membership travels: the action restricts
+```
+
+**The carrier (the author's ruling, 2026-07-28): the members of the inverse image, under the
+square's whole action** — the action `∫𝓡_A` is presented by. Never `IsPretransitive G2
+(A.AsectionState)` globally: G₂ alone moves directions, not coordinates — that statement is false
+and sits one register low. One orbit means **any member to any member**: no anchor point — north
+and `0` are both inside the orbit and neither is privileged.
+
+**Kind: DECLARATION + INSTANTIATION** — state at the named carrier, consume the green suppliers,
+register as `instance` so `:128`'s hypothesis resolves. Inference: none.
 
 ### Declaration 1 — `ι_A` is full and faithful; `𝓡_A` is definitionally its own image
 
@@ -113,7 +182,7 @@ Certificates behind it, all live: `ObjectProperty.fullyFaithfulι` on **`[propex
 
 ### Declaration 2 — therefore `∫𝓡_A` is connected
 
-Master, `:1225`–`:1242`: *"Connectedness is established here, by the structure of `ι_A` itself…
+Master, `:1218`–`:1262`: *"Connectedness is established here, by the structure of `ι_A` itself…
 This follows immediately, because `ι_A` is a proper inclusion and a natural isomorphism onto its
 image… `∫𝓡_A` is a connected action groupoid."*
 
@@ -122,7 +191,7 @@ Already declared **and instantiated** as `instance ASection.residueTotal_isConne
 
 **Kind: INSTANTIATION** — it consumes Declaration 1. Inference: none.
 
-**Order is forced: 1 before 2.** Declaration 2 could never land while Declaration 1 was absent —
+**Order is forced: 0 and 1 before 2.** Declaration 2 could never land while Declaration 1 was absent —
 there was nothing named at `ι_A`'s level for its term to consume. Four consecutive attempts at the
 seat reached *downward* for a fibrewise arrow for exactly that reason: right register, empty shelf.
 
