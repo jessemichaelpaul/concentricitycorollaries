@@ -532,19 +532,25 @@ INFER — terms to assemble, each read off certified data, no search:
    `fiber := eqToHom` of the membership equality — one constructor
    application consuming `x.property`. **Membership data IS the connecting
    arrow**: single arrow, no zigzag, no hunt.
-2. **The north-part identification — ALSO read off ι_A (author's ruling,
-   2026-07-27).** The north part being one system IS part of what ι_A
-   consumed and certified: the 0-to-N frame receipts are already in the
-   refreshed inverse-image audit — `projectiveObjectFrame_north` and both
-   `fixes_cayley` faces, placed there at the author's direction precisely
-   because the `R_A` square was 0-to-N — with `G₂` sweeping each residue
-   sphere (`smul_coordinate = rfl`) and the winding held in
-   `NorthStabilizer`. The term is composed from those certified receipts
-   exactly as INFER-1 is composed from `x.property`: **no dictation seam,
-   no arrow hunting — the square is the source, and it is
-   triple-certified.** If the kernel prints a residual goal during
-   assembly, it routes to the author verbatim per standing protocol; that
-   safety valve is not a planned step.
+2. **The `0`-to-`N` square, consumed whole by `ι_A` — resolved by that
+   square (author's ruling, 2026-07-27).** Name the object, not an
+   operation on parts of it: the earlier row title, "the north-part
+   identification," presupposes two or more things to identify, and that
+   plural is the same lowering as "the north residues" one layer up. The
+   square is one object-system. `projectiveObjectFrame_north` makes the
+   frame the distinguished element itself; both `fixes_cayley` faces hold
+   the ends; `G₂` sweeps each residue sphere as gauge
+   (`smul_coordinate = rfl`); the winding stays in `NorthStabilizer`.
+
+   Status, stated on both axes so neither is mistaken for the other. **The
+   mathematics is resolved by the `0`-to-`N` `ι_A`** — not by the
+   elaborator, which authors nothing. **The Lean status** is that those
+   receipts are green at their literal types and `#check`ed in the
+   refreshed inverse-image audit (`:32–34`), and the term that consumes
+   them is not yet written. A goal printed during assembly therefore
+   concerns the spelling of a term, never whether the mathematics holds; it
+   routes to the author verbatim per standing protocol and is not a planned
+   step. Arrow hunting is forbidden here: the square is the source.
 3. **Packaging — by Mathlib's own template.** The `:128` instance proof IS
    Gate 1's shape, written by the library:
    `zigzag_isConnected fun x y => Relation.ReflTransGen.single <| Or.inl <|`
