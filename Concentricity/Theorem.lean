@@ -150,8 +150,10 @@ theorem pi0_grothendieck {B : Type u} [SmallCategory B] (F : B ⥤ Grpd.{u, u}) 
 
 /-- RE-BADGED 2026-07-05 (PLAN_reencode_concentricity_2026-07-05.md §5):
 translation-layer row — the level read that the STATIC readout consumes.
-The master label `thm:concentricity` now lives on
-`ASection.concentricity_transport` (Concentricity/TransportObject.lean).
+The master label `thm:concentricity` was briefly re-badged onto
+`ASection.concentricity_transport` (Concentricity/TransportObject.lean —
+that file was later retired; no such declaration remains in the tree, and
+the label lives on `ASection.concentricity` below).
 
 The **transport level** of the n-th residue-ℂ zero-sphere: the level of
 the fibre point over the n-th zero-sphere, read in the vocabulary of
@@ -225,7 +227,9 @@ concentric component: [the concentric component] → ∃ c, one centre.
 
 THE ONE OPEN NODE of the repository (R8: `sorry` = UNFORMALIZED, never
 UNSOUND). Everything on both sides is proved and certified: the transport
-connectivity (`concentricity_transport`, frozen kernel certificate), the
+connectivity (historically `concentricity_transport` — its file was
+retired with the static tower; the live connectivity is the ι_A route
+typed at this node), the
 articulation (one component, defined through
 the witness 𝔫, fibre concentric), the Φ-collapse and π₀(𝒮₂)
 (PhiConversion.lean: the glue total and proper, the slice world's
