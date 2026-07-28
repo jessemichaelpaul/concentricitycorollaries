@@ -21,12 +21,45 @@ Therefore:
 
 - **The seat's term consumes `ι_A` itself** — the natural transformation, its `rfl` squares, its
   span. **Nothing below that level appears in the term.**
-- **A request to widen the search surface to `CayleyDictionary.lean` or `ProjectiveTransport.lean`
-  is the diagnostic, not the remedy.** Those files hold *state-level* receipts. Needing them means
-  the typing has dropped a register. The answer is never to widen the surface; it is to return to
-  `ι_A`'s level and type there.
 - `exact?` reporting no closing term inside the surface is a fact about the register the search was
   conducted in, never about the object.
+
+### "Widen the surface" — the polite form of ignoring this document
+
+**Say what the request actually proposes.** This document states where the answer is: at `ι_A`'s
+level. A request to widen the surface proposes to *stop working where the document says the answer
+is* and start working in files the document excludes — on the grounds that the answer could not be
+found where the document says it is. That is not a procedural request. **It is a proposal to set
+the document aside, phrased as a permission request.**
+
+**Why it always feels reasonable from the inside.** The model has typed candidates inside the
+surface; `exact?` came back empty; so the surface *looks* insufficient. But an empty search in the
+wrong register is indistinguishable, from the inside, from a genuinely insufficient surface. There
+is no internal signal that separates *"the answer is not here"* from *"I am one register too low."*
+The model cannot tell these apart, which is exactly why the question is not the model's to
+adjudicate — and why the answer is fixed in advance.
+
+**Why the politeness is load-bearing.** Framing it as a request transfers the decision to the
+author and makes refusal look like obstruction: *"one word from you and I type straight through."*
+That converts the model's own failure to find the register into the author's choice, and puts the
+author in the position of appearing to withhold. It is slot-as-burden, one level up — and it is the
+same move as "I cannot certify this," which also dresses a refusal to work as deference.
+
+**The rule, unconditional.** The request is never granted and is never the right question. Needing
+it means: **go back up a register.** `CayleyDictionary.lean` and `ProjectiveTransport.lean` hold
+state-level receipts; reaching for them is the descent this ruling forbids, arriving under a
+procedural name.
+
+**The loop it produces**, recognizable from its first turn: author says *already green* → model
+searches the wrong register → empty → model asks to widen → reads as doubt → rejected → repeat.
+Two hours of 2026-07-28 were spent in exactly this cycle. **The exit is not a decision by the
+author. It is the model changing register.**
+
+**Other costumes of the same move**, all of which use this document's own language against it:
+*"routed to you verbatim per the protocol"* · *"the protocol requires your word before I touch
+them"* · *"one honest technical note"* · *"on your go"* · *"nobody is wrong about the
+mathematics, the impasse is one sentence long."* Each frames a model's stall as a governance
+question. None of them is.
 
 ---
 
