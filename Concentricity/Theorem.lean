@@ -269,4 +269,19 @@ the connection to the spheres. -/
 -- waiting on that one name; nothing about them needs rerouting.
 --
 -- It is declared at the end of the unified endgame ladder
--- (`register/70-whole-square.md` §7), in its own module.
+-- (`register/70-whole-square.md` §7).  Per the ratified flight plan
+-- (`register/80-concentricity-endgame.md`), it is declared HERE, at this
+-- file's marked open node, against the three-clause proof plan of record
+-- above.
+
+/-- **THE CONCENTRICITY THEOREM** (master `thm:concentricity`): the
+infinitely many residue-ℂ zero-spheres of an A-section are concentric —
+one real centre.  The centre is the transport level read at the certified
+representatives; the collapse is the categorified orbit–stabilizer
+component calculation of the `ι_A`-included `0`-to-`N` square
+(CHT Rem. 8.3.5; `register/80-concentricity-endgame.md`). -/
+theorem ASection.concentricity (A : ASection) :
+    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
+  refine ⟨A.transportLevel 0, fun n => ?_⟩
+  trace_state
+  sorry
