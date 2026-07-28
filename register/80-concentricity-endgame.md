@@ -42,9 +42,19 @@ zigzag_isConnected fun x y =>
   Relation.ReflTransGen.single <| Or.inl <| nonempty_subtype.mpr (exists_smul_eq M x.back y.back)
 ```
 
-- **The shape is imitated, never invoked**: the instance is stated for a
-  literal `ActionCategory` and will not fire on `∫𝓡_A`. Do not try to
-  exhibit `∫𝓡_A` as a literal `ActionCategory` to make it resolve.
+- **STRUCK 2026-07-28 (author's ruling; the audit's damning finding).** An
+  earlier draft of this bullet FORBADE exhibiting `∫𝓡_A` as an
+  `ActionCategory` — a grep-level inference ("the instance is stated for
+  `ActionCategory`, the total is spelled `Grothendieck`, so it will not
+  fire") frozen into a prohibition that then blocked the author's own
+  route. The inference was never sound: syntax non-resolution is not
+  object non-identity, and the master states the object IS an action
+  groupoid ("the whole is an action groupoid formed from the distinguished
+  element"). THE ROUTE OF RECORD: exhibit the action-groupoid presentation
+  of `∫𝓡_A` under which `Action.lean:128` applies — pretransitivity is the
+  one-orbit statement the construction supplies, `Nonempty` is the
+  certified inhabitants — and the library instance fires. Kernel-test,
+  never grep-freeze.
 - **The one substitution**: the hom supplier is `x.property` (the certified
   membership dossier) where the library has `exists_smul_eq`. That supplies
   the **anchor legs** — each object, one arrow from its own north datum,
