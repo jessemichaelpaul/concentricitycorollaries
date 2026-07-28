@@ -312,6 +312,46 @@ theorem ASection.residueTotal_isConnected (A : ASection) :
         A.residueActionState_mem 0⟩⟩⟩
   refine zigzag_isConnected fun P Q => ?_
   refine Relation.ReflTransGen.single (Or.inl ?_)
+  -- the ONE arrow P ⟶ Q, wired from ι_A's own dossiers in the library's
+  -- register (Action.lean:92): labels with their transport equations.
+  obtain ⟨xNP, hNP, gP, hgP⟩ := P.fiber.property
+  obtain ⟨xNQ, hNQ, gQ, hgQ⟩ := Q.fiber.property
+  let aP : GreatCircle.Aut := gP.1
+  let aQ : GreatCircle.Aut := gQ.1
+  let hbase : P.base ⟶ Q.base :=
+    ⟨aQ * aP⁻¹, by
+      show (aQ * aP⁻¹) • ActionCategory.back P.base =
+        ActionCategory.back Q.base
+      have hp : aP • ActionCategory.back
+          projectiveNorth = ActionCategory.back P.base := gP.2
+      have hq : aQ • ActionCategory.back
+          projectiveNorth = ActionCategory.back Q.base := gQ.2
+      rw [← hp, smul_smul, mul_assoc, inv_mul_cancel, mul_one]
+      exact hq⟩
+  have harrow : gP ≫ hbase = gQ :=
+    Subtype.ext (by
+      rw [CategoryTheory.ActionCategory.comp_val]
+      show (aQ * aP⁻¹) * aP = aQ
+      rw [mul_assoc, inv_mul_cancel, mul_one])
+  have hsrc : (((AsectionCResidueDiagram A ⋙
+        Grpd.forgetToCat).map hbase).toFunctor.obj
+        P.fiber).obj =
+      (AsectionActionTransport A gQ).obj xNP := by
+    rw [show (((AsectionCResidueDiagram A ⋙
+          Grpd.forgetToCat).map hbase).toFunctor.obj
+          P.fiber).obj =
+        (AsectionActionTransport A hbase).obj P.fiber.obj
+        from rfl,
+      ← hgP, ← CategoryTheory.Functor.comp_obj,
+      ← AsectionActionTransport_comp]
+    exact congrArg
+      (fun t => (AsectionActionTransport A t).obj xNP) harrow
+  refine ⟨⟨hbase,
+    (IsCResidueState A Q.base).homMk
+      (eqToHom hsrc ≫
+        (AsectionActionTransport A gQ).map ?_ ≫
+          eqToHom hgQ)⟩⟩
+  trace_state
   sorry
 
 /-- **THE DECLARATION**: `π₀(∫𝓡_A)` IS A SINGLETON — CHT Remark 8.3.5 on
