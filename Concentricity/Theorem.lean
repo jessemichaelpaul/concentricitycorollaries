@@ -302,7 +302,7 @@ IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
 natural isomorphism onto its image (certified, `57384ae`; naturality
 `rfl`).  Consumption seat: `Action.lean:128`, a SINGLE arrow — wiring
 only, inference none (`EndgameFinal.md` §5). -/
-theorem ASection.residueTotal_isConnected (A : ASection) :
+instance ASection.residueTotal_isConnected (A : ASection) :
     CategoryTheory.IsConnected (Grothendieck
       (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
   haveI : Nonempty (Grothendieck
