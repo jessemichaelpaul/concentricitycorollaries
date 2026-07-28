@@ -5,6 +5,31 @@ State as of 2026-07-28, elicited from the kernel — not recalled.
 
 ---
 
+## ⚖️ THE REGISTER RULING (the author, 2026-07-28) — read before typing anything
+
+**Connectedness lives at `ι_A`'s own level.** It is a property *at the functor level* — `ι_A` as a
+natural transformation, its naturality squares holding definitionally, the span of categories that
+structure forces, and the zigzag that span carries. It is **inherited by the total from the
+inclusion's certified structure**, and that structure is stamped: `57384ae`, three ways.
+
+**It is not assembled from state-level homs.** Anything reaching for `G₂` elements, chart
+coordinates, a stabilizer's motion on a coordinate, or individual arrows inside fibres is **one
+register too low** — that is the leg-by-leg descent, and the author has struck it every time it has
+appeared, in every costume it has worn.
+
+Therefore:
+
+- **The seat's term consumes `ι_A` itself** — the natural transformation, its `rfl` squares, its
+  span. **Nothing below that level appears in the term.**
+- **A request to widen the search surface to `CayleyDictionary.lean` or `ProjectiveTransport.lean`
+  is the diagnostic, not the remedy.** Those files hold *state-level* receipts. Needing them means
+  the typing has dropped a register. The answer is never to widen the surface; it is to return to
+  `ι_A`'s level and type there.
+- `exact?` reporting no closing term inside the surface is a fact about the register the search was
+  conducted in, never about the object.
+
+---
+
 ## The author's movement, triple-certified line by line — certificates beside every check
 
 The end of the master (`thm:concentricity`, from the span diagram at `:1225`), each sentence

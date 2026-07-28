@@ -351,8 +351,7 @@ theorem ASection.residueTotal_isConnected (A : ASection) :
       (eqToHom hsrc ≫
         (AsectionActionTransport A gQ).map ?_ ≫
           eqToHom hgQ)⟩⟩
-  trace_state
-  sorry
+  apply?
 
 /-- **THE DECLARATION**: `π₀(∫𝓡_A)` IS A SINGLETON — CHT Remark 8.3.5 on
 the connected action groupoid: nonempty and connected, so one class. -/
