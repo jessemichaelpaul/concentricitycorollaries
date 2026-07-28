@@ -181,11 +181,19 @@ G2.lean:194                      G2.exists_smul_eq_of_mem_unitImaginarySphere : 
 ASectionCResidueDiagram.lean:76  AsectionCResidueTransport                 -- membership travels: the action restricts
 ```
 
-**The carrier (the author's ruling, 2026-07-28): the members of the inverse image, under the
-square's whole action** — the action `∫𝓡_A` is presented by. Never `IsPretransitive G2
-(A.AsectionState)` globally: G₂ alone moves directions, not coordinates — that statement is false
-and sits one register low. One orbit means **any member to any member**: no anchor point — north
-and `0` are both inside the orbit and neither is privileged.
+**The carrier (the author, 2026-07-28 night — superseding the earlier text of this paragraph):
+all of `A.AsectionState`.** His words: *"it already is on all, because the image of my C-residue
+S⁶ spheres is all of them… they're zeros, so that's all of them, and the inverse image is over
+the groupoid."* The earlier text here declared the global statement false — **that was a
+model-authored prohibition, never typed** (the register/80 shape again), struck by the standing
+rule: kernel-test, never grep-freeze. Probe receipts (Opus, tonight): `instSMulG2` and
+`instMulActionG2` are **registered** on exactly this pair — the action data already lives on the
+carrier; `IsPretransitive G2 A.AsectionState` is the **single missing head**, no subtype, no
+`Set` coercion, no new carrier. The term: the April theorem
+(`G2.exists_smul_eq_of_mem_unitImaginarySphere`) applied through the definitional identification
+the master states. If the kernel prints a residual goal, it routes to the author verbatim — the
+kernel settles the carrier, never a document paragraph. One orbit means **any member to any
+member**: no anchor point — north and `0` are both inside the orbit and neither is privileged.
 
 **Why "inference: none" is exact (the author's congruence ruling, 2026-07-28 night):** the S⁶
 leg enters **by definition, not by derivation**. The preimage IS the C-residue locus
@@ -401,14 +409,17 @@ this : Functor.Full (A.AsectionCResidueInclusion.app P.base)
 ```
 
 **The locked classification (the pre-flight's answer):** DECLARATIONS — one remains to add, Decl 0
-(`IsPretransitive` at the members; grep receipt: zero instances anywhere in `Concentricity/`);
+(`IsPretransitive G2 A.AsectionState` — the author's carrier, all of it; grep receipt: zero
+instances with that head anywhere in `Concentricity/`, while `instSMulG2`/`instMulActionG2` are
+registered on exactly that pair);
 Decl 1 is GREEN in the tree (`bb02b54`, `Theorem.lean:310–323`); Decl 2 is stated and registered
 (probe receipt `2b11128`), only its seat open. INSTANTIATIONS — Decl 0's term (the three green
-suppliers composed at the members, then registered; the probe flip is the receipt); seat A
+suppliers composed at the author's carrier, then registered; the probe flip is the receipt); seat A
 (consume Decls 0+1 at the `Action.lean:128` shape — one arrow); seat B (the level law read on one
-arrow — an arrow IS one element, `hom_as_subtype` — plus zigzag induction). WIRING — Decl 1's
-terms (done: `ObjectProperty.fullyFaithfulι`/`full_ι`/`faithful_ι` at `ι_A`'s name); the zigzag
-induction machinery in seat B. **INFERENCE — NONE. Zero entries.** Every term composes
+arrow — an arrow IS one element, `hom_as_subtype` — the master's own sentence: *"conserved along
+every connecting transport by the lift's level law"*). WIRING — Decl 1's terms (done:
+`ObjectProperty.fullyFaithfulι`/`full_ι`/`faithful_ι` at `ι_A`'s name); the extension from one
+transport to the component class, inside the allowed `ConnectedComponents` surface. **INFERENCE — NONE. Zero entries.** Every term composes
 kernel-stamped facts at named carriers; the congruence ruling makes the S⁶ leg definitional. The
 only way an inference could appear is stop condition 5 — a kernel print no surface supplier
 closes, routed verbatim — and the two-detector taxonomy says to expect registration, not
@@ -437,7 +448,7 @@ the author**, do not start typing candidates.
 
 | | declaration | seat | kind |
 |---|---|---|---|
-| **0** | pretransitivity at the members, registered as `instance` | not yet in the tree | declaration + instantiation |
+| **0** | `IsPretransitive G2 A.AsectionState` (the author's carrier — all of it), registered as `instance` | not yet in the tree | declaration + instantiation |
 | **1** | `ι_A` full + faithful at `ι_A`'s name | ✅ green, `bb02b54` | wiring |
 | **2** | `∫𝓡_A` `IsConnected` | `instance` registered; seat open | instantiation |
 | — | level conservation | seat open | instantiation |
