@@ -1213,14 +1213,7 @@ with Euler presenting at one end, Weierstrass at the other. The preimage of this
 under the action --- the preimage of the total action groupoid, membership travelling by
 composition in the base --- is the residue subdiagram $\mathcal R_A$ of
 Definition~\ref{def:residue-subdiagram}, included in $\mathcal A_A$ by $\iota_A$. The
-restriction of the total object to this preimage sits over the same base:
-\[
-\begin{tikzcd}[column sep=large]
-\int_{\mathcal B}\mathcal R_A \arrow[rr, hook, "\int\iota_A"] \arrow[dr, "\pi_{\mathcal R}"'] & &
-\int_{\mathcal B}\mathcal A_A \arrow[dl, "\pi_{\mathcal A}"] \\
-& \mathcal B &
-\end{tikzcd}
-\]
+restriction of the total object to this preimage sits over the same base.
 
 Connectedness is established here, by the structure of $\iota_A$ itself. Because $\iota_A$ is
 a faithful embedding, an isomorphism onto its image, there is a canonical diagram of three
@@ -1378,14 +1371,27 @@ viewpoint; the value-bearing A-section functor gathers all of them over the base
 together, and the colimit conjugates them into a single answer. The concentricity we could not
 picture becomes one component we can compute.
 
-\begin{remark}[An alternative route]\label{rmk:thomason}
-Another proof of Theorem~\ref{thm:concentricity} is available through Thomason's homotopy
-colimit theorem \cite{Thomason79}: the classifying space of a Grothendieck construction is
-homotopy equivalent to the homotopy colimit of the classifying spaces of its fibres, and
-reading connected components through that equivalence yields the same collapse of
-$\pi_0\bigl(\int_{\mathcal B}\mathcal R_A\bigr)$. The proof given here stays at the level of
-categories, where Lemma~\ref{lem:pi0-grothendieck} suffices; the Thomason route is the
-topological shadow of the same computation, and that path has not been formalized in Lean.
+\begin{remark}[Two alternative routes]\label{rmk:thomason}
+Two other proofs of Theorem~\ref{thm:concentricity} are available. The first runs over the
+base. The restriction sits over $\mathcal B$ through its two projections,
+\[
+\begin{tikzcd}[column sep=large]
+\int_{\mathcal B}\mathcal R_A \arrow[rr, hook, "\int\iota_A"] \arrow[dr, "\pi_{\mathcal R}"'] & &
+\int_{\mathcal B}\mathcal A_A \arrow[dl, "\pi_{\mathcal A}"] \\
+& \mathcal B &
+\end{tikzcd}
+\]
+and one may connect residue states footpoint by footpoint: zigzags in the connected base,
+lifted through the fibres. That zigzag is a different one from the single arrow used above ---
+it travels through $\mathcal B$ and reassembles the value data leg by leg --- and it is not the
+proof given here. The second is Thomason's homotopy colimit theorem \cite{Thomason79}: the
+classifying space of a Grothendieck construction is homotopy equivalent to the homotopy
+colimit of the classifying spaces of its fibres, and reading connected components through that
+equivalence yields the same collapse of $\pi_0\bigl(\int_{\mathcal B}\mathcal R_A\bigr)$. The
+proof given here stays at the level of categories, where Lemma~\ref{lem:pi0-grothendieck}
+suffices: the base route assembles what the action already supplies whole, the Thomason route
+is the topological shadow of the same computation, and neither path has been formalized in
+Lean.
 \end{remark}
 
 %=====================================================================
