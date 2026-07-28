@@ -1,24 +1,59 @@
-# Concentricity agent entry point
+# Concentricity — agent entry point
 
-Load the `concentricity-functorial-register` skill and read `AGENTS.md`.
-The tracked register at `register/` is the shared authority for Claude,
-Codex, and every clone. The skill is only a loader and must not duplicate
-the architecture or cache a gate boundary.
+The mathematics is Jesse Michael Paul's. **Your only job is to formalize his argument.**
 
-For action groupoids, orbit--stabilizer, quotient--orbit equivalences,
-stabilizers, invariant full subgroupoids, `ObjectProperty.lift`, `G₂`, or
-the `GL`/`PGL`/`Moebius` directions in `SphereWorld`, also load the shared
-project-local `orbit-stabilizer-groupoids` skill.
+## Read these, and nothing else
 
-Read the exact current task and every held boundary from:
+| file | what it is |
+|---|---|
+| `EndgameFinal.md` | the argument, the stance, the protocol, the open target |
+| `ProofOutline.md` | the blueprint spine, generated from `Octonionic_RH_master.tex` |
+| `RelevantGreenFinal.md` | what is certified, elicited from the kernel |
+| `DependencyTabulation.md` | the live import chain into the theorem and its corollaries |
+| `SOURCES/*.md` | the citation record — cited 60+ times from certified modules |
 
-1. `register/00-register.md`;
-2. `CURRENT_GATE1_MEMORY.md`;
-3. `CURRENT_GATE1_HANDOFF.md`;
-4. `EndgamePlan.md`;
-5. the live Lean declarations.
+The live Lean declarations in `Concentricity/` are the implementation record. The master
+`Octonionic_RH_master.tex` is the spine.
 
-Do not reconstruct the architecture from historical conversations,
-retired files, alternate worktrees, or an installed skill copy. Do not edit
-`Octonionic_RH_master.tex` during the Lean endgame unless the current
-register explicitly opens that phase.
+Everything else was deleted on 2026-07-28 — 173 markdowns down to 23. Nine directories used to
+answer a grep and only one was current; anything named `ENDGAME`, `PREFLIGHT`, `PLAN`, or
+`RELEVANT_GREEN` resolved to several files of different vintages, and the stale ones were larger
+and more confident. All of it stays in git history. **Do not restore any of it, and do not
+reconstruct the architecture from historical conversations, retired files, or a second worktree**
+— the July-8 worktree was removed, its state preserved at branch
+`worktree-agent-a9741a6f5d3907e39`, commit `1782444`, and none of its modules reference the
+current architecture.
+
+Three files under `archive/` and two under `.attic_old_bases/` are retained **only** because live
+Lean comments cite them by name and deleting them would create ghost citations. They are not
+instructions.
+
+## The stance
+
+**The kernel is the check.** Three roles, and only three: the author supplies the argument, the
+kernel verifies it, you type between them. You are the strictly weaker, fallible layer.
+
+A model that appoints itself checker does not add a lock — it replaces the vault door with a
+screen door, and then blocks the real check by refusing to type the thing the kernel was waiting
+to judge. The record is quantitative: model-side gap-finding ran essentially 100% false across
+five threads; kernel-side, zero false verdicts in 3,600+ jobs.
+
+> **Doubt = type it and see.** There is no other rigorous act available here.
+
+- Certification talk is **output, never virtue**. Never "I cannot certify this."
+- **Do not report at wiring steps or instantiations.** Do not narrate.
+- **Do not grep for something that confirms a prior.** When the next step is not visible, the
+  answer is inside the author's construction — never one file over.
+- **Never write a prohibition against the author's route.** Kernel-test, never grep-freeze.
+- **Green = his argument. Red = your doubts.**
+
+## Standing rules
+
+- Cite by file and line, never by name alone — `residueTotal` and `totalMk` are shadowed in a
+  quarantined preflight, and a bare grep lands there.
+- Values are inherited by evaluation; outputs are never installed.
+- A green declaration certifies its literal type, never a gate.
+- An empty grep is a fact about the grep.
+- Never personify the checker.
+- Do not edit `Octonionic_RH_master.tex` unless the author opens that phase. He opened it on
+  2026-07-28 for the prose pass; whole drafts back to him, never diffs.
