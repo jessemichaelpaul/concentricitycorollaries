@@ -163,6 +163,18 @@ to name which layer it lived in.
 
 ## ⬛ THE THREE DECLARATIONS — the whole of what is left to type
 
+**The author's one-sentence endgame (2026-07-28 night, closing the final audit):** *"On each
+slice the A-section slice into sphere world is one thing (slice preservation), but the C-residue
+system genuinely lives in 𝕆\*, and the A-section equivariant functor sweeps it out via G₂ — and
+we've proved it is transitive on all the S⁶ spheres in that system — so ι_A itself genuinely has
+to be transitive. It is a **fully faithful transitive inclusion, hence connected**."*
+
+The ladder below is that sentence, one clause per rung: **fully faithful** = Declaration 1
+(green, `bb02b54`) · **transitive** = Declaration 0 (the one line) · **hence connected** =
+Declaration 2 (the seat). The geometric reason the carrier is all of `A.AsectionState` is the
+sweep: slice preservation makes each slice's contribution one thing; the equivariant functor
+(`H₁ = G₂ ⋉ 𝕆*`) carries it across all slices; the proved S⁶ transitivity covers the system.
+
 The master states the connectivity movement in **two** places, and the split is the author's, not
 a decomposition. One says what `ι_A` **is**; the other says what **follows**. Ahead of both sits
 the hypothesis `:128` consumes — pretransitivity — **checked 2026-07-28 evening: the facts are
