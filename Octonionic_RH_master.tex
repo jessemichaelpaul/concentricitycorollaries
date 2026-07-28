@@ -685,6 +685,7 @@ $\varphi_v$ (Definition~\ref{def:zeta_O}(i)),
 \end{proof}
 
 \begin{theorem}[\protect{\cite{Baez02}}]\label{thm:G2-S6}
+\lean{G2.exists_smul_eq_of_mem_unitImaginarySphere}
 $\Gtwo$ acts transitively on $S^6$ with stabilizer $\mathrm{SU}(3)$:
 $\mathrm{SU}(3)\hookrightarrow\Gtwo\twoheadrightarrow S^6$.
 \end{theorem}
@@ -960,7 +961,7 @@ These two geometric registers hold the octonionic and slice-value geometry drawn
 \subsection*{The base of the degenerate set and the Grothendieck construction}
 
 \begin{definition}[The projective base, genuine section functor, and total category]\label{def:base}
-\lean{GreatCircle.Base, CategoryTheory.Grothendieck}
+\lean{GreatCircle.Base, GreatCircle.orbitRep_spec, CategoryTheory.Grothendieck}
 \uses{def:A-section, def:two-worlds, thm:winding-lift, prop:winding-signature}
 The base is the projective action groupoid
 \[
@@ -1148,7 +1149,7 @@ and its naturality squares commute definitionally.
 
 \begin{theorem}[Concentricity]\label{thm:concentricity}
 \uses{def:A-section, def:base, def:residue-subdiagram, lem:residue-spheres, lem:pi0-grothendieck,
-thm:winding-lift, prop:winding-signature, thm:identity}
+thm:G2-S6, thm:winding-lift, prop:winding-signature, thm:identity}
 Let $A$ be an $A$-section. The infinitely many C-residue zeros transported by the A-section functor
 $\mathcal A_A:\mathcal B\to\mathbf{Grpd}$, from the projective great-circle base
 $\mathcal B$ to the A-generated normalized value groupoids, form exactly one
