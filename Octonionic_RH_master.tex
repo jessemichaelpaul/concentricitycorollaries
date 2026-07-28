@@ -927,7 +927,7 @@ Theorem~\ref{thm:concentricity}.
 \subsection*{Two geometric viewpoints}
 
 \begin{definition}[The octonionic and slice-value worlds]\label{def:two-worlds}
-\lean{H1, S2}
+\lean{H1, SphereWorld}
 \uses{def:carrier, def:G2, thm:G2-S6, rmk:G2-compact, def:slices}
 Recall the \emph{translation groupoid} of an action $G\curvearrowright X$: its objects are the
 points of $X$ and its morphisms $x\to y$ are the elements $g\in G$ satisfying $g\cdot x=y$.
@@ -1238,11 +1238,36 @@ isomorphism onto its image.
 The backward path exists because $\iota_A:\mathcal R_A\to\operatorname{Im}(\iota_A)$ is a
 strict isomorphism of categories, hence fully invertible; the forward path is the canonical,
 non-invertible inclusion $j:\operatorname{Im}(\iota_A)\hookrightarrow\mathcal A_A$. Any
-relation of the full category back to the restricted domain traverses exactly this roof. A
-category is connected when any pair of its objects is joined by a finite zigzag of morphisms,
-and the residue total inherits its zigzags through this span from the action that produced it:
-$\int_{\mathcal B}\mathcal R_A$ is a connected action groupoid. Concretely, the element's
-unique tame continuous lift runs the members into one another while fixing the real level, a
+relation of the full category back to the restricted domain traverses exactly this roof.
+
+It is worth pausing over what an arrow in this total \emph{is}, because the conclusion turns
+on the answer. In an action groupoid, a morphism between two states is not a path, and not a
+chain of comparisons: it is a single element of the acting group, carrying one state to the
+other. The Lean library states this as an identity of types: a hom $p \to q$ \emph{is}
+$\{\, m : M \mid m \cdot p = q \,\}$
+\textup{(}\texttt{CategoryTheory.ActionCategory.hom\_as\_subtype}\textup{)}. In a Grothendieck
+construction, an arrow \emph{is} a pair --- a base channel together with the compatible fibre
+transport over it \textup{(}\texttt{CategoryTheory.Grothendieck.Hom}\textup{)}. These are two
+spellings of one movement: read on the total, an arrow of $\int_{\mathcal B}\mathcal R_A$ is
+one element of the distinguished action, presented by its base part and its value-transport
+part.
+\[
+\begin{tikzcd}[column sep=huge]
+(X,\,x) \arrow[r, "{(f,\;\varphi_f)}", bend left=25] \arrow[r, "m"', bend right=25] & (Y,\,y)
+\end{tikzcd}
+\qquad \text{one arrow, two spellings}
+\]
+So to join two residue states is to exhibit one element of the action that carries one to the
+other --- and the action reaches every member of the preimage: orbit representatives position
+the element at every footpoint of the base, $G_2$ carries every direction to every other, and
+membership travels by composition, so the residue states form a single orbit under the action
+that produced them. A category is connected when its objects are joined by finite zigzags of
+morphisms; in an action groupoid the zigzag required has length one. The preimage is populated
+\textup{(}C4\textup{)} and single-orbit, and a nonempty action groupoid whose action reaches
+every member is connected --- this is the connectedness instance of the Lean library's
+\texttt{ActionCategory} itself, transported along $\iota_A$'s proper inclusion:
+$\int_{\mathcal B}\mathcal R_A$ is a connected action groupoid. The element's unique tame
+continuous lift is what runs the members into one another while fixing the real level, a
 difference of winding being purely vertical \textup{(}Lemma~\ref{lem:exp-degenerate}\textup{)}.
 
 By Remark~8.3.5 of \cite{Riehl}, a category is nonempty and connected if and only if its
