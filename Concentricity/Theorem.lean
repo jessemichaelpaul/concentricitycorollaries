@@ -367,13 +367,46 @@ theorem ASection.concentricity (A : ASection) :
       -- single arrow is what ι_A supplies — the proper inclusion, natural
       -- isomorphism onto its image.
       refine Relation.ReflTransGen.single (Or.inl ?_)
-      -- the ONE arrow P ⟶ Q, wired from ι_A's own dossiers: base leg
-      -- composed in the base groupoid, fibre leg through the certified
-      -- membership machinery.
+      -- the ONE arrow P ⟶ Q, wired from ι_A's own dossiers in the
+      -- library's register (Action.lean:92): labels with their transport
+      -- equations; group algebra only, no categorical inverse.
       obtain ⟨xNP, hNP, gP, hgP⟩ := P.fiber.property
       obtain ⟨xNQ, hNQ, gQ, hgQ⟩ := Q.fiber.property
-      refine ⟨⟨CategoryTheory.Groupoid.inv gP ≫ gQ,
-        (ASection.IsCResidueState A Q.base).homMk ?_⟩⟩
+      let aP : GreatCircle.Aut := gP.1
+      let aQ : GreatCircle.Aut := gQ.1
+      let hbase : P.base ⟶ Q.base :=
+        ⟨aQ * aP⁻¹, by
+          show (aQ * aP⁻¹) • ActionCategory.back P.base =
+            ActionCategory.back Q.base
+          have hp : aP • ActionCategory.back
+              (ASection.projectiveNorth) = ActionCategory.back P.base := gP.2
+          have hq : aQ • ActionCategory.back
+              (ASection.projectiveNorth) = ActionCategory.back Q.base := gQ.2
+          rw [← hp, smul_smul, mul_assoc, inv_mul_cancel, mul_one]
+          exact hq⟩
+      have harrow : gP ≫ hbase = gQ :=
+        Subtype.ext (by
+          rw [CategoryTheory.ActionCategory.comp_val]
+          show (aQ * aP⁻¹) * aP = aQ
+          rw [mul_assoc, inv_mul_cancel, mul_one])
+      have hsrc : (((ASection.AsectionCResidueDiagram A ⋙
+            Grpd.forgetToCat).map hbase).toFunctor.obj
+            P.fiber).obj =
+          (ASection.AsectionActionTransport A gQ).obj xNP := by
+        rw [show (((ASection.AsectionCResidueDiagram A ⋙
+              Grpd.forgetToCat).map hbase).toFunctor.obj
+              P.fiber).obj =
+            (ASection.AsectionActionTransport A hbase).obj P.fiber.obj
+            from rfl,
+          ← hgP, ← CategoryTheory.Functor.comp_obj,
+          ← ASection.AsectionActionTransport_comp]
+        exact congrArg
+          (fun t => (ASection.AsectionActionTransport A t).obj xNP) harrow
+      refine ⟨⟨hbase,
+        (ASection.IsCResidueState A Q.base).homMk
+          (eqToHom hsrc ≫
+            (ASection.AsectionActionTransport A gQ).map ?_ ≫
+              eqToHom hgQ)⟩⟩
       trace_state
       sorry
     letI := hIsConn
