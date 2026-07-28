@@ -155,7 +155,7 @@ $\zetaO$, use its functional equation to identify $c=\tfrac12$: the Riemann Hypo
 %=====================================================================
 The Riemann Hypothesis is usually met head-on, as a question about where the zeros of a single complex function fall along a line. This paper approaches it from the side. It asks instead whether a family of geometric objects, sitting a few dimensions up in the octonions, share a common centre, and shows that they must. The Riemann Hypothesis then follows, not as the thing we set out to prove, but as the shadow this larger fact casts back down onto the complex plane.
 
-A nontrivial zero of the zeta function, seen from the complex line alone, is a lone point in a strip. Seen from the compactified octonions, that same zero opens into a round six-dimensional sphere, and the critical-line question becomes a question of arrangement: are these spheres concentric, gathered about one shared real centre? No single eye can settle that. It takes the whole continuum of imaginary directions in the octonions, read together, to see whether the alignment holds.
+A nontrivial zero of the zeta function, seen from the complex line alone, is a lone point in a strip. Seen from the compactified octonions, that same zero opens into a round six-dimensional sphere, and the critical-line question becomes a question of arrangement: are these spheres concentric, gathered about one shared real centre? It takes the whole continuum of imaginary directions in the octonions, read together, to see whether the alignment holds.
 
 The paper is built to make that convergence visible and, at every step, checkable. Part 1 recalls the classical facts about the Riemann zeta function we will lean on. Part 2 develops the slice-preserving theory of functions on the octonions, builds the commutative ring $\mathcal R$ in which the octonionic zeta lives, and proves the reframing at the centre of everything: the classically nontrivial zeros are exactly the residue-$\CC$ zero six-spheres, and the Riemann Hypothesis holds precisely when those spheres are concentric. Part 3 proves the main result, the Concentricity Theorem, with a small piece of machinery I think of as a concentricity detector. From the section itself we build one distinguished action on a projective base, carry it across a continuum of Riemann spheres by orbit and stabilizer, and read off, through categorical homotopy theory, whether the zero-spheres land in a single connected piece. They do; and for the octonionic zeta, that is the Riemann Hypothesis.
 
@@ -922,7 +922,7 @@ infinite family, so that whether it lies in one connected component of $\mathcal
 (Definition~\ref{def:base}) is an infinite alignment, decided by
 Theorem~\ref{thm:concentricity}.
 
-\subsection*{The two geometric registers}
+\subsection*{Two geometric viewpoints}
 
 \begin{definition}[The octonionic and slice-value worlds]\label{def:two-worlds}
 \lean{H1, S2}
@@ -1131,10 +1131,23 @@ four properties.
 \end{enumerate}
 \end{definition}
 
+\begin{definition}[The residue subdiagram and its inclusion]\label{def:residue-subdiagram}
+\lean{ASection.CResidueZeroLocus, ASection.AsectionCResidueDiagram, ASection.AsectionCResidueInclusion}
+\uses{def:base, def:A-section, lem:residue-spheres}
+The \emph{residue locus} of an A-section is $\{z : A(z)=0,\ \operatorname{Im}z>0\}$
+\textup{(}\texttt{CResidueZeroLocus}\textup{)}. The \emph{residue subdiagram}
+$\mathcal R_A:\mathcal B\to\mathbf{Grpd}$ \textup{(}\texttt{AsectionCResidueDiagram}\textup{)} is
+the preimage of the states this locus selects at the north frame --- a preimage taken in the
+total action groupoid, not of a set --- with the witnessing base arrow carried as data; its
+inclusion $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$
+\textup{(}\texttt{AsectionCResidueInclusion}\textup{)} is a faithful embedding onto its image,
+and its naturality squares commute definitionally.
+\end{definition}
+
 \begin{theorem}[Concentricity]\label{thm:concentricity}
-\uses{def:A-section, def:base, lem:residue-spheres, lem:pi0-grothendieck,
+\uses{def:A-section, def:base, def:residue-subdiagram, lem:residue-spheres, lem:pi0-grothendieck,
 thm:winding-lift, prop:winding-signature, thm:identity}
-Let $A$ be an $A$-section. The C-residue values transported by the A-section functor
+Let $A$ be an $A$-section. The infinitely many C-residue zeros transported by the A-section functor
 $\mathcal A_A:\mathcal B\to\mathbf{Grpd}$, from the projective great-circle base
 $\mathcal B$ to the A-generated normalized value groupoids, form exactly one
 colimit/component class, and that
@@ -1148,46 +1161,101 @@ many populated residue-$\CC$ zero spheres are concentric. The theorem does not p
 numerical value of $c$.
 \end{theorem}
 \begin{proof}
-Conditions \textup{C1--C3} determine one distinguished element: the Euler product presents it
-at $0$ and the Weierstrass product at $N$, the two boundary points it fixes, as a single
-diagonal M\"obius element, through the commuting triangle $\pi\circ E=\exp$; per prime a
-centered degenerate family with one real level, each lifting uniquely to $N$. The winding,
-lift-uniqueness, tameness, crossing, welding, and GPV transport laws are readings of that one
-action. Orbit--stabilizer carries the element across the base by M\"obius group laws, its
-object and arrow actions determined together and its identity and composition laws pure group
-algebra. The resulting functor
-$A^{\mathrm{slice}}:\mathcal B\to\SphereWorld$ is the geometric projection.
-The $G_2$-equivariant realization on $\Ostar$ lifts this same action to the
-normalized value-state fibres, giving
-$\mathcal A_A:\mathcal B\to\mathbf{Grpd}$. Its normalized states carry their
-real-value data and its arrows are the actual value transports.
+We consider a slice-preserving section $A$ of the ring $\mathcal R$ on the compactified
+octonions $\OO^{*}$. Slice preservation hands us, for each slice, an isomorphism onto a
+Riemann sphere, pinned down by a normalization of $\OO^{*}$; and this is already the push
+toward a functorial point of view, because the spheres do not come one at a time --- they come
+as a family with coherent identifications, and such a family is organized by a functor. The
+hypotheses push in the same direction. Specifying the analytic object, the theory suggests
+exponential equations; and $\OO^{*}$ comes from the Cayley--Dickson construction with only one
+real axis. The projective great circle that axis compactifies to is framed by $PGL(2,\RR)$: a
+projective coordinate frame in which $\exp(I\theta)$ lives, and the analytic sections of
+$\mathcal R$ themselves transform as M\"obius transformations --- self-transformations of the
+slice-preserving section. Frames and transformations compose, invert, and act: they are
+groupoids. That is the base $\mathcal B$ of Definition~\ref{def:base}
+\textup{(}\texttt{GreatCircle.Base}\textup{)}, arrived at by the shape of the ring rather than
+by choice.
 
-Form $P_A=\pi_0\circ\mathcal A_A$ and
-$\mathcal T_A=\int_{\mathcal B}\mathcal A_A$. By
-Lemma~\ref{lem:pi0-grothendieck},
-\[
-  \pi_0(\mathcal T_A)\cong
-  \operatorname*{colim}_{\mathcal B}P_A.
-\]
-Riehl's category-of-elements calculation shows that this colimit imposes exactly the
-identifications generated by the maps of $P_A$, hence by the completed value transports of
-$\mathcal A_A$ \cite[p.~102, proof of Lemma~8.3.4]{Riehl}. The A-section functor is global on the
-continuum of sphere worlds and its analytic cargo is carried through the one common witness
-$N$. The colimit therefore consumes the entire transport system at once. Condition
-\textup{C4} supplies the nonempty infinite output population, and the completed transports
-supply its categorical connectedness. Riehl's singleton criterion then identifies its
-$\pi_0$ with a singleton \cite[Rem.~8.3.5]{Riehl}. Thus the populated residue-$\CC$ part of the
-colimit is one class.
+Conditions C1--C4 now determine what kind of distinguished action the A-section is. The
+exponential equations lead to the commuting triangle $\pi\circ E=\exp$ of the logarithm
+manifold \textup{(}Theorems~\ref{thm:slice-exp} and~\ref{thm:log-manifold}\textup{)}, giving
+the unique tame lift of any exponential base \textup{(}Theorem~\ref{thm:winding-lift},
+Proposition~\ref{prop:winding-signature}\textup{)}; since C2 supplies an Euler product, the
+winding of that lift is partitioned and well-defined at every prime, all of it carried in one
+diagonal M\"obius element --- a group and a function, and a functor. C3 supplies the unique
+factorization at $N$ \textup{(}Proposition~\ref{prop:weierstrass}\textup{)}. That the Euler
+diagonal element and the Weierstrass factorization are connected by the same unique tame lift
+is what gives the distinguished disk action its structure: the degenerate fibre of
+Lemma~\ref{lem:exp-degenerate}, with its one real level and its winding heights, is this
+action's own level-and-height bookkeeping. Each of these points of view is by itself
+fragmentary; conjugated, they show how A-section functors act. And they act on groupoids, so
+the construction is completed by categorified orbit--stabilizer theory, which is how such a
+functor is made well-defined on all of $\OO^{*}$: the M\"obius group law gives the local
+action, orbit representatives position the element at every footpoint, stabilizer
+compatibility makes the positioning independent of the representatives, and the group identity
+and multiplication supply the functor laws. The $G_2$-equivariant realization
+\textup{(}Theorem~\ref{thm:G2-equiv}\textup{)} lifts the same action to the value states,
+along the continuum of Riemann spheres through the one point $N$. The result is the A-section
+functor $\mathcal A_A:\mathcal B\to\mathbf{Grpd}$ of Definition~\ref{def:base}, whose states
+carry their real-value data and whose arrows are the element's actual value transports.
 
-This categorical class and its carried real value are kept in distinct registers:
+From the functor we form its total Grothendieck construction,
+$\mathcal T_A=\int_{\mathcal B}\mathcal A_A$ \textup{(}Definition~\ref{def:base}\textup{)}: an
+object is a base position together with a normalized value state in its fibre, a morphism is a
+base channel together with the compatible transport, and the whole is an action groupoid
+formed from the distinguished element. It is in this total, and not in any set, that the
+residue-$\CC$ zeros are found. The distinguished element fixes $0$ and $N$, and between them
+the upper half-space; at the north frame, where the positioning factor is trivial and the
+frame is the element itself, the equation $A=0$ on that half-space selects the residue states,
+with Euler presenting at one end, Weierstrass at the other. The preimage of this selection
+under the action --- the preimage of the total action groupoid, membership travelling by
+composition in the base --- is the residue subdiagram $\mathcal R_A$ of
+Definition~\ref{def:residue-subdiagram}, included in $\mathcal A_A$ by $\iota_A$. The
+restriction of the total object to this preimage sits over the same base:
 \[
-  \kappa\in\pi_0(\mathcal T_A),\qquad c\in\RR.
+\begin{tikzcd}[column sep=large]
+\int_{\mathcal B}\mathcal R_A \arrow[rr, hook, "\int\iota_A"] \arrow[dr, "\pi_{\mathcal R}"'] & &
+\int_{\mathcal B}\mathcal A_A \arrow[dl, "\pi_{\mathcal A}"] \\
+& \mathcal B &
+\end{tikzcd}
 \]
-The first is the unique transport class; the second is the one real value already present in
-the normalized states identified in that class. Therefore the colimit output is the one
-real-value singleton $\{c\}$. The populated objects supplied by \textup{C3--C4} are precisely
-the residue-$\CC$ zero $6$-sphere states. They arrived as outputs of the degenerate fibre,
-never as input assumptions. Each therefore has centre $c$, and the spheres are concentric.
+
+Connectedness is established here, by the structure of $\iota_A$ itself. Because $\iota_A$ is
+a faithful embedding, an isomorphism onto its image, there is a canonical diagram of three
+categories: the domain $\mathcal R_A$, the image subcategory $\operatorname{Im}(\iota_A)$, and
+the full target $\mathcal A_A$. This creates a mandatory span of functors, a length-two
+zigzag:
+\[
+\begin{tikzcd}[column sep=large]
+& \operatorname{Im}(\iota_A) \arrow[dl, "\iota_A^{-1}"'] \arrow[dr, hook, "j"] & \\
+\mathcal R_A & & \mathcal A_A
+\end{tikzcd}
+\]
+The backward path exists because $\iota_A:\mathcal R_A\to\operatorname{Im}(\iota_A)$ is a
+strict isomorphism of categories, hence fully invertible; the forward path is the canonical,
+non-invertible inclusion $j:\operatorname{Im}(\iota_A)\hookrightarrow\mathcal A_A$. Any
+relation of the full category back to the restricted domain traverses exactly this roof. A
+category is connected when any pair of its objects is joined by a finite zigzag of morphisms,
+and the residue total inherits its zigzags through this span from the action that produced it:
+$\int_{\mathcal B}\mathcal R_A$ is a connected action groupoid. Concretely, the element's
+unique tame continuous lift runs the members into one another while fixing the real level, a
+difference of winding being purely vertical \textup{(}Lemma~\ref{lem:exp-degenerate}\textup{)}.
+
+By Remark~8.3.5 of \cite{Riehl}, a category is nonempty and connected if and only if its
+$\pi_0$ is the singleton set. Condition C4 supplies nonemptiness --- infinitely many
+residue-$\CC$ zero-sphere states populate the preimage --- and connectedness was just
+established. Therefore, by Lemma~\ref{lem:pi0-grothendieck}
+\textup{(}\texttt{pi0GrothendieckEquiv}\textup{)},
+\[
+\pi_0\Bigl(\int_{\mathcal B}\mathcal R_A\Bigr)\;\cong\;\operatorname*{colim}_{\mathcal B}\,(\pi_0\circ\mathcal R_A)
+\]
+collapses to a singleton $\kappa$. The class and its value are kept in distinct registers:
+$\kappa$ is the unique transport class, and $c\in\RR$ is the one real level present in the
+states $\kappa$ identifies, conserved along every connecting transport by the lift's level
+law; the level read is \texttt{ASection.transportLevel} in the Lean source. Reading the level
+on $\kappa$ returns a single number. The populated residue-$\CC$ zero $6$-sphere states all
+represent $\kappa$, so each has centre $c$. Hence, the infinitely many residue-$\CC$ zero
+spheres of the A-section are concentric.
 \end{proof}
 
 \begin{corollary}[Translation to the classical framework]\label{cor:nontrivial}
@@ -1281,6 +1349,16 @@ viewpoint; the value-bearing A-section functor gathers all of them over the base
 together, and the colimit conjugates them into a single answer. The concentricity we could not
 picture becomes one component we can compute.
 
+\begin{remark}[An alternative route]\label{rmk:thomason}
+Another proof of Theorem~\ref{thm:concentricity} is available through Thomason's homotopy
+colimit theorem \cite{Thomason79}: the classifying space of a Grothendieck construction is
+homotopy equivalent to the homotopy colimit of the classifying spaces of its fibres, and
+reading connected components through that equivalence yields the same collapse of
+$\pi_0\bigl(\int_{\mathcal B}\mathcal R_A\bigr)$. The proof given here stays at the level of
+categories, where Lemma~\ref{lem:pi0-grothendieck} suffices; the Thomason route is the
+topological shadow of the same computation, and that path has not been formalized in Lean.
+\end{remark}
+
 %=====================================================================
 \begin{thebibliography}{99}
 %=====================================================================
@@ -1356,6 +1434,11 @@ classifying spaces).
 \bibitem{Riehl} E.~Riehl, \emph{Categorical Homotopy Theory}, New Mathematical Monographs \textbf{24},
 Cambridge University Press, 2014 (the nerve, classifying spaces, the two-sided bar construction, and
 homotopy colimits; Ch.~1, 4--6).
+\bibitem{RiehlContext} E.~Riehl, \emph{Category Theory in Context}, Aurora: Dover Modern Math
+Originals, Dover Publications, 2016 (action groupoids and their orbits; Ex.~1.5.19).
+\bibitem{Thomason79} R.~W.~Thomason, \emph{Homotopy colimits in the category of small
+categories}, Math.\ Proc.\ Cambridge Philos.\ Soc.\ \textbf{85} (1979), 91--109 (Thm.~1.2:
+the classifying space of the Grothendieck construction as a homotopy colimit).
 \bibitem{Vistoli} A.~Vistoli, \emph{Notes on Grothendieck topologies, fibered categories and descent
 theory}, in \emph{Fundamental Algebraic Geometry}, Math.\ Surveys Monogr.\ \textbf{123}, AMS, 2005
 (arXiv:math/0412512); \S3.1 for the Grothendieck construction and categories fibered in groupoids.
