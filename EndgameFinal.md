@@ -57,6 +57,21 @@ exactly `[propext, Classical.choice, Quot.sound]`.
 tree currently duplicates a sentence (the inline `hconn`), the blueprint has nothing to bind to —
 another reason to collapse it onto the declaration.
 
+## THE REGISTER LOCK (the author's ruling, 2026-07-28 — THE POINT)
+
+**The encoding fact is `ι_A`'s, and it is certified.** A faithful inclusion, a natural
+isomorphism onto its image, naturality definitional — `57384ae`, three independent
+verifications. **Connectedness lives at that register: the FUNCTOR level** — `ι_A` as a
+natural transformation, the span of categories it forces, the zigzag it carries. The total
+inherits its connectedness from the inclusion's certified structure.
+
+**The state level is the WRONG register.** G₂ elements, chart coordinates, individual homs
+inside fibres, arrows assembled leg-by-leg between states — every descent to that level is the
+banned substitution ("leg by leg", struck by the author each time it appeared). The seat's
+consumption is typed **at ι_A's own level**: the term consumes `ι_A` itself — the natural
+transformation, its `rfl` squares, its span — and nothing below that level appears in the term
+or in any explanation of it.
+
 ## The stance (binding)
 
 **The kernel is the check.** Author supplies, kernel verifies, model types between them — the
