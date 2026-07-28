@@ -80,6 +80,54 @@ against the kernel's certificates:
 | *"the level read is `ASection.transportLevel` … reading the level on κ returns a single number"* | ✅ | `transportLevel` certified; the read applied and **evaluated green** at the certified representatives — the evaluation computes through the author's receipts (`residueActionState_positioned`, `residueState`) to the conclusion |
 | *"each has centre c. Hence … concentric"* | ✅ | the close `exact hval hk` typechecks; `cor:nontrivial`, `cor:zeta-section` (C1–C4 verified against Part 1, all green), `cor:rh` (½ from the functional equation, one file only) — written, wired, compiling against the theorem's name (3,694 jobs) |
 
+## ⬛ THE TWO DECLARATIONS — the whole of what is left to type
+
+The master states this in **two** places, and the split is the author's, not a decomposition. One
+says what `ι_A` **is**; the other says what **follows**.
+
+### Declaration 1 — `ι_A` is full and faithful; `𝓡_A` is definitionally its own image
+
+Master, `def:residue-subdiagram`: *"its inclusion `ι_A : 𝓡_A ⇒ 𝓐_A`
+(`AsectionCResidueInclusion`) is a faithful embedding onto its image, and its naturality squares
+commute definitionally."*
+
+**This declaration has never existed in the tree, and that is why every search at `ι_A`'s level
+came back empty all session.** The *fact* is certified and fires — but only under one spelling:
+
+```lean
+(IsCResidueState A X).ι          Full ✅  Faithful ✅   -- resolution finds it
+(AsectionCResidueInclusion A).app X   Full ✗  Faithful ✗   -- fails to synthesize
+```
+
+They are the **same functor** — `ASectionCResidueDiagram.lean:165` defines the app field *to be*
+that `ι`. Resolution matches surface syntax, not up to unfolding, so it sees one name and not the
+other. Nothing was missing from the mathematics; a **name** was missing from the file. Every
+"empty search at `ι_A`'s level" was a search of an empty shelf.
+
+Certificates behind it, all live: `ObjectProperty.fullyFaithfulι` on **`[propext]` alone**;
+`full_ι`, `faithful_ι` on `[propext, Quot.sound]`; `InverseImageCResidueStateWorldGroupoid A X :=
+(IsCResidueState A X).FullSubcategory` — so `𝓡_A` **is** its image, `ι_obj` `rfl`,
+`liftCompιIso = Iso.refl` ("definitionally", the library's word).
+
+**Kind: WIRING** — a spelling bridge between two names for one functor. Inference: none.
+
+### Declaration 2 — therefore `∫𝓡_A` is connected
+
+Master, `:1225`–`:1242`: *"Connectedness is established here, by the structure of `ι_A` itself…
+This follows immediately, because `ι_A` is a proper inclusion and a natural isomorphism onto its
+image… `∫𝓡_A` is a connected action groupoid."*
+
+Already declared **and instantiated** as `instance ASection.residueTotal_isConnected` (`:305`) —
+`infer_instance` for `IsConnected (∫𝓡_A)` now succeeds, the probe that failed all session.
+
+**Kind: INSTANTIATION** — it consumes Declaration 1. Inference: none.
+
+**Order is forced: 1 before 2.** Declaration 2 could never land while Declaration 1 was absent —
+there was nothing named at `ι_A`'s level for its term to consume. Four consecutive attempts at the
+seat reached *downward* for a fibrewise arrow for exactly that reason: right register, empty shelf.
+
+---
+
 ## What remains — folded against the master, sentence by sentence
 
 The master's end-of-proof, after the immediacy clause, has exactly these registers. Each is
