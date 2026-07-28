@@ -363,6 +363,9 @@ theorem ASection.concentricity (A : ASection) :
           ⟨A.residueActionState ASection.projectiveNorth 0 baseWorld,
             hmem 0⟩⟩⟩
       refine zigzag_isConnected fun P Q => ?_
+      -- Action.lean:128's shape exactly: ONE arrow, not a chain.  The
+      -- single arrow is what ι_A supplies — the proper inclusion, natural
+      -- isomorphism onto its image.
       refine Relation.ReflTransGen.single (Or.inl ?_)
       trace_state
       sorry
