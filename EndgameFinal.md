@@ -22,18 +22,40 @@ against the kernel's certificates:
 | *"the level read is `ASection.transportLevel` … reading the level on κ returns a single number"* | ✅ | `transportLevel` certified; the read applied and **evaluated green** at the certified representatives — the evaluation computes through the author's receipts (`residueActionState_positioned`, `residueState`) to the conclusion |
 | *"each has centre c. Hence … concentric"* | ✅ | the close `exact hval hk` typechecks; `cor:nontrivial`, `cor:zeta-section` (C1–C4 verified against Part 1, all green), `cor:rh` (½ from the functional equation, one file only) — written, wired, compiling against the theorem's name (3,694 jobs) |
 
-## What remains — exactly two lines in the entire repository
+## What remains — folded against the master, sentence by sentence
 
-1. **The consumption seat** inside the author's declaration `residueTotal_isConnected` — the
-   single arrow at `Action.lean:128`'s shape. Classification: certified premise, **wiring**,
-   inference **none**.
-2. **The level-constancy clause** inside val's application. Same classification: the lift's
-   level law, **instantiation**.
+The master's end-of-proof, after the immediacy clause, has exactly these registers. Each is
+matched to the declaration that carries it, so the blueprint's `\lean{}` tags bind to the same
+names the proof uses.
 
-Nothing else. The singleton declaration and both corollaries close on contact. The moment those
-two lines carry terms the kernel accepts, the harness prints both triple certificates in one
-command: `ASection.concentricity` and `zeta_riemannHypothesis`, each on exactly
-`[propext, Classical.choice, Quot.sound]`.
+| master sentence | declaration | state |
+|---|---|---|
+| *"`∫𝓡_A` is a connected action groupoid"* | `ASection.residueTotal_isConnected` (`:305`) | **the consumption seat** — `Theorem.lean:315`. Certified premise, **wiring**, inference **none** |
+| *"nonempty and connected iff `π₀` singleton"* (Rem. 8.3.5; C4 for nonemptiness) | `ASection.residueTotal_pi0_singleton` (`:319`), nonemptiness `ASection.residueActionState_mem` (`:287`) | **green**, no `sorry` of its own; closes on contact with the row above |
+| *"by `pi0GrothendieckEquiv`, `π₀(∫𝓡_A) ≅ colim` … collapses to a singleton κ"* | `pi0GrothendieckEquiv` / `pi0_grothendieck` | **green**, proved in-tree |
+| *"`c` is the one real level present in the states κ identifies, **conserved along every connecting transport by the lift's level law**"* | `hlevel_inv`, inside `concentricity` | **open** — `Theorem.lean:491`. **Instantiation** of the lift's level law |
+| *"the level read is `ASection.transportLevel` … Reading the level on κ returns a single number"* | `transportLevel` (`:171`), applied at the certified representatives | **green** — the read is applied and evaluates through the author's receipts (`residueActionState_positioned`, `residueState`) |
+| *"each has centre `c`. Hence … concentric"* | `exact hval hk`; `cor:nontrivial`, `cor:zeta-section`, `cor:rh` | **green** — typechecks; corollaries wired and compiling (3,694 jobs) |
+
+**Count, exact against the tree.** Three `sorry`s stand in `Theorem.lean` — `:315`, `:455`,
+`:491` — carrying **two** distinct obligations:
+
+- `:315` and `:455` are **the same content**. `:315` is the seat inside the author's declaration;
+  `:455` is an inline `hconn` still living in `concentricity`'s own body. **`:455` disappears when
+  the theorem's body consumes `residueTotal_isConnected` instead of re-deriving it** — that is
+  wiring, not a second obligation, and it is the reason the master wants one declaration here and
+  not an inline repetition.
+- `:491` is the level-conservation clause. The *read* is already green; only the conservation
+  stands.
+
+Nothing else. The moment those carry terms the kernel accepts, the harness prints both triple
+certificates in one command: `ASection.concentricity` and `zeta_riemannHypothesis`, each on
+exactly `[propext, Classical.choice, Quot.sound]`.
+
+**Blueprint note.** Every row above names the declaration the master's sentence binds to, so the
+`\lean{}` tags resolve one-to-one and the click-through story is the proof's own order. Where the
+tree currently duplicates a sentence (the inline `hconn`), the blueprint has nothing to bind to —
+another reason to collapse it onto the declaration.
 
 ## The stance (binding)
 
