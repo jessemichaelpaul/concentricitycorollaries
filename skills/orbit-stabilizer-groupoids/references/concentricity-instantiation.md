@@ -502,7 +502,7 @@ grepping during execution.**
 
 | name | exact location |
 |---|---|
-| `ActionCategory`; `stabilizerIsoEnd` (:105); anonymous `IsConnected` instance (:128, by resolution only) | `Mathlib/CategoryTheory/Action.lean` |
+| `ActionCategory`; `stabilizerIsoEnd` (:105 — **monoid-level**: `stabilizerSubmonoid ≃* End`, `MulEquiv.refl`, definitional; applies to groups as monoids); `endMulEquivSubgroup` (:142 — **group-level** vertex group, stated for the quotient action `G ⧸ H`; cite both and say which is which); anonymous `IsConnected` instance (:128, by resolution only — **and its proof is Gate 1's template**); `homOfPair` (:148 — arrow constructor) | `Mathlib/CategoryTheory/Action.lean` |
 | `ConnectedComponents = Quotient (Zigzag.setoid)` (:40) | `Mathlib/CategoryTheory/ConnectedComponents.lean` |
 | `Zigzag` (:314); `Zigzag.setoid` (:375); `isPreconnected_zigzag` (:418) | `Mathlib/CategoryTheory/IsConnected.lean` |
 | `Grothendieck.Hom` (:86); `Grothendieck.map` (:242); `functor_comp_forget` (:269) | `Mathlib/CategoryTheory/Grothendieck.lean` |
@@ -510,8 +510,10 @@ grepping during execution.**
 | the residue chain, inhabitants, level receipts | `Concentricity/ASectionCResidue*.lean`, `ASectionTotalActionState.lean`, `ASectionActionDiagram.lean` |
 
 **GATE 1 — connectedness of the ι_A-included residue total.** Outer type
-(binders: `A` only): `Nonempty` + `IsConnected` of
-`Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)`.
+(binders: `A` only):
+`IsConnected (Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat))`
+— `IsConnected` already includes nonemptiness (the earlier `Nonempty +`
+conjunct was redundant; the inhabitant receipts supply that component).
 
 CITE — already-proved kernel facts, zero inference:
 
@@ -543,8 +545,26 @@ INFER — terms to assemble, each read off certified data, no search:
    triple-certified.** If the kernel prints a residual goal during
    assembly, it routes to the author verbatim per standing protocol; that
    safety valve is not a planned step.
-3. **Packaging**: `Nonempty` from CITE-3; `IsConnected` from INFER-1 +
-   INFER-2 via the zigzag characterization.
+3. **Packaging — by Mathlib's own template.** The `:128` instance proof IS
+   Gate 1's shape, written by the library:
+   `zigzag_isConnected fun x y => Relation.ReflTransGen.single <| Or.inl <|`
+   (a nonempty hom). Gate 1 differs only in what supplies the hom —
+   `x.property` instead of `exists_smul_eq` — and `homOfPair` (:148) is the
+   arrow constructor. **Arrow hunting is eliminated by citation: a template
+   and a constructor exist.** Nonemptiness from CITE-3.
+
+**INFER, defined precisely (sync ruling, 2026-07-27):** INFER means *no
+Mathlib name carries the statement, so the term gets written*. It is a claim
+about the library's naming, never about unproved mathematics — provenance
+stays kind 1 (CHT 8.3.5, verbatim in `SOURCES/Riehl.md`) or certified
+kind 3. If the column ever reads as doubt, the column is mislabelled, not
+the mathematics.
+
+**The author's guard:** connectedness must be a THEOREM about `∫𝓡_A`,
+constructed from `x.property` — never true by definition or fiat. If it
+ever collapses into an identity making connectedness true by construction,
+that shows at elaboration — which is what stating the outer type first is
+for.
 
 **8.3.4 is not quicker and is not used** (the author's instinct, confirmed
 by the register): it introduces a functor `K` and slice objects — the
