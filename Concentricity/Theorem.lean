@@ -297,11 +297,35 @@ theorem ASection.residueActionState_mem (A : ASection) (m : ℕ) :
   · rw [AsectionActionTransport_id]
     rfl
 
-/-- **THE DECLARATION** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
+/-- **DECLARATION 1** (the author's, verbatim, `def:residue-subdiagram`):
+`ι_A : 𝓡_A ⇒ 𝓐_A` is "a faithful embedding onto its image, and its
+naturality squares commute definitionally."
+
+Wiring only: `(AsectionCResidueInclusion A).app X` **is**
+`(IsCResidueState A X).ι` (`ASectionCResidueDiagram.lean:165`), and `𝓡_A`
+**is** its own image (`FullSubcategory`; `ι_obj` = `rfl`).  Mathlib carries
+the fact — `fullyFaithfulι` on `[propext]` alone — but resolution matches
+surface syntax, so it fires on the `ι` spelling and not on `ι_A`'s name.
+These declarations put it under the author's name. -/
+def ASection.AsectionCResidueInclusion_app_fullyFaithful
+    (A : ASection) (X : GreatCircle.Base) :
+    ((AsectionCResidueInclusion A).app X).FullyFaithful :=
+  ObjectProperty.fullyFaithfulι _
+
+instance ASection.AsectionCResidueInclusion_app_full
+    (A : ASection) (X : GreatCircle.Base) :
+    ((AsectionCResidueInclusion A).app X).Full :=
+  ObjectProperty.full_ι _
+
+instance ASection.AsectionCResidueInclusion_app_faithful
+    (A : ASection) (X : GreatCircle.Base) :
+    ((AsectionCResidueInclusion A).app X).Faithful :=
+  ObjectProperty.faithful_ι _
+
+/-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
 natural isomorphism onto its image (certified, `57384ae`; naturality
-`rfl`).  Consumption seat: `Action.lean:128`, a SINGLE arrow — wiring
-only, inference none (`EndgameFinal.md` §5). -/
+`rfl`).  Consumes Declaration 1. -/
 instance ASection.residueTotal_isConnected (A : ASection) :
     CategoryTheory.IsConnected (Grothendieck
       (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
