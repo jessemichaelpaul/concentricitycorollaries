@@ -327,6 +327,8 @@ theorem ASection.concentricity (A : ASection) :
     have ιA := ASection.AsectionCResidueInclusion A
     have hIsConn : CategoryTheory.IsConnected (Grothendieck
         (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
+      -- ι_A is the connected action groupoid: the proper inclusion,
+      -- iso onto its image, certified.
       trace_state
       sorry
     letI := hIsConn
@@ -346,6 +348,14 @@ theorem ASection.concentricity (A : ASection) :
       CategoryTheory.ConnectedComponents.mk P =
         CategoryTheory.ConnectedComponents.mk Q) →
       A.transportLevel n = A.transportLevel 0 := by
+    intro hsingleton
+    -- 8.3.5 APPLIED: the singleton k, at the two certified representatives.
+    have hkn := hsingleton
+      ⟨ASection.projectiveNorth,
+        ⟨A.residueActionState ASection.projectiveNorth n baseWorld, hmem n⟩⟩
+      ⟨ASection.projectiveNorth,
+        ⟨A.residueActionState ASection.projectiveNorth 0 baseWorld, hmem 0⟩⟩
+    -- val(k) = c: that real part.
     trace_state
     sorry
   exact hval hk
