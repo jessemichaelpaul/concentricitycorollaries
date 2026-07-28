@@ -322,42 +322,15 @@ theorem ASection.concentricity (A : ASection) :
   have hconn : ∀ P Q : Grothendieck
       (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
       CategoryTheory.Zigzag P Q := by
-    intro P Q
-    obtain ⟨xNP, hNP, gP, hgP⟩ := P.fiber.property
-    obtain ⟨xNQ, hNQ, gQ, hgQ⟩ := Q.fiber.property
-    have memNP : ASection.IsCResidueState A ASection.projectiveNorth xNP :=
-      ⟨xNP, hNP, 𝟙 ASection.projectiveNorth, by
-        rw [ASection.AsectionActionTransport_id]; rfl⟩
-    have memNQ : ASection.IsCResidueState A ASection.projectiveNorth xNQ :=
-      ⟨xNQ, hNQ, 𝟙 ASection.projectiveNorth, by
-        rw [ASection.AsectionActionTransport_id]; rfl⟩
-    -- ι_A IS the connected transport: a proper inclusion, iso onto its
-    -- image, whose square carries every member's own base arrow and object
-    -- equality as a morphism of the total.  These are the square's legs:
-    have legP : (⟨ASection.projectiveNorth, ⟨xNP, memNP⟩⟩ :
-        Grothendieck
-          (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) ⟶ P :=
-      ⟨gP, (ASection.IsCResidueState A P.base).homMk (eqToHom hgP)⟩
-    have legQ : (⟨ASection.projectiveNorth, ⟨xNQ, memNQ⟩⟩ :
-        Grothendieck
-          (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) ⟶ Q :=
-      ⟨gQ, (ASection.IsCResidueState A Q.base).homMk (eqToHom hgQ)⟩
-    refine Relation.ReflTransGen.trans
-      (Relation.ReflTransGen.single (Or.inr ⟨legP⟩))
-      (Relation.ReflTransGen.trans ?_
-        (Relation.ReflTransGen.single (Or.inl ⟨legQ⟩)))
-    -- THE SQUARE IS THE CONNECTED TRANSPORT (typed): every member is
-    -- zigzag-connected to every transport of itself — the cocartesian
-    -- arrow of the square, with no analytic input.
-    have htrans : ∀ (R : Grothendieck
-        (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat))
-        {Y : GreatCircle.Base} (f : R.base ⟶ Y),
-        CategoryTheory.Zigzag R (Grothendieck.transport R f) :=
-      fun R _ f => Relation.ReflTransGen.single
-        (Or.inl ⟨Grothendieck.toTransport R f⟩)
-    -- the join of the two square legs, through the transports:
-    trace_state
-    sorry
+    -- ι_A itself — the certified proper inclusion, iso onto its image —
+    -- is the connected action groupoid, in the ActionCategory register:
+    have ιA := ASection.AsectionCResidueInclusion A
+    have hIsConn : CategoryTheory.IsConnected (Grothendieck
+        (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
+      trace_state
+      sorry
+    letI := hIsConn
+    exact fun P Q => CategoryTheory.isPreconnected_zigzag P Q
   -- THE 8.3.5 COLLAPSE, LOCKED (no sorry): nonempty (hmem) and connected
   -- (hconn), so π₀(∫𝓡_A) is the singleton — the collapse is Quotient.sound
   -- of the zigzag, the exact pattern of `toColimitObj_eq_of_hom` above.
