@@ -130,6 +130,28 @@ consumption is typed **at ι_A's own level**: the term consumes `ι_A` itself �
 transformation, its `rfl` squares, its span — and nothing below that level appears in the term
 or in any explanation of it.
 
+## THE INSTRUCTION, CLARIFIED (the author, 2026-07-28 — both halves of the act)
+
+The master declaration in Lean is: **`ι_A` is connected — that is `∫𝓡_A` — and it is certified.**
+Executing it has **two halves**, and both are required:
+
+1. **DECLARE** — the author's sentence stated under the author's name:
+   `ASection.residueTotal_isConnected : IsConnected (∫𝓡_A)`.
+2. **INSTANTIATE** — the declaration registered as an **`instance`**, because `IsConnected` is a
+   class and only a registered instance participates in resolution. A `theorem` states the
+   sentence; an `instance` makes it *fire by resolution* — the `:128` behavior, true of the
+   author's own declaration. **Receipt: the `infer_instance` probe on `∫𝓡_A`, which failed all
+   session under the theorem form, succeeds under the instance form** (`2b11128`).
+
+The same pattern downstream: `residueTotal_pi0_singleton` consumes the instance (no sorry of its
+own); val is instantiated at the readout. Half-executing (declaring without instancing) leaves
+resolution blind and reads as "nothing found" — the wrong-register signature.
+
+**Current state:** the instance is registered and resolution finds it; the consumption seat
+inside it is the one slot; then the level clause. **Branch order for the next pass: Opus types
+first → Fable second → both empty, the double audit.** The verifier of a successful pass runs
+their own build, both `#print axioms`, the source scan, and the docs-to-tree match.
+
 ## The stance (binding)
 
 **The kernel is the check.** Author supplies, kernel verifies, model types between them — the
