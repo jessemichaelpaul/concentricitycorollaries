@@ -25,14 +25,9 @@ and that element holds *both* boundary faces —
 semantic locus `CResidueZeroLocus A` selects there is the whole `0`-to-`N`
 core: Euler presenting at `0`, Weierstrass at `N`, the square spanning them.
 
-⛔ **Do not read this as "the residues at the north point."**  The selected
-object is that square, and `𝓡_A(X)` at an arbitrary frame is the image of
-the square under the same A-specific action functor — an object belongs when
-it is the image under `AsectionActionTransport A g` for a base arrow
-`g : projectiveNorth ⟶ X`.  Reading it as a plural of points manufactures a
-"join the distinct zeros" obligation that the author struck: if the selected
-object is the square, there is nothing to join.  The point-reading is weaker
-than what is triple-certified here.
+`𝓡_A(X)` at an arbitrary frame is the image of that square under the same
+A-specific action functor: an object belongs when it is the image under
+`AsectionActionTransport A g` for a base arrow `g : projectiveNorth ⟶ X`.
 
 Thus the base arrow and the action on objects and arrows are part of the
 groupoid preimage itself.  No external fixed carrier is tested after

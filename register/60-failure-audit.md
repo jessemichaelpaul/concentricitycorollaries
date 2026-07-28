@@ -542,6 +542,7 @@ construction → the static/local substitute an assistant produced.
 | total groupoid preimage | arrowwise `ObjectProperty.inverseImage` |
 | `ι_A : 𝓡_A ⟹ F_A` | per-arrow inclusion depending on `f` |
 | consuming the `d = 1` square | a disconnected audit example never used |
+| the `0`-to-`N` square selected at the frame that IS the element | "the north residues" — a plural of points at a frame |
 
 The mechanism, in the assistant's own words: *"Lean exposes local terms and
 propositions, and my strongest default pattern is function/set/predicate

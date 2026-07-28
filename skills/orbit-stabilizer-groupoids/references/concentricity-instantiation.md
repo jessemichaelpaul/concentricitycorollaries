@@ -494,6 +494,83 @@ orbit–stabilizer action already built from the distinguished element.
 Likewise, nonemptiness is not an open task: the certified inverse image
 already has inhabitants, and C4 supplies the stronger infinitude result.
 
+## The endgame two-gate ledger (pre-build accounting, 2026-07-27)
+
+**Folder map — verified at the pinned revision with line numbers. There is
+no other folder; a name not on this map is not a supplier, and there is no
+grepping during execution.**
+
+| name | exact location |
+|---|---|
+| `ActionCategory`; `stabilizerIsoEnd` (:105); anonymous `IsConnected` instance (:128, by resolution only) | `Mathlib/CategoryTheory/Action.lean` |
+| `ConnectedComponents = Quotient (Zigzag.setoid)` (:40) | `Mathlib/CategoryTheory/ConnectedComponents.lean` |
+| `Zigzag` (:314); `Zigzag.setoid` (:375); `isPreconnected_zigzag` (:418) | `Mathlib/CategoryTheory/IsConnected.lean` |
+| `Grothendieck.Hom` (:86); `Grothendieck.map` (:242); `functor_comp_forget` (:269) | `Mathlib/CategoryTheory/Grothendieck.lean` |
+| `MulAction.orbitEquivQuotientStabilizer` (:174) | `Mathlib/GroupTheory/GroupAction/Quotient.lean` |
+| the residue chain, inhabitants, level receipts | `Concentricity/ASectionCResidue*.lean`, `ASectionTotalActionState.lean`, `ASectionActionDiagram.lean` |
+
+**GATE 1 — connectedness of the ι_A-included residue total.** Outer type
+(binders: `A` only): `Nonempty` + `IsConnected` of
+`Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)`.
+
+CITE — already-proved kernel facts, zero inference:
+
+1. `x.property` — the certified membership witness (∃-data): a projection.
+2. `AsectionActionTransport_id`/`_comp`
+   (`ASectionActionDiagram.lean:306/:313`).
+3. Inhabitants: the certified inverse-image audit examples;
+   `residueTotal` (`ASectionTotalActionState.lean:117`);
+   `sphereZero_mem_CResidueZeroLocus`.
+4. The zigzag machinery at the folder map's locations.
+
+INFER — terms to assemble, each read off certified data, no search:
+
+1. **The witness-arrow term**: for any `(X, x)` in the total, the
+   Grothendieck morphism `(N, xN) ⟶ (X, x)` with `base := g` and
+   `fiber := eqToHom` of the membership equality — one constructor
+   application consuming `x.property`. **Membership data IS the connecting
+   arrow**: single arrow, no zigzag, no hunt.
+2. **The north-part identification** — the 0-to-N square read as ONE
+   system. The single dictation seam of Gate 1, stated by the author from
+   the square already held (`projectiveObjectFrame_north`, both
+   `fixes_cayley` faces, `G₂` sweeping each residue sphere with
+   `smul_coordinate = rfl`, the winding held in `NorthStabilizer`).
+   **Arrow hunting at this seam is forbidden; the square is the source.**
+3. **Packaging**: `Nonempty` from CITE-3; `IsConnected` from INFER-1 +
+   INFER-2 via the zigzag characterization.
+
+**8.3.4 is not quicker and is not used** (the author's instinct, confirmed
+by the register): it introduces a functor `K` and slice objects — the
+generic-letter shape — and computes finality, strictly more than the
+singleton needs. 8.3.5 consumes exactly what Gate 1 produces.
+
+**GATE 2 — `ASection.concentricity`, atomic (8.3.5 + the pluck).** Outer
+type (binders: `A`, `n` — the conclusion's own indices):
+`∃ c : ℝ, ∀ n, (A.sphereZero n).re = c`.
+
+CITE: Gate 1's receipt; `Quotient.sound (isPreconnected_zigzag _ _)` (the
+singleton); `residueTotal A n I` with `residueTotal_base` (`rfl` — over
+`normalizedFootpoint (A.sphereZero n).re`); `smul_coordinate = rfl`;
+`residueToNorth_level` / `normalizedNActionSquare_level` with
+`lift_closed` (the level rides every closed tape).
+
+INFER: **the pluck** — the descent term reading the real level at the one
+class. The single dictation seam of Gate 2, shaped by the standing
+rulings: `π₀` is a left adjoint, the colimit performs the identifications,
+the value is plucked at the certified representatives — **never a
+separately-proved invariance function** (the output-into-input trap, three
+instances on record). Suppliers are the CITE list; the author dictates the
+reading.
+
+**Targeted-reading rule for the endgame.** A model working Gates 1–2 reads:
+this section, the two SOURCES files, the folder map above, and the
+Concentricity files it names — nothing else. The ι_A construction is
+consumed only through `x.property` and the outer declarations;
+`ASectionFunctor.lean`'s tape internals only through the two level
+receipts; every preservation-era register section is history, not
+instruction. Overlap with ι_A/F_A(X) materials is permitted only where
+this ledger names it.
+
 ## Registered A-specific naming table
 
 Keep these names active through the implementation loop so no generic slot becomes

@@ -824,21 +824,17 @@ The reading of record, complete:
    `distinguishedDiskAction_fixes_cayley_zero` and
    `distinguishedDiskAction_fixes_cayley_N`.
 
-   ⛔ **The selected object is the whole `0`-to-`N` square, never "the
-   residues at the north point"** (author, 2026-07-27). Euler presents at
-   `0`, Weierstrass at `N`, and the square spans them; `𝓡_A(X)` is the image
-   of *that square* under the same action functor. The point-reading is
-   strictly weaker than what is triple-certified, and it is not merely
-   imprecise — it manufactures a "join the distinct zeros" obligation the
-   author already struck. If the selected object is the square, there is
-   nothing to join. Two consequences for the component step: the orbit whose
-   image is taken is the orbit of the square, and connectedness and the
-   level's conservation stop being two facts — an axis pinned at both ends by
-   the very element doing the moving cannot slide, so the same square that
-   gives the orbit gives the invariant.
+   **The selected object is the whole `0`-to-`N` square** (author,
+   2026-07-27): Euler presents at `0`, Weierstrass at `N`, and the square
+   spans them. `𝓡_A(X)` is the image of that square under the same action
+   functor, so it is one orbit. Two things follow for the component step: the
+   orbit whose image is taken is the orbit of the square, and connectedness
+   and the level's conservation are one fact rather than two — an axis pinned
+   at both ends by the very element doing the moving cannot slide, so the
+   same square that gives the orbit gives the invariant.
 
-   **Do not re-raise the read-only clause against the certified
-   code; this text was the stale side of that collision (§6c).**
+   The read-only clause quoted above is the stale side of a doc-vs-code
+   collision (§6c); the certified code is the current side.
 2. **The preimage square at `0`/`N` already commutes.** The unique winding —
    `winding_lift_unique`, the tape's `lift_unique`, `lift_closed`, the
    element fixing both boundary points — means the two ways around were
