@@ -147,6 +147,25 @@ The same pattern downstream: `residueTotal_pi0_singleton` consumes the instance 
 own); val is instantiated at the readout. Half-executing (declaring without instancing) leaves
 resolution blind and reads as "nothing found" — the wrong-register signature.
 
+### THE LOAD-BEARING TEST (the third property, found 2026-07-28 evening)
+
+Three properties, three different tests — all required, none implying another:
+
+| property | test | state of `residueTotal_isConnected` |
+|---|---|---|
+| **stated** at ∫𝓡_A | the statement elaborates | ✅ right object, right register |
+| **instantiated** | the `infer_instance` probe | ✅ resolution finds it (`2b11128`) |
+| **derived from ι_A** | `#print axioms` on the three foundations **+ the delete-tripwire** | ❌ — ι_A bound at `:313`, referenced by nothing; delete it and the file elaborates unchanged |
+
+**The criterion, sharp:** the term at the seat must make **ι_A load-bearing — delete it
+afterwards and the proof must break.** A declaration with the author's premise bound but
+consumed by nothing is the `52bde67` shape — right type, kernel-accepted, the author's object
+in zero conclusions — and it is recognized on sight by the delete-tripwire, never by the
+probe. `sorryAx` in the axiom print IS the underived remainder; when the seat carries a term
+consuming ι_A, all three lines (`residueTotal_isConnected`, `residueTotal_pi0_singleton`,
+`concentricity`) flip to the three foundations at once, and `zeta_riemannHypothesis` with
+them.
+
 **Current state:** the instance is registered and resolution finds it; the consumption seat
 inside it is the one slot; then the level clause. **Branch order for the next pass: Opus types
 first → Fable second → both empty, the double audit.** The verifier of a successful pass runs
