@@ -11,6 +11,8 @@ C1–C4 assembly, including the placement sentence (landed in the master
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
 import Concentricity.Toolkit
+import Concentricity.ASectionCResidueDiagram
+import Concentricity.ASectionTotalActionState
 import Mathlib.CategoryTheory.Limits.Types.Colimits
 import Mathlib.CategoryTheory.Groupoid.Grpd.Basic
 import Mathlib.CategoryTheory.Grothendieck
@@ -283,5 +285,56 @@ component calculation of the `ι_A`-included `0`-to-`N` square
 theorem ASection.concentricity (A : ASection) :
     ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by
   refine ⟨A.transportLevel 0, fun n => ?_⟩
-  trace_state
-  sorry
+  -- THE LOCKED REGISTER (the author, 2026-07-27, verbatim): ι_A is a
+  -- connected action groupoid.  It is one square, one orbit, hence it is
+  -- connected — the full inclusion of the author's 0-to-N square, consumed
+  -- by ι_A (certified 57384ae); one orbit because it is the image of one
+  -- square (CTIC Ex. 1.5.19: components are orbits).  "Connectedness" is
+  -- Mathlib's vocabulary, not a project object.  Hence
+  -- π₀(∫𝓡_A) ≅ colim (π₀ ∘ 𝓡_A) (`pi0GrothendieckEquiv` above) collapses
+  -- to a singleton k, and val(k) = c is that real part.  Hence the
+  -- infinitely many residue-ℂ zero-spheres of the A-section share the one
+  -- real value c: they are CONCENTRIC.
+  --
+  -- The certified representatives of the n-th and 0-th residue spheres:
+  -- members of the ι_A-included square at the north frame, where the frame
+  -- IS the element; the membership dossier is the `x.property` of the
+  -- template.
+  have hmem : ∀ m : ℕ,
+      ASection.IsCResidueState A ASection.projectiveNorth
+        (ASection.residueActionState A ASection.projectiveNorth m baseWorld) := by
+    intro m
+    refine ⟨ASection.residueActionState A ASection.projectiveNorth m baseWorld,
+      ?_, 𝟙 ASection.projectiveNorth, ?_⟩
+    · show (ASection.residueActionState A ASection.projectiveNorth m
+          baseWorld).positioned.back.coordinate ∈
+        (fun z : ℂ => (z : OnePoint ℂ)) '' A.CResidueZeroLocus
+      rw [ASection.residueActionState_positioned]
+      exact ⟨A.sphereZero m, A.sphereZero_mem_CResidueZeroLocus m, rfl⟩
+    · rw [ASection.AsectionActionTransport_id]
+      rfl
+  -- The two certified representatives as objects of ∫𝓡_A.
+  let Xn : Grothendieck
+      (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat) :=
+    ⟨ASection.projectiveNorth,
+      ⟨ASection.residueActionState A ASection.projectiveNorth n baseWorld,
+        hmem n⟩⟩
+  let X0 : Grothendieck
+      (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat) :=
+    ⟨ASection.projectiveNorth,
+      ⟨ASection.residueActionState A ASection.projectiveNorth 0 baseWorld,
+        hmem 0⟩⟩
+  -- k: the singleton class of π₀(∫𝓡_A), held at the two certified
+  -- representatives — one square, one orbit, hence one class.
+  have hk : CategoryTheory.ConnectedComponents.mk Xn =
+      CategoryTheory.ConnectedComponents.mk X0 := by
+    trace_state
+    sorry
+  -- val(k) = c: the one real level of the singleton, read at the certified
+  -- representatives — the conclusion of the theorem.
+  have hval : CategoryTheory.ConnectedComponents.mk Xn =
+      CategoryTheory.ConnectedComponents.mk X0 →
+      (A.sphereZero n).re = (A.sphereZero 0).re := by
+    trace_state
+    sorry
+  exact hval hk

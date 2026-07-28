@@ -17,7 +17,7 @@ complex numbers — no σ₀, no ½, no absolute level.
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
-import Concentricity.Theorem
+import Concentricity.Toolkit
 import Mathlib.Analysis.Calculus.Deriv.Basic
 import Mathlib.Analysis.Meromorphic.TrailingCoefficient
 import Mathlib.Analysis.SpecialFunctions.Log.Summable

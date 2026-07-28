@@ -38,7 +38,7 @@ data only.
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8).
 -/
-import Concentricity.Theorem
+import Concentricity.Toolkit
 import Concentricity.StemFactorization
 import Concentricity.LiKernel
 import Mathlib.Analysis.Complex.OpenMapping
