@@ -325,10 +325,30 @@ theorem ASection.concentricity (A : ASection) :
     -- ι_A itself — the certified proper inclusion, iso onto its image —
     -- is the connected action groupoid, in the ActionCategory register:
     have ιA := ASection.AsectionCResidueInclusion A
+    -- THE SQUARE IS THE TRANSPORT.  Every object of ∫𝓡_A carries, as data,
+    -- the witness that it IS the square's own image: `P.fiber.property`
+    -- unfolds to a north member `xN` together with the base arrow
+    -- `g : projectiveNorth ⟶ P.base` and the equality
+    -- `(AsectionActionTransport A g).obj xN = P.fiber.obj`.  That datum IS
+    -- a morphism of ∫𝓡_A — base leg `g`, fibre leg the equality — so no
+    -- arrow is hunted: the membership dossier is the arrow.
+    have hanchor : ∀ P : Grothendieck
+        (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+        ∃ (xN : ASection.AsectionActionFiber A ASection.projectiveNorth)
+          (hxN : ASection.IsCResidueState A ASection.projectiveNorth xN),
+          CategoryTheory.Zigzag
+            (⟨ASection.projectiveNorth, ⟨xN, hxN⟩⟩ :
+              Grothendieck (ASection.AsectionCResidueDiagram A ⋙
+                Grpd.forgetToCat)) P := by
+      intro P
+      obtain ⟨xN, hxN_north, g, hg⟩ := P.fiber.property
+      refine ⟨xN, ⟨xN, hxN_north, 𝟙 _, by
+        rw [ASection.AsectionActionTransport_id]; rfl⟩, ?_⟩
+      refine Relation.ReflTransGen.single (Or.inl ⟨?_⟩)
+      exact { base := g
+              fiber := eqToHom (ObjectProperty.FullSubcategory.ext hg) }
     have hIsConn : CategoryTheory.IsConnected (Grothendieck
         (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
-      -- ι_A is the connected action groupoid: the proper inclusion,
-      -- iso onto its image, certified.
       trace_state
       sorry
     letI := hIsConn
@@ -355,7 +375,26 @@ theorem ASection.concentricity (A : ASection) :
         ⟨A.residueActionState ASection.projectiveNorth n baseWorld, hmem n⟩⟩
       ⟨ASection.projectiveNorth,
         ⟨A.residueActionState ASection.projectiveNorth 0 baseWorld, hmem 0⟩⟩
-    -- val(k) = c: that real part.
-    trace_state
-    sorry
+    -- val APPLIED: the level read lifted to π₀ — constant on the class by
+    -- the level law — evaluated on k at the certified representatives; the
+    -- infinitely many residue-ℂ zeros share val(k) = c.
+    have hlevel_inv : ∀ P Q : Grothendieck
+        (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+        CategoryTheory.Zigzag P Q →
+        @OnePoint.rec ℂ (fun _ => ℝ) (0 : ℝ) Complex.re
+          P.fiber.obj.positioned.back.coordinate =
+        @OnePoint.rec ℂ (fun _ => ℝ) (0 : ℝ) Complex.re
+          Q.fiber.obj.positioned.back.coordinate := by
+      trace_state
+      sorry
+    have happlied := congrArg
+      (_root_.Quotient.lift (fun P : Grothendieck
+          (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat) =>
+          @OnePoint.rec ℂ (fun _ => ℝ) (0 : ℝ) Complex.re
+            P.fiber.obj.positioned.back.coordinate) hlevel_inv) hkn
+    simp only [CategoryTheory.ConnectedComponents.mk,
+      _root_.Quotient.mk''_eq_mk, _root_.Quotient.lift_mk,
+      ASection.residueActionState_positioned,
+      ASection.residueState] at happlied
+    exact happlied
   exact hval hk
