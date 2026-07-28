@@ -367,6 +367,13 @@ theorem ASection.concentricity (A : ASection) :
       -- single arrow is what ι_A supplies — the proper inclusion, natural
       -- isomorphism onto its image.
       refine Relation.ReflTransGen.single (Or.inl ?_)
+      -- the ONE arrow P ⟶ Q, wired from ι_A's own dossiers: base leg
+      -- composed in the base groupoid, fibre leg through the certified
+      -- membership machinery.
+      obtain ⟨xNP, hNP, gP, hgP⟩ := P.fiber.property
+      obtain ⟨xNQ, hNQ, gQ, hgQ⟩ := Q.fiber.property
+      refine ⟨⟨CategoryTheory.Groupoid.inv gP ≫ gQ,
+        (ASection.IsCResidueState A Q.base).homMk ?_⟩⟩
       trace_state
       sorry
     letI := hIsConn

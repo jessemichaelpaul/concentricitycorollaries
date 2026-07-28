@@ -127,5 +127,35 @@ Downstream is proved and building: `riemannHypothesis_iff_concentric` (`RhEquiv.
 right-hand side contains **no `1/2`** — `1/2` is derived from the functional equation in one file
 only — and `Corollaries.lean`, which compiles against the theorem's name.
 
+### The classification — connectedness is a CERTIFIED PREMISE, not an open fact
+
+⛔ **"Connectivity is open" is banned phrasing.** It was used repeatedly on 2026-07-27/28 by two
+models, and it is false. The receipt that bans it is `57384ae`.
+
+| | |
+|---|---|
+| **premise** | `ι_A` at the ratified type: a **proper** inclusion, a **natural isomorphism onto its image**, naturality by `rfl`. `FullSubcategory` *is* the image — `ι_obj` is `rfl` (`FullSubcategory.lean:62`), `liftCompιIso` is `Iso.refl` and the library's docstring says *definitionally* (`:167`). Components fully faithful. **CERTIFIED, `57384ae`, verified three independent ways.** |
+| **immediacy** | the master's own sentence under the span diagram: *"This follows immediately, because `ι_A` is a proper inclusion and a natural isomorphism onto its image."* The zigzag **follows**. |
+| **what remains** | **the consumption is untyped.** That is *wiring* at `Action.lean:128`, which gives connectedness by a **single arrow** (`ReflTransGen.single`) — never a chain, never a join of two members. |
+| **inference required** | **NONE.** |
+
+Instance synthesis not firing on a spelling is a fact about the spelling, never about the object —
+the same error as the struck prohibition. Obligation kinds for the whole endgame are **wiring and
+instantiation only**.
+
+**The entire allowable search surface**, because the premise is certified rather than open:
+
+1. `Mathlib/CategoryTheory/Action.lean` — the seat (`:48`, `:92`, `:105`, `:128`, `:137`, `:146`, `:154`);
+2. the `ι_A` certificate pair — `ASectionCResidueDiagram.lean` + `ASectionCResidueInverseImage.lean`;
+3. at most `ConnectedComponents.lean` / `IsConnected.lean` for the 8.3.5 spelling.
+
+Nothing else. A name outside those is not a supplier; needing one is a printed kernel goal routed
+to the author verbatim, never a licence to search.
+
+**Already applied downstream, in the tree:** `π₀` and the singleton — the collapse is
+`Quotient.sound` of the zigzag, locked with no `sorry`, and it is applied at the certified
+representatives. The node's printed goal `⊢ (A.sphereZero n).re = A.transportLevel 0` **is `k`'s
+readout**, not an open question.
+
 See `RelevantGreenFinal.md` for what is certified, `DependencyTabulation.md` for the chain,
 `ProofOutline.md` for the blueprint spine.
