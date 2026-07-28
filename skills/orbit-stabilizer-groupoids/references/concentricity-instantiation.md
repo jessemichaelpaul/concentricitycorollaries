@@ -530,12 +530,19 @@ INFER — terms to assemble, each read off certified data, no search:
    `fiber := eqToHom` of the membership equality — one constructor
    application consuming `x.property`. **Membership data IS the connecting
    arrow**: single arrow, no zigzag, no hunt.
-2. **The north-part identification** — the 0-to-N square read as ONE
-   system. The single dictation seam of Gate 1, stated by the author from
-   the square already held (`projectiveObjectFrame_north`, both
-   `fixes_cayley` faces, `G₂` sweeping each residue sphere with
-   `smul_coordinate = rfl`, the winding held in `NorthStabilizer`).
-   **Arrow hunting at this seam is forbidden; the square is the source.**
+2. **The north-part identification — ALSO read off ι_A (author's ruling,
+   2026-07-27).** The north part being one system IS part of what ι_A
+   consumed and certified: the 0-to-N frame receipts are already in the
+   refreshed inverse-image audit — `projectiveObjectFrame_north` and both
+   `fixes_cayley` faces, placed there at the author's direction precisely
+   because the `R_A` square was 0-to-N — with `G₂` sweeping each residue
+   sphere (`smul_coordinate = rfl`) and the winding held in
+   `NorthStabilizer`. The term is composed from those certified receipts
+   exactly as INFER-1 is composed from `x.property`: **no dictation seam,
+   no arrow hunting — the square is the source, and it is
+   triple-certified.** If the kernel prints a residual goal during
+   assembly, it routes to the author verbatim per standing protocol; that
+   safety valve is not a planned step.
 3. **Packaging**: `Nonempty` from CITE-3; `IsConnected` from INFER-1 +
    INFER-2 via the zigzag characterization.
 
