@@ -110,7 +110,7 @@ from `[IsPretransitive M X] [Nonempty X]`. `M` and `X` are already named in the 
 **The master states it too**, above the connectivity movement: `:932–935` names the translation
 groupoid and cites `CategoryTheory.ActionCategory` outright; `:965` *"the projective action
 groupoid"*; `:993` *"a functor on the octonionic action groupoid"*; `:1207` *"the whole is an action
-groupoid"*; `:1213` *"the preimage of the total action groupoid"*; `:1262` *"`∫𝓡_A` is a connected
+groupoid"*; `:1213` *"the preimage of the total action groupoid"*; `:1266` *"`∫𝓡_A` is a connected
 action groupoid."* And since `97c2335` (2026-07-28) the finale states the arrow dictionary
 **itself** — the two spellings above, the single-orbit sentence, *"in an action groupoid the
 zigzag required has length one"* — so the master and this document now consume the same
@@ -187,6 +187,16 @@ square's whole action** — the action `∫𝓡_A` is presented by. Never `IsPre
 and sits one register low. One orbit means **any member to any member**: no anchor point — north
 and `0` are both inside the orbit and neither is privileged.
 
+**Why "inference: none" is exact (the author's congruence ruling, 2026-07-28 night):** the S⁶
+leg enters **by definition, not by derivation**. The preimage IS the C-residue locus
+(`IsCResidueState` / `CResidueZeroLocus`): each member is *by definition* a state on an S⁶
+C-residue zero sphere, so the inclusion lands in exactly the image on which the action is
+already proved transitive (`thm:G2-S6` = `G2.exists_smul_eq_of_mem_unitImaginarySphere`). The
+term's shape is therefore WIRING (the definitional identification of the carrier) +
+INSTANTIATION (the already-proved theorem read on it) — at no point is transitivity *derived*.
+A stalled hand re-finds the S⁶-image reading here, inside this rung: it is the fibre-leg
+supplier, never a second route.
+
 **Kind: DECLARATION + INSTANTIATION** — state at the named carrier, consume the green suppliers,
 register as `instance` so `:128`'s hypothesis resolves. Inference: none.
 
@@ -218,7 +228,7 @@ Certificates behind it, all live: `ObjectProperty.fullyFaithfulι` on **`[propex
 
 ### Declaration 2 — therefore `∫𝓡_A` is connected
 
-Master, `:1218`–`:1262`: *"Connectedness is established here, by the structure of `ι_A` itself…
+Master, `:1218`–`:1266`: *"Connectedness is established here, by the structure of `ι_A` itself…
 This follows immediately, because `ι_A` is a proper inclusion and a natural isomorphism onto its
 image… `∫𝓡_A` is a connected action groupoid."*
 
