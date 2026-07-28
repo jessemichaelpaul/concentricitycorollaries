@@ -31,7 +31,9 @@ Regenerate by `#print axioms` on these names; do not hand-edit.
 `ASection.AsectionActionFiber` · `ASection.AsectionActionTransport` ·
 `ASection.AsectionActionTransport_id` · `ASection.AsectionActionTransport_comp` ·
 `ASection.AsectionActionDiagram` (= `F_A`) · `ASection.TotalActionStateWorld` (= `T_A`) ·
-`ASection.orbitStabilizerActionSquare` · `ASection.positionedOrbitSquare`
+`ASection.orbitStabilizerActionSquare` · `ASection.positionedOrbitSquare` ·
+`ASection.AsectionEquivariant` (`H1 ⥤ H1`, the sweep — `ASectionEquivariant.lean:43`; elicited
+2026-07-28 night, exactly the three foundations)
 
 ## C3 / C4 and the semantic locus
 
