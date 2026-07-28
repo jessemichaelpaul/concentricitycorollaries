@@ -42,7 +42,10 @@ Regenerate by `#print axioms` on these names; do not hand-edit.
 
 `ASection.IsNorthCResidueState` · `ASection.IsCResidueState` ·
 `ASection.AsectionCResidueTransport` (= `𝓡_A(f)`) · `ASection.AsectionCResidueDiagram` (= `𝓡_A`) ·
-`ASection.AsectionCResidueInclusion` (= `ι_A`, **naturality by `rfl`**)
+`ASection.AsectionCResidueInclusion` (= `ι_A`, **naturality by `rfl`**) ·
+`ASection.AsectionCResidueInclusion_app_fullyFaithful` / `…_app_full` / `…_app_faithful`
+(**Declaration 1 at `ι_A`'s own name**, `Theorem.lean:310–323`, `bb02b54`; elicited 2026-07-28
+night — all three on exactly the three foundations, independent of the open seats)
 
 ## Inhabitants
 
@@ -88,5 +91,9 @@ as written. The corollary layer is wired and waiting.
 
 ## Open
 
-`ASection.concentricity` — one node, in `Theorem.lean`. It carries `sorryAx` until it closes, and
-that propagates arithmetically to the corollaries. Nothing else in the repository is open.
+One movement, two seats, both in `Theorem.lean` (step-0 receipt at `141fcc0`):
+`ASection.residueTotal_isConnected` (seat A, `:342` — Declaration 2's consumption) and the level
+clause inside `ASection.concentricity` (seat B, `:419`). They carry `sorryAx` until they close,
+and that propagates arithmetically to the corollaries. Declaration 0
+(`IsPretransitive G2 A.AsectionState`) is the one declaration not yet in the tree — its
+suppliers are green above. Nothing else in the repository is open.

@@ -8,9 +8,15 @@ State as of 2026-07-28, elicited from the kernel — not recalled.
 ## ⚖️ THE REGISTER RULING (the author, 2026-07-28) — read before typing anything
 
 **Connectedness lives at `ι_A`'s own level.** It is a property *at the functor level* — `ι_A` as a
-natural transformation, its naturality squares holding definitionally, the span of categories that
-structure forces, and the zigzag that span carries. It is **inherited by the total from the
-inclusion's certified structure**, and that structure is stamped: `57384ae`, three ways.
+natural transformation, its naturality squares holding definitionally, **fully faithful and
+transitive**. It is **inherited by the total from the inclusion's certified structure**, and that
+structure is stamped: `57384ae`, three ways.
+
+⚠️ **Span/zigzag language is struck from this document (author, 2026-07-28 night).** That framing
+belongs to the **8.3.4** finality route, not the **8.3.5** route this proof takes, and it is not
+formalized. The route here is: **fully faithful + transitive ⟹ connected**, via `Action.lean:128`,
+by **one arrow**. The master keeps the alternative routes where they belong — in `rmk:thomason` —
+but in the game plan they can only mislead.
 
 **It is not assembled from state-level homs.** Anything reaching for `G₂` elements, chart
 coordinates, a stabilizer's motion on a coordinate, or individual arrows inside fibres is **one
@@ -303,8 +309,9 @@ another reason to collapse it onto the declaration.
 **The encoding fact is `ι_A`'s, and it is certified.** A faithful inclusion, a natural
 isomorphism onto its image, naturality definitional — `57384ae`, three independent
 verifications. **Connectedness lives at that register: the FUNCTOR level** — `ι_A` as a
-natural transformation, the span of categories it forces, the zigzag it carries. The total
-inherits its connectedness from the inclusion's certified structure.
+natural transformation, **fully faithful and transitive**. The total inherits its connectedness
+from the inclusion's certified structure. (Span/zigzag framing struck: that is the 8.3.4 route,
+not this one.)
 
 **The state level is the WRONG register.** G₂ elements, chart coordinates, individual homs
 inside fibres, arrows assembled leg-by-leg between states — every descent to that level is the
@@ -408,17 +415,18 @@ or the lines differ from this document, the document is stale — fix it before 
 warnings — declarations `:329` (`residueTotal_isConnected`, seat at `:342`) and `:359`
 (`concentricity`, seat at `:419`). The seats' goals, kernel-printed verbatim:
 
-```text
--- seat A (:342), Declaration 2's consumption — Declaration 1 BOUND IN CONTEXT:
-hff  : Functor.FullyFaithful (A.AsectionCResidueInclusion.app P.base)
-this : Functor.Full (A.AsectionCResidueInclusion.app P.base)
-⊢ Zigzag P Q
+⚠️ **The seats' current goal prints are NOT reproduced here (author, 2026-07-28 night).** As the
+file stands, both are phrased in the pairwise `P Q` shape left over from the struck 8.3.4 framing,
+and that shape is **not the register of this proof** — connectedness here comes from
+*transitivity*, consumed by `Action.lean:128` as **one arrow**, not from exhibiting a relation
+between two chosen objects. Printing those goals in the game plan can only aim the typing hand at
+the wrong register, which is exactly what it did four times.
 
--- seat B (:419), the level clause:
-⊢ ∀ P Q, Zigzag P Q →
-    OnePoint.rec 0 Complex.re (ActionCategory.back P.fiber.obj.positioned).coordinate =
-    OnePoint.rec 0 Complex.re (ActionCategory.back Q.fiber.obj.positioned).coordinate
-```
+**Seat A** (`:342`) is Declaration 2's consumption, with Declaration 1 already bound in context.
+**Seat B** (`:419`) is the master's sentence: *"conserved along every connecting transport by the
+lift's level law."* Both are re-read from the kernel at typing time, after Declaration 0 lands —
+because the seats change shape once the transitivity instance is registered, and a goal printed
+before that is a goal from the old route.
 
 **The locked classification (the pre-flight's answer):** DECLARATIONS — one remains to add, Decl 0
 (`IsPretransitive G2 A.AsectionState` — the author's carrier, all of it; grep receipt: zero
