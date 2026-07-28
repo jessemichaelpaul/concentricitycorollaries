@@ -561,6 +561,37 @@ counter-measures are the target-first gate (SKILL.md, Step 0) and the
 orbit-wise selection ruling (instantiation reference) — not further
 explanation, which the record proves insufficient.
 
+## 6l. PROSPECTIVE FORECAST — the `concentricity` gate (written 2026-07-27 night, before the step)
+
+Same genre as §6b, and written the same way: from the record, before the step, so the verdict is not
+composed after seeing the outcome. The flight plan is `register/80-concentricity-endgame.md`.
+
+**Frozen:** every module outside the write-set (`Theorem.lean` + one `_Gate*Audit.lean`). An edit
+anywhere else is the tell that the proof is being made true by redefinition.
+
+| # | predicted move | tell | instead |
+|---|---|---|---|
+| 23 | read the zigzag chain as a stall | "the template doesn't apply"; expecting `.single` and finding a `trans` step | `Zigzag := Relation.ReflTransGen Zag` — an arbitrary pair is anchor → across → anchor. A `trans` step is expected **spelling** |
+| 24 | turn the middle step into a joining problem | plural nouns: "the north members", "identify the anchors", "join the residues" | the square is **one** object; the term reads it whole. A plural noun here re-imports the struck obligation |
+| 25 | hunt an arrow at the middle | `exact?`, `apply?`, grepping for a hom, "which morphism connects…" | arrows are **built**: the `Grothendieck.Hom` constructor, `x.property`, `homOfPair` (`Action.lean:148`) |
+| 26 | make the library instance fire | `infer_instance` for `IsConnected`; exhibiting `∫𝓡_A` as a literal `ActionCategory` | `Action.lean:128`'s **shape is imitated, never invoked** — it is stated for `ActionCategory` and will not resolve here |
+| 27 | land in the quarantine by grep | `residueTotal`, `totalMk`, or `residueToNorth` cited without file:line; any import of `ASectionTotalPreflights` or `ASectionFinality` | those names are shadowed in excluded files. Cite by **file and line**, never by name alone |
+| 28 | turn the pluck into an invariance proof | "show `.re` is constant on the component"; "define `val` and prove it well defined" | the colimit **performs** the identification; the value is plucked at the certified representatives. **Three instances on record on 2026-07-27 alone** |
+| 29 | manufacture intermediate declarations, or ask the author to name them | separate named theorems for connectedness/singleton; a request for names | ONE gate; those are **terms inside the proof**. Asking the author to name what the record answers is slot-as-burden |
+| 30 | edit the prose instead of writing the term | re-badging `Theorem.lean`'s open-node commentary, adjusting the placement paragraph | the node needs a **term**; its prose is the author's and is already correct |
+| 31 | the cheapness inference, in either direction | "this seems too easy"; or padding a short proof to look substantial | cheap is the Rising Sea working as designed and carries **zero** information |
+| 32 | declare victory on a `#check` | an audit listing names rather than instantiating the statement at free `A` and `n` | the receipt is the theorem consumed at its exact signature, plus the corollary layer compiling |
+
+**The free correctness check.** `Corollaries.lean:34` already consumes `A.concentricity`. The
+statement's shape is therefore pinned by an existing consumer: if the written statement differs from
+the one the corollaries expect, `Corollaries` will not compile. A green corollary layer is part of
+the receipt, not a later step.
+
+**Why the remaining risk is process, not mathematics.** The authored content is certified through
+`ι_A`; what is left is generic machinery at the pins plus assembly, with the target's own shape
+pinned downstream. Every row above is a way of *mis-executing* a known construction, which is what
+this file has always catalogued.
+
 ## 7. Housekeeping rule
 
 Do not let agent instructions, skills, plans, and handoffs independently
