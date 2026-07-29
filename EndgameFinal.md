@@ -864,3 +864,28 @@ enumeration meets the element.
 type `w` from the tape's data on the naked board.  The pretransitivity registration (`IsPretransitive`
 — NO declaration in the live tree, the empty shelf) seats AFTER the join closes, from the SAME
 restriction.
+
+---
+
+## ⛔ THE HALF-SQUARE STRIKE (the author, 2026-07-29, verbatim — supersedes §THE REDUCTION's floor reading)
+
+*"That's one level too low and it is only half a square so you didn't run the ι_A argument.
+1) Revisit the construction of F_A(X) FROM A SECTION EQUIVARIANT and note the transitivity
+2) revisit the proof of the natural and faithful inclusion for ι_A.  Second you typed my conclusion
+into the premises.  The spheres are connected by a CONTINUUM OF MAPS.  Therefore there will NEVER
+be a map that connects zero spheres.  My inverse image IS the image of my C-residue locus and hence
+when ∫R_A collapses to a singleton there is one real value."*
+
+What this strikes: the base-𝟙 naked board (fibre-only join) — fixing the base leg and demanding the
+fibre supply the join is the register drop itself, and it used only the INPUT face of the 5-field
+square (input / positioned / value) — half a square.  A single fibre map between distinct zero
+spheres does not exist and is not owed: the connection is the CONTINUUM of maps carried by the
+equivariant build — the whole square, at ι_A's level.  Any statement demanding one fibre map
+between spheres types the conclusion into the premises.
+
+The two revisits are the next window's first reads, before any typing:
+1. F_A(X)'s construction FROM `AsectionEquivariant` — note where the transitivity enters the build.
+2. ι_A's natural-and-faithful-inclusion proof (57384ae; the three rfls) — the whole square.
+
+Then the seat is re-run at ι_A's own level: the inverse image IS the image of the C-residue locus;
+∫𝓡_A collapses to a singleton by 8.3.5; the singleton's level read is one real value.
