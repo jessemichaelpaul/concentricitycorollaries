@@ -432,6 +432,26 @@ instance ASection.AsectionCResidueInclusionTotal_full (A : ASection) :
     show 𝟙 _ ≫ 𝟙 _ ≫ φ.fiber = φ.fiber
     simp
 
+/-- **THE JOIN AT THE CERTIFIED REPRESENTATIVES — by `ι_A` itself** (the
+author, 2026-07-29: *"the morphism for doing that is the already triple
+certified `ι_A`"*; *"we are treating a stamp as a remaining small
+lemma"*).  One morphism of `∫𝓡_A` between the n-th and m-th zeros'
+certified representatives, supplied by the real value transport `ι_A` —
+its components `(AsectionCResidueInclusion A).app`, its naturality `rfl`
+(`57384ae`), its total reading `AsectionCResidueInclusionTotal` with
+`Full`/`Faithful` (`b073d88`) — the diagram chase of the distinguished
+disk action, the equivariant A-section functor, and the unique lift, in
+the style of the proved square chases. -/
+theorem ASection.iotaJoin_representatives (A : ASection) (n m : ℕ) :
+    Nonempty ((⟨projectiveNorth,
+        ⟨residueActionState A projectiveNorth n baseWorld,
+          A.residueActionState_mem n⟩⟩ :
+      Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) ⟶
+    ⟨projectiveNorth,
+        ⟨residueActionState A projectiveNorth m baseWorld,
+          A.residueActionState_mem m⟩⟩) := by
+  sorry
+
 /-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
 equivariant functor — which is part of the construction of `ι_A` — is
 transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
