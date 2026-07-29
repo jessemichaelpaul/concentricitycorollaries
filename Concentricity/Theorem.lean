@@ -384,41 +384,6 @@ instance ASection.AsectionCResidueInclusion_app_faithful
     ((AsectionCResidueInclusion A).app X).Faithful :=
   ObjectProperty.faithful_ι _
 
-/-- **DECLARATION 0's REGISTRATION, base pair** (the taxonomy's two-line
-fix: the fact green, the instance absent).  `Action.lean:128` fires from
-`[IsPretransitive M X] [Nonempty X]`; the document names the base pair
-verbatim: `GreatCircle.Aut ↷ GreatCircle.Point`.  The supplier is the
-author's own `GreatCircle.orbitRep_spec` (`ProjectiveSection.lean:83`):
-every frame is reachable from `∞`, so any frame reaches any other through
-it.  Registration only; inference none. -/
-instance GreatCircle.base_isPretransitive :
-    MulAction.IsPretransitive GreatCircle.Aut GreatCircle.Point where
-  exists_smul_eq u v := by
-    refine ⟨GreatCircle.orbitRep v * (GreatCircle.orbitRep u)⁻¹, ?_⟩
-    have h1 := inv_smul_eq_iff.mpr (GreatCircle.orbitRep_spec u).symm
-    rw [mul_smul, h1]
-    exact GreatCircle.orbitRep_spec v
-
-/-- **DECLARATION 0's REGISTRATION, the sweep's S⁶ leg** — the world leg of
-the fused instance (`ASectionFunctor.lean:64`), registered standalone at its
-own carrier so resolution can consume it.  `G₂` sweeps the members' sphere
-worlds; the supplier is `thm:G2-S6`
-(`G2.exists_smul_eq_of_mem_unitImaginarySphere`, the April theorem), closing
-through `Subtype.ext` exactly as in the certified members supplier
-(`8907f88`).  Registration only; inference none. -/
-instance SphereWorld.instMulActionG2 : MulAction G2 SphereWorld where
-  smul g v := ⟨g • v.val, G2.smul_mem_unitImaginarySphere g v.prop⟩
-  one_smul v := Subtype.ext (one_smul G2 v.val)
-  mul_smul g h v := Subtype.ext (mul_smul g h v.val)
-
-instance SphereWorld.sweep_isPretransitive :
-    MulAction.IsPretransitive G2 SphereWorld where
-  exists_smul_eq u v := by
-    obtain ⟨g, hg⟩ := G2.exists_smul_eq_of_mem_unitImaginarySphere u.prop v.prop
-    exact ⟨g, Subtype.ext hg⟩
-
-instance SphereWorld.instNonempty : Nonempty SphereWorld := ⟨baseWorld⟩
-
 /-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
 equivariant functor — which is part of the construction of `ι_A` — is
 transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
