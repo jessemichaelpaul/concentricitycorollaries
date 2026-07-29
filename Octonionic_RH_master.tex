@@ -841,7 +841,7 @@ This section assembles the parts the detector runs on. We begin with the compact
 $\Ostar=S^8$ and their north pole $N$, the point at infinity where a section sends its pole. We then
 describe what a slice-preserving section does on each slice, one holomorphic stem repeated in every
 direction, which is why its non-real zeros fill whole $6$-spheres. We set up the two geometric
-registers that carry this data, the octonionic world $\mathcal H_1$ and the slice-value world
+viewpoints that carry this data, the octonionic world $\mathcal H_1$ and the slice-value world
 $\mathcal S_2$. And we close with the projective base $\mathcal B$, the A-section functor over it,
 and its Grothendieck total $\mathcal T_A$, the object the next section reads.
 
@@ -859,18 +859,18 @@ give a conformal atlas $\{(K,f),(K,h)\}$ endowing $S^m$ with the structure of a 
 (quaternionic/octonionic) Riemann manifold, with transition map $h^{-1}\circ f(q)=\bar q/q^2=1/q$,
 itself slice regular and slice preserving. The adjoined point is the north pole $N$; this is the
 point at infinity. In Lean the underlying compactification is
-\texttt{Mathlib.Topology.Compactification.OnePoint}, $\OO^{*}=\texttt{OnePoint }\OO$ with
+\texttt{Mathlib.\-Topology.\-Compactification.\-OnePoint}, $\OO^{*}=\texttt{OnePoint }\OO$ with
 $\infty=\texttt{OnePoint.infty}$, and the homeomorphism $\OO^{*}\cong S^8$ is
-\texttt{onePointEquivSphereOfFinrankEq} applied to $\dim_\RR\OO=8$
-(\texttt{Mathlib.Topology.Compactification.OnePoint.Sphere}). The compactification is what makes
+\texttt{onePoint\-Equiv\-Sphere\-Of\-Finrank\-Eq} applied to $\dim_\RR\OO=8$
+(\texttt{Mathlib.\-Topology.\-Compactification.\-OnePoint.\-Sphere}). The compactification is what makes
 the value of a section at its real pole a well-defined point of $\OO^{*}$, the point at
-infinity $\infty=N$. The geometric registers $\mathcal H_1$ and $\mathcal S_2$ are built on
+infinity $\infty=N$. The two views $\mathcal H_1$ and $\mathcal S_2$ are built on
 these compactified values (Definition~\ref{def:two-worlds}); the distinct projective base
 $\mathcal B$ and direction-indexed sphere world used in the construction below are introduced in
 Definition~\ref{def:base}.
 \end{definition}
 
-There is one geometric north pole $N=\infty$, represented in two categorical registers. In
+There is one geometric north pole $N=\infty$, seen from two categorical points of view. In
 $\mathcal H_1$ this point of $\OO^{*}$ is a $\Gtwo$-fixed object: its own connected component,
 with $\Aut(N)=\Gtwo$, carrying no universal property. In the slice-value world
 $\mathcal S_2$ the same geometric point is represented by the object
@@ -878,7 +878,7 @@ $\mathcal S_2$ the same geometric point is represented by the object
   \nfr\;:=\;\infty=N\ \text{regarded as an object of }\mathcal S_2,
 \]
 the common point at infinity of the slice Riemann spheres, fixed by band and direction alike.
-The two representatives belong to \emph{different} categorical registers and are related by the section
+The two representatives belong to \emph{different} categorical viewpoints and are related by the section
 through \textup{C1}: the pole of $A$ has value $\infty$, so the section carries the pole point
 to $\nfr$. The residue field of a closed zero sorts the picture:
 residue-$\RR$ (the $\Gtwo$-fixed locus $\RR\cup\{N\}$, classically trivial) versus residue-$\CC$
@@ -955,7 +955,7 @@ by $\Gtwo$ and the band phases $z\mapsto e^{I\theta}z$ within a compactified sli
 object \texttt{S2} is the quotient path category by the direction-composition relations. In
 particular $0$ and $N$ are shared values, not new objects indexed by a zero.
 
-These two geometric registers hold the octonionic and slice-value geometry drawn on below.
+These two geometric views hold the octonionic and slice-value geometry drawn on below.
 \end{definition}
 
 \subsection*{The base of the degenerate set and the Grothendieck construction}
@@ -1224,16 +1224,14 @@ It is the inverse image of $\mathcal T_A$, and its inclusion is the total readin
 $\iota_A$,
 \[
 \begin{tikzcd}[column sep=huge]
-\int_{\mathcal B}\mathcal R_A
-  \arrow[r, hook, "\textstyle\int\iota_A"]
-& \int_{\mathcal B}\mathcal A_A=\mathcal T_A
+\int_{\mathcal B}\mathcal R_A \arrow[r, hook, "\int\iota_A"] & \int_{\mathcal B}\mathcal A_A=\mathcal T_A
 \end{tikzcd}
 \]
-\textup{(}\texttt{AsectionCResidueInclusionTotal}, the Grothendieck functoriality of $\iota_A$;
-in Lean \texttt{CategoryTheory.Grothendieck.map} applied to it\textup{)}. There it is full and
-faithful \textup{(}\texttt{AsectionCResidueInclusionTotal\_full},
-\texttt{AsectionCResidueInclusionTotal\_faithful}\textup{)}, hence an isomorphism onto its
-image; the C-residue system is therefore the image itself, carrying the total's own morphisms
+\textup{(}\texttt{Asection\-CResidue\-Inclusion\-Total} in the Lean source, the Grothendieck
+functoriality of $\iota_A$ applied to it\textup{)}. There it is full and faithful
+\textup{(}\texttt{Asection\-CResidue\-Inclusion\-Total\-\_full} and
+\texttt{Asection\-CResidue\-Inclusion\-Total\-\_faithful}\textup{)}, hence an isomorphism onto
+its image; the C-residue system is therefore the image itself, carrying the total's own morphisms
 and nothing added.
 
 Notice that both of these are action groupoids. The base
@@ -1249,17 +1247,16 @@ on the answer. In an action groupoid, a morphism between two states is not a pat
 chain of comparisons: it is a single element of the acting group, carrying one state to the
 other. The Lean library states this as an identity of types: a hom $p \to q$ \emph{is}
 $\{\, m : M \mid m \cdot p = q \,\}$
-\textup{(}\texttt{CategoryTheory.ActionCategory.hom\_as\_subtype}\textup{)}. In a Grothendieck
+\textup{(}\texttt{CategoryTheory.\-Action\-Category.\-hom\_as\_subtype}\textup{)}. In a Grothendieck
 construction, an arrow \emph{is} a pair --- a base channel together with the compatible fibre
-transport over it \textup{(}\texttt{CategoryTheory.Grothendieck.Hom}\textup{)}. These are two
-spellings of one movement: read on the total, an arrow of $\int_{\mathcal B}\mathcal R_A$ is
-one element of the distinguished action, presented by its base part and its value-transport
+transport over it \textup{(}\texttt{CategoryTheory.\-Grothendieck.\-Hom}\textup{)}. Read on the
+total, an arrow of $\int_{\mathcal B}\mathcal R_A$ is one element of the distinguished action,
+and the pair is how that element presents itself, by its base part and its value-transport
 part.
 \[
 \begin{tikzcd}[column sep=huge]
-(X,\,x) \arrow[r, "{(f,\;\varphi_f)}", bend left=25] \arrow[r, "m"', bend right=25] & (Y,\,y)
+(X,\,x) \arrow[r, "{(f,\;\varphi_f)}"] & (Y,\,y)
 \end{tikzcd}
-\qquad \text{one arrow, two spellings}
 \]
 So to join two residue states is to exhibit one element of the action that carries one to the
 other --- and the action reaches every member of the preimage by definition rather than by
@@ -1286,7 +1283,7 @@ established. Therefore, by Lemma~\ref{lem:pi0-grothendieck}
 \[
 \pi_0\Bigl(\int_{\mathcal B}\mathcal R_A\Bigr)\;\cong\;\operatorname*{colim}_{\mathcal B}\,(\pi_0\circ\mathcal R_A)
 \]
-collapses to a singleton $\kappa$. The class and its value are kept in distinct registers:
+collapses to a singleton $\kappa$. The class and its value are kept apart, as two different things read off one object:
 $\kappa$ is the unique transport class, and $c\in\RR$ is the one real level present in the
 states $\kappa$ identifies, conserved along every connecting transport by the lift's level
 law; the level read is \texttt{ASection.transportLevel} in the Lean source. Reading the level
