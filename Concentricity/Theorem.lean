@@ -397,7 +397,46 @@ Declaration 1 at `57384ae`) are consumed here and nowhere lower. -/
 theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     ∀ P Q : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
       Nonempty (P ⟶ Q) := by
-  sorry
+  intro P Q
+  -- One element of the distinguished action, presented by its base part
+  -- and its value-transport part (master :1244-1247, the arrow
+  -- dictionary).  The base part: "orbit representatives position the
+  -- element at every footpoint of the base" — the standard arrow.
+  have hstd : (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back Q.base) *
+      (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back P.base))⁻¹) •
+        CategoryTheory.ActionCategory.back P.base =
+      CategoryTheory.ActionCategory.back Q.base := by
+    have h1 := inv_smul_eq_iff.mpr
+      (GreatCircle.orbitRep_spec
+        (CategoryTheory.ActionCategory.back P.base)).symm
+    rw [mul_smul, h1]
+    exact GreatCircle.orbitRep_spec _
+  have f_std : P.base ⟶ Q.base := ⟨_, hstd⟩
+  -- The value-transport part: thm:G2-S6 applied to the object — the
+  -- author's certified 8907f88 key, verbatim.  Membership travels by
+  -- composition (the transported member over Q.base); the fibres are the
+  -- sweep's graph (AsectionState_input_then_equivariant, rfl), so the one
+  -- element on the input eye IS the sweep's arrow.
+  have key : ∀ s t : A.AsectionState, s.coordinate = t.coordinate →
+      ∃ g : G2, g • s = t := by
+    rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hc
+    obtain ⟨g, hg⟩ :=
+      G2.exists_smul_eq_of_mem_unitImaginarySphere sw.2 tw.2
+    refine ⟨g, ?_⟩
+    simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
+    exact ⟨Subtype.ext hg, hc⟩
+  have hcoord :
+      (CategoryTheory.ActionCategory.back
+        (((AsectionCResidueTransport A f_std).obj P.fiber).obj.input)).coordinate =
+      (CategoryTheory.ActionCategory.back (Q.fiber.obj.input)).coordinate := by
+    sorry
+  obtain ⟨g, hg⟩ := key _ _ hcoord
+  -- The whole arrow: the fibre leg pulled back through the certified
+  -- fully faithful ι_A at its own name (Declaration 1, 57384ae/bb02b54;
+  -- the image definitional — ι_obj rfl).
+  exact ⟨⟨f_std,
+    ((AsectionCResidueInclusion A).app Q.base).preimage
+      (CategoryTheory.InducedCategory.homMk (Subtype.mk g hg))⟩⟩
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
