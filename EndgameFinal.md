@@ -271,7 +271,8 @@ are *in this document* (the register list above) and in `RelevantGreenFinal.md` 
 not hunted**. §1's surface stands unchanged; a request to widen it in order to "find" the sweep is
 the request §"Widen the surface" already answers.
 
-**The carrier — SETTLED BY THE KERNEL at Leg 1 (2026-07-28 night), exactly as this paragraph
+**The carrier — SETTLED BY THE KERNEL at the first typed run of Declaration 0 (2026-07-28
+night), exactly as this paragraph
 promised it would be.** The raw head `IsPretransitive G2 A.AsectionState` was typed (scratchpad
 probe, tree clean) and the kernel answered with two prints: the residual goal `⊢ xc = yc`, and
 the fused instance's definition (`ASectionFunctor.lean:64`): `smul g x = {world := g • x.world,
@@ -499,7 +500,7 @@ or the lines differ from this document, the document is stale — fix it before 
 two sorry-bearing declarations — the instance (one hole at the fibre arrow) and the level
 clause. The seat currently CONTAINS Fable's assembly (`4070a73`…`80fb6e8`): witnesses, base leg,
 `harrow`, `hX`, all kernel-accepted — but typed in the FOREIGN Grothendieck pair spelling, with
-the pairwise `zigzag_isConnected` line still present; per Leg 2 both are residue and re-seating
+the pairwise `zigzag_isConnected` line still present; per THE RUN both are residue and re-seating
 is the FIRST act of the next turn. `hff` is bound and consumed nowhere (the `52bde67` shape —
 the delete-tripwire catches it). Re-run step 0 at typing time.** The original receipt, for
 history:
