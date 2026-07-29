@@ -98,4 +98,6 @@ One movement, two seats, both in `Theorem.lean` (step-0 receipt at `141fcc0`):
 clause inside `ASection.concentricity` (seat B, `:419`). They carry `sorryAx` until they close,
 and that propagates arithmetically to the corollaries. Declaration 0
 (`IsPretransitive G2 A.AsectionState`) is the one declaration not yet in the tree — its
-suppliers are green above. Nothing else in the repository is open.
+suppliers are green above, and its **route** is `AsectionEquivariant` (`ASectionEquivariant.lean:43`,
+the sweep): `thm:G2-S6` reaches the states by moving **up** to the equivariant functor, never down
+to `distinguishedDiskAction`. Nothing else in the repository is open.

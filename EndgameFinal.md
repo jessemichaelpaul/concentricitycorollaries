@@ -116,7 +116,7 @@ from `[IsPretransitive M X] [Nonempty X]`. `M` and `X` are already named in the 
 **The master states it too**, above the connectivity movement: `:932–935` names the translation
 groupoid and cites `CategoryTheory.ActionCategory` outright; `:965` *"the projective action
 groupoid"*; `:993` *"a functor on the octonionic action groupoid"*; `:1207` *"the whole is an action
-groupoid"*; `:1213` *"the preimage of the total action groupoid"*; `:1266` *"`∫𝓡_A` is a connected
+groupoid"*; `:1213` *"the preimage of the total action groupoid"*; `:1267` *"`∫𝓡_A` is a connected
 action groupoid."* And since `97c2335` (2026-07-28) the finale states the arrow dictionary
 **itself** — the two spellings above, the single-orbit sentence, *"in an action groupoid the
 zigzag required has length one"* — so the master and this document now consume the same
@@ -181,6 +181,41 @@ Declaration 2 (the seat). The geometric reason the carrier is all of `A.Asection
 sweep: slice preservation makes each slice's contribution one thing; the equivariant functor
 (`H₁ = G₂ ⋉ 𝕆*`) carries it across all slices; the proved S⁶ transitivity covers the system.
 
+### 📋 THE AUTHOR'S REGISTER LIST (2026-07-28 night, his words: "the only registers I see here from my mathematics") — all three elicited, all three on exactly the three foundations
+
+| register | where | certificate |
+|---|---|---|
+| `ASection.AsectionEquivariant` (`H1 ⥤ H1`) — the sweep | `ASectionEquivariant.lean:43` | `[propext, Classical.choice, Quot.sound]`, elicited 2026-07-28 night |
+| `G2.exists_smul_eq_of_mem_unitImaginarySphere` (= `thm:G2-S6`) | `G2.lean:194` | same three, elicited 2026-07-28 night |
+| `ASection.AsectionCResidueInclusion` (= `ι_A`) — **the image C-residue system of the infinitely many C-residue S⁶ spheres in the total object in 𝕆\*, hence transitive; the inverse image is pretransitive** | `ASectionCResidueDiagram.lean:165`, `57384ae` | same three, elicited 2026-07-28 night |
+
+**These three, plus Mathlib, are the whole vocabulary of the remaining work.** A term reaching
+for any other register of the author's mathematics has dropped a level; a statement naming an
+object outside this list and Mathlib is not the route.
+
+#### The citation chain — what is stamped where (the author, 2026-07-28 night)
+
+**Both of the author's orbit–stabilizer registers feed `ι_A`, confirmed by import lineage:**
+`ASectionFunctor.lean:6–7` imports BOTH `ASectionEquivariant` (the categorified
+orbit–stabilizer, `H1 ⥤ H1` — Mathlib states the categorification as a theorem:
+`stabilizerIsoEnd`, `Action.lean:105`, stabilizer = End definitionally) AND `ProjectiveSection`
+(the PGL/GL orbit–stabilizer: the element `distinguishedDiskAction`, `projectiveObjectFrame`,
+`orbit_stabilizer_factor`, `stabilizerPart_unique`). **`ASectionFunctor.lean:64` fuses them into
+`instance : SMul G2 (AsectionState A)` — the exact action `ActionCategory G2 A.AsectionState` is
+built from and the exact carrier pair Declaration 0 registers over.** The element also appears
+by name directly in `ASectionCResidueInverseImage.lean` — one of the two `ι_A` certificate
+files.
+
+`distinguishedDiskAction` (the element; Euler's face at `0`, Weierstrass's at `N` — all three
+ledger rows green) **sits inside** `AsectionEquivariant` (the sweep) → the sweep feeds the
+squares and the functor (`orbitStabilizerActionSquare` / `positionedOrbitSquare` → `F_A`) → the
+north selection cuts the preimage (`IsCResidueState` → `𝓡_A`) → `ι_A` includes it as the image
+C-residue system. **The element is cited in BOTH remaining movements:** the connectivity movement
+consumes it *through the sweep* — Declaration 0's transitivity arrives via `AsectionEquivariant`
++ `thm:G2-S6`, never re-proved; the level movement (seat B) consumes it *directly* — the level
+law is the element's own tape (`lem:exp-degenerate`, the two faces). **One stamp upstream, two
+citations downstream. No remaining term re-proves any link of this chain; every term cites it.**
+
 The master states the connectivity movement in **two** places, and the split is the author's, not
 a decomposition. One says what `ι_A` **is**; the other says what **follows**. Ahead of both sits
 the hypothesis `:128` consumes — pretransitivity — **checked 2026-07-28 evening: the facts are
@@ -194,10 +229,33 @@ green, and no instance is registered anywhere in the tree.**
 when the author built `F_A(X)`:
 
 ```lean
-ProjectiveSection.lean:83        orbitRep_spec (b) : orbitRep b • ∞ = b    -- the base: every frame reachable
 G2.lean:194                      G2.exists_smul_eq_of_mem_unitImaginarySphere : ∃ g : G2, g • u = v
+ASectionEquivariant.lean:43      AsectionEquivariant (H1 ⥤ H1)             -- THE ROUTE: the sweep carries it to the states
+ProjectiveSection.lean:83        orbitRep_spec (b) : orbitRep b • ∞ = b    -- the base: every frame reachable
 ASectionCResidueDiagram.lean:76  AsectionCResidueTransport                 -- membership travels: the action restricts
 ```
+
+⚠️ **THE DIRECTION (the author, 2026-07-28 night): transitivity arrives at the states by moving
+UP to `AsectionEquivariant`, never DOWN to the element.** Row 2 is not one supplier among four —
+it is the register the other rows are read in. The master says so in one sentence, `:993–995`:
+*"The slice-preserving realization on `𝕆*` is `G₂`-equivariant, hence a functor on the octonionic
+action groupoid. **Sweeping** that whole point-valued action … gives the genuine A-section
+functor."* And `:1199–1201`: the equivariant realization *"lifts the same action to the value
+states."* So `thm:G2-S6` (`:686`, transitive on `S⁶`) reaches `A.AsectionState` **through the
+sweep** — `thm:G2-equiv` (`:671`) → `rmk:G2-compact` (`:702–703`, *"This is the action on which
+`𝓗₁` is built"*) → `lem:residue-spheres` (`:1060–1077`, the components of `𝓗₁` **are** the
+`G₂`-orbits, i.e. the spheres) → the sweep → `𝓐_A`.
+
+`distinguishedDiskAction` **sits inside** `AsectionEquivariant`: it is stamped once upstream and
+**cited, never unpacked**. A term that reaches for the element's faces, its chart coordinates, or
+a stabilizer's motion to obtain transitivity is one register too low — the same descent struck at
+`ι_A`'s level, wearing the element's costume. The element's own citation belongs to seat B (the
+level law, its tape), not to this rung.
+
+**This changes no search surface.** The sweep's name, its `file:line`, and its axiom certificate
+are *in this document* (the register list above) and in `RelevantGreenFinal.md` — it is **cited,
+not hunted**. §1's surface stands unchanged; a request to widen it in order to "find" the sweep is
+the request §"Widen the surface" already answers.
 
 **The carrier (the author, 2026-07-28 night — superseding the earlier text of this paragraph):
 all of `A.AsectionState`.** His words: *"it already is on all, because the image of my C-residue
@@ -208,8 +266,8 @@ rule: kernel-test, never grep-freeze. Probe receipts (Opus, tonight): `instSMulG
 `instMulActionG2` are **registered** on exactly this pair — the action data already lives on the
 carrier; `IsPretransitive G2 A.AsectionState` is the **single missing head**, no subtype, no
 `Set` coercion, no new carrier. The term: the April theorem
-(`G2.exists_smul_eq_of_mem_unitImaginarySphere`) applied through the definitional identification
-the master states. If the kernel prints a residual goal, it routes to the author verbatim — the
+(`G2.exists_smul_eq_of_mem_unitImaginarySphere`) read at the carrier **through the sweep**
+(`AsectionEquivariant`) by the definitional identification the master states. If the kernel prints a residual goal, it routes to the author verbatim — the
 kernel settles the carrier, never a document paragraph. One orbit means **any member to any
 member**: no anchor point — north and `0` are both inside the orbit and neither is privileged.
 
@@ -254,7 +312,7 @@ Certificates behind it, all live: `ObjectProperty.fullyFaithfulι` on **`[propex
 
 ### Declaration 2 — therefore `∫𝓡_A` is connected
 
-Master, `:1218`–`:1266`: *"Connectedness is established here, by the structure of `ι_A` itself…
+Master, `:1218`–`:1267`: *"Connectedness is established here, by the structure of `ι_A` itself…
 This follows immediately, because `ι_A` is a proper inclusion and a natural isomorphism onto its
 image… `∫𝓡_A` is a connected action groupoid."*
 
@@ -433,8 +491,9 @@ before that is a goal from the old route.
 instances with that head anywhere in `Concentricity/`, while `instSMulG2`/`instMulActionG2` are
 registered on exactly that pair);
 Decl 1 is GREEN in the tree (`bb02b54`, `Theorem.lean:310–323`); Decl 2 is stated and registered
-(probe receipt `2b11128`), only its seat open. INSTANTIATIONS — Decl 0's term (the three green
-suppliers composed at the author's carrier, then registered; the probe flip is the receipt); seat A
+(probe receipt `2b11128`), only its seat open. INSTANTIATIONS — Decl 0's term (`thm:G2-S6` read at
+the author's carrier **through `AsectionEquivariant`** — up to the sweep, never down to the
+element — then registered; the probe flip is the receipt); seat A
 (consume Decls 0+1 at the `Action.lean:128` shape — one arrow); seat B (the level law read on one
 arrow — an arrow IS one element, `hom_as_subtype` — the master's own sentence: *"conserved along
 every connecting transport by the lift's level law"*). WIRING — Decl 1's terms (done:
@@ -468,7 +527,7 @@ the author**, do not start typing candidates.
 
 | | declaration | seat | kind |
 |---|---|---|---|
-| **0** | `IsPretransitive G2 A.AsectionState` (the author's carrier — all of it), registered as `instance` | not yet in the tree | declaration + instantiation |
+| **0** | `IsPretransitive G2 A.AsectionState` (the author's carrier — all of it), registered as `instance`; supplied by `thm:G2-S6` **via `AsectionEquivariant`** | not yet in the tree | declaration + instantiation |
 | **1** | `ι_A` full + faithful at `ι_A`'s name | ✅ green, `bb02b54` | wiring |
 | **2** | `∫𝓡_A` `IsConnected` | `instance` registered; seat open | instantiation |
 | — | level conservation | seat open | instantiation |
