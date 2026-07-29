@@ -624,6 +624,24 @@ this one movement, never stations of a sequence.
   Commit on green. **Per-commit tripwire: delete every bound premise — if the term still
   elaborates, it is not consumed; do not commit.**
 
+**📐 THE ACTOR IS NAMED — the functoriality revisit (the author's correction, 2026-07-29,
+grounded in three `rfl`s):** the thing that is pretransitive is **`AsectionCResidueDiagram` —
+the preimage of the groupoid carrying the SAME restricted square** — named and certified since
+`57384ae`. The receipts, all `rfl`: `AsectionCResidueTransport A f :=
+(IsCResidueState).lift (ι ⋙ AsectionActionTransport A f) (cResidue_lands A f)`
+(`ASectionCResidueDiagram.lean:76-82` — the ambient transport lifted through "membership
+travels"); its obj and map coincide with the ambient ones (`:84-96`, both `rfl`); ι_A's
+naturality (`:166-168`, `rfl`) — *the preimage carries the same action*, literally. **Because
+naturality is `rfl` and ι_A is fully faithful onto its image (Declaration 1), an arrow between
+two members of `∫𝓡_A` IS an ambient arrow between them — the homs coincide; the restriction
+inherits the sweep's reach word for word, by identity.** Therefore the proof of THE RESULT
+(`:397`) has exactly one shape: **the ambient join of two members — supplied by the sweep that
+produced them, in the total where the whole square acts — pulled back through ι_A's
+`rfl`-naturality and full faithfulness.** "Fully faithful and transitive inclusion onto the
+image, hence connected," every clause on a certified line. The `IsPretransitive` *class format*
+(a group-and-carrier pair) was the wrong FORMAT, never a missing object — do not hunt a
+`MulAction` head; the categorical actor is the diagram.
+
 **🔓 THE CARRIER QUESTION, DISSOLVED (the author, 2026-07-29, answering the routed print
 verbatim):** the driving hand routed one open datum — an equivalence
 `e : ActionCategory G2 SphereWorld ≌ ∫𝓡_A` — and asked for "the members' ActionCategory
