@@ -14,10 +14,9 @@ step consumes. Draft of 2026-07-29; every Lean line is `#print`/`#check` output 
 > It is a natural transformation **OF THE TOTAL GROTHENDIECK CONSTRUCTION**. It is an inverse image
 > **OF** the total `F_A(X)`.
 
-**So `ι_A` lives at the total, not at the diagram.** The struck gloss called it "a natural
-transformation in `GreatCircle.Base ⥤ Grpd`" — that is the *presentation*, the fibrewise
-bookkeeping. What `ι_A` **is** is the inverse image of the total `F_A`, included in that total.
-`∫𝓡_A` is that inverse image, as a category.
+**`F_A(X)` is the total. `𝓡_A(X)` is the inverse image of that total. `ι_A` is the inclusion of
+the one in the other — a natural transformation of the total Grothendieck construction.** That is
+what `ι_A` is, and every statement about it belongs there.
 
 | | `ι_A` | `∫𝓡_A` |
 |---|---|---|
@@ -91,12 +90,21 @@ prose is not replaced; it is pinned.**
 
 ### "the diagram for `ι_A` : `𝓡_A(X) ⇉ F_A(X)`"
 
-**Precisely (the author):** a natural transformation **of the total Grothendieck construction** —
-`ι_A` is the **inverse image OF the total `F_A(X)`**, included in that total. Its presentation is
-componentwise: at each `X`, the inclusion `(IsCResidueState A X).ι : 𝓡_A(X) ⥤ F_A(X)`, naturality
-`rfl`. At the total it reads `Grothendieck.map (Functor.whiskerRight ι_A Grpd.forgetToCat)`.
-**Lean:** `AsectionCResidueInclusion` (`ASectionCResidueDiagram.lean:163`, `57384ae`).
-**Mathlib:** `ObjectProperty.ι` (`FullSubcategory.lean:58`), `NatTrans`.
+**Positively, in the author's terms:** `F_A(X)` is **the total**. `𝓡_A(X)` is **the inverse image
+of that total**. `ι_A` is the inclusion of the one in the other — **a natural transformation of the
+total Grothendieck construction**. That is the whole of what `ι_A` is, and it is where every
+statement about it belongs.
+
+**Lean, at the total:**
+
+```lean
+Grothendieck.map (Functor.whiskerRight (AsectionCResidueInclusion A) Grpd.forgetToCat)
+  : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)     -- 𝓡_A(X), the inverse image
+  ⥤ Grothendieck (AsectionActionDiagram   A ⋙ Grpd.forgetToCat)     -- F_A(X), the total
+```
+
+**Mathlib:** `Grothendieck.map` (`Grothendieck.lean:242`) · `Functor.whiskerRight` ·
+`Grpd.forgetToCat` (`Grpd/Basic.lean:77`).
 
 ### "which is my C-residue system as an action groupoid, `∫𝓡_A`"
 
@@ -123,13 +131,6 @@ consume any of the three; it may not manufacture a fourth.**
 **Lean:** `distinguishedDiskAction` · `projectiveObjectFrame` · `projectiveObjectFrame_north` ·
 `projectiveArrowElement` · `AsectionEquivariant : H1 ⥤ H1` (`ASectionEquivariant.lean:43`) ·
 `AsectionEquivariant_map_val` (`rfl`: retains the same `G₂` element).
-
-### "an orbit stabilizer slice wise from PGL to GL" · "the full Octonionic image sweep … (via G2)" · "and those groups, and that's nice"
-
-**Precisely:** two *group-level* facts, both green, both genuinely used to **build** the functor —
-and neither is the statement to be proved.
-**Lean:** `GreatCircle.orbit_stabilizer_factor` · `GreatCircle.stabilizerPart_unique` ·
-`G2.exists_smul_eq_of_mem_unitImaginarySphere` · `AsectionState.input_equivariant`.
 
 ### "BUT we want a transitive *action groupoid*"
 
@@ -310,26 +311,23 @@ Read top to bottom. **Two rows are red; everything else is kernel-stamped.**
 | 1 | the projective base groupoid | `𝓑` | `GreatCircle.Base := ActionCategory GreatCircle.Aut GreatCircle.Point` | `Action.lean:48` | ✅ |
 | 2 | the element, positioned at every footpoint (`PGL → GL`) | | `distinguishedDiskAction` · `projectiveObjectFrame` · `projectiveObjectFrame_north` · `orbit_stabilizer_factor` · `stabilizerPart_unique` | — | ✅ |
 | 3 | the octonionic image sweep over the normalization (`G₂`) | | `AsectionEquivariant : H1 ⥤ H1` · `AsectionEquivariant_map_val` · `G2.exists_smul_eq_of_mem_unitImaginarySphere` | `Action.lean:48` (`H1` is an action category) | ✅ |
-| 4 | the fibre — **objects are projective squares** | `F_A(X)` | `AsectionActionFiber`; objects `AsectionActionState` | `InducedCategory`, `Grpd.of` (`:54`) | ✅ |
-| 5 | **the real value transports — the morphisms that build the functor** | `F_A(f)` | `AsectionActionTransport := (orbitStabilizerActionSquare f).actionStateTransport` | — | ✅ |
-| 6 | the A-section functor | `F_A` | `AsectionActionDiagram : GreatCircle.Base ⥤ Grpd` | — | ✅ |
-| 7 | the gigantic graph | `T_A` | `TotalActionStateWorld := Grothendieck AsectionActionCatDiagram` | `Grothendieck.lean:73`, `Grpd/Basic:77` | ✅ |
-| 8 | the equation selects at north | | `IsNorthCResidueState` · `CResidueZeroLocus` · `CResidueZeroLocus_infinite` (C4) · `sphereZero_complete` | `ObjectProperty` | ✅ |
-| 9 | the C-residue preimage — **each member carries its own production witness** | `𝓡_A(X)` | `IsCResidueState` · `InverseImageCResidueStateWorldGroupoid := (IsCResidueState A X).FullSubcategory` | `FullSubcategory.lean:58` | ✅ |
-| 10 | **the residue transports ARE the value transports, restricted** | `𝓡_A(f)` | `AsectionCResidueTransport := (IsCResidueState Y).lift ((IsCResidueState X).ι ⋙ AsectionActionTransport f)` | `lift` `:161`, `ι` `:58` | ✅ |
-| 11 | the residue subdiagram | `𝓡_A` | `AsectionCResidueDiagram : GreatCircle.Base ⥤ Grpd` | — | ✅ |
-| 12 | **the double arrow — the INVERSE IMAGE OF the total `F_A`, included in it; a real value transport. This is what `ι_A` IS.** A **morphism**, not a category | `ι_A` | `AsectionCResidueInclusion : 𝓡_A ⟶ F_A`, naturality `rfl` | `ObjectProperty.ι` `:58` | ✅ `57384ae` |
-| 13 | `ι_A` full + faithful **at its own name**; `𝓡_A` **is** its own image | | `…_app_fullyFaithful` / `…_app_full` / `…_app_faithful` | `full_ι` `:98`, `faithful_ι` `:99`, `ι_obj` `:62`, `liftCompιIso` `:167` | ✅ `bb02b54` |
-| 14 | **the C-residue system as a CATEGORY, inside `T_A`** | `∫𝓡_A` | `Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)`; inside via `Grothendieck.map (Functor.whiskerRight ι_A Grpd.forgetToCat)` | `Grothendieck.lean:73`, `:86`, `:242` | ✅ (object) |
-| **15** | **THE TERM — `ι_A` is a transitive action groupoid: any two projective squares in the C-residue image joined by ONE groupoid element, using the `distinguishedDiskAction` morphism AND `AsectionEquivariant` BOTH** | | `sweepTransitive_on_residueSystem : ∀ P Q : ∫𝓡_A, Nonempty (P ⟶ Q)` | supplier is row 10 | 🔴 **OPEN**, `Theorem.lean:397` |
-| 16 | nonempty — C4 populates the preimage | | `residueActionState` · `residueActionState_mem` | — | ✅ |
-| 17 | therefore connected — **one morphism** | | `residueTotal_isConnected`, closing on row 15 | `Zigzag.of_hom` `:341`, `zigzag_isConnected` | ✅ **on 15** |
-| 18 | therefore `π₀` is a singleton — Riehl 8.3.5 | `κ` | `residueTotal_pi0_singleton` · `pi0GrothendieckEquiv` · `pi0_grothendieck` | `ConnectedComponents` `:40`, `isPreconnected_zigzag`, `Limits.colimit` | ✅ **on 15** |
-| 19 | the level read on the class | `c` | `transportLevel A n := (A.sphereZero n).re` | — | ✅ |
-| **20** | **the theorem** — the residue-`ℂ` zero spheres are concentric | | `ASection.concentricity : ∃ c, ∀ n, (A.sphereZero n).re = c` | — | 🔴 **level clause**, `Theorem.lean:480` |
-| 21 | RH | | `riemannHypothesis_iff_concentric` ✅ → `zeta_riemannHypothesis` · `nontrivial_one_centre` · `zeta_criticalLine_zeros_infinite` | — | `sorryAx` from 15, 20 only |
+| 4 | the fibre — **its objects are projective squares** | | `AsectionActionFiber`; objects `AsectionActionState` (two corners, three constraint faces) | `InducedCategory`, `Grpd.of` (`:54`) | ✅ |
+| 5 | **the real value transports — the morphisms that build it** | | `AsectionActionTransport := (orbitStabilizerActionSquare f).actionStateTransport` · `_id` · `_comp` | — | ✅ |
+| 6 | **`F_A(X)` — THE TOTAL.** The gigantic graph the argument lives in | `F_A(X)` = `T_A` | `TotalActionStateWorld := Grothendieck AsectionActionCatDiagram`, i.e. `Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)` | `Grothendieck.lean:73`, `Grpd/Basic:77` | ✅ |
+| 7 | the preimage taken **under the action** — each member carries the north object and the base arrow that produced it | | `IsCResidueState := fun x => ∃ xN, IsNorthCResidueState A xN ∧ ∃ g, (AsectionActionTransport A g).obj xN = x` | — | ✅ |
+| 8 | **the residue transports ARE the value transports, restricted** | | `AsectionCResidueTransport := (IsCResidueState Y).lift ((IsCResidueState X).ι ⋙ AsectionActionTransport f)` | `lift` `:161`, `ι` `:58` | ✅ |
+| 9 | **`𝓡_A(X)` — THE INVERSE IMAGE OF THE TOTAL.** Not a diagram: the part of `F_A(X)` that `ι_A` includes | `𝓡_A(X)` = `∫𝓡_A` | `Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)` | `Grothendieck.lean:73`, `:86` | ✅ |
+| 10 | **`ι_A` — the inclusion of the inverse image in the total.** A natural transformation of the total Grothendieck construction; a real value transport | `ι_A` | `Grothendieck.map (Functor.whiskerRight (AsectionCResidueInclusion A) Grpd.forgetToCat) : 𝓡_A(X) ⥤ F_A(X)` | `Grothendieck.map` `:242`, `Functor.whiskerRight` | ✅ `57384ae` |
+| 11 | `ι_A` full and faithful; `𝓡_A(X)` **is** its image | | `…_app_fullyFaithful` / `…_app_full` / `…_app_faithful` | `full_ι` `:98`, `faithful_ι` `:99`, `ι_obj` `:62`, `liftCompιIso` `:167` | ✅ `bb02b54` |
+| **12** | **THE TERM — `ι_A` is a transitive action groupoid: any two projective squares in the C-residue image joined by ONE groupoid element, using the `distinguishedDiskAction` morphism AND `AsectionEquivariant` BOTH** | | `sweepTransitive_on_residueSystem : ∀ P Q : 𝓡_A(X), Nonempty (P ⟶ Q)` | supplier is row 8 | 🔴 **OPEN**, `Theorem.lean:397` |
+| 13 | nonempty — C4 populates the inverse image | | `residueActionState` · `residueActionState_mem` · `CResidueZeroLocus_infinite` | — | ✅ |
+| 14 | therefore connected — **one morphism** | | `residueTotal_isConnected`, closing on row 12 | `Zigzag.of_hom` `:341`, `zigzag_isConnected` | ✅ **on 12** |
+| 15 | therefore `π₀` is a singleton — Riehl 8.3.5 | `κ` | `residueTotal_pi0_singleton` · `pi0GrothendieckEquiv` · `pi0_grothendieck` | `ConnectedComponents` `:40`, `isPreconnected_zigzag`, `Limits.colimit` | ✅ **on 12** |
+| 16 | the level read on the class | `c` | `transportLevel A n := (A.sphereZero n).re` | — | ✅ |
+| **17** | **the theorem** — the residue-`ℂ` zero spheres are concentric | | `ASection.concentricity : ∃ c, ∀ n, (A.sphereZero n).re = c` | — | 🔴 **level clause**, `Theorem.lean:480` |
+| 18 | RH | | `riemannHypothesis_iff_concentric` ✅ → `zeta_riemannHypothesis` · `nontrivial_one_centre` · `zeta_criticalLine_zeros_infinite` | — | `sorryAx` from 12, 17 only |
 
-**Rows 15 and 20 are the whole distance.** Row 15's joining morphism comes from **row 10** — *any
+**Rows 12 and 17 are the whole distance.** Row 12's joining morphism comes from **row 8** — *any
 two square frames are connected by the same morphisms that built that functor.*
 
 ---
