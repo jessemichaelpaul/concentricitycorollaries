@@ -195,6 +195,11 @@ object outside this list and Mathlib is not the route.
 
 #### The citation chain — what is stamped where (the author, 2026-07-28 night)
 
+**The direction rule, the author's general form (2026-07-28 night): "up towards the abstraction
+of category theory, not down to arrows."** Every route in the remaining work moves UP — to the
+functor, the instance, the class, the sweep. Every failure mode today was a DOWN move — to a
+group element, a chart coordinate, an individual arrow. When a term stalls, the exit is up.
+
 **Both of the author's orbit–stabilizer registers feed `ι_A`, confirmed by import lineage:**
 `ASectionFunctor.lean:6–7` imports BOTH `ASectionEquivariant` (the categorified
 orbit–stabilizer, `H1 ⥤ H1` — Mathlib states the categorification as a theorem:
@@ -471,7 +476,7 @@ or the lines differ from this document, the document is stale — fix it before 
 **Step 0 receipt (run 2026-07-28 night, baseline `f5c5a35`, kernel-elicited):** `git status
 --short` → clean; `lake env lean Concentricity/Theorem.lean` → **0 errors**, exactly two `sorry`
 warnings — declarations `:329` (`residueTotal_isConnected`, seat at `:342`) and `:359`
-(`concentricity`, seat at `:419`). The seats' goals, kernel-printed verbatim:
+(`concentricity`, seat at `:419`).
 
 ⚠️ **The seats' current goal prints are NOT reproduced here (author, 2026-07-28 night).** As the
 file stands, both are phrased in the pairwise `P Q` shape left over from the struck 8.3.4 framing,
@@ -535,6 +540,31 @@ the author**, do not start typing candidates.
 After **0**, re-run `infer_instance` for `IsPretransitive` at the carrier. **A probe flipping
 fail→success is the receipt** that the registration landed — that is the detector from the taxonomy,
 and it is the only one that has ever found a real gap here.
+
+### ✈️ THE FLIGHT PLAN — the run order, four legs, a commit after each
+
+**The compass at every leg (the author): *"up towards the abstraction of category theory, not
+down to arrows."* A stalled term exits upward — to the functor, the instance, the class, the
+sweep — never downward to a group element, a coordinate, or an individual arrow.**
+
+1. **Leg 1 — Declaration 0.** One `instance` line: `IsPretransitive G2 A.AsectionState`. Term:
+   `thm:G2-S6` (`G2.exists_smul_eq_of_mem_unitImaginarySphere`, `G2.lean:194`) read at the
+   carrier **through `AsectionEquivariant`** — up to the sweep, never down to the element. If the
+   kernel prints identification residue, that is **expected wiring** (the congruence ruling: the
+   S⁶ leg is definitional) — type it or route it verbatim; never report it as mathematics.
+   Receipt: the `infer_instance` flip. Focused build; commit.
+2. **Leg 2 — Seat A (`:342`), re-read from the kernel only now.** The goal changes shape once
+   Declaration 0 registers. Expected closure: **one arrow at `Action.lean:128`'s shape**,
+   Declaration 1 already bound in context — transitivity, inside `ι_A`'s register, the whole
+   square. The tree's existing pairwise `refine zigzag_isConnected fun P Q => ?_` line is
+   old-route residue — **re-seating it is sanctioned**. Commit on green.
+3. **Leg 3 — Seat B (`:419`), re-read after A.** Supplier: the element's own tape, cited
+   **directly** — `transportLevel` + `lem:exp-degenerate`, *"conserved along every connecting
+   transport by the lift's level law."* The asymmetry is intentional: connectivity moves UP
+   through the sweep; the level cites the tape at its own stamped register. Commit on green.
+4. **Leg 4 — the certificates** (step 6 below), plus the source scan
+   (`sorry`/`admit`/`sorryAx`/`native_decide`/new axioms) and the docs-to-tree match. Both
+   certificates delivered together, elicited independently.
 
 ## 4 — Between steps
 
