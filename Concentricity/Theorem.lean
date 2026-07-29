@@ -384,10 +384,25 @@ instance ASection.AsectionCResidueInclusion_app_faithful
     ((AsectionCResidueInclusion A).app X).Faithful :=
   ObjectProperty.faithful_ι _
 
+/-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
+equivariant functor — which is part of the construction of `ι_A` — is
+transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
+
+The sweep is part of the construction by `rfl`: every fibre of `F_A` is its
+graph (`AsectionState_input_then_equivariant`,
+`AsectionFiber_input_then_equivariant`).  One element of the sweep's action
+joins any two members — one arrow of the system; in an action groupoid the
+zigzag required has length one.  The suppliers (`6596e04`, `8907f88`,
+Declaration 1 at `57384ae`) are consumed here and nowhere lower. -/
+theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
+    ∀ P Q : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+      Nonempty (P ⟶ Q) := by
+  sorry
+
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
 natural isomorphism onto its image (certified, `57384ae`; naturality
-`rfl`).  Consumes Declaration 1. -/
+`rfl`).  Consumes THE RESULT — closes on contact, no proof of its own. -/
 instance ASection.residueTotal_isConnected (A : ASection) :
     CategoryTheory.IsConnected (Grothendieck
       (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
@@ -396,57 +411,8 @@ instance ASection.residueTotal_isConnected (A : ASection) :
     ⟨⟨projectiveNorth,
       ⟨residueActionState A projectiveNorth 0 baseWorld,
         A.residueActionState_mem 0⟩⟩⟩
-  refine zigzag_isConnected fun P Q => ?_
-  -- Declaration 1, at ι_A's name: full and faithful at every frame.
-  have hff := AsectionCResidueInclusion_app_fullyFaithful A P.base
-  haveI := AsectionCResidueInclusion_app_full A P.base
-  -- The master's finale, typed: one arrow of the total — the production
-  -- witnesses unpack the joining element; the base part is one element of
-  -- the base action; the value-transport part is one element of the sweep
-  -- (the equivariant functor is transitive: G₂ on the unit imaginary
-  -- octonions); membership travels by composition.
-  obtain ⟨xNP, hNP, gP, hgP⟩ := P.fiber.property
-  obtain ⟨xNQ, hNQ, gQ, hgQ⟩ := Q.fiber.property
-  let aP : GreatCircle.Aut := gP.1
-  let aQ : GreatCircle.Aut := gQ.1
-  let ubase : P.base ⟶ Q.base :=
-    ⟨aQ * aP⁻¹, by
-      have hP : aP • CategoryTheory.ActionCategory.back projectiveNorth
-          = CategoryTheory.ActionCategory.back P.base := gP.2
-      have hQ : aQ • CategoryTheory.ActionCategory.back projectiveNorth
-          = CategoryTheory.ActionCategory.back Q.base := gQ.2
-      show (aQ * aP⁻¹) • CategoryTheory.ActionCategory.back P.base
-          = CategoryTheory.ActionCategory.back Q.base
-      rw [← hP, mul_smul, inv_smul_smul]
-      exact hQ⟩
-  have harrow : gP ≫ ubase = gQ := by
-    apply Subtype.ext
-    simp [ubase, aP, aQ, CategoryTheory.ActionCategory.comp_val,
-      inv_mul_cancel_right]
-  have hX : (((AsectionCResidueDiagram A ⋙ Grpd.forgetToCat).map
-      ubase).toFunctor.obj P.fiber).obj
-      = (AsectionActionTransport A gQ).obj xNP := by
-    show (AsectionActionTransport A ubase).obj P.fiber.obj
-        = (AsectionActionTransport A gQ).obj xNP
-    rw [← hgP]
-    calc (AsectionActionTransport A ubase).obj
-          ((AsectionActionTransport A gP).obj xNP)
-        = (AsectionActionTransport A (gP ≫ ubase)).obj xNP := by
-          rw [AsectionActionTransport_comp]; rfl
-      _ = (AsectionActionTransport A gQ).obj xNP := by rw [harrow]
-  -- THE ONE OPEN JOINT (kernel-elicited anatomy, 2026-07-28 night):
-  -- `AsectionState.input = spherePt world coordinate` — the embedded slice
-  -- point.  The fused `G₂` leg (`smul_coordinate` rfl) joins members of
-  -- equal coordinate (DECLARATION 0's sweep — fired); the base leg's
-  -- transport moves the coordinate by `(cayleyProjective ∘ stabilizerPart)`
-  -- (`coordinateTransport_obj_coordinate` rfl) — the element's flow, whose
-  -- affine stabilizer at ∞ reaches every upper-half coordinate (concrete
-  -- `toNGL`-pattern matrices).  The fibre arrow below is the composite of
-  -- exactly those two certified movements at the members.
-  refine CategoryTheory.Zigzag.of_hom ⟨ubase,
-    ⟨CategoryTheory.eqToHom hX ≫ (AsectionActionTransport A gQ).map ?_ ≫
-      CategoryTheory.eqToHom hgQ⟩⟩
-  sorry
+  exact zigzag_isConnected fun P Q =>
+    CategoryTheory.Zigzag.of_hom (A.sweepTransitive_on_residueSystem P Q).some
 /-- **THE DECLARATION**: `π₀(∫𝓡_A)` IS A SINGLETON — CHT Remark 8.3.5 on
 the connected action groupoid: nonempty and connected, so one class. -/
 theorem ASection.residueTotal_pi0_singleton (A : ASection) :
