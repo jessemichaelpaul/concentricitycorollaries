@@ -396,19 +396,15 @@ instance ASection.residueTotal_isConnected (A : ASection) :
         = (AsectionActionTransport A (gP ≫ ubase)).obj xNP := by
           rw [AsectionActionTransport_comp]; rfl
       _ = (AsectionActionTransport A gQ).obj xNP := by rw [harrow]
-  -- DECLARATION 0 consumed at the members: the sweep joins the members'
-  -- faces (`AsectionEquivariant_transitive`, green, the author's sentence);
-  -- Declaration 1 (`hff`, bound above) transfers the join through the
-  -- certified inclusion.  The joints are the kernel's to place: type,
-  -- print, route.
-  have hface := A.AsectionEquivariant_transitive
-    ((AsectionStateInput A).obj xNP.input)
-    ((AsectionStateInput A).obj xNQ.input)
-    (u := (CategoryTheory.ActionCategory.back xNP.input).world.1)
-    (v := (CategoryTheory.ActionCategory.back xNQ.input).world.1)
-    (CategoryTheory.ActionCategory.back xNP.input).world.2
-    (CategoryTheory.ActionCategory.back xNQ.input).world.2
-    (by sorry) (by sorry)
+  -- THE ONE OPEN JOINT (kernel-elicited anatomy, 2026-07-28 night):
+  -- `AsectionState.input = spherePt world coordinate` — the embedded slice
+  -- point.  The fused `G₂` leg (`smul_coordinate` rfl) joins members of
+  -- equal coordinate (DECLARATION 0's sweep — fired); the base leg's
+  -- transport moves the coordinate by `(cayleyProjective ∘ stabilizerPart)`
+  -- (`coordinateTransport_obj_coordinate` rfl) — the element's flow, whose
+  -- affine stabilizer at ∞ reaches every upper-half coordinate (concrete
+  -- `toNGL`-pattern matrices).  The fibre arrow below is the composite of
+  -- exactly those two certified movements at the members.
   refine CategoryTheory.Zigzag.of_hom ⟨ubase,
     ⟨CategoryTheory.eqToHom hX ≫ (AsectionActionTransport A gQ).map ?_ ≫
       CategoryTheory.eqToHom hgQ⟩⟩
