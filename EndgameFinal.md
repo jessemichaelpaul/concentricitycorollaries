@@ -223,7 +223,9 @@ ASection.AsectionCResidueTransport A f :=                                       
   (A.IsCResidueState Y).lift ((A.IsCResidueState X).ι ⋙ A.AsectionActionTransport f) _
 ASection.AsectionCResidueDiagram A : GreatCircle.Base ⥤ Grpd                                  -- :154
 
--- ι_A : THE MORPHISM                              pin: ObjectProperty.ι, FullSubcategory:58
+-- ι_A : THE INVERSE IMAGE **OF** THE TOTAL F_A, included in it (the author).
+--       Below is its PRESENTATION, componentwise; its total-level reading is the last block.
+--                                                 pin: ObjectProperty.ι, FullSubcategory:58
 ASection.AsectionCResidueInclusion A : A.AsectionCResidueDiagram ⟶ A.AsectionActionDiagram    -- :163
   := { app := fun X => (A.IsCResidueState X).ι, naturality := rfl }        -- 57384ae
 
@@ -257,7 +259,7 @@ Verified `file:line` under `Mathlib/CategoryTheory/`.
 | `Grpd.of` · `Grpd.forgetToCat` | `Grpd/Basic.lean:54`, `:77` | groupoid-valued diagrams into `Cat` |
 | `ObjectProperty.ι` | `FullSubcategory.lean:58` | **`ι_A`'s component at each `X`** |
 | `ObjectProperty.ι_obj` = `rfl` | `FullSubcategory.lean:62` | `𝓡_A` **is** its own image, definitionally |
-| `ObjectProperty.fullyFaithfulι` · `full_ι` · `faithful_ι` | `FullSubcategory.lean:98`, `:99` | Declaration 1, at `ι_A`'s own name |
+| `ObjectProperty.fullyFaithfulι` (consumed at `:98`) · `full_ι` `:98` · `faithful_ι` `:99` | `FullSubcategory.lean` | Declaration 1, at `ι_A`'s own name |
 | `ObjectProperty.lift` | `FullSubcategory.lean:161` | `𝓡_A(f)` as the restriction of `F_A(f)` |
 | `ObjectProperty.liftCompιIso` = `Iso.refl` | `FullSubcategory.lean:167` | the library's own word: *definitionally* |
 | `Zigzag` · `Zigzag.of_hom` · `Zigzag.setoid` | `IsConnected.lean:314`, `:341`, `:375` | **one morphism ⟹ connected** |
@@ -270,7 +272,9 @@ Verified `file:line` under `Mathlib/CategoryTheory/`.
 
 # 5 — GREEN, by the clause of the argument it certifies
 
-**28 declarations on exactly `[propext, Classical.choice, Quot.sound]`. Zero project axioms.**
+**41 declarations — every name in the table below — each printing exactly
+`[propext, Classical.choice, Quot.sound]`. Zero project axioms.** Re-elicited 2026-07-29 by
+`#print axioms` over this exact list; 41 of 41 clean.
 
 | the author's clause | the certified declarations |
 |---|---|
@@ -284,6 +288,12 @@ Verified `file:line` under `Mathlib/CategoryTheory/`.
 | the objects exist (C4 populates the preimage) | `residueActionState` · `residueActionState_positioned` · `residueActionState_mem` |
 | *"connectedness … on real value transports"*, once transitivity is in hand | `pi0Functor` · `pi0Cocone` · `toColimitObj_eq_of_zigzag` · `pi0GrothendieckEquiv` · `pi0_grothendieck` · `transportLevel` |
 | RH's other half, independent of everything open | `riemannHypothesis_iff_concentric` — **no `½` on its RHS**; the `½` comes from the functional equation in one file only |
+
+**Also green in `Theorem.lean`, and NOT the result:** `AsectionEquivariant_transitive` (`6596e04`)
+and `AsectionEquivariant_transitive_states` (`8907f88`). Both quantify over the ambient world and
+mention `ι_A` nowhere; they are `thm:G2-S6` re-spelled through the sweep. They are **suppliers at
+most** — badging them as the transitivity of `ι_A` is what misled the team on 2026-07-29 and the
+badge is retracted in their own docstrings (`4a167be`).
 
 **Carrying `sorryAx`, and only these two:** `ASection.concentricity`, `zeta_riemannHypothesis` —
 arithmetic propagation from the open sites. `Corollaries.lean` compiles against
@@ -308,7 +318,7 @@ Read top to bottom. **Two rows are red; everything else is kernel-stamped.**
 | 9 | the C-residue preimage — **each member carries its own production witness** | `𝓡_A(X)` | `IsCResidueState` · `InverseImageCResidueStateWorldGroupoid := (IsCResidueState A X).FullSubcategory` | `FullSubcategory.lean:58` | ✅ |
 | 10 | **the residue transports ARE the value transports, restricted** | `𝓡_A(f)` | `AsectionCResidueTransport := (IsCResidueState Y).lift ((IsCResidueState X).ι ⋙ AsectionActionTransport f)` | `lift` `:161`, `ι` `:58` | ✅ |
 | 11 | the residue subdiagram | `𝓡_A` | `AsectionCResidueDiagram : GreatCircle.Base ⥤ Grpd` | — | ✅ |
-| 12 | **the double arrow — a real value transport; this is what `ι_A` IS.** A **morphism**, not a category | `ι_A` | `AsectionCResidueInclusion : 𝓡_A ⟶ F_A`, naturality `rfl` | `ObjectProperty.ι` `:58` | ✅ `57384ae` |
+| 12 | **the double arrow — the INVERSE IMAGE OF the total `F_A`, included in it; a real value transport. This is what `ι_A` IS.** A **morphism**, not a category | `ι_A` | `AsectionCResidueInclusion : 𝓡_A ⟶ F_A`, naturality `rfl` | `ObjectProperty.ι` `:58` | ✅ `57384ae` |
 | 13 | `ι_A` full + faithful **at its own name**; `𝓡_A` **is** its own image | | `…_app_fullyFaithful` / `…_app_full` / `…_app_faithful` | `full_ι` `:98`, `faithful_ι` `:99`, `ι_obj` `:62`, `liftCompιIso` `:167` | ✅ `bb02b54` |
 | 14 | **the C-residue system as a CATEGORY, inside `T_A`** | `∫𝓡_A` | `Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)`; inside via `Grothendieck.map (Functor.whiskerRight ι_A Grpd.forgetToCat)` | `Grothendieck.lean:73`, `:86`, `:242` | ✅ (object) |
 | **15** | **THE TERM — `ι_A` is a transitive action groupoid: any two projective squares in the C-residue image joined by ONE groupoid element, using the `distinguishedDiskAction` morphism AND `AsectionEquivariant` BOTH** | | `sweepTransitive_on_residueSystem : ∀ P Q : ∫𝓡_A, Nonempty (P ⟶ Q)` | supplier is row 10 | 🔴 **OPEN**, `Theorem.lean:397` |
