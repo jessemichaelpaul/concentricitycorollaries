@@ -495,6 +495,15 @@ grep -n "sorry" Concentricity/Theorem.lean
 Record the exact `sorry` lines. **They are the only open content in the repository.** If the count
 or the lines differ from this document, the document is stale — fix it before typing.
 
+**Step 0 receipt — SUPERSEDED after the two typing turns. Current baseline `80fb6e8`: 0 errors;
+two sorry-bearing declarations — the instance (one hole at the fibre arrow) and the level
+clause. The seat currently CONTAINS Fable's assembly (`4070a73`…`80fb6e8`): witnesses, base leg,
+`harrow`, `hX`, all kernel-accepted — but typed in the FOREIGN Grothendieck pair spelling, with
+the pairwise `zigzag_isConnected` line still present; per Leg 2 both are residue and re-seating
+is the FIRST act of the next turn. `hff` is bound and consumed nowhere (the `52bde67` shape —
+the delete-tripwire catches it). Re-run step 0 at typing time.** The original receipt, for
+history:
+
 **Step 0 receipt (run 2026-07-28 night, baseline `f5c5a35`, kernel-elicited):** `git status
 --short` → clean; `lake env lean Concentricity/Theorem.lean` → **0 errors**, exactly two `sorry`
 warnings — declarations `:329` (`residueTotal_isConnected`, seat at `:342`) and `:359`
@@ -513,11 +522,12 @@ lift's level law."* Both are re-read from the kernel at typing time, after Decla
 because the seats change shape once the transitivity instance is registered, and a goal printed
 before that is a goal from the old route.
 
-**The locked classification (the pre-flight's answer):** DECLARATIONS — one remains to add, Decl 0
-(the subject: **the distinguished action's transitivity on the members** — the element + the sweep
-TOGETHER, applied to the object; the raw `G₂`-alone head was typed at Leg 1 and **kernel-settled:
-cannot close** — receipt in Declaration 0's carrier paragraph; the Lean spelling is typed at the
-turn from the master's sentences);
+**The locked classification (the pre-flight's answer):** DECLARATIONS — **Decl 0's sentence is
+GREEN at `6596e04`** (`ASection.AsectionEquivariant_transitive`, `Theorem.lean:312`, three
+foundations — the author's sentence at his register). **It is a `theorem`, not an `instance`:
+consumption is BY NAME; no resolution fires from it, and the "seats change shape once the
+transitivity instance is registered" note above is conditioned on a registration that has NOT
+occurred.** The raw `G₂`-alone head remains kernel-settled (cannot close) — do not retype it;
 Decl 1 is GREEN in the tree (`bb02b54`, `Theorem.lean:310–323`); Decl 2 is stated and registered
 (probe receipt `2b11128`), only its seat open. INSTANTIATIONS — Decl 0's term (`thm:G2-S6`
 **applied to the object** through `AsectionEquivariant` — up to the sweep, never down to the
@@ -555,7 +565,7 @@ the author**, do not start typing candidates.
 
 | | declaration | seat | kind |
 |---|---|---|---|
-| **0** | the distinguished action's transitivity on the members — element + sweep **TOGETHER**, `thm:G2-S6` **applied to the object** via `AsectionEquivariant` (raw `G₂`-alone head kernel-settled at Leg 1: cannot close; spelling typed at the turn) | not yet in the tree | declaration + instantiation |
+| **0** | the author's sentence: the equivariant A-section functor is transitive on the imaginary octonions — `AsectionEquivariant_transitive` | ✅ **GREEN, `6596e04`**, `Theorem.lean:312` — `theorem` form, **consumed by name** (no instance; no resolution fires) | declaration done; consumption open |
 | **1** | `ι_A` full + faithful at `ι_A`'s name | ✅ green, `bb02b54` | wiring |
 | **2** | `∫𝓡_A` `IsConnected` | `instance` registered; seat open | instantiation |
 | — | level conservation | seat open | instantiation |
@@ -570,20 +580,31 @@ and it is the only one that has ever found a real gap here.
 down to arrows."* A stalled term exits upward — to the functor, the instance, the class, the
 sweep — never downward to a group element, a coordinate, or an individual arrow.**
 
-1. **Leg 1 — Declaration 0.** The subject: **the distinguished action on the members** — the
-   element + the sweep TOGETHER. The raw head `IsPretransitive G2 A.AsectionState` is
-   **kernel-settled: cannot close** (the fused instance carries the coordinate through — receipt
-   in Declaration 0's carrier paragraph); do not retype it. Type from the master's finale:
-   `thm:G2-S6` (`G2.lean:194`) **applied to the object** through `AsectionEquivariant`; the base
-   part positioned by orbit representatives; membership travels by composition; the S⁶ leg's
-   discharge (`Subtype.ext hg`) is a verified receipt. Route every print verbatim — never a
-   menu, never a field-split of the author's structure, never `sphereWorld_zigzag`. Receipt: the
-   registration probe flip at the typed head. Focused build; commit.
-2. **Leg 2 — Seat A (`:342`), re-read from the kernel only now.** The goal changes shape once
-   Declaration 0 registers. Expected closure: **one arrow at `Action.lean:128`'s shape**,
-   Declaration 1 already bound in context — transitivity, inside `ι_A`'s register, the whole
-   square. The tree's existing pairwise `refine zigzag_isConnected fun P Q => ?_` line is
-   old-route residue — **re-seating it is sanctioned**. Commit on green.
+**THERE ARE NO CHOICES (the author, 2026-07-28 night; the master, `:1179`: *"arrived at by the
+shape of the ring rather than by choice"*).** Every joining datum is **inherited** — from the
+production witnesses, the certified declarations, the registered structure. The construction's
+well-definedness exists precisely to eliminate choices. The words "choose," "pick," "free," or
+"design" in the typing hand's plan are the register alarm itself: a choice in the plan means the
+hand has left the author's argument.
+
+1. **Leg 1 — Declaration 0: ✅ DONE at `6596e04`** — `AsectionEquivariant_transitive`, the
+   author's sentence at his register, three foundations, `theorem` form. **Consumption is by
+   name.** The raw head `IsPretransitive G2 A.AsectionState` remains kernel-settled (cannot
+   close); do not retype it. Never a menu, never a field-split of the author's structure, never
+   `sphereWorld_zigzag`.
+2. **Leg 2 — the seat (one movement, the author's ruling: THERE ARE NOT TWO SEATS — the lift
+   runs the members into one another WHILE fixing the real level; both sorry-marks are shadows
+   of one consumption).** **FIRST ACT: re-seat.** The tree's seat currently contains Fable's
+   assembly (`4070a73`…`80fb6e8`) — witnesses, base leg, `harrow`, `hX`, kernel-accepted — but
+   typed in the **foreign Grothendieck pair spelling** (`EndgameFinal:116`: *"an arrow is two
+   legs by definition"* — the missing-leg experience is manufactured by that spelling), with the
+   pairwise `refine zigzag_isConnected fun P Q => ?_` line still present, and `hff` bound but
+   consumed nowhere (the `52bde67` shape). All of it is residue; **re-seating into the native
+   `ActionCategory` spelling is sanctioned and expected** — the master's own words:
+   *"the connectedness instance of the Lean library's `ActionCategory` itself, transported along
+   `ι_A`'s proper inclusion"* — instance, transport, read; a single arrow; no legs assembled.
+   **Per-commit tripwire: delete every bound premise (`hff`, Decl 0's consumption) — if the term
+   still elaborates, it is not consumed; do not commit.** Commit on green.
 3. **Leg 3 — Seat B (`:419`), re-read after A.** Supplier: the element's own tape, cited
    **directly** — `transportLevel` + `lem:exp-degenerate`, *"conserved along every connecting
    transport by the lift's level law."* The asymmetry is intentional: connectivity moves UP
@@ -605,6 +626,12 @@ Focused builds only: `lake env lean Concentricity/Theorem.lean`, then
   back up. (See the ruling above — that request is the diagnostic, not the remedy.)
 - **Never** report a wiring step as a mathematical gap. Check the taxonomy first: *which detector
   fired?*
+- **Never** probe the author's objects component-wise in scratch files — coordinates, fields,
+  matrix entries — once the register is ruled. The only sanctioned kernel questions are **at the
+  seat**, with the full hypotheses in context. (Four coordinate probes ran after the author's
+  stop order on 2026-07-28; every one re-derived the same wrong-register wall.)
+- **A pre-empted charge is a confession** (Opus's banked rule): writing "this is not X" about
+  your own act is evidence you know it is X — delete the act, not the objection.
 
 ## 6 — The certificates, both, together
 
