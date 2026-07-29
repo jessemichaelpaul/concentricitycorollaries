@@ -384,6 +384,23 @@ instance ASection.AsectionCResidueInclusion_app_faithful
     ((AsectionCResidueInclusion A).app X).Faithful :=
   ObjectProperty.faithful_ι _
 
+/-- **THE ELEMENT'S FLOW, STATED AS A FACT** (the author, 2026-07-29): the
+north stabilizer's reach between two members' heights — membership
+hypotheses in, element out; the `toNGL` pattern (`ProjectiveSection.lean:32`
+— explicit element, `norm_num`) at the supplier layer, exactly as
+`thm:G2-S6` sits at its own layer.  The other leg of the one action: `G₂`
+sweeps the directions, the element's flow moves the heights.  This is the
+only new line of mathematics in the whole remaining distance. -/
+theorem ASection.northStabilizer_reach_heights (A : ASection)
+    {X Y : GreatCircle.Base}
+    {x : AsectionActionFiber A X} {y : AsectionActionFiber A Y}
+    (hx : IsCResidueState A X x) (hy : IsCResidueState A Y y) :
+    ∃ w : GreatCircle.NorthStabilizer,
+      (GreatCircle.cayleyProjective w.1).val
+          (CategoryTheory.ActionCategory.back x.input).coordinate =
+        (CategoryTheory.ActionCategory.back y.input).coordinate := by
+  sorry
+
 /-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
 equivariant functor — which is part of the construction of `ι_A` — is
 transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
@@ -412,16 +429,31 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- `_N`), the `GpvTransport` lift laws, the `normalizedN` tapes and
   -- their `_level` face, the stabilizer's reach.
   intro P Q  -- the definition unfolding, nothing more
-  have hstd : (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back Q.base) *
+  -- The heights leg: the element's flow, stated as a fact — the supplier
+  -- above, membership in, element out.
+  obtain ⟨w, hw⟩ :=
+    A.northStabilizer_reach_heights P.fiber.property Q.fiber.property
+  -- The whole square's base arrow, BUILT FROM the element: the orbit
+  -- representatives foot it (orbitRep_spec), and by the uniqueness half of
+  -- the author's factorization the element IS its stabilizer part.
+  have hfoot : ((GreatCircle.orbitRep
+      (CategoryTheory.ActionCategory.back Q.base)) * w.1 *
       (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back P.base))⁻¹) •
         CategoryTheory.ActionCategory.back P.base =
       CategoryTheory.ActionCategory.back Q.base := by
     have h1 := inv_smul_eq_iff.mpr
       (GreatCircle.orbitRep_spec
         (CategoryTheory.ActionCategory.back P.base)).symm
-    rw [mul_smul, h1]
+    rw [mul_smul, mul_smul, h1]
+    have h2 : w.1 • (OnePoint.infty : GreatCircle.Point) =
+        OnePoint.infty := w.2
+    rw [h2]
     exact GreatCircle.orbitRep_spec _
-  have f_std : P.base ⟶ Q.base := ⟨_, hstd⟩
+  let f : P.base ⟶ Q.base := ⟨_, hfoot⟩
+  have hstab : w = GreatCircle.stabilizerPart f :=
+    GreatCircle.stabilizerPart_unique f w rfl
+  -- The directions leg: thm:G2-S6 through the sweep — the certified
+  -- 8907f88 key.
   have key : ∀ s t : A.AsectionState, s.coordinate = t.coordinate →
       ∃ g : G2, g • s = t := by
     rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hc
@@ -430,13 +462,20 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     refine ⟨g, ?_⟩
     simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
     exact ⟨Subtype.ext hg, hc⟩
+  -- The transported height IS the supplier's equation, because the element
+  -- is the arrow's own stabilizer part.
   have hreach :
       (CategoryTheory.ActionCategory.back
-        (((AsectionCResidueTransport A f_std).obj P.fiber).obj.input)).coordinate =
+        (((AsectionCResidueTransport A f).obj P.fiber).obj.input)).coordinate =
       (CategoryTheory.ActionCategory.back (Q.fiber.obj.input)).coordinate := by
-    sorry
+    show (GreatCircle.cayleyProjective
+        (GreatCircle.stabilizerPart f).1).val
+          (CategoryTheory.ActionCategory.back P.fiber.obj.input).coordinate =
+      (CategoryTheory.ActionCategory.back (Q.fiber.obj.input)).coordinate
+    rw [← hstab]
+    exact hw
   obtain ⟨g, hg⟩ := key _ _ hreach
-  exact ⟨⟨f_std,
+  exact ⟨⟨f,
     ((AsectionCResidueInclusion A).app Q.base).preimage
       (CategoryTheory.InducedCategory.homMk (Subtype.mk g hg))⟩⟩
 
