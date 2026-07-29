@@ -412,39 +412,59 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- `_N`), the `GpvTransport` lift laws, the `normalizedN` tapes and
   -- their `_level` face, the stabilizer's reach.
   intro P Q  -- the definition unfolding, nothing more
-  -- The footing: the author's orbit representatives (orbitRep_spec) — the
-  -- standard base arrow between the two footpoints.
-  have hstd : (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back Q.base) *
-      (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back P.base))⁻¹) •
-        CategoryTheory.ActionCategory.back P.base =
-      CategoryTheory.ActionCategory.back Q.base := by
-    have h1 := inv_smul_eq_iff.mpr
-      (GreatCircle.orbitRep_spec
-        (CategoryTheory.ActionCategory.back P.base)).symm
-    rw [mul_smul, h1]
-    exact GreatCircle.orbitRep_spec _
-  let f : P.base ⟶ Q.base := ⟨_, hstd⟩
+  -- The production witnesses: IsCResidueState's own definition.
+  obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
+  obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
+  obtain ⟨zx, hzxmem, hzxeq⟩ := hxN
+  obtain ⟨zy, hzymem, hzyeq⟩ := hyN
+  obtain ⟨hFzx, hzxim⟩ := (mem_CResidueZeroLocus_iff A zx).mp hzxmem
+  obtain ⟨hFzy, hzyim⟩ := (mem_CResidueZeroLocus_iff A zy).mp hzymem
+  -- The witnesses' own arrows compose in the base groupoid: the base leg.
+  let f : P.base ⟶ Q.base := CategoryTheory.Groupoid.inv g ≫ h
+  -- The element's positioning at north — at north the frame IS the
+  -- element (projectiveObjectFrame_north): the selected coordinates are
+  -- the zeros through the element's own faces.
+  have h2x : (↑zx : OnePoint ℂ) =
+      (A.distinguishedDiskAction).val
+        ((CategoryTheory.ActionCategory.back xN.input).coordinate) := by
+    have hzxeq' : (↑zx : OnePoint ℂ) =
+        (CategoryTheory.ActionCategory.back xN.positioned).coordinate := hzxeq
+    have hpos := congrArg
+      (fun s => (CategoryTheory.ActionCategory.back s).coordinate)
+      xN.positioned_by_action
+    rw [hzxeq']
+    simpa [projectiveNorth, projectiveObjectFrame_north] using hpos
+  have h2y : (↑zy : OnePoint ℂ) =
+      (A.distinguishedDiskAction).val
+        ((CategoryTheory.ActionCategory.back yN.input).coordinate) := by
+    have hzyeq' : (↑zy : OnePoint ℂ) =
+        (CategoryTheory.ActionCategory.back yN.positioned).coordinate := hzyeq
+    have hpos := congrArg
+      (fun s => (CategoryTheory.ActionCategory.back s).coordinate)
+      yN.positioned_by_action
+    rw [hzyeq']
+    simpa [projectiveNorth, projectiveObjectFrame_north] using hpos
   -- The directions leg: thm:G2-S6 through the sweep — the certified
   -- 8907f88 key.
   have key : ∀ s t : A.AsectionState, s.coordinate = t.coordinate →
-      ∃ g : G2, g • s = t := by
+      ∃ w : G2, w • s = t := by
     rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hc
-    obtain ⟨g, hg⟩ :=
+    obtain ⟨w, hw⟩ :=
       G2.exists_smul_eq_of_mem_unitImaginarySphere sw.2 tw.2
-    refine ⟨g, ?_⟩
+    refine ⟨w, ?_⟩
     simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
-    exact ⟨Subtype.ext hg, hc⟩
-  -- The heights: the point where the wiring of the certified ledger
-  -- stands open.
+    exact ⟨Subtype.ext hw, hc⟩
+  -- The heights, with the whole certified ledger in scope: the point
+  -- where the greens' wiring stands open.
   have hreach :
       (CategoryTheory.ActionCategory.back
         (((AsectionCResidueTransport A f).obj P.fiber).obj.input)).coordinate =
       (CategoryTheory.ActionCategory.back (Q.fiber.obj.input)).coordinate := by
     sorry
-  obtain ⟨g, hg⟩ := key _ _ hreach
+  obtain ⟨w, hw⟩ := key _ _ hreach
   exact ⟨⟨f,
     ((AsectionCResidueInclusion A).app Q.base).preimage
-      (CategoryTheory.InducedCategory.homMk (Subtype.mk g hg))⟩⟩
+      (CategoryTheory.InducedCategory.homMk (Subtype.mk w hw))⟩⟩
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
