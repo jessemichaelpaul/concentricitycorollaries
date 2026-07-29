@@ -321,6 +321,31 @@ theorem ASection.AsectionEquivariant_transitive (A : ASection) (p q : H1)
     rw [hp, hq, ← hg]; rfl⟩
   exact ⟨(A.AsectionEquivariant).map harrow⟩
 
+/-- **DECLARATION 0, at the members** — the same sentence read where the
+members live.  A member's input eye is `AsectionState.input s =
+spherePt ↑s.world s.coordinate`: the point `σ + γ·v` of its own sphere, not
+the bare direction.  `thm:G2-S6` is the transitivity of `G₂` on that sphere
+(`lem:residue-spheres`: *"each such sphere `σ+γS⁶` is the `G₂`-orbit of any
+of its points"*), and `AsectionStateInput` is a **functor**, so the arrow
+travels through it — no coordinate law is needed on the way.  The sweep then
+carries it, as in Declaration 0. -/
+theorem ASection.AsectionEquivariant_transitive_states (A : ASection)
+    (x y : A.AsectionStateWorld)
+    (h : (CategoryTheory.ActionCategory.back x).coordinate
+       = (CategoryTheory.ActionCategory.back y).coordinate) :
+    Nonempty ((A.AsectionEquivariant).obj ((AsectionStateInput A).obj x) ⟶
+              (A.AsectionEquivariant).obj ((AsectionStateInput A).obj y)) := by
+  have key : ∀ s t : A.AsectionState, s.coordinate = t.coordinate →
+      ∃ g : G2, g • s = t := by
+    rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hc
+    obtain ⟨g, hg⟩ :=
+      G2.exists_smul_eq_of_mem_unitImaginarySphere sw.2 tw.2
+    refine ⟨g, ?_⟩
+    simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
+    exact ⟨Subtype.ext hg, hc⟩
+  obtain ⟨g, hg⟩ := key _ _ h
+  exact ⟨(A.AsectionEquivariant).map ((AsectionStateInput A).map (⟨g, hg⟩ : x ⟶ y))⟩
+
 /-- **DECLARATION 1** (the author's, verbatim, `def:residue-subdiagram`):
 `ι_A : 𝓡_A ⇒ 𝓐_A` is "a faithful embedding onto its image, and its
 naturality squares commute definitionally."
