@@ -445,120 +445,58 @@ Declaration 1 at `57384ae`) are consumed here and nowhere lower. -/
 theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     ∀ P Q : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
       Nonempty (P ⟶ Q) := by
-  -- THE HALF-SQUARE STRIKE executed (the author, banked at 87773fe): the
-  -- base-fixed, fibre-only board is out — it demanded a single fibre map
-  -- between zero spheres, which the author's mathematics says will never
-  -- exist; the spheres are connected by the continuum of maps the
-  -- equivariant build carries, and the collapse happens at ∫𝓡_A by
-  -- 8.3.5.  The seat re-runs at ι_A's own level: the certified inclusion
-  -- (57384ae — a PREMISE, never an open fact) consumed whole.
-  -- THE GROUPOID REGISTER (the author, 2026-07-29, his realization):
-  -- this statement IS the lemma "ι_A is a transitive action groupoid" —
-  -- no group in it.  Transitive means: any two projective squares in
-  -- the C-residue image (the OBJECTS of ∫𝓡_A — five-field squares, two
-  -- corners and their constraint faces) are connected by ONE groupoid
-  -- element.  That element is made of the distinguishedDiskAction
-  -- morphism AND the A-section equivariant functor BOTH — not one
-  -- inside the other — because the author's element is simultaneously a
-  -- function, a group element, and a functor.  Each object arrives
-  -- carrying its own preimage (IsCResidueState): nothing is chosen, the
-  -- objects hand the data.  Every prior body reduced this to a single
-  -- fibre map between zero spheres — the half-square (struck, 87773fe):
-  -- that map never exists; the join is one element of the groupoid,
-  -- both mechanisms at once.
+  -- THE PROOF SHAPE (the author, ratified and saved to memory,
+  -- 2026-07-29): let ι_A(1), ι_A(2) be two arbitrary C-residue systems
+  -- in the subcategory ∫𝓡_A of the total object; then there is a
+  -- morphism m of ∫𝓡_A with m ∘ ι_A(1) = ι_A(2).  One statement with
+  -- this seat's Nonempty, by hom_as_subtype (Action.lean:92).  The proof
+  -- opens twice in the cResidue_lands pattern — each object carries ITS
+  -- OWN d = 1 instantiation — then the subcategory's fact enters once
+  -- (thm:G2-S6), and m is assembled from the two supplied transports and
+  -- the sphere fact, canonical by the stabilizer factorization.
   intro P Q
-  -- ROW 4 SUPPLIES (EndgameFinal §2, §6): a morphism of 𝓡_A(X) IS a
-  -- morphism of F_A(X) — "any two square frames are connected by the
-  -- same morphisms that built that functor" — and membership IS the
-  -- preimage datum: each object hands, in its own IsCResidueState
-  -- witness, the north producer and the base arrow that made it.
-  -- Choice never enters.
-  -- The master, :1270-1274: "a fully faithful transitive inclusion of an
-  -- action groupoid is connected — transported along ι_A's proper
-  -- inclusion."  ι_A at the total is full and faithful (b073d88, the
-  -- isomorphism onto its image): a join of the images inside T_A pulls
-  -- back along the proper inclusion; the images are joined by the
-  -- total's own morphisms — one groupoid element, both functors present.
-  obtain ⟨φ⟩ : Nonempty ((AsectionCResidueInclusionTotal A).obj P ⟶
-      (AsectionCResidueInclusionTotal A).obj Q) := by
-    -- The lemma just needs the morphism ι_A (the author, 2026-07-29):
-    -- two arbitrary 0-N frames connected by a morphism, hence transitive.
-    -- ι_A bound whole — the total reading (b073d88), the componentwise
-    -- presentation with naturality rfl (57384ae).
-    -- The author, verbatim (2026-07-29): "let square 𝓡_A and square 𝓡̄_A
-    -- be two arbitrary objects of the total C-residue system in the
-    -- Grothendieck construction ∫𝓡_A, then show we can connect them with
-    -- ι_A."  The two squares are P and Q; their images are the endpoints;
-    -- the connection is ι_A's own — the total reading (b073d88), the
-    -- naturality rfl (57384ae) — nothing else added.
-    -- THE RATIFIED SENTENCE (the author, 2026-07-29): the join exists
-    -- because of what the members are — directions on the S⁶ spheres
-    -- where G₂ is transitive (the sweep's half, green); frames and
-    -- coordinates linked by the total's own transports with the element
-    -- inside each (the base half, the built morphisms); the stabilizer
-    -- factorization making the composite canonical rather than chosen.
-    -- F_A(X) is NOT transitive — which is why this is a lemma.
-    obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
-    obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-    -- The base half: the total's own transports over the members' own
-    -- arrows.
-    have hback : (AsectionActionTransport A
-        (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN := by
-      calc (AsectionActionTransport A
-            (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj
-          = (AsectionActionTransport A
-              (CategoryTheory.Groupoid.inv g)).obj
-                ((AsectionActionTransport A g).obj xN) := by rw [hg]
-        _ = (AsectionActionTransport A
-              (g ≫ CategoryTheory.Groupoid.inv g)).obj xN :=
-            (congrArg (fun F => F.obj xN)
-              (AsectionActionTransport_comp A g
-                (CategoryTheory.Groupoid.inv g))).symm
-        _ = xN := by
-            have harrow : g ≫ CategoryTheory.Groupoid.inv g =
-                𝟙 projectiveNorth :=
-              CategoryTheory.Groupoid.comp_inv g
-            rw [harrow, AsectionActionTransport_id]
-            rfl
-    have rideP : (AsectionCResidueInclusionTotal A).obj P ⟶
-        (⟨projectiveNorth, xN⟩ :
-          Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) :=
-      ⟨CategoryTheory.Groupoid.inv g, eqToHom hback⟩
-    have rideQ : (⟨projectiveNorth, yN⟩ :
-          Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
-        (AsectionCResidueInclusionTotal A).obj Q :=
-      ⟨h, eqToHom hh⟩
-    -- The lift's segment between the zeros, with the sweep on the
-    -- directions — where the kernel speaks first (the author's order).
-    have hlift : Nonempty ((⟨projectiveNorth, xN⟩ :
-          Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
-        ⟨projectiveNorth, yN⟩) := by
-      -- THE NORMALIZATION MOVE (the author, 2026-07-29): "that is the
-      -- normalization action of the A-section equivariant functor.  Move
-      -- the normalization, you move from one system to the next, because
-      -- you project to different slices."  The certified carrier per
-      -- zero: the normalizedN tapes — each C-residue output's own closed
-      -- zero-to-N tape into the common chart (lift_closed; level face
-      -- `_level` = row 12's fact).  The component: ride the one tape in,
-      -- the other back out, the sweep (thm:G2-S6) closing within the
-      -- target sphere; naturality is realize_equivariant and
-      -- coordinateTransportNatTrans's naturality, both green; the
-      -- stabilizer factorization makes the composite canonical.
-      obtain ⟨zx, hzxmem, hzxeq⟩ := hxN
-      obtain ⟨zy, hzymem, hzyeq⟩ := hyN
-      obtain ⟨n, hn⟩ :=
-        (mem_CResidueZeroLocus_iff_exists_sphereZero A zx).mp hzxmem
-      obtain ⟨m, hm⟩ :=
-        (mem_CResidueZeroLocus_iff_exists_sphereZero A zy).mp hzymem
-      -- The tape is a STATEMENT about the d=1 instantiation (the author):
-      -- every square is already instantiated at d = 1, which fixes 0 and
-      -- N; the level faces are the statements consumed, never machinery
-      -- to ride.
-      have hleveln := A.normalizedNActionSquare_level n baseWorld
-      have hlevelm := A.normalizedNActionSquare_level m baseWorld
-      sorry
-    exact ⟨rideP ≫ hlift.some ≫ rideQ⟩
-  exact ⟨(AsectionCResidueInclusionTotal A).preimage φ⟩
+  obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
+  obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
+  -- FIRST square: ι_A(1)'s own channel g, its positioned square at the
+  -- literal d = 1, identified with its transport — SUPPLIED.
+  let square1 : ActionTransportSquare
+      (projectiveObjectFrame A projectiveNorth)
+      (projectiveObjectFrame A P.base) := by
+    simpa only [mul_one] using positionedOrbitSquare A g (1 : Moebius)
+  have hsquare1 : square1 = orbitStabilizerActionSquare A g := by
+    apply ActionTransportSquare.ext
+    · rfl
+    · change (1 : Moebius)⁻¹ *
+          GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1 * 1 =
+        GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1
+      group
+  have htransport1 : square1.actionStateTransport A =
+      AsectionActionTransport A g := by
+    rw [hsquare1]
+    rfl
+  -- SECOND square: ι_A(2)'s own channel h, likewise at the literal
+  -- d = 1 — SUPPLIED.
+  let square2 : ActionTransportSquare
+      (projectiveObjectFrame A projectiveNorth)
+      (projectiveObjectFrame A Q.base) := by
+    simpa only [mul_one] using positionedOrbitSquare A h (1 : Moebius)
+  have hsquare2 : square2 = orbitStabilizerActionSquare A h := by
+    apply ActionTransportSquare.ext
+    · rfl
+    · change (1 : Moebius)⁻¹ *
+          GreatCircle.cayleyProjective (GreatCircle.stabilizerPart h).1 * 1 =
+        GreatCircle.cayleyProjective (GreatCircle.stabilizerPart h).1
+      group
+  have htransport2 : square2.actionStateTransport A =
+      AsectionActionTransport A h := by
+    rw [hsquare2]
+    rfl
+  -- The subcategory's fact, entering once: the members' directions lie
+  -- on the spheres where G₂ is transitive (thm:G2-S6).
+  have hG2 := @G2.exists_smul_eq_of_mem_unitImaginarySphere
+  -- The morphism m of ∫𝓡_A with m ∘ ι_A(1) = ι_A(2), assembled from the
+  -- two supplied transports and the sphere fact.
+  sorry
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
