@@ -467,33 +467,56 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- that map never exists; the join is one element of the groupoid,
   -- both mechanisms at once.
   intro P Q
-  -- PREMISES FIRST, before any object is touched (the instructions,
-  -- 2026-07-29): Declaration 1 at ι_A's own name (bb02b54, three
-  -- foundations); 𝓡_A definitionally its own image (ι_obj rfl,
-  -- liftCompιIso = Iso.refl — the library's word); naturality rfl
-  -- (57384ae) — premises, never open facts.
-  have hff := ASection.AsectionCResidueInclusion_app_fullyFaithful A
-  -- UPSTAIRS, NAMED PRECISELY (the target of ι_A): the total of the
-  -- action diagram, T_A.  The arrow to construct is between ι_A's images
-  -- of P and Q there — the author's ONE element of the distinguished
-  -- action, the distinguishedDiskAction morphism and the equivariant
-  -- functor TOGETHER; one datum, both encoding fields its projections.
-  have hup : (⟨P.base, ((AsectionCResidueInclusion A).app P.base).obj
-          P.fiber⟩ :
-        Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
-      ⟨Q.base, ((AsectionCResidueInclusion A).app Q.base).obj Q.fiber⟩ := by
+  -- ROW 4 SUPPLIES (EndgameFinal §2, §6): a morphism of 𝓡_A(X) IS a
+  -- morphism of F_A(X) — "any two square frames are connected by the
+  -- same morphisms that built that functor" — and membership IS the
+  -- preimage datum: each object hands, in its own IsCResidueState
+  -- witness, the north producer and the base arrow that made it.
+  -- Choice never enters.  [The prior hup body — an arrow fetched
+  -- upstairs and brought home — was the struck upstairs/downstairs
+  -- error: the master transports the instance, not a fetched morphism.]
+  obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
+  obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
+  have memxN : ASection.IsCResidueState A ASection.projectiveNorth xN :=
+    ⟨xN, hxN, 𝟙 _, by rw [ASection.AsectionActionTransport_id]; rfl⟩
+  have memyN : ASection.IsCResidueState A ASection.projectiveNorth yN :=
+    ⟨yN, hyN, 𝟙 _, by rw [ASection.AsectionActionTransport_id]; rfl⟩
+  have hback : (ASection.AsectionActionTransport A
+      (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN := by
+    calc (ASection.AsectionActionTransport A
+          (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj
+        = (ASection.AsectionActionTransport A
+            (CategoryTheory.Groupoid.inv g)).obj
+              ((ASection.AsectionActionTransport A g).obj xN) := by rw [hg]
+      _ = (ASection.AsectionActionTransport A
+            (g ≫ CategoryTheory.Groupoid.inv g)).obj xN :=
+          (congrArg (fun F => F.obj xN)
+            (ASection.AsectionActionTransport_comp A g
+              (CategoryTheory.Groupoid.inv g))).symm
+      _ = xN := by
+          have harrow : g ≫ CategoryTheory.Groupoid.inv g =
+              𝟙 ASection.projectiveNorth :=
+            CategoryTheory.Groupoid.comp_inv g
+          rw [harrow, ASection.AsectionActionTransport_id]
+          rfl
+  -- The join of the two producers at the north frame — the morphisms of
+  -- ∫𝓡_A being the total's own (row 4); held here for the kernel.
+  have hN : Nonempty
+      ((⟨ASection.projectiveNorth, ⟨xN, memxN⟩⟩ :
+          Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) ⟶
+        ⟨ASection.projectiveNorth, ⟨yN, memyN⟩⟩) := by
     sorry
-  -- THE HOMECOMING: both downstairs fields are projections of the one
-  -- datum hup — the base leg literally shared (one base arrow, not two:
-  -- ι_A is a natural transformation over the same base), the fibre leg
-  -- pulled home into 𝓡_A through ι_A's fullness (Declaration 1's own
-  -- FullyFaithful.preimage).
-  exact ⟨⟨hup.base, (hff Q.base).preimage
-    (show ((AsectionCResidueInclusion A).app Q.base).obj
-        (((AsectionCResidueDiagram A ⋙ Grpd.forgetToCat).map
-          hup.base).toFunctor.obj P.fiber) ⟶
-      ((AsectionCResidueInclusion A).app Q.base).obj Q.fiber
-     from hup.fiber)⟩⟩
+  refine ⟨(⟨CategoryTheory.Groupoid.inv g, eqToHom ?_⟩ :
+      P ⟶ ⟨ASection.projectiveNorth, ⟨xN, memxN⟩⟩) ≫ hN.some ≫
+    (⟨h, eqToHom ?_⟩ :
+      (⟨ASection.projectiveNorth, ⟨yN, memyN⟩⟩ :
+          Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) ⟶ Q)⟩
+  · apply ObjectProperty.FullSubcategory.ext
+    show (ASection.AsectionActionTransport A
+        (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN
+    exact hback
+  · apply ObjectProperty.FullSubcategory.ext
+    exact hh
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
@@ -584,7 +607,26 @@ theorem ASection.concentricity (A : ASection) :
           P.fiber.obj.positioned.back.coordinate =
         @OnePoint.rec ℂ (fun _ => ℝ) (0 : ℝ) Complex.re
           Q.fiber.obj.positioned.back.coordinate := by
-      sorry
+      -- The induction is the file's own green pattern
+      -- (toColimitObj_eq_of_zigzag, :94).  The one fact — the level is
+      -- unchanged by a single morphism: the lift's level law
+      -- (lem:exp-degenerate) — held here for the kernel.
+      have hhom : ∀ {P Q : Grothendieck
+          (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)}
+          (_ : P ⟶ Q),
+          @OnePoint.rec ℂ (fun _ => ℝ) (0 : ℝ) Complex.re
+            P.fiber.obj.positioned.back.coordinate =
+          @OnePoint.rec ℂ (fun _ => ℝ) (0 : ℝ) Complex.re
+            Q.fiber.obj.positioned.back.coordinate := by
+        sorry
+      intro P Q h
+      induction h with
+      | refl => rfl
+      | tail _ hzag ih =>
+        refine ih.trans ?_
+        rcases hzag with hφ | hφ
+        · exact hhom hφ.some
+        · exact (hhom hφ.some).symm
     have happlied := congrArg
       (_root_.Quotient.lift (fun P : Grothendieck
           (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat) =>
