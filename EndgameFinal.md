@@ -62,6 +62,34 @@ decomposition of the author's mathematics.** The term must fill both — there i
 What is struck is *sourcing the two fields from two independent searches*: both are determined by
 the same datum. These are different things and the team has collapsed them repeatedly.
 
+## Where the term reaches — the author's ruling, 2026-07-29
+
+**Build the morphism through `ι_A`'s certified structure**, not by reaching into object internals.
+Bind first, as premises: Declaration 1 at `ι_A`'s own name (`bb02b54`) and `𝓡_A`-is-its-own-image
+(`FullSubcategory`; `ι_obj` = `rfl`, `FullSubcategory.lean:62`; `liftCompιIso` = `Iso.refl`, `:167`
+— the library's own word, *definitionally*); `ι_A`'s naturality is `rfl` (`57384ae`), **a premise,
+never an open fact**.
+
+**The construction and the inclusion are not rival sources.** This is the master's sentence read
+literally — *"the connectedness instance … **transported along `ι_A`'s proper inclusion**"*:
+
+| supplies | what |
+|---|---|
+| the author's construction — the `distinguishedDiskAction` morphism and the equivariant functor **together**, one element | the arrow, in the target |
+| `ι_A`'s certified structure — **full**, faithful, image definitional | brings that arrow **home** into `𝓡_A` |
+| Mathlib | one arrow ⟹ connected ⟹ singleton (already wired) |
+
+**Fullness is the transfer mechanism, and that is why Declaration 1 had to stand at `ι_A`'s own
+name.** Faithfulness alone only pushes arrows *out* of `𝓡_A`; **fullness pulls them back in** — and
+`𝓡_A` being definitionally its own image is what makes "in the target" and "in `𝓡_A`" the same
+objects. The construction supplies the element; the certified inclusion transports it. Neither
+half is optional, and neither is a "leg."
+
+**Why the lemma must exist at all (the author, 2026-07-29):** no library theorem can supply that
+two frame squares of `∫𝓡_A` are joined, because no library knows what a C-residue square is.
+`sweepTransitive_on_residueSystem` is the single place the author's construction enters the chain.
+Everything downstream of it is already green.
+
 ## Shapes the kernel has RULED OUT — do not retype these
 
 | shape | receipt |
