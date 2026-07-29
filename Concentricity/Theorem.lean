@@ -397,51 +397,7 @@ Declaration 1 at `57384ae`) are consumed here and nowhere lower. -/
 theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     ∀ P Q : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
       Nonempty (P ⟶ Q) := by
-  intro P Q
-  -- The members are OUTPUTS of the action that produced them: the
-  -- production witnesses are data of the preimage (IsCResidueState,
-  -- ASectionCResidueInverseImage.lean:60) — the joining element is
-  -- unpacked, never searched.
-  obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
-  obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-  have memxN : ASection.IsCResidueState A ASection.projectiveNorth xN :=
-    ⟨xN, hxN, 𝟙 _, by rw [ASection.AsectionActionTransport_id]; rfl⟩
-  have memyN : ASection.IsCResidueState A ASection.projectiveNorth yN :=
-    ⟨yN, hyN, 𝟙 _, by rw [ASection.AsectionActionTransport_id]; rfl⟩
-  -- The north-core join: both members' producers live in the fibre where
-  -- the equation selects — the 0-to-N core the frame itself holds.
-  have hN : Nonempty
-      ((⟨ASection.projectiveNorth, ⟨xN, memxN⟩⟩ :
-          Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) ⟶
-        ⟨ASection.projectiveNorth, ⟨yN, memyN⟩⟩) := by
-    sorry
-  -- One arrow of the system: the witness arrows carry the core join out
-  -- to P and Q — every datum inherited from the production witnesses.
-  refine ⟨(⟨CategoryTheory.Groupoid.inv g, eqToHom ?_⟩ :
-      P ⟶ ⟨ASection.projectiveNorth, ⟨xN, memxN⟩⟩) ≫ hN.some ≫
-    (⟨h, eqToHom ?_⟩ :
-      (⟨ASection.projectiveNorth, ⟨yN, memyN⟩⟩ :
-          Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) ⟶ Q)⟩
-  · apply ObjectProperty.FullSubcategory.ext
-    show (ASection.AsectionActionTransport A
-        (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN
-    calc (ASection.AsectionActionTransport A
-          (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj
-        = (ASection.AsectionActionTransport A
-            (CategoryTheory.Groupoid.inv g)).obj
-              ((ASection.AsectionActionTransport A g).obj xN) := by rw [hg]
-      _ = (ASection.AsectionActionTransport A
-            (g ≫ CategoryTheory.Groupoid.inv g)).obj xN :=
-          (congrArg (fun F => F.obj xN)
-            (ASection.AsectionActionTransport_comp A g
-              (CategoryTheory.Groupoid.inv g))).symm
-      _ = xN := by
-          have harrow : g ≫ CategoryTheory.Groupoid.inv g =
-              𝟙 ASection.projectiveNorth := CategoryTheory.Groupoid.comp_inv g
-          rw [harrow, ASection.AsectionActionTransport_id]
-          rfl
-  · apply ObjectProperty.FullSubcategory.ext
-    exact hh
+  sorry
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
