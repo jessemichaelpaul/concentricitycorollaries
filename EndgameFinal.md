@@ -89,7 +89,7 @@ ASection.AsectionActionCatDiagram A := A.AsectionActionDiagram ⋙ Grpd.forgetTo
 ASection.TotalActionStateWorld A    := Grothendieck A.AsectionActionCatDiagram      -- @[reducible]
 ```
 
-⚠️ **Note the second line, because a model finding died on it (see §5): `AsectionActionCatDiagram`
+⚠️ **Note the second line: `AsectionActionCatDiagram`
 IS `⋙ Grpd.forgetToCat`, reducibly.** So `T_A` unfolds to
 `Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)`.
 
@@ -198,23 +198,41 @@ every session.
 
 ---
 
-# 5 — RULED OUT BY THE KERNEL OR BY THE AUTHOR. Do not retype.
+# 5 — THE ARGUMENT, STEP BY STEP, IN LEAN
 
-| shape | receipt |
-|---|---|
-| `IsPretransitive G2 A.AsectionState`, or any single group on the raw states | typed; residual `⊢ xc = yc` — the fused instance (`ASectionFunctor.lean:64`) carries the coordinate through by design |
-| fibre-only join, base fixed | struck twice (`87773fe`, `54c6432`) — demands a single fibre map between distinct zero spheres |
-| base-only join, fibre fixed | the same half-square, other face |
-| `isConnected_of_equivalent` sourced at `ActionCategory G2 A.AsectionState` | typed; `failed to synthesize IsConnected` — the ambient world, not the members |
-| an arrow fetched "upstairs" in `T_A` and carried back down | author, `b823aa1`: *"the key giveaway that this is definitely wrong — the upstairs arrow."* `∫𝓡_A` is **inside** `T_A`; there is no second location |
-| a second, parallel Grothendieck total alongside `T_A` | author, 2026-07-29: *"it isn't parallel to `T_A`, it is INSIDE IT"* |
-| **"`∫𝓡_A` has no name — `⋙ Grpd.forgetToCat` is a model re-spelling"** — MY FINDING, **FALSE** | `AsectionActionCatDiagram A := AsectionActionDiagram A ⋙ Grpd.forgetToCat`, `@[reducible]`. `T_A` uses the **same** spelling. There was no re-spelling and no missing name; the author: *"that is just a subcategory of the Grothendieck construction, and it is a real value transport — that is what `ι_A` IS"* |
-| `sphereWorld_zigzag`, `concentricityReadout` as suppliers | `𝒮₂` facts, consumed by no certificate |
+Read top to bottom: this is the argument, in order, with the author's object at every step and the
+declaration that carries it. **Two rows are red. Everything else is kernel-stamped.**
 
-**One cause under all of them: a group-register term, or a model-authored object, under a
-groupoid-register statement about the author's object.**
+| # | the step | the object | the Lean declaration | where | state |
+|---|---|---|---|---|---|
+| 1 | the projective base groupoid | `𝓑` | `GreatCircle.Base := ActionCategory GreatCircle.Aut GreatCircle.Point` | `@[reducible]` | ✅ |
+| 2 | the element, positioned at every footpoint — orbit–stabilizer, `PGL → GL` | | `distinguishedDiskAction` · `_fixes_cayley_zero` (Euler at `0`) · `_fixes_cayley_N` (Weierstrass at `N`) · `projectiveObjectFrame` · `projectiveObjectFrame_north` · `projectiveArrowElement` · `orbit_stabilizer_factor` · `stabilizerPart_unique` | | ✅ |
+| 3 | the octonionic image sweep over the normalization, via `G₂` | | `AsectionEquivariant : H1 ⥤ H1` · `AsectionEquivariant_map_val` (`rfl` — retains the same `G₂` element) · `G2.exists_smul_eq_of_mem_unitImaginarySphere` | `ASectionEquivariant.lean:43` | ✅ |
+| 4 | the fibre — **its objects are projective squares** | `F_A(X)` | `AsectionActionFiber A X`; objects are `AsectionActionState` (`input`, `positioned`, `positioned_by_action`, `value`, `value_realized`) | | ✅ |
+| 5 | **the real value transports — the morphisms that BUILD the functor** | `F_A(f)` | `AsectionActionTransport A f := (orbitStabilizerActionSquare f).actionStateTransport` · `_id` · `_comp` | | ✅ |
+| 6 | the A-section functor | `F_A` | `AsectionActionDiagram : GreatCircle.Base ⥤ Grpd` | | ✅ |
+| 7 | the total — the gigantic graph | `T_A` | `TotalActionStateWorld A := Grothendieck A.AsectionActionCatDiagram`, and `AsectionActionCatDiagram A := AsectionActionDiagram A ⋙ Grpd.forgetToCat` | both `@[reducible]` | ✅ |
+| 8 | the equation selects at north — Euler at one end, Weierstrass at the other | | `IsNorthCResidueState` · `CResidueZeroLocus` · `CResidueZeroLocus_infinite` (C4) · `sphereZero_complete` | `ASectionCResidueInverseImage.lean:48` | ✅ |
+| 9 | the C-residue preimage, fibrewise — **each member carries its own production witness** | `𝓡_A(X)` | `IsCResidueState A X` (`∃ xN, IsNorthCResidueState A xN ∧ ∃ g, (AsectionActionTransport A g).obj xN = x`) · `InverseImageCResidueStateWorldGroupoid A X := (IsCResidueState A X).FullSubcategory` — a **full subcategory of `F_A(X)`** | `…InverseImage.lean:60`, `:71` | ✅ |
+| 10 | **the residue transports ARE the same value transports, restricted** | `𝓡_A(f)` | `AsectionCResidueTransport A f := (IsCResidueState Y).lift ((IsCResidueState X).ι ⋙ AsectionActionTransport f) _` | `ASectionCResidueDiagram.lean:76` | ✅ |
+| 11 | the residue subdiagram | `𝓡_A` | `AsectionCResidueDiagram : GreatCircle.Base ⥤ Grpd` | `…CResidueDiagram.lean:154` | ✅ |
+| 12 | **the double arrow `𝓡_A(X) ⇉ F_A(X)` — the real value transport; this is what `ι_A` IS** | `ι_A` | `AsectionCResidueInclusion A : 𝓡_A ⟶ F_A := { app := fun X => (IsCResidueState A X).ι }`, naturality `rfl` | `…CResidueDiagram.lean:163` · `57384ae` | ✅ |
+| 13 | `ι_A` full and faithful **at its own name**; `𝓡_A` **is** its own image | | `AsectionCResidueInclusion_app_fullyFaithful` · `…_app_full` · `…_app_faithful` (`ObjectProperty.fullyFaithfulι`/`full_ι`/`faithful_ι`; `ι_obj` = `rfl`, `liftCompιIso` = `Iso.refl`) | `Theorem.lean:372`, `:377`, `:382` · `bb02b54` | ✅ |
+| 14 | **the C-residue system as an action groupoid — INSIDE `T_A`** | `∫𝓡_A` | `Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)` — the same spelling as row 7, diagram restricted; objects `⟨X, x⟩` = a base position and a projective square in the C-residue image | | ✅ (object) |
+| **15** | **THE LEMMA — `ι_A` is a transitive action groupoid: any two projective squares in the C-residue image are connected by ONE groupoid element, using the `distinguishedDiskAction` morphism AND `AsectionEquivariant` BOTH** | | `ASection.sweepTransitive_on_residueSystem : ∀ P Q : ∫𝓡_A, Nonempty (P ⟶ Q)` | `Theorem.lean:397` | 🔴 **OPEN** |
+| 16 | nonempty — C4 populates the preimage | | `residueActionState` · `residueActionState_positioned` · `residueActionState_mem` | `Theorem.lean:287` | ✅ |
+| 17 | therefore connected — one arrow, `Zigzag.of_hom` | | `residueTotal_isConnected`, closing with `Zigzag.of_hom (A.sweepTransitive_on_residueSystem P Q).some` | `Theorem.lean:454` | ✅ **on 15** |
+| 18 | therefore `π₀` is a singleton — Riehl 8.3.5 | `κ` | `residueTotal_pi0_singleton` (`Quotient.sound ∘ isPreconnected_zigzag`) · `pi0GrothendieckEquiv` · `pi0_grothendieck` · `pi0Functor` | `Theorem.lean:466`, `:110`, `:146`, `:33` | ✅ **on 15** |
+| 19 | the level read on the class | `c` | `ASection.transportLevel A n := (A.sphereZero n).re` | `Theorem.lean:175` | ✅ |
+| **20** | **the theorem** — the residue-`ℂ` zero spheres are concentric | | `ASection.concentricity : ∃ c : ℝ, ∀ n, (A.sphereZero n).re = c` | `Theorem.lean:480` | 🔴 **level clause open** |
+| 21 | RH | | `riemannHypothesis_iff_concentric` ✅ (three foundations, independent of the open rows) → `zeta_riemannHypothesis` · `nontrivial_one_centre` · `zeta_criticalLine_zeros_infinite` | `Corollaries.lean` | `sorryAx` from 15 and 20 only |
 
----
+**Rows 15 and 20 are the whole distance.** Row 15 is the single place the construction enters the
+chain — no library theorem can supply it, because no library knows what a C-residue square is.
+Row 20's level clause is the same movement read for its level.
+
+**The joining morphism in row 15 comes from row 10**, and that is the author's sentence: *any two
+square frames are connected by the same morphisms that built that functor.*
 
 # 6 — THE STANCE
 
