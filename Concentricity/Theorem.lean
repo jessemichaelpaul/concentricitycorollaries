@@ -472,51 +472,17 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- same morphisms that built that functor" — and membership IS the
   -- preimage datum: each object hands, in its own IsCResidueState
   -- witness, the north producer and the base arrow that made it.
-  -- Choice never enters.  [The prior hup body — an arrow fetched
-  -- upstairs and brought home — was the struck upstairs/downstairs
-  -- error: the master transports the instance, not a fetched morphism.]
-  obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
-  obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-  have memxN : ASection.IsCResidueState A ASection.projectiveNorth xN :=
-    ⟨xN, hxN, 𝟙 _, by rw [ASection.AsectionActionTransport_id]; rfl⟩
-  have memyN : ASection.IsCResidueState A ASection.projectiveNorth yN :=
-    ⟨yN, hyN, 𝟙 _, by rw [ASection.AsectionActionTransport_id]; rfl⟩
-  have hback : (ASection.AsectionActionTransport A
-      (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN := by
-    calc (ASection.AsectionActionTransport A
-          (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj
-        = (ASection.AsectionActionTransport A
-            (CategoryTheory.Groupoid.inv g)).obj
-              ((ASection.AsectionActionTransport A g).obj xN) := by rw [hg]
-      _ = (ASection.AsectionActionTransport A
-            (g ≫ CategoryTheory.Groupoid.inv g)).obj xN :=
-          (congrArg (fun F => F.obj xN)
-            (ASection.AsectionActionTransport_comp A g
-              (CategoryTheory.Groupoid.inv g))).symm
-      _ = xN := by
-          have harrow : g ≫ CategoryTheory.Groupoid.inv g =
-              𝟙 ASection.projectiveNorth :=
-            CategoryTheory.Groupoid.comp_inv g
-          rw [harrow, ASection.AsectionActionTransport_id]
-          rfl
-  -- The join of the two producers at the north frame — the morphisms of
-  -- ∫𝓡_A being the total's own (row 4); held here for the kernel.
-  have hN : Nonempty
-      ((⟨ASection.projectiveNorth, ⟨xN, memxN⟩⟩ :
-          Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) ⟶
-        ⟨ASection.projectiveNorth, ⟨yN, memyN⟩⟩) := by
+  -- Choice never enters.
+  -- The master, :1270-1274: "a fully faithful transitive inclusion of an
+  -- action groupoid is connected — transported along ι_A's proper
+  -- inclusion."  ι_A at the total is full and faithful (b073d88, the
+  -- isomorphism onto its image): a join of the images inside T_A pulls
+  -- back along the proper inclusion; the images are joined by the
+  -- total's own morphisms — one groupoid element, both functors present.
+  obtain ⟨φ⟩ : Nonempty ((AsectionCResidueInclusionTotal A).obj P ⟶
+      (AsectionCResidueInclusionTotal A).obj Q) := by
     sorry
-  refine ⟨(⟨CategoryTheory.Groupoid.inv g, eqToHom ?_⟩ :
-      P ⟶ ⟨ASection.projectiveNorth, ⟨xN, memxN⟩⟩) ≫ hN.some ≫
-    (⟨h, eqToHom ?_⟩ :
-      (⟨ASection.projectiveNorth, ⟨yN, memyN⟩⟩ :
-          Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) ⟶ Q)⟩
-  · apply ObjectProperty.FullSubcategory.ext
-    show (ASection.AsectionActionTransport A
-        (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN
-    exact hback
-  · apply ObjectProperty.FullSubcategory.ext
-    exact hh
+  exact ⟨(AsectionCResidueInclusionTotal A).preimage φ⟩
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
