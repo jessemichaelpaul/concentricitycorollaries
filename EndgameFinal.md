@@ -23,6 +23,11 @@ coordinates, a stabilizer's motion on a coordinate, or individual arrows inside 
 register too low** — that is the leg-by-leg descent, and the author has struck it every time it has
 appeared, in every costume it has worn.
 
+**Scope:** this ruling governs the **seat's term** — Declaration 2's consumption at `ι_A`'s level.
+It does **not** govern Declaration 0's statement, where quantifying over group elements **is** the
+content: `∃ g : G2, g • x = y` is the class being registered, and its supplier producing a
+`g : G2` is the route, not a register drop.
+
 Therefore:
 
 - **The seat's term consumes `ι_A` itself** — the natural transformation, its `rfl` squares, its
@@ -212,7 +217,9 @@ by name directly in `ASectionCResidueInverseImage.lean` — one of the two `ι_A
 files.
 
 `distinguishedDiskAction` (the element; Euler's face at `0`, Weierstrass's at `N` — all three
-ledger rows green) **sits inside** `AsectionEquivariant` (the sweep) → the sweep feeds the
+ledger rows green) is **stamped as a sibling in `ProjectiveSection.lean` and fused with
+`AsectionEquivariant` (the sweep) at `ASectionFunctor.lean:64` — one action mathematically, which
+is why they fuse; two files in the citation record** → the sweep feeds the
 squares and the functor (`orbitStabilizerActionSquare` / `positionedOrbitSquare` → `F_A`) → the
 north selection cuts the preimage (`IsCResidueState` → `𝓡_A`) → `ι_A` includes it as the image
 C-residue system. **The element is cited in BOTH remaining movements:** the connectivity movement
@@ -251,8 +258,10 @@ sweep** — `thm:G2-equiv` (`:671`) → `rmk:G2-compact` (`:702–703`, *"This i
 `𝓗₁` is built"*) → `lem:residue-spheres` (`:1060–1077`, the components of `𝓗₁` **are** the
 `G₂`-orbits, i.e. the spheres) → the sweep → `𝓐_A`.
 
-`distinguishedDiskAction` **sits inside** `AsectionEquivariant`: it is stamped once upstream and
-**cited, never unpacked**. A term that reaches for the element's faces, its chart coordinates, or
+`distinguishedDiskAction` is **stamped as a sibling in `ProjectiveSection.lean` and fused with
+`AsectionEquivariant` at `ASectionFunctor.lean:64` — one action mathematically, which is why they
+fuse; two files in the citation record**: it is stamped once upstream and **cited, never
+unpacked**. A term that reaches for the element's faces, its chart coordinates, or
 a stabilizer's motion to obtain transitivity is one register too low — the same descent struck at
 `ι_A`'s level, wearing the element's costume. The element's own citation belongs to seat B (the
 level law, its tape), not to this rung.
