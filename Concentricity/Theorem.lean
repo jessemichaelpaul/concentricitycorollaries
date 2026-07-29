@@ -384,6 +384,35 @@ instance ASection.AsectionCResidueInclusion_app_faithful
     ((AsectionCResidueInclusion A).app X).Faithful :=
   ObjectProperty.faithful_ι _
 
+/-- **THE SQUARE — the bridge declaration** (the author, 2026-07-29,
+verbatim): *"the element's flow, at the north frame, is arrows of the
+total joining the selected states."*  The distinguished element holds both
+boundary faces — Euler presenting at `0`, Weierstrass at `N`, both
+fixed-point certificates green (`distinguishedDiskAction_fixes_cayley_zero`,
+`distinguishedDiskAction_fixes_cayley_N`) — and between the two eyes runs
+the whole `0`-to-`N` core: the element's unique tame continuous lift
+carrying the selected states into one another, level fixed, winding purely
+vertical (master `:1259`).  Suppliers, all green: the two faces, the
+`GpvTransport` lift laws, the `normalizedN` tapes into the common chart
+(`normalizedNActionSquare`, its `_level` face), the stabilizer's reach.
+This is the one declaration that was never installed: the lift lives as
+its own certified layer about the action, the total's arrows are bare, and
+this name connects them.  Both open seats consume it — the join on
+contact, the level clause as the same datum's other face. -/
+theorem ASection.squareFlow_joins_selected (A : ASection)
+    (xN yN : AsectionActionFiber A projectiveNorth)
+    (hxN : IsNorthCResidueState A xN) (hyN : IsNorthCResidueState A yN) :
+    Nonempty ((⟨projectiveNorth, xN⟩ :
+        Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
+      ⟨projectiveNorth, yN⟩) := by
+  -- The two eyes select: each member's positioned coordinate is an actual
+  -- zero of the complete C3 enumeration.
+  obtain ⟨zx, hzx, hzxeq⟩ := hxN
+  obtain ⟨zy, hzy, hzyeq⟩ := hyN
+  obtain ⟨n, hn⟩ := (mem_CResidueZeroLocus_iff_exists_sphereZero A zx).mp hzx
+  obtain ⟨m, hm⟩ := (mem_CResidueZeroLocus_iff_exists_sphereZero A zy).mp hzy
+  sorry
+
 /-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
 equivariant functor — which is part of the construction of `ι_A` — is
 transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
@@ -435,8 +464,8 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     have middle : Nonempty
         ((⟨ASection.projectiveNorth, xN⟩ :
             Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
-          ⟨ASection.projectiveNorth, yN⟩) := by
-      sorry
+          ⟨ASection.projectiveNorth, yN⟩) :=
+      A.squareFlow_joins_selected xN yN hxN hyN
     exact ⟨(⟨CategoryTheory.Groupoid.inv g, eqToHom hback⟩ :
         (⟨P.base, P.fiber.obj⟩ :
             Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
