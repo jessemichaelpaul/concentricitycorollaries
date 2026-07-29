@@ -495,8 +495,64 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- on the spheres where G₂ is transitive (thm:G2-S6).
   have hG2 := @G2.exists_smul_eq_of_mem_unitImaginarySphere
   -- The morphism m of ∫𝓡_A with m ∘ ι_A(1) = ι_A(2), assembled from the
-  -- two supplied transports and the sphere fact.
-  sorry
+  -- two supplied transports and the sphere fact: the base part the two
+  -- channels composed in the base groupoid, the fibre part pulled back
+  -- through ι_A at its own name.
+  refine ⟨⟨CategoryTheory.Groupoid.inv g ≫ h,
+    ((AsectionCResidueInclusion A).app Q.base).preimage ?_⟩⟩
+  have hback : (AsectionActionTransport A
+      (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN := by
+    calc (AsectionActionTransport A
+          (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj
+        = (AsectionActionTransport A
+            (CategoryTheory.Groupoid.inv g)).obj
+              ((AsectionActionTransport A g).obj xN) := by rw [hg]
+      _ = (AsectionActionTransport A
+            (g ≫ CategoryTheory.Groupoid.inv g)).obj xN :=
+          (congrArg (fun F => F.obj xN)
+            (AsectionActionTransport_comp A g
+              (CategoryTheory.Groupoid.inv g))).symm
+      _ = xN := by
+          have harrow : g ≫ CategoryTheory.Groupoid.inv g =
+              𝟙 projectiveNorth := CategoryTheory.Groupoid.comp_inv g
+          rw [harrow, AsectionActionTransport_id]
+          rfl
+  have hsrc : (AsectionActionTransport A
+      (CategoryTheory.Groupoid.inv g ≫ h)).obj P.fiber.obj =
+      (AsectionActionTransport A h).obj xN := by
+    calc (AsectionActionTransport A
+          (CategoryTheory.Groupoid.inv g ≫ h)).obj P.fiber.obj
+        = (AsectionActionTransport A h).obj
+            ((AsectionActionTransport A
+              (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj) :=
+          congrArg (fun F => F.obj P.fiber.obj)
+            (AsectionActionTransport_comp A
+              (CategoryTheory.Groupoid.inv g) h)
+      _ = (AsectionActionTransport A h).obj xN := by rw [hback]
+  have hex := hG2
+    (CategoryTheory.ActionCategory.back xN.input).world.prop
+    (CategoryTheory.ActionCategory.back yN.input).world.prop
+  refine eqToHom ?_ ≫
+    (AsectionActionTransport A h).map
+      ((CategoryTheory.InducedCategory.homMk
+        (Subtype.mk hex.choose ?_) : xN ⟶ yN)) ≫
+    eqToHom ?_
+  · exact hsrc
+  · show hex.choose • CategoryTheory.ActionCategory.back xN.input =
+      CategoryTheory.ActionCategory.back yN.input
+    have hcoord : (CategoryTheory.ActionCategory.back xN.input).coordinate =
+        (CategoryTheory.ActionCategory.back yN.input).coordinate := by
+      sorry
+    have hworld := hex.choose_spec
+    have key : ∀ s t : A.AsectionState,
+        hex.choose • s.world.val = t.world.val →
+        s.coordinate = t.coordinate →
+        hex.choose • s = t := by
+      rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hw hc
+      simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
+      exact ⟨Subtype.ext hw, hc⟩
+    exact key _ _ hworld hcoord
+  · exact hh
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
