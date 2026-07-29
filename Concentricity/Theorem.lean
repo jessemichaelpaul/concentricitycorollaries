@@ -396,21 +396,23 @@ instance ASection.residueTotal_isConnected (A : ASection) :
         = (AsectionActionTransport A (gP ≫ ubase)).obj xNP := by
           rw [AsectionActionTransport_comp]; rfl
       _ = (AsectionActionTransport A gQ).obj xNP := by rw [harrow]
-  -- one element of the sweep joins the two normalized sources:
-  have hjoin : ∀ s t : AsectionState A,
-      s.coordinate = t.coordinate → ∃ g : G2, g • s = t := by
-    rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hct
-    obtain ⟨g, hg⟩ := G2.exists_smul_eq_of_mem_unitImaginarySphere sw.2 tw.2
-    refine ⟨g, ?_⟩
-    simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
-    exact ⟨Subtype.ext hg, hct⟩
-  have hc : (CategoryTheory.ActionCategory.back xNP.input).coordinate
-      = (CategoryTheory.ActionCategory.back xNQ.input).coordinate := by
-    sorry
-  obtain ⟨g, hgs⟩ := hjoin _ _ hc
-  exact CategoryTheory.Zigzag.of_hom ⟨ubase,
-    ⟨CategoryTheory.eqToHom hX ≫ (AsectionActionTransport A gQ).map ⟨⟨g, hgs⟩⟩ ≫
+  -- DECLARATION 0 consumed at the members: the sweep joins the members'
+  -- faces (`AsectionEquivariant_transitive`, green, the author's sentence);
+  -- Declaration 1 (`hff`, bound above) transfers the join through the
+  -- certified inclusion.  The joints are the kernel's to place: type,
+  -- print, route.
+  have hface := A.AsectionEquivariant_transitive
+    ((AsectionStateInput A).obj xNP.input)
+    ((AsectionStateInput A).obj xNQ.input)
+    (u := (CategoryTheory.ActionCategory.back xNP.input).world.1)
+    (v := (CategoryTheory.ActionCategory.back xNQ.input).world.1)
+    (CategoryTheory.ActionCategory.back xNP.input).world.2
+    (CategoryTheory.ActionCategory.back xNQ.input).world.2
+    (by sorry) (by sorry)
+  refine CategoryTheory.Zigzag.of_hom ⟨ubase,
+    ⟨CategoryTheory.eqToHom hX ≫ (AsectionActionTransport A gQ).map ?_ ≫
       CategoryTheory.eqToHom hgQ⟩⟩
+  sorry
 /-- **THE DECLARATION**: `π₀(∫𝓡_A)` IS A SINGLETON — CHT Remark 8.3.5 on
 the connected action groupoid: nonempty and connected, so one class. -/
 theorem ASection.residueTotal_pi0_singleton (A : ASection) :
