@@ -384,14 +384,25 @@ instance ASection.AsectionCResidueInclusion_app_faithful
     ((AsectionCResidueInclusion A).app X).Faithful :=
   ObjectProperty.faithful_ι _
 
-/-- **DECLARATION 2 — THE STATEMENT OF THE PROJECT** (the author's,
-verbatim): `∫𝓡_A` — `ι_A`'s total — IS CONNECTED, immediately, because
-`ι_A` is a *proper* inclusion and a natural isomorphism onto its image
-(certified, `57384ae`, triple-verified; naturality `rfl`).  Asked of the
-kernel at the author's structure and nothing else: the inclusion
-(`AsectionCResidueInclusion`, `57384ae`), fully faithful at its own name
-(`bb02b54`), the presentations literal `ActionCategory`s (`02b5fd3`,
-`@[reducible]`).  Structure in, connectedness out; then 8.3.5. -/
+/-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
+equivariant functor — which is part of the construction of `ι_A` — is
+transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
+
+The sweep is part of the construction by `rfl`: every fibre of `F_A` is its
+graph (`AsectionState_input_then_equivariant`,
+`AsectionFiber_input_then_equivariant`).  One element of the sweep's action
+joins any two members — one arrow of the system; in an action groupoid the
+zigzag required has length one.  The suppliers (`6596e04`, `8907f88`,
+Declaration 1 at `57384ae`) are consumed here and nowhere lower. -/
+theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
+    ∀ P Q : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+      Nonempty (P ⟶ Q) := by
+  sorry
+
+/-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
+IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
+natural isomorphism onto its image (certified, `57384ae`; naturality
+`rfl`).  Consumes THE RESULT — closes on contact, no proof of its own. -/
 instance ASection.residueTotal_isConnected (A : ASection) :
     CategoryTheory.IsConnected (Grothendieck
       (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
@@ -400,9 +411,8 @@ instance ASection.residueTotal_isConnected (A : ASection) :
     ⟨⟨projectiveNorth,
       ⟨residueActionState A projectiveNorth 0 baseWorld,
         A.residueActionState_mem 0⟩⟩⟩
-  have hincl := AsectionCResidueInclusion A
-  have hff := ASection.AsectionCResidueInclusion_app_fullyFaithful A
-  sorry
+  exact zigzag_isConnected fun P Q =>
+    CategoryTheory.Zigzag.of_hom (A.sweepTransitive_on_residueSystem P Q).some
 /-- **THE DECLARATION**: `π₀(∫𝓡_A)` IS A SINGLETON — CHT Remark 8.3.5 on
 the connected action groupoid: nonempty and connected, so one class. -/
 theorem ASection.residueTotal_pi0_singleton (A : ASection) :
