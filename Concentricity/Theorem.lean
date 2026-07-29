@@ -550,8 +550,10 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
         (mem_CResidueZeroLocus_iff_exists_sphereZero A zx).mp hzxmem
       obtain ⟨m, hm⟩ :=
         (mem_CResidueZeroLocus_iff_exists_sphereZero A zy).mp hzymem
-      have htapen := A.normalizedNActionSquare n baseWorld
-      have htapem := A.normalizedNActionSquare m baseWorld
+      -- The tape is a STATEMENT about the d=1 instantiation (the author):
+      -- every square is already instantiated at d = 1, which fixes 0 and
+      -- N; the level faces are the statements consumed, never machinery
+      -- to ride.
       have hleveln := A.normalizedNActionSquare_level n baseWorld
       have hlevelm := A.normalizedNActionSquare_level m baseWorld
       sorry
