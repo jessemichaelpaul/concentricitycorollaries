@@ -384,6 +384,54 @@ instance ASection.AsectionCResidueInclusion_app_faithful
     ((AsectionCResidueInclusion A).app X).Faithful :=
   ObjectProperty.faithful_ι _
 
+/-- **`ι_A` AT THE TOTAL** (the author, 2026-07-29): *"it is a natural
+transformation OF THE TOTAL GROTHENDIECK CONSTRUCTION — an inverse image OF
+the total `F_A(X)`."*  This is that reading in Lean: the inclusion of the
+inverse image `∫𝓡_A` in the total `T_A`.  *"`∫𝓡_A` isn't parallel to `T_A`,
+it is INSIDE IT."* -/
+noncomputable def ASection.AsectionCResidueInclusionTotal (A : ASection) :
+    Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat) ⥤
+    Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat) :=
+  Grothendieck.map
+    (Functor.whiskerRight (AsectionCResidueInclusion A) Grpd.forgetToCat)
+
+/-- `ι_A` is FAITHFUL AT THE TOTAL.  Mathlib has no lemma that
+`Grothendieck.map` of a fully faithful transformation is fully faithful
+(`Grothendieck.lean` carries `map` `:242`, `map_map` `:262`, and
+`faithful_ι` `:560` for the *fibre* inclusion, and nothing else) — so the
+total-level head was an empty shelf, exactly as `ι_A`'s componentwise head
+was before `bb02b54`.  This puts it under a name.  Consumes Declaration 1
+at `ι_A`'s own name; the structural work is `Grothendieck.ext` (`:93`). -/
+instance ASection.AsectionCResidueInclusionTotal_faithful (A : ASection) :
+    (AsectionCResidueInclusionTotal A).Faithful where
+  map_injective {P Q} f g h := by
+    obtain ⟨fb, ff⟩ := f
+    obtain ⟨gb, gf⟩ := g
+    simp only [AsectionCResidueInclusionTotal, Grothendieck.map] at h
+    injection h with hb hf
+    subst hb
+    refine Grothendieck.ext _ _ rfl ?_
+    simp only [eqToHom_refl, Category.id_comp]
+    have h2 := eq_of_heq hf
+    simp at h2
+    exact (AsectionCResidueInclusion_app_faithful A Q.base).map_injective h2
+
+/-- `ι_A` is FULL AT THE TOTAL — so, with faithfulness above, the inclusion
+of the inverse image in the total is an isomorphism onto its image.  This is
+the author's *"a transitive action groupoid whose fully faithful image is
+`∫𝓡_A`"*, stated where he says it lives: at the total. -/
+instance ASection.AsectionCResidueInclusionTotal_full (A : ASection) :
+    (AsectionCResidueInclusionTotal A).Full where
+  map_surjective {P Q} φ := by
+    haveI := AsectionCResidueInclusion_app_full A Q.base
+    refine ⟨⟨φ.base,
+      ((AsectionCResidueInclusion A).app Q.base).preimage φ.fiber⟩, ?_⟩
+    refine Grothendieck.ext _ _ rfl ?_
+    simp only [AsectionCResidueInclusionTotal, Grothendieck.map, eqToHom_refl]
+    erw [Functor.map_preimage]
+    show 𝟙 _ ≫ 𝟙 _ ≫ φ.fiber = φ.fiber
+    simp
+
 /-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
 equivariant functor — which is part of the construction of `ι_A` — is
 transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
