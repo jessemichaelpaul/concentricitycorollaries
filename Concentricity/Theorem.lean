@@ -384,102 +384,6 @@ instance ASection.AsectionCResidueInclusion_app_faithful
     ((AsectionCResidueInclusion A).app X).Faithful :=
   ObjectProperty.faithful_ι _
 
-/-- **THE ELEMENT'S FLOW, STATED AS A FACT** (the author, 2026-07-29): the
-north stabilizer's reach between two members' heights — membership
-hypotheses in, element out; the `toNGL` pattern (`ProjectiveSection.lean:32`
-— explicit element, `norm_num`) at the supplier layer, exactly as
-`thm:G2-S6` sits at its own layer.  The other leg of the one action: `G₂`
-sweeps the directions, the element's flow moves the heights.  This is the
-only new line of mathematics in the whole remaining distance. -/
-theorem ASection.northStabilizer_reach_heights (A : ASection)
-    {X Y : GreatCircle.Base}
-    {x : AsectionActionFiber A X} {y : AsectionActionFiber A Y}
-    (hx : IsCResidueState A X x) (hy : IsCResidueState A Y y) :
-    ∃ w : GreatCircle.NorthStabilizer,
-      (GreatCircle.cayleyProjective w.1).val
-          (CategoryTheory.ActionCategory.back x.input).coordinate =
-        (CategoryTheory.ActionCategory.back y.input).coordinate := by
-  -- The memberships hand the proof everything: the production witnesses
-  -- and the selected coordinates.
-  obtain ⟨xN, hxN, g, hg⟩ := hx
-  obtain ⟨yN, hyN, h, hh⟩ := hy
-  obtain ⟨zx, hzxmem, hzxeq⟩ := hxN
-  obtain ⟨zy, hzymem, hzyeq⟩ := hyN
-  -- The membership receipts: both zeros live strictly above the real axis.
-  obtain ⟨hFzx, hzxim⟩ := (mem_CResidueZeroLocus_iff A zx).mp hzxmem
-  obtain ⟨hFzy, hzyim⟩ := (mem_CResidueZeroLocus_iff A zy).mp hzymem
-  -- Receipt 1: the members' input heights, read through the producers.
-  have h1x : (CategoryTheory.ActionCategory.back x.input).coordinate =
-      (GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1).val
-        ((CategoryTheory.ActionCategory.back xN.input).coordinate) := by
-    rw [← hg]; rfl
-  have h1y : (CategoryTheory.ActionCategory.back y.input).coordinate =
-      (GreatCircle.cayleyProjective (GreatCircle.stabilizerPart h).1).val
-        ((CategoryTheory.ActionCategory.back yN.input).coordinate) := by
-    rw [← hh]; rfl
-  -- Receipt 2: at north the frame IS the element; the producers' selected
-  -- coordinates are the zeros through the element's own positioning.
-  have h2x : (↑zx : OnePoint ℂ) =
-      (A.distinguishedDiskAction).val
-        ((CategoryTheory.ActionCategory.back xN.input).coordinate) := by
-    have hzxeq' : (↑zx : OnePoint ℂ) =
-        (CategoryTheory.ActionCategory.back xN.positioned).coordinate := hzxeq
-    have hpos := congrArg
-      (fun s => (CategoryTheory.ActionCategory.back s).coordinate)
-      xN.positioned_by_action
-    rw [hzxeq']
-    simpa [projectiveNorth, projectiveObjectFrame_north] using hpos
-  have h2y : (↑zy : OnePoint ℂ) =
-      (A.distinguishedDiskAction).val
-        ((CategoryTheory.ActionCategory.back yN.input).coordinate) := by
-    have hzyeq' : (↑zy : OnePoint ℂ) =
-        (CategoryTheory.ActionCategory.back yN.positioned).coordinate := hzyeq
-    have hpos := congrArg
-      (fun s => (CategoryTheory.ActionCategory.back s).coordinate)
-      yN.positioned_by_action
-    rw [hzyeq']
-    simpa [projectiveNorth, projectiveObjectFrame_north] using hpos
-  -- The explicit element, the toNGL pattern: the affine flow between the
-  -- two heights, real entries, determinant closed by norm_num from the
-  -- memberships' strict positivity.
-  have ha : zy.im / zx.im ≠ 0 :=
-    ne_of_gt (div_pos hzyim hzxim)
-  let vGL : GL (Fin 2) ℝ :=
-    Matrix.GeneralLinearGroup.mkOfDetNeZero
-      !![zy.im / zx.im, zy.re - (zy.im / zx.im) * zx.re; 0, 1] (by
-        rw [Matrix.det_fin_two_of]
-        simpa using ha)
-  have hvstab : Matrix.ProjGenLinGroup.mk vGL •
-      (OnePoint.infty : GreatCircle.Point) = OnePoint.infty := by
-    rw [GreatCircle.mk_smul, OnePoint.smul_infty_eq_ite]
-    simp [vGL]
-  let v : GreatCircle.NorthStabilizer := ⟨Matrix.ProjGenLinGroup.mk vGL, hvstab⟩
-  -- The coset move: the producers' parts carry the element between the two
-  -- members; the affine flow acts at north.
-  refine ⟨GreatCircle.stabilizerPart h * v * (GreatCircle.stabilizerPart g)⁻¹, ?_⟩
-  rw [h1x, h1y]
-  simp only [Subgroup.coe_mul, InvMemClass.coe_inv, map_mul, map_inv]
-  -- Möbius composition is definitional; the producer's part cancels
-  -- against its own inverse, and the carrier strips by congruence.
-  show (GreatCircle.cayleyProjective (GreatCircle.stabilizerPart h).1).val
-      ((GreatCircle.cayleyProjective v.1).val
-        (((GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1))⁻¹.val
-          ((GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1).val
-            ((CategoryTheory.ActionCategory.back xN.input).coordinate)))) =
-    (GreatCircle.cayleyProjective (GreatCircle.stabilizerPart h).1).val
-      ((CategoryTheory.ActionCategory.back yN.input).coordinate)
-  have hcancel : ((GreatCircle.cayleyProjective
-      (GreatCircle.stabilizerPart g).1))⁻¹.val
-        ((GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1).val
-          ((CategoryTheory.ActionCategory.back xN.input).coordinate)) =
-      (CategoryTheory.ActionCategory.back xN.input).coordinate :=
-    (GreatCircle.cayleyProjective
-      (GreatCircle.stabilizerPart g).1).val.symm_apply_apply _
-  rw [hcancel]
-  refine congrArg _ ?_
-  -- The core equation of the element's flow at north, on the receipts.
-  sorry
-
 /-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
 equivariant functor — which is part of the construction of `ι_A` — is
 transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
@@ -508,29 +412,18 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- `_N`), the `GpvTransport` lift laws, the `normalizedN` tapes and
   -- their `_level` face, the stabilizer's reach.
   intro P Q  -- the definition unfolding, nothing more
-  -- The heights leg: the element's flow, stated as a fact — the supplier
-  -- above, membership in, element out.
-  obtain ⟨w, hw⟩ :=
-    A.northStabilizer_reach_heights P.fiber.property Q.fiber.property
-  -- The whole square's base arrow, BUILT FROM the element: the orbit
-  -- representatives foot it (orbitRep_spec), and by the uniqueness half of
-  -- the author's factorization the element IS its stabilizer part.
-  have hfoot : ((GreatCircle.orbitRep
-      (CategoryTheory.ActionCategory.back Q.base)) * w.1 *
+  -- The footing: the author's orbit representatives (orbitRep_spec) — the
+  -- standard base arrow between the two footpoints.
+  have hstd : (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back Q.base) *
       (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back P.base))⁻¹) •
         CategoryTheory.ActionCategory.back P.base =
       CategoryTheory.ActionCategory.back Q.base := by
     have h1 := inv_smul_eq_iff.mpr
       (GreatCircle.orbitRep_spec
         (CategoryTheory.ActionCategory.back P.base)).symm
-    rw [mul_smul, mul_smul, h1]
-    have h2 : w.1 • (OnePoint.infty : GreatCircle.Point) =
-        OnePoint.infty := w.2
-    rw [h2]
+    rw [mul_smul, h1]
     exact GreatCircle.orbitRep_spec _
-  let f : P.base ⟶ Q.base := ⟨_, hfoot⟩
-  have hstab : w = GreatCircle.stabilizerPart f :=
-    GreatCircle.stabilizerPart_unique f w rfl
+  let f : P.base ⟶ Q.base := ⟨_, hstd⟩
   -- The directions leg: thm:G2-S6 through the sweep — the certified
   -- 8907f88 key.
   have key : ∀ s t : A.AsectionState, s.coordinate = t.coordinate →
@@ -541,18 +434,13 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     refine ⟨g, ?_⟩
     simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
     exact ⟨Subtype.ext hg, hc⟩
-  -- The transported height IS the supplier's equation, because the element
-  -- is the arrow's own stabilizer part.
+  -- The heights: the point where the wiring of the certified ledger
+  -- stands open.
   have hreach :
       (CategoryTheory.ActionCategory.back
         (((AsectionCResidueTransport A f).obj P.fiber).obj.input)).coordinate =
       (CategoryTheory.ActionCategory.back (Q.fiber.obj.input)).coordinate := by
-    show (GreatCircle.cayleyProjective
-        (GreatCircle.stabilizerPart f).1).val
-          (CategoryTheory.ActionCategory.back P.fiber.obj.input).coordinate =
-      (CategoryTheory.ActionCategory.back (Q.fiber.obj.input)).coordinate
-    rw [← hstab]
-    exact hw
+    sorry
   obtain ⟨g, hg⟩ := key _ _ hreach
   exact ⟨⟨f,
     ((AsectionCResidueInclusion A).app Q.base).preimage
