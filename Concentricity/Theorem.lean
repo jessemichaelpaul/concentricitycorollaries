@@ -419,7 +419,33 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- that map never exists; the join is one element of the groupoid,
   -- both mechanisms at once.
   intro P Q
-  sorry
+  -- PREMISES FIRST, before any object is touched (the instructions,
+  -- 2026-07-29): Declaration 1 at ι_A's own name (bb02b54, three
+  -- foundations); 𝓡_A definitionally its own image (ι_obj rfl,
+  -- liftCompιIso = Iso.refl — the library's word); naturality rfl
+  -- (57384ae) — premises, never open facts.
+  have hff := ASection.AsectionCResidueInclusion_app_fullyFaithful A
+  -- UPSTAIRS, NAMED PRECISELY (the target of ι_A): the total of the
+  -- action diagram, T_A.  The arrow to construct is between ι_A's images
+  -- of P and Q there — the author's ONE element of the distinguished
+  -- action, the distinguishedDiskAction morphism and the equivariant
+  -- functor TOGETHER; one datum, both encoding fields its projections.
+  have hup : (⟨P.base, ((AsectionCResidueInclusion A).app P.base).obj
+          P.fiber⟩ :
+        Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
+      ⟨Q.base, ((AsectionCResidueInclusion A).app Q.base).obj Q.fiber⟩ := by
+    sorry
+  -- THE HOMECOMING: both downstairs fields are projections of the one
+  -- datum hup — the base leg literally shared (one base arrow, not two:
+  -- ι_A is a natural transformation over the same base), the fibre leg
+  -- pulled home into 𝓡_A through ι_A's fullness (Declaration 1's own
+  -- FullyFaithful.preimage).
+  exact ⟨⟨hup.base, (hff Q.base).preimage
+    (show ((AsectionCResidueInclusion A).app Q.base).obj
+        (((AsectionCResidueDiagram A ⋙ Grpd.forgetToCat).map
+          hup.base).toFunctor.obj P.fiber) ⟶
+      ((AsectionCResidueInclusion A).app Q.base).obj Q.fiber
+     from hup.fiber)⟩⟩
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
