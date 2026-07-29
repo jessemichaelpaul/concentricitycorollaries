@@ -404,20 +404,22 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- equivariant build carries, and the collapse happens at ∫𝓡_A by
   -- 8.3.5.  The seat re-runs at ι_A's own level: the certified inclusion
   -- (57384ae — a PREMISE, never an open fact) consumed whole.
+  -- THE GROUPOID REGISTER (the author, 2026-07-29, his realization):
+  -- this statement IS the lemma "ι_A is a transitive action groupoid" —
+  -- no group in it.  Transitive means: any two projective squares in
+  -- the C-residue image (the OBJECTS of ∫𝓡_A — five-field squares, two
+  -- corners and their constraint faces) are connected by ONE groupoid
+  -- element.  That element is made of the distinguishedDiskAction
+  -- morphism AND the A-section equivariant functor BOTH — not one
+  -- inside the other — because the author's element is simultaneously a
+  -- function, a group element, and a functor.  Each object arrives
+  -- carrying its own preimage (IsCResidueState): nothing is chosen, the
+  -- objects hand the data.  Every prior body reduced this to a single
+  -- fibre map between zero spheres — the half-square (struck, 87773fe):
+  -- that map never exists; the join is one element of the groupoid,
+  -- both mechanisms at once.
   intro P Q
-  -- THE SIMPLEST PART (the author, verbatim): ∫𝓡_A is a TRANSITIVE
-  -- ACTION GROUPOID BECAUSE F_A(X) — BY CONSTRUCTION EQUIVARIANT
-  -- REALIZE — IS A TRANSITIVE ACTION GROUPOID, hence the inverse image
-  -- is pretransitive.
-  have hfib : ∀ (X : GreatCircle.Base)
-      (x y : AsectionActionFiber A X), Nonempty (x ⟶ y) := by
-    trace_state
-    sorry
-  obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
-  obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-  exact ⟨⟨CategoryTheory.Groupoid.inv g ≫ h,
-    ((AsectionCResidueInclusion A).app Q.base).preimage
-      (hfib Q.base _ _).some⟩⟩
+  sorry
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
