@@ -533,6 +533,27 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     have hlift : Nonempty ((⟨projectiveNorth, xN⟩ :
           Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
         ⟨projectiveNorth, yN⟩) := by
+      -- THE NORMALIZATION MOVE (the author, 2026-07-29): "that is the
+      -- normalization action of the A-section equivariant functor.  Move
+      -- the normalization, you move from one system to the next, because
+      -- you project to different slices."  The certified carrier per
+      -- zero: the normalizedN tapes — each C-residue output's own closed
+      -- zero-to-N tape into the common chart (lift_closed; level face
+      -- `_level` = row 12's fact).  The component: ride the one tape in,
+      -- the other back out, the sweep (thm:G2-S6) closing within the
+      -- target sphere; naturality is realize_equivariant and
+      -- coordinateTransportNatTrans's naturality, both green; the
+      -- stabilizer factorization makes the composite canonical.
+      obtain ⟨zx, hzxmem, hzxeq⟩ := hxN
+      obtain ⟨zy, hzymem, hzyeq⟩ := hyN
+      obtain ⟨n, hn⟩ :=
+        (mem_CResidueZeroLocus_iff_exists_sphereZero A zx).mp hzxmem
+      obtain ⟨m, hm⟩ :=
+        (mem_CResidueZeroLocus_iff_exists_sphereZero A zy).mp hzymem
+      have htapen := A.normalizedNActionSquare n baseWorld
+      have htapem := A.normalizedNActionSquare m baseWorld
+      have hleveln := A.normalizedNActionSquare_level n baseWorld
+      have hlevelm := A.normalizedNActionSquare_level m baseWorld
       sorry
     exact ⟨rideP ≫ hlift.some ≫ rideQ⟩
   exact ⟨(AsectionCResidueInclusionTotal A).preimage φ⟩
