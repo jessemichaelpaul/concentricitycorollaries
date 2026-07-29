@@ -588,7 +588,13 @@ well-definedness exists precisely to eliminate choices. The words "choose," "pic
 "design" in the typing hand's plan are the register alarm itself: a choice in the plan means the
 hand has left the author's argument.
 
-**⭐ THE RESULT (the author, 2026-07-29, LOCKED — this is the statement, nothing else is):**
+**⭐ THE OPEN TRANSITIVITY — renamed from "THE OPEN TRANSITIVITY" because that label HID the work (the
+author's catch, 2026-07-29). This is the ONE UNPROVED STATEMENT of the repository — the task,
+not an achievement. Its body is a `sorry`; it prints `sorryAx`; it has never been proved by any
+hand; and nothing downstream — connected, singleton, theorem, corollaries — certifies until a
+real proof stands under it. Any sentence of the form "it stands / is consumed / closes on
+contact" is about the STATEMENT existing, never about the proof. (The author, 2026-07-29,
+LOCKED — this is the statement, nothing else is):**
 *"THE A-SECTION EQUIVARIANT FUNCTOR — WHICH IS PART OF THE CONSTRUCTION OF ι_A — IS TRANSITIVE
 ON THE C-RESIDUE SYSTEM `∫𝓡_A`, HENCE `∫𝓡_A` IS CONNECTED."*
 
@@ -602,7 +608,7 @@ C-residue system carries this graph structure; `ι_A` includes it certified.
 **Point-1 ruling (the author): sweep-facts in isolation are NOT the result.** `6596e04` and
 `8907f88` are *suppliers* — transitivity read at `H1` and at the eye-images. The RESULT is
 transitivity **on the system `∫𝓡_A` itself**, consumed through the graph identities — i.e.
-related to how `F_A(X)` was literally built — and the seat consumes THE RESULT, nothing lower.
+related to how `F_A(X)` was literally built — and the seat consumes THE OPEN TRANSITIVITY, nothing lower.
 
 **THE MOVEMENT — one, the master's own sentence (`:1263–1267`):** *"the connectedness instance
 of the Lean library's `ActionCategory` **itself**, transported along `ι_A`'s proper inclusion"*
@@ -634,7 +640,7 @@ travels"); its obj and map coincide with the ambient ones (`:84-96`, both `rfl`)
 naturality (`:166-168`, `rfl`) — *the preimage carries the same action*, literally. **Because
 naturality is `rfl` and ι_A is fully faithful onto its image (Declaration 1), an arrow between
 two members of `∫𝓡_A` IS an ambient arrow between them — the homs coincide; the restriction
-inherits the sweep's reach word for word, by identity.** Therefore the proof of THE RESULT
+inherits the sweep's reach word for word, by identity.** Therefore the proof of THE OPEN TRANSITIVITY
 (`:397`) has exactly one shape: **the ambient join of two members — supplied by the sweep that
 produced them, in the total where the whole square acts — pulled back through ι_A's
 `rfl`-naturality and full faithfulness.** "Fully faithful and transitive inclusion onto the
@@ -653,7 +659,7 @@ members BY CONSTRUCTION (the ⬛ section above: both levels literal `ActionCateg
 `@[reducible]`, certified `02b5fd3` — *"it is not something to add"*). Every hunt for a source
 category to transport from is the same leg-search: the instantiations go **on `∫𝓡_A`
 directly** — pretransitive on the inverse image = any two members joined by one arrow of the
-system = THE RESULT's exact statement, already stated at `Theorem.lean:397`; `IsConnected`
+system = THE OPEN TRANSITIVITY's exact statement, already stated at `Theorem.lean:397`; `IsConnected`
 consumes it at the whole system. The `e` in the print was the probe's own detour, not a datum
 the movement owes.
 
@@ -664,7 +670,7 @@ then the corollaries. Two **instantiations**, in that order, at the system's own
 pretransitivity **instance on the inverse image** (the members, whole — G₂-closed by
 sphere-blindness, master `:913-915`); (2) `IsConnected` instantiated from it at the whole
 system; (3) 8.3.5 + `pi0GrothendieckEquiv` read the singleton (already closing on contact);
-(4) `nontrivial_one_centre` + `zeta_riemannHypothesis`. THE RESULT's statement
+(4) `nontrivial_one_centre` + `zeta_riemannHypothesis`. THE OPEN TRANSITIVITY's statement
 (`sweepTransitive_on_residueSystem`, `9d43a4f`) is the sentence these instantiations prove —
 never proved member-pair by member-pair.
 
