@@ -679,6 +679,41 @@ equivalence; `residueTotal_pi0_singleton` and the level read follow as the same 
 reading. **The one name to go up into: the members' ActionCategory carrier** — a register, not
 a lemma to request.
 
+**⭐ THE ACTOR IS NAMED (the author + the audit, 2026-07-29 — supersedes every carrier hunt,
+including the "members' ActionCategory carrier" register above):** the author's question *"why
+is transitive so hard? it is literally the preimage of the groupoid"* — answered from the
+functoriality proof itself, and his way.
+
+- **Not an inference.** No new mathematics, nothing underived; the kernel has never once
+  resisted the content. Ruled out completely.
+- **The actor is `AsectionCResidueDiagram` — named, certified `57384ae`, in the tree since the
+  beginning.** The functoriality proof says so in three `rfl`s: the restricted transport is the
+  ambient transport lifted through membership — `(IsCResidueState).lift (ι ⋙
+  AsectionActionTransport A f) (cResidue_lands A f)` (`ASectionCResidueDiagram.lean:76-82`, the
+  same square, restricted, `cResidue_lands` = "membership travels"); the restricted transport's
+  objects and arrows ARE the ambient ones (`:84-96`, both `rfl`); `ι_A`'s naturality (`:166-168`)
+  is `rfl` — the functoriality proof is literally the sentence *"the preimage carries the same
+  action."*
+- **What was actually wrong: the FORMAT, never the object.** Lean's `IsPretransitive` wants a
+  group-and-carrier pair — the wrong format for a thing that had been named and `rfl`-certified
+  all along. Every leg-decomposition, coordinate wall, and carrier hunt was an artifact of two
+  models typing one action's verbs through the pieces' names because they reached for a
+  pair-format noun that was never the construction's.
+- **The consequence (the author's point):** because the naturality is `rfl` and `ι_A` is fully
+  faithful onto its image (Declaration 1, green), **an arrow between two members of `∫𝓡_A` is
+  exactly an ambient arrow between them** — the homs literally coincide; nothing is added or
+  lost by the restriction. So *"the preimage is pretransitive"* means precisely: **the ambient
+  action joins any two members** — the sweep's reach, inherited by the restriction word for
+  word, **by `rfl`. Not an inference, not a new instance format — inheritance through an
+  identity.**
+- **The one shape left for `:397`, verbatim:** *"the ambient join of two members — supplied by
+  the sweep that produced them, in the total where the whole square acts — pulled back through
+  `ι_A`'s `rfl`-naturality and full faithfulness."* That is "fully faithful and transitive
+  inclusion onto the image, hence connected," every clause grounded in a certified line of the
+  author's own file. `IsConnected` then follows trivially — one arrow, `:128`'s own shape; the
+  instance already closes on contact; the singleton, the level read, the theorem, the
+  corollaries — all wired.
+
 **THEN THE CERTIFICATES** (step 6): both together, independently elicited, plus the source scan
 (`sorry`/`admit`/`sorryAx`/`native_decide`/new axioms) and the docs-to-tree match.
 
