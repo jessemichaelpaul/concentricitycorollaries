@@ -297,7 +297,16 @@ theorem ASection.residueActionState_mem (A : ASection) (m : ℕ) :
   · rw [AsectionActionTransport_id]
     rfl
 
-/-- **DECLARATION 0** (the author's, verbatim, 2026-07-28 night): *"ι_A IS my
+/-- **A SUPPLIER, NOT THE RESULT** (badge corrected 2026-07-29, the author:
+*"you misled us"*).  This quantifies over the **ambient** `H1`, not over the
+C-residue system: it is `thm:G2-S6` re-spelled through the sweep, and it
+says nothing about `ι_A`.  THE RESULT is that the A-section equivariant
+functor — **part of the construction of `ι_A`**, its fibres being the
+functor's graph (`AsectionStateInput ⋙ AsectionEquivariant =
+AsectionStateOutput`, `rfl`) — is transitive on the C-residue system
+`∫𝓡_A`, hence connected.  That is not this declaration.
+
+The author's sentence this states one clause of, 2026-07-28 night: *"ι_A IS my
 C-residue system and the equivariant A-section functor is transitive on it …
 THE EQUIVARIANT A SECTION FUNCTOR IS LITERALLY TRANSITIVE ON THE IMAGINARY
 OCTONIONS."*
@@ -321,7 +330,11 @@ theorem ASection.AsectionEquivariant_transitive (A : ASection) (p q : H1)
     rw [hp, hq, ← hg]; rfl⟩
   exact ⟨(A.AsectionEquivariant).map harrow⟩
 
-/-- **DECLARATION 0, at the members** — the same sentence read where the
+/-- **A SUPPLIER, NOT THE RESULT** (badge corrected 2026-07-29) — the same
+clause read at the ambient states.  Like the declaration above it mentions
+`ι_A` nowhere, and it is not the transitivity of the sweep on `∫𝓡_A`.
+
+The anatomy it records — the same clause read where the
 members live.  A member's input eye is `AsectionState.input s =
 spherePt ↑s.world s.coordinate`: the point `σ + γ·v` of its own sphere, not
 the bare direction.  `thm:G2-S6` is the transitivity of `G₂` on that sphere
