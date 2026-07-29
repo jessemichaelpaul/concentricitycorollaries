@@ -1,7 +1,110 @@
 # EndgameFinal
 
 The one endgame document. Supersedes every earlier endgame, preflight, plan, and gate file.
-State as of 2026-07-28, elicited from the kernel — not recalled.
+
+---
+
+# ⬛ STATE OF RECORD — 2026-07-29, elicited from the kernel
+
+**This block supersedes every section below it on any point where they differ.** The sections
+below are kept for their receipts and their record of struck routes; where one states a position,
+a coordinate, or a badge that contradicts this block, **this block is current and that text is
+history.**
+
+## The one open movement, and its two sites
+
+```text
+Concentricity/Theorem.lean:397   ASection.sweepTransitive_on_residueSystem   -- the term
+Concentricity/Theorem.lean:454   the level clause inside ASection.concentricity
+```
+
+Two `sorry`s in one file. **Nothing else in the repository is open.**
+
+## The statement at `:397` IS the author's lemma — no group in it
+
+```lean
+theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
+    ∀ P Q : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+      Nonempty (P ⟶ Q)
+```
+
+**"`ι_A` is a transitive action groupoid."** The author, 2026-07-29: *"transitive means any two
+projective squares in the C-residue image — the OBJECTS of `∫𝓡_A` — can be connected by a
+groupoid element … and that element is made of the `distinguishedDiskAction` morphism AND the
+A-section equivariant functor BOTH."* The statement quantifies over **objects and morphisms**, and
+names **no group at all**. That is the register; it has been the register in the tree since the
+statement was seated.
+
+**Objects are squares.** `AsectionActionState A m` is a five-field record — two corners
+(`input`, `positioned`) and their constraint faces (`positioned_by_action`, `value`,
+`value_realized`). An object *is* a commuting square. `cases`/`mk.injEq` on it demolishes the very
+thing that carries the transitivity, and then reports that the corners don't line up.
+
+**The objects hand over their own data.** `IsCResidueState` (`ASectionCResidueInverseImage.lean:60`)
+says a member **is** a transport-image of a north member — each object arrives carrying a north
+square and the base arrow that produced it. The joining element is **read off the two witnesses**.
+Nothing is chosen (the author: *"there are no choices"*).
+
+## What Mathlib supplies, and what only the author's construction can
+
+| supplied by Mathlib, already wired green | supplied only by the construction |
+|---|---|
+| `Grothendieck.Hom` — what a morphism of the total **is** | that any two members are joined |
+| `Zigzag.of_hom` · `zigzag_isConnected` · `isPreconnected_zigzag` — **one arrow ⟹ connected** | the arrow itself |
+| `pi0GrothendieckEquiv` — 8.3.5's collapse | the level read on the class |
+
+`residueTotal_isConnected` already closes with
+`Zigzag.of_hom (A.sweepTransitive_on_residueSystem P Q).some`, and `residueTotal_pi0_singleton`
+closes on that. **The library half is done.** The seam is the term at `:397`.
+
+⚠️ **`Grothendieck.Hom` has a `base` field and a `fiber` field. That is Mathlib's encoding, not a
+decomposition of the author's mathematics.** The term must fill both — there is no way around it.
+What is struck is *sourcing the two fields from two independent searches*: both are determined by
+the same datum. These are different things and the team has collapsed them repeatedly.
+
+## Shapes the kernel has RULED OUT — do not retype these
+
+| shape | receipt |
+|---|---|
+| `IsPretransitive G2 A.AsectionState` (any single group on the raw states) | typed; residual `⊢ xc = yc` — the fused instance (`ASectionFunctor.lean:64`) carries the coordinate through by design |
+| a **fibre-only** join, base held fixed | struck twice (`87773fe`, `54c6432`) — demands a single fibre map between distinct zero spheres |
+| a **base-only** join, fibre held fixed | same half-square, other face |
+| `isConnected_of_equivalent` sourced at `ActionCategory G2 A.AsectionState` | typed; `failed to synthesize IsConnected` — that is the *ambient* world, not the members |
+| `sphereWorld_zigzag` / `concentricityReadout` as suppliers | `𝒮₂` facts, consumed by no certificate; the lure every stalled hand has reached for |
+
+**The common cause of all five: a group-register term under a groupoid-register statement.**
+
+## Green, with certificates — elicited 2026-07-29
+
+**28 declarations on exactly `[propext, Classical.choice, Quot.sound]`. Zero project axioms.**
+The element and its two faces · `projectiveObjectFrame_north` · `orbit_stabilizer_factor` ·
+`stabilizerPart_unique` · `AsectionEquivariant` · `AsectionState.input_equivariant` ·
+`G2.exists_smul_eq_of_mem_unitImaginarySphere` · `AsectionActionDiagram` ·
+`orbitStabilizerActionSquare` · `positionedOrbitSquare` · `CResidueZeroLocus_infinite` ·
+`sphereZero_complete` · `IsCResidueState` · `AsectionCResidueTransport` ·
+`AsectionCResidueDiagram` · `AsectionCResidueInclusion` (naturality `rfl`, `57384ae`) ·
+`…_app_fullyFaithful`/`…_app_full`/`…_app_faithful` (`bb02b54`) · `residueActionState_mem` ·
+`pi0GrothendieckEquiv` · `pi0_grothendieck` · `transportLevel` · `riemannHypothesis_iff_concentric`.
+
+Carrying `sorryAx`, and **only** these two: `ASection.concentricity` and `zeta_riemannHypothesis`
+— arithmetic propagation from the two open sites, nothing of their own. `Corollaries.lean`
+compiles against `ASection.concentricity` (3,694 jobs): the corollary layer is wired and waiting.
+
+## Corrections of record
+
+- **The "DECLARATION 0" badge is RETRACTED** (`4a167be`). `AsectionEquivariant_transitive`
+  (`6596e04`) and `AsectionEquivariant_transitive_states` (`8907f88`) are green and are
+  **suppliers, not the result**: they quantify over the ambient world and mention `ι_A` nowhere.
+  Every "Declaration 0" heading below is history.
+- **The three-rung ladder is history.** There is one movement and one open term, plus the level
+  clause. Any section below that sequences the work into rungs, seats, or parts is describing a
+  skeleton the author struck.
+- **Stale coordinates below** (`:329`, `:342`, `:359`, `:419`, `:310–323`) predate several
+  re-seatings. The live coordinates are the two at the top of this block; re-elicit at typing time.
+- **Commit hygiene, from `cf6a5a8`:** an edit and a commit were chained with a pre-written
+  message; the edit failed on a text mismatch and the commit shipped anyway, stamping a false
+  message on a diff it did not describe (corrected at `54c6432`). **Never pre-write a commit
+  message for an edit that has not been verified to apply.**
 
 ---
 
@@ -172,7 +275,10 @@ to name which layer it lived in.
 
 ---
 
-## ⬛ THE THREE DECLARATIONS — the whole of what is left to type
+## ⬛ ~~THE THREE DECLARATIONS~~ — **SUPERSEDED: there is ONE movement and one open term**
+
+> **History.** The ladder sequenced the author's single movement into rungs — the skeleton he
+> struck. See STATE OF RECORD. Kept for the certificates cited below.
 
 **The author's one-sentence endgame (2026-07-28 night, closing the final audit):** *"On each
 slice the A-section slice into sphere world is one thing (slice preservation), but the C-residue
@@ -233,7 +339,11 @@ a decomposition. One says what `ι_A` **is**; the other says what **follows**. A
 the hypothesis `:128` consumes — pretransitivity — **checked 2026-07-28 evening: the facts are
 green, and no instance is registered anywhere in the tree.**
 
-### Declaration 0 — the action reaches every member: pretransitivity registered
+### ~~Declaration 0 — pretransitivity registered~~ — **SUPERSEDED (see STATE OF RECORD)**
+
+> **History.** The badge is retracted (`4a167be`) and the raw head is kernel-settled. Kept for its
+> receipts and for the record of the struck routes. The live statement is
+> `sweepTransitive_on_residueSystem` at `Theorem.lean:397`.
 
 `Action.lean:128` fires from `[IsPretransitive M X] [Nonempty X]`. Nonempty is certified
 (`residueActionState` + `residueActionState_mem`). Pretransitivity is **another empty shelf**: no
@@ -562,7 +672,7 @@ intended proof term:  nameable BEFORE the file is opened
 If the intended term cannot be named, the obligation is not yet understood — **stop and route to
 the author**, do not start typing candidates.
 
-## 3 — The ladder, in order. Nothing skips.
+## 3 — ~~The ladder~~ — **SUPERSEDED (see STATE OF RECORD): one movement, one open term**
 
 | | declaration | seat | kind |
 |---|---|---|---|
