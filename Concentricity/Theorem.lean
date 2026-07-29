@@ -297,6 +297,30 @@ theorem ASection.residueActionState_mem (A : ASection) (m : ℕ) :
   · rw [AsectionActionTransport_id]
     rfl
 
+/-- **DECLARATION 0** (the author's, verbatim, 2026-07-28 night): *"ι_A IS my
+C-residue system and the equivariant A-section functor is transitive on it …
+THE EQUIVARIANT A SECTION FUNCTOR IS LITERALLY TRANSITIVE ON THE IMAGINARY
+OCTONIONS."*
+
+`thm:G2-S6` **applied to the object**, not cited bare: on the imaginary
+octonions where the members live, one element of `G₂` is one arrow of
+`H1 = G₂ ⋉ 𝕆*` (`hom_as_subtype`, `Action.lean:92`), and
+`AsectionEquivariant` carries that arrow — it *"retains the same `G₂`
+element"* (`ASectionEquivariant.lean:49`), its naturality being
+`realize_equivariant` itself. The element and the sweep together, applied to
+the members. -/
+theorem ASection.AsectionEquivariant_transitive (A : ASection) (p q : H1)
+    {u v : Octonion} (hu : u ∈ Octonion.unitImaginarySphere)
+    (hv : v ∈ Octonion.unitImaginarySphere)
+    (hp : p.back = (u : OnePoint Octonion))
+    (hq : q.back = (v : OnePoint Octonion)) :
+    Nonempty ((A.AsectionEquivariant).obj p ⟶ (A.AsectionEquivariant).obj q) := by
+  obtain ⟨g, hg⟩ := G2.exists_smul_eq_of_mem_unitImaginarySphere hu hv
+  have harrow : p ⟶ q := ⟨g, by
+    show g • p.back = q.back
+    rw [hp, hq, ← hg]; rfl⟩
+  exact ⟨(A.AsectionEquivariant).map harrow⟩
+
 /-- **DECLARATION 1** (the author's, verbatim, `def:residue-subdiagram`):
 `ι_A : 𝓡_A ⇒ 𝓐_A` is "a faithful embedding onto its image, and its
 naturality squares commute definitionally."
