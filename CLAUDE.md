@@ -7,13 +7,16 @@ The mathematics is Jesse Michael Paul's. **Your only job is to formalize his arg
 | file | what it is |
 |---|---|
 | `EndgameFinal.md` | the argument, the stance, the protocol, the open target |
-| `ProofOutline.md` | the blueprint spine, generated from `Octonionic_RH_master.tex` |
+| `Octonionic_RH_master.tex` | **the spine — the argument itself.** Read the proof of `thm:concentricity` directly; there is no derived outline |
 | `RelevantGreenFinal.md` | what is certified, elicited from the kernel |
 | `DependencyTabulation.md` | the live import chain into the theorem and its corollaries |
 | `SOURCES/*.md` | the citation record — cited 60+ times from certified modules |
 
-The live Lean declarations in `Concentricity/` are the implementation record. The master
-`Octonionic_RH_master.tex` is the spine.
+The live Lean declarations in `Concentricity/` are the implementation record.
+
+`ProofOutline.md` was deleted on 2026-07-29: it was a hand-maintained copy of the master's proof
+with no generator behind it, and it had drifted — carrying a diagram and a sentence the master no
+longer contains. **The master is the spine; read it, never a copy of it.**
 
 Everything else was deleted on 2026-07-28 — 173 markdowns down to 23. Nine directories used to
 answer a grep and only one was current; anything named `ENDGAME`, `PREFLIGHT`, `PLAN`, or

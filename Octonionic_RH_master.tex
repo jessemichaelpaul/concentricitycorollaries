@@ -1216,12 +1216,12 @@ composition in the base --- is the residue subdiagram $\mathcal R_A$ of
 Definition~\ref{def:residue-subdiagram}, included in $\mathcal A_A$ by $\iota_A$. The
 restriction of the total object to this preimage sits over the same base.
 
-Connectedness is established here, and it is established at the total. The preimage above is
-taken under the action, so it assembles over the base into a total of its own,
-$\int_{\mathcal B}\mathcal R_A$, whose objects are the positioned squares of the C-residue
-image and whose morphisms are the value transports of $\mathcal T_A$ between them. It is not a
-second total formed alongside $\mathcal T_A$: it is the inverse image of $\mathcal T_A$,
-sitting inside it, and its inclusion is the total reading of $\iota_A$,
+We establish connectedness of the total image of C-residue zero $S^6$ spheres
+$\int_{\mathcal B}\mathcal R_A$. The preimage above is taken under the action, so it assembles
+over the base into a total of its own, whose objects are the positioned squares of the
+C-residue image and whose morphisms are the value transports of $\mathcal T_A$ between them.
+It is the inverse image of $\mathcal T_A$, and its inclusion is the total reading of
+$\iota_A$,
 \[
 \begin{tikzcd}[column sep=huge]
 \int_{\mathcal B}\mathcal R_A
@@ -1236,14 +1236,13 @@ faithful \textup{(}\texttt{AsectionCResidueInclusionTotal\_full},
 image; the C-residue system is therefore the image itself, carrying the total's own morphisms
 and nothing added.
 
-Both are action groupoids, and that is the register in which the conclusion is read. The base
+Notice that both of these are action groupoids. The base
 is the projective action groupoid; each fibre is the action groupoid of the $\Gtwo$-action on
 its value states; the total of an action-groupoid-valued diagram over an action groupoid is
 again one, formed from the distinguished element. Transitivity of $\iota_A$ therefore means
 what it means for an action groupoid --- any two of its objects are joined by a single
 element --- and for such a groupoid transitive and connected are one statement, since the
-orbit is the connected component and the stabilizer is the endomorphism monoid at a point
-\textup{(}\texttt{CategoryTheory.ActionCategory.stabilizerIsoEnd}\textup{)}.
+orbit is the connected component.
 
 It is worth pausing over what an arrow in this total \emph{is}, because the conclusion turns
 on the answer. In an action groupoid, a morphism between two states is not a path, and not a
