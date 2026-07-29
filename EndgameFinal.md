@@ -45,6 +45,29 @@ says a member **is** a transport-image of a north member — each object arrives
 square and the base arrow that produced it. The joining element is **read off the two witnesses**.
 Nothing is chosen (the author: *"there are no choices"*).
 
+## ⭐ THE JOINING ELEMENT IS INSIDE EVERY SQUARE — the author, 2026-07-29
+
+> **"Because the unique GPV lift is inside every square for `ι_A`."**
+
+Master `:1205`: *"slice-preserving theory yields the unique continuous winding lift each transport
+carries."* Master `:1267`: *"the element's unique tame continuous lift is what runs the members
+into one another while fixing the real level, a difference of winding being purely vertical
+(`lem:exp-degenerate`)."*
+
+**The lift is already in the object.** It is not searched for. It is not chosen — it is *unique*.
+It is not transported in from anywhere — **each square of `ι_A` carries it**. That is what makes
+`ι_A` a transitive action groupoid, and it is why both mechanisms are present in **one** element
+without ever being two parts: the square holds the lift, and the lift is what runs the members
+into one another.
+
+**The same lift fixes the real level.** That is why the level clause is the same movement's
+reading and never a second seat.
+
+**Any goal that asks for a morphism to be produced somewhere other than from the objects' own
+squares has left the author's argument.** (Receipt: `b823aa1` — a goal posed in `T_A` instead,
+and the author's verdict on it: *"the key giveaway that this is definitely wrong — the upstairs
+arrow."*)
+
 ## What Mathlib supplies, and what only the author's construction can
 
 | supplied by Mathlib, already wired green | supplied only by the construction |
@@ -64,43 +87,14 @@ the same datum. These are different things and the team has collapsed them repea
 
 ## ⛔ RETRACTED — "upstairs / downstairs" (Opus's error, struck by the author 2026-07-29)
 
-**The section below is wrong and is kept only so the error is legible.** It told the typing hand
-that the construction supplies an arrow *"upstairs, in the target"* and that `ι_A`'s fullness
-*"brings it home"*. The author, on seeing the goal it produced: **"the key giveaway that this is
-definitely wrong — *the upstairs arrow*."**
-
-**There is no upstairs.** `ι_A` is a proper inclusion, an isomorphism onto its image, and `𝓡_A`
-**is** its own image — `ι_obj` = `rfl`, `liftCompιIso` = `Iso.refl`, *definitionally*. Domain and
-image are the same objects. The retracted text invented a second location, sent the term to `T_A`
-(the total over **all** states), and so posed a goal that is both harder than the author's lemma
-and has forgotten that the members are C-residue members at all. Receipt: the hole Fable was left
-holding at `hup` — a morphism in `Grothendieck (AsectionActionDiagram ⋙ forgetToCat)` between two
-arbitrary-looking states.
-
-**It was the decomposition failure mode once more**, split as *construction supplies the arrow* +
-*fullness transports it*, and given false authority by attaching the master's phrase to it. The
-master's *"the connectedness instance of the Lean library's `ActionCategory` **itself**,
-transported along `ι_A`'s proper inclusion"* transports the **instance** — the property. It is not
-an instruction to fetch an individual morphism from a larger category and carry it back.
-
-### ✅ THE AUTHOR'S CORRECTION — the joining element is INSIDE every square
-
-**"Because the unique GPV lift is inside every square for `ι_A`."** (The author, 2026-07-29.)
-
-Master `:1205`: *"slice-preserving theory yields the unique continuous winding lift each transport
-carries."* Master `:1267`: *"the element's unique tame continuous lift is what runs the members
-into one another while fixing the real level, a difference of winding being purely vertical
-(`lem:exp-degenerate`)."*
-
-So: **the lift is already in the object.** It is not searched for, not chosen (it is *unique*),
-and not transported in from anywhere — each square of `ι_A` carries it. That is what makes `ι_A` a
-transitive action groupoid, and it is why *both* mechanisms are present in one element without
-being two parts: the square holds the lift, and the lift is what runs the members into one
-another. The same lift is what fixes the real level — which is why the level clause is the same
-movement's reading and never a second seat.
-
-**Any goal that asks for a morphism to be produced somewhere other than from the objects' own
-squares has left the author's argument.**
+**Kept only so the error stays legible.** The section below told the typing hand that the
+construction supplies an arrow *"upstairs, in the target"* and that `ι_A`'s fullness *"brings it
+home"*. **There is no upstairs** — `𝓡_A` **is** its own image, definitionally. The text invented a
+second location, sent the term to `T_A` (the total over **all** states), and posed a goal both
+harder than the lemma and stripped of the fact that the members are C-residue members. It was the
+decomposition failure mode again, given false authority by attaching the master's phrase to it:
+the master transports the **instance**, the property — not an individual morphism fetched from a
+larger category. **The mathematics is at ⭐ THE JOINING ELEMENT IS INSIDE EVERY SQUARE, above.**
 
 ---
 
