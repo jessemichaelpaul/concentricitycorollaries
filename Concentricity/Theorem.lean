@@ -413,6 +413,10 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- reach at its own outputs, posed for the kernel.
   refine ⟨⟨CategoryTheory.Groupoid.inv g ≫ h,
     ((AsectionCResidueInclusion A).app Q.base).preimage ?_⟩⟩
+  -- The action's reach at its own outputs: the sweep that produced the
+  -- members, the restriction that carries it, the graph identities by rfl.
+  have hsweep := A.AsectionEquivariant
+  have hgraph := AsectionState_input_then_equivariant A
   sorry
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
