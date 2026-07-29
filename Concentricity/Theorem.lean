@@ -384,35 +384,6 @@ instance ASection.AsectionCResidueInclusion_app_faithful
     ((AsectionCResidueInclusion A).app X).Faithful :=
   ObjectProperty.faithful_ι _
 
-/-- **THE SQUARE — the bridge declaration** (the author, 2026-07-29,
-verbatim): *"the element's flow, at the north frame, is arrows of the
-total joining the selected states."*  The distinguished element holds both
-boundary faces — Euler presenting at `0`, Weierstrass at `N`, both
-fixed-point certificates green (`distinguishedDiskAction_fixes_cayley_zero`,
-`distinguishedDiskAction_fixes_cayley_N`) — and between the two eyes runs
-the whole `0`-to-`N` core: the element's unique tame continuous lift
-carrying the selected states into one another, level fixed, winding purely
-vertical (master `:1259`).  Suppliers, all green: the two faces, the
-`GpvTransport` lift laws, the `normalizedN` tapes into the common chart
-(`normalizedNActionSquare`, its `_level` face), the stabilizer's reach.
-This is the one declaration that was never installed: the lift lives as
-its own certified layer about the action, the total's arrows are bare, and
-this name connects them.  Both open seats consume it — the join on
-contact, the level clause as the same datum's other face. -/
-theorem ASection.squareFlow_joins_selected (A : ASection)
-    (xN yN : AsectionActionFiber A projectiveNorth)
-    (hxN : IsNorthCResidueState A xN) (hyN : IsNorthCResidueState A yN) :
-    Nonempty ((⟨projectiveNorth, xN⟩ :
-        Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
-      ⟨projectiveNorth, yN⟩) := by
-  -- The two eyes select: each member's positioned coordinate is an actual
-  -- zero of the complete C3 enumeration.
-  obtain ⟨zx, hzx, hzxeq⟩ := hxN
-  obtain ⟨zy, hzy, hzyeq⟩ := hyN
-  obtain ⟨n, hn⟩ := (mem_CResidueZeroLocus_iff_exists_sphereZero A zx).mp hzx
-  obtain ⟨m, hm⟩ := (mem_CResidueZeroLocus_iff_exists_sphereZero A zy).mp hzy
-  sorry
-
 /-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
 equivariant functor — which is part of the construction of `ι_A` — is
 transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
@@ -426,53 +397,48 @@ Declaration 1 at `57384ae`) are consumed here and nowhere lower. -/
 theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     ∀ P Q : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
       Nonempty (P ⟶ Q) := by
-  intro P Q
-  -- THE SHAPE (the author, 2026-07-29, locked in EndgameFinal — THE ACTOR
-  -- IS NAMED): the ambient join of the two members — supplied by the
-  -- sweep that produced them, in the total where the whole square acts —
-  -- pulled back through ι_A's rfl-naturality and full faithfulness: an
-  -- arrow between members IS an ambient arrow between them.
-  have amb : Nonempty
-      ((⟨P.base, P.fiber.obj⟩ :
-          Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
-        ⟨Q.base, Q.fiber.obj⟩) := by
-    -- Step 4 (the author, 2026-07-29): "its proof is the production
-    -- itself: IsCResidueState's very definition carries each member's
-    -- witness — the north state and the arrow that made it.  The members
-    -- did not wander into the total; the action put them there.  Consume
-    -- the witnesses in the ambient total, where the whole square acts —
-    -- the element's flow and G₂ together, one action, no parts."
-    obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
-    obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-    have hback : (AsectionActionTransport A
-        (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN := by
-      calc (AsectionActionTransport A
-            (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj
-          = (AsectionActionTransport A (CategoryTheory.Groupoid.inv g)).obj
-              ((AsectionActionTransport A g).obj xN) := by rw [hg]
-        _ = (AsectionActionTransport A
-              (g ≫ CategoryTheory.Groupoid.inv g)).obj xN :=
-            (congrArg (fun F => F.obj xN)
-              (AsectionActionTransport_comp A g
-                (CategoryTheory.Groupoid.inv g))).symm
-        _ = xN := by
-            have harrow : g ≫ CategoryTheory.Groupoid.inv g =
-                𝟙 ASection.projectiveNorth :=
-              CategoryTheory.Groupoid.comp_inv g
-            rw [harrow, AsectionActionTransport_id]
-            rfl
-    have middle : Nonempty
-        ((⟨ASection.projectiveNorth, xN⟩ :
-            Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
-          ⟨ASection.projectiveNorth, yN⟩) :=
-      A.squareFlow_joins_selected xN yN hxN hyN
-    exact ⟨(⟨CategoryTheory.Groupoid.inv g, eqToHom hback⟩ :
-        (⟨P.base, P.fiber.obj⟩ :
-            Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
-          ⟨ASection.projectiveNorth, xN⟩) ≫ middle.some ≫
-      ⟨h, eqToHom hh⟩⟩
-  obtain ⟨⟨f, φ⟩⟩ := amb
-  exact ⟨⟨f, CategoryTheory.InducedCategory.homMk φ⟩⟩
+  -- THE PRETRANSITIVITY, instantiated ONCE on the inverse image groupoid
+  -- — the named actor, `AsectionCResidueDiagram` (the preimage carrying
+  -- the same restricted action by the three rfls,
+  -- `ASectionCResidueDiagram.lean:76-96, :166-168`).  Because the homs
+  -- coincide through ι_A, its pretransitivity is the ambient action's
+  -- reach at the members, inherited through an identity.  Suppliers (the
+  -- blueprint's own `\uses` edges into `thm:concentricity`, all green):
+  -- `thm:G2-S6` (`G2.exists_smul_eq_of_mem_unitImaginarySphere`),
+  -- `orbitRep_spec`, and the equivariant sweep (`AsectionEquivariant`;
+  -- the fibres are its graph, `AsectionState_input_then_equivariant`,
+  -- rfl).  The element's own inventory, kept from the retired shadow:
+  -- both boundary faces (`distinguishedDiskAction_fixes_cayley_zero`,
+  -- `_N`), the `GpvTransport` lift laws, the `normalizedN` tapes and
+  -- their `_level` face, the stabilizer's reach.
+  intro P Q  -- the definition unfolding, nothing more
+  have hstd : (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back Q.base) *
+      (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back P.base))⁻¹) •
+        CategoryTheory.ActionCategory.back P.base =
+      CategoryTheory.ActionCategory.back Q.base := by
+    have h1 := inv_smul_eq_iff.mpr
+      (GreatCircle.orbitRep_spec
+        (CategoryTheory.ActionCategory.back P.base)).symm
+    rw [mul_smul, h1]
+    exact GreatCircle.orbitRep_spec _
+  have f_std : P.base ⟶ Q.base := ⟨_, hstd⟩
+  have key : ∀ s t : A.AsectionState, s.coordinate = t.coordinate →
+      ∃ g : G2, g • s = t := by
+    rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hc
+    obtain ⟨g, hg⟩ :=
+      G2.exists_smul_eq_of_mem_unitImaginarySphere sw.2 tw.2
+    refine ⟨g, ?_⟩
+    simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
+    exact ⟨Subtype.ext hg, hc⟩
+  have hreach :
+      (CategoryTheory.ActionCategory.back
+        (((AsectionCResidueTransport A f_std).obj P.fiber).obj.input)).coordinate =
+      (CategoryTheory.ActionCategory.back (Q.fiber.obj.input)).coordinate := by
+    sorry
+  obtain ⟨g, hg⟩ := key _ _ hreach
+  exact ⟨⟨f_std,
+    ((AsectionCResidueInclusion A).app Q.base).preimage
+      (CategoryTheory.InducedCategory.homMk (Subtype.mk g hg))⟩⟩
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
