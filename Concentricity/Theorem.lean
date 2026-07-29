@@ -338,8 +338,55 @@ instance ASection.residueTotal_isConnected (A : ASection) :
   -- Declaration 1, at ι_A's name: full and faithful at every frame.
   have hff := AsectionCResidueInclusion_app_fullyFaithful A P.base
   haveI := AsectionCResidueInclusion_app_full A P.base
-  trace_state
-  sorry
+  -- The master's finale, typed: one arrow of the total — the production
+  -- witnesses unpack the joining element; the base part is one element of
+  -- the base action; the value-transport part is one element of the sweep
+  -- (the equivariant functor is transitive: G₂ on the unit imaginary
+  -- octonions); membership travels by composition.
+  obtain ⟨xNP, hNP, gP, hgP⟩ := P.fiber.property
+  obtain ⟨xNQ, hNQ, gQ, hgQ⟩ := Q.fiber.property
+  let aP : GreatCircle.Aut := gP.1
+  let aQ : GreatCircle.Aut := gQ.1
+  let ubase : P.base ⟶ Q.base :=
+    ⟨aQ * aP⁻¹, by
+      have hP : aP • CategoryTheory.ActionCategory.back projectiveNorth
+          = CategoryTheory.ActionCategory.back P.base := gP.2
+      have hQ : aQ • CategoryTheory.ActionCategory.back projectiveNorth
+          = CategoryTheory.ActionCategory.back Q.base := gQ.2
+      show (aQ * aP⁻¹) • CategoryTheory.ActionCategory.back P.base
+          = CategoryTheory.ActionCategory.back Q.base
+      rw [← hP, mul_smul, inv_smul_smul]
+      exact hQ⟩
+  have harrow : gP ≫ ubase = gQ := by
+    apply Subtype.ext
+    simp [ubase, aP, aQ, CategoryTheory.ActionCategory.comp_val,
+      inv_mul_cancel_right]
+  have hX : (((AsectionCResidueDiagram A ⋙ Grpd.forgetToCat).map
+      ubase).toFunctor.obj P.fiber).obj
+      = (AsectionActionTransport A gQ).obj xNP := by
+    show (AsectionActionTransport A ubase).obj P.fiber.obj
+        = (AsectionActionTransport A gQ).obj xNP
+    rw [← hgP]
+    calc (AsectionActionTransport A ubase).obj
+          ((AsectionActionTransport A gP).obj xNP)
+        = (AsectionActionTransport A (gP ≫ ubase)).obj xNP := by
+          rw [AsectionActionTransport_comp]; rfl
+      _ = (AsectionActionTransport A gQ).obj xNP := by rw [harrow]
+  -- one element of the sweep joins the two normalized sources:
+  have hjoin : ∀ s t : AsectionState A,
+      s.coordinate = t.coordinate → ∃ g : G2, g • s = t := by
+    rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hct
+    obtain ⟨g, hg⟩ := G2.exists_smul_eq_of_mem_unitImaginarySphere sw.2 tw.2
+    refine ⟨g, ?_⟩
+    simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
+    exact ⟨Subtype.ext hg, hct⟩
+  have hc : (CategoryTheory.ActionCategory.back xNP.input).coordinate
+      = (CategoryTheory.ActionCategory.back xNQ.input).coordinate := by
+    sorry
+  obtain ⟨g, hgs⟩ := hjoin _ _ hc
+  exact CategoryTheory.Zigzag.of_hom ⟨ubase,
+    ⟨CategoryTheory.eqToHom hX ≫ (AsectionActionTransport A gQ).map ⟨⟨g, hgs⟩⟩ ≫
+      CategoryTheory.eqToHom hgQ⟩⟩
 /-- **THE DECLARATION**: `π₀(∫𝓡_A)` IS A SINGLETON — CHT Remark 8.3.5 on
 the connected action groupoid: nonempty and connected, so one class. -/
 theorem ASection.residueTotal_pi0_singleton (A : ASection) :
