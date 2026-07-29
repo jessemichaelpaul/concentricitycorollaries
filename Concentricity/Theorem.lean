@@ -407,7 +407,11 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- witness of the action that produced it.
   obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
   obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-  refine ⟨?_⟩
+  -- The bridge (the author's two maps, one consumption): the base leg is
+  -- the witnesses' own arrows composed in the base groupoid — the
+  -- carriage, typed and accepted; the fibre leg is the one action's
+  -- reach at its own outputs, posed for the kernel.
+  refine ⟨⟨CategoryTheory.Groupoid.inv g ≫ h, ?_⟩⟩
   sorry
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
