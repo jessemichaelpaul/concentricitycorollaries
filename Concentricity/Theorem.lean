@@ -407,7 +407,41 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
       ((⟨P.base, P.fiber.obj⟩ :
           Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
         ⟨Q.base, Q.fiber.obj⟩) := by
-    sorry
+    -- Step 4 (the author, 2026-07-29): "its proof is the production
+    -- itself: IsCResidueState's very definition carries each member's
+    -- witness — the north state and the arrow that made it.  The members
+    -- did not wander into the total; the action put them there.  Consume
+    -- the witnesses in the ambient total, where the whole square acts —
+    -- the element's flow and G₂ together, one action, no parts."
+    obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
+    obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
+    have hback : (AsectionActionTransport A
+        (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN := by
+      calc (AsectionActionTransport A
+            (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj
+          = (AsectionActionTransport A (CategoryTheory.Groupoid.inv g)).obj
+              ((AsectionActionTransport A g).obj xN) := by rw [hg]
+        _ = (AsectionActionTransport A
+              (g ≫ CategoryTheory.Groupoid.inv g)).obj xN :=
+            (congrArg (fun F => F.obj xN)
+              (AsectionActionTransport_comp A g
+                (CategoryTheory.Groupoid.inv g))).symm
+        _ = xN := by
+            have harrow : g ≫ CategoryTheory.Groupoid.inv g =
+                𝟙 ASection.projectiveNorth :=
+              CategoryTheory.Groupoid.comp_inv g
+            rw [harrow, AsectionActionTransport_id]
+            rfl
+    have middle : Nonempty
+        ((⟨ASection.projectiveNorth, xN⟩ :
+            Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
+          ⟨ASection.projectiveNorth, yN⟩) := by
+      sorry
+    exact ⟨(⟨CategoryTheory.Groupoid.inv g, eqToHom hback⟩ :
+        (⟨P.base, P.fiber.obj⟩ :
+            Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
+          ⟨ASection.projectiveNorth, xN⟩) ≫ middle.some ≫
+      ⟨h, eqToHom hh⟩⟩
   obtain ⟨⟨f, φ⟩⟩ := amb
   exact ⟨⟨f, CategoryTheory.InducedCategory.homMk φ⟩⟩
 
