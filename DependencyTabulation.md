@@ -51,12 +51,14 @@ turns concentricity into RH. Its statement contains no `1/2`.
 | 1 | `F_A`, `F_A(f)`, laws | `AsectionActionDiagram`, `AsectionActionTransport`, `_id`, `_comp` | green |
 | 2 | the semantic locus | `CResidueZeroLocus`, `sphereZero_mem_CResidueZeroLocus`, `CResidueZeroLocus_infinite` | green |
 | 3 | the preimage | `IsNorthCResidueState`, `IsCResidueState` | green |
-| 4 | `𝓡_A`, `𝓡_A(f)`, `ι_A` | `AsectionCResidueDiagram`, `AsectionCResidueTransport`, `AsectionCResidueInclusion` (naturality `rfl`) | green |
+| 4 | `𝓡_A`, `𝓡_A(f)`, and `ι_A`'s **presentation** | `AsectionCResidueDiagram`, `AsectionCResidueTransport`, `AsectionCResidueInclusion` (naturality `rfl`, `57384ae`) | green |
+| 4a | **`ι_A` AT THE TOTAL** — the inclusion of the inverse image in the total, full and faithful there | `AsectionCResidueInclusionTotal`, `…Total_faithful`, `…Total_full` (`b073d88`) | green |
+| 4b | **the transitivity of `ι_A`** — any two projective squares joined by one groupoid element | `sweepTransitive_on_residueSystem` (`Theorem.lean:445`) | **carries `sorryAx`** |
 | 5 | inhabitants | `residueActionState`, `residueTotal` (`ASectionTotalActionState.lean:117`) | green |
 | 6 | **`∫𝓡_A` is a connected action groupoid** | the argument is stated at the level of the connected action of the groupoid — that is *why* the real transports are connected; `ι_A` a proper inclusion, natural iso onto its image, `57384ae` | **green — certified premise.** Marking this "open" is the banned framing |
 | 7 | singleton | CHT Rem. 8.3.5; `ConnectedComponents := Quotient (Zigzag.setoid)`; `Quotient.sound` | applied, locked, no `sorry` |
-| 8 | components comparison | `pi0GrothendieckEquiv` (`Theorem.lean:108`) | green |
-| 9 | the level read | `transportLevel` (`Theorem.lean:171`) at the representatives | follows from 7 |
+| 8 | components comparison | `pi0GrothendieckEquiv` (`Theorem.lean:110`) | green |
+| 9 | the level read | `transportLevel` (`Theorem.lean:175`) at the representatives | follows from 7 |
 | 10 | corollaries fire | `Corollaries.lean` | already building |
 
 ## Citation dependencies outside `Concentricity/`

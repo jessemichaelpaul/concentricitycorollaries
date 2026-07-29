@@ -44,10 +44,17 @@ Regenerate by `#print axioms` on these names; do not hand-edit.
 
 `ASection.IsNorthCResidueState` · `ASection.IsCResidueState` ·
 `ASection.AsectionCResidueTransport` (= `𝓡_A(f)`) · `ASection.AsectionCResidueDiagram` (= `𝓡_A`) ·
-`ASection.AsectionCResidueInclusion` (= `ι_A`, **naturality by `rfl`**) ·
-`ASection.AsectionCResidueInclusion_app_fullyFaithful` / `…_app_full` / `…_app_faithful`
-(**Declaration 1 at `ι_A`'s own name**, `Theorem.lean:310–323`, `bb02b54`; elicited 2026-07-28
-night — all three on exactly the three foundations, independent of the open seats)
+`ASection.AsectionCResidueInclusion` (**naturality by `rfl`**, `57384ae`) and
+`…_app_fullyFaithful` / `…_app_full` / `…_app_faithful` (`Theorem.lean:372`, `:377`, `:382`,
+`bb02b54`) — these are the **componentwise presentation**.
+
+**`ι_A` AT THE TOTAL — the inclusion of the inverse image IN the total, which is what `ι_A` is:**
+`ASection.AsectionCResidueInclusionTotal` (`Grothendieck.map` of the whiskered inclusion,
+`∫𝓡_A ⥤ T_A`) · `…Total_faithful` · `…Total_full` — **`b073d88`**, all three on exactly the three
+foundations. Together they make it an **isomorphism onto its image inside the total**. Mathlib has
+no lemma that `Grothendieck.map` preserves fullness or faithfulness (`Grothendieck.lean` carries
+`map` `:242`, `map_map` `:262`, `faithful_ι` `:560` for the *fibre* inclusion, nothing else) —
+these put it under a name.
 
 ## Inhabitants
 
@@ -60,13 +67,14 @@ the quarantined `ASectionTotalPreflights.lean:172`.*
 `pi0Functor` · `toColimitObj_eq_of_zigzag` · `pi0GrothendieckEquiv` · `pi0_grothendieck` ·
 `ASection.transportLevel` (`= (A.sphereZero n).re`, by definition)
 
-## Transitivity and the sphere world
+## Elsewhere in the tree, and NOT suppliers for the open sites
 
-`G2.exists_smul_eq_of_mem_unitImaginarySphere` · `sphereWorld_zigzag` — **register label
-(2026-07-28 night): `sphereWorld_zigzag` is a `𝒮₂`/slice-world fact** (`SliceSphereWorld.lean:288`,
-honest inside: one hom from the April theorem) — **the conclusion's shape at the wrong object for
-the seats; consumed by no certificate** (`Corollaries.lean` cites `ASection.concentricity`,
-nothing else); never a supplier for the seats
+`G2.exists_smul_eq_of_mem_unitImaginarySphere` (green) · `sphereWorld_zigzag`
+(`SliceSphereWorld.lean:288`) — a `𝒮₂`/slice-world fact, consumed by no certificate
+(`Corollaries.lean` cites `ASection.concentricity`, nothing else) ·
+`ASection.AsectionEquivariant_transitive` (`6596e04`) · `…_transitive_states` (`8907f88`) — green,
+quantify over the ambient world, name `ι_A` nowhere. **None of these is at the register of the open
+term** (see `EndgameFinal.md` §0 and §3).
 
 ## Downstream, already proved
 
@@ -97,14 +105,16 @@ as written. The corollary layer is wired and waiting.
 
 ## Open
 
-One movement, two seats, both in `Theorem.lean` (step-0 receipt at `141fcc0`):
-`ASection.residueTotal_isConnected` (seat A, `:342` — Declaration 2's consumption) and the level
-clause inside `ASection.concentricity` (seat B, `:419`). They carry `sorryAx` until they close,
-and that propagates arithmetically to the corollaries. Declaration 0 is the one declaration not
-yet in the tree. **Its raw-pair head (`IsPretransitive G2 A.AsectionState`) was kernel-settled at
-Leg 1 — cannot close: the fused instance (`ASectionFunctor.lean:64`) carries the coordinate
-through, residual `⊢ xc = yc`.** The subject is **the distinguished action on the members** — the
-element + the sweep TOGETHER (the author: *"you can't just say G₂ — you have to apply it to the
-object"*); `thm:G2-S6` reaches the members **through** `AsectionEquivariant`
-(`ASectionEquivariant.lean:43`); the Lean spelling is typed at the typing turn from the master's
-finale. Its suppliers are green above. Nothing else in the repository is open.
+Two sites, both in `Theorem.lean`, coordinates re-elicited 2026-07-29:
+
+```text
+:445   ASection.sweepTransitive_on_residueSystem   -- ι_A is a transitive action groupoid
+:528   the level clause inside ASection.concentricity
+```
+
+They carry `sorryAx`, and it propagates arithmetically to the corollaries. **Nothing else in the
+repository is open.**
+
+The statement at `:445` is the author's lemma, at the total and naming no group: *any two
+projective squares in the C-residue image — the objects of `∫𝓡_A` — are connected by one groupoid
+element.* See `EndgameFinal.md`.
