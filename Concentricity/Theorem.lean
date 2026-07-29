@@ -399,6 +399,85 @@ theorem ASection.northStabilizer_reach_heights (A : ASection)
       (GreatCircle.cayleyProjective w.1).val
           (CategoryTheory.ActionCategory.back x.input).coordinate =
         (CategoryTheory.ActionCategory.back y.input).coordinate := by
+  -- The memberships hand the proof everything: the production witnesses
+  -- and the selected coordinates.
+  obtain ⟨xN, hxN, g, hg⟩ := hx
+  obtain ⟨yN, hyN, h, hh⟩ := hy
+  obtain ⟨zx, hzxmem, hzxeq⟩ := hxN
+  obtain ⟨zy, hzymem, hzyeq⟩ := hyN
+  -- The membership receipts: both zeros live strictly above the real axis.
+  obtain ⟨hFzx, hzxim⟩ := (mem_CResidueZeroLocus_iff A zx).mp hzxmem
+  obtain ⟨hFzy, hzyim⟩ := (mem_CResidueZeroLocus_iff A zy).mp hzymem
+  -- Receipt 1: the members' input heights, read through the producers.
+  have h1x : (CategoryTheory.ActionCategory.back x.input).coordinate =
+      (GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1).val
+        ((CategoryTheory.ActionCategory.back xN.input).coordinate) := by
+    rw [← hg]; rfl
+  have h1y : (CategoryTheory.ActionCategory.back y.input).coordinate =
+      (GreatCircle.cayleyProjective (GreatCircle.stabilizerPart h).1).val
+        ((CategoryTheory.ActionCategory.back yN.input).coordinate) := by
+    rw [← hh]; rfl
+  -- Receipt 2: at north the frame IS the element; the producers' selected
+  -- coordinates are the zeros through the element's own positioning.
+  have h2x : (↑zx : OnePoint ℂ) =
+      (A.distinguishedDiskAction).val
+        ((CategoryTheory.ActionCategory.back xN.input).coordinate) := by
+    have hzxeq' : (↑zx : OnePoint ℂ) =
+        (CategoryTheory.ActionCategory.back xN.positioned).coordinate := hzxeq
+    have hpos := congrArg
+      (fun s => (CategoryTheory.ActionCategory.back s).coordinate)
+      xN.positioned_by_action
+    rw [hzxeq']
+    simpa [projectiveNorth, projectiveObjectFrame_north] using hpos
+  have h2y : (↑zy : OnePoint ℂ) =
+      (A.distinguishedDiskAction).val
+        ((CategoryTheory.ActionCategory.back yN.input).coordinate) := by
+    have hzyeq' : (↑zy : OnePoint ℂ) =
+        (CategoryTheory.ActionCategory.back yN.positioned).coordinate := hzyeq
+    have hpos := congrArg
+      (fun s => (CategoryTheory.ActionCategory.back s).coordinate)
+      yN.positioned_by_action
+    rw [hzyeq']
+    simpa [projectiveNorth, projectiveObjectFrame_north] using hpos
+  -- The explicit element, the toNGL pattern: the affine flow between the
+  -- two heights, real entries, determinant closed by norm_num from the
+  -- memberships' strict positivity.
+  have ha : zy.im / zx.im ≠ 0 :=
+    ne_of_gt (div_pos hzyim hzxim)
+  let vGL : GL (Fin 2) ℝ :=
+    Matrix.GeneralLinearGroup.mkOfDetNeZero
+      !![zy.im / zx.im, zy.re - (zy.im / zx.im) * zx.re; 0, 1] (by
+        rw [Matrix.det_fin_two_of]
+        simpa using ha)
+  have hvstab : Matrix.ProjGenLinGroup.mk vGL •
+      (OnePoint.infty : GreatCircle.Point) = OnePoint.infty := by
+    rw [GreatCircle.mk_smul, OnePoint.smul_infty_eq_ite]
+    simp [vGL]
+  let v : GreatCircle.NorthStabilizer := ⟨Matrix.ProjGenLinGroup.mk vGL, hvstab⟩
+  -- The coset move: the producers' parts carry the element between the two
+  -- members; the affine flow acts at north.
+  refine ⟨GreatCircle.stabilizerPart h * v * (GreatCircle.stabilizerPart g)⁻¹, ?_⟩
+  rw [h1x, h1y]
+  simp only [Subgroup.coe_mul, InvMemClass.coe_inv, map_mul, map_inv]
+  -- Möbius composition is definitional; the producer's part cancels
+  -- against its own inverse, and the carrier strips by congruence.
+  show (GreatCircle.cayleyProjective (GreatCircle.stabilizerPart h).1).val
+      ((GreatCircle.cayleyProjective v.1).val
+        (((GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1))⁻¹.val
+          ((GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1).val
+            ((CategoryTheory.ActionCategory.back xN.input).coordinate)))) =
+    (GreatCircle.cayleyProjective (GreatCircle.stabilizerPart h).1).val
+      ((CategoryTheory.ActionCategory.back yN.input).coordinate)
+  have hcancel : ((GreatCircle.cayleyProjective
+      (GreatCircle.stabilizerPart g).1))⁻¹.val
+        ((GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1).val
+          ((CategoryTheory.ActionCategory.back xN.input).coordinate)) =
+      (CategoryTheory.ActionCategory.back xN.input).coordinate :=
+    (GreatCircle.cayleyProjective
+      (GreatCircle.stabilizerPart g).1).val.symm_apply_apply _
+  rw [hcancel]
+  refine congrArg _ ?_
+  -- The core equation of the element's flow at north, on the receipts.
   sorry
 
 /-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
