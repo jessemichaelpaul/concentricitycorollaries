@@ -272,7 +272,8 @@ rule: kernel-test, never grep-freeze. Probe receipts (Opus, tonight): `instSMulG
 carrier; `IsPretransitive G2 A.AsectionState` is the **single missing head**, no subtype, no
 `Set` coercion, no new carrier. The term: the April theorem
 (`G2.exists_smul_eq_of_mem_unitImaginarySphere`) read at the carrier **through the sweep**
-(`AsectionEquivariant`) by the definitional identification the master states. If the kernel prints a residual goal, it routes to the author verbatim — the
+(`AsectionEquivariant`) by the definitional identification the master states. If the kernel prints
+a residual goal, it routes to the author verbatim — the
 kernel settles the carrier, never a document paragraph. One orbit means **any member to any
 member**: no anchor point — north and `0` are both inside the orbit and neither is privileged.
 
