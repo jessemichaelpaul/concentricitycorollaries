@@ -100,8 +100,9 @@ componentwise: at each `X`, the inclusion `(IsCResidueState A X).ι : 𝓡_A(X) 
 
 ### "which is my C-residue system as an action groupoid, `∫𝓡_A`"
 
-**Precisely:** the *category* obtained by the Grothendieck construction of `ι_A`'s **source**
-diagram. It is `ι_A`'s domain assembled over the base; `ι_A` itself does not occur in its type.
+**Precisely (the author):** the **inverse image of the total `F_A`**, as a category — it sits
+**inside** `T_A`, it is not a second total built alongside it. `ι_A` itself does not occur in its
+type: the type names only the restricted diagram.
 **Lean:** `Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)`.
 **Mathlib:** `Grothendieck` (`Grothendieck.lean:73`), `Grothendieck.Hom` (`:86`),
 `Grpd.forgetToCat` (`Grpd/Basic.lean:77`).
