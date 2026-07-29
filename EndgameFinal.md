@@ -167,34 +167,68 @@ built the functor**: `AsectionActionTransport`, restricted through `AsectionCRes
 
 ---
 
-# 4 — THE KERNEL STATE, elicited 2026-07-29
+# 4 — THE KERNEL STATE, by the step of the argument it certifies
 
-**Green: 28 declarations on exactly `[propext, Classical.choice, Quot.sound]`. Zero project axioms.**
+**28 declarations on exactly `[propext, Classical.choice, Quot.sound]`. Zero project axioms.**
+Grouped by what they certify in the argument above, not as a list.
 
-```text
-distinguishedDiskAction · _fixes_cayley_zero (Euler at 0) · _fixes_cayley_N (Weierstrass at N)
-projectiveObjectFrame_north · orbit_stabilizer_factor · stabilizerPart_unique
-AsectionEquivariant · AsectionState.input_equivariant
-G2.exists_smul_eq_of_mem_unitImaginarySphere
-AsectionActionDiagram · orbitStabilizerActionSquare · positionedOrbitSquare
-CResidueZeroLocus_infinite (C4) · sphereZero_complete
-IsCResidueState · AsectionCResidueTransport · AsectionCResidueDiagram
-AsectionCResidueInclusion                  (naturality rfl, 57384ae)
-…_app_fullyFaithful / _full / _faithful    (bb02b54, at ι_A's own name)
-residueActionState_mem · pi0GrothendieckEquiv · pi0_grothendieck · transportLevel
-riemannHypothesis_iff_concentric           (independent of everything open; no ½ on its RHS)
-```
+**"my `distinguishedDiskAction` … is simultaneously a function, a group element, and a functor"** —
+the element, and the fact that it is already positioned everywhere:
+`distinguishedDiskAction` · `distinguishedDiskAction_fixes_cayley_zero` (Euler at `0`) ·
+`distinguishedDiskAction_fixes_cayley_N` (Weierstrass at `N`) · `projectiveObjectFrame` ·
+`projectiveObjectFrame_north` (**at north the frame IS the element**) · `projectiveArrowElement`.
 
-**Carrying `sorryAx`, and only these two:** `ASection.concentricity`, `zeta_riemannHypothesis` —
+**"an orbit stabilizer slice wise from PGL to GL"** — `GreatCircle.orbit_stabilizer_factor`
+(existence of the factorization) · `GreatCircle.stabilizerPart_unique` (its uniqueness, so the
+positioning does not depend on representatives).
+
+**"and for the full Octonionic image sweep over the normalization (via G2)"** —
+`AsectionEquivariant` (`H1 ⥤ H1`) · `AsectionEquivariant_map_val` (`rfl`: it retains the same `G₂`
+element) · `AsectionState.input_equivariant` · `G2.exists_smul_eq_of_mem_unitImaginarySphere`.
+
+**"the same morphisms that built that functor"** — the real value transports and the functor they
+build: `AsectionActionTransport` · `_id` · `_comp` · `orbitStabilizerActionSquare` ·
+`positionedOrbitSquare` · `AsectionActionDiagram` (`F_A`) · `TotalActionStateWorld` (`T_A`).
+
+**"the C-residue image"** — the semantic locus and the preimage that selects it:
+`CResidueZeroLocus` · `sphereZero_mem_CResidueZeroLocus` · `CResidueZeroLocus_infinite` (C4) ·
+`sphereZero_complete` · `IsNorthCResidueState` · `IsCResidueState` · `AsectionCResidueTransport`
+(`𝓡_A(f)`) · `AsectionCResidueDiagram` (`𝓡_A`).
+
+**"the diagram `ι_A : 𝓡_A(X) ⇉ F_A(X)` … a real value transport — that is what `ι_A` IS"** —
+`AsectionCResidueInclusion`, naturality `rfl`, **`57384ae`**.
+
+**"whose fully faithful image is `∫𝓡_A`"** — `AsectionCResidueInclusion_app_fullyFaithful` /
+`…_app_full` / `…_app_faithful`, at `ι_A`'s own name, **`bb02b54`**; `𝓡_A` **is** its own image
+(`ι_obj` = `rfl`, `liftCompιIso` = `Iso.refl`).
+
+**The objects exist** — `residueActionState` · `residueActionState_positioned` ·
+`residueActionState_mem` (C4 populates the preimage: nonemptiness).
+
+**"connectedness for an action groupoid … on real value transports"**, once transitivity is in
+hand — `pi0Functor` · `pi0Cocone` · `toColimitObj_eq_of_zigzag` · `pi0GrothendieckEquiv` ·
+`pi0_grothendieck` (Riehl 8.3.5's collapse) · `transportLevel` (the level read on the class).
+
+**The conclusion's other half, already proved and independent of everything open** —
+`riemannHypothesis_iff_concentric`. **Its right-hand side contains no `½`**; it asserts only a
+common centre. The `½` is derived from the functional equation in one file only
+(`upperZero_re_eq_half_of_concentric`).
+
+## What is open, in the argument's terms
+
+**Carrying `sorryAx`, and only these two:** `ASection.concentricity` and `zeta_riemannHypothesis` —
 arithmetic propagation from the open sites, nothing of their own. `Corollaries.lean` compiles
-against `ASection.concentricity` (3,694 jobs).
+against `ASection.concentricity` (3,694 jobs); the corollary layer is wired and waiting.
 
-**Open — two sites, one file, `Concentricity/Theorem.lean`:** the transitivity term, and the level
-clause inside `ASection.concentricity`. Re-elicit coordinates at typing time; they have drifted
-every session.
+**The two open sites, both in `Concentricity/Theorem.lean`:**
 
-**Downstream, already wired to consume the transitivity:** `residueTotal_isConnected` closes with
-`Zigzag.of_hom`; `residueTotal_pi0_singleton` closes on that; the level read gives the centre.
+1. **the transitivity of `ι_A`** — *any two projective squares in the C-residue image are connected
+   by one groupoid element* (`sweepTransitive_on_residueSystem`, `:397`);
+2. **the level clause** inside `ASection.concentricity` (`:480`).
+
+Everything downstream is already wired to consume the first: `residueTotal_isConnected` closes with
+`Zigzag.of_hom` on it, `residueTotal_pi0_singleton` closes on that, and the level read on the class
+gives the centre. Re-elicit both coordinates at typing time — they have drifted every session.
 
 ---
 
@@ -233,6 +267,17 @@ Row 20's level clause is the same movement read for its level.
 
 **The joining morphism in row 15 comes from row 10**, and that is the author's sentence: *any two
 square frames are connected by the same morphisms that built that functor.*
+
+---
+
+# ⚠️ THE WARNING — the author, 2026-07-29, verbatim
+
+> This is transitivity of an action groupoid, `\int R_A` **NOT *group theory***. It is at the
+> level of the **categorification of orbit-stabilizer theory** and it is about transitivity of the
+> **real value transport `\iota_A`**, which is a *transitive action groupoid* whose **fully
+> faithful image is `\int R_A`**.
+
+---
 
 # 6 — THE STANCE
 
