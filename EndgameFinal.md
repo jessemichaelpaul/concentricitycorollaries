@@ -823,3 +823,44 @@ level.* The recurring wall was never a missing fact — it was the tape's seat, 
 
 The heart's goal, already on the kernel's board (probe, 2026-07-29): join the two canonical members
 at north in the total, tapes in scope. That probe is the next window's first keystroke.
+
+---
+
+## 🎯 THE REDUCTION (2026-07-29, the author's route, kernel-accepted to the floor)
+
+The author's correction mid-run, verbatim: *"the A section Equivariant functor BUILDS F_A(X) and
+then use the RESTRICTION FROM THE ι_A proof"*; *"is pretransitive from the SAME restriction"*;
+*"the inverse image groupoid R_A(X) is pretransitive from F_A(X) which was BUILT TRANSITIVELY
+equivariant."*  The tape-square carriage of §THE ASSEMBLY is STRUCK (the decomposition again).
+
+**The kernel-accepted chain (probe, every wire green):** the canonical-member join
+`Nonempty (⟨N, canonical n⟩ ⟶ ⟨N, canonical m⟩)` reduces by `refine ⟨{base := 𝟙 _, fiber := ?_}⟩`
+→ `simp only [Functor.map_id]` → `refine ⟨?_⟩` (the restriction's one-field hom) → `show` (defeq) to
+the NAKED BOARD:
+
+```
+⊢ A.residueActionState projectiveNorth n baseWorld ⟶ A.residueActionState projectiveNorth m baseWorld
+```
+
+**The definitional floor (all `@[reducible]`, elicited):**
+`AsectionActionFiber A X = AsectionActionStateFiber (frame X)` = `Grpd.of (AsectionActionStateWorld
+(frame X))` = **`InducedCategory (AsectionStateWorld A) (fun x => x.input)`** with
+`AsectionStateWorld = ActionCategory G2 AsectionState`.  So the naked hom IS a G₂-subtype on the
+inputs (Action.lean:92 `hom_as_subtype` — THE SEAT, reached definitionally).  `AsectionActionState`
+is a 5-field structure: `input`, `positioned = coordinateTransport m input`, `value = Output
+positioned` — values inherited by evaluation.
+
+**What the floor says:** with base `𝟙`, the G₂ face fixes the coordinate — the fibre-only join
+forces `sphereZero n = sphereZero m`.  `exact?` on the naked board: no closing name.  Therefore the
+join rides a NONIDENTITY base endo `w : projectiveNorth ⟶ projectiveNorth` (NorthStabilizer, the
+seat's subtype) — the sweep's own base motion, part of F_A's build — whose fibre transport moves
+the positioned coordinate by `cayleyProjective (stabilizerPart w)`.  The supplier of `w` is the
+element's own winding (master :1259, the unique tame continuous lift; the tape's `winding` field),
+unpacked from the tape — never searched.  `sphereZero : ℕ → ℂ` is a raw field (ASection.lean:115);
+its laws are the structure's other fields — read them next, they are where the author's
+enumeration meets the element.
+
+**Next keystroke:** read ASection.lean:100–160 (the structure's fields around `sphereZero`), then
+type `w` from the tape's data on the naked board.  The pretransitivity registration (`IsPretransitive`
+— NO declaration in the live tree, the empty shelf) seats AFTER the join closes, from the SAME
+restriction.
