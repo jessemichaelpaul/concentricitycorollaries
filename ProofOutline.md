@@ -175,26 +175,36 @@ restriction of the total object to this preimage sits over the same base:
 \end{tikzcd}
 \]
 
-Connectedness is established here, by the structure of $\iota_A$ itself. Because $\iota_A$ is
-a faithful embedding, an isomorphism onto its image, there is a canonical diagram of three
-categories: the domain $\mathcal R_A$, the image subcategory $\operatorname{Im}(\iota_A)$, and
-the full target $\mathcal A_A$. This creates a mandatory span of functors, a length-two
-zigzag:
+Connectedness is established here, and it is established at the total. The preimage above is
+taken under the action, so it assembles over the base into a total of its own,
+$\int_{\mathcal B}\mathcal R_A$, whose objects are the positioned squares of the C-residue
+image and whose morphisms are the value transports of $\mathcal T_A$ between them. It is not a
+second total formed alongside $\mathcal T_A$: it is the inverse image of $\mathcal T_A$,
+sitting inside it, and its inclusion is the total reading of $\iota_A$,
 \[
-\begin{tikzcd}[column sep=large]
-& \operatorname{Im}(\iota_A) \arrow[dl, "\iota_A^{-1}"'] \arrow[dr, hook, "j"] & \\
-\mathcal R_A & & \mathcal A_A
+\begin{tikzcd}[column sep=huge]
+\int_{\mathcal B}\mathcal R_A
+  \arrow[r, hook, "\textstyle\int\iota_A"]
+& \int_{\mathcal B}\mathcal A_A=\mathcal T_A
 \end{tikzcd}
 \]
-This follows immediately, because $\iota_A$ is a \emph{proper} inclusion and a natural
-isomorphism onto its image.
-The backward path exists because $\iota_A:\mathcal R_A\to\operatorname{Im}(\iota_A)$ is a
-strict isomorphism of categories, hence fully invertible; the forward path is the canonical,
-non-invertible inclusion $j:\operatorname{Im}(\iota_A)\hookrightarrow\mathcal A_A$. Any
-relation of the full category back to the restricted domain traverses exactly this roof. A
-category is connected when any pair of its objects is joined by a finite zigzag of morphisms,
-and the residue total inherits its zigzags through this span from the action that produced it:
-$\int_{\mathcal B}\mathcal R_A$ is a connected action groupoid. Concretely, the element's
+\textup{(}\texttt{AsectionCResidueInclusionTotal}, the Grothendieck functoriality of $\iota_A$;
+in Lean \texttt{CategoryTheory.Grothendieck.map} applied to it\textup{)}. There it is full and
+faithful \textup{(}\texttt{AsectionCResidueInclusionTotal\_full},
+\texttt{AsectionCResidueInclusionTotal\_faithful}\textup{)}, hence an isomorphism onto its
+image; the C-residue system is therefore the image itself, carrying the total's own morphisms
+and nothing added.
+
+Both are action groupoids, and that is the register in which the conclusion is read. The base
+is the projective action groupoid; each fibre is the action groupoid of the $\Gtwo$-action on
+its value states; the total of an action-groupoid-valued diagram over an action groupoid is
+again one, formed from the distinguished element. Transitivity of $\iota_A$ therefore means
+what it means for an action groupoid --- any two of its objects are joined by a single
+element --- and for such a groupoid transitive and connected are one statement, since the
+orbit is the connected component and the stabilizer is the endomorphism monoid at a point
+\textup{(}\texttt{CategoryTheory.ActionCategory.stabilizerIsoEnd}\textup{)}.
+
+$\int_{\mathcal B}\mathcal R_A$ is a connected action groupoid. The element's
 unique tame continuous lift runs the members into one another while fixing the real level, a
 difference of winding being purely vertical \textup{(}Lemma~\ref{lem:exp-degenerate}\textup{)}.
 
