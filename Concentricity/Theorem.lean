@@ -432,30 +432,6 @@ instance ASection.AsectionCResidueInclusionTotal_full (A : ASection) :
     show 𝟙 _ ≫ 𝟙 _ ≫ φ.fiber = φ.fiber
     simp
 
-/-- **THE 0-TO-N SPAN — ONE FRAME, ONE CENTER** (the author, 2026-07-29,
-pithily): *"Everything has to spin outwards from one real axis, and all
-the 2-spheres have to assemble in 𝕆*, and then the unique GPV winding and
-continuous lift fixes those 0 and N levels, so that very spinning pins
-the north frame and origin frame as ONE frame with ONE center."*  The
-span is one morphism of the total between the element's two faces —
-Euler's at the 0 level, Weierstrass's at N, both fixed-point certificates
-green (`distinguishedDiskAction_fixes_cayley_zero`, `_N`) — at the one
-pinned frame; the `d = 1` instantiation (the native member of the
-certified all-`d` family, `ASectionCResidueDiagram.lean:74`) is what made
-`ι_A` well defined there.  Body: the chase of the `d = 1` positioned
-square, the two face certificates, and the unique lift's closed tape.
-Its level face is the lift's level law — row 12's fact. -/
-theorem ASection.eulerWeierstrassSpan (A : ASection) :
-    Nonempty ((⟨projectiveNorth,
-        AsectionActionState.ofCoordinate A projectiveNorth baseWorld
-          (GreatCircle.cayleyCoord ((0 : ℝ) : GreatCircle.Point))⟩ :
-      Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
-    ⟨projectiveNorth,
-        AsectionActionState.ofCoordinate A projectiveNorth baseWorld
-          (GreatCircle.cayleyCoord
-            (OnePoint.infty : GreatCircle.Point))⟩) := by
-  sorry
-
 /-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
 equivariant functor — which is part of the construction of `ι_A` — is
 transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
