@@ -397,6 +397,17 @@ Declaration 1 at `57384ae`) are consumed here and nowhere lower. -/
 theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     ∀ P Q : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
       Nonempty (P ⟶ Q) := by
+  intro P Q
+  -- The author's chain, and nothing else (2026-07-29): the sweep and its
+  -- naturality (ASectionEquivariant.lean:29-44); every fibre of F_A is
+  -- the sweep's graph, by rfl (ASectionFunctor.lean:437, :1003); ι_A is
+  -- that same action restricted, membership travelling by composition,
+  -- naturality identity (ASectionCResidueDiagram.lean:76-96, :166-168);
+  -- and IsCResidueState's own definition — every member carries the
+  -- witness of the action that produced it.
+  obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
+  obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
+  refine ⟨?_⟩
   sorry
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
