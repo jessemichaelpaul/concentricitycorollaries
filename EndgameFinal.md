@@ -43,31 +43,7 @@ thing that carries the transitivity, and then reports that the corners don't lin
 **The objects hand over their own data.** `IsCResidueState` (`ASectionCResidueInverseImage.lean:60`)
 says a member **is** a transport-image of a north member — each object arrives carrying a north
 square and the base arrow that produced it. Nothing is chosen (the author: *"there are no
-choices"*) — and the joining element itself is the unique GPV lift the square already carries;
-see ⭐ below, which is the author's sentence and governs.
-
-## ⭐ THE JOINING ELEMENT IS INSIDE EVERY SQUARE — the author, 2026-07-29
-
-> **"Because the unique GPV lift is inside every square for `ι_A`."**
-
-Master `:1205`: *"slice-preserving theory yields the unique continuous winding lift each transport
-carries."* Master `:1267`: *"the element's unique tame continuous lift is what runs the members
-into one another while fixing the real level, a difference of winding being purely vertical
-(`lem:exp-degenerate`)."*
-
-**The lift is already in the object.** It is not searched for. It is not chosen — it is *unique*.
-It is not transported in from anywhere — **each square of `ι_A` carries it**. That is what makes
-`ι_A` a transitive action groupoid, and it is why both mechanisms are present in **one** element
-without ever being two parts: the square holds the lift, and the lift is what runs the members
-into one another.
-
-**The same lift fixes the real level.** That is why the level clause is the same movement's
-reading and never a second seat.
-
-**Any goal that asks for a morphism to be produced somewhere other than from the objects' own
-squares has left the author's argument.** (Receipt: `b823aa1` — a goal posed in `T_A` instead,
-and the author's verdict on it: *"the key giveaway that this is definitely wrong — the upstairs
-arrow."*)
+choices"*): the joining element is the unique GPV lift the square already carries.
 
 ## What Mathlib supplies, and what only the author's construction can
 
@@ -95,7 +71,7 @@ second location, sent the term to `T_A` (the total over **all** states), and pos
 harder than the lemma and stripped of the fact that the members are C-residue members. It was the
 decomposition failure mode again, given false authority by attaching the master's phrase to it:
 the master transports the **instance**, the property — not an individual morphism fetched from a
-larger category. **The mathematics is at ⭐ THE JOINING ELEMENT IS INSIDE EVERY SQUARE, above.**
+larger category. The author: **the unique GPV lift is inside every square for `ι_A`** — nothing is fetched from anywhere.
 
 ---
 
