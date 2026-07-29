@@ -397,34 +397,16 @@ Declaration 1 at `57384ae`) are consumed here and nowhere lower. -/
 theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     ∀ P Q : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
       Nonempty (P ⟶ Q) := by
+  -- THE HALF-SQUARE STRIKE executed (the author, banked at 87773fe): the
+  -- base-fixed, fibre-only board is out — it demanded a single fibre map
+  -- between zero spheres, which the author's mathematics says will never
+  -- exist; the spheres are connected by the continuum of maps the
+  -- equivariant build carries, and the collapse happens at ∫𝓡_A by
+  -- 8.3.5.  The seat re-runs at ι_A's own level: the certified inclusion
+  -- (57384ae — a PREMISE, never an open fact) consumed whole.
   intro P Q
-  -- The author's chain, and nothing else (2026-07-29): the sweep and its
-  -- naturality (ASectionEquivariant.lean:29-44); every fibre of F_A is
-  -- the sweep's graph, by rfl (ASectionFunctor.lean:437, :1003); ι_A is
-  -- that same action restricted, membership travelling by composition,
-  -- naturality identity (ASectionCResidueDiagram.lean:76-96, :166-168);
-  -- and IsCResidueState's own definition — every member carries the
-  -- witness of the action that produced it.
-  obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
-  obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-  -- The action's reach at its own outputs, every supplier bound while the
-  -- goal is the author's Nonempty: the sweep that produced the members,
-  -- the graph identity by rfl, the enumeration's indices, the tape at
-  -- each index into the common chart with its level face.
-  have hsweep := A.AsectionEquivariant
-  have hgraph := AsectionState_input_then_equivariant A
-  obtain ⟨zx, hzxmem, hzxeq⟩ := hxN
-  obtain ⟨zy, hzymem, hzyeq⟩ := hyN
-  obtain ⟨n, hn⟩ := (mem_CResidueZeroLocus_iff_exists_sphereZero A zx).mp hzxmem
-  obtain ⟨m, hm⟩ := (mem_CResidueZeroLocus_iff_exists_sphereZero A zy).mp hzymem
-  have htapen := A.normalizedNActionSquare n baseWorld
-  have htapem := A.normalizedNActionSquare m baseWorld
-  have hleveln := A.normalizedNActionSquare_level n baseWorld
-  have hlevelm := A.normalizedNActionSquare_level m baseWorld
-  -- The bridge: the witnesses' own base leg; the fibre leg pulled back
-  -- through iota_A at its own name.
-  refine ⟨⟨CategoryTheory.Groupoid.inv g ≫ h,
-    ((AsectionCResidueInclusion A).app Q.base).preimage ?_⟩⟩
+  have hiota := AsectionCResidueInclusion A
+  have hff := ASection.AsectionCResidueInclusion_app_fullyFaithful A
   sorry
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
