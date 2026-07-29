@@ -624,6 +624,32 @@ this one movement, never stations of a sequence.
   Commit on green. **Per-commit tripwire: delete every bound premise — if the term still
   elaborates, it is not consumed; do not commit.**
 
+**🔓 THE CARRIER QUESTION, DISSOLVED (the author, 2026-07-29, answering the routed print
+verbatim):** the driving hand routed one open datum — an equivalence
+`e : ActionCategory G2 SphereWorld ≌ ∫𝓡_A` — and asked for "the members' ActionCategory
+carrier, by name." The author's answer: **"IT IS NOT OVER SPHERE WORLD. IT IS OVER MY C-RESIDUE
+SYSTEM. MY C-RESIDUE SYSTEM IS ι_A IS ∫𝓡_A."** There is **no equivalence to build and no
+carrier to name**: the system is not `ActionCategory`-presented *by* some other carrier — **the
+system IS the object**. `∫𝓡_A` is the action groupoid of the distinguished action on the
+members BY CONSTRUCTION (the ⬛ section above: both levels literal `ActionCategory`s,
+`@[reducible]`, certified `02b5fd3` — *"it is not something to add"*). Every hunt for a source
+category to transport from is the same leg-search: the instantiations go **on `∫𝓡_A`
+directly** — pretransitive on the inverse image = any two members joined by one arrow of the
+system = THE RESULT's exact statement, already stated at `Theorem.lean:397`; `IsConnected`
+consumes it at the whole system. The `e` in the print was the probe's own detour, not a datum
+the movement owes.
+
+**⚡ THE INSTANTIATION ORDER (the author, 2026-07-29, dictated — supersedes every other reading
+of the movement):** *"PRETRANSITIVE ON THE INVERSE IMAGE, then ISCONNECTED — ALWAYS AT THE LEVEL
+OF THE WHOLE C-RESIDUE SYSTEM — then by 8.3.5, π₀(∫𝓡_A) = colim(π₀ ∘ 𝓡_A) IS A SINGLETON"* —
+then the corollaries. Two **instantiations**, in that order, at the system's own level: (1) the
+pretransitivity **instance on the inverse image** (the members, whole — G₂-closed by
+sphere-blindness, master `:913-915`); (2) `IsConnected` instantiated from it at the whole
+system; (3) 8.3.5 + `pi0GrothendieckEquiv` read the singleton (already closing on contact);
+(4) `nontrivial_one_centre` + `zeta_riemannHypothesis`. THE RESULT's statement
+(`sweepTransitive_on_residueSystem`, `9d43a4f`) is the sentence these instantiations prove —
+never proved member-pair by member-pair.
+
 **THE TRANSPORT'S LEAN NAME, kernel-fixed (Opus's probe, 2026-07-29):**
 `isConnected_of_equivalent` (`IsConnected.lean:262`) **is** *"transported along ι_A's proper
 inclusion"* — it carries `IsConnected` from a source category across an equivalence. The
