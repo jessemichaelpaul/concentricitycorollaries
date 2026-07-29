@@ -271,20 +271,24 @@ are *in this document* (the register list above) and in `RelevantGreenFinal.md` 
 not hunted**. §1's surface stands unchanged; a request to widen it in order to "find" the sweep is
 the request §"Widen the surface" already answers.
 
-**The carrier (the author, 2026-07-28 night — superseding the earlier text of this paragraph):
-all of `A.AsectionState`.** His words: *"it already is on all, because the image of my C-residue
-S⁶ spheres is all of them… they're zeros, so that's all of them, and the inverse image is over
-the groupoid."* The earlier text here declared the global statement false — **that was a
-model-authored prohibition, never typed** (the register/80 shape again), struck by the standing
-rule: kernel-test, never grep-freeze. Probe receipts (Opus, tonight): `instSMulG2` and
-`instMulActionG2` are **registered** on exactly this pair — the action data already lives on the
-carrier; `IsPretransitive G2 A.AsectionState` is the **single missing head**, no subtype, no
-`Set` coercion, no new carrier. The term: the April theorem
-(`G2.exists_smul_eq_of_mem_unitImaginarySphere`) read at the carrier **through the sweep**
-(`AsectionEquivariant`) by the definitional identification the master states. If the kernel prints
-a residual goal, it routes to the author verbatim — the
-kernel settles the carrier, never a document paragraph. One orbit means **any member to any
-member**: no anchor point — north and `0` are both inside the orbit and neither is privileged.
+**The carrier — SETTLED BY THE KERNEL at Leg 1 (2026-07-28 night), exactly as this paragraph
+promised it would be.** The raw head `IsPretransitive G2 A.AsectionState` was typed (scratchpad
+probe, tree clean) and the kernel answered with two prints: the residual goal `⊢ xc = yc`, and
+the fused instance's definition (`ASectionFunctor.lean:64`): `smul g x = {world := g • x.world,
+coordinate := x.coordinate}` — `G₂` moves the world, the coordinate passes through unchanged.
+**That head cannot close under any term shape — and it was never the author's sentence. It was a
+model compression** (the probe posed the raw pair; the ratification followed; the author's "on
+all" answered our question as we posed it). The author's explanation, on the record: *"the
+`distinguishedDiskAction` and `AsectionEquivariant` — **TOGETHER** — sweep out `ι_A` `∫𝓡_A` …
+you can't just say 'G₂ is transitive on S⁶' — **you have to apply it to the object**."* The
+subject of Declaration 0 is **the distinguished action** — the master's arrow dictionary: an
+arrow of the total is *"one element of the distinguished action, presented by its base part and
+its value-transport part"* — applied to the members, where *"the residue states form a single
+orbit under the action that produced them."* Positive receipt from the same probe: **the S⁶ leg
+fires** — `Subtype.ext hg` closed the world leg on the April theorem verbatim. The Lean spelling
+of the head is typed at the typing turn from these sentences and routed print by print — it is
+not authored in this document. One orbit means **any member to any member**: no anchor point —
+north and `0` are both inside the orbit and neither is privileged.
 
 **Why "inference: none" is exact (the author's congruence ruling, 2026-07-28 night):** the S⁶
 leg enters **by definition, not by derivation**. The preimage IS the C-residue locus
@@ -296,8 +300,16 @@ INSTANTIATION (the already-proved theorem read on it) — at no point is transit
 A stalled hand re-finds the S⁶-image reading here, inside this rung: it is the fibre-leg
 supplier, never a second route.
 
-**Kind: DECLARATION + INSTANTIATION** — state at the named carrier, consume the green suppliers,
-register as `instance` so `:128`'s hypothesis resolves. Inference: none.
+**⛔ THE PRE-TYPED CONCLUSIONS ARE NOT SUPPLIERS (elicited 2026-07-28 night):**
+`sphereWorld_zigzag` (`SliceSphereWorld.lean:288` — its docstring: *"π₀(𝒮₂) is a single
+component"*) and `concentricityReadout` (`ConcentricityReadout.lean:141`) are conclusion-shaped
+declarations at `𝒮₂` — the slice world, **not `ι_A`** — typed ahead of time. Receipt: **neither
+is consumed by `ASection.concentricity` nor by the corollaries** (`Corollaries.lean`:
+*"`ASection.concentricity`, nothing else"*; Theorem.lean's one mention is a comment). They are
+the lure every stalled hand has reached for. Banned as suppliers for every seat.
+
+**Kind: DECLARATION + INSTANTIATION** — state the author's sentence, consume the green suppliers,
+register so `:128`'s hypothesis resolves. Inference: none.
 
 ### Declaration 1 — `ι_A` is full and faithful; `𝓡_A` is definitionally its own image
 
@@ -502,12 +514,13 @@ because the seats change shape once the transitivity instance is registered, and
 before that is a goal from the old route.
 
 **The locked classification (the pre-flight's answer):** DECLARATIONS — one remains to add, Decl 0
-(`IsPretransitive G2 A.AsectionState` — the author's carrier, all of it; grep receipt: zero
-instances with that head anywhere in `Concentricity/`, while `instSMulG2`/`instMulActionG2` are
-registered on exactly that pair);
+(the subject: **the distinguished action's transitivity on the members** — the element + the sweep
+TOGETHER, applied to the object; the raw `G₂`-alone head was typed at Leg 1 and **kernel-settled:
+cannot close** — receipt in Declaration 0's carrier paragraph; the Lean spelling is typed at the
+turn from the master's sentences);
 Decl 1 is GREEN in the tree (`bb02b54`, `Theorem.lean:310–323`); Decl 2 is stated and registered
-(probe receipt `2b11128`), only its seat open. INSTANTIATIONS — Decl 0's term (`thm:G2-S6` read at
-the author's carrier **through `AsectionEquivariant`** — up to the sweep, never down to the
+(probe receipt `2b11128`), only its seat open. INSTANTIATIONS — Decl 0's term (`thm:G2-S6`
+**applied to the object** through `AsectionEquivariant` — up to the sweep, never down to the
 element — then registered; the probe flip is the receipt); seat A
 (consume Decls 0+1 at the `Action.lean:128` shape — one arrow); seat B (the level law read on one
 arrow — an arrow IS one element, `hom_as_subtype` — the master's own sentence: *"conserved along
@@ -542,7 +555,7 @@ the author**, do not start typing candidates.
 
 | | declaration | seat | kind |
 |---|---|---|---|
-| **0** | `IsPretransitive G2 A.AsectionState` (the author's carrier — all of it), registered as `instance`; supplied by `thm:G2-S6` **via `AsectionEquivariant`** | not yet in the tree | declaration + instantiation |
+| **0** | the distinguished action's transitivity on the members — element + sweep **TOGETHER**, `thm:G2-S6` **applied to the object** via `AsectionEquivariant` (raw `G₂`-alone head kernel-settled at Leg 1: cannot close; spelling typed at the turn) | not yet in the tree | declaration + instantiation |
 | **1** | `ι_A` full + faithful at `ι_A`'s name | ✅ green, `bb02b54` | wiring |
 | **2** | `∫𝓡_A` `IsConnected` | `instance` registered; seat open | instantiation |
 | — | level conservation | seat open | instantiation |
@@ -557,12 +570,15 @@ and it is the only one that has ever found a real gap here.
 down to arrows."* A stalled term exits upward — to the functor, the instance, the class, the
 sweep — never downward to a group element, a coordinate, or an individual arrow.**
 
-1. **Leg 1 — Declaration 0.** One `instance` line: `IsPretransitive G2 A.AsectionState`. Term:
-   `thm:G2-S6` (`G2.exists_smul_eq_of_mem_unitImaginarySphere`, `G2.lean:194`) read at the
-   carrier **through `AsectionEquivariant`** — up to the sweep, never down to the element. If the
-   kernel prints identification residue, that is **expected wiring** (the congruence ruling: the
-   S⁶ leg is definitional) — type it or route it verbatim; never report it as mathematics.
-   Receipt: the `infer_instance` flip. Focused build; commit.
+1. **Leg 1 — Declaration 0.** The subject: **the distinguished action on the members** — the
+   element + the sweep TOGETHER. The raw head `IsPretransitive G2 A.AsectionState` is
+   **kernel-settled: cannot close** (the fused instance carries the coordinate through — receipt
+   in Declaration 0's carrier paragraph); do not retype it. Type from the master's finale:
+   `thm:G2-S6` (`G2.lean:194`) **applied to the object** through `AsectionEquivariant`; the base
+   part positioned by orbit representatives; membership travels by composition; the S⁶ leg's
+   discharge (`Subtype.ext hg`) is a verified receipt. Route every print verbatim — never a
+   menu, never a field-split of the author's structure, never `sphereWorld_zigzag`. Receipt: the
+   registration probe flip at the typed head. Focused build; commit.
 2. **Leg 2 — Seat A (`:342`), re-read from the kernel only now.** The goal changes shape once
    Declaration 0 registers. Expected closure: **one arrow at `Action.lean:128`'s shape**,
    Declaration 1 already bound in context — transitivity, inside `ι_A`'s register, the whole

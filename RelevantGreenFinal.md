@@ -62,7 +62,11 @@ the quarantined `ASectionTotalPreflights.lean:172`.*
 
 ## Transitivity and the sphere world
 
-`G2.exists_smul_eq_of_mem_unitImaginarySphere` · `sphereWorld_zigzag`
+`G2.exists_smul_eq_of_mem_unitImaginarySphere` · `sphereWorld_zigzag` — **register label
+(2026-07-28 night): `sphereWorld_zigzag` is a `𝒮₂`/slice-world fact** (`SliceSphereWorld.lean:288`,
+honest inside: one hom from the April theorem) — **the conclusion's shape at the wrong object for
+the seats; consumed by no certificate** (`Corollaries.lean` cites `ASection.concentricity`,
+nothing else); never a supplier for the seats
 
 ## Downstream, already proved
 
@@ -96,8 +100,11 @@ as written. The corollary layer is wired and waiting.
 One movement, two seats, both in `Theorem.lean` (step-0 receipt at `141fcc0`):
 `ASection.residueTotal_isConnected` (seat A, `:342` — Declaration 2's consumption) and the level
 clause inside `ASection.concentricity` (seat B, `:419`). They carry `sorryAx` until they close,
-and that propagates arithmetically to the corollaries. Declaration 0
-(`IsPretransitive G2 A.AsectionState`) is the one declaration not yet in the tree — its
-suppliers are green above, and its **route** is `AsectionEquivariant` (`ASectionEquivariant.lean:43`,
-the sweep): `thm:G2-S6` reaches the states by moving **up** to the equivariant functor, never down
-to `distinguishedDiskAction`. Nothing else in the repository is open.
+and that propagates arithmetically to the corollaries. Declaration 0 is the one declaration not
+yet in the tree. **Its raw-pair head (`IsPretransitive G2 A.AsectionState`) was kernel-settled at
+Leg 1 — cannot close: the fused instance (`ASectionFunctor.lean:64`) carries the coordinate
+through, residual `⊢ xc = yc`.** The subject is **the distinguished action on the members** — the
+element + the sweep TOGETHER (the author: *"you can't just say G₂ — you have to apply it to the
+object"*); `thm:G2-S6` reaches the members **through** `AsectionEquivariant`
+(`ASectionEquivariant.lean:43`); the Lean spelling is typed at the typing turn from the master's
+finale. Its suppliers are green above. Nothing else in the repository is open.
