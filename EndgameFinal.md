@@ -123,22 +123,6 @@ that produced it. Choice never enters.
 **Lean:** `IsCResidueState` (`ASectionCResidueInverseImage.lean:60`) —
 `∃ xN, IsNorthCResidueState A xN ∧ ∃ g : projectiveNorth ⟶ X, (AsectionActionTransport A g).obj xN = x`.
 
-### "`distinguishedDiskAction` and A equivariant functor is simultaneously a function, a group element, and a functor for action groupoids"
-
-**Precisely:** one datum at three registers, each with its own green name — a Möbius element, the
-element positioned at a frame, and a functor on the octonionic action groupoid. **A term may
-consume any of the three; it may not manufacture a fourth.**
-**Lean:** `distinguishedDiskAction` · `projectiveObjectFrame` · `projectiveObjectFrame_north` ·
-`projectiveArrowElement` · `AsectionEquivariant : H1 ⥤ H1` (`ASectionEquivariant.lean:43`) ·
-`AsectionEquivariant_map_val` (`rfl`: retains the same `G₂` element).
-
-### "BUT we want a transitive *action groupoid*"
-
-**Precisely:** the target is a property of a **category**, not of a group action. Mathlib's
-group-level notion (`MulAction.IsPretransitive`, consumed by `Action.lean:128`) is a *different
-statement*, kernel-settled as unclosable on the raw states. **The groupoid notion names no group at
-all.**
-
 ### "any two projective squares in the C-residue image (the *objects* of `∫𝓡_A`) can be connected by a groupoid element (a morphism)"
 
 **Precisely:** `∀ P Q : ∫𝓡_A, Nonempty (P ⟶ Q)`. Objects are `⟨X, x⟩` — a base position and a
@@ -155,21 +139,26 @@ mathematics: a term fills both, and what is struck is sourcing them from two ind
 
 ### "any two square frames are connected by the same morphisms that built that functor"
 
-**Precisely — and this is the supplier:** `𝓡_A`'s action on arrows **is** `F_A`'s, restricted.
-**Lean:** `AsectionCResidueTransport A f := (IsCResidueState Y).lift ((IsCResidueState X).ι ⋙ AsectionActionTransport f) _`
-(`ASectionCResidueDiagram.lean:76`), over
-`AsectionActionTransport A f := (orbitStabilizerActionSquare f).actionStateTransport`.
-**Mathlib:** `ObjectProperty.lift` (`FullSubcategory.lean:161`), `ObjectProperty.ι` (`:58`).
+**At the total, and this is the supplier:** a morphism of `𝓡_A(X)` **is** a morphism of `F_A(X)` —
+same base leg, same value transport. `ι_A` introduces nothing at the inverse image; it carries each
+morphism across unchanged.
+**Lean:** `Grothendieck.Hom` is the morphism at both totals, and
+`Grothendieck.map (Functor.whiskerRight (AsectionCResidueInclusion A) Grpd.forgetToCat)` is what
+carries one to the other.
+**Mathlib:** `Grothendieck.Hom` (`Grothendieck.lean:86`) · `Grothendieck.map` (`:242`) ·
+`Grothendieck.functor_comp_forget` (`:269`).
 
 ### "a transitive action groupoid whose fully faithful image is `∫𝓡_A`"
 
-**Precisely:** `ι_A` is full and faithful componentwise and `𝓡_A` is definitionally its own image,
-so `Grothendieck.map (Functor.whiskerRight ι_A Grpd.forgetToCat)` is an isomorphism onto its image
-inside `T_A` (§0).
-**Lean:** `AsectionCResidueInclusion_app_fullyFaithful` / `…_app_full` / `…_app_faithful`
-(`Theorem.lean:372`, `:377`, `:382`, `bb02b54`).
-**Mathlib:** `fullyFaithfulι` · `full_ι` (`:98`) · `faithful_ι` (`:99`) · `ι_obj` = `rfl` (`:62`) ·
-`liftCompιIso` = `Iso.refl` (`:167`).
+**At the total:** `Grothendieck.map (Functor.whiskerRight (AsectionCResidueInclusion A) Grpd.forgetToCat)`
+is an isomorphism onto its image inside `F_A(X)` — the inverse image sits in the total as itself,
+nothing collapsed and nothing added.
+**Certified:** `AsectionCResidueInclusion_app_fullyFaithful` / `…_app_full` / `…_app_faithful`
+(`Theorem.lean:372`, `:377`, `:382`, `bb02b54`), on exactly the three foundations.
+**Registration note, kernel-elicited 2026-07-29:** the *total-level* heads `.Full` and `.Faithful`
+for that functor **fail to synthesize** — they are not registered anywhere in the tree. That is a
+fact about the name, not the object: the same empty shelf that hid Declaration 1 under `ι` instead
+of `ι_A`'s own name until `bb02b54`.
 
 ### "connectedness for an action groupoid … on real value transports"
 
