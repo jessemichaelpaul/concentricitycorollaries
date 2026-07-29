@@ -15,7 +15,7 @@ history.**
 
 ```text
 Concentricity/Theorem.lean:397   ASection.sweepTransitive_on_residueSystem   -- the term
-Concentricity/Theorem.lean:454   the level clause inside ASection.concentricity
+Concentricity/Theorem.lean:480   the level clause inside ASection.concentricity
 ```
 
 Two `sorry`s in one file. **Nothing else in the repository is open.**
@@ -42,8 +42,9 @@ thing that carries the transitivity, and then reports that the corners don't lin
 
 **The objects hand over their own data.** `IsCResidueState` (`ASectionCResidueInverseImage.lean:60`)
 says a member **is** a transport-image of a north member — each object arrives carrying a north
-square and the base arrow that produced it. The joining element is **read off the two witnesses**.
-Nothing is chosen (the author: *"there are no choices"*).
+square and the base arrow that produced it. Nothing is chosen (the author: *"there are no
+choices"*) — and the joining element itself is the unique GPV lift the square already carries;
+see ⭐ below, which is the author's sentence and governs.
 
 ## ⭐ THE JOINING ELEMENT IS INSIDE EVERY SQUARE — the author, 2026-07-29
 
