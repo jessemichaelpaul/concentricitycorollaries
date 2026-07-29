@@ -481,6 +481,18 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- total's own morphisms — one groupoid element, both functors present.
   obtain ⟨φ⟩ : Nonempty ((AsectionCResidueInclusionTotal A).obj P ⟶
       (AsectionCResidueInclusionTotal A).obj Q) := by
+    -- The lemma just needs the morphism ι_A (the author, 2026-07-29):
+    -- two arbitrary 0-N frames connected by a morphism, hence transitive.
+    -- ι_A bound whole — the total reading (b073d88), the componentwise
+    -- presentation with naturality rfl (57384ae).
+    -- The author, verbatim (2026-07-29): "let square 𝓡_A and square 𝓡̄_A
+    -- be two arbitrary objects of the total C-residue system in the
+    -- Grothendieck construction ∫𝓡_A, then show we can connect them with
+    -- ι_A."  The two squares are P and Q; their images are the endpoints;
+    -- the connection is ι_A's own — the total reading (b073d88), the
+    -- naturality rfl (57384ae) — nothing else added.
+    have hiota := AsectionCResidueInclusionTotal A
+    have hnat := AsectionCResidueInclusion A
     sorry
   exact ⟨(AsectionCResidueInclusionTotal A).preimage φ⟩
 
