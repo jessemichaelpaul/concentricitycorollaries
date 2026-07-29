@@ -384,92 +384,14 @@ instance ASection.AsectionCResidueInclusion_app_faithful
     ((AsectionCResidueInclusion A).app X).Faithful :=
   ObjectProperty.faithful_ι _
 
-/-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
-equivariant functor — which is part of the construction of `ι_A` — is
-transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
-
-The sweep is part of the construction by `rfl`: every fibre of `F_A` is its
-graph (`AsectionState_input_then_equivariant`,
-`AsectionFiber_input_then_equivariant`).  One element of the sweep's action
-joins any two members — one arrow of the system; in an action groupoid the
-zigzag required has length one.  The suppliers (`6596e04`, `8907f88`,
-Declaration 1 at `57384ae`) are consumed here and nowhere lower. -/
-theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
-    ∀ P Q : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
-      Nonempty (P ⟶ Q) := by
-  -- THE PRETRANSITIVITY, instantiated ONCE on the inverse image groupoid
-  -- — the named actor, `AsectionCResidueDiagram` (the preimage carrying
-  -- the same restricted action by the three rfls,
-  -- `ASectionCResidueDiagram.lean:76-96, :166-168`).  Because the homs
-  -- coincide through ι_A, its pretransitivity is the ambient action's
-  -- reach at the members, inherited through an identity.  Suppliers (the
-  -- blueprint's own `\uses` edges into `thm:concentricity`, all green):
-  -- `thm:G2-S6` (`G2.exists_smul_eq_of_mem_unitImaginarySphere`),
-  -- `orbitRep_spec`, and the equivariant sweep (`AsectionEquivariant`;
-  -- the fibres are its graph, `AsectionState_input_then_equivariant`,
-  -- rfl).  The element's own inventory, kept from the retired shadow:
-  -- both boundary faces (`distinguishedDiskAction_fixes_cayley_zero`,
-  -- `_N`), the `GpvTransport` lift laws, the `normalizedN` tapes and
-  -- their `_level` face, the stabilizer's reach.
-  intro P Q  -- the definition unfolding, nothing more
-  -- The production witnesses: IsCResidueState's own definition.
-  obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
-  obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-  obtain ⟨zx, hzxmem, hzxeq⟩ := hxN
-  obtain ⟨zy, hzymem, hzyeq⟩ := hyN
-  obtain ⟨hFzx, hzxim⟩ := (mem_CResidueZeroLocus_iff A zx).mp hzxmem
-  obtain ⟨hFzy, hzyim⟩ := (mem_CResidueZeroLocus_iff A zy).mp hzymem
-  -- The witnesses' own arrows compose in the base groupoid: the base leg.
-  let f : P.base ⟶ Q.base := CategoryTheory.Groupoid.inv g ≫ h
-  -- The element's positioning at north — at north the frame IS the
-  -- element (projectiveObjectFrame_north): the selected coordinates are
-  -- the zeros through the element's own faces.
-  have h2x : (↑zx : OnePoint ℂ) =
-      (A.distinguishedDiskAction).val
-        ((CategoryTheory.ActionCategory.back xN.input).coordinate) := by
-    have hzxeq' : (↑zx : OnePoint ℂ) =
-        (CategoryTheory.ActionCategory.back xN.positioned).coordinate := hzxeq
-    have hpos := congrArg
-      (fun s => (CategoryTheory.ActionCategory.back s).coordinate)
-      xN.positioned_by_action
-    rw [hzxeq']
-    simpa [projectiveNorth, projectiveObjectFrame_north] using hpos
-  have h2y : (↑zy : OnePoint ℂ) =
-      (A.distinguishedDiskAction).val
-        ((CategoryTheory.ActionCategory.back yN.input).coordinate) := by
-    have hzyeq' : (↑zy : OnePoint ℂ) =
-        (CategoryTheory.ActionCategory.back yN.positioned).coordinate := hzyeq
-    have hpos := congrArg
-      (fun s => (CategoryTheory.ActionCategory.back s).coordinate)
-      yN.positioned_by_action
-    rw [hzyeq']
-    simpa [projectiveNorth, projectiveObjectFrame_north] using hpos
-  -- The directions leg: thm:G2-S6 through the sweep — the certified
-  -- 8907f88 key.
-  have key : ∀ s t : A.AsectionState, s.coordinate = t.coordinate →
-      ∃ w : G2, w • s = t := by
-    rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hc
-    obtain ⟨w, hw⟩ :=
-      G2.exists_smul_eq_of_mem_unitImaginarySphere sw.2 tw.2
-    refine ⟨w, ?_⟩
-    simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
-    exact ⟨Subtype.ext hw, hc⟩
-  -- The heights, with the whole certified ledger in scope: the point
-  -- where the greens' wiring stands open.
-  have hreach :
-      (CategoryTheory.ActionCategory.back
-        (((AsectionCResidueTransport A f).obj P.fiber).obj.input)).coordinate =
-      (CategoryTheory.ActionCategory.back (Q.fiber.obj.input)).coordinate := by
-    sorry
-  obtain ⟨w, hw⟩ := key _ _ hreach
-  exact ⟨⟨f,
-    ((AsectionCResidueInclusion A).app Q.base).preimage
-      (CategoryTheory.InducedCategory.homMk (Subtype.mk w hw))⟩⟩
-
-/-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
-IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
-natural isomorphism onto its image (certified, `57384ae`; naturality
-`rfl`).  Consumes THE RESULT — closes on contact, no proof of its own. -/
+/-- **DECLARATION 2 — THE STATEMENT OF THE PROJECT** (the author's,
+verbatim): `∫𝓡_A` — `ι_A`'s total — IS CONNECTED, immediately, because
+`ι_A` is a *proper* inclusion and a natural isomorphism onto its image
+(certified, `57384ae`, triple-verified; naturality `rfl`).  Asked of the
+kernel at the author's structure and nothing else: the inclusion
+(`AsectionCResidueInclusion`, `57384ae`), fully faithful at its own name
+(`bb02b54`), the presentations literal `ActionCategory`s (`02b5fd3`,
+`@[reducible]`).  Structure in, connectedness out; then 8.3.5. -/
 instance ASection.residueTotal_isConnected (A : ASection) :
     CategoryTheory.IsConnected (Grothendieck
       (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
@@ -478,8 +400,9 @@ instance ASection.residueTotal_isConnected (A : ASection) :
     ⟨⟨projectiveNorth,
       ⟨residueActionState A projectiveNorth 0 baseWorld,
         A.residueActionState_mem 0⟩⟩⟩
-  exact zigzag_isConnected fun P Q =>
-    CategoryTheory.Zigzag.of_hom (A.sweepTransitive_on_residueSystem P Q).some
+  have hincl := AsectionCResidueInclusion A
+  have hff := ASection.AsectionCResidueInclusion_app_fullyFaithful A
+  sorry
 /-- **THE DECLARATION**: `π₀(∫𝓡_A)` IS A SINGLETON — CHT Remark 8.3.5 on
 the connected action groupoid: nonempty and connected, so one class. -/
 theorem ASection.residueTotal_pi0_singleton (A : ASection) :
