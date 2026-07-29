@@ -588,6 +588,22 @@ well-definedness exists precisely to eliminate choices. The words "choose," "pic
 "design" in the typing hand's plan are the register alarm itself: a choice in the plan means the
 hand has left the author's argument.
 
+**⭐ THE RESULT (the author, 2026-07-29, LOCKED — this is the statement, nothing else is):**
+*"THE A-SECTION EQUIVARIANT FUNCTOR — WHICH IS PART OF THE CONSTRUCTION OF ι_A — IS TRANSITIVE
+ON THE C-RESIDUE SYSTEM `∫𝓡_A`, HENCE `∫𝓡_A` IS CONNECTED."*
+
+**How the sweep is part of the construction, by `rfl` (the well-definition of `F_A(X)`):** the
+fibres are the sweep's **graph** — `AsectionState_input_then_equivariant`
+(`ASectionFunctor.lean:437`): `AsectionStateInput ⋙ AsectionEquivariant = AsectionStateOutput`,
+proved `Functor.ext rfl rfl`; and per fibre `AsectionFiber_input_then_equivariant` (`:1003`):
+*"forgetting the presentation recovers the graph of the original `AsectionEquivariant`."* The
+C-residue system carries this graph structure; `ι_A` includes it certified.
+
+**Point-1 ruling (the author): sweep-facts in isolation are NOT the result.** `6596e04` and
+`8907f88` are *suppliers* — transitivity read at `H1` and at the eye-images. The RESULT is
+transitivity **on the system `∫𝓡_A` itself**, consumed through the graph identities — i.e.
+related to how `F_A(X)` was literally built — and the seat consumes THE RESULT, nothing lower.
+
 **THE MOVEMENT — one, the master's own sentence (`:1263–1267`):** *"the connectedness instance
 of the Lean library's `ActionCategory` **itself**, transported along `ι_A`'s proper inclusion"*
 — then 8.3.5 and the level read on the class. **One consumption.** The lift runs the members
@@ -607,6 +623,17 @@ this one movement, never stations of a sequence.
 - Route every print verbatim; never a menu, never a field-split, never `sphereWorld_zigzag`.
   Commit on green. **Per-commit tripwire: delete every bound premise — if the term still
   elaborates, it is not consumed; do not commit.**
+
+**THE TRANSPORT'S LEAN NAME, kernel-fixed (Opus's probe, 2026-07-29):**
+`isConnected_of_equivalent` (`IsConnected.lean:262`) **is** *"transported along ι_A's proper
+inclusion"* — it carries `IsConnected` from a source category across an equivalence. The
+kernel's own print fixed the order: the source is **the ActionCategory on the members — the
+C-residue system, the thing ι_A is** (never the ambient `ActionCategory G2 A.AsectionState`,
+whose raw head is settled); `:128` fires there from the transitivity already green
+(`8907f88`); Declaration 1 (`57384ae` — `𝓡_A` definitionally its own image) supplies the
+equivalence; `residueTotal_pi0_singleton` and the level read follow as the same movement's
+reading. **The one name to go up into: the members' ActionCategory carrier** — a register, not
+a lemma to request.
 
 **THEN THE CERTIFICATES** (step 6): both together, independently elicited, plus the source scan
 (`sorry`/`admit`/`sorryAx`/`native_decide`/new axioms) and the docs-to-tree match.
