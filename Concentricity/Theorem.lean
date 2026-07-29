@@ -491,9 +491,50 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     -- ι_A."  The two squares are P and Q; their images are the endpoints;
     -- the connection is ι_A's own — the total reading (b073d88), the
     -- naturality rfl (57384ae) — nothing else added.
-    have hiota := AsectionCResidueInclusionTotal A
-    have hnat := AsectionCResidueInclusion A
-    sorry
+    -- THE RATIFIED SENTENCE (the author, 2026-07-29): the join exists
+    -- because of what the members are — directions on the S⁶ spheres
+    -- where G₂ is transitive (the sweep's half, green); frames and
+    -- coordinates linked by the total's own transports with the element
+    -- inside each (the base half, the built morphisms); the stabilizer
+    -- factorization making the composite canonical rather than chosen.
+    -- F_A(X) is NOT transitive — which is why this is a lemma.
+    obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
+    obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
+    -- The base half: the total's own transports over the members' own
+    -- arrows.
+    have hback : (AsectionActionTransport A
+        (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN := by
+      calc (AsectionActionTransport A
+            (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj
+          = (AsectionActionTransport A
+              (CategoryTheory.Groupoid.inv g)).obj
+                ((AsectionActionTransport A g).obj xN) := by rw [hg]
+        _ = (AsectionActionTransport A
+              (g ≫ CategoryTheory.Groupoid.inv g)).obj xN :=
+            (congrArg (fun F => F.obj xN)
+              (AsectionActionTransport_comp A g
+                (CategoryTheory.Groupoid.inv g))).symm
+        _ = xN := by
+            have harrow : g ≫ CategoryTheory.Groupoid.inv g =
+                𝟙 projectiveNorth :=
+              CategoryTheory.Groupoid.comp_inv g
+            rw [harrow, AsectionActionTransport_id]
+            rfl
+    have rideP : (AsectionCResidueInclusionTotal A).obj P ⟶
+        (⟨projectiveNorth, xN⟩ :
+          Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) :=
+      ⟨CategoryTheory.Groupoid.inv g, eqToHom hback⟩
+    have rideQ : (⟨projectiveNorth, yN⟩ :
+          Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
+        (AsectionCResidueInclusionTotal A).obj Q :=
+      ⟨h, eqToHom hh⟩
+    -- The lift's segment between the zeros, with the sweep on the
+    -- directions — where the kernel speaks first (the author's order).
+    have hlift : Nonempty ((⟨projectiveNorth, xN⟩ :
+          Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)) ⟶
+        ⟨projectiveNorth, yN⟩) := by
+      sorry
+    exact ⟨rideP ≫ hlift.some ≫ rideQ⟩
   exact ⟨(AsectionCResidueInclusionTotal A).preimage φ⟩
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
