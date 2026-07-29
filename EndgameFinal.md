@@ -1,12 +1,12 @@
 # EndgameFinal
 
-The one endgame document. It is the author's argument, his words first, then the kernel's receipts.
-Everything that stood here before 2026-07-29 was deleted at his instruction: it had accumulated six
-vintages of model commentary and did not contain the argument.
+The author's argument, then the Lean names it is written in, then the kernel's receipts.
+Rebuilt 2026-07-29 at his instruction. Everything that stood here before was deleted: it had
+accumulated six vintages of model commentary and did not contain the argument.
 
 ---
 
-# THE ARGUMENT — the author, verbatim, 2026-07-29
+# 1 — THE ARGUMENT, the author verbatim (2026-07-29)
 
 > Let me try to explain what I mean. I remember when I first leanred about this theorem, for the
 > longest time I didn't know what connectedness for an action groupoid meant on real value
@@ -24,56 +24,150 @@ vintages of model commentary and did not contain the argument.
 > inside the other way, which is true but it was more precise) AND THAT is what shows this is
 > transitive.
 
-And, on where `∫𝓡_A` lives:
+On where `∫𝓡_A` lives, and what `ι_A` is:
 
 > `\int R_A` isn't "parallel" to `T_A`, it is **INSIDE IT** — the Grothendieck construction is
-> basically a gigantic graph.
+> basically a gigantic graph. … **BUT THAT IS JUST A SUBCATEGORY OF THE GROTHENDIECK CONSTRUCTION
+> AND IT IS A REAL VALUE TRANSPORT — THAT IS WHAT `\iota_A` *IS*** — and any two square frames are
+> connected by **the same morphisms that built that functor**.
 
 ---
 
-# THE ARGUMENT, CLAUSE BY CLAUSE
+# 2 — `∫𝓡_A` IN LEAN — the chain, elicited from the kernel, name by name
 
-**The object is the diagram.** `ι_A : 𝓡_A(X) ⇉ F_A(X)`. That diagram **is** the C-residue system as
-an action groupoid — `∫𝓡_A`. Connectedness on real value transports is read there and nowhere else.
+**This section exists because `∫𝓡_A` keeps getting dropped.** Every line below is a `#print` /
+`#check` output, not a recollection.
 
-**And `∫𝓡_A` is inside `T_A`.** The Grothendieck construction is a gigantic graph; the C-residue
-system is the part of that graph which `ι_A` includes. It is not a second, parallel total to be
-built alongside `T_A` — it is the sub-thing, which is exactly what `ι_A` being a proper inclusion,
-an isomorphism onto its image, says.
+## The base
 
-**Riehl's warning, and the freedom it gives.** We are **free to pick a preimage of whatever we
-want**, because `distinguishedDiskAction` and the A-section equivariant functor are
-**simultaneously a function, a group element, and a functor for action groupoids**. The element
-works on multiple levels at once; no level has to be chosen over another, and no preimage has to be
-justified.
+```lean
+GreatCircle.Base    := ActionCategory GreatCircle.Aut GreatCircle.Point   -- @[reducible]
+GreatCircle.Aut     := Matrix.ProjGenLinGroup (Fin 2) ℝ                   -- PGL(2,ℝ)
+GreatCircle.Point   := OnePoint ℝ
+ASection.projectiveNorth := GreatCircle.pointObj OnePoint.infty
+```
 
-**The two orbit–stabilizers are groups, and groups are not the target.** One runs slice-wise from
-`PGL` to `GL`; the other is the full octonionic image sweep over the normalization, via `G₂`. Both
-are real and both are green. **But the object we want is a transitive *action groupoid*, not a
-transitive group action** — and every failed term in this project has been a group-register term
-under a groupoid-register statement.
+## The state world, and why an object is a square
 
-**Transitive, in this situation, means:** *any two projective squares in the C-residue image — the
-**objects** of `∫𝓡_A` — can be connected by a "groupoid element" (a morphism).* There is no group
-in that sentence.
+```lean
+ASection.AsectionStateWorld A         := ActionCategory G2 A.AsectionState          -- @[reducible]
+ASection.AsectionActionStateWorld A m := InducedCategory A.AsectionStateWorld (·.input)
+ASection.AsectionActionStateFiber A m := Grpd.of (A.AsectionActionStateWorld m)
+ASection.AsectionActionFiber A X      := A.AsectionActionStateFiber (A.projectiveObjectFrame X)
+```
 
-**The key step:** it had to use the **`distinguishedDiskAction` morphism AND the A-section
-equivariant functor BOTH** — and not in the simple "one sits inside the other" way, which is true
-but less precise. **That** is what shows this is transitive.
+`AsectionActionFiber A X` **is** `F_A(X)`. Its objects:
+
+```lean
+structure ASection.AsectionActionState (A : ASection) (m : ↥Moebius) where
+  input               : A.AsectionStateWorld
+  positioned          : A.AsectionStateWorld
+  positioned_by_action : positioned = (A.coordinateTransport m).obj input
+  value               : H1
+  value_realized      : value = A.AsectionStateOutput.obj positioned
+```
+
+**An object is a projective square** — two corners and their constraint faces. `cases` / `mk.injEq`
+on it demolishes the square that carries the transitivity and then reports that the corners do not
+line up. This has happened in four separate costumes.
+
+## The functor `F_A` and its transports — the morphisms that BUILD it
+
+```lean
+ASection.AsectionActionTransport A f := (A.orbitStabilizerActionSquare f).actionStateTransport
+ASection.AsectionActionTransport_id   ·  ASection.AsectionActionTransport_comp
+ASection.AsectionActionDiagram    : ASection → GreatCircle.Base ⥤ Grpd              -- F_A
+```
+
+`AsectionActionTransport` **is** the orbit–stabilizer square's own transport — the real value
+transport. These are "the morphisms that built that functor."
+
+## `T_A` — the gigantic graph
+
+```lean
+ASection.AsectionActionCatDiagram A := A.AsectionActionDiagram ⋙ Grpd.forgetToCat   -- @[reducible]
+ASection.TotalActionStateWorld A    := Grothendieck A.AsectionActionCatDiagram      -- @[reducible]
+```
+
+⚠️ **Note the second line, because a model finding died on it (see §5): `AsectionActionCatDiagram`
+IS `⋙ Grpd.forgetToCat`, reducibly.** So `T_A` unfolds to
+`Grothendieck (AsectionActionDiagram A ⋙ Grpd.forgetToCat)`.
+
+## The C-residue system, **inside** `T_A`
+
+```lean
+ASection.IsNorthCResidueState A : ObjectProperty (AsectionActionFiber A projectiveNorth)
+ASection.IsCResidueState A X    : ObjectProperty (AsectionActionFiber A X) :=
+  fun x => ∃ xN, IsNorthCResidueState A xN ∧
+             ∃ g : projectiveNorth ⟶ X, (AsectionActionTransport A g).obj xN = x
+
+ASection.InverseImageCResidueStateWorldGroupoid A X := (IsCResidueState A X).FullSubcategory
+```
+
+`InverseImageCResidueStateWorldGroupoid A X` **is** `𝓡_A(X)` — a **full subcategory of `F_A(X)`**,
+cut out fibrewise. Not a new carrier; the fibrewise inside-ness that makes `∫𝓡_A` inside `T_A`.
+
+```lean
+ASection.AsectionCResidueTransport A f :=
+  (A.IsCResidueState Y).lift ((A.IsCResidueState X).ι ⋙ A.AsectionActionTransport f) _
+
+ASection.AsectionCResidueDiagram A :=
+  { obj := fun X => Grpd.of (A.InverseImageCResidueStateWorldGroupoid X)
+    map := fun f => A.AsectionCResidueTransport f, map_id := _, map_comp := _ }
+
+ASection.AsectionCResidueInclusion A : A.AsectionCResidueDiagram ⟶ A.AsectionActionDiagram :=
+  { app := fun X => (A.IsCResidueState X).ι, naturality := _ }        -- ι_A, naturality rfl, 57384ae
+```
+
+**Read `AsectionCResidueTransport` carefully — it is the author's sentence in Lean.** `𝓡_A(f)` is
+`AsectionActionTransport f` **restricted**: `ι` in, the value transport applied, `lift` back. The
+morphisms of `𝓡_A` **are** the morphisms that built `F_A`. Nothing new is introduced at the residue
+level; `ι_A` is the inclusion of a real-value-transport subcategory.
+
+## `∫𝓡_A`
+
+```lean
+Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)
+```
+
+The same spelling shape as `T_A` (`⋙ Grpd.forgetToCat`, then `Grothendieck`), with the diagram
+restricted to the C-residue full subcategories. **That is what "inside `T_A`" means in Lean:** same
+base, same transports, objects cut down fibrewise by `IsCResidueState`, arrows the restrictions of
+the same value transports.
+
+Its objects are `⟨X, x⟩` with `X : GreatCircle.Base` and `x : 𝓡_A(X)` — a base position and a
+projective square in the C-residue image. Its morphisms are `Grothendieck.Hom`: a `base` field and a
+`fiber` field. **That is Mathlib's encoding, not a decomposition of the mathematics** — a term must
+fill both, and what is struck is sourcing them from two independent searches.
 
 ---
 
-# THE LEMMA
+# 3 — THE ARGUMENT IN THOSE NAMES
 
-`ι_A` is a transitive action groupoid. This is the single place the author's construction enters the
-chain: no library theorem can supply that two projective squares of the C-residue image are joined,
-because no library knows what a C-residue square is. Everything downstream is already green — one
-morphism gives connectedness (`Zigzag.of_hom`), connectedness with nonemptiness gives the singleton
-(Riehl 8.3.5, `pi0GrothendieckEquiv`), and the level read on the class gives the common centre.
+**The diagram `ι_A : 𝓡_A(X) ⇉ F_A(X)` is the C-residue system as an action groupoid, `∫𝓡_A`.**
+`AsectionCResidueInclusion` is that double arrow; `app X` is `(IsCResidueState A X).ι`.
+
+**Free to pick any preimage** — `distinguishedDiskAction` and `AsectionEquivariant` are
+simultaneously a function, a group element, and a functor for action groupoids. Each object of
+`∫𝓡_A` already carries a preimage in its own membership (`IsCResidueState`: a north square plus the
+base arrow that produced it), so nothing has to be chosen or justified.
+
+**The two orbit–stabilizers are groups, and groups are not the target.** Slice-wise `PGL → GL`
+(`GreatCircle.orbit_stabilizer_factor`, `stabilizerPart_unique`, `projectiveObjectFrame`,
+`projectiveArrowElement`) and the octonionic image sweep over the normalization via `G₂`
+(`AsectionEquivariant`, `G2.exists_smul_eq_of_mem_unitImaginarySphere`). Both green. **The object
+wanted is a transitive *action groupoid*, not a transitive group action.**
+
+**Transitive means:** any two projective squares in the C-residue image — the **objects** of
+`∫𝓡_A` — are connected by one groupoid element. No group appears in that statement.
+
+**The key step uses the `distinguishedDiskAction` morphism AND `AsectionEquivariant` BOTH** — not
+in the simple one-inside-the-other way. And the connecting morphisms are **the same morphisms that
+built the functor**: `AsectionActionTransport`, restricted through `AsectionCResidueTransport`.
 
 ---
 
-# THE KERNEL STATE — elicited 2026-07-29, not recalled
+# 4 — THE KERNEL STATE, elicited 2026-07-29
 
 **Green: 28 declarations on exactly `[propext, Classical.choice, Quot.sound]`. Zero project axioms.**
 
@@ -91,31 +185,20 @@ residueActionState_mem · pi0GrothendieckEquiv · pi0_grothendieck · transportL
 riemannHypothesis_iff_concentric           (independent of everything open; no ½ on its RHS)
 ```
 
-**Carrying `sorryAx`, and only these two:** `ASection.concentricity` and `zeta_riemannHypothesis` —
+**Carrying `sorryAx`, and only these two:** `ASection.concentricity`, `zeta_riemannHypothesis` —
 arithmetic propagation from the open sites, nothing of their own. `Corollaries.lean` compiles
-against `ASection.concentricity` (3,694 jobs): the corollary layer is wired and waiting.
+against `ASection.concentricity` (3,694 jobs).
 
-**Open — two sites in one file.** Re-elicit coordinates at typing time; they have drifted repeatedly.
+**Open — two sites, one file, `Concentricity/Theorem.lean`:** the transitivity term, and the level
+clause inside `ASection.concentricity`. Re-elicit coordinates at typing time; they have drifted
+every session.
 
-```text
-Concentricity/Theorem.lean   the transitivity term
-Concentricity/Theorem.lean   the level clause inside ASection.concentricity
-```
+**Downstream, already wired to consume the transitivity:** `residueTotal_isConnected` closes with
+`Zigzag.of_hom`; `residueTotal_pi0_singleton` closes on that; the level read gives the centre.
 
 ---
 
-# FINDINGS THAT CONSTRAIN THE TYPING — receipts, not opinions
-
-**The objects are squares.** `AsectionActionState A m` is a five-field record: two corners (`input`,
-`positioned`) and their constraint faces (`positioned_by_action`, `value`, `value_realized`). It *is*
-a commuting square. `cases` / `mk.injEq` on it demolishes the thing that carries the transitivity and
-then reports that the corners don't line up.
-
-**`Grothendieck.Hom` has a `base` field and a `fiber` field. That is Mathlib's encoding, not a
-decomposition of the mathematics.** A term must fill both; what is struck is *sourcing them from two
-independent searches*. Both are determined by one datum.
-
-**Shapes the kernel has already ruled out. Do not retype these.**
+# 5 — RULED OUT BY THE KERNEL OR BY THE AUTHOR. Do not retype.
 
 | shape | receipt |
 |---|---|
@@ -123,26 +206,29 @@ independent searches*. Both are determined by one datum.
 | fibre-only join, base fixed | struck twice (`87773fe`, `54c6432`) — demands a single fibre map between distinct zero spheres |
 | base-only join, fibre fixed | the same half-square, other face |
 | `isConnected_of_equivalent` sourced at `ActionCategory G2 A.AsectionState` | typed; `failed to synthesize IsConnected` — the ambient world, not the members |
-| an arrow fetched "upstairs" in `T_A` and carried back down | struck by the author, `b823aa1`: *"the key giveaway that this is definitely wrong — the upstairs arrow."* `∫𝓡_A` is **inside** `T_A` and `𝓡_A` **is** its own image, definitionally — there is no second location to fetch from |
-| a second, parallel Grothendieck total built alongside `T_A` | struck by the author, 2026-07-29: *"it isn't parallel to `T_A`, it is INSIDE IT"* |
+| an arrow fetched "upstairs" in `T_A` and carried back down | author, `b823aa1`: *"the key giveaway that this is definitely wrong — the upstairs arrow."* `∫𝓡_A` is **inside** `T_A`; there is no second location |
+| a second, parallel Grothendieck total alongside `T_A` | author, 2026-07-29: *"it isn't parallel to `T_A`, it is INSIDE IT"* |
+| **"`∫𝓡_A` has no name — `⋙ Grpd.forgetToCat` is a model re-spelling"** — MY FINDING, **FALSE** | `AsectionActionCatDiagram A := AsectionActionDiagram A ⋙ Grpd.forgetToCat`, `@[reducible]`. `T_A` uses the **same** spelling. There was no re-spelling and no missing name; the author: *"that is just a subcategory of the Grothendieck construction, and it is a real value transport — that is what `ι_A` IS"* |
 | `sphereWorld_zigzag`, `concentricityReadout` as suppliers | `𝒮₂` facts, consumed by no certificate |
 
-**One cause under all seven: a group-register term under a groupoid-register statement.**
+**One cause under all of them: a group-register term, or a model-authored object, under a
+groupoid-register statement about the author's object.**
 
 ---
 
-# THE STANCE
+# 6 — THE STANCE
 
-**The kernel is the check.** Three roles: the author supplies the argument, the kernel verifies it,
-the model types between them. Model-side gap-finding has run ~100% false across five threads; the
-kernel has returned zero false verdicts in 3,600+ jobs.
+**The kernel is the check.** The author supplies the argument, the kernel verifies it, the model
+types between them. Model-side gap-finding has run ~100% false across five threads; the kernel has
+returned zero false verdicts in 3,600+ jobs.
 
-**Doubt = type it and see.** There is no other rigorous act available here.
+**Doubt = type it and see.**
 
 - Green is the author's argument. Red is the model's doubt.
 - Never write a prohibition against the author's route.
-- An empty search is a fact about the search.
+- An empty search is a fact about the search. A missing name is a fact about the grep — check
+  whether it is `@[reducible]` to something already there before reporting it (§5, row 7).
 - Cite by file and line, never by name alone.
 - On a stall: route the kernel print to the author **verbatim** — not split, not diagnosed, not
-  characterized — and stop. He decides the next move.
+  characterized — and stop.
 - Never pre-write a commit message for an edit that has not been verified to apply (`cf6a5a8`).
