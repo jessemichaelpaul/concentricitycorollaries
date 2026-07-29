@@ -7,19 +7,31 @@ step consumes. Draft of 2026-07-29; every Lean line is `#print`/`#check` output 
 
 ---
 
-# 0 — THE DISTINCTION THAT MUST NEVER BE DROPPED
+# 0 — WHAT `ι_A` IS, AND WHAT `∫𝓡_A` IS
 
-**`ι_A` is a morphism. `∫𝓡_A` is a category.** In the author's prose they are one subject; in Lean
-they are different *kinds*, and every register slip this project has suffered has passed through
-this gap.
+**The author, 2026-07-29, correcting a model gloss that had been written into this section:**
+
+> It is a natural transformation **OF THE TOTAL GROTHENDIECK CONSTRUCTION**. It is an inverse image
+> **OF** the total `F_A(X)`.
+
+**So `ι_A` lives at the total, not at the diagram.** The struck gloss called it "a natural
+transformation in `GreatCircle.Base ⥤ Grpd`" — that is the *presentation*, the fibrewise
+bookkeeping. What `ι_A` **is** is the inverse image of the total `F_A`, included in that total.
+`∫𝓡_A` is that inverse image, as a category.
 
 | | `ι_A` | `∫𝓡_A` |
 |---|---|---|
-| what it is | a **natural transformation** — a morphism in the functor category `GreatCircle.Base ⥤ Grpd` | a **category** — a `Type` with a `Category` instance |
-| Lean | `ASection.AsectionCResidueInclusion A : A.AsectionCResidueDiagram ⟶ A.AsectionActionDiagram` | `Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)` |
-| its data | at each `X`, the functor `(IsCResidueState A X).ι : 𝓡_A(X) ⥤ F_A(X)`, plus naturality (`rfl`) | objects `⟨base, fiber⟩`; morphisms `Grothendieck.Hom` |
-| what it mentions | **both** `𝓡_A` and `F_A` | **only** `𝓡_A` — `F_A` does not occur in it |
+| what it **is** | the **inverse image of the total `F_A`**, included in it — a natural transformation **of the total Grothendieck construction** | that inverse image **as a category**: a `Type` with a `Category` instance |
+| at the total | `Grothendieck.map (Functor.whiskerRight (AsectionCResidueInclusion A) Grpd.forgetToCat) : ∫𝓡_A ⥤ T_A` | `Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)`, sitting inside `T_A` |
+| its presentation | `AsectionCResidueInclusion A : 𝓡_A ⟶ F_A`, componentwise `(IsCResidueState A X).ι`, naturality `rfl` | objects `⟨base, fiber⟩`; morphisms `Grothendieck.Hom` |
+| kind | a **morphism** | a **category** |
 | can it be `IsConnected`? | **no** — `IsConnected` takes a category | **yes** — this is where connectedness is stated |
+
+**Why the inverse-image reading is the load-bearing one.** `IsCResidueState`
+(`ASectionCResidueInverseImage.lean:60`) is a preimage taken *under the action*: membership is
+`∃ xN, IsNorthCResidueState A xN ∧ ∃ g : projectiveNorth ⟶ X, (AsectionActionTransport A g).obj xN = x`.
+The file's own name says it — `InverseImageCResidueStateWorldGroupoid`. Nothing is cut out by an
+external test after the fact; the base arrow and the action are **part of the preimage itself**.
 
 **Consequence for the open term.** The author's sentence is *"`ι_A` is a transitive action
 groupoid."* In Lean that sentence is **stated about `∫𝓡_A`**:
@@ -31,21 +43,13 @@ groupoid."* In Lean that sentence is **stated about `∫𝓡_A`**:
 **The subject is `ι_A`; the type is `∫𝓡_A`.** Both readings are needed and neither may replace the
 other.
 
-**The bridge, kernel-accepted 2026-07-29** — this is *"`∫𝓡_A` isn't parallel to `T_A`, it is INSIDE
-IT"*, in Lean:
-
-```lean
-Grothendieck.map (Functor.whiskerRight (AsectionCResidueInclusion A) Grpd.forgetToCat)
-  : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)      -- ∫𝓡_A
-  ⥤ Grothendieck (AsectionActionDiagram   A ⋙ Grpd.forgetToCat)      -- T_A
-```
-
-Pins: `Grothendieck.map` (`Grothendieck.lean:242`), `Functor.whiskerRight`,
-`Grpd.forgetToCat` (`Groupoid/Grpd/Basic.lean:77`). Because `ι_A` is full and faithful at each `X`
-(`bb02b54`) and `𝓡_A` is definitionally its own image (`ι_obj` = `rfl`,
-`ObjectProperty/FullSubcategory.lean:62`; `liftCompιIso` = `Iso.refl`, `:167`), **that functor is
-an isomorphism onto its image** — so a property proved of `∫𝓡_A` *is* a property of `ι_A`'s image
-inside `T_A`. That is the author's *"a transitive action groupoid whose fully faithful image is
+**`∫𝓡_A` is INSIDE `T_A`** — *"the Grothendieck construction is basically a gigantic graph"* — and
+the functor above is that inside-ness, kernel-accepted 2026-07-29. Pins: `Grothendieck.map`
+(`Grothendieck.lean:242`), `Functor.whiskerRight`, `Grpd.forgetToCat` (`Grpd/Basic.lean:77`).
+Because `ι_A` is full and faithful at each `X` (`bb02b54`) and `𝓡_A` is definitionally its own
+image (`ι_obj` = `rfl`, `FullSubcategory.lean:62`; `liftCompιIso` = `Iso.refl`, `:167`), that
+functor is an **isomorphism onto its image** — so a property proved of `∫𝓡_A` *is* a property of
+`ι_A`'s image inside `T_A`. That is *"a transitive action groupoid whose fully faithful image is
 `∫𝓡_A`."*
 
 ---
@@ -87,9 +91,10 @@ prose is not replaced; it is pinned.**
 
 ### "the diagram for `ι_A` : `𝓡_A(X) ⇉ F_A(X)`"
 
-**Precisely:** `ι_A` is a natural transformation whose component at `X` is the full-subcategory
-inclusion `(IsCResidueState A X).ι : 𝓡_A(X) ⥤ F_A(X)`, naturality by `rfl`. The double arrow is
-*indexed by the base* — one inclusion per `X`, coherently.
+**Precisely (the author):** a natural transformation **of the total Grothendieck construction** —
+`ι_A` is the **inverse image OF the total `F_A(X)`**, included in that total. Its presentation is
+componentwise: at each `X`, the inclusion `(IsCResidueState A X).ι : 𝓡_A(X) ⥤ F_A(X)`, naturality
+`rfl`. At the total it reads `Grothendieck.map (Functor.whiskerRight ι_A Grpd.forgetToCat)`.
 **Lean:** `AsectionCResidueInclusion` (`ASectionCResidueDiagram.lean:163`, `57384ae`).
 **Mathlib:** `ObjectProperty.ι` (`FullSubcategory.lean:58`), `NatTrans`.
 
@@ -345,7 +350,7 @@ returned zero false verdicts in 3,600+ jobs.
 - Never write a prohibition against the author's route.
 - An empty search is a fact about the search. A missing name is a fact about the grep — check
   whether it is `@[reducible]` to something already present before reporting it.
-- **Never conflate `ι_A` with `∫𝓡_A` (§0).** A statement about one is not a statement about the
+- **Never conflate `ι_A` with `∫𝓡_A`, and never state `ι_A` at the diagram level (§0).** It is a natural transformation OF THE TOTAL — the inverse image of the total `F_A`. A statement about one is not a statement about the
   other, and the identification between them is Declaration 1, not an assumption.
 - Cite by file and line, never by name alone.
 - On a stall: route the kernel print to the author **verbatim** — not split, not diagnosed, not
