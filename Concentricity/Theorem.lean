@@ -411,7 +411,8 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- the witnesses' own arrows composed in the base groupoid — the
   -- carriage, typed and accepted; the fibre leg is the one action's
   -- reach at its own outputs, posed for the kernel.
-  refine ⟨⟨CategoryTheory.Groupoid.inv g ≫ h, ?_⟩⟩
+  refine ⟨⟨CategoryTheory.Groupoid.inv g ≫ h,
+    ((AsectionCResidueInclusion A).app Q.base).preimage ?_⟩⟩
   sorry
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
