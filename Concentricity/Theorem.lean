@@ -405,9 +405,19 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- 8.3.5.  The seat re-runs at ι_A's own level: the certified inclusion
   -- (57384ae — a PREMISE, never an open fact) consumed whole.
   intro P Q
-  have hiota := AsectionCResidueInclusion A
-  have hff := ASection.AsectionCResidueInclusion_app_fullyFaithful A
-  sorry
+  -- THE SIMPLEST PART (the author, verbatim): ∫𝓡_A is a TRANSITIVE
+  -- ACTION GROUPOID BECAUSE F_A(X) — BY CONSTRUCTION EQUIVARIANT
+  -- REALIZE — IS A TRANSITIVE ACTION GROUPOID, hence the inverse image
+  -- is pretransitive.
+  have hfib : ∀ (X : GreatCircle.Base)
+      (x y : AsectionActionFiber A X), Nonempty (x ⟶ y) := by
+    trace_state
+    sorry
+  obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
+  obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
+  exact ⟨⟨CategoryTheory.Groupoid.inv g ≫ h,
+    ((AsectionCResidueInclusion A).app Q.base).preimage
+      (hfib Q.base _ _).some⟩⟩
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
