@@ -766,3 +766,60 @@ plus a source scan clean of `sorry`, `admit`, `sorryAx`, `native_decide`, and an
 the terminal root build and the 0/0 audit.
 
 **Deliver both prints verbatim. Nothing else counts as the report.**
+
+---
+
+## 🧭 THE ASSEMBLY (2026-07-29, elicited from the kernel under the author's execute order)
+
+Every line below is a kernel print or a literal definition read from the tree tonight. Nothing is
+recalled, nothing is invented.
+
+**1. The greens-only chain corners exactly one goal.** The full join term — production witnesses
+unpacked, `ubase = ⟨aQ·aP⁻¹, …⟩` register-native, `harrow` by `Subtype.ext`, transport composition,
+`hjoin` from `G2.exists_smul_eq_of_mem_unitImaginarySphere` — leaves the kernel asking only:
+
+```
+⊢ (ActionCategory.back xNP.input).coordinate = (ActionCategory.back xNQ.input).coordinate
+```
+
+**2. His predicate reduces that goal to locus points.** `IsNorthCResidueState`
+(ASectionCResidueInverseImage.lean:48–54) says the member's positioned coordinate lies in
+`coe '' CResidueZeroLocus`; `mem_CResidueZeroLocus_iff_exists_sphereZero`
+(ASectionCResidue.lean:40) names it `sphereZero n`. Two members at indices `n ≠ m` have different
+coordinates, and the fused `SMul G2` fixes the coordinate — so **G₂ alone never joins distinct
+indices. The join must consume the element's tape.** That is the master's own sentence (:1259):
+*the element's unique tame continuous lift runs the members into one another while fixing the real
+level.* The recurring wall was never a missing fact — it was the tape's seat, unoccupied.
+
+**3. The tape is certified in exactly the needed shape.**
+- `normalizedNActionSquare A n I : ActionTransportSquare (frame(footpoint n)·dE(lift 0))
+  (frame(north)·dE(lift 1))` (ASectionFunctor.lean:292) — each index runs into the COMMON NORTH
+  CHART. `_left`/`_right` are `rfl` faces; `_level` (:358) fixes the real part through the run.
+- `ActionTransportSquare` (ASectionActionDiagram.lean) is all-Möbius: `left·source = target·right`;
+  `actionStateTransport : World(source) ⥤ World(target)` with simp faces `_obj_input`,
+  `_obj_positioned`, `_obj_value` (:161–:179) and certified functoriality: `_id` (:185),
+  `_comp` (:205) — **squares compose, and the composite's transport is the composite of
+  transports.** `AsectionActionTransport f` IS `(orbitStabilizerActionSquare A f).actionStateTransport`
+  (:282) — base transport and square transport are the same machine.
+- `GpvTransport.actionSquare` (ProjectiveTransport.lean) — the vertical GPV square, `left = right = 1`.
+- Canonical members exist at every index: `residueActionState A projectiveNorth n baseWorld` with
+  `residueActionState_mem n` — literally `ofInput` of the frame-inverse coordinate transport of
+  `residueState n I = {world := I, coordinate := sphereZero n}`.
+
+**4. The two legs of THE OPEN TRANSITIVITY, in his names only.**
+- **Leg A (typed, kernel-accepted in probe):** arbitrary member → canonical member at its own
+  index: `hjoin` — one G₂ element at equal coordinates, worlds joined by
+  `exists_smul_eq_of_mem_unitImaginarySphere`.
+- **Leg B (the heart, the open seat):** canonical `n` → canonical `m` **through the common
+  chart**: compose tape-`n`'s square forward with tape-`m`'s square backward (reposition squares
+  `mk 1 r` between decorated frames are one `group` away; square inverses likewise). The composite
+  is an endo-square at the north frame whose transport carries member `n` to member `m`; its level
+  face is the two `_level` certificates — **the level clause closes on the same element**.
+- **The one joint the kernel has not yet judged:** presenting the composite square's transport as
+  an arrow OF THE TOTAL — the base leg for the tape composite (`hom_as_subtype`, Action.lean:92).
+  `diskExpAction z = diskDiagonalMoebiusHom (expUnit z)` (CayleyDictionary.lean:191) is Möbius
+  directly, not through `cayleyProjective` — so the base-leg presentation is the first term whose
+  print may resist. **Doubt = type it and see; a resisting print routes to the author naked.**
+
+The heart's goal, already on the kernel's board (probe, 2026-07-29): join the two canonical members
+at north in the total, tapes in scope. That probe is the next window's first keystroke.
