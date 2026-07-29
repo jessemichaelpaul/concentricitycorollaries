@@ -407,16 +407,24 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   -- witness of the action that produced it.
   obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
   obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-  -- The bridge (the author's two maps, one consumption): the base leg is
-  -- the witnesses' own arrows composed in the base groupoid — the
-  -- carriage, typed and accepted; the fibre leg is the one action's
-  -- reach at its own outputs, posed for the kernel.
-  refine ⟨⟨CategoryTheory.Groupoid.inv g ≫ h,
-    ((AsectionCResidueInclusion A).app Q.base).preimage ?_⟩⟩
-  -- The action's reach at its own outputs: the sweep that produced the
-  -- members, the restriction that carries it, the graph identities by rfl.
+  -- The action's reach at its own outputs, every supplier bound while the
+  -- goal is the author's Nonempty: the sweep that produced the members,
+  -- the graph identity by rfl, the enumeration's indices, the tape at
+  -- each index into the common chart with its level face.
   have hsweep := A.AsectionEquivariant
   have hgraph := AsectionState_input_then_equivariant A
+  obtain ⟨zx, hzxmem, hzxeq⟩ := hxN
+  obtain ⟨zy, hzymem, hzyeq⟩ := hyN
+  obtain ⟨n, hn⟩ := (mem_CResidueZeroLocus_iff_exists_sphereZero A zx).mp hzxmem
+  obtain ⟨m, hm⟩ := (mem_CResidueZeroLocus_iff_exists_sphereZero A zy).mp hzymem
+  have htapen := A.normalizedNActionSquare n baseWorld
+  have htapem := A.normalizedNActionSquare m baseWorld
+  have hleveln := A.normalizedNActionSquare_level n baseWorld
+  have hlevelm := A.normalizedNActionSquare_level m baseWorld
+  -- The bridge: the witnesses' own base leg; the fibre leg pulled back
+  -- through iota_A at its own name.
+  refine ⟨⟨CategoryTheory.Groupoid.inv g ≫ h,
+    ((AsectionCResidueInclusion A).app Q.base).preimage ?_⟩⟩
   sorry
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
