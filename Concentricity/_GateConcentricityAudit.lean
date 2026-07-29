@@ -52,3 +52,11 @@ open content in the repository. -/
 show sorryAx through exactly the node and nowhere else). -/
 #print axioms ASection.nontrivial_one_centre
 #print axioms zeta_riemannHypothesis
+
+/- DECLARATION 0's REGISTRATION PROBES (2026-07-29).  `Action.lean:128`
+fires by resolution at the two carriers the document names.  Each of these
+failed to synthesize before the registrations; the flip is the receipt. -/
+example : IsConnected GreatCircle.Base := inferInstance
+example : IsConnected (ActionCategory G2 SphereWorld) := inferInstance
+#print axioms GreatCircle.base_isPretransitive
+#print axioms SphereWorld.sweep_isPretransitive
