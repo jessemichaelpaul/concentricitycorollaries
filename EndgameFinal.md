@@ -574,7 +574,7 @@ After **0**, re-run `infer_instance` for `IsPretransitive` at the carrier. **A p
 fail→success is the receipt** that the registration landed — that is the detector from the taxonomy,
 and it is the only one that has ever found a real gap here.
 
-### ✈️ THE FLIGHT PLAN — the run order, four legs, a commit after each
+### THE RUN — one movement, then the certificates
 
 **The compass at every leg (the author): *"up towards the abstraction of category theory, not
 down to arrows."* A stalled term exits upward — to the functor, the instance, the class, the
@@ -587,31 +587,33 @@ well-definedness exists precisely to eliminate choices. The words "choose," "pic
 "design" in the typing hand's plan are the register alarm itself: a choice in the plan means the
 hand has left the author's argument.
 
-1. **Leg 1 — Declaration 0: ✅ DONE at `6596e04`** — `AsectionEquivariant_transitive`, the
-   author's sentence at his register, three foundations, `theorem` form. **Consumption is by
-   name.** The raw head `IsPretransitive G2 A.AsectionState` remains kernel-settled (cannot
-   close); do not retype it. Never a menu, never a field-split of the author's structure, never
-   `sphereWorld_zigzag`.
-2. **Leg 2 — the seat (one movement, the author's ruling: THERE ARE NOT TWO SEATS — the lift
-   runs the members into one another WHILE fixing the real level; both sorry-marks are shadows
-   of one consumption).** **FIRST ACT: re-seat.** The tree's seat currently contains Fable's
-   assembly (`4070a73`…`80fb6e8`) — witnesses, base leg, `harrow`, `hX`, kernel-accepted — but
-   typed in the **foreign Grothendieck pair spelling** (`EndgameFinal:116`: *"an arrow is two
-   legs by definition"* — the missing-leg experience is manufactured by that spelling), with the
-   pairwise `refine zigzag_isConnected fun P Q => ?_` line still present, and `hff` bound but
-   consumed nowhere (the `52bde67` shape). All of it is residue; **re-seating into the native
-   `ActionCategory` spelling is sanctioned and expected** — the master's own words:
-   *"the connectedness instance of the Lean library's `ActionCategory` itself, transported along
-   `ι_A`'s proper inclusion"* — instance, transport, read; a single arrow; no legs assembled.
-   **Per-commit tripwire: delete every bound premise (`hff`, Decl 0's consumption) — if the term
-   still elaborates, it is not consumed; do not commit.** Commit on green.
-3. **Leg 3 — Seat B (`:419`), re-read after A.** Supplier: the element's own tape, cited
-   **directly** — `transportLevel` + `lem:exp-degenerate`, *"conserved along every connecting
-   transport by the lift's level law."* The asymmetry is intentional: connectivity moves UP
-   through the sweep; the level cites the tape at its own stamped register. Commit on green.
-4. **Leg 4 — the certificates** (step 6 below), plus the source scan
-   (`sorry`/`admit`/`sorryAx`/`native_decide`/new axioms) and the docs-to-tree match. Both
-   certificates delivered together, elicited independently.
+**THE MOVEMENT — one, the master's own sentence (`:1263–1267`):** *"the connectedness instance
+of the Lean library's `ActionCategory` **itself**, transported along `ι_A`'s proper inclusion"*
+— then 8.3.5 and the level read on the class. **One consumption.** The lift runs the members
+into one another *while* fixing the real level; the two sorry-marks in the tree are shadows of
+this one movement, never stations of a sequence.
+
+- Declaration 0 is ✅ GREEN (`6596e04`, `theorem` form — consumed **by name**; the raw
+  `G₂`-alone head stays kernel-settled, do not retype it). Declaration 1 is ✅ GREEN
+  (`bb02b54`) and must end **load-bearing**.
+- **First act: re-seat.** The seat's current contents (`4070a73`…`80fb6e8`) are foreign-spelling
+  residue (`:116` — *"an arrow is two legs by definition"*; the missing-piece experience is
+  manufactured by that spelling), including the pairwise `zigzag_isConnected` line and the
+  bound-unconsumed `hff` (the `52bde67` shape). Re-seat into the native `ActionCategory`
+  spelling: **instance, transport, read** — a single arrow, nothing assembled, nothing chosen.
+- The level read (*"conserved along every connecting transport by the lift's level law"*) is the
+  **same movement's reading** — never a second seat, never an "asymmetry."
+- Route every print verbatim; never a menu, never a field-split, never `sphereWorld_zigzag`.
+  Commit on green. **Per-commit tripwire: delete every bound premise — if the term still
+  elaborates, it is not consumed; do not commit.**
+
+**THEN THE CERTIFICATES** (step 6): both together, independently elicited, plus the source scan
+(`sorry`/`admit`/`sorryAx`/`native_decide`/new axioms) and the docs-to-tree match.
+
+**Vocabulary rule, from the failure that names it: "leg" is banned from plans.** The prior
+version of this section ran "Leg 1 … Leg 4" — the register ruling's most-banned word as the
+plan's skeleton, encoding the very decomposition the author struck ("there are not two seats").
+A plan that sequences the author's one movement into parts has already re-authored it.
 
 ## 4 — Between steps
 
