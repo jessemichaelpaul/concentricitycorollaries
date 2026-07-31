@@ -1078,7 +1078,7 @@ $A^{-1}(0)$.
 \end{proof}
 
 \begin{lemma}[$\pi_0$ of a Grothendieck construction]\label{lem:pi0-grothendieck}
-\lean{CategoryTheory.Grothendieck}
+\lean{CategoryTheory.Grothendieck, pi0GrothendieckEquiv, pi0_grothendieck}
 \uses{def:base}
 For a functor $F:\mathcal B\to\Grpd$, the connected-components functor carries the Grothendieck
 construction to the colimit of the component diagram:
@@ -1135,7 +1135,7 @@ four properties.
 \end{definition}
 
 \begin{definition}[The residue subdiagram and its inclusion]\label{def:residue-subdiagram}
-\lean{ASection.CResidueZeroLocus, ASection.AsectionCResidueDiagram, ASection.AsectionCResidueInclusion}
+\lean{ASection.CResidueZeroLocus, ASection.AsectionCResidueDiagram, ASection.AsectionCResidueInclusion, ASection.AsectionCResidueInclusionTotal, ASection.AsectionCResidueInclusionTotal_full, ASection.AsectionCResidueInclusionTotal_faithful}
 \uses{def:base, def:A-section, lem:residue-spheres}
 The \emph{residue locus} of an A-section is $\{z : A(z)=0,\ \operatorname{Im}z>0\}$
 \textup{(}\texttt{CResidueZeroLocus}\textup{)}. The \emph{residue subdiagram}
@@ -1302,7 +1302,7 @@ common frame.
 \end{proof}
 
 \begin{theorem}[Concentricity]\label{thm:concentricity}
-\lean{ASection.concentricity}
+\lean{ASection.concentricity, ASection.residueTotal_isConnected, ASection.residueTotal_pi0_singleton, ASection.transportLevel}
 \leanok
 \uses{def:A-section, def:base, def:residue-subdiagram, lem:c-residue-transitive,
 lem:residue-spheres, lem:pi0-grothendieck,
