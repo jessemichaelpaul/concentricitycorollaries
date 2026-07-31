@@ -1,0 +1,104 @@
+CLAIM [thm:G2-S6] $ $ acts transitively on $S^6$ with stabilizer $ {SU}(3)$: $ {SU}(3) S^6$.
+CERTIFIEDAT G2.exists_smul_eq_of_mem_unitImaginarySphere
+OBJECT exists_smul_eq_of_mem_unitImaginarySphere
+END
+
+CLAIM [def:two-worlds] Recall the {translation groupoid} of an action $G X$: its objects are the points of $X$ an
+CERTIFIEDAT H1
+OBJECT CategoryTheory.ActionCategory
+END
+
+CLAIM [def:two-worlds] Recall the {translation groupoid} of an action $G X$: its objects are the points of $X$ an
+CERTIFIEDAT SphereWorld
+OBJECT CategoryTheory.ActionCategory
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.Base
+OBJECT Base
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.orbitRep_spec
+OBJECT orbitRep_spec
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT CategoryTheory.Grothendieck
+OBJECT Grothendieck
+END
+
+CLAIM [lem:pi0-grothendieck] For a functor $F: B $, the connected-components functor carries the Grothendieck construct
+CERTIFIEDAT CategoryTheory.Grothendieck
+OBJECT Grothendieck
+END
+
+CLAIM [lem:pi0-grothendieck] For a functor $F: B $, the connected-components functor carries the Grothendieck construct
+CERTIFIEDAT pi0GrothendieckEquiv
+OBJECT pi0GrothendieckEquiv
+END
+
+CLAIM [lem:pi0-grothendieck] For a functor $F: B $, the connected-components functor carries the Grothendieck construct
+CERTIFIEDAT pi0_grothendieck
+OBJECT pi0_grothendieck
+END
+
+CLAIM [def:residue-subdiagram] The {residue locus} of an A-section is $\{z : A(z)=0,\ {Im}z>0\}$ {(} {CResidueZeroLocus} 
+CERTIFIEDAT ASection.CResidueZeroLocus
+OBJECT CResidueZeroLocus
+END
+
+CLAIM [def:residue-subdiagram] The {residue locus} of an A-section is $\{z : A(z)=0,\ {Im}z>0\}$ {(} {CResidueZeroLocus} 
+CERTIFIEDAT ASection.AsectionCResidueDiagram
+OBJECT AsectionCResidueDiagram
+END
+
+CLAIM [def:residue-subdiagram] The {residue locus} of an A-section is $\{z : A(z)=0,\ {Im}z>0\}$ {(} {CResidueZeroLocus} 
+CERTIFIEDAT ASection.AsectionCResidueInclusion
+OBJECT AsectionCResidueInclusion
+END
+
+CLAIM [def:residue-subdiagram] The {residue locus} of an A-section is $\{z : A(z)=0,\ {Im}z>0\}$ {(} {CResidueZeroLocus} 
+CERTIFIEDAT ASection.AsectionCResidueInclusionTotal
+OBJECT AsectionCResidueInclusion
+END
+
+CLAIM [def:residue-subdiagram] The {residue locus} of an A-section is $\{z : A(z)=0,\ {Im}z>0\}$ {(} {CResidueZeroLocus} 
+CERTIFIEDAT ASection.AsectionCResidueInclusionTotal_full
+OBJECT AsectionCResidueInclusion
+END
+
+CLAIM [def:residue-subdiagram] The {residue locus} of an A-section is $\{z : A(z)=0,\ {Im}z>0\}$ {(} {CResidueZeroLocus} 
+CERTIFIEDAT ASection.AsectionCResidueInclusionTotal_faithful
+OBJECT AsectionCResidueInclusion
+END
+
+CLAIM [lem:c-residue-transitive] For an A-section $A$, the total inverse-image groupoid \[ _{ B} R_A \] is transitive: any 
+CERTIFIEDAT ASection.sweepTransitive_on_residueSystem
+OBJECT sweepTransitive_on_residueSystem
+END
+
+CLAIM [thm:concentricity] Let $A$ be an $A$-section. The infinitely many C-residue zero $S^6$ spheres transported by
+CERTIFIEDAT ASection.concentricity
+OBJECT concentricity
+END
+
+CLAIM [thm:concentricity] Let $A$ be an $A$-section. The infinitely many C-residue zero $S^6$ spheres transported by
+CERTIFIEDAT ASection.residueTotal_isConnected
+OBJECT residueTotal_isConnected
+END
+
+CLAIM [thm:concentricity] Let $A$ be an $A$-section. The infinitely many C-residue zero $S^6$ spheres transported by
+CERTIFIEDAT ASection.residueTotal_pi0_singleton
+OBJECT residueTotal_pi0_singleton
+END
+
+CLAIM [thm:concentricity] Let $A$ be an $A$-section. The infinitely many C-residue zero $S^6$ spheres transported by
+CERTIFIEDAT ASection.transportLevel
+OBJECT transportLevel
+END
+
+CLAIM [cor:rh] Every nontrivial zero of the classical Riemann zeta function has real part $ 12$; in parti
+CERTIFIEDAT zeta_riemannHypothesis
+OBJECT zeta_riemannHypothesis
+END
