@@ -1,0 +1,49 @@
+{
+  "_": [
+    "AUTHOR-OWNED FILE. This is the single place where it is recorded which",
+    "declarations are Jesse's mathematics, which are infrastructure built to",
+    "support it, and which are retired. Nothing else may infer it.",
+    "",
+    "The assistant DRAFTS entries and marks them status:PROPOSED. Only Jesse",
+    "moves an entry to status:RATIFIED. The certification ledger reads this file",
+    "and refuses to classify anything that is not listed here.",
+    "",
+    "kind:  AUTHOR_OBJECT   named in the master; part of the argument",
+    "       INFRASTRUCTURE  built to support it; not a claim of Jesse's",
+    "       RETIRED         superseded; kept only so live citations do not dangle",
+    "",
+    "status: PROPOSED | RATIFIED"
+  ],
+
+  "objects": [
+    { "decl": "ASection.concentricity",                          "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "the theorem" },
+    { "decl": "ASection.sweepTransitive_on_residueSystem",       "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "lem:c-residue-transitive" },
+    { "decl": "ASection.AsectionCResidueDiagram",                "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "the C-residue inverse-image diagram" },
+    { "decl": "ASection.AsectionCResidueInclusion",              "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "iota_A, componentwise" },
+    { "decl": "ASection.AsectionCResidueInclusionTotal",         "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "iota_A at the total" },
+    { "decl": "ASection.AsectionCResidueInclusionTotal_full",    "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "" },
+    { "decl": "ASection.AsectionCResidueInclusionTotal_faithful","kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "" },
+    { "decl": "ASection.CResidueZeroLocus",                      "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "C3 zero locus" },
+    { "decl": "ASection.residueTotal_isConnected",               "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "" },
+    { "decl": "ASection.residueTotal_pi0_singleton",             "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "" },
+    { "decl": "ASection.transportLevel",                         "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "the level read" },
+    { "decl": "zeta_riemannHypothesis",                          "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "cor:rh" },
+
+    { "decl": "GreatCircle.Base",                                "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "def:base — the projective base groupoid" },
+    { "decl": "GreatCircle.orbitRep_spec",                       "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "" },
+    { "decl": "H1",                                              "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "G2 semidirect octonion world" },
+    { "decl": "SphereWorld",                                     "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "" },
+    { "decl": "G2.exists_smul_eq_of_mem_unitImaginarySphere",    "kind": "AUTHOR_OBJECT", "status": "PROPOSED", "note": "thm:G2-S6" },
+
+    { "decl": "pi0GrothendieckEquiv",                            "kind": "INFRASTRUCTURE", "status": "PROPOSED", "note": "general lemma; Jesse's use is its instantiation at his diagram" },
+    { "decl": "pi0_grothendieck",                                "kind": "INFRASTRUCTURE", "status": "PROPOSED", "note": "same" },
+    { "decl": "pi0Functor",                                      "kind": "INFRASTRUCTURE", "status": "PROPOSED", "note": "" },
+    { "decl": "pi0Cocone",                                       "kind": "INFRASTRUCTURE", "status": "PROPOSED", "note": "" },
+    { "decl": "toColimitObj",                                    "kind": "INFRASTRUCTURE", "status": "PROPOSED", "note": "" },
+    { "decl": "CategoryTheory.Grothendieck",                     "kind": "INFRASTRUCTURE", "status": "PROPOSED", "note": "Mathlib" }
+  ],
+
+  "retired": [
+    { "decl": "ASection.concentricity_transport", "note": "re-badged 2026-07-05, file retired; label lives on ASection.concentricity", "status": "PROPOSED" }
+  ]
+}

@@ -26,15 +26,24 @@ EVIDENCE = ROOT / "blueprint" / "lean_certificate_evidence.json"
 OUT = ROOT / "CertificationLedger.md"
 ALLOWED = ["propext", "Classical.choice", "Quot.sound"]
 
-# Tokens that mark a statement as being about THIS author's construction rather
-# than about an arbitrary object of the same shape.
-PROJECT_TOKENS = [
-    "ASection", "AsectionCResidueDiagram", "AsectionCResidueInclusion",
-    "AsectionActionDiagram", "AsectionActionTransport", "AsectionActionFiber",
-    "sphereZero", "transportLevel", "residueActionState", "projectiveNorth",
-    "CResidueZeroLocus", "IsCResidueState", "IsNorthCResidueState",
-    "distinguishedDiskAction", "GreatCircle", "SphereWorld", "G2",
-]
+AUTHOR_OBJECTS = ROOT / "blueprint" / "author_objects.json"
+
+
+def ownership():
+    """Who owns each declaration. AUTHOR-DECLARED ONLY — never inferred.
+
+    The ledger refuses to classify any declaration absent from this file. That
+    is deliberate: deciding what counts as the author's mathematics is the
+    author's call, and a heuristic here would be the assistant substituting its
+    judgement for his."""
+    if not AUTHOR_OBJECTS.exists():
+        return {}, {}
+    blob = json.loads(AUTHOR_OBJECTS.read_text())
+    kinds, status = {}, {}
+    for row in blob.get("objects", []) + blob.get("retired", []):
+        kinds[row["decl"]] = row.get("kind", "RETIRED")
+        status[row["decl"]] = row.get("status", "PROPOSED")
+    return kinds, status
 
 DECL_KW = r"(?:noncomputable\s+)?(?:private\s+|protected\s+)?(?:theorem|lemma|def|instance|abbrev|structure)"
 
@@ -74,18 +83,11 @@ def find_declaration(name: str):
     return None, None
 
 
-def instantiation(stmt: str) -> tuple[str, list[str]]:
-    """A-specific, or generic? Report which project tokens occur in the statement."""
-    if stmt is None:
-        return "—", []
-    # everything after the first ':' at depth 0 is roughly the claim being made
-    found = sorted({t for t in PROJECT_TOKENS if re.search(rf"\b{t}\b", stmt)})
-    if not found:
-        return "GENERIC", []
-    if found == ["ASection"]:
-        # only the section variable is mentioned; nothing else A-specific
-        return "GENERIC", found
-    return "A-SPECIFIC", found
+def instantiation(name: str, kinds: dict, status: dict) -> tuple[str, list[str]]:
+    """Ownership, as DECLARED BY THE AUTHOR. Never inferred from source text."""
+    if name not in kinds:
+        return "UNCLASSIFIED", []
+    return kinds[name], [status.get(name, "PROPOSED")]
 
 
 def axiom_lines() -> dict[str, str]:
@@ -112,7 +114,7 @@ def axiom_lines() -> dict[str, str]:
 
 def row_for(name: str, axmap: dict[str, str]):
     site, stmt = find_declaration(name)
-    inst, toks = instantiation(stmt)
+    inst, toks = instantiation(name, KINDS, STATUS)
     ax = axmap.get(name) or axmap.get(name.split(".")[-1])
     if ax is None:
         axstat, inference = "not recorded", "—"
@@ -133,7 +135,12 @@ def row_for(name: str, axmap: dict[str, str]):
     }
 
 
+KINDS, STATUS = {}, {}
+
+
 def main() -> int:
+    global KINDS, STATUS
+    KINDS, STATUS = ownership()
     axmap = axiom_lines()
     names = ratified_names()
     rows = [row_for(n, axmap) for n in names]
@@ -150,20 +157,24 @@ def main() -> int:
         "PROOF and is blind to the STATEMENT, so a perfect axiom surface says nothing",
         "about whether the theorem is about the author's objects.",
         "",
-        "| Declaration | Declaration | Instantiation | Inference | Axioms | Site |",
+        "| Declaration | Exists | Ownership (author-declared) | Ratified | Inference | Axioms |",
         "|---|---|---|---|---|---|",
     ]
     for r in rows:
         lines.append(
             f"| `{r['name']}` | {r['declaration']} | {r['instantiation']} | "
-            f"{r['inference']} | {r['axioms']} | `{r['site']}` |"
+            f"{(r['tokens'] or ['—'])[0]} | {r['inference']} | {r['axioms']} |"
         )
 
-    generic = [r for r in rows if r["instantiation"] == "GENERIC"]
+    generic = [r for r in rows if r["instantiation"] == "UNCLASSIFIED"]
     openrows = [r for r in rows if r["inference"] == "OPEN"]
     unknown = [r for r in rows if r["axioms"] == "not recorded"]
+    # TRIPLE_CERTIFIED requires all four mechanical levels AND the author's
+    # ratified ownership. Nothing the assistant merely PROPOSED can qualify.
     triple = [r for r in rows
-              if r["declaration"] == "OK" and r["instantiation"] == "A-SPECIFIC"
+              if r["declaration"] == "OK"
+              and r["instantiation"] == "AUTHOR_OBJECT"
+              and (r["tokens"] or [""])[0] == "RATIFIED"
               and r["inference"] == "CHECKS" and r["axioms"] == "clean"]
 
     lines += [
@@ -174,8 +185,10 @@ def main() -> int:
         f"- **{len(openrows)}** known to carry `sorryAx`",
         f"- **{len(unknown)}** axiom surface **NOT RECORDED** — status unknown, "
         f"NOT to be read as clean. Regenerate the evidence to resolve.",
-        f"- **{len(generic)}** flagged generic instantiation "
-        f"(heuristic: source-text match, has known false positives — see caveat)",
+        f"- **{len(generic)}** UNCLASSIFIED — the author has not yet declared "
+        f"whether these are his objects, infrastructure, or retired",
+        f"- **{sum(1 for r in rows if (r['tokens'] or [''])[0] == 'PROPOSED')}** "
+        f"classifications still PROPOSED (drafted by the assistant, awaiting ratification)",
         f"- **{len(rows)}** author-ratified declarations in the master",
         "",
         "> **Caveats, v1.** (a) `not recorded` means the generated evidence has no",
@@ -188,7 +201,7 @@ def main() -> int:
         "",
     ]
     if generic:
-        lines += ["### Generic instantiations remaining", ""]
+        lines += ["### Unclassified — author has not declared ownership", ""]
         lines += [f"- `{r['name']}` — {r['site']}" for r in generic] + [""]
     if openrows:
         lines += ["### Open inference", ""]
