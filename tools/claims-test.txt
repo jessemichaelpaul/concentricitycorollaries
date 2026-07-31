@@ -1,0 +1,24 @@
+CLAIM The repository contains exactly two sorry terms, both legacy route receipts
+KERNEL grep -rn "^\s*sorry\s*$" Concentricity/*.lean | wc -l
+EXPECT 2
+END
+
+CLAIM [TODAY'S FALSE CLAIM] The fixed-tape level-preservation bridge is not proved or exported
+KERNEL grep -c "lift_endpoint_re_eq" Concentricity/ProjectiveTransport.lean
+EXPECT 0
+END
+
+CLAIM northComparison_of_parallelFaces is a certified production declaration
+CERTIFIED ASection.northComparison_of_parallelFaces
+AXIOMS propext, Classical.choice, Quot.sound
+END
+
+CLAIM [HALLUCINATED] residueClassVal_mk_residue certifies the value read
+CERTIFIED ASection.residueClassVal_mk_residue
+AXIOMS propext, Classical.choice, Quot.sound
+END
+
+CLAIM The concentricity theorem is the author's, anchored in his master
+AUTHOR the infinitely many residue-C zero spheres are concentric
+ANCHOR thm:concentricity
+END
