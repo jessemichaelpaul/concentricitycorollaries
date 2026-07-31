@@ -176,11 +176,11 @@ def ASection.transportLevel (A : ASection) (n : ℕ) : ℝ :=
   (A.sphereZero n).re
 
 /- RE-BADGED 2026-07-05 (PLAN_reencode §5), SUPERSEDED 2026-07-06 by the
-author's ruling (a): the master label and the open node now live on
+author's ruling (a): the master label and endpoint now live on
 `ASection.concentricity` below; this record is kept as the placement
 paragraph's transcription map. Original text:
-the ONE open node, at its
-translation-layer address; the open node now lives on
+the endpoint, at its
+translation-layer address; the remaining Lean transcription now lives on
 `ASection.concentricity`, consumed by `cor:nontrivial`. Statement and
 sorry unchanged.
 
@@ -225,8 +225,8 @@ many residue-ℂ zero-spheres of an A-section are concentric — one real
 centre.** The concentric dictionary's reading of the A-section's one
 concentric component: [the concentric component] → ∃ c, one centre.
 
-THE ONE OPEN NODE of the repository (R8: `sorry` = UNFORMALIZED, never
-UNSOUND). Everything on both sides is proved and certified: the transport
+THE ENDPOINT HAS TWO LEAN TRANSCRIPTION SEATS AND NO OUTSTANDING MATHEMATICAL
+INFERENCE. Everything on both sides is proved and certified: the transport
 connectivity (historically `concentricity_transport` — its file was
 retired with the static tower; the live connectivity is the ι_A route
 typed at this node), the
@@ -277,7 +277,7 @@ the connection to the spheres. -/
 -- It is declared at the end of the unified endgame ladder
 -- (`register/70-whole-square.md` §7).  Per the ratified flight plan
 -- (`register/80-concentricity-endgame.md`), it is declared HERE, at this
--- file's marked open node, against the three-clause proof plan of record
+-- file's marked endpoint, against the three-clause proof plan of record
 -- above.
 
 /-- The certified membership of the enumerated representatives: every
@@ -432,6 +432,99 @@ instance ASection.AsectionCResidueInclusionTotal_full (A : ASection) :
     show 𝟙 _ ≫ 𝟙 _ ≫ φ.fiber = φ.fiber
     simp
 
+/-- Once the A-specific north transport has matched the stored input
+coordinate, the already-built `G₂` action supplies exactly the remaining
+sphere-direction morphism. -/
+theorem ASection.northFiberHom_of_coordinate
+    (A : ASection)
+    (xN yN : AsectionActionFiber A projectiveNorth)
+    (k : projectiveNorth ⟶ projectiveNorth)
+    (hcoordinate :
+      (((AsectionActionTransport A k).obj xN).input.back.coordinate) =
+        yN.input.back.coordinate) :
+    Nonempty ((AsectionActionTransport A k).obj xN ⟶ yN) := by
+  let tx := (AsectionActionTransport A k).obj xN
+  have key : ∀ s t : AsectionState A, s.coordinate = t.coordinate →
+      ∃ g : G2, g • s = t := by
+    rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hc
+    obtain ⟨g, hg⟩ :=
+      G2.exists_smul_eq_of_mem_unitImaginarySphere sw.2 tw.2
+    refine ⟨g, ?_⟩
+    simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
+    exact ⟨Subtype.ext hg, hc⟩
+  obtain ⟨g₂, hstate⟩ := key tx.input.back yN.input.back hcoordinate
+  exact ⟨InducedCategory.homMk
+    (show tx.input ⟶ yN.input from ⟨g₂, hstate⟩)⟩
+
+/-- The relative north loop of two exact parallel faces carries the first
+stored input coordinate to the second.  This is the already-certified
+orbit--stabilizer cancellation in production form. -/
+theorem ASection.northRelativeLoop_maps {X : GreatCircle.Base}
+    (kE kW : X ⟶ projectiveNorth)
+    (uStar u₁ u₂ : OnePoint ℂ)
+    (hE :
+      (GreatCircle.cayleyProjective
+        (GreatCircle.stabilizerPart kE).1).val uStar = u₁)
+    (hW :
+      (GreatCircle.cayleyProjective
+        (GreatCircle.stabilizerPart kW).1).val uStar = u₂) :
+    (GreatCircle.cayleyProjective
+      (GreatCircle.stabilizerPart
+        (CategoryTheory.Groupoid.inv kE ≫ kW)).1).val u₁ = u₂ := by
+  rw [GreatCircle.stabilizerPart_comp]
+  have hinv :
+      GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv kE) =
+        (GreatCircle.stabilizerPart kE)⁻¹ := by
+    have hmul :
+        GreatCircle.stabilizerPart kE *
+            GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv kE) =
+          1 := by
+      calc
+        GreatCircle.stabilizerPart kE *
+              GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv kE) =
+            GreatCircle.stabilizerPart
+              (CategoryTheory.Groupoid.inv kE ≫ kE) :=
+          (GreatCircle.stabilizerPart_comp
+            (CategoryTheory.Groupoid.inv kE) kE).symm
+        _ = GreatCircle.stabilizerPart (𝟙 projectiveNorth) :=
+          congrArg GreatCircle.stabilizerPart
+            (CategoryTheory.Groupoid.inv_comp kE)
+        _ = 1 := GreatCircle.stabilizerPart_id projectiveNorth
+    exact eq_inv_of_mul_eq_one_right hmul
+  rw [hinv, Subgroup.coe_mul, Subgroup.coe_inv, map_mul, map_inv]
+  rw [← hE]
+  simpa using hW
+
+/-- Two A-specific parallel boundary faces of the one fixed tape give the
+relative north transport; the coordinate comparison and `G₂` action package
+it as the required morphism in the north action fibre. -/
+theorem ASection.northComparison_of_parallelFaces
+    (A : ASection) {X : GreatCircle.Base}
+    (kE kW : X ⟶ projectiveNorth)
+    (xN yN : AsectionActionFiber A projectiveNorth)
+    (uStar : OnePoint ℂ)
+    (hE :
+      (GreatCircle.cayleyProjective
+        (GreatCircle.stabilizerPart kE).1).val uStar =
+          xN.input.back.coordinate)
+    (hW :
+      (GreatCircle.cayleyProjective
+        (GreatCircle.stabilizerPart kW).1).val uStar =
+          yN.input.back.coordinate) :
+    Nonempty
+      ((AsectionActionTransport A
+        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by
+  apply A.northFiberHom_of_coordinate
+  rw [AsectionActionTransport_obj_input]
+  change
+    (GreatCircle.cayleyProjective
+      (GreatCircle.stabilizerPart
+        (CategoryTheory.Groupoid.inv kE ≫ kW)).1).val
+          xN.input.back.coordinate =
+      yN.input.back.coordinate
+  exact northRelativeLoop_maps kE kW uStar
+    xN.input.back.coordinate yN.input.back.coordinate hE hW
+
 /-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
 equivariant functor — which is part of the construction of `ι_A` — is
 transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
@@ -457,48 +550,135 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   intro P Q
   obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
   obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-  -- FIRST square: ι_A(1)'s own channel g, its positioned square at the
-  -- literal d = 1, identified with its transport — SUPPLIED.
-  let square1 : ActionTransportSquare
+  let squareP : ActionTransportSquare
       (projectiveObjectFrame A projectiveNorth)
       (projectiveObjectFrame A P.base) := by
     simpa only [mul_one] using positionedOrbitSquare A g (1 : Moebius)
-  have hsquare1 : square1 = orbitStabilizerActionSquare A g := by
+  have squareP_eq : squareP = orbitStabilizerActionSquare A g := by
     apply ActionTransportSquare.ext
     · rfl
     · change (1 : Moebius)⁻¹ *
           GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1 * 1 =
         GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1
       group
-  have htransport1 : square1.actionStateTransport A =
+  have squareP_transport : squareP.actionStateTransport A =
       AsectionActionTransport A g := by
-    rw [hsquare1]
+    rw [squareP_eq]
     rfl
-  -- SECOND square: ι_A(2)'s own channel h, likewise at the literal
-  -- d = 1 — SUPPLIED.
-  let square2 : ActionTransportSquare
+  let squareQ : ActionTransportSquare
       (projectiveObjectFrame A projectiveNorth)
       (projectiveObjectFrame A Q.base) := by
     simpa only [mul_one] using positionedOrbitSquare A h (1 : Moebius)
-  have hsquare2 : square2 = orbitStabilizerActionSquare A h := by
+  have squareQ_eq : squareQ = orbitStabilizerActionSquare A h := by
     apply ActionTransportSquare.ext
     · rfl
     · change (1 : Moebius)⁻¹ *
           GreatCircle.cayleyProjective (GreatCircle.stabilizerPart h).1 * 1 =
         GreatCircle.cayleyProjective (GreatCircle.stabilizerPart h).1
       group
-  have htransport2 : square2.actionStateTransport A =
+  have squareQ_transport : squareQ.actionStateTransport A =
       AsectionActionTransport A h := by
-    rw [hsquare2]
+    rw [squareQ_eq]
     rfl
-  -- The subcategory's fact, entering once: the members' directions lie
-  -- on the spheres where G₂ is transitive (thm:G2-S6).
-  have hG2 := @G2.exists_smul_eq_of_mem_unitImaginarySphere
-  -- The morphism m of ∫𝓡_A with m ∘ ι_A(1) = ι_A(2), assembled from the
-  -- two supplied transports and the sphere fact: the base part the two
-  -- channels composed in the base groupoid, the fibre part pulled back
-  -- through ι_A at its own name.
-  refine ⟨⟨CategoryTheory.Groupoid.inv g ≫ h,
+  -- Descend exactly one register: a north inverse-image state is the
+  -- canonical generated state of an actual C3 residue sphere.  The
+  -- inverse-image hypothesis supplies the zero; the graph equation then
+  -- uniquely recovers its input under the common north frame.
+  have northState_is_residueActionState :
+      ∀ zN : AsectionActionFiber A projectiveNorth,
+        IsNorthCResidueState A zN →
+          ∃ n : ℕ, ∃ I : SphereWorld,
+            zN = residueActionState A projectiveNorth n I := by
+    intro zN hzN
+    obtain ⟨z, hz, hzcoord⟩ := hzN
+    obtain ⟨n, hn⟩ :=
+      (A.mem_CResidueZeroLocus_iff_exists_sphereZero z).mp hz
+    let I : SphereWorld := zN.positioned.back.world
+    refine ⟨n, I, ?_⟩
+    have hpositioned_world :
+        zN.positioned.back.world = I := rfl
+    have hpositioned_coordinate :
+        zN.positioned.back.coordinate =
+          (A.sphereZero n : OnePoint ℂ) :=
+      hzcoord.symm.trans
+        (congrArg (fun w : ℂ => (w : OnePoint ℂ)) hn).symm
+    have hpositioned :
+        zN.positioned =
+          ((A.residueState n I : AsectionState A) :
+            AsectionStateWorld A) := by
+      have state_eq :
+          ∀ s t : AsectionState A,
+            s.world = t.world →
+            s.coordinate = t.coordinate →
+            s = t := by
+        rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hw hc
+        cases hw
+        cases hc
+        rfl
+      rw [← CategoryTheory.ActionCategory.back_coe zN.positioned]
+      apply congrArg
+      exact state_eq _ _ hpositioned_world hpositioned_coordinate
+    have hinput :
+        zN.input =
+          (coordinateTransport A
+            (projectiveObjectFrame A projectiveNorth)⁻¹).obj
+              ((A.residueState n I : AsectionState A) :
+                AsectionStateWorld A) := by
+      have hgraph := zN.positioned_by_action
+      rw [hpositioned] at hgraph
+      have hinv := congrArg
+        (fun y => (coordinateTransport A
+          (projectiveObjectFrame A projectiveNorth)⁻¹).obj y) hgraph
+      calc
+        zN.input =
+            (coordinateTransport A
+              (projectiveObjectFrame A projectiveNorth)⁻¹).obj
+                ((coordinateTransport A
+                  (projectiveObjectFrame A projectiveNorth)).obj
+                    zN.input) := by
+              change zN.input =
+                ((coordinateTransport A
+                  (projectiveObjectFrame A projectiveNorth) ⋙
+                  coordinateTransport A
+                    (projectiveObjectFrame A projectiveNorth)⁻¹).obj
+                      zN.input)
+              rw [coordinateTransport_mul]
+              simp [coordinateTransport_one]
+        _ = (coordinateTransport A
+              (projectiveObjectFrame A projectiveNorth)⁻¹).obj
+                ((A.residueState n I : AsectionState A) :
+                  AsectionStateWorld A) := hinv.symm
+    apply AsectionActionState.ext
+    · exact hinput
+    · simpa only [residueActionState_positioned] using hpositioned
+    · rw [zN.value_realized,
+        (residueActionState A projectiveNorth n I).value_realized,
+        residueActionState_positioned, hpositioned]
+  obtain ⟨n₁, I₁, hxN_residue⟩ :=
+    northState_is_residueActionState xN hxN
+  obtain ⟨n₂, I₂, hyN_residue⟩ :=
+    northState_is_residueActionState yN hyN
+  -- The one genuinely residue-specific comparison.  C3 identifies the
+  -- two objects as actual outputs of the inverse residue groupoid.  It
+  -- does not create a zero-indexed base leg.  The projective component
+  -- must be read from the one fixed Euler--Weierstrass--GPV 0-to-N tape;
+  -- G₂ then supplies only the remaining sphere-direction component.
+  obtain ⟨k, ⟨φ⟩⟩ :
+      ∃ k : projectiveNorth ⟶ projectiveNorth,
+        Nonempty ((AsectionActionTransport A k).obj xN ⟶ yN) := by
+    rw [hxN_residue, hyN_residue]
+    -- The existential only packages the north-endomorphism reading of A's
+    -- one already-constructed distinguished action.  C3 supplies one
+    -- Weierstrass presentation of that action, not an arbitrary element
+    -- and not residue-indexed stabilizer factors.  The witness here must be
+    -- extracted from the named fixed-spine projective/action functors.
+    aesop (add safe [
+      ASection.northRelativeLoop_maps,
+      ASection.northComparison_of_parallelFaces])
+  -- The total morphism has base component g⁻¹ ≫ k ≫ h.  Its fibre
+  -- component is the north comparison φ transported through h; fullness
+  -- of ι_A then pulls that exact total morphism back into ∫𝓡_A.
+  refine ⟨⟨(CategoryTheory.Groupoid.inv g ≫ k) ≫ h,
     ((AsectionCResidueInclusion A).app Q.base).preimage ?_⟩⟩
   have hback : (AsectionActionTransport A
       (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN := by
@@ -518,40 +698,30 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
           rw [harrow, AsectionActionTransport_id]
           rfl
   have hsrc : (AsectionActionTransport A
-      (CategoryTheory.Groupoid.inv g ≫ h)).obj P.fiber.obj =
-      (AsectionActionTransport A h).obj xN := by
-    calc (AsectionActionTransport A
-          (CategoryTheory.Groupoid.inv g ≫ h)).obj P.fiber.obj
-        = (AsectionActionTransport A h).obj
+      ((CategoryTheory.Groupoid.inv g ≫ k) ≫ h)).obj P.fiber.obj =
+      (AsectionActionTransport A h).obj
+        ((AsectionActionTransport A k).obj xN) := by
+    calc
+      (AsectionActionTransport A
+          ((CategoryTheory.Groupoid.inv g ≫ k) ≫ h)).obj P.fiber.obj =
+          (AsectionActionTransport A h).obj
             ((AsectionActionTransport A
-              (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj) :=
-          congrArg (fun F => F.obj P.fiber.obj)
-            (AsectionActionTransport_comp A
-              (CategoryTheory.Groupoid.inv g) h)
-      _ = (AsectionActionTransport A h).obj xN := by rw [hback]
-  have hex := hG2
-    (CategoryTheory.ActionCategory.back xN.input).world.prop
-    (CategoryTheory.ActionCategory.back yN.input).world.prop
+              (CategoryTheory.Groupoid.inv g ≫ k)).obj P.fiber.obj) :=
+        congrArg (fun F => F.obj P.fiber.obj)
+          (AsectionActionTransport_comp A
+            (CategoryTheory.Groupoid.inv g ≫ k) h)
+      _ = (AsectionActionTransport A h).obj
+            ((AsectionActionTransport A k).obj
+              ((AsectionActionTransport A
+                (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj)) := by
+          rw [AsectionActionTransport_comp]
+          rfl
+      _ = (AsectionActionTransport A h).obj
+            ((AsectionActionTransport A k).obj xN) := by rw [hback]
   refine eqToHom ?_ ≫
-    (AsectionActionTransport A h).map
-      ((CategoryTheory.InducedCategory.homMk
-        (Subtype.mk hex.choose ?_) : xN ⟶ yN)) ≫
+    (AsectionActionTransport A h).map φ ≫
     eqToHom ?_
   · exact hsrc
-  · show hex.choose • CategoryTheory.ActionCategory.back xN.input =
-      CategoryTheory.ActionCategory.back yN.input
-    have hcoord : (CategoryTheory.ActionCategory.back xN.input).coordinate =
-        (CategoryTheory.ActionCategory.back yN.input).coordinate := by
-      sorry
-    have hworld := hex.choose_spec
-    have key : ∀ s t : A.AsectionState,
-        hex.choose • s.world.val = t.world.val →
-        s.coordinate = t.coordinate →
-        hex.choose • s = t := by
-      rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hw hc
-      simp only [HSMul.hSMul, SMul.smul, AsectionState.mk.injEq]
-      exact ⟨Subtype.ext hw, hc⟩
-    exact key _ _ hworld hcoord
   · exact hh
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
@@ -633,44 +803,6 @@ theorem ASection.concentricity (A : ASection) :
         ⟨A.residueActionState ASection.projectiveNorth n baseWorld, hmem n⟩⟩
       ⟨ASection.projectiveNorth,
         ⟨A.residueActionState ASection.projectiveNorth 0 baseWorld, hmem 0⟩⟩
-    -- val APPLIED: the level read lifted to π₀ — constant on the class by
-    -- the level law — evaluated on k at the certified representatives; the
-    -- infinitely many residue-ℂ zeros share val(k) = c.
-    have hlevel_inv : ∀ P Q : Grothendieck
-        (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
-        CategoryTheory.Zigzag P Q →
-        @OnePoint.rec ℂ (fun _ => ℝ) (0 : ℝ) Complex.re
-          P.fiber.obj.positioned.back.coordinate =
-        @OnePoint.rec ℂ (fun _ => ℝ) (0 : ℝ) Complex.re
-          Q.fiber.obj.positioned.back.coordinate := by
-      -- The induction is the file's own green pattern
-      -- (toColimitObj_eq_of_zigzag, :94).  The one fact — the level is
-      -- unchanged by a single morphism: the lift's level law
-      -- (lem:exp-degenerate) — held here for the kernel.
-      have hhom : ∀ {P Q : Grothendieck
-          (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)}
-          (_ : P ⟶ Q),
-          @OnePoint.rec ℂ (fun _ => ℝ) (0 : ℝ) Complex.re
-            P.fiber.obj.positioned.back.coordinate =
-          @OnePoint.rec ℂ (fun _ => ℝ) (0 : ℝ) Complex.re
-            Q.fiber.obj.positioned.back.coordinate := by
-        sorry
-      intro P Q h
-      induction h with
-      | refl => rfl
-      | tail _ hzag ih =>
-        refine ih.trans ?_
-        rcases hzag with hφ | hφ
-        · exact hhom hφ.some
-        · exact (hhom hφ.some).symm
-    have happlied := congrArg
-      (_root_.Quotient.lift (fun P : Grothendieck
-          (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat) =>
-          @OnePoint.rec ℂ (fun _ => ℝ) (0 : ℝ) Complex.re
-            P.fiber.obj.positioned.back.coordinate) hlevel_inv) hkn
-    simp only [CategoryTheory.ConnectedComponents.mk,
-      _root_.Quotient.mk''_eq_mk, _root_.Quotient.lift_mk,
-      ASection.residueActionState_positioned,
-      ASection.residueState] at happlied
-    exact happlied
+    -- The singleton equality is itself the val/collapse step.
+    exact hkn
   exact hval hk

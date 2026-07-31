@@ -14,9 +14,8 @@ The canonical top-level Grothendieck total of the certified action diagram,
 together with its insertion and transport, and the Gate-6 recognition of the
 generated residue outputs.
 
-This file contains **only** live, certified material.  The quarantined
-`PointProjection` and `JuxtapositionPreflight` preflights live in
-`Concentricity/ASectionTotalPreflights.lean` and are not imported here.
+This file contains **only** live, certified material.  The obsolete
+point-projection and per-zero north-leg preflights have been removed.
 -/
 
 noncomputable section

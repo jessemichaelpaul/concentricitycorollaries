@@ -1,0 +1,240 @@
+{
+  "schema": 1,
+  "allowed_axioms": ["propext", "Classical.choice", "Quot.sound"],
+  "terminal_build_target": "Concentricity.ASectionCResidueDiagram",
+  "terminal_probe": "Concentricity/_BlueprintTerminalCertificateProbe.lean",
+  "inference_probe": "scripts/build_transitivity_inference_probe.sh",
+  "corollary_build_target": "Concentricity.ZetaSection",
+  "corollary_inference_probe": "Concentricity/_GateCorollaryInferenceAudit.lean",
+  "corollary_production_source": "Concentricity/Corollaries.lean",
+  "production_source": "Concentricity/Theorem.lean",
+  "project_specific_locals": [
+    {
+      "objects": "xN, hxN, g, hg",
+      "exact_source": "obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property",
+      "paper_identity": "the inverse-image dossier carried by the arbitrary object P"
+    },
+    {
+      "objects": "yN, hyN, h, hh",
+      "exact_source": "obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property",
+      "paper_identity": "the inverse-image dossier carried by the arbitrary object Q"
+    }
+  ],
+  "bindings": [
+    {
+      "id": "seat1.kE",
+      "paper_object": "the base component k_E of F_A(E_N)",
+      "lean_local": "kE",
+      "binder": "let",
+      "expected_type": "projectiveZero ⟶ projectiveNorth",
+      "candidate_expression": null,
+      "author_confirmed_candidate_sha256": null
+    },
+    {
+      "id": "seat1.kW",
+      "paper_object": "the base component k_W of F_A(W_N)",
+      "lean_local": "kW",
+      "binder": "let",
+      "expected_type": "projectiveZero ⟶ projectiveNorth",
+      "candidate_expression": null,
+      "author_confirmed_candidate_sha256": null
+    },
+    {
+      "id": "seat1.uStar",
+      "paper_object": "the common reference input u_* of the fixed tape",
+      "lean_local": "uStar",
+      "binder": "let",
+      "expected_type": "OnePoint ℂ",
+      "candidate_expression": null,
+      "author_confirmed_candidate_sha256": null
+    },
+    {
+      "id": "seat1.hE",
+      "paper_object": "the instantiated boundary equation C(r_E)(u_*) = u_1",
+      "lean_local": "hE",
+      "binder": "have",
+      "expected_type": "(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kE).1).val uStar = (residueActionState A projectiveNorth n₁ I₁).input.back.coordinate",
+      "candidate_expression": null,
+      "author_confirmed_candidate_sha256": null
+    },
+    {
+      "id": "seat1.hW",
+      "paper_object": "the instantiated boundary equation C(r_W)(u_*) = u_2",
+      "lean_local": "hW",
+      "binder": "have",
+      "expected_type": "(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kW).1).val uStar = (residueActionState A projectiveNorth n₂ I₂).input.back.coordinate",
+      "candidate_expression": null,
+      "author_confirmed_candidate_sha256": null
+    },
+    {
+      "id": "seat2.valA",
+      "paper_object": "the existing A-specific val/level read on the unique transport class of the exact π₀(∫R_A)",
+      "lean_local": "valA",
+      "binder": "let",
+      "expected_type": "CategoryTheory.ConnectedComponents (Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) → ℝ",
+      "candidate_expression": null,
+      "author_confirmed_candidate_sha256": null
+    }
+  ],
+  "binding_probe_anchor": "    aesop (add safe [",
+  "identity_hash_sources": [
+    "Octonionic_RH_master.tex",
+    "Concentricity/Theorem.lean"
+  ],
+  "terminal": [
+    {
+      "master": "thm:G2-S6",
+      "semantics": "G₂ supplies the remaining sphere-direction action",
+      "declaration": "G2.exists_smul_eq_of_mem_unitImaginarySphere"
+    },
+    {
+      "master": "def:two-worlds",
+      "semantics": "octonionic action world",
+      "declaration": "H1"
+    },
+    {
+      "master": "def:two-worlds",
+      "semantics": "slice-value world",
+      "declaration": "SphereWorld"
+    },
+    {
+      "master": "def:base",
+      "semantics": "projective action-groupoid base",
+      "declaration": "GreatCircle.Base"
+    },
+    {
+      "master": "def:base",
+      "semantics": "chosen orbit representative has the required endpoint",
+      "declaration": "GreatCircle.orbitRep_spec"
+    },
+    {
+      "master": "def:base",
+      "semantics": "total Grothendieck construction",
+      "declaration": "CategoryTheory.Grothendieck"
+    },
+    {
+      "master": "def:residue-subdiagram",
+      "semantics": "C-residue zero locus",
+      "declaration": "ASection.CResidueZeroLocus"
+    },
+    {
+      "master": "def:residue-subdiagram",
+      "semantics": "C-residue inverse-image diagram",
+      "declaration": "ASection.AsectionCResidueDiagram"
+    },
+    {
+      "master": "def:residue-subdiagram",
+      "semantics": "inclusion of the inverse-image diagram in the total action diagram",
+      "declaration": "ASection.AsectionCResidueInclusion"
+    }
+  ],
+  "inference": [
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "a north C-residue state is the exact C3 residue action state",
+      "master_anchor": "there are C-residue indices $n_1,n_2$",
+      "receipt": "ASection.northState_is_residueActionState_audit"
+    },
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "the north input is D_A⁻¹(sphereZero n)",
+      "master_anchor": "u_i=D^{-1}(z_i)",
+      "receipt": "ASection.residueActionState_north_input_audit"
+    },
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "a north loop acts by C(stabilizerPart k) on the stored input",
+      "master_anchor": "the accepted input leg is $C(r)$",
+      "receipt": "ASection.residueActionTransport_north_input_audit"
+    },
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "the common source factor cancels in k_E⁻¹ ≫ k_W",
+      "master_anchor": "the identical $o_0$ factors cancel",
+      "receipt": "ASection.northRelativeLoop_stabilizer_audit"
+    },
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "the relative loop carries the first certified input to the second",
+      "master_anchor": "C(r_W)(u_\\ast)=u_2",
+      "receipt": "ASection.northRelativeLoop_maps_audit"
+    },
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "the two parallel faces and G₂ package the north-fibre morphism",
+      "master_anchor": "Transitivity of the $G_2$-action on $S^6$ supplies",
+      "receipt": "ASection.northComparison_of_parallelFaces_audit"
+    },
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "the same relative calculation holds in the two-legged square functor register",
+      "master_anchor": "including the relative loop, its action-state",
+      "receipt": "ASection.relativeActionSquare_transport_audit"
+    },
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "g⁻¹ ≫ k ≫ h and fullness produce P ⟶ Q inside ∫R_A",
+      "master_anchor": "The full inclusion $\\int\\iota_A$ pulls this total morphism back",
+      "receipt": "ASection.residueTotal_morphism_of_northComparison_audit"
+    },
+    {
+      "master": "thm:concentricity",
+      "semantics": "transitivity of the exact ∫R_A implies IsConnected for that exact ∫R_A",
+      "master_anchor": "Thus $\\int_{\\mathcal B}\\mathcal R_A$ is connected.",
+      "receipt": "ASection.residueTotal_isConnected_of_transitive_audit"
+    },
+    {
+      "master": "thm:concentricity",
+      "semantics": "connectedness of the exact ∫R_A makes π₀ of that exact ∫R_A a singleton",
+      "master_anchor": "$\\pi_0$ is the singleton set",
+      "receipt": "ASection.residueTotal_pi0_singleton_of_connected_audit"
+    },
+    {
+      "master": "thm:concentricity",
+      "semantics": "the A-specific val read preserves hkn on the exact π₀(∫R_A)",
+      "master_anchor": "the level read is \\texttt{ASection.transportLevel} in the Lean source.",
+      "receipt": "ASection.residuePi0_val_congr_audit"
+    },
+    {
+      "master": "cor:nontrivial",
+      "semantics": "the general one-centre corollary is exactly the concentricity conclusion",
+      "master_anchor": "common centre $c$ supplied by Theorem~\\ref{thm:concentricity}",
+      "receipt": "ASection.nontrivial_one_centre_of_concentricity_audit",
+      "source": "Concentricity/_GateCorollaryInferenceAudit.lean",
+      "edge_kind": "identity",
+      "upstream_declaration": "ASection.concentricity",
+      "production_declaration": "ASection.nontrivial_one_centre",
+      "production_exact": "theorem ASection.nontrivial_one_centre (A : ASection) :\n    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c :=\n  A.concentricity"
+    },
+    {
+      "master": "cor:rh",
+      "semantics": "the zeta specialization and proved concentricity equivalence imply RH",
+      "master_anchor": "Every nontrivial zero of the classical Riemann zeta function has real part $\\tfrac12$",
+      "receipt": "zeta_riemannHypothesis_of_concentricity_audit",
+      "source": "Concentricity/_GateCorollaryInferenceAudit.lean"
+    },
+    {
+      "master": "cor:rh",
+      "semantics": "RH and the proved infinitude imply infinitely many critical-line zeros",
+      "master_anchor": "infinitely many zeros lie on the line $\\Re s=\\tfrac12$",
+      "receipt": "zeta_criticalLine_zeros_infinite_of_RH_audit",
+      "source": "Concentricity/_GateCorollaryInferenceAudit.lean"
+    }
+  ],
+  "open": [
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "bind and instantiate the exact F_A(E_N) and F_A(W_N) faces, then wire the certified middle morphism",
+      "declaration": "ASection.sweepTransitive_on_residueSystem",
+      "source": "Concentricity/Theorem.lean",
+      "diagnostic": "⊢ ∃ k"
+    },
+    {
+      "master": "thm:concentricity",
+      "semantics": "declaration/instantiation only: bind the existing A-specific val to the exact π₀(∫R_A), then instantiate the certified val inference at the exact P_n and P_0",
+      "declaration": "ASection.concentricity",
+      "source": "Concentricity/Theorem.lean",
+      "diagnostic": "A.transportLevel n = A.transportLevel 0"
+    }
+  ]
+}

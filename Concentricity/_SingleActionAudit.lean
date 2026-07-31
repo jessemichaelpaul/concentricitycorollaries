@@ -21,7 +21,6 @@ import `ASectionGenerated`, `ASectionAction`, or the action diagram.
 #print axioms ASection.AsectionState_input_then_equivariant
 #print axioms ASection.orbitStabilizerActionSquare
 #print axioms ASection.projectiveGpvActionSquare
-#print axioms ASection.normalizedNActionSquare
 #print axioms ASection.ActionTransportSquare.coordinateTransport_commutes
 #print axioms ASection.ActionTransportSquare.output_commutes
 #print axioms ASection.orbitStabilizerActionSquare_output_commutes

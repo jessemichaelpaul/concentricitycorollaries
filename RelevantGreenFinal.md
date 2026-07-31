@@ -60,20 +60,20 @@ these put it under a name.
 
 `ASection.residueActionState` · `ASection.residueActionState_positioned` ·
 `ASection.residueTotal` — *cite at `ASectionTotalActionState.lean:117`; the name is shadowed in
-the quarantined `ASectionTotalPreflights.lean:172`.*
+the now-removed per-zero north-leg preflight.*
 
 ## The π₀ engine and the level
 
 `pi0Functor` · `toColimitObj_eq_of_zigzag` · `pi0GrothendieckEquiv` · `pi0_grothendieck` ·
 `ASection.transportLevel` (`= (A.sphereZero n).re`, by definition)
 
-## Elsewhere in the tree, and NOT suppliers for the open sites
+## Elsewhere in the tree, and NOT suppliers for the transcription seats
 
 `G2.exists_smul_eq_of_mem_unitImaginarySphere` (green) · `sphereWorld_zigzag`
 (`SliceSphereWorld.lean:288`) — a `𝒮₂`/slice-world fact, consumed by no certificate
 (`Corollaries.lean` cites `ASection.concentricity`, nothing else) ·
 `ASection.AsectionEquivariant_transitive` (`6596e04`) · `…_transitive_states` (`8907f88`) — green,
-quantify over the ambient world, name `ι_A` nowhere. **None of these is at the register of the open
+quantify over the ambient world, name `ι_A` nowhere. **None of these is at the register of the live
 term** (see `EndgameFinal.md` §0 and §3).
 
 ## Downstream, already proved
@@ -86,8 +86,8 @@ and it enters in that one file only.
 
 ```text
 lake build Concentricity.Corollaries   →  Build completed successfully (3694 jobs)
-lake build (root)                      →  3693/3695; the only red is Corollaries' dependency
-                                          on the open node
+lake build (root)                      →  3693/3695; the endpoint awaited the two transcription
+                                          seats in Theorem.lean
 ```
 
 `Corollaries.lean` compiles against `A.concentricity`: `ASection.nontrivial_one_centre`,
@@ -103,7 +103,7 @@ as written. The corollary layer is wired and waiting.
 `isPreconnected_zigzag` · `Grothendieck.map` · `Grothendieck.functor_comp_forget` ·
 `ObjectProperty.lift` / `ι` / `fullyFaithfulι` / `liftCompιIso`
 
-## Open
+## Remaining Lean transcription
 
 Two sites, both in `Theorem.lean`, coordinates re-elicited 2026-07-29:
 
@@ -112,7 +112,7 @@ Two sites, both in `Theorem.lean`, coordinates re-elicited 2026-07-29:
 :528   the level clause inside ASection.concentricity
 ```
 
-They carry `sorryAx`, and it propagates arithmetically to the corollaries. **Nothing else in the
+They are formalization seats, not outstanding mathematical inferences. **Nothing else in the
 repository is open.**
 
 The statement at `:445` is the author's lemma, at the total and naming no group: *any two

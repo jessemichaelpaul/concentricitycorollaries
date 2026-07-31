@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jesse Michael Paul
 -/
 import Concentricity.ASectionEquivariant
+import Concentricity.NormalizedBase
 import Concentricity.ProjectiveSection
 import Mathlib.CategoryTheory.Groupoid
 import Mathlib.CategoryTheory.Groupoid.Discrete
@@ -276,91 +277,6 @@ theorem projectiveGpvActionSquare_level (A : ASection)
     (h : GpvTransport A X Y k) :
     (h.lift 0).re = (h.lift 1).re := by
   exact h.lift_endpoint_re_eq
-
-/-- The actual projective-base leg underlying the n-th normalized
-zero-to-N action square. -/
-def normalizedNBaseHom (A : ASection) (n : ℕ) :
-    normalizedFootpoint (A.sphereZero n).re ⟶
-      GreatCircle.pointObj (OnePoint.infty : GreatCircle.Point) :=
-  GreatCircle.toNHom (A.sphereZero n).re
-
-/-- Each C-residue output's own closed zero--pole tape, positioned by the
-same orbit--stabilizer action, gives its full action square to the common
-north chart.  The source is indexed by the actual zero and the GPV tape is
-the one extracted from `normalizedNLeg`; an arbitrary real point cannot be
-substituted into this declaration. -/
-noncomputable def normalizedNActionSquare (A : ASection) (n : ℕ)
-    (I : SphereWorld) :
-    let tape := A.normalizedNActionTape n I
-    ActionTransportSquare
-      (projectiveObjectFrame A
-          (normalizedFootpoint (A.sphereZero n).re) *
-        GreatCircle.diskExpAction (tape.lift 0))
-      (projectiveObjectFrame A
-          (GreatCircle.pointObj (OnePoint.infty : GreatCircle.Point)) *
-        GreatCircle.diskExpAction (tape.lift 1)) := by
-  let tape := A.normalizedNActionTape n I
-  let f := A.normalizedNBaseHom n
-  refine
-    { left := projectiveArrowElement A f
-      right :=
-        (GreatCircle.diskExpAction (tape.lift 0))⁻¹ *
-          GreatCircle.cayleyProjective
-            (GreatCircle.stabilizerPart f).1 *
-          GreatCircle.diskExpAction (tape.lift 0)
-      commutes := ?_ }
-  have hgpv :
-      GreatCircle.diskExpAction (tape.lift 0) =
-        GreatCircle.diskExpAction (tape.lift 1) := by
-    exact congrArg GreatCircle.diskExpAction tape.lift_closed.symm
-  rw [← hgpv]
-  calc
-    projectiveArrowElement A f *
-        (projectiveObjectFrame A
-            (normalizedFootpoint (A.sphereZero n).re) *
-          GreatCircle.diskExpAction (tape.lift 0)) =
-        (projectiveArrowElement A f *
-          projectiveObjectFrame A
-            (normalizedFootpoint (A.sphereZero n).re)) *
-          GreatCircle.diskExpAction (tape.lift 0) := by group
-    _ = (projectiveObjectFrame A
-            (GreatCircle.pointObj
-              (OnePoint.infty : GreatCircle.Point)) *
-          GreatCircle.cayleyProjective
-            (GreatCircle.stabilizerPart f).1) *
-          GreatCircle.diskExpAction (tape.lift 0) := by
-        rw [projectiveArrowElement_frame_compat]
-    _ = (projectiveObjectFrame A
-            (GreatCircle.pointObj
-              (OnePoint.infty : GreatCircle.Point)) *
-          GreatCircle.diskExpAction (tape.lift 0)) *
-        ((GreatCircle.diskExpAction (tape.lift 0))⁻¹ *
-          GreatCircle.cayleyProjective
-            (GreatCircle.stabilizerPart f).1 *
-          GreatCircle.diskExpAction (tape.lift 0)) := by group
-
-@[simp] theorem normalizedNActionSquare_left (A : ASection) (n : ℕ)
-    (I : SphereWorld) :
-    (A.normalizedNActionSquare n I).left =
-      projectiveArrowElement A (A.normalizedNBaseHom n) := rfl
-
-@[simp] theorem normalizedNActionSquare_right (A : ASection) (n : ℕ)
-    (I : SphereWorld) :
-    (A.normalizedNActionSquare n I).right =
-      (GreatCircle.diskExpAction
-          ((A.normalizedNActionTape n I).lift 0))⁻¹ *
-        GreatCircle.cayleyProjective
-          (GreatCircle.stabilizerPart (A.normalizedNBaseHom n)).1 *
-        GreatCircle.diskExpAction
-          ((A.normalizedNActionTape n I).lift 0) := rfl
-
-/-- The real-level face of the normalized zero-to-N action square. -/
-theorem normalizedNActionSquare_level (A : ASection) (n : ℕ)
-    (I : SphereWorld) :
-    ((A.normalizedNActionTape n I).lift 0).re =
-      ((A.normalizedNActionTape n I).lift 1).re := by
-  exact congrArg Complex.re
-    (A.normalizedNActionTape n I).lift_closed.symm
 
 /-- Identity base transport gives the identity action square. -/
 theorem orbitStabilizerActionSquare_id (A : ASection)

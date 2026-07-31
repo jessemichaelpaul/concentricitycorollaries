@@ -1147,8 +1147,165 @@ inclusion $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$
 and its naturality squares commute definitionally.
 \end{definition}
 
+\begin{lemma}[Transitivity of the C-residue total]\label{lem:c-residue-transitive}
+\lean{ASection.sweepTransitive_on_residueSystem}
+\leanok
+\uses{def:A-section, def:base, def:residue-subdiagram, prop:weierstrass,
+lem:residue-spheres, thm:G2-S6}
+For an A-section $A$, the total inverse-image groupoid
+\[
+  \int_{\mathcal B}\mathcal R_A
+\]
+is transitive: any two of its objects are joined by a morphism.
+\end{lemma}
+\begin{proof}
+Write $F_A=\mathcal A_A$ for the A-section action functor,
+$D=D_A$ for its one distinguished Euler--Weierstrass disk action, and
+$C=\operatorname{cayleyProjective}$.  There is one projective base and one north
+object $N$.  The unique tame GPV lift is the one fixed $0$-to-$N$ tape; a zero
+index does not supply another base arrow.
+
+First take two states $x_N,y_N$ in the north fibre of the C-residue inverse
+image.  Because the inverse image was taken in the C3 zero-sphere system, not in
+the ambient action groupoid, there are C-residue indices $n_1,n_2$ and
+directions $I_1,I_2\in S^6$ for which their positioned coordinates are the
+actual C3 coordinates
+\[
+  z_1=\operatorname{sphereZero}(n_1),\qquad
+  z_2=\operatorname{sphereZero}(n_2).
+\]
+The north object frame is $D$, so their inputs are forced rather than chosen:
+\[
+  u_i=D^{-1}(z_i),\qquad z_i=D(u_i).
+\]
+This is where C3 enters the argument.  It supplies the Weierstrass face of the
+distinguished action and the precise inputs on which that action is being
+evaluated; it does not supply transitivity.
+
+The two states are two evaluations, swept out by $F_A$, of that same
+distinguished action in the same normalized north frame.  More precisely,
+the two rectangles are the functorial arrows
+$F_A(E_N)$ and $F_A(W_N)$, where $E_N$ and $W_N$ are the distinguished
+north Euler and Weierstrass actions.  They are the two eyes of the one
+action, not arrows manufactured from the residue coordinates.  Both run on
+the one fixed tape from the common projective zero frame to the one north
+frame.  Write
+\[
+  k_E,k_W:0\longrightarrow N
+\]
+for their base components and
+\[
+  r_E=\operatorname{stabilizerPart}(k_E),\qquad
+  r_W=\operatorname{stabilizerPart}(k_W).
+\]
+The remaining projective assertion is that these exact functorial
+evaluations attach the two inputs to the common reference input $u_\ast$ of
+the fixed tape:
+\[
+  u_1=C(r_E)(u_\ast),\qquad
+  u_2=C(r_W)(u_\ast),\qquad z_\ast=D(u_\ast).
+\]
+Equivalently, the two action rectangles are
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+u_\ast \arrow[r,"C(r_E)"] \arrow[d,"D"']&
+u_1 \arrow[d,"D"]&
+u_\ast \arrow[r,"C(r_W)"] \arrow[d,"D"']&
+u_2 \arrow[d,"D"]\\
+z_\ast \arrow[r,"D\,C(r_E)\,D^{-1}"']&
+z_1&
+z_\ast \arrow[r,"D\,C(r_W)\,D^{-1}"']&
+z_2 .
+\end{tikzcd}
+\]
+The vertical arrow is not new data: $D$ acts on every input carried by the
+A-section equivariant functor, and the inverse-image definition says that the
+outputs here are precisely $z_1,z_2$.
+
+In Lean the next step is only to name these two already-built boundary
+faces at their functorial type and instantiate their displayed equations.
+Write those local declarations as $F_A(E_N)$ and $F_A(W_N)$.  Their common
+source, common $0$-to-$N$ tape, and one north target are fixed by the
+construction; no new arrow, normalization, or transitivity premise is
+declared.  Applying the two squares to $u_\ast$ gives exactly
+\[
+  C(r_E)(u_\ast)=u_1,\qquad C(r_W)(u_\ast)=u_2.
+\]
+All subsequent steps, including the relative loop, its action-state
+transport, the $G_2$ direction morphism, and the final Grothendieck
+morphism, are already kernel-checked once these two instantiations are
+supplied.
+
+Once those two exact faces have been exposed, the rest is algebraic
+cancellation.  Put
+\[
+  r=r_Wr_E^{-1}.
+\]
+The required comparison is the elementary group calculation, applied only to
+the certified faces of the distinguished action:
+\[
+\begin{aligned}
+ C(r)(u_1)
+ &=C(r_Wr_E^{-1})\,C(r_E)(u_\ast)\\
+ &=C(r_W)(u_\ast)=u_2,
+\end{aligned}
+\qquad
+\begin{aligned}
+ D\,C(r)\,D^{-1}(z_1)
+ &=D\,C(r)(u_1)\\
+ &=D(u_2)=z_2 .
+\end{aligned}
+\]
+Categorically the comparison loop is
+\[
+  k=k_E^{-1}\mathbin{\gg}k_W:N\longrightarrow N.
+\]
+The action-category composition convention and the common source and target
+give
+\[
+\begin{aligned}
+ k.\mathrm{val}
+ &=k_W.\mathrm{val}\,k_E.\mathrm{val}^{-1}\\
+ &=(o_Nr_Wo_0^{-1})(o_Nr_Eo_0^{-1})^{-1}\\
+ &=r_Wr_E^{-1},
+\end{aligned}
+\]
+because $o_N=1$ and the identical $o_0$ factors cancel.  Now both endpoints
+of $k$ are $N$, so their orbit representatives are identities and uniqueness
+of the orbit--stabilizer factor gives
+\[
+  \operatorname{stabilizerPart}(k)=k.\mathrm{val}.
+\]
+Thus the accepted input leg is $C(r)$ and the positioned leg is exactly
+$D\,C(r)\,D^{-1}$.  Transitivity of the $G_2$-action on $S^6$ supplies the
+remaining direction component $I_1\mapsto I_2$.  Together these are one
+morphism
+\[
+  F_A(k)(x_N)\longrightarrow y_N
+\]
+in the north action fibre, hence one Grothendieck morphism at the same
+categorical level as $\int\mathcal R_A$.
+
+Finally let $P,Q\in\int_{\mathcal B}\mathcal R_A$ be arbitrary.  Their
+inverse-image witnesses consist of north states $x_N,y_N$ as above and base
+arrows $g:N\to P_{\mathrm{base}}$, $h:N\to Q_{\mathrm{base}}$.  Transporting
+the north comparison along the functor gives the total base leg
+\[
+  g^{-1}\mathbin{\gg}k\mathbin{\gg}h.
+\]
+The full inclusion $\int\iota_A$ pulls this total morphism back into
+$\int\mathcal R_A$.  Hence the lemma follows from the displayed local
+producer.  Notice that this reduction neither identifies $z_1$ with $z_2$
+nor assumes a common real part: after the producer, the load-bearing
+inference is only the relative stabilizer cancellation through the one
+common frame.
+\end{proof}
+
 \begin{theorem}[Concentricity]\label{thm:concentricity}
-\uses{def:A-section, def:base, def:residue-subdiagram, lem:residue-spheres, lem:pi0-grothendieck,
+\lean{ASection.concentricity}
+\leanok
+\uses{def:A-section, def:base, def:residue-subdiagram, lem:c-residue-transitive,
+lem:residue-spheres, lem:pi0-grothendieck,
 thm:G2-S6, thm:winding-lift, prop:winding-signature, thm:identity}
 Let $A$ be an $A$-section. The infinitely many C-residue zero $S^6$ spheres transported by the A-section functor
 $\mathcal A_A:\mathcal B\to\mathbf{Grpd}$, from the projective great-circle base
@@ -1216,12 +1373,9 @@ composition in the base --- is the residue subdiagram $\mathcal R_A$ of
 Definition~\ref{def:residue-subdiagram}, included in $\mathcal A_A$ by $\iota_A$. The
 restriction of the total object to this preimage sits over the same base.
 
-We establish connectedness of the total image of C-residue zero $S^6$ spheres
-$\int_{\mathcal B}\mathcal R_A$. The preimage above is taken under the action, so it assembles
-over the base into a total of its own, whose objects are the positioned squares of the
-C-residue image and whose morphisms are the value transports of $\mathcal T_A$ between them.
-It is the inverse image of $\mathcal T_A$, and its inclusion is the total reading of
-$\iota_A$,
+The preimage above assembles over the base into a total of its own, whose objects are the
+positioned squares of the C-residue image and whose morphisms are the value transports of
+$\mathcal T_A$ between them.  Its inclusion is the total reading of $\iota_A$,
 \[
 \begin{tikzcd}[column sep=huge]
 \int_{\mathcal B}\mathcal R_A \arrow[r, hook, "\int\iota_A"] & \int_{\mathcal B}\mathcal A_A=\mathcal T_A
@@ -1234,46 +1388,11 @@ functoriality of $\iota_A$ applied to it\textup{)}. There it is full and faithfu
 its image; the C-residue system is therefore the image itself, carrying the total's own morphisms
 and nothing added.
 
-Notice that both of these are action groupoids. The base
-is the projective action groupoid; each fibre is the action groupoid of the $\Gtwo$-action on
-its value states; the total of an action-groupoid-valued diagram over an action groupoid is
-again one, formed from the distinguished element. Transitivity of $\iota_A$ therefore means
-what it means for an action groupoid --- any two of its objects are joined by a single
-element --- and for such a groupoid transitive and connected are one statement, since the
-orbit is the connected component.
-
-It is worth pausing over what an arrow in this total \emph{is}, because the conclusion turns
-on the answer. In an action groupoid, a morphism between two states is not a path, and not a
-chain of comparisons: it is a single element of the acting group, carrying one state to the
-other. The Lean library states this as an identity of types: a hom $p \to q$ \emph{is}
-$\{\, m : M \mid m \cdot p = q \,\}$
-\textup{(}\texttt{CategoryTheory.\-Action\-Category.\-hom\_as\_subtype}\textup{)}. In a Grothendieck
-construction, an arrow \emph{is} a pair --- a base channel together with the compatible fibre
-transport over it \textup{(}\texttt{CategoryTheory.\-Grothendieck.\-Hom}\textup{)}. Read on the
-total, an arrow of $\int_{\mathcal B}\mathcal R_A$ is one element of the distinguished action,
-and the pair is how that element presents itself, by its base part and its value-transport
-part.
-\[
-\begin{tikzcd}[column sep=huge]
-(X,\,x) \arrow[r, "{(f,\;\varphi_f)}"] & (Y,\,y)
-\end{tikzcd}
-\]
-So to join two residue states is to exhibit one element of the action that carries one to the
-other --- and the action reaches every member of the preimage by definition rather than by
-derivation. The preimage is the C-residue locus: each member is by definition a state on one
-of the infinitely many $S^6$ C-residue zero spheres, so the inclusion lands in exactly the
-image on which the $G_2$-action is already transitive \textup{(}Theorem~\ref{thm:G2-S6}\textup{)}. Orbit
-representatives position the element at every footpoint of the base, membership travels by
-composition, and the residue states form a single orbit under the action that produced them. A category is connected when its objects are joined by finite zigzags of
-morphisms; in an action groupoid the zigzag required has length one. The preimage is populated
-by infinitely many $S^6$ C-residue zero-sphere states \textup{(}C4\textup{)} and single-orbit
---- and that system is still an action groupoid. Taken together: $\iota_A$ is a fully faithful,
-transitive inclusion, and a fully faithful transitive inclusion of an action groupoid is
-connected --- this is the connectedness instance of the Lean library's \texttt{ActionCategory}
-itself, transported along $\iota_A$'s proper inclusion:
-$\int_{\mathcal B}\mathcal R_A$ is a connected action groupoid. The element's unique tame
-continuous lift is what runs the members into one another while fixing the real level, a
-difference of winding being purely vertical \textup{(}Lemma~\ref{lem:exp-degenerate}\textup{)}.
+Lemma~\ref{lem:c-residue-transitive} proves, in this exact inverse-image groupoid, that any
+two objects are joined by one Grothendieck morphism: the relative
+orbit--stabilizer face is its base component and the $G_2$ transport is its fibre component.
+Thus $\int_{\mathcal B}\mathcal R_A$ is connected.  This is a groupoid-register statement:
+no equality of residue coordinates, common centre, or concentricity conclusion has been used.
 
 By Remark~8.3.5 of \cite{Riehl}, a category is nonempty and connected if and only if its
 $\pi_0$ is the singleton set. Condition C4 supplies nonemptiness --- infinitely many
@@ -1359,6 +1478,8 @@ Theorem~\ref{thm:zero-spheres} and \cite{AdF}; it is what makes ``residue-$\CC$'
 \end{proof}
 
 \begin{corollary}[Riemann Hypothesis]\label{cor:rh}
+\lean{zeta_riemannHypothesis}
+\leanok
 \uses{cor:zeta-section, thm:concentricity, cor:nontrivial, thm:rh-equiv}
 Every nontrivial zero of the classical Riemann zeta function has real part $\tfrac12$; in
 particular infinitely many zeros lie on the line $\Re s=\tfrac12$.

@@ -21,8 +21,6 @@ import Concentricity.ZetaWeierstrass
 import Concentricity.ZetaXiMatch
 import Concentricity.ZetaAssembly
 import Concentricity.NormalizedBase
-import Concentricity.NormalizedPoleBridge
-import Concentricity.NormalizedNLeg
 import Concentricity.ProjectiveSection
 import Concentricity.ProjectiveCone
 import Concentricity.ProjectiveTransport

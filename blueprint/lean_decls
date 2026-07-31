@@ -1,3 +1,13 @@
-CategoryTheory.ActionCategory
+G2.exists_smul_eq_of_mem_unitImaginarySphere
+H1
+SphereWorld
+GreatCircle.Base
+GreatCircle.orbitRep_spec
 CategoryTheory.Grothendieck
 CategoryTheory.Grothendieck
+ASection.CResidueZeroLocus
+ASection.AsectionCResidueDiagram
+ASection.AsectionCResidueInclusion
+ASection.sweepTransitive_on_residueSystem
+ASection.concentricity
+zeta_riemannHypothesis

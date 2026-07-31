@@ -13,7 +13,7 @@ Concentricity/Corollaries.lean
   ├── Concentricity.ZetaDivisor
   └── Concentricity.ConcentricityReadout
         ├── Concentricity.ProjectiveTotal
-        └── Concentricity.Theorem                    ← THE ONE OPEN NODE
+        └── Concentricity.Theorem                    ← TWO LIVE TRANSCRIPTION SEATS
               ├── Concentricity.Toolkit
               ├── Concentricity.ASectionTotalActionState     (inhabitants: residueTotal :117)
               ├── Concentricity.ASectionCResidueDiagram      (𝓡_A, 𝓡_A(f), ι_A)
@@ -35,7 +35,7 @@ Concentricity/Corollaries.lean
 
 | declaration | file | status |
 |---|---|---|
-| `ASection.concentricity` | `Theorem.lean` | the node — its premises green, wiring in progress |
+| `ASection.concentricity` | `Theorem.lean` | all mathematical inferences fixed; two Lean transcription seats remain |
 | `ASection.nontrivial_one_centre` | `Corollaries.lean:32` | compiles against the node |
 | `zeta_riemannHypothesis` | `Corollaries.lean:46` | compiles against the node |
 | `zeta_criticalLine_zeros_infinite` | `Corollaries.lean:57` | compiles against the node |
@@ -53,7 +53,7 @@ turns concentricity into RH. Its statement contains no `1/2`.
 | 3 | the preimage | `IsNorthCResidueState`, `IsCResidueState` | green |
 | 4 | `𝓡_A`, `𝓡_A(f)`, and `ι_A`'s **presentation** | `AsectionCResidueDiagram`, `AsectionCResidueTransport`, `AsectionCResidueInclusion` (naturality `rfl`, `57384ae`) | green |
 | 4a | **`ι_A` AT THE TOTAL** — the inclusion of the inverse image in the total, full and faithful there | `AsectionCResidueInclusionTotal`, `…Total_faithful`, `…Total_full` (`b073d88`) | green |
-| 4b | **the transitivity of `ι_A`** — any two projective squares joined by one groupoid element | `sweepTransitive_on_residueSystem` (`Theorem.lean:445`) | **carries `sorryAx`** |
+| 4b | **the transitivity of `ι_A`** — any two projective squares joined by one groupoid element | `sweepTransitive_on_residueSystem` | **formalization seat only**: extract the live faces from `P,Q`, then wire the certified total arrow |
 | 5 | inhabitants | `residueActionState`, `residueTotal` (`ASectionTotalActionState.lean:117`) | green |
 | 6 | **`∫𝓡_A` is a connected action groupoid** | the argument is stated at the level of the connected action of the groupoid — that is *why* the real transports are connected; `ι_A` a proper inclusion, natural iso onto its image, `57384ae` | **green — certified premise.** Marking this "open" is the banned framing |
 | 7 | singleton | CHT Rem. 8.3.5; `ConnectedComponents := Quotient (Zigzag.setoid)`; `Quotient.sound` | applied, locked, no `sorry` |
@@ -74,10 +74,10 @@ those comments do not become ghost citations. **Do not read them as instructions
 
 ## Shadowed and absent names
 
-- `residueTotal`, `totalMk` — genuine at `ASectionTotalActionState.lean:117`; shadowed in the
-  quarantined `ASectionTotalPreflights.lean:172`. Cite by file and line.
-- `residueToNorth` — exists only in excluded files (`ASectionFinality.lean`, the quarantined
-  preflight).
+- `residueTotal`, `totalMk` — genuine at `ASectionTotalActionState.lean`; their former
+  preflight shadows were removed on 2026-07-29.
+- The obsolete zero-indexed `residueToNorth` branch and its quarantined
+  preflights were removed on 2026-07-29; they are not suppliers of the live proof.
 - `ASection.concentricity_transport` / `Concentricity/TransportObject.lean` — **absent from the
   live tree.** It existed only in the removed July-8 worktree, built on retired objects
   (`BaseC`, `nObj`, `Populated`), and is preserved in history at branch

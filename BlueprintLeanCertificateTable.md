@@ -1,0 +1,274 @@
+# Blueprint–Lean certificate table
+
+Generated mechanically from the current master, current Lean sources, and the pinned toolchain.
+The manifest is the single human-ratified mapping from a master clause to a Lean declaration; the generator verifies the exact master anchor, exact Lean type, fresh kernel run, axiom surface, and source fingerprints.
+Regenerate with `scripts/generate_blueprint_lean_table.py`. The generator reads and probes `Concentricity/Theorem.lean`; it does not edit either production seat.
+
+Current count: 9 terminal certificates; 14 inference certificates; 2 unpacked dossier bindings ready; 6 identity bindings unresolved; 2 production seats open.
+
+Certificate meanings:
+
+- `TERMINAL_CERTIFIED`: master `\lean{...}` link + fresh provider build/type check + exact allowed axiom surface.
+- `INFERENCE_CERTIFIED`: exact master-clause anchor + focused current-source kernel proof + exact allowed axiom surface; production wiring may still be open.
+- `OPEN_SEAT`: Lean reached the precise declaration/instantiation/wiring boundary printed below.
+
+Allowed axiom surface: `['propext', 'Classical.choice', 'Quot.sound']`.
+
+## Already terminal-certified
+
+| Master semantics | Lean declaration | Master | Kernel/type | Axioms | Status |
+|---|---|---:|---:|---:|---|
+| G₂ supplies the remaining sphere-direction action | `G2.exists_smul_eq_of_mem_unitImaginarySphere` | ✓ | ✓ | ✓ | `TERMINAL_CERTIFIED` |
+| octonionic action world | `H1` | ✓ | ✓ | ✓ | `TERMINAL_CERTIFIED` |
+| slice-value world | `SphereWorld` | ✓ | ✓ | ✓ | `TERMINAL_CERTIFIED` |
+| projective action-groupoid base | `GreatCircle.Base` | ✓ | ✓ | ✓ | `TERMINAL_CERTIFIED` |
+| chosen orbit representative has the required endpoint | `GreatCircle.orbitRep_spec` | ✓ | ✓ | ✓ | `TERMINAL_CERTIFIED` |
+| total Grothendieck construction | `CategoryTheory.Grothendieck` | ✓ | ✓ | ✓ | `TERMINAL_CERTIFIED` |
+| C-residue zero locus | `ASection.CResidueZeroLocus` | ✓ | ✓ | ✓ | `TERMINAL_CERTIFIED` |
+| C-residue inverse-image diagram | `ASection.AsectionCResidueDiagram` | ✓ | ✓ | ✓ | `TERMINAL_CERTIFIED` |
+| inclusion of the inverse-image diagram in the total action diagram | `ASection.AsectionCResidueInclusion` | ✓ | ✓ | ✓ | `TERMINAL_CERTIFIED` |
+
+## Triple-certified at the level of inference
+
+| Master clause | Focused Lean receipt | Edge | Master/identity | Kernel/type | Axioms | Status |
+|---|---|---|---:|---:|---:|---|
+| a north C-residue state is the exact C3 residue action state | `ASection.northState_is_residueActionState_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:61) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| the north input is D_A⁻¹(sphereZero n) | `ASection.residueActionState_north_input_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:18) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| a north loop acts by C(stabilizerPart k) on the stored input | `ASection.residueActionTransport_north_input_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:26) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| the common source factor cancels in k_E⁻¹ ≫ k_W | `ASection.northRelativeLoop_stabilizer_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:137) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| the relative loop carries the first certified input to the second | `ASection.northRelativeLoop_maps_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:165) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| the two parallel faces and G₂ package the north-fibre morphism | `ASection.northComparison_of_parallelFaces_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:201) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| the same relative calculation holds in the two-legged square functor register | `ASection.relativeActionSquare_transport_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:286) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| g⁻¹ ≫ k ≫ h and fullness produce P ⟶ Q inside ∫R_A | `ASection.residueTotal_morphism_of_northComparison_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:293) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| transitivity of the exact ∫R_A implies IsConnected for that exact ∫R_A | `ASection.residueTotal_isConnected_of_transitive_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:359) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| connectedness of the exact ∫R_A makes π₀ of that exact ∫R_A a singleton | `ASection.residueTotal_pi0_singleton_of_connected_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:374) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| the A-specific val read preserves hkn on the exact π₀(∫R_A) | `ASection.residuePi0_val_congr_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:388) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| the general one-centre corollary is exactly the concentricity conclusion | `ASection.nontrivial_one_centre_of_concentricity_audit` (Concentricity/_GateCorollaryInferenceAudit.lean:13) | `identity` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| the zeta specialization and proved concentricity equivalence imply RH | `zeta_riemannHypothesis_of_concentricity_audit` (Concentricity/_GateCorollaryInferenceAudit.lean:19) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| RH and the proved infinitude imply infinitely many critical-line zeros | `zeta_criticalLine_zeros_infinite_of_RH_audit` (Concentricity/_GateCorollaryInferenceAudit.lean:31) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+
+## Binding identity layer
+
+The first table records the project-specific objects already unpacked from the two arbitrary objects. The second table is the only unresolved identity bridge. A candidate becomes ready only when Lean elaborates the exact expression at the expected type and the author-confirmed hash matches that expression together with the current master and production-source fingerprints.
+
+| Exact project-specific locals | Provenance | Source exact | Kernel reached consumer | Status |
+|---|---|---:|---:|---|
+| `xN, hxN, g, hg` | the inverse-image dossier carried by the arbitrary object P; `obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property` | ✓ | ✓ | `BINDING_READY` |
+| `yN, hyN, h, hh` | the inverse-image dossier carried by the arbitrary object Q; `obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property` | ✓ | ✓ | `BINDING_READY` |
+
+| Paper object | Lean local | Expected type | Candidate expression | Lean elaboration | Author identity confirmation | Status |
+|---|---|---|---|---:|---:|---|
+| the base component k_E of F_A(E_N) | `kE` | `projectiveZero ⟶ projectiveNorth` | — | — | — | `BINDING_UNRESOLVED` |
+| the base component k_W of F_A(W_N) | `kW` | `projectiveZero ⟶ projectiveNorth` | — | — | — | `BINDING_UNRESOLVED` |
+| the common reference input u_* of the fixed tape | `uStar` | `OnePoint ℂ` | — | — | — | `BINDING_UNRESOLVED` |
+| the instantiated boundary equation C(r_E)(u_*) = u_1 | `hE` | `(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kE).1).val uStar = (residueActionState A projectiveNorth n₁ I₁).input.back.coordinate` | — | — | — | `BINDING_UNRESOLVED` |
+| the instantiated boundary equation C(r_W)(u_*) = u_2 | `hW` | `(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kW).1).val uStar = (residueActionState A projectiveNorth n₂ I₂).input.back.coordinate` | — | — | — | `BINDING_UNRESOLVED` |
+| the existing A-specific val/level read on the unique transport class of the exact π₀(∫R_A) | `valA` | `CategoryTheory.ConnectedComponents (Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) → ℝ` | — | — | — | `BINDING_UNRESOLVED` |
+
+### Exact attempt emission
+
+`EXACT ATTEMPT` is mechanically suppressed because at least one consumed binding is `BINDING_UNRESOLVED`. No tactic text is proposed or printed.
+
+## Current production boundary
+
+| Master result | Exact remaining role | Production declaration | Lean contact | Status |
+|---|---|---|---:|---|
+| `lem:c-residue-transitive` | bind and instantiate the exact F_A(E_N) and F_A(W_N) faces, then wire the certified middle morphism | `ASection.sweepTransitive_on_residueSystem` (Concentricity/Theorem.lean:538) | ✓ | `OPEN_SEAT` |
+| `thm:concentricity` | declaration/instantiation only: bind the existing A-specific val to the exact π₀(∫R_A), then instantiate the certified val inference at the exact P_n and P_0 | `ASection.concentricity` (Concentricity/Theorem.lean:757) | ✓ | `OPEN_SEAT` |
+
+The current production run reaches exactly two errors: the north existential in `sweepTransitive_on_residueSystem` and the real-valued equality in `concentricity`. The inference table above is independently green against the exact current source prefix; the open seats do not downgrade those receipts.
+
+## Exact checked types
+
+### `G2.exists_smul_eq_of_mem_unitImaginarySphere`
+
+```lean
+G2.exists_smul_eq_of_mem_unitImaginarySphere : ∀ {u v : Octonion},
+  u ∈ Octonion.unitImaginarySphere → v ∈ Octonion.unitImaginarySphere → ∃ g, g • u = v
+```
+
+### `H1`
+
+```lean
+H1 : Type
+```
+
+### `SphereWorld`
+
+```lean
+SphereWorld : Type
+```
+
+### `GreatCircle.Base`
+
+```lean
+GreatCircle.Base : Type
+```
+
+### `GreatCircle.orbitRep_spec`
+
+```lean
+GreatCircle.orbitRep_spec : ∀ (b : GreatCircle.Point), GreatCircle.orbitRep b • OnePoint.infty = b
+```
+
+### `CategoryTheory.Grothendieck`
+
+```lean
+CategoryTheory.Grothendieck : {C : Type u_1} →
+  [inst : CategoryTheory.Category.{u_2, u_1} C] → CategoryTheory.Functor C CategoryTheory.Cat → Type (max u_1 u_3)
+```
+
+### `ASection.CResidueZeroLocus`
+
+```lean
+ASection.CResidueZeroLocus : ASection → Set ℂ
+```
+
+### `ASection.AsectionCResidueDiagram`
+
+```lean
+ASection.AsectionCResidueDiagram : ASection → CategoryTheory.Functor GreatCircle.Base CategoryTheory.Grpd
+```
+
+### `ASection.AsectionCResidueInclusion`
+
+```lean
+ASection.AsectionCResidueInclusion : (A : ASection) → A.AsectionCResidueDiagram ⟶ A.AsectionActionDiagram
+```
+
+### `ASection.northState_is_residueActionState_audit`
+
+```lean
+ASection.northState_is_residueActionState_audit : ∀ (A : ASection) (zN : ↑(A.AsectionActionFiber projectiveNorth)),
+  A.IsNorthCResidueState zN → ∃ n I, zN = A.residueActionState projectiveNorth n I
+```
+
+### `ASection.residueActionState_north_input_audit`
+
+```lean
+ASection.residueActionState_north_input_audit : ∀ (A : ASection) (n : ℕ) (I : SphereWorld),
+  (ActionCategory.back (A.residueActionState projectiveNorth n I).input).coordinate =
+    ↑A.distinguishedDiskAction⁻¹ ↑(A.sphereZero n)
+```
+
+### `ASection.residueActionTransport_north_input_audit`
+
+```lean
+ASection.residueActionTransport_north_input_audit : ∀ (A : ASection) (n : ℕ) (I : SphereWorld)
+  (k : projectiveNorth ⟶ projectiveNorth),
+  (ActionCategory.back
+        ((A.AsectionActionTransport k).obj (A.residueActionState projectiveNorth n I)).input).coordinate =
+    ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart k)) (↑A.distinguishedDiskAction⁻¹ ↑(A.sphereZero n))
+```
+
+### `ASection.northRelativeLoop_stabilizer_audit`
+
+```lean
+ASection.northRelativeLoop_stabilizer_audit : ∀ {X : GreatCircle.Base} (kE kW : X ⟶ projectiveNorth),
+  GreatCircle.stabilizerPart (Groupoid.inv kE ≫ kW) = GreatCircle.stabilizerPart kW * (GreatCircle.stabilizerPart kE)⁻¹
+```
+
+### `ASection.northRelativeLoop_maps_audit`
+
+```lean
+ASection.northRelativeLoop_maps_audit : ∀ {X : GreatCircle.Base} (kE kW : X ⟶ projectiveNorth) (uStar u₁ u₂ : OnePoint ℂ),
+  ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kE)) uStar = u₁ →
+    ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kW)) uStar = u₂ →
+      ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart (Groupoid.inv kE ≫ kW))) u₁ = u₂
+```
+
+### `ASection.northComparison_of_parallelFaces_audit`
+
+```lean
+ASection.northComparison_of_parallelFaces_audit : ∀ (A : ASection) {X : GreatCircle.Base} (kE kW : X ⟶ projectiveNorth)
+  (xN yN : ↑(A.AsectionActionFiber projectiveNorth)) (uStar : OnePoint ℂ),
+  ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kE)) uStar = (ActionCategory.back xN.input).coordinate →
+    ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kW)) uStar = (ActionCategory.back yN.input).coordinate →
+      Nonempty ((A.AsectionActionTransport (Groupoid.inv kE ≫ kW)).obj xN ⟶ yN)
+```
+
+### `ASection.relativeActionSquare_transport_audit`
+
+```lean
+ASection.relativeActionSquare_transport_audit : ∀ (A : ASection) {source target : ↥Moebius}
+  (E W : ActionTransportSquare source target),
+  (E.inv.comp W).actionStateTransport A = E.inv.actionStateTransport A ⋙ W.actionStateTransport A
+```
+
+### `ASection.residueTotal_morphism_of_northComparison_audit`
+
+```lean
+ASection.residueTotal_morphism_of_northComparison_audit : ∀ (A : ASection)
+  (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)) (xN yN : ↑(A.AsectionActionFiber projectiveNorth))
+  (g : projectiveNorth ⟶ P.base),
+  (A.AsectionActionTransport g).obj xN = P.fiber.obj →
+    ∀ (h : projectiveNorth ⟶ Q.base),
+      (A.AsectionActionTransport h).obj yN = Q.fiber.obj →
+        ∀ (k : projectiveNorth ⟶ projectiveNorth) (φ : (A.AsectionActionTransport k).obj xN ⟶ yN), Nonempty (P ⟶ Q)
+```
+
+### `ASection.residueTotal_isConnected_of_transitive_audit`
+
+```lean
+ASection.residueTotal_isConnected_of_transitive_audit : ∀ (A : ASection),
+  (∀ (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)), Nonempty (P ⟶ Q)) →
+    CategoryTheory.IsConnected (Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat))
+```
+
+### `ASection.residueTotal_pi0_singleton_of_connected_audit`
+
+```lean
+ASection.residueTotal_pi0_singleton_of_connected_audit : ∀ (A : ASection)
+  [CategoryTheory.IsConnected (Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat))]
+  (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),
+  CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q
+```
+
+### `ASection.residuePi0_val_congr_audit`
+
+```lean
+ASection.residuePi0_val_congr_audit : ∀ (A : ASection)
+  (valA : CategoryTheory.ConnectedComponents (Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)) → ℝ)
+  (Pn P0 : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),
+  CategoryTheory.ConnectedComponents.mk Pn = CategoryTheory.ConnectedComponents.mk P0 →
+    valA (CategoryTheory.ConnectedComponents.mk Pn) = valA (CategoryTheory.ConnectedComponents.mk P0)
+```
+
+### `ASection.nontrivial_one_centre_of_concentricity_audit`
+
+```lean
+ASection.nontrivial_one_centre_of_concentricity_audit : ∀ (A : ASection),
+  (∃ c, ∀ (n : ℕ), (A.sphereZero n).re = c) → ∃ c, ∀ (n : ℕ), (A.sphereZero n).re = c
+```
+
+### `zeta_riemannHypothesis_of_concentricity_audit`
+
+```lean
+zeta_riemannHypothesis_of_concentricity_audit : (∃ c, ∀ (n : ℕ), (zetaSection.sphereZero n).re = c) → RiemannHypothesis
+```
+
+### `zeta_criticalLine_zeros_infinite_of_RH_audit`
+
+```lean
+zeta_criticalLine_zeros_infinite_of_RH_audit : RiemannHypothesis → {s | riemannZeta s = 0 ∧ s.re = 1 / 2}.Infinite
+```
+
+## Source fingerprints
+
+| Source | SHA-256 |
+|---|---|
+| `Octonionic_RH_master.tex` | `2d772c108bc9f0854c688757bab96d3461d8c38c243497e1b8aea846c273025b` |
+| `blueprint/lean_certificate_manifest.json` | `da60dcd95e8b3b5773c8ecac25c2b5aaf6ab3e0a9a3f7038ddd50ac6a1b0b581` |
+| `Concentricity/_BlueprintTerminalCertificateProbe.lean` | `2e898992124efa19b135e96f87d14813b03809f27f9cc7a69f85fb8d5f257d37` |
+| `Concentricity/Theorem.lean` | `5c7b44b96f41af65bf62f4e4e04c74419392259d6029112ada438cab36fb3914` |
+| `Concentricity/_GateNorthCResidueTransitivityAudit.lean` | `23b45cc8527129bdad5434c1c93b2d712528925d1cb178d99c0c2118354f6830` |
+| `scripts/build_transitivity_inference_probe.sh` | `e0982829e4937b00e01bda1b7b4a4e767c09f3a907ae65393a4590125a686683` |
+| `Concentricity/_GateCorollaryInferenceAudit.lean` | `8bac693ca5c93deae6b9f1511e3f058efab47a8b657c061fc178176fe5636efb` |
+| `Concentricity/Corollaries.lean` | `4866f494cf62579778905d6dd93b912a868a880b827c4456a060bdb08d441248` |
+| `lean-toolchain` | `efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee` |
+| `lakefile.toml` | `361be5c558f10fbc113a616222d2db2c08c9b353ddb12f0cac6d5ad9a0d0287d` |
+
+Raw kernel output: `blueprint/lean_certificate_probe.txt`.
+Machine-readable evidence: `blueprint/lean_certificate_evidence.json`.
+Composition-free verdict: `blueprint/lean_inference_verdict.txt`.
+Semantic manifest: `blueprint/lean_certificate_manifest.json`.

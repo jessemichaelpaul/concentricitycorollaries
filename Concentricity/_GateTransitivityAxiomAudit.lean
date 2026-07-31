@@ -1,0 +1,15 @@
+import Concentricity.Theorem
+
+noncomputable section
+
+open CategoryTheory
+
+#check ASection.AsectionCResidueInclusion_app_fullyFaithful
+#check ASection.AsectionCResidueInclusionTotal
+
+#check ASection.sweepTransitive_on_residueSystem
+
+#print axioms ASection.AsectionCResidueInclusion_app_fullyFaithful
+#print axioms ASection.AsectionCResidueInclusionTotal_full
+#print axioms ASection.AsectionCResidueInclusionTotal_faithful
+#print axioms ASection.sweepTransitive_on_residueSystem

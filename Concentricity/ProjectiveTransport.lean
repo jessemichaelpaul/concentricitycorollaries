@@ -5,7 +5,6 @@ Authors: Jesse Michael Paul
 -/
 import Concentricity.CayleyDictionary
 import Concentricity.FaithfulApply
-import Concentricity.NormalizedNLeg
 import Concentricity.ProjectiveCone
 
 /-!
