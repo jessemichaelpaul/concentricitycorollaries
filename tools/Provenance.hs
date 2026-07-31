@@ -44,6 +44,15 @@ data Provenance
       { pClause  :: String   -- ^ a clause of the author's paper
       , pAnchor  :: String   -- ^ its \label in the master source
       }
+  -- | An edit to the author's master source. Requires a VERBATIM quote of the
+  --   author's own instruction, which must be found in the session transcript
+  --   (the assistant cannot write into the author's side of the log, so it
+  --   cannot manufacture permission) AND must not already be spent.
+  --   Permission is single-use: one instruction authorises one edit.
+  | MasterEdit
+      { pInstruction :: String -- ^ verbatim quote of the author's instruction
+      , pTarget      :: String -- ^ file being edited
+      }
   deriving (Show)
 
 -- | A claim is a statement plus its provenance. The provenance field has no
@@ -122,9 +131,33 @@ validate repo claim = case cProvenance claim of
     return $ if trim out `notElem` ["", "0"]
       then Right (Verified claim)
       else Left  (Reason claim ("no \\label{" ++ anchor ++ "} in the master source"))
+
+  -- Permission to edit the master must be (a) quoted verbatim from something the
+  -- AUTHOR typed, and (b) not already spent. Both are checked against files the
+  -- assistant cannot forge: the session transcript, and the spent-permission
+  -- ledger. Clearing the ledger revokes nothing retroactively; permission simply
+  -- never persists past the single edit it authorised.
+  MasterEdit instruction target -> do
+    let needle = escapeQ (trim instruction)
+    (found, _, _) <- runIn repo
+      ("python3 tools/user_says.py " ++ needle ++ " 2>/dev/null")
+    (spent, _, _) <- runIn repo
+      ("grep -cF " ++ needle ++ " .provenance-spent 2>/dev/null")
+    if null (trim found)
+      then return $ Left (Reason claim
+             ("no verbatim instruction in the transcript authorising an edit to "
+              ++ target ++ "\n        quoted: " ++ take 90 instruction))
+      else if trim spent `notElem` ["", "0"]
+        then return $ Left (Reason claim
+               "that instruction has already been spent; permission is single-use"
+             )
+        else do
+          _ <- runIn repo ("printf '%s\\n' " ++ needle ++ " >> .provenance-spent")
+          return $ Right (Verified claim)
   where
     baseName = reverse . takeWhile (/= '.') . reverse
     escape   = concatMap (\c -> if c `elem` "[](){}.*+?^$|\\" then ['\\', c] else [c])
+    escapeQ s' = "'" ++ concatMap (\c -> if c == '\'' then "'\\''" else [c]) s' ++ "'"
 
 --------------------------------------------------------------------------------
 -- Parsing the claims file.
@@ -161,10 +194,12 @@ parseClaims = go . filter (not . null) . map trim . lines
     build stmt body =
       case (field "KERNEL" body, field "EXPECT" body,
             field "CERTIFIED" body, field "AXIOMS" body,
-            field "AUTHOR" body, field "ANCHOR" body) of
-        (Just k, Just e, _, _, _, _) -> Right (MathClaim stmt (KernelPrint k e))
-        (_, _, Just d, Just a, _, _) -> Right (MathClaim stmt (Certified d (splitCommas a)))
-        (_, _, _, _, Just c, Just n) -> Right (MathClaim stmt (AuthorRatified c n))
+            field "AUTHOR" body, field "ANCHOR" body,
+            field "MASTEREDIT" body, field "TARGET" body) of
+        (Just k, Just e, _, _, _, _, _, _) -> Right (MathClaim stmt (KernelPrint k e))
+        (_, _, Just d, Just a, _, _, _, _) -> Right (MathClaim stmt (Certified d (splitCommas a)))
+        (_, _, _, _, Just c, Just n, _, _) -> Right (MathClaim stmt (AuthorRatified c n))
+        (_, _, _, _, _, _, Just i, Just t) -> Right (MathClaim stmt (MasterEdit i t))
         _ -> Left ("claim has no usable provenance: " ++ stmt)
 
     field k = fmap (drop (length k + 1)) . lookupPrefix (k ++ " ")
