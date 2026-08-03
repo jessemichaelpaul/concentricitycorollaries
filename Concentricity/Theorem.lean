@@ -533,6 +533,24 @@ theorem ASection.orbitStabilizerActionSquare_inv (A : ASection)
       ASection.ActionTransportSquare.inv, ASection.projectiveArrowElement,
       ASection.cayleyProjective_stabilizerPart_inv k, mul_assoc]
 
+/-- **(S)+(B) ⟹ (I)** (master `lem:c-residue-transitive`).  A boundary face is
+a commuting action square: its `commutes` field *is* the square identity
+`L S = D R`.  Evaluating that at the common input `u_*` of the fixed tape and
+using the C3 boundary reading `L (S u_*) = D u`, cancellation by the Möbius
+automorphism `D` yields the input equation `R u_* = u` — where `R` is the Cayley
+action of the uniquely determined stabilizer part. -/
+theorem ASection.inputEquation_of_boundaryReading
+    {S D : ↥Moebius} (sq : ASection.ActionTransportSquare S D)
+    (uStar u : OnePoint ℂ)
+    (hB : sq.left.val (S.val uStar) = D.val u) :
+    sq.right.val uStar = u := by
+  have h2 : sq.left.val (S.val uStar) = D.val (sq.right.val uStar) := by
+    have h1 : (sq.left * S).val uStar = (D * sq.right).val uStar := by
+      rw [sq.commutes]
+    exact h1
+  rw [hB] at h2
+  exact ((EquivLike.apply_eq_iff_eq (D : OnePoint ℂ ≃ OnePoint ℂ)).mp h2).symm
+
 /-- **(R)** (master `lem:c-residue-transitive`): the relative base arrow's
 transport is the endosquare's transport — the inverse Euler square followed by
 the Weierstrass square, read on the A-generated value states.  The two boundary
