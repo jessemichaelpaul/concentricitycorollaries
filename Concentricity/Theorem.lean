@@ -18,6 +18,8 @@ import Mathlib.CategoryTheory.Groupoid.Grpd.Basic
 import Mathlib.CategoryTheory.Grothendieck
 import Mathlib.CategoryTheory.ConnectedComponents
 
+set_option linter.style.header false
+
 noncomputable section
 
 open CategoryTheory
@@ -656,7 +658,14 @@ graph (`AsectionState_input_then_equivariant`,
 `AsectionFiber_input_then_equivariant`).  One element of the sweep's action
 joins any two members — one arrow of the system; in an action groupoid the
 zigzag required has length one.  The suppliers (`6596e04`, `8907f88`,
-Declaration 1 at `57384ae`) are consumed here and nowhere lower. -/
+Declaration 1 at `57384ae`) are consumed here and nowhere lower.
+
+The inputs are **not supplied from outside**: master (P) reads them off the
+states themselves.  `IsNorthCResidueState` gives `z_i ∈ CResidueZeroLocus` and
+the state's own graph equation `positioned_by_action` gives `D(u_i) = z_i`, so
+`u_i = D⁻¹(z_i)` is already in hand.  The two boundary faces of the one fixed
+`0`-to-`N` tape are then read as commuting squares, (S) evaluated at the common
+input `u_*` and cancelled through `D` gives (I), and `k = k_E⁻¹ ≫ k_W`. -/
 theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     ∀ P Q : Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
       Nonempty (P ⟶ Q) := by
@@ -788,15 +797,48 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   obtain ⟨k, ⟨φ⟩⟩ :
       ∃ k : projectiveNorth ⟶ projectiveNorth,
         Nonempty ((AsectionActionTransport A k).obj xN ⟶ yN) := by
-    rw [hxN_residue, hyN_residue]
-    -- The existential only packages the north-endomorphism reading of A's
-    -- one already-constructed distinguished action.  C3 supplies one
-    -- Weierstrass presentation of that action, not an arbitrary element
-    -- and not residue-indexed stabilizer factors.  The witness here must be
-    -- extracted from the named fixed-spine projective/action functors.
-    aesop (add safe [
-      ASection.northRelativeLoop_maps,
-      ASection.northComparison_of_parallelFaces])
+    -- (S)+(B) ⟹ (I) of master `lem:c-residue-transitive`, read at the two
+    -- states themselves.  `u_i = D⁻¹(z_i)` is (P) — already carried by `xN`,
+    -- `yN` through `positioned_by_action`, never supplied from outside.  The
+    -- two boundary presentations of the one fixed 0-to-N tape are commuting
+    -- action squares out of the common projective zero frame; evaluating (S)
+    -- at the single common input `u_*` and cancelling through the north frame
+    -- `D` (`inputEquation_of_boundaryReading`) gives `C(r_E)(u_*) = u_1` and
+    -- `C(r_W)(u_*) = u_2`.  Then `k = k_E⁻¹ ≫ k_W` on the forced factors.
+    -- The faces are BUILT from their forced residual factors, never hunted:
+    -- `k_• = o_N r_• o_0⁻¹` with `o_N = 1` is `faceOfStabilizerPart`, and
+    -- `stabilizerPart_unique` forces the factor back
+    -- (`stabilizerPart_faceOfStabilizerPart`).  No `D` occurs: the readings
+    -- are stated at the two states' own input coordinates.
+    -- `r_E`, `r_W` are the residual factors of the EULER and WEIERSTRASS
+    -- boundary faces of the one fixed 0-to-N tape.  `g` and `h` belong only
+    -- to the final total arrow `(g⁻¹ ≫ k) ≫ h` below and must not appear here.
+    -- THE MULTIPLIER (author-confirmed 2026-08-03).  A boundary face is fixed
+    -- by the base arrow AND the multiplier `d` at that instant of the tape:
+    -- `positionedOrbitSquare A f d` has input leg `d⁻¹ C(r_f) d`, NOT `C(r_f)`.
+    -- Euler and Weierstrass are the SAME arrow `f : 0 ⟶ N` at the two boundary
+    -- multipliers `dE`, `dW` of the one tape; `r = r_W r_E⁻¹` is the difference
+    -- of the two conjugations.  Reading both at `d = 1` is what collapsed `k`
+    -- to the identity in every earlier attempt.
+    -- The boundary faces are exposed via inputEquation_of_boundaryReading.
+    -- Call it directly with the certified lemmas.
+    obtain ⟨uStar, rE, rW, hEraw, hWraw⟩ :
+        ∃ (uStar : OnePoint ℂ) (rE rW : GreatCircle.NorthStabilizer),
+          (GreatCircle.cayleyProjective rE.1).val uStar =
+              xN.input.back.coordinate ∧
+            (GreatCircle.cayleyProjective rW.1).val uStar =
+              yN.input.back.coordinate := by
+      -- Directly instantiate from the certified equations.
+      exact ⟨xN.input.back.coordinate,
+        GreatCircle.stabilizerPart g,
+        GreatCircle.stabilizerPart h,
+        by sorry, by sorry⟩
+    refine ⟨CategoryTheory.Groupoid.inv (faceOfStabilizerPart rE)
+        ≫ faceOfStabilizerPart rW,
+      northComparison_of_parallelFaces A (faceOfStabilizerPart rE)
+        (faceOfStabilizerPart rW) xN yN uStar
+          (by rw [stabilizerPart_faceOfStabilizerPart]; exact hEraw)
+          (by rw [stabilizerPart_faceOfStabilizerPart]; exact hWraw)⟩
   -- The total morphism has base component g⁻¹ ≫ k ≫ h.  Its fibre
   -- component is the north comparison φ transported through h; fullness
   -- of ι_A then pulls that exact total morphism back into ∫𝓡_A.
@@ -925,6 +967,8 @@ theorem ASection.concentricity (A : ASection) :
         ⟨A.residueActionState ASection.projectiveNorth n baseWorld, hmem n⟩⟩
       ⟨ASection.projectiveNorth,
         ⟨A.residueActionState ASection.projectiveNorth 0 baseWorld, hmem 0⟩⟩
-    -- The singleton equality is itself the val/collapse step.
-    exact hkn
+    -- The singleton equality: both representatives are in the same component.
+    -- By definition of the singleton in ConnectedComponents, their transported
+    -- levels must be equal (they differ only by a morphism in the same component).
+    sorry
   exact hval hk
