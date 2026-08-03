@@ -626,6 +626,28 @@ theorem ASection.northComparison_of_parallelFaces
   exact northRelativeLoop_maps kE kW uStar
     xN.input.back.coordinate yN.input.back.coordinate hE hW
 
+/-- The north comparison stated on the **forced residual factors** themselves.
+Master `lem:c-residue-transitive`: the two boundary faces are built from their
+uniquely determined stabilizer parts `r_E`, `r_W` by orbit--stabilizer, and the
+C3 boundary readings give (I) at a common input `u_*`.  Supplying those two
+readings joins the two north states. -/
+theorem ASection.northComparison_of_residualFactors (A : ASection)
+    (rE rW : GreatCircle.NorthStabilizer)
+    (xN yN : A.AsectionActionFiber ASection.projectiveNorth)
+    (uStar : OnePoint ℂ)
+    (hE : (GreatCircle.cayleyProjective rE.1).val uStar
+            = xN.input.back.coordinate)
+    (hW : (GreatCircle.cayleyProjective rW.1).val uStar
+            = yN.input.back.coordinate) :
+    Nonempty ((A.AsectionActionTransport
+        (CategoryTheory.Groupoid.inv (ASection.faceOfStabilizerPart rE)
+          ≫ ASection.faceOfStabilizerPart rW)).obj xN ⟶ yN) :=
+  ASection.northComparison_of_parallelFaces A
+    (ASection.faceOfStabilizerPart rE) (ASection.faceOfStabilizerPart rW)
+    xN yN uStar
+    (by rw [ASection.stabilizerPart_faceOfStabilizerPart]; exact hE)
+    (by rw [ASection.stabilizerPart_faceOfStabilizerPart]; exact hW)
+
 /-- **THE RESULT** (the author, 2026-07-29, verbatim): *"the A-section
 equivariant functor — which is part of the construction of `ι_A` — is
 transitive on the C-residue system `∫𝓡_A`, hence `∫𝓡_A` is connected."*
