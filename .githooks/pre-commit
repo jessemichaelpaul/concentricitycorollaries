@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Reject any commit that stages a Lean file containing `sorry`.
+#
+# Why this exists: commit 3c82b81 was titled "Complete Seat 1 and Seat 2
+# formalization—both compile successfully". It compiled because the two open
+# steps were filled with `sorry`. `sorry` elaborates to sorryAx, so the build
+# is green and the theorems prove nothing. The claim gate and the receipt
+# importer both refused to certify it; only the commit message said otherwise.
+#
+# Install once:   git config core.hooksPath .githooks
+# Bypass (never routine, and never for a green claim):  git commit --no-verify
+
+set -uo pipefail
+
+staged=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.lean$' || true)
+[ -z "$staged" ] && exit 0
+
+fail=0
+for f in $staged; do
+    [ -f "$f" ] || continue
+    # Match `sorry` only where it is actually a term or tactic, not prose.
+    # Covers: a bare `sorry` line, `:= sorry`, `by sorry`, `, sorry`, `(sorry`.
+    hits=$(git show ":$f" \
+        | grep -nE '^[[:space:]]*sorry[[:space:]]*$|:=[[:space:]]*sorry([^[:alnum:]_]|$)|by[[:space:]]+sorry([^[:alnum:]_]|$)|,[[:space:]]*sorry([^[:alnum:]_]|$)|\([[:space:]]*sorry([^[:alnum:]_]|$)' \
+        | grep -vE '^[0-9]+:[[:space:]]*--' || true)
+    if [ -n "$hits" ]; then
+        if [ "$fail" -eq 0 ]; then
+            echo "pre-commit: refusing — staged Lean sources contain \`sorry\`." >&2
+            echo >&2
+        fi
+        echo "  $f" >&2
+        echo "$hits" | sed 's/^/      /' >&2
+        fail=1
+    fi
+done
+
+if [ "$fail" -ne 0 ]; then
+    cat >&2 <<'MSG'
+
+A file with `sorry` compiles. It does not prove anything: every declaration
+downstream of it carries sorryAx in its axiom surface.
+
+Either finish the step, or replace the `sorry` with an unsolved goal so the
+module is honestly red, then commit that.
+
+To override deliberately:  git commit --no-verify
+MSG
+    exit 1
+fi
+
+exit 0

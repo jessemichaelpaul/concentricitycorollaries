@@ -3,11 +3,11 @@ warning: Concentricity/LogManifold.lean:698:2: The `show` tactic should only be 
 However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
 
 Note: This linter can be disabled with `set_option linter.style.show false`
-⚠ [3647/3653] Replayed Concentricity.FaithfulApply
+⚠ [3644/3653] Replayed Concentricity.FaithfulApply
 warning: Concentricity/FaithfulApply.lean:546:100: This line exceeds the 100 character limit, please shorten it!
 
 Note: This linter can be disabled with `set_option linter.style.longLine false`
-⚠ [3650/3653] Replayed Concentricity.ASectionFunctor
+⚠ [3649/3653] Replayed Concentricity.ASectionFunctor
 warning: Concentricity/ASectionFunctor.lean:719:7: Variable name `hstart` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
@@ -64,7 +64,7 @@ ASection.AsectionCResidueInclusion : (A : ASection) → A.AsectionCResidueDiagra
 
 
 ===== TRANSITIVITY INFERENCE PROBE =====
-/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:62:31: warning: This simp argument is unused:
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:64:31: warning: This simp argument is unused:
   Functor.comp_obj
 
 Hint: Omit it from the simp argument list.
@@ -73,7 +73,7 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:62:67: warning: This simp argument is unused:
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:64:67: warning: This simp argument is unused:
   types_comp_apply
 
 Hint: Omit it from the simp argument list.
@@ -82,7 +82,7 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:63:10: warning: This simp argument is unused:
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:65:10: warning: This simp argument is unused:
   TypeCat.ofHom_apply
 
 Hint: Omit it from the simp argument list.
@@ -91,7 +91,7 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:63:31: warning: This simp argument is unused:
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:65:31: warning: This simp argument is unused:
   Functor.mapConnectedComponents_mk
 
 Hint: Omit it from the simp argument list.
@@ -99,7 +99,7 @@ Hint: Omit it from the simp argument list.
             TypeCat.ofHom_apply, F̵u̵n̵c̵t̵o̵r̵.̵m̵a̵p̵C̵o̵n̵n̵e̵c̵t̵e̵d̵C̵o̵m̵p̵o̵n̵e̵n̵t̵s̵_̵m̵k̵,̵Functor.const_obj_obj, Functor.const_obj_map, types_id_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:64:10: warning: This simp argument is unused:
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:66:10: warning: This simp argument is unused:
   Functor.const_obj_obj
 
 Hint: Omit it from the simp argument list.
@@ -108,7 +108,7 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:64:56: warning: This simp argument is unused:
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:66:56: warning: This simp argument is unused:
   types_id_apply
 
 Hint: Omit it from the simp argument list.
@@ -244,7 +244,7 @@ zeta_criticalLine_zeros_infinite_of_RH_audit : RiemannHypothesis → {s | rieman
 
 
 ===== CURRENT PRODUCTION PROBE =====
-Concentricity/Theorem.lean:62:31: warning: This simp argument is unused:
+Concentricity/Theorem.lean:64:31: warning: This simp argument is unused:
   Functor.comp_obj
 
 Hint: Omit it from the simp argument list.
@@ -253,7 +253,7 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-Concentricity/Theorem.lean:62:67: warning: This simp argument is unused:
+Concentricity/Theorem.lean:64:67: warning: This simp argument is unused:
   types_comp_apply
 
 Hint: Omit it from the simp argument list.
@@ -262,7 +262,7 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-Concentricity/Theorem.lean:63:10: warning: This simp argument is unused:
+Concentricity/Theorem.lean:65:10: warning: This simp argument is unused:
   TypeCat.ofHom_apply
 
 Hint: Omit it from the simp argument list.
@@ -271,7 +271,7 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-Concentricity/Theorem.lean:63:31: warning: This simp argument is unused:
+Concentricity/Theorem.lean:65:31: warning: This simp argument is unused:
   Functor.mapConnectedComponents_mk
 
 Hint: Omit it from the simp argument list.
@@ -279,7 +279,7 @@ Hint: Omit it from the simp argument list.
             TypeCat.ofHom_apply, F̵u̵n̵c̵t̵o̵r̵.̵m̵a̵p̵C̵o̵n̵n̵e̵c̵t̵e̵d̵C̵o̵m̵p̵o̵n̵e̵n̵t̵s̵_̵m̵k̵,̵Functor.const_obj_obj, Functor.const_obj_map, types_id_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-Concentricity/Theorem.lean:64:10: warning: This simp argument is unused:
+Concentricity/Theorem.lean:66:10: warning: This simp argument is unused:
   Functor.const_obj_obj
 
 Hint: Omit it from the simp argument list.
@@ -288,7 +288,7 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-Concentricity/Theorem.lean:64:56: warning: This simp argument is unused:
+Concentricity/Theorem.lean:66:56: warning: This simp argument is unused:
   types_id_apply
 
 Hint: Omit it from the simp argument list.
@@ -297,45 +297,447 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲F̵u̵n̵c̵t̵o̵r̵.̵c̵o̵n̵s̵t̵_̵o̵b̵j̵_̵m̵a̵p̵,̵ ̵t̵y̵p̵e̵s̵_̵i̵d̵_̵a̵p̵p̵l̵y̵]̵F̲u̲n̲c̲t̲o̲r̲.̲c̲o̲n̲s̲t̲_̲o̲b̲j̲_̲m̲a̲p̲]̲
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-Concentricity/Theorem.lean:798:4: warning: aesop: failed to prove the goal after exhaustive search.
-Concentricity/Theorem.lean:791:64: error: unsolved goals
+Concentricity/Theorem.lean:833:6: error: don't know how to synthesize placeholder
+context:
+case boundaryFaceReadings
 A : ASection
 P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
 g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
 h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
 squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
   ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
 squareQ : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame Q.base) :=
   ⋯.mp (A.positionedOrbitSquare h 1)
+squareQ_eq : squareQ = A.orbitStabilizerActionSquare h
+squareQ_transport : squareQ.actionStateTransport A = A.AsectionActionTransport h
+northState_is_residueActionState :
+  ∀ (zN : ↑(A.AsectionActionFiber projectiveNorth)),
+    A.IsNorthCResidueState zN → ∃ n I, zN = A.residueActionState projectiveNorth n I
 n₁ : ℕ
 I₁ : SphereWorld
+hxN_residue : xN = A.residueActionState projectiveNorth n₁ I₁
 n₂ : ℕ
 I₂ : SphereWorld
-squareP_eq : cast ⋯ (A.positionedOrbitSquare g 1) = A.orbitStabilizerActionSquare g
-squareP_transport : (A.orbitStabilizerActionSquare g).actionStateTransport A = A.AsectionActionTransport g
-squareQ_eq : cast ⋯ (A.positionedOrbitSquare h 1) = A.orbitStabilizerActionSquare h
-squareQ_transport : (A.orbitStabilizerActionSquare h).actionStateTransport A = A.AsectionActionTransport h
+hyN_residue : yN = A.residueActionState projectiveNorth n₂ I₂
+⊢ ∃ uStar rE rW,
+    ↑(GreatCircle.cayleyProjective ↑rE) uStar = (ActionCategory.back xN.input).coordinate ∧
+      ↑(GreatCircle.cayleyProjective ↑rW) uStar = (ActionCategory.back yN.input).coordinate
+Concentricity/Theorem.lean:718:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
+squareQ : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame Q.base) :=
+  ⋯.mp (A.positionedOrbitSquare h 1)
+squareQ_eq : squareQ = A.orbitStabilizerActionSquare h
+squareQ_transport : squareQ.actionStateTransport A = A.AsectionActionTransport h
 northState_is_residueActionState :
-  ∀ (zN : A.AsectionActionStateWorld (A.projectiveObjectFrame projectiveNorth)),
+  ∀ (zN : ↑(A.AsectionActionFiber projectiveNorth)),
     A.IsNorthCResidueState zN → ∃ n I, zN = A.residueActionState projectiveNorth n I
-hxN : A.IsNorthCResidueState (A.residueActionState projectiveNorth n₁ I₁)
-hg : (A.AsectionActionTransport g).obj (A.residueActionState projectiveNorth n₁ I₁) = P.fiber.obj
-hyN : A.IsNorthCResidueState (A.residueActionState projectiveNorth n₂ I₂)
-hh : (A.AsectionActionTransport h).obj (A.residueActionState projectiveNorth n₂ I₂) = Q.fiber.obj
-⊢ ∃ k,
-    Nonempty
-      ((A.AsectionActionTransport k).obj (A.residueActionState projectiveNorth n₁ I₁) ⟶
-        A.residueActionState projectiveNorth n₂ I₂)
-Concentricity/Theorem.lean:930:4: error: Type mismatch
-  hkn
-has type
+⊢ Nonempty (P ⟶ Q)
+Concentricity/Theorem.lean:710:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
+squareQ : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame Q.base) :=
+  ⋯.mp (A.positionedOrbitSquare h 1)
+squareQ_eq : squareQ = A.orbitStabilizerActionSquare h
+squareQ_transport : squareQ.actionStateTransport A = A.AsectionActionTransport h
+⊢ Nonempty (P ⟶ Q)
+Concentricity/Theorem.lean:703:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
+squareQ : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame Q.base) :=
+  ⋯.mp (A.positionedOrbitSquare h 1)
+squareQ_eq : squareQ = A.orbitStabilizerActionSquare h
+⊢ Nonempty (P ⟶ Q)
+Concentricity/Theorem.lean:699:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
+squareQ : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame Q.base) :=
+  ⋯.mp (A.positionedOrbitSquare h 1)
+⊢ Nonempty (P ⟶ Q)
+Concentricity/Theorem.lean:695:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
+⊢ Nonempty (P ⟶ Q)
+Concentricity/Theorem.lean:688:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+⊢ Nonempty (P ⟶ Q)
+Concentricity/Theorem.lean:684:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+⊢ Nonempty (P ⟶ Q)
+Concentricity/Theorem.lean:960:49: error: unsolved goals
+A : ASection
+n : ℕ
+hmem : ∀ (m : ℕ), A.IsCResidueState projectiveNorth (A.residueActionState projectiveNorth m baseWorld)
+hk hsingleton :
+  ∀ (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),
+    CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q
+hkn :
   CategoryTheory.ConnectedComponents.mk
       { base := projectiveNorth, fiber := { obj := A.residueActionState projectiveNorth n baseWorld, property := ⋯ } } =
     CategoryTheory.ConnectedComponents.mk
       { base := projectiveNorth, fiber := { obj := A.residueActionState projectiveNorth 0 baseWorld, property := ⋯ } }
-but is expected to have type
-  A.transportLevel n = A.transportLevel 0
+⊢ A.transportLevel n = A.transportLevel 0
+Concentricity/Theorem.lean:920:49: error: unsolved goals
+A : ASection
+n : ℕ
+hmem : ∀ (m : ℕ), A.IsCResidueState projectiveNorth (A.residueActionState projectiveNorth m baseWorld)
+hk :
+  ∀ (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),
+    CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q
+hval :
+  (∀ (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),
+      CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q) →
+    A.transportLevel n = A.transportLevel 0
+⊢ (A.sphereZero n).re = A.transportLevel 0
+Concentricity/Theorem.lean:971:4: error: unexpected token '?'; expected 'binder_predicate'
 
 
 ===== BINDING IDENTITY PROBE =====
-No candidate expressions supplied; probe suppressed.
+seat1.kE: probe source or unique anchor unavailable
+
+seat1.kW: probe source or unique anchor unavailable
+
+seat1.uStar: probe source or unique anchor unavailable
+
+seat1.hE: probe source or unique anchor unavailable
+
+seat1.hW: probe source or unique anchor unavailable
+
+===== seat2.transportLevelCollapse =====
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:64:31: warning: This simp argument is unused:
+  Functor.comp_obj
+
+Hint: Omit it from the simp argument list.
+  simp only [pi0Functor, F̵u̵n̵c̵t̵o̵r̵.̵c̵o̵m̵p̵_̵o̵b̵j̵,̵ ̵Functor.comp_map, types_comp_apply, TypeCat.ofHom_apply,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲Functor.mapConnectedComponents_mk, Functor.const_obj_obj, Functor.const_obj_map,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:64:67: warning: This simp argument is unused:
+  types_comp_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [pi0Functor, Functor.comp_obj, Functor.comp_map, t̵y̵p̵e̵s̵_̵c̵o̵m̵p̵_̵a̵p̵p̵l̵y̵,̵TypeCat.ofHom_apply,
+            Functor.mapConnectedComponents_mk, Functor.const_obj_obj, Functor.const_obj_map,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:65:10: warning: This simp argument is unused:
+  TypeCat.ofHom_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [pi0Functor, Functor.comp_obj, Functor.comp_map, types_comp_apply,
+            T̵y̵p̵e̵C̵a̵t̵.̵o̵f̵H̵o̵m̵_̵a̵p̵p̵l̵y̵,̵ ̵Functor.mapConnectedComponents_mk, Functor.const_obj_obj, Functor.const_obj_map,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:65:31: warning: This simp argument is unused:
+  Functor.mapConnectedComponents_mk
+
+Hint: Omit it from the simp argument list.
+  simp only [pi0Functor, Functor.comp_obj, Functor.comp_map, types_comp_apply,
+            TypeCat.ofHom_apply, F̵u̵n̵c̵t̵o̵r̵.̵m̵a̵p̵C̵o̵n̵n̵e̵c̵t̵e̵d̵C̵o̵m̵p̵o̵n̵e̵n̵t̵s̵_̵m̵k̵,̵Functor.const_obj_obj, Functor.const_obj_map, types_id_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:66:10: warning: This simp argument is unused:
+  Functor.const_obj_obj
+
+Hint: Omit it from the simp argument list.
+  simp only [pi0Functor, Functor.comp_obj, Functor.comp_map, types_comp_apply,
+            TypeCat.ofHom_apply, Functor.mapConnectedComponents_mk, F̵u̵n̵c̵t̵o̵r̵.̵c̵o̵n̵s̵t̵_̵o̵b̵j̵_̵o̵b̵j̵,̵ ̵Functor.const_obj_map,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲types_id_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:66:56: warning: This simp argument is unused:
+  types_id_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [pi0Functor, Functor.comp_obj, Functor.comp_map, types_comp_apply,
+            TypeCat.ofHom_apply, Functor.mapConnectedComponents_mk, Functor.const_obj_obj,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲F̵u̵n̵c̵t̵o̵r̵.̵c̵o̵n̵s̵t̵_̵o̵b̵j̵_̵m̵a̵p̵,̵ ̵t̵y̵p̵e̵s̵_̵i̵d̵_̵a̵p̵p̵l̵y̵]̵F̲u̲n̲c̲t̲o̲r̲.̲c̲o̲n̲s̲t̲_̲o̲b̲j̲_̲m̲a̲p̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:833:6: error: don't know how to synthesize placeholder
+context:
+case boundaryFaceReadings
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
+squareQ : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame Q.base) :=
+  ⋯.mp (A.positionedOrbitSquare h 1)
+squareQ_eq : squareQ = A.orbitStabilizerActionSquare h
+squareQ_transport : squareQ.actionStateTransport A = A.AsectionActionTransport h
+northState_is_residueActionState :
+  ∀ (zN : ↑(A.AsectionActionFiber projectiveNorth)),
+    A.IsNorthCResidueState zN → ∃ n I, zN = A.residueActionState projectiveNorth n I
+n₁ : ℕ
+I₁ : SphereWorld
+hxN_residue : xN = A.residueActionState projectiveNorth n₁ I₁
+n₂ : ℕ
+I₂ : SphereWorld
+hyN_residue : yN = A.residueActionState projectiveNorth n₂ I₂
+⊢ ∃ uStar rE rW,
+    ↑(GreatCircle.cayleyProjective ↑rE) uStar = (ActionCategory.back xN.input).coordinate ∧
+      ↑(GreatCircle.cayleyProjective ↑rW) uStar = (ActionCategory.back yN.input).coordinate
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:718:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
+squareQ : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame Q.base) :=
+  ⋯.mp (A.positionedOrbitSquare h 1)
+squareQ_eq : squareQ = A.orbitStabilizerActionSquare h
+squareQ_transport : squareQ.actionStateTransport A = A.AsectionActionTransport h
+northState_is_residueActionState :
+  ∀ (zN : ↑(A.AsectionActionFiber projectiveNorth)),
+    A.IsNorthCResidueState zN → ∃ n I, zN = A.residueActionState projectiveNorth n I
+⊢ Nonempty (P ⟶ Q)
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:710:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
+squareQ : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame Q.base) :=
+  ⋯.mp (A.positionedOrbitSquare h 1)
+squareQ_eq : squareQ = A.orbitStabilizerActionSquare h
+squareQ_transport : squareQ.actionStateTransport A = A.AsectionActionTransport h
+⊢ Nonempty (P ⟶ Q)
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:703:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
+squareQ : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame Q.base) :=
+  ⋯.mp (A.positionedOrbitSquare h 1)
+squareQ_eq : squareQ = A.orbitStabilizerActionSquare h
+⊢ Nonempty (P ⟶ Q)
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:699:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
+squareQ : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame Q.base) :=
+  ⋯.mp (A.positionedOrbitSquare h 1)
+⊢ Nonempty (P ⟶ Q)
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:695:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+squareP_transport : squareP.actionStateTransport A = A.AsectionActionTransport g
+⊢ Nonempty (P ⟶ Q)
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:688:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+squareP_eq : squareP = A.orbitStabilizerActionSquare g
+⊢ Nonempty (P ⟶ Q)
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:684:2: error: don't know how to synthesize placeholder
+context:
+A : ASection
+P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+xN : ↑(A.AsectionActionFiber projectiveNorth)
+hxN : A.IsNorthCResidueState xN
+g : projectiveNorth ⟶ P.base
+hg : (A.AsectionActionTransport g).obj xN = P.fiber.obj
+yN : ↑(A.AsectionActionFiber projectiveNorth)
+hyN : A.IsNorthCResidueState yN
+h : projectiveNorth ⟶ Q.base
+hh : (A.AsectionActionTransport h).obj yN = Q.fiber.obj
+squareP : ActionTransportSquare (A.projectiveObjectFrame projectiveNorth) (A.projectiveObjectFrame P.base) :=
+  ⋯.mp (A.positionedOrbitSquare g 1)
+⊢ Nonempty (P ⟶ Q)
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:960:49: error: unsolved goals
+A : ASection
+n : ℕ
+hmem : ∀ (m : ℕ), A.IsCResidueState projectiveNorth (A.residueActionState projectiveNorth m baseWorld)
+hk hsingleton :
+  ∀ (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),
+    CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q
+⊢ A.transportLevel n = A.transportLevel 0
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:920:49: error: unsolved goals
+A : ASection
+n : ℕ
+hmem : ∀ (m : ℕ), A.IsCResidueState projectiveNorth (A.residueActionState projectiveNorth m baseWorld)
+hk :
+  ∀ (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),
+    CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q
+hval :
+  (∀ (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),
+      CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q) →
+    A.transportLevel n = A.transportLevel 0
+⊢ (A.sphereZero n).re = A.transportLevel 0
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T/concentricity-binding-probe-0wmhtgdq.lean:962:0: error: unexpected token 'have'; expected command

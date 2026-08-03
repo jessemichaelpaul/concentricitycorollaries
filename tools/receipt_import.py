@@ -245,13 +245,39 @@ def record_attempt(row, command, green, output):
     except ValueError:
         return
     path.parent.mkdir(parents=True, exist_ok=True)
+    # CANDIDATE versus RATIFIED.  The silence gate requires every turn to end
+    # with a term put to Lean; the ratification check requires the author to
+    # have ratified an expression before the probe runs.  Both are right, and
+    # together they made a first attempt at any row impossible.  The missing
+    # thing is a distinction in the record, not a relaxation of either gate.
+    #
+    # A CANDIDATE_ATTEMPT is real kernel contact and satisfies the silence gate.
+    # It never carries the author's imprimatur.  On 2026-08-02 seven candidates
+    # were filed indistinguishably from ratified attempts, which is exactly what
+    # made a log of the model's own objects look like evidence.
+    expression = str(row.get("exact_expression", ""))
+    ratified = False
+    try:
+        master = CFG.get("master")
+        if master and (ROOT / str(master)).exists():
+            rows, error = author_registry(sha256(ROOT / str(master)))
+            entry_row = rows.get(str(row.get("id", ""))) if not error else None
+            ratified = bool(
+                entry_row
+                and entry_row.get("author_confirmed") is True
+                and str(entry_row.get("exact_expression", "")).strip() == expression.strip()
+            )
+    except Exception:
+        ratified = False
     entry = {
         "id": str(row.get("id", "")),
         "target_declaration": str(row.get("target_declaration", "")),
-        "exact_expression": str(row.get("exact_expression", "")),
+        "exact_expression": expression,
         "command": command,
         "kernel_green": bool(green),
         "kernel_output": output[:4000],
+        "ratified": ratified,
+        "status": "RATIFIED_ATTEMPT" if ratified else "CANDIDATE_ATTEMPT",
     }
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(entry, ensure_ascii=False) + "\n")
