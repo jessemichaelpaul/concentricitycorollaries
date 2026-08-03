@@ -495,6 +495,60 @@ theorem ASection.northRelativeLoop_maps {X : GreatCircle.Base}
   rw [← hE]
   simpa using hW
 
+/-- Inversion sends a stabilizer part to its inverse (master `lem:c-residue-
+transitive`, (R)).  This is the `hinv` argument already used inline inside
+`northRelativeLoop_maps`, hoisted so both consumers share one proof. -/
+theorem ASection.stabilizerPart_inv {X : GreatCircle.Base}
+    (k : X ⟶ ASection.projectiveNorth) :
+    GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv k)
+      = (GreatCircle.stabilizerPart k)⁻¹ := by
+  have hmul :
+      GreatCircle.stabilizerPart k *
+          GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv k) = 1 := by
+    calc
+      GreatCircle.stabilizerPart k *
+            GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv k) =
+          GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv k ≫ k) :=
+        (GreatCircle.stabilizerPart_comp (CategoryTheory.Groupoid.inv k) k).symm
+      _ = GreatCircle.stabilizerPart (𝟙 ASection.projectiveNorth) :=
+        congrArg GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv_comp k)
+      _ = 1 := GreatCircle.stabilizerPart_id ASection.projectiveNorth
+  exact eq_inv_of_mul_eq_one_right hmul
+
+/-- The Cayley reading of the same fact; `cayleyProjective` is a monoid map. -/
+theorem ASection.cayleyProjective_stabilizerPart_inv {X : GreatCircle.Base}
+    (k : X ⟶ ASection.projectiveNorth) :
+    (GreatCircle.cayleyProjective (GreatCircle.stabilizerPart k).1)⁻¹
+      = GreatCircle.cayleyProjective
+          (GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv k)).1 := by
+  rw [ASection.stabilizerPart_inv k, Subgroup.coe_inv, map_inv]
+
+/-- Reversing a boundary square is the square of the reversed base arrow. -/
+theorem ASection.orbitStabilizerActionSquare_inv (A : ASection)
+    {X : GreatCircle.Base} (k : X ⟶ ASection.projectiveNorth) :
+    (A.orbitStabilizerActionSquare k).inv
+      = A.orbitStabilizerActionSquare (CategoryTheory.Groupoid.inv k) := by
+  apply ASection.ActionTransportSquare.ext <;>
+    simp [ASection.orbitStabilizerActionSquare,
+      ASection.ActionTransportSquare.inv, ASection.projectiveArrowElement,
+      ASection.cayleyProjective_stabilizerPart_inv k, mul_assoc]
+
+/-- **(R)** (master `lem:c-residue-transitive`): the relative base arrow's
+transport is the endosquare's transport — the inverse Euler square followed by
+the Weierstrass square, read on the A-generated value states.  The two boundary
+presentations are parallel squares `S ⟶ D` with `D = A.distinguishedDiskAction`
+by `projectiveObjectFrame_north`. -/
+theorem ASection.relativeSquare_transport (A : ASection)
+    {X : GreatCircle.Base} (kE kW : X ⟶ ASection.projectiveNorth) :
+    A.AsectionActionTransport (CategoryTheory.Groupoid.inv kE ≫ kW)
+      = ((A.orbitStabilizerActionSquare kE).inv.comp
+          (A.orbitStabilizerActionSquare kW)).actionStateTransport A := by
+  rw [ASection.ActionTransportSquare.actionStateTransport_comp,
+      A.AsectionActionTransport_comp]
+  congr 1
+  · rw [ASection.orbitStabilizerActionSquare_inv]
+    rfl
+
 /-- Two A-specific parallel boundary faces of the one fixed tape give the
 relative north transport; the coordinate comparison and `G₂` action package
 it as the required morphism in the north action fibre. -/
