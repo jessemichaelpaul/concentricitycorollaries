@@ -533,6 +533,35 @@ theorem ASection.orbitStabilizerActionSquare_inv (A : ASection)
       ASection.ActionTransportSquare.inv, ASection.projectiveArrowElement,
       ASection.cayleyProjective_stabilizerPart_inv k, mul_assoc]
 
+/-- **The boundary face of a forced residual factor** (master
+`lem:c-residue-transitive`).  Orbit--stabilizer gives `k_• = o_N r_• o_0⁻¹`,
+and at the north frame `o_N = 1`.  So a boundary face out of the common
+projective zero frame is built FROM its residual stabilizer part, rather than
+searched for: the factorization is the constructor. -/
+def ASection.faceOfStabilizerPart (r : GreatCircle.NorthStabilizer) :
+    GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ ASection.projectiveNorth :=
+  ⟨r.1 * (GreatCircle.orbitRep ((0 : ℝ) : GreatCircle.Point))⁻¹, by
+    have h0 : (GreatCircle.orbitRep ((0 : ℝ) : GreatCircle.Point))⁻¹ •
+        (((0 : ℝ) : GreatCircle.Point)) = (OnePoint.infty : GreatCircle.Point) := by
+      rw [inv_smul_eq_iff]
+      exact (GreatCircle.orbitRep_spec ((0 : ℝ) : GreatCircle.Point)).symm
+    change (r.1 * (GreatCircle.orbitRep ((0 : ℝ) : GreatCircle.Point))⁻¹) •
+      (((0 : ℝ) : GreatCircle.Point)) = (OnePoint.infty : GreatCircle.Point)
+    rw [mul_smul, h0]
+    exact r.2⟩
+
+/-- `stabilizerPart_unique` identifies that face's residual factor as exactly
+the one it was built from — the uniqueness half of master (R). -/
+theorem ASection.stabilizerPart_faceOfStabilizerPart
+    (r : GreatCircle.NorthStabilizer) :
+    GreatCircle.stabilizerPart (ASection.faceOfStabilizerPart r) = r :=
+  (GreatCircle.stabilizerPart_unique _ r (by
+    show r.1 * (GreatCircle.orbitRep ((0 : ℝ) : GreatCircle.Point))⁻¹ = _
+    rw [show (CategoryTheory.ActionCategory.back ASection.projectiveNorth)
+          = (OnePoint.infty : GreatCircle.Point) from rfl,
+        GreatCircle.orbitRep_infty, one_mul]
+    rfl)).symm
+
 /-- **(S)+(B) ⟹ (I)** (master `lem:c-residue-transitive`).  A boundary face is
 a commuting action square: its `commutes` field *is* the square identity
 `L S = D R`.  Evaluating that at the common input `u_*` of the fixed tape and
