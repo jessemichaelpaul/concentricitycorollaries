@@ -31,12 +31,30 @@
     ],
     "evidence": "blueprint/lean_certificate_evidence.json"
   },
+  "author_binding_registry": ".provenance/author_bindings.json",
+  "release_build_commands": [
+    ["lake", "env", "lean", "Concentricity/Theorem.lean"],
+    ["lake", "build", "Concentricity"]
+  ],
+  "release_targets": [
+    {
+      "declaration": "ASection.concentricity",
+      "module": "Concentricity.Theorem",
+      "expected_axioms": ["propext", "Classical.choice", "Quot.sound"]
+    },
+    {
+      "declaration": "zeta_riemannHypothesis",
+      "module": "Concentricity.Corollaries",
+      "expected_axioms": ["propext", "Classical.choice", "Quot.sound"]
+    }
+  ],
   "active_register_surface": "seat1-transitivity",
   "register_surfaces": {
     "seat1-transitivity": {
       "note": "transitivity of the C-residue total; o_N = 1, stabilizerPart_unique",
       "allow": [
         "Concentricity/Theorem.lean",
+        "Concentricity/ASectionFunctor.lean",
         "Concentricity/ASectionCResidueDiagram.lean",
         "Concentricity/ASectionCResidueInverseImage.lean",
         "Octonionic_RH_master.tex",

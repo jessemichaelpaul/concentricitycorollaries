@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "master": "Octonionic_RH_master.tex",
+  "master_sha256": "2af455a80c111536cf748b9e6b169440ed1e73a33460f48148edb24fa2e7d0c2",
+  "bindings": [
+    {
+      "id": "seat1.kE",
+      "master": "lem:c-residue-transitive",
+      "paper_object": "the base component k_E of F_A(E_N)",
+      "expected_type": "GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth",
+      "required_master_declarations": [
+        "ASection.sweepTransitive_on_residueSystem",
+        "ASection.northRelativeLoop_maps",
+        "ASection.northComparison_of_parallelFaces"
+      ],
+      "target_declaration": "ASection.northComparison_of_parallelFaces",
+      "lean_local": "kE",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    aesop (add safe [",
+      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}",
+      "exact_expression": "",
+      "author_confirmed": true
+    },
+    {
+      "id": "seat1.kW",
+      "master": "lem:c-residue-transitive",
+      "paper_object": "the base component k_W of F_A(W_N)",
+      "expected_type": "GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth",
+      "required_master_declarations": [
+        "ASection.sweepTransitive_on_residueSystem",
+        "ASection.northRelativeLoop_maps",
+        "ASection.northComparison_of_parallelFaces"
+      ],
+      "target_declaration": "ASection.northComparison_of_parallelFaces",
+      "lean_local": "kW",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    aesop (add safe [",
+      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}",
+      "exact_expression": "",
+      "author_confirmed": true
+    },
+    {
+      "id": "seat1.uStar",
+      "master": "lem:c-residue-transitive",
+      "paper_object": "the common reference input u_* of the fixed tape",
+      "expected_type": "OnePoint ℂ",
+      "required_master_declarations": [
+        "ASection.sweepTransitive_on_residueSystem",
+        "ASection.northRelativeLoop_maps",
+        "ASection.northComparison_of_parallelFaces"
+      ],
+      "target_declaration": "ASection.northComparison_of_parallelFaces",
+      "lean_local": "uStar",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    aesop (add safe [",
+      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}",
+      "exact_expression": "",
+      "author_confirmed": true
+    },
+    {
+      "id": "seat1.hE",
+      "master": "lem:c-residue-transitive",
+      "paper_object": "the instantiated boundary equation C(r_E)(u_*) = u_1",
+      "expected_type": "(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kE).1).val uStar = (residueActionState A projectiveNorth n₁ I₁).input.back.coordinate",
+      "required_master_declarations": [
+        "ASection.sweepTransitive_on_residueSystem",
+        "ASection.northRelativeLoop_maps",
+        "ASection.northComparison_of_parallelFaces"
+      ],
+      "target_declaration": "ASection.northComparison_of_parallelFaces",
+      "lean_local": "hE",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    aesop (add safe [",
+      "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
+      "exact_expression": "",
+      "author_confirmed": true
+    },
+    {
+      "id": "seat1.hW",
+      "master": "lem:c-residue-transitive",
+      "paper_object": "the instantiated boundary equation C(r_W)(u_*) = u_2",
+      "expected_type": "(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kW).1).val uStar = (residueActionState A projectiveNorth n₂ I₂).input.back.coordinate",
+      "required_master_declarations": [
+        "ASection.sweepTransitive_on_residueSystem",
+        "ASection.northRelativeLoop_maps",
+        "ASection.northComparison_of_parallelFaces"
+      ],
+      "target_declaration": "ASection.northComparison_of_parallelFaces",
+      "lean_local": "hW",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    aesop (add safe [",
+      "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
+      "exact_expression": "",
+      "author_confirmed": true
+    },
+    {
+      "id": "seat2.transportLevelCollapse",
+      "master": "thm:concentricity",
+      "paper_object": "the post-collapse residue read instantiated at the n-th and 0-th certified representatives",
+      "expected_type": "A.transportLevel n = A.transportLevel 0",
+      "required_master_declarations": [
+        "ASection.residueTotal_pi0_singleton",
+        "ASection.transportLevel"
+      ],
+      "target_declaration": "ASection.transportLevel",
+      "lean_local": "hkn",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    -- 8.3.5 APPLIED: the singleton k, at the two certified representatives.",
+      "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
+      "exact_expression": "",
+      "author_confirmed": true
+    }
+  ]
+}

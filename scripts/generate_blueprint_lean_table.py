@@ -181,9 +181,10 @@ def author_binding_digest(row: dict[str, object]) -> str:
 
 def receipt_binding_identity(
     expression: str, expected_type: str, master_hash: str, source_hash: str,
+    seat_identity: str = "",
 ) -> str:
     value = hashlib.sha256()
-    for part in (expression, expected_type, master_hash, source_hash):
+    for part in (expression, expected_type, master_hash, source_hash, seat_identity):
         value.update(part.encode("utf-8"))
         value.update(b"\0")
     return value.hexdigest()
@@ -195,48 +196,49 @@ def run_binding_probe(manifest: dict[str, object]) -> tuple[dict[str, bool], dic
     if not candidates:
         return {}, {"exit_code": None, "output": "No candidate expressions supplied; probe suppressed."}
 
-    production_path = ROOT / str(manifest["production_source"])
-    source = production_path.read_text(encoding="utf-8")
-    anchor = str(manifest["binding_probe_anchor"])
-    if source.count(anchor) != 1:
-        return {str(row["id"]): False for row in candidates}, {
-            "exit_code": None,
-            "output": f"Binding probe anchor count was {source.count(anchor)}, expected 1.",
-        }
-
-    insertion: list[str] = ["    -- BEGIN GENERATED BINDING IDENTITY PROBE"]
-    ranges: dict[str, tuple[int, int]] = {}
-    anchor_line = source[: source.index(anchor)].count("\n") + 1
-    current_line = anchor_line + 1
+    checked: dict[str, bool] = {}
+    outputs: list[str] = []
     for row in candidates:
-        expression_lines = str(row["candidate_expression"]).splitlines()
-        declaration = (
-            f"    {row['binder']} {row['lean_local']} : {row['expected_type']} := "
-            + expression_lines[0]
-        )
-        body = [declaration] + ["      " + line for line in expression_lines[1:]]
-        insertion.extend(body)
-        ranges[str(row["id"])] = (current_line, current_line + len(body) - 1)
-        current_line += len(body)
-    insertion.append("    -- END GENERATED BINDING IDENTITY PROBE")
-    injected = "\n".join(insertion) + "\n"
-    probe_source = source.replace(anchor, injected + anchor, 1)
-
-    with tempfile.NamedTemporaryFile(
-        mode="w", suffix=".lean", prefix="concentricity-binding-probe-", delete=False, encoding="utf-8"
-    ) as handle:
-        handle.write(probe_source)
-        probe_path = Path(handle.name)
-    result = run(["lake", "env", "lean", str(probe_path)])
-    error_lines = {
-        int(match.group(1))
-        for match in re.finditer(rf"{re.escape(str(probe_path))}:(\d+):\d+: error:", result.stdout)
+        binding_id = str(row["id"])
+        source_name = str(row.get("probe_source", manifest["production_source"]))
+        source_path = ROOT / source_name
+        anchor = str(row.get("probe_anchor", manifest.get("binding_probe_anchor", "")))
+        template = str(row.get("probe_template", ""))
+        if not source_path.exists() or not anchor or source_path.read_text(encoding="utf-8").count(anchor) != 1:
+            checked[binding_id] = False
+            outputs.append(f"{binding_id}: probe source or unique anchor unavailable")
+            continue
+        if "{expected_type}" not in template or "{exact_expression}" not in template:
+            checked[binding_id] = False
+            outputs.append(f"{binding_id}: probe template does not consume type and expression")
+            continue
+        source = source_path.read_text(encoding="utf-8")
+        declaration = (template
+            .replace("{lean_local}", str(row.get("lean_local", "kgtBinding")))
+            .replace("{expected_type}", str(row["expected_type"]))
+            .replace("{exact_expression}", str(row["candidate_expression"])))
+        anchor_at = source.index(anchor)
+        line_at = source.rfind("\n", 0, anchor_at) + 1
+        indent = re.match(r"[ \t]*", source[line_at:anchor_at]).group(0)
+        injected = "\n".join(indent + line if line else line for line in declaration.splitlines())
+        probe_source = source.replace(anchor, injected + "\n" + anchor, 1)
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".lean", prefix="concentricity-binding-probe-",
+            delete=False, encoding="utf-8",
+        ) as handle:
+            handle.write(probe_source)
+            probe_path = Path(handle.name)
+        try:
+            result = run(["lake", "env", "lean", str(probe_path)])
+        finally:
+            probe_path.unlink(missing_ok=True)
+        sorry_seen = bool(re.search(r"declaration uses ['\"`]?sorry|sorryAx", result.stdout))
+        checked[binding_id] = result.returncode == 0 and not sorry_seen
+        outputs.append(f"===== {binding_id} =====\n{result.stdout}")
+    return checked, {
+        "exit_code": 0 if checked and all(checked.values()) else 1,
+        "output": "\n\n".join(outputs),
     }
-    checked = {
-        binding_id: not any(start <= line <= end for line in error_lines)
-        for binding_id, (start, end) in ranges.items()
-    }
-    return checked, {"exit_code": result.returncode, "output": result.stdout, "path": str(probe_path)}
 
 
 def main() -> int:
@@ -434,6 +436,10 @@ def main() -> int:
                     receipt_binding_identity(
                         str(candidate), str(row["expected_type"]),
                         receipt_master_hash, receipt_source_hash,
+                        "\0".join(str(row.get(field, "")) for field in (
+                            "id", "target_declaration", "probe_source",
+                            "probe_anchor", "probe_template",
+                        )) + "\0" + author_digest,
                     )
                     if candidate else None
                 ),
@@ -442,7 +448,8 @@ def main() -> int:
                 "status": status,
             }
         )
-    exact_attempt_emitted = bool(binding_rows) and all(row["status"] == "BINDING_READY" for row in binding_rows)
+    exact_attempt_binding_ids = sorted(binding_checks)
+    exact_attempt_emitted = bool(exact_attempt_binding_ids)
 
     fingerprint_paths = [
         MASTER_PATH,
@@ -546,6 +553,7 @@ def main() -> int:
         "project_specific_locals": project_local_rows,
         "bindings": binding_rows,
         "binding_identity_hash_sources": identity_hashes,
+        "exact_attempt_binding_ids": exact_attempt_binding_ids,
         "exact_attempt_emitted": exact_attempt_emitted,
     }
     EVIDENCE_PATH.write_text(json.dumps(evidence, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -673,12 +681,16 @@ def main() -> int:
     lines.extend(
         [
             "",
-            "### Exact attempt emission",
+            "### Exact seat attempts",
             "",
             (
-                "`EXACT ATTEMPT` is enabled because every consumed binding is `BINDING_READY`."
+                "Lean was contacted with the exact candidate expression for: "
+                + ", ".join(f"`{binding_id}`" for binding_id in exact_attempt_binding_ids)
+                + ". Each remaining row stays mandatory transcription work."
                 if exact_attempt_emitted
-                else "`EXACT ATTEMPT` is mechanically suppressed until every author-confirmed binding has a Lean expression accepted at its exact type. No substitute object or tactic text is proposed or printed."
+                else "No candidate expression has reached Lean for an author-confirmed binding. "
+                     "The pending rows are the immediate action queue; this is not permission "
+                     "to stop, substitute an object, or report mathematical uncertainty."
             ),
         ]
     )

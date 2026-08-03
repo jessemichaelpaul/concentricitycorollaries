@@ -3,11 +3,11 @@ warning: Concentricity/LogManifold.lean:698:2: The `show` tactic should only be 
 However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
 
 Note: This linter can be disabled with `set_option linter.style.show false`
-⚠ [3644/3653] Replayed Concentricity.FaithfulApply
+⚠ [3647/3653] Replayed Concentricity.FaithfulApply
 warning: Concentricity/FaithfulApply.lean:546:100: This line exceeds the 100 character limit, please shorten it!
 
 Note: This linter can be disabled with `set_option linter.style.longLine false`
-⚠ [3649/3653] Replayed Concentricity.ASectionFunctor
+⚠ [3650/3653] Replayed Concentricity.ASectionFunctor
 warning: Concentricity/ASectionFunctor.lean:719:7: Variable name `hstart` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
@@ -297,8 +297,8 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲F̵u̵n̵c̵t̵o̵r̵.̵c̵o̵n̵s̵t̵_̵o̵b̵j̵_̵m̵a̵p̵,̵ ̵t̵y̵p̵e̵s̵_̵i̵d̵_̵a̵p̵p̵l̵y̵]̵F̲u̲n̲c̲t̲o̲r̲.̲c̲o̲n̲s̲t̲_̲o̲b̲j̲_̲m̲a̲p̲]̲
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-Concentricity/Theorem.lean:675:4: warning: aesop: failed to prove the goal after exhaustive search.
-Concentricity/Theorem.lean:668:64: error: unsolved goals
+Concentricity/Theorem.lean:798:4: warning: aesop: failed to prove the goal after exhaustive search.
+Concentricity/Theorem.lean:791:64: error: unsolved goals
 A : ASection
 P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
 g : projectiveNorth ⟶ P.base
@@ -326,7 +326,7 @@ hh : (A.AsectionActionTransport h).obj (A.residueActionState projectiveNorth n�
     Nonempty
       ((A.AsectionActionTransport k).obj (A.residueActionState projectiveNorth n₁ I₁) ⟶
         A.residueActionState projectiveNorth n₂ I₂)
-Concentricity/Theorem.lean:807:4: error: Type mismatch
+Concentricity/Theorem.lean:930:4: error: Type mismatch
   hkn
 has type
   CategoryTheory.ConnectedComponents.mk

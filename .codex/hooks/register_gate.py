@@ -67,9 +67,15 @@ def in_project(raw, cwd):
     if not path.is_absolute():
         path = cwd / path
     try:
-        return path.resolve().relative_to(PROJECT.resolve())
+        relative = path.resolve().relative_to(PROJECT.resolve())
     except ValueError:
         return None
+    # A bare fragment of some FOREIGN absolute path -- "Truth/new_project.sh",
+    # chopped at the space in "Kernel Ground Truth" -- resolves "inside" this
+    # project while naming nothing real here.  Gate only what actually exists.
+    if not path.exists():
+        return None
+    return relative
 
 
 def permitted(relative, allow):

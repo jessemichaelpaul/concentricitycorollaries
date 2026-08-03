@@ -19,17 +19,32 @@ PROJECT = (SCRIPT.parents[2]
            if SCRIPT.parent.name == "hooks" and SCRIPT.parent.parent.name == ".codex"
            else SCRIPT.parent)
 MANIFEST = PROJECT / ".provenance-project.json"
+AGENT_POLICY = PROJECT / "AGENTS.md"
 try:
     CFG = json.loads(MANIFEST.read_text())
 except (OSError, json.JSONDecodeError):
     CFG = {}
+AUTHOR_BINDINGS = (PROJECT / str(CFG.get(
+    "author_binding_registry", ".provenance/author_bindings.json"
+))).resolve()
 MASTER = (PROJECT / str(CFG["master"])).resolve() if CFG.get("master") else None
 PHASE = str(CFG.get("phase", "formalization"))
 LOCK = pathlib.Path.home() / ".provenance-active"
+# Two corrections.  Stderr redirection (2>&1, 2>/dev/null) mutates nothing and
+# no longer counts as a mutation -- it was refusing ordinary reads, which is
+# how a guard teaches a model to route around it.  And the common interpreter
+# write routes are named rather than passing silently.  A shape blocklist is
+# never complete; the authoritative confinement is write_scope_guard.sh plus
+# the workspace sandbox, and this is the second line, not the first.
 MUTATING_SHELL = re.compile(
-    r"(?:^|[;&|\s])(?:rm|mv|cp|install|mkdir|touch|truncate|tee|patch|"
+    r"(?:^|[;&|\s])(?:rm|mv|cp|install|mkdir|touch|truncate|tee|dd|patch|"
     r"git\s+(?:add|apply|commit|push|reset|checkout|clean|restore)|"
-    r"sed\s+-i|perl\s+-i)(?:\s|$)|(?:^|[^>])>{1,2}(?:[^>]|$)"
+    r"sed\s+-i|perl\s+-i)(?:\s|$)"
+    r"|>{1,2}\s*(?!&)(?!/dev/null\b)[^\s;&|]"
+    r"|(?:python3?|perl|ruby|node|osascript)\s+-(?:c|e)\b"
+    r"|(?:python3?|perl|ruby|node)\s+-\s*<<"
+    r"|\.write(?:_text|_bytes)?\s*\("
+    r"|shutil\.(?:copy|move|rmtree)|os\.(?:remove|rename|replace|makedirs)"
 )
 PATCH_TARGET = re.compile(r"^\*\*\* (?:Add|Update|Delete) File: (.+)$", re.MULTILINE)
 
@@ -77,6 +92,10 @@ def locked_author_target(raw: str, cwd: pathlib.Path) -> str | None:
     target = resolve_target(raw, cwd)
     if target == MANIFEST.resolve():
         return "the provenance manifest and phase are author-controlled"
+    if target == AGENT_POLICY.resolve():
+        return "the installed Provenance protocol is machinery-controlled"
+    if target == AUTHOR_BINDINGS:
+        return "the ratified authored-binding registry is author-controlled"
     if PHASE != "authoring" and MASTER is not None and target == MASTER:
         return "the ratified master is read-only during formalization"
     return None
@@ -118,22 +137,40 @@ def main() -> int:
         return 0
 
     if tool in {"Write", "Edit", "NotebookEdit"}:
+        raw = str(tool_input.get("file_path", "")) if isinstance(tool_input, dict) else ""
+        if not raw:
+            deny(event, "Provenance lock: direct edit target is absent.")
+        # Jurisdiction is this project's own tree.  Outside it, the global write
+        # scope guard and the target project's own lock decide.  Vetoing every
+        # other repository made the ENTERED project unwritable, which inverted
+        # the whole point of entering one.
+        if not inside_project(raw, cwd):
+            return 0
         if not is_active:
             deny(event, f"Provenance lock: {PROJECT} is not the author-entered active project.")
-        raw = str(tool_input.get("file_path", "")) if isinstance(tool_input, dict) else ""
-        if not raw or not inside_project(raw, cwd):
-            deny(event, "Provenance lock: direct edit target is absent or outside the active project.")
         reason = locked_author_target(raw, cwd)
         if reason:
             deny(event, "Provenance lock: " + reason + ".")
         return 0
 
     if tool == "Bash" and MUTATING_SHELL.search(command):
-        if not is_active:
-            deny(event, f"Provenance lock: mutation refused because the active project is {active or '(none)' }.")
+        if re.search(r"(?:^|[;&|\s])git\s+push(?:\s|$)", command):
+            deny(
+                event,
+                "Provenance lock: raw git push is disabled; use "
+                "python3 tools/verified_push.py so the exact certified commit is checked remotely.",
+            )
         try:
             cwd.relative_to(PROJECT.resolve())
+            cwd_here = True
         except ValueError:
+            cwd_here = False
+        if not is_active:
+            # Same jurisdiction rule: refuse only what reaches this tree.
+            if cwd_here or str(PROJECT.resolve()) in command:
+                deny(event, f"Provenance lock: mutation refused because the active project is {active or '(none)' }.")
+            return 0
+        if not cwd_here:
             deny(event, f"Provenance lock: mutating command has out-of-project working directory {cwd}.")
 
         # Explicit references to another instantiated project are refused here;
@@ -145,6 +182,10 @@ def main() -> int:
                 deny(event, f"Provenance lock: command names another provenance project: {other}.")
         if str(MANIFEST.resolve()) in command or str(MANIFEST.relative_to(PROJECT)) in command:
             deny(event, "Provenance lock: the provenance manifest and phase are author-controlled.")
+        if str(AGENT_POLICY.resolve()) in command or str(AGENT_POLICY.relative_to(PROJECT)) in command:
+            deny(event, "Provenance lock: the installed Provenance protocol is machinery-controlled.")
+        if str(AUTHOR_BINDINGS) in command or str(AUTHOR_BINDINGS.relative_to(PROJECT)) in command:
+            deny(event, "Provenance lock: the ratified authored-binding registry is author-controlled.")
         if PHASE != "authoring" and MASTER is not None and (
             str(MASTER) in command or str(MASTER.relative_to(PROJECT)) in command
         ):

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-08-02T22:00:59.977735+00:00",
+  "generated_utc": "2026-08-03T04:29:47.077569+00:00",
   "allowed_axioms": [
     "propext",
     "Classical.choice",
@@ -32,17 +32,17 @@
     }
   },
   "fingerprints": {
-    "Octonionic_RH_master.tex": "d855b08f9a275005d2048951f42f862559dbaf395f175b87ec8306ef0dc0c578",
-    "blueprint/lean_certificate_manifest.json": "b44cff275a7ee41d693021e9086b18bc328d5f235a068157017595c34173cfca",
+    "Octonionic_RH_master.tex": "2af455a80c111536cf748b9e6b169440ed1e73a33460f48148edb24fa2e7d0c2",
+    "blueprint/lean_certificate_manifest.json": "eea87254da0bfe274013957bfa30db88142a2b4ad72207e81bf663ded908e39d",
     "Concentricity/_BlueprintTerminalCertificateProbe.lean": "2e898992124efa19b135e96f87d14813b03809f27f9cc7a69f85fb8d5f257d37",
-    "Concentricity/Theorem.lean": "5c7b44b96f41af65bf62f4e4e04c74419392259d6029112ada438cab36fb3914",
+    "Concentricity/Theorem.lean": "57b66c60bf62a0c13d1746ca97e3b9abc12ccbce6105843e1834399233c53679",
     "Concentricity/_GateNorthCResidueTransitivityAudit.lean": "07ddbe960df820ab93c25f87f4b963077f058fd3c79b739430a3c5ff6533d99a",
     "scripts/build_transitivity_inference_probe.sh": "e0982829e4937b00e01bda1b7b4a4e767c09f3a907ae65393a4590125a686683",
     "Concentricity/_GateCorollaryInferenceAudit.lean": "8bac693ca5c93deae6b9f1511e3f058efab47a8b657c061fc178176fe5636efb",
     "Concentricity/Corollaries.lean": "4866f494cf62579778905d6dd93b912a868a880b827c4456a060bdb08d441248",
     "lean-toolchain": "efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee",
     "lakefile.toml": "361be5c558f10fbc113a616222d2db2c08c9b353ddb12f0cac6d5ad9a0d0287d",
-    "lean_source_tree": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5"
+    "lean_source_tree": "c4e90fa965a915dd3436e332348d764756d70d8ad1559c32e597726afa47e6a8"
   },
   "terminal": [
     {
@@ -732,7 +732,7 @@
       "diagnostic_seen": true,
       "command": "lake env lean Concentricity/Theorem.lean",
       "kernel_message": "⊢ ∃ k,",
-      "source_line": 538,
+      "source_line": 661,
       "status": "OPEN_SEAT"
     },
     {
@@ -746,7 +746,7 @@
       "diagnostic_seen": true,
       "command": "lake env lean Concentricity/Theorem.lean",
       "kernel_message": "A.transportLevel n = A.transportLevel 0",
-      "source_line": 757,
+      "source_line": 880,
       "status": "OPEN_SEAT"
     }
   ],
@@ -781,7 +781,7 @@
       "paper_object": "the base component k_E of F_A(E_N)",
       "lean_local": "kE",
       "binder": "let",
-      "expected_type": "projectiveZero ⟶ projectiveNorth",
+      "expected_type": "GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth",
       "required_master_declarations": [
         "ASection.sweepTransitive_on_residueSystem",
         "ASection.northRelativeLoop_maps",
@@ -791,10 +791,13 @@
       "target_argument": "kE",
       "candidate_expression": null,
       "author_binding_confirmed": true,
-      "author_binding_sha256": "9d922df910595c49d7b53df26464e0aa5df9adf87c1ad5c7b337cc28a5797770",
+      "author_binding_sha256": "10ed350c4c6a038cf6911a05cad214dfb352b8d8822850e80c50538772367445",
       "author_confirmation_source": "active author confirmation, 2026-08-02",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    aesop (add safe [",
+      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}",
       "candidate_sha256": null,
-      "author_binding_digest": "9d922df910595c49d7b53df26464e0aa5df9adf87c1ad5c7b337cc28a5797770",
+      "author_binding_digest": "10ed350c4c6a038cf6911a05cad214dfb352b8d8822850e80c50538772367445",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
@@ -810,7 +813,7 @@
       "paper_object": "the base component k_W of F_A(W_N)",
       "lean_local": "kW",
       "binder": "let",
-      "expected_type": "projectiveZero ⟶ projectiveNorth",
+      "expected_type": "GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth",
       "required_master_declarations": [
         "ASection.sweepTransitive_on_residueSystem",
         "ASection.northRelativeLoop_maps",
@@ -820,10 +823,13 @@
       "target_argument": "kW",
       "candidate_expression": null,
       "author_binding_confirmed": true,
-      "author_binding_sha256": "408b31b05e3f5bb8931d5559bb05f519f9157ba625b3f3524514b64f9d4b5a0f",
+      "author_binding_sha256": "f0601c8d2b14969676e517298355daa3f12f151730a2b439cd363c5ff79065a5",
       "author_confirmation_source": "active author confirmation, 2026-08-02",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    aesop (add safe [",
+      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}",
       "candidate_sha256": null,
-      "author_binding_digest": "408b31b05e3f5bb8931d5559bb05f519f9157ba625b3f3524514b64f9d4b5a0f",
+      "author_binding_digest": "f0601c8d2b14969676e517298355daa3f12f151730a2b439cd363c5ff79065a5",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
@@ -851,6 +857,9 @@
       "author_binding_confirmed": true,
       "author_binding_sha256": "9fa762fe6270cff57dc06b026d059f68f9abe7973b43bb01ca253e5ff127efcd",
       "author_confirmation_source": "active author confirmation, 2026-08-02",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    aesop (add safe [",
+      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}",
       "candidate_sha256": null,
       "author_binding_digest": "9fa762fe6270cff57dc06b026d059f68f9abe7973b43bb01ca253e5ff127efcd",
       "master_targets_linked": true,
@@ -880,6 +889,10 @@
       "author_binding_confirmed": true,
       "author_binding_sha256": "2b3d9d7b55c72c07a491348ed79f8b95449091c6f5d7177b1e0bfe2647e87835",
       "author_confirmation_source": "active author confirmation, 2026-08-02",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    aesop (add safe [",
+      "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
+      "probe_type_context": "let kE : GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth := by sorry\nlet uStar : OnePoint ℂ := by sorry",
       "candidate_sha256": null,
       "author_binding_digest": "2b3d9d7b55c72c07a491348ed79f8b95449091c6f5d7177b1e0bfe2647e87835",
       "master_targets_linked": true,
@@ -909,6 +922,10 @@
       "author_binding_confirmed": true,
       "author_binding_sha256": "94daf66062844c31aca83b8258762beb5dcd55c796cc6247d232ea2ddcd4aefd",
       "author_confirmation_source": "active author confirmation, 2026-08-02",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    aesop (add safe [",
+      "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
+      "probe_type_context": "let kW : GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth := by sorry\nlet uStar : OnePoint ℂ := by sorry",
       "candidate_sha256": null,
       "author_binding_digest": "94daf66062844c31aca83b8258762beb5dcd55c796cc6247d232ea2ddcd4aefd",
       "master_targets_linked": true,
@@ -924,8 +941,8 @@
       "master": "thm:concentricity",
       "id": "seat2.transportLevelCollapse",
       "paper_object": "the post-collapse residue read instantiated at the n-th and 0-th certified representatives",
-      "lean_local": null,
-      "binder": null,
+      "lean_local": "hkn",
+      "binder": "have",
       "expected_type": "A.transportLevel n = A.transportLevel 0",
       "required_master_declarations": [
         "ASection.residueTotal_pi0_singleton",
@@ -936,6 +953,9 @@
       "author_binding_confirmed": true,
       "author_binding_sha256": "2303695ed6012271f74b08d247c9ec6b1646324d5eaa878e83ca59ce31323ccb",
       "author_confirmation_source": "author correction in active provenance task, 2026-08-02",
+      "probe_source": "Concentricity/Theorem.lean",
+      "probe_anchor": "    -- 8.3.5 APPLIED: the singleton k, at the two certified representatives.",
+      "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
       "candidate_sha256": null,
       "author_binding_digest": "2303695ed6012271f74b08d247c9ec6b1646324d5eaa878e83ca59ce31323ccb",
       "master_targets_linked": true,
@@ -949,8 +969,9 @@
     }
   ],
   "binding_identity_hash_sources": {
-    "Octonionic_RH_master.tex": "d855b08f9a275005d2048951f42f862559dbaf395f175b87ec8306ef0dc0c578",
-    "Concentricity/Theorem.lean": "5c7b44b96f41af65bf62f4e4e04c74419392259d6029112ada438cab36fb3914"
+    "Octonionic_RH_master.tex": "2af455a80c111536cf748b9e6b169440ed1e73a33460f48148edb24fa2e7d0c2",
+    "Concentricity/Theorem.lean": "57b66c60bf62a0c13d1746ca97e3b9abc12ccbce6105843e1834399233c53679"
   },
+  "exact_attempt_binding_ids": [],
   "exact_attempt_emitted": false
 }

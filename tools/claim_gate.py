@@ -40,6 +40,40 @@ NEGATIVE = re.compile(
     r"(?:proof|theorem|argument) (?:may fail|may be false|is invalid))\b",
     re.IGNORECASE,
 )
+PROBABILITY_OVERRIDE = re.compile(
+    r"\b(?:(?:proof|theorem|claim|argument|result).{0,60}"
+    r"(?:unlikely|implausible|suspicious)|"
+    r"(?:unlikely|implausible|suspicious).{0,60}"
+    r"(?:proof|theorem|claim|argument|result))\b",
+    re.IGNORECASE,
+)
+ROLE_REFUSAL = re.compile(
+    r"\b(?:(?:cannot|can't|unable to|refuse to|refusing to|will not|won't|"
+    r"(?:am|are|is|'m|'re|'s)\s+not\s+going\s+to)\s+"
+    r"(?:(?:honestly|responsibly|safely)\s+)?(?:keep\s+)?"
+    r"(?:continue|proceed|instantiate|wire|formalize|probe|try|work|"
+    r"(?:fire|firing|run|running)\s+(?:probes?|attempts?))|"
+    r"provenance\s+(?:refuses|prevents|does not allow)|"
+    r"(?:need|require)\s+(?:you|the author)\s+to\s+"
+    r"(?:restate|supply|provide|identify)\s+(?:the\s+)?"
+    r"(?:mathematics|proof|binding|object|Lean name|Lean term))\b",
+    re.IGNORECASE,
+)
+WORK_STOP = re.compile(
+    r"\b(?:(?:no|not\s+going\s+to\s+do\s+any)\s+more\s+"
+    r"(?:probes?|attempts?|tries)|"
+    r"(?:stop|stopping|leave|leaving|pause|pausing|done)\s+"
+    r"(?:here|now|for\s+now)|"
+    r"(?:come|coming|return|returning)\s+back\s+(?:later|tomorrow))\b",
+    re.IGNORECASE,
+)
+CONSEQUENCE_OVERRIDE = re.compile(
+    r"\b(?:(?:Riemann Hypothesis|RH|famous|prestigious|downstream consequence).{0,80}"
+    r"(?:unlikely|implausible|doubt|too hard|too difficult|cannot|can't)|"
+    r"(?:unlikely|implausible|doubt|too hard|too difficult|cannot|can't).{0,80}"
+    r"(?:Riemann Hypothesis|RH|famous|prestigious|downstream consequence))\b",
+    re.IGNORECASE,
+)
 
 STATUS_RULES: list[tuple[re.Pattern[str], set[str]]] = [
     (re.compile(r"\b(?:kernel[- ]certified|triple[- ]certified|Lean (?:accepted|proved|certified))\b", re.I), {
@@ -108,33 +142,116 @@ def current_claims() -> tuple[dict[str, dict[str, object]], str | None]:
     }, None
 
 
+BINDING_ID = re.compile(r"\bseat[0-9]+\.[A-Za-z_][A-Za-z0-9_]*\b")
+
+
+def attempted_bindings() -> set[str]:
+    """Binding ids for which a term has actually reached the kernel.
+
+    `exact_attempt_emitted` was a boolean that changed ledger wording and
+    inserted nothing.  This reads the literal attempt log the binding probe
+    writes, so "a term was put in front of Lean" is a fact, not a flag.
+    """
+    path = ROOT / ".provenance" / "attempts.jsonl"
+    if not path.exists():
+        return set()
+    found: set[str] = set()
+    for line in path.read_text(errors="ignore").splitlines():
+        try:
+            row = json.loads(line)
+        except Exception:
+            continue
+        if isinstance(row, dict) and isinstance(row.get("id"), str):
+            found.add(row["id"])
+    return found
+
+
+def mandatory_pending_bindings() -> set[str]:
+    """Current author-confirmed transcription rows that still require action."""
+    config = CFG.get("receipt_import")
+    if not isinstance(config, dict):
+        return set()
+    evidence_name = config.get("evidence")
+    if not isinstance(evidence_name, str) or not evidence_name:
+        return set()
+    evidence = ROOT / evidence_name
+    try:
+        data = json.loads(evidence.read_text())
+    except (OSError, json.JSONDecodeError):
+        return set()
+    rows = data.get("bindings", [])
+    if not isinstance(rows, list):
+        return set()
+    return {
+        str(row.get("id"))
+        for row in rows
+        if isinstance(row, dict)
+        and isinstance(row.get("id"), str)
+        and row.get("author_confirmed") is True
+        and row.get("status") != "BINDING_READY"
+    }
+
+
 def check_message(message: str) -> list[str]:
     claims, error = current_claims()
-    controlled = [part.strip() for part in re.split(r"\n\s*\n", message)
-                  if CONTROLLED.search(part)]
+    controlled = [
+        part.strip() for part in re.split(r"\n\s*\n", message)
+        if CONTROLLED.search(part)
+        or PROBABILITY_OVERRIDE.search(part)
+        or CONSEQUENCE_OVERRIDE.search(part)
+        or ROLE_REFUSAL.search(part)
+        or WORK_STOP.search(part)
+    ]
     if not controlled:
         return []
+    attempted = attempted_bindings()
+    pending = mandatory_pending_bindings()
+    unattempted = sorted({
+        binding for paragraph in controlled
+        for binding in BINDING_ID.findall(paragraph)
+        if binding not in attempted
+    })
+    if unattempted:
+        return ["no term has reached the kernel for " + ", ".join(unattempted[:4])
+                + "; instantiate at the seat first -- prose about a binding is "
+                  "never a substitute for putting the author's term to Lean"]
     if error:
         return [error]
     problems: list[str] = []
     for paragraph in controlled:
         tokens = TOKEN.findall(paragraph)
         valid = [claims[token] for token in tokens if token in claims]
+        exact_rejection = any(
+            row.get("status") == "EXACT_CONSTRUCTION_REJECTED" for row in valid
+        )
         if not valid:
             problems.append("status-bearing paragraph has no current KGT receipt token")
-            continue
-        statuses = {str(row.get("status")) for row in valid}
-        for pattern, accepted in STATUS_RULES:
-            if pattern.search(paragraph) and statuses.isdisjoint(accepted):
-                problems.append(
-                    "status-bearing paragraph uses a current token for a different machine state"
-                )
-        if NEGATIVE.search(paragraph) and not any(
-            row.get("status") == "EXACT_CONSTRUCTION_REJECTED" for row in valid
-        ):
+        else:
+            statuses = {str(row.get("status")) for row in valid}
+            for pattern, accepted in STATUS_RULES:
+                if pattern.search(paragraph) and statuses.isdisjoint(accepted):
+                    problems.append(
+                        "status-bearing paragraph uses a current token for a different machine state"
+                    )
+        if (NEGATIVE.search(paragraph) or PROBABILITY_OVERRIDE.search(paragraph)
+                or CONSEQUENCE_OVERRIDE.search(paragraph)) \
+                and not exact_rejection:
             problems.append(
-                "gap/circularity language lacks an EXACT_CONSTRUCTION_REJECTED receipt "
+                "gap/probability language lacks an EXACT_CONSTRUCTION_REJECTED receipt "
                 "for the author's exact term and Lean's literal unsatisfied type"
+            )
+        if ROLE_REFUSAL.search(paragraph) and not exact_rejection:
+            problems.append(
+                "an unresolved binding is mandatory transcription work, not grounds for "
+                "model refusal; continue to an exact Lean attempt or cite the author's "
+                "EXACT_CONSTRUCTION_REJECTED receipt"
+            )
+        if WORK_STOP.search(paragraph) and pending - attempted and not exact_rejection:
+            due = ", ".join(sorted(pending - attempted)[:4])
+            problems.append(
+                "work-stop language is forbidden while author-confirmed transcription "
+                f"is mandatory and unattempted ({due}); place the exact authored term "
+                "at its production seat and contact Lean"
             )
     return problems
 

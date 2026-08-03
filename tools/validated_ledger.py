@@ -8,7 +8,6 @@ assessment or qualification.
 from __future__ import annotations
 
 import argparse
-import concurrent.futures
 import hashlib
 import importlib.util
 import json
@@ -729,21 +728,12 @@ def receipt_summary_md(label: str, bundle: dict[str, object]) -> str:
         )
     ready = [str(row.get("id", row.get("lean_local", "binding")))
              for row in bucket.get("bindings", []) if row.get("status") == "BINDING_READY"]
-    lean_pending = [str(row.get("id", row.get("lean_local", "binding")))
-                    for row in bucket.get("bindings", [])
-                    if row.get("status") == "AUTHOR_BOUND_LEAN_PENDING"]
     unresolved = [str(row.get("id", row.get("lean_local", "binding")))
-                  for row in bucket.get("bindings", [])
-                  if row.get("status") not in {"BINDING_READY", "AUTHOR_BOUND_LEAN_PENDING"}]
+                  for row in bucket.get("bindings", []) if row.get("status") != "BINDING_READY"]
     if ready:
         lines.append("Authored bindings ready: " + ", ".join(f"`{x}`" for x in ready))
-    if lean_pending:
-        lines.append(
-            "Author-confirmed bindings awaiting Lean instantiation: "
-            + ", ".join(f"`{x}`" for x in lean_pending)
-        )
     if unresolved:
-        lines.append("Binding records requiring attention: " + ", ".join(f"`{x}`" for x in unresolved))
+        lines.append("Authored bindings unresolved: " + ", ".join(f"`{x}`" for x in unresolved))
     for row in bucket.get("open", []):
         lines.append(f"Production seat `{row.get('declaration', '—')}`: **{row.get('status', '—')}**")
     for row in bucket.get("rejections", []):
@@ -803,7 +793,7 @@ def generate() -> str:
         "|---|---|---|---|---|---|---|---|",
     ]
 
-    # Run every distinct kernel query once, concurrently.  A statement with
+    # Run every distinct kernel query once.  A statement with
     # no ratified semantic anchor still receives a fresh declaration/axiom
     # audit; absence of an object mark must never hide the axiom surface.
     jobs: dict[tuple[str, str, str], tuple[str, str | None]] = {}

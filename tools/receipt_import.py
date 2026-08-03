@@ -12,6 +12,7 @@ import hashlib
 import json
 import pathlib
 import subprocess
+import tempfile
 import time
 import re
 
@@ -21,6 +22,11 @@ CFG = json.loads((ROOT / ".provenance-project.json").read_text())
 ALLOWED = list(CFG.get("allowed_axioms", [
     "propext", "Classical.choice", "Quot.sound",
 ]))
+
+# Lean exits 0 on a file containing `sorry` -- it is a warning, not an error.
+# Exit-code-green is therefore weaker than sorry-free, and BINDING_READY is the
+# one layer that used to rest on it.
+SORRY_IN_PROBE = re.compile(r"declaration uses ['\"`]?sorry|sorryAx")
 
 
 def sha256(path: pathlib.Path) -> str:
@@ -40,23 +46,214 @@ def tree_digest(paths: list[pathlib.Path]) -> str:
 
 def binding_identity(
     expression: str, expected_type: str, master_hash: str, source_hash: str,
+    seat_identity: str = "",
 ) -> str:
     """Identity of an authored binding at one exact project revision."""
     value = hashlib.sha256()
-    for part in (expression, expected_type, master_hash, source_hash):
+    for part in (expression, expected_type, master_hash, source_hash, seat_identity):
         value.update(part.encode())
         value.update(b"\0")
     return value.hexdigest()
 
 
 def author_binding_identity(row: dict[str, object]) -> str:
-    """Identity of the author's semantic binding, before Lean spelling."""
+    """Identity of the author's semantics before Lean spelling is recovered."""
     fields = ("id", "master", "paper_object", "expected_type")
-    parts = [str(row[field]) for field in fields]
+    try:
+        parts = [str(row[field]) for field in fields]
+    except KeyError:
+        return ""
     parts.extend(str(item) for item in row.get("required_master_declarations", []))
     parts.append(str(row.get("target_declaration", "")))
-    payload = "\0".join(parts)
-    return hashlib.sha256(payload.encode()).hexdigest()
+    return hashlib.sha256("\0".join(parts).encode()).hexdigest()
+
+
+def author_registry(master_hash: str) -> tuple[dict[str, dict[str, object]], str | None]:
+    """Load the ratified binding identities that the receipt producer cannot edit."""
+    name = CFG.get("author_binding_registry", ".provenance/author_bindings.json")
+    if not isinstance(name, str) or not name:
+        return {}, "the author binding registry path is not configured"
+    try:
+        path = safe_path(name)
+    except ValueError as error:
+        return {}, str(error)
+    if not path.exists():
+        return {}, "the ratified author binding registry is missing"
+    try:
+        data = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError) as error:
+        return {}, f"the ratified author binding registry is malformed: {error}"
+    if not isinstance(data, dict) or data.get("schema") != 1:
+        return {}, "the ratified author binding registry must use schema 1"
+    if data.get("master") != CFG.get("master") or data.get("master_sha256") != master_hash:
+        return {}, "the ratified author binding registry does not match the current master"
+    rows = data.get("bindings")
+    if not isinstance(rows, list):
+        return {}, "the ratified author binding registry has no bindings list"
+    by_id: dict[str, dict[str, object]] = {}
+    for raw in rows:
+        if not isinstance(raw, dict):
+            return {}, "the ratified author binding registry contains a non-object row"
+        binding_id = str(raw.get("id", "")).strip()
+        if not binding_id or binding_id in by_id:
+            return {}, "the ratified author binding registry has a duplicate or empty id"
+        by_id[binding_id] = dict(raw)
+    return by_id, None
+
+
+RATIFIED_FIELDS = (
+    "id", "master", "paper_object", "expected_type",
+    "required_master_declarations", "target_declaration", "lean_local",
+    "probe_source", "probe_anchor", "probe_template",
+)
+
+
+def matches_ratified_binding(row: dict[str, object], ratified: dict[str, object]) -> bool:
+    return all(row.get(field) == ratified.get(field) for field in RATIFIED_FIELDS)
+
+
+def run_binding_probe(row: dict[str, object]) -> tuple[bool, str, str]:
+    """Inject one binding at its own production seat and ask Lean directly."""
+    required = ("probe_source", "probe_anchor", "probe_template")
+    if not all(isinstance(row.get(key), str) and str(row[key]) for key in required):
+        return False, "", "binding lacks a seat-specific probe source, anchor, or template"
+    template = str(row["probe_template"])
+    if "{expected_type}" not in template or "{exact_expression}" not in template:
+        return False, "", "probe template must consume expected_type and exact_expression"
+    try:
+        source_path = safe_path(str(row["probe_source"]))
+    except ValueError as error:
+        return False, "", str(error)
+    if not source_path.exists():
+        return False, "", f"binding probe source does not exist: {row['probe_source']}"
+    source = source_path.read_text()
+    anchor = str(row["probe_anchor"])
+    if source.count(anchor) != 1:
+        return False, "", f"binding probe anchor count was {source.count(anchor)}, expected 1"
+    expression = str(row.get("exact_expression", "")).strip()
+    expected_type = str(row.get("expected_type", "")).strip()
+    local = str(row.get("lean_local", "kgtBinding"))
+    declaration = (template
+        .replace("{lean_local}", local)
+        .replace("{expected_type}", expected_type)
+        .replace("{exact_expression}", expression))
+    anchor_at = source.index(anchor)
+    line_at = source.rfind("\n", 0, anchor_at) + 1
+    indent = re.match(r"[ \t]*", source[line_at:anchor_at]).group(0)
+    injected = "\n".join(indent + line if line else line for line in declaration.splitlines())
+    probe_source = source.replace(anchor, injected + "\n" + anchor, 1)
+    with tempfile.NamedTemporaryFile(
+        mode="w", suffix=".lean", prefix="kgt-binding-", delete=False,
+        encoding="utf-8",
+    ) as handle:
+        handle.write(probe_source)
+        probe_path = pathlib.Path(handle.name)
+    command = ["lake", "env", "lean", str(probe_path)]
+    rendered_command = " ".join(command)
+    try:
+        run = subprocess.run(
+            command, cwd=ROOT, capture_output=True, text=True,
+            timeout=int(CFG.get("audit_timeout_seconds", 900)),
+        )
+    except subprocess.TimeoutExpired:
+        return False, rendered_command, "binding probe timed out; this has no mathematical meaning"
+    finally:
+        probe_path.unlink(missing_ok=True)
+    output = (run.stdout + "\n" + run.stderr).strip()
+    record_attempt(row, rendered_command, run.returncode == 0, output)
+    if SORRY_IN_PROBE.search(output):
+        return False, rendered_command, (
+            "the binding elaborated only because its term is closed by `sorry`; "
+            "Lean exits 0 on a sorry, so exit status alone is not a proof\n" + output
+        )
+    return run.returncode == 0, rendered_command, output
+
+
+def expected_type_probe(row):
+    """Ask Lean whether the author-confirmed expected TYPE elaborates at its seat.
+
+    Until now the expected type was only compared as a string against a
+    declaration header, so a row could sit author-confirmed carrying a type the
+    elaborator had never seen -- `projectiveZero` is a paper name, not a Lean
+    constant, and six rows carried it.  A name check is not an elaboration.
+    """
+    required = ("probe_source", "probe_anchor")
+    if not all(isinstance(row.get(k), str) and str(row[k]) for k in required):
+        return True, "", ""            # nothing to place it in; other checks apply
+    expected = str(row.get("expected_type", "")).strip()
+    if not expected:
+        return True, "", ""
+    try:
+        source_path = safe_path(str(row["probe_source"]))
+    except ValueError as error:
+        return False, "", str(error)
+    if not source_path.exists():
+        return True, "", ""
+    source = source_path.read_text()
+    anchor = str(row["probe_anchor"])
+    if source.count(anchor) != 1:
+        return True, "", ""
+    at = source.index(anchor)
+    line_at = source.rfind("\n", 0, at) + 1
+    indent = re.match(r"[ \t]*", source[line_at:at]).group(0)
+    context = str(row.get("probe_type_context", "")).strip()
+    declarations = [*context.splitlines(),
+                    "have _kgtExpectedType : " + expected + " := by sorry"]
+    declaration = "\n".join(indent + line for line in declarations)
+    probed = source.replace(anchor, declaration + "\n" + anchor, 1)
+    with tempfile.NamedTemporaryFile(
+        mode="w", suffix=".lean", prefix="kgt-type-", delete=False, encoding="utf-8",
+    ) as handle:
+        handle.write(probed)
+        probe_path = pathlib.Path(handle.name)
+    command = ["lake", "env", "lean", str(probe_path)]
+    try:
+        run = subprocess.run(
+            command, cwd=ROOT, capture_output=True, text=True,
+            encoding="utf-8", errors="replace",
+            timeout=int(CFG.get("audit_timeout_seconds", 900)),
+        )
+    except subprocess.TimeoutExpired:
+        return True, " ".join(command), "expected-type probe timed out; tooling only"
+    finally:
+        probe_path.unlink(missing_ok=True)
+    output = (run.stdout + "\n" + run.stderr).strip()
+    unknown = UNKNOWN_NAME.findall(output)
+    if unknown:
+        return False, " ".join(command), (
+            "the author-confirmed expected type names " + ", ".join(sorted(set(unknown)))
+            + ", which Lean does not know at this seat; a paper name is not a Lean "
+              "spelling and a header match is not an elaboration\n" + output
+        )
+    return True, " ".join(command), output
+
+
+UNKNOWN_NAME = re.compile(r"unknown (?:identifier|constant) [`']([^`']+)[`']")
+
+
+def record_attempt(row, command, green, output):
+    """Append the literal fact that a term was put in front of the kernel.
+
+    `exact_attempt_emitted` was a boolean that changed ledger wording and
+    inserted nothing.  This is the ground truth the claim gate reads: without a
+    line here, no term has ever reached this seat, and prose about the seat is
+    a report standing in for the work.
+    """
+    try:
+        path = safe_path(".provenance/attempts.jsonl")
+    except ValueError:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    entry = {
+        "id": str(row.get("id", "")),
+        "target_declaration": str(row.get("target_declaration", "")),
+        "exact_expression": str(row.get("exact_expression", "")),
+        "command": command,
+        "kernel_green": bool(green),
+        "kernel_output": output[:4000],
+    }
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
 
 def literal_axioms(line: str) -> list[str] | None:
@@ -108,6 +305,7 @@ def normalize(data: dict[str, object]) -> dict[str, object]:
         )
 
     master_labels = set(re.findall(r"\\label\{([^}]+)\}", master_path.read_text()))
+    ratified_bindings, registry_error = author_registry(master_hash)
 
     by_label: dict[str, dict[str, list[dict[str, object]]]] = {}
 
@@ -156,18 +354,24 @@ def normalize(data: dict[str, object]) -> dict[str, object]:
                     f"{row.get('receipt', 'inference')} claims certification without its exact checks",
                 )
 
+    bindings_by_id: dict[str, dict[str, object]] = {}
     for raw in data.get("bindings", []):
         if not isinstance(raw, dict):
             return rejected("RECEIPT_SCHEMA_REJECTED", "binding receipt is not an object")
         row = dict(raw)
+        binding_id = str(row.get("id", "")).strip()
+        if not binding_id or binding_id in bindings_by_id:
+            return rejected(
+                "RECEIPT_SCHEMA_REJECTED",
+                "every authored binding must have a unique nonempty id",
+            )
+        bindings_by_id[binding_id] = row
         error = add(row.get("master"), "bindings", row)
         if error:
             return rejected("RECEIPT_SCHEMA_REJECTED", error)
         if row.get("status") not in {
-            "BINDING_READY",
-            "AUTHOR_BOUND_LEAN_PENDING",
-            "AUTHOR_CONFIRMATION_REQUIRED",
-            "AUTHOR_BINDING_TARGET_MISMATCH",
+            "BINDING_READY", "BINDING_UNRESOLVED",
+            "AUTHOR_BOUND_LEAN_PENDING", "AUTHOR_CONFIRMATION_REQUIRED",
             "LEAN_BINDING_REJECTED",
         }:
             return rejected(
@@ -175,47 +379,81 @@ def normalize(data: dict[str, object]) -> dict[str, object]:
                 f"{row.get('id', 'binding')} has an unknown binding status",
             )
         author_digest = author_binding_identity(row)
+        ratified = ratified_bindings.get(binding_id)
         author_confirmed = (
-            row.get("author_confirmed") is True
+            registry_error is None
+            and ratified is not None
+            and ratified.get("author_confirmed") is True
+            and matches_ratified_binding(row, ratified)
+            and row.get("author_confirmed") is True
+            and bool(author_digest)
             and row.get("author_binding_sha256") == author_digest
             and row.get("author_binding_digest") == author_digest
         )
         if row.get("status") == "BINDING_READY":
             expression = str(row.get("exact_expression", "")).strip()
             expected_type = str(row.get("expected_type", "")).strip()
+            seat_identity = "\0".join(str(row.get(field, "")) for field in (
+                "id", "target_declaration", "probe_source", "probe_anchor", "probe_template",
+            )) + "\0" + author_digest
             expected_identity = binding_identity(
-                expression, expected_type, master_hash, source_hash,
+                expression, expected_type, master_hash, source_hash, seat_identity,
             )
+            probe_green, probe_command, probe_output = run_binding_probe(row)
+            row["probe_command"] = probe_command
+            row["probe_output"] = probe_output
             ready = (
-                row.get("typechecked") is True
-                and author_confirmed
+                author_confirmed
                 and bool(expression)
+                and expression == str(ratified.get("exact_expression", "")).strip()
                 and bool(expected_type)
                 and row.get("identity_hash") == expected_identity
+                and probe_green
             )
         elif row.get("status") == "AUTHOR_BOUND_LEAN_PENDING":
             ready = (
                 author_confirmed
                 and not str(row.get("exact_expression", "")).strip()
+                and not str(ratified.get("exact_expression", "")).strip()
                 and row.get("typechecked") is False
-            )
-        elif row.get("status") == "LEAN_BINDING_REJECTED":
-            ready = (
-                author_confirmed
-                and bool(str(row.get("exact_expression", "")).strip())
-                and row.get("typechecked") is False
+                and all(isinstance(row.get(key), str) and str(row[key]).strip()
+                        for key in ("probe_source", "probe_anchor", "probe_template"))
+                and "{expected_type}" in str(row.get("probe_template", ""))
+                and "{exact_expression}" in str(row.get("probe_template", ""))
             )
         elif row.get("status") == "AUTHOR_CONFIRMATION_REQUIRED":
-            ready = row.get("author_confirmed") is False
-        else:
             ready = (
-                row.get("master_targets_linked") is False
-                or row.get("target_typed") is False
+                row.get("author_confirmed") is False
+                and (ratified is None or ratified.get("author_confirmed") is False)
             )
+        elif row.get("status") == "LEAN_BINDING_REJECTED":
+            expression = str(row.get("exact_expression", "")).strip()
+            probe_green, probe_command, probe_output = run_binding_probe(row)
+            row["probe_command"] = probe_command
+            row["probe_output"] = probe_output
+            ready = (
+                author_confirmed and bool(expression)
+                and expression == str(ratified.get("exact_expression", "")).strip()
+                and not probe_green
+            )
+        else:  # migration-only; it can never satisfy the execution gate
+            ready = (
+                not str(row.get("exact_expression", "")).strip()
+                and row.get("typechecked") is False
+            )
+        if row.get("status") != "BINDING_UNRESOLVED" and registry_error is not None:
+            return rejected("AUTHOR_BINDING_REGISTRY_REJECTED", registry_error)
+        if row.get("status") != "BINDING_UNRESOLVED":
+            type_ok, type_command, type_message = expected_type_probe(row)
+            row["expected_type_command"] = type_command
+            row["expected_type_output"] = type_message
+            if not type_ok:
+                return rejected("EXPECTED_TYPE_NOT_ELABORABLE",
+                                str(row.get("id", "binding")) + ": " + type_message)
         if not ready:
             return rejected(
                 "RECEIPT_SCHEMA_REJECTED",
-                f"{row.get('id', 'binding')} has inconsistent author-binding or Lean-instantiation evidence",
+                f"{row.get('id', 'binding')} claims readiness without its exact, author-confirmed identity",
             )
 
     for raw in data.get("open", []):
@@ -250,14 +488,21 @@ def normalize(data: dict[str, object]) -> dict[str, object]:
         error = add(row.get("master"), "rejections", row)
         if error:
             return rejected("RECEIPT_SCHEMA_REJECTED", error)
-        required = ["exact_term", "expected_type", "kernel_message", "command"]
+        required = ["binding_id", "exact_term", "expected_type", "kernel_message", "command"]
+        binding = bindings_by_id.get(str(row.get("binding_id", "")))
         if row.get("status") != "EXACT_CONSTRUCTION_REJECTED" or not all(
             isinstance(row.get(field), str) and bool(str(row.get(field)).strip())
             for field in required
-        ) or row.get("author_confirmed") is not True:
+        ) or row.get("author_confirmed") is not True or binding is None or not (
+            binding.get("status") == "LEAN_BINDING_REJECTED"
+            and row.get("master") == binding.get("master")
+            and row.get("exact_term") == binding.get("exact_expression")
+            and row.get("expected_type") == binding.get("expected_type")
+            and row.get("author_binding_sha256") == binding.get("author_binding_sha256")
+        ):
             return rejected(
                 "RECEIPT_SCHEMA_REJECTED",
-                "an exact-construction rejection must be author-confirmed and quote the term, type, command, and kernel message",
+                "an exact-construction rejection must be tied to the centrally reprobed, author-confirmed binding and quote its term, type, command, and kernel message",
             )
 
     clauses: dict[str, dict[str, object]] = {}
@@ -273,11 +518,7 @@ def normalize(data: dict[str, object]) -> dict[str, object]:
         if rejections:
             status = "EXACT_CONSTRUCTION_REJECTED"
         elif inference_closed and unresolved:
-            status = (
-                "INFERENCE_CERTIFIED_AUTHOR_BOUND_LEAN_PENDING"
-                if all(row.get("status") == "AUTHOR_BOUND_LEAN_PENDING" for row in unresolved)
-                else "INFERENCE_CERTIFIED_BINDING_OPEN"
-            )
+            status = "INFERENCE_CERTIFIED_BINDING_OPEN"
         elif opens and inference_closed:
             status = "INFERENCE_CERTIFIED_WIRING_OPEN"
         elif opens:
@@ -293,18 +534,23 @@ def normalize(data: dict[str, object]) -> dict[str, object]:
                 row.get("status") == "INFERENCE_CERTIFIED" for row in inferences
             ),
             "binding_count": len(bindings),
-            "author_confirmed_binding_count": sum(
-                row.get("author_confirmed") is True for row in bindings
-            ),
             "unresolved_binding_count": len(unresolved),
         }
 
+    action_required = [
+        str(row.get("id", "binding"))
+        for bucket in by_label.values()
+        for row in bucket["bindings"]
+        if row.get("status") != "BINDING_READY"
+    ]
     return {
         "schema": 1,
         "status": "RECEIPTS_CURRENT",
         "allowed_axioms": ALLOWED,
         "by_label": by_label,
         "clauses": clauses,
+        "action_required_bindings": action_required,
+        "bindings_ready": not action_required,
     }
 
 
@@ -350,10 +596,30 @@ def load_receipts(run_fresh: bool = True) -> dict[str, object]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--no-run", action="store_true", help="validate existing evidence without rerunning producer")
+    parser.add_argument(
+        "--require-ready", action="store_true",
+        help="fail unless every authored binding has a fresh seat-specific Lean probe",
+    )
     args = parser.parse_args()
     result = load_receipts(run_fresh=not args.no_run)
+    valid = result["status"] in {"RECEIPTS_CURRENT", "NOT_CONFIGURED"}
+    if not valid:
+        print(json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True))
+        return 1
+    if args.require_ready and result.get("bindings_ready") is not True:
+        print(json.dumps({
+            "schema": 1,
+            "status": "AUTHOR_BINDING_ACTION_REQUIRED",
+            "message": (
+                "author-confirmed bindings are mandatory transcription work; "
+                "place each exact expression at its production seat and contact Lean"
+            ),
+            "action_required_bindings": result.get("action_required_bindings", []),
+            "clauses": result.get("clauses", {}),
+        }, indent=2, ensure_ascii=False, sort_keys=True))
+        return 1
     print(json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True))
-    return 0 if result["status"] in {"RECEIPTS_CURRENT", "NOT_CONFIGURED"} else 1
+    return 0
 
 
 if __name__ == "__main__":
