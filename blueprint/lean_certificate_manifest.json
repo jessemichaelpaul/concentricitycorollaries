@@ -1,6 +1,10 @@
 {
   "schema": 1,
-  "allowed_axioms": ["propext", "Classical.choice", "Quot.sound"],
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
   "terminal_build_target": "Concentricity.ASectionCResidueDiagram",
   "terminal_probe": "Concentricity/_BlueprintTerminalCertificateProbe.lean",
   "inference_probe": "scripts/build_transitivity_inference_probe.sh",
@@ -39,13 +43,30 @@
       ],
       "target_declaration": "ASection.northComparison_of_parallelFaces",
       "target_argument": "kE",
-      "candidate_expression": null,
+      "candidate_expression": "GreatCircle.toNHom 0",
       "author_binding_confirmed": true,
       "author_binding_sha256": "10ed350c4c6a038cf6911a05cad214dfb352b8d8822850e80c50538772367445",
       "author_confirmation_source": "active author confirmation, 2026-08-02",
       "probe_source": "Concentricity/Theorem.lean",
       "probe_anchor": "    aesop (add safe [",
-      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}"
+      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}",
+      "register_modules": [
+        "Concentricity/ASectionFunctor.lean",
+        "Concentricity/ProjectiveBase.lean",
+        "Concentricity/ProjectiveSection.lean",
+        "Concentricity/Theorem.lean"
+      ],
+      "consumer_module": "Concentricity/Theorem.lean",
+      "consumed_as_binder": true,
+      "object_status": "WITNESS_REQUIRED",
+      "witness_suppliers": [
+        "def:A-section",
+        "def:base",
+        "def:residue-subdiagram",
+        "prop:weierstrass",
+        "lem:residue-spheres",
+        "thm:G2-S6"
+      ]
     },
     {
       "master": "lem:c-residue-transitive",
@@ -61,13 +82,30 @@
       ],
       "target_declaration": "ASection.northComparison_of_parallelFaces",
       "target_argument": "kW",
-      "candidate_expression": null,
+      "candidate_expression": "GreatCircle.toNHom 0",
       "author_binding_confirmed": true,
       "author_binding_sha256": "f0601c8d2b14969676e517298355daa3f12f151730a2b439cd363c5ff79065a5",
       "author_confirmation_source": "active author confirmation, 2026-08-02",
       "probe_source": "Concentricity/Theorem.lean",
       "probe_anchor": "    aesop (add safe [",
-      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}"
+      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}",
+      "register_modules": [
+        "Concentricity/ASectionFunctor.lean",
+        "Concentricity/ProjectiveBase.lean",
+        "Concentricity/ProjectiveSection.lean",
+        "Concentricity/Theorem.lean"
+      ],
+      "consumer_module": "Concentricity/Theorem.lean",
+      "consumed_as_binder": true,
+      "object_status": "WITNESS_REQUIRED",
+      "witness_suppliers": [
+        "def:A-section",
+        "def:base",
+        "def:residue-subdiagram",
+        "prop:weierstrass",
+        "lem:residue-spheres",
+        "thm:G2-S6"
+      ]
     },
     {
       "master": "lem:c-residue-transitive",
@@ -83,13 +121,27 @@
       ],
       "target_declaration": "ASection.northComparison_of_parallelFaces",
       "target_argument": "uStar",
-      "candidate_expression": null,
+      "candidate_expression": "(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kE).1).val.symm ((A.distinguishedDiskAction⁻¹).val (A.sphereZero n₁ : OnePoint ℂ))",
       "author_binding_confirmed": true,
       "author_binding_sha256": "9fa762fe6270cff57dc06b026d059f68f9abe7973b43bb01ca253e5ff127efcd",
       "author_confirmation_source": "active author confirmation, 2026-08-02",
       "probe_source": "Concentricity/Theorem.lean",
       "probe_anchor": "    aesop (add safe [",
-      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}"
+      "probe_template": "let {lean_local} : {expected_type} := {exact_expression}",
+      "register_modules": [
+        "Concentricity/Theorem.lean"
+      ],
+      "consumer_module": "Concentricity/Theorem.lean",
+      "consumed_as_binder": true,
+      "object_status": "WITNESS_REQUIRED",
+      "witness_suppliers": [
+        "def:A-section",
+        "def:base",
+        "def:residue-subdiagram",
+        "prop:weierstrass",
+        "lem:residue-spheres",
+        "thm:G2-S6"
+      ]
     },
     {
       "master": "lem:c-residue-transitive",
@@ -105,14 +157,32 @@
       ],
       "target_declaration": "ASection.northComparison_of_parallelFaces",
       "target_argument": "hE",
-      "candidate_expression": null,
+      "candidate_expression": "by simp [uStar, residueActionState, AsectionActionState.ofInput, residueState, projectiveNorth, projectiveObjectFrame_north]",
       "author_binding_confirmed": true,
       "author_binding_sha256": "2b3d9d7b55c72c07a491348ed79f8b95449091c6f5d7177b1e0bfe2647e87835",
       "author_confirmation_source": "active author confirmation, 2026-08-02",
       "probe_source": "Concentricity/Theorem.lean",
       "probe_anchor": "    aesop (add safe [",
       "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
-      "probe_type_context": "let kE : GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth := by sorry\nlet uStar : OnePoint ℂ := by sorry"
+      "probe_type_context": "let kE : GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth := by sorry\nlet uStar : OnePoint ℂ := by sorry",
+      "register_modules": [
+        "Concentricity/ASectionFunctor.lean",
+        "Concentricity/ASectionTotalActionState.lean",
+        "Concentricity/CayleyDictionary.lean",
+        "Concentricity/ProjectiveSection.lean",
+        "Concentricity/Theorem.lean"
+      ],
+      "consumer_module": "Concentricity/Theorem.lean",
+      "consumed_as_binder": true,
+      "object_status": "WITNESS_REQUIRED",
+      "witness_suppliers": [
+        "def:A-section",
+        "def:base",
+        "def:residue-subdiagram",
+        "prop:weierstrass",
+        "lem:residue-spheres",
+        "thm:G2-S6"
+      ]
     },
     {
       "master": "lem:c-residue-transitive",
@@ -128,14 +198,32 @@
       ],
       "target_declaration": "ASection.northComparison_of_parallelFaces",
       "target_argument": "hW",
-      "candidate_expression": null,
+      "candidate_expression": "by simp [uStar, residueActionState, AsectionActionState.ofInput, residueState, projectiveNorth, projectiveObjectFrame_north]",
       "author_binding_confirmed": true,
       "author_binding_sha256": "94daf66062844c31aca83b8258762beb5dcd55c796cc6247d232ea2ddcd4aefd",
       "author_confirmation_source": "active author confirmation, 2026-08-02",
       "probe_source": "Concentricity/Theorem.lean",
       "probe_anchor": "    aesop (add safe [",
       "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
-      "probe_type_context": "let kW : GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth := by sorry\nlet uStar : OnePoint ℂ := by sorry"
+      "probe_type_context": "let kW : GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth := by sorry\nlet uStar : OnePoint ℂ := by sorry",
+      "register_modules": [
+        "Concentricity/ASectionFunctor.lean",
+        "Concentricity/ASectionTotalActionState.lean",
+        "Concentricity/CayleyDictionary.lean",
+        "Concentricity/ProjectiveSection.lean",
+        "Concentricity/Theorem.lean"
+      ],
+      "consumer_module": "Concentricity/Theorem.lean",
+      "consumed_as_binder": true,
+      "object_status": "WITNESS_REQUIRED",
+      "witness_suppliers": [
+        "def:A-section",
+        "def:base",
+        "def:residue-subdiagram",
+        "prop:weierstrass",
+        "lem:residue-spheres",
+        "thm:G2-S6"
+      ]
     },
     {
       "master": "thm:concentricity",
@@ -149,13 +237,31 @@
         "ASection.transportLevel"
       ],
       "target_declaration": "ASection.transportLevel",
-      "candidate_expression": null,
+      "candidate_expression": "hkn",
       "author_binding_confirmed": true,
       "author_binding_sha256": "2303695ed6012271f74b08d247c9ec6b1646324d5eaa878e83ca59ce31323ccb",
       "author_confirmation_source": "author correction in active provenance task, 2026-08-02",
       "probe_source": "Concentricity/Theorem.lean",
       "probe_anchor": "    -- 8.3.5 APPLIED: the singleton k, at the two certified representatives.",
-      "probe_template": "have {lean_local} : {expected_type} := {exact_expression}"
+      "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
+      "register_modules": [
+        "Concentricity/Theorem.lean"
+      ],
+      "consumer_module": "Concentricity/Theorem.lean",
+      "consumed_as_binder": false,
+      "object_status": "WITNESS_REQUIRED",
+      "witness_suppliers": [
+        "def:A-section",
+        "def:base",
+        "def:residue-subdiagram",
+        "lem:c-residue-transitive",
+        "lem:residue-spheres",
+        "lem:pi0-grothendieck",
+        "thm:G2-S6",
+        "thm:winding-lift",
+        "prop:winding-signature",
+        "thm:identity"
+      ]
     }
   ],
   "binding_probe_anchor": "    aesop (add safe [",
