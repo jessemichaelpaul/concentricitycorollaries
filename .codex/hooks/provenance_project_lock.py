@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 import pathlib
 import re
+import subprocess
 import sys
 
 
@@ -47,6 +48,33 @@ MUTATING_SHELL = re.compile(
     r"|shutil\.(?:copy|move|rmtree)|os\.(?:remove|rename|replace|makedirs)"
 )
 PATCH_TARGET = re.compile(r"^\*\*\* (?:Add|Update|Delete) File: (.+)$", re.MULTILINE)
+
+
+def receipt_production_source() -> str:
+    """The production file, read from the project's own receipt evidence.
+
+    The provenance manifest is author-locked and predates this rule, so a
+    project that already declares its production source in its receipt manifest
+    should not need the author to restate it before the commit gate works.
+    """
+    config = CFG.get("receipt_import")
+    if not isinstance(config, dict):
+        return ""
+    for key in ("manifest", "evidence"):
+        name = config.get(key)
+        if not isinstance(name, str) or not name:
+            continue
+        path = PROJECT / name
+        if not path.exists():
+            continue
+        try:
+            data = json.loads(path.read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        value = data.get("production_source") if isinstance(data, dict) else None
+        if isinstance(value, str) and value:
+            return value
+    return ""
 
 
 def emit(value: dict[str, object]) -> None:
@@ -154,6 +182,42 @@ def main() -> int:
         return 0
 
     if tool == "Bash" and MUTATING_SHELL.search(command):
+        # RULE 1.  A commit touching the production source must carry a term that
+        # reached the kernel.  On 2026-08-02 four commits landed in the
+        # production file, all compiling, none moving a binding -- and every gate
+        # was silent, because a commit that closes a row and a commit that
+        # restates a settled lemma are indistinguishable to anything that reads
+        # words.  This reads the attempt log instead.
+        if re.search(r"(?:^|[;&|\s])git\s+commit(?:\s|$)", command):
+            production = CFG.get("production_source") or receipt_production_source()
+            if isinstance(production, str) and production:
+                attempts = PROJECT / ".provenance" / "attempts.jsonl"
+                staged = subprocess.run(
+                    ["git", "diff", "--cached", "--name-only"],
+                    cwd=PROJECT, capture_output=True, text=True,
+                )
+                touches = production in staged.stdout.split()
+                if touches:
+                    head = subprocess.run(
+                        ["git", "log", "-1", "--format=%ct"],
+                        cwd=PROJECT, capture_output=True, text=True,
+                    )
+                    try:
+                        since = float(head.stdout.strip() or 0)
+                    except ValueError:
+                        since = 0.0
+                    fresh = attempts.exists() and attempts.stat().st_mtime > since
+                    if not fresh:
+                        deny(
+                            event,
+                            "Provenance lock: this commit changes " + production +
+                            " but no term has reached the kernel since the last "
+                            "commit -- .provenance/attempts.jsonl carries no newer "
+                            "line.  The production source is reached through a "
+                            "binding probe, never beside one.  Work adjacent to a "
+                            "seat compiles just as well as work in it; that is why "
+                            "this reads the attempt log and not the diff.",
+                        )
         if re.search(r"(?:^|[;&|\s])git\s+push(?:\s|$)", command):
             deny(
                 event,

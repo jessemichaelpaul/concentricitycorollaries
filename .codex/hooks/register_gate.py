@@ -47,8 +47,56 @@ def deny(reason):
     raise SystemExit(0)
 
 
+def binding_register():
+    """The active binding row's own author-ratified register, if one is named.
+
+    A whole-seat surface is still a place to search.  When the manifest names an
+    `active_binding`, the surface narrows to exactly the modules the author says
+    that row's object lives in -- so the work is to fill one field from inside
+    two or three files, not to look for it.
+    """
+    binding_id = CFG.get("active_binding")
+    config = CFG.get("receipt_import")
+    name = (config or {}).get("evidence") if isinstance(config, dict) else None
+    if not isinstance(binding_id, str) or not binding_id:
+        return None, None
+    if not isinstance(name, str) or not name:
+        return None, None
+    path = PROJECT / name
+    if not path.exists():
+        return None, None
+    try:
+        data = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return None, None
+    for row in (data.get("bindings") or []):
+        if not isinstance(row, dict) or str(row.get("id")) != binding_id:
+            continue
+        modules = row.get("register_modules")
+        if not isinstance(modules, list) or not all(isinstance(x, str) for x in modules):
+            return None, None
+        # The row's own seat, the master, and the ledger are always readable:
+        # a typist needs the statement it is filling and the file it lands in.
+        extra = [str(row.get("probe_source") or "")]
+        if CFG.get("master"):
+            extra.append(str(CFG["master"]))
+        if CFG.get("blueprint"):
+            extra.append(str(CFG["blueprint"]))
+        if isinstance(config, dict) and config.get("evidence"):
+            extra.append(str(config["evidence"]))
+        return binding_id, [m for m in modules + extra if m]
+    return None, None
+
+
 def surface():
-    """The author's allow-list for the seat currently in force, or None."""
+    """The author's allow-list currently in force, or None.
+
+    A named `active_binding` narrows to that row's register; otherwise the
+    seat-wide `register_surfaces` entry applies.
+    """
+    name, allow = binding_register()
+    if allow:
+        return "binding " + str(name), allow
     surfaces = CFG.get("register_surfaces")
     active = CFG.get("active_register_surface")
     if not isinstance(surfaces, dict) or not isinstance(active, str) or not active:
@@ -78,11 +126,17 @@ def in_project(raw, cwd):
     return relative
 
 
+# The machinery's own tools are always reachable.  A gate whose printed remedy
+# ("run tools/claim_gate.py --list") is refused by a sibling gate is not a
+# boundary, it is a deadlock -- which is exactly what happened on 2026-08-02.
+ALWAYS_ALLOW = ("tools/*",)
+
+
 def permitted(relative, allow):
     text = str(relative)
     return any(fnmatch.fnmatch(text, rule) or text == rule or
                fnmatch.fnmatch(text, rule.rstrip("/") + "/*")
-               for rule in allow)
+               for rule in tuple(allow) + ALWAYS_ALLOW)
 
 
 def main():
@@ -112,10 +166,16 @@ def main():
         candidates = [str(raw_input.get("path", ""))]
     elif tool == "Bash":
         command = str(raw_input.get("command", ""))
-        if not re.search(r"(?:^|[;&|\s])(?:grep|rg|cat|head|tail|sed|awk|less|wc)(?:\s|$)",
-                         command):
+        # Scan only the pipeline segments that ARE a search, and only their own
+        # arguments.  Scanning the whole command made `… | head` read as a
+        # search of every path anywhere in it, so running a tool and paging its
+        # output was refused -- including the remedy this gate's sibling prints.
+        candidates = []
+        for segment in re.split(r"[|;&]+", command):
+            if re.match(r"\s*(?:grep|rg|cat|head|tail|sed|awk|less|wc)(?:\s|$)", segment):
+                candidates.extend(PATH_TOKEN.findall(segment))
+        if not candidates:
             return 0
-        candidates = PATH_TOKEN.findall(command)
 
     refused = []
     for candidate in candidates:

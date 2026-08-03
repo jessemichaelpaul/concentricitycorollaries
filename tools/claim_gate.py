@@ -48,23 +48,12 @@ PROBABILITY_OVERRIDE = re.compile(
     re.IGNORECASE,
 )
 ROLE_REFUSAL = re.compile(
-    r"\b(?:(?:cannot|can't|unable to|refuse to|refusing to|will not|won't|"
-    r"(?:am|are|is|'m|'re|'s)\s+not\s+going\s+to)\s+"
-    r"(?:(?:honestly|responsibly|safely)\s+)?(?:keep\s+)?"
-    r"(?:continue|proceed|instantiate|wire|formalize|probe|try|work|"
-    r"(?:fire|firing|run|running)\s+(?:probes?|attempts?))|"
+    r"\b(?:(?:cannot|can't|unable to|refuse to|refusing to|will not|won't)\s+"
+    r"(?:continue|proceed|instantiate|wire|formalize)|"
     r"provenance\s+(?:refuses|prevents|does not allow)|"
     r"(?:need|require)\s+(?:you|the author)\s+to\s+"
     r"(?:restate|supply|provide|identify)\s+(?:the\s+)?"
     r"(?:mathematics|proof|binding|object|Lean name|Lean term))\b",
-    re.IGNORECASE,
-)
-WORK_STOP = re.compile(
-    r"\b(?:(?:no|not\s+going\s+to\s+do\s+any)\s+more\s+"
-    r"(?:probes?|attempts?|tries)|"
-    r"(?:stop|stopping|leave|leaving|pause|pausing|done)\s+"
-    r"(?:here|now|for\s+now)|"
-    r"(?:come|coming|return|returning)\s+back\s+(?:later|tomorrow))\b",
     re.IGNORECASE,
 )
 CONSEQUENCE_OVERRIDE = re.compile(
@@ -166,46 +155,106 @@ def attempted_bindings() -> set[str]:
     return found
 
 
-def mandatory_pending_bindings() -> set[str]:
-    """Current author-confirmed transcription rows that still require action."""
+def pending_bindings() -> list[dict[str, object]]:
+    """Author-confirmed rows whose `candidate_expression` is still null.
+
+    RULE 4.  The empty column was passive: a model could describe the seat for
+    a whole session while every candidate stayed null.  It is now the gate.
+    """
     config = CFG.get("receipt_import")
-    if not isinstance(config, dict):
-        return set()
-    evidence_name = config.get("evidence")
-    if not isinstance(evidence_name, str) or not evidence_name:
-        return set()
-    evidence = ROOT / evidence_name
+    name = (config or {}).get("evidence") if isinstance(config, dict) else None
+    if not isinstance(name, str) or not name:
+        return []
+    path = ROOT / name
+    if not path.exists():
+        return []
     try:
-        data = json.loads(evidence.read_text())
+        data = json.loads(path.read_text())
     except (OSError, json.JSONDecodeError):
-        return set()
-    rows = data.get("bindings", [])
+        return []
+    rows = data.get("bindings")
     if not isinstance(rows, list):
-        return set()
-    return {
-        str(row.get("id"))
-        for row in rows
+        return []
+    return [
+        row for row in rows
         if isinstance(row, dict)
-        and isinstance(row.get("id"), str)
-        and row.get("author_confirmed") is True
-        and row.get("status") != "BINDING_READY"
-    }
+        and not str(row.get("candidate_expression") or "").strip()
+        and not str(row.get("exact_expression") or "").strip()
+    ]
+
+
+def pending_names(rows: list[dict[str, object]]) -> dict[str, str]:
+    """Every spelling by which a pending row can be referred to.
+
+    On 2026-08-02 the id-only matcher was evaded without effort: the model
+    wrote `kE` and `the five` rather than `seat1.kE`, and the gate never fired.
+    A row's local name and its target declaration are names for it too.
+    """
+    names: dict[str, str] = {}
+    for row in rows:
+        rid = str(row.get("id", "")).strip()
+        if not rid:
+            continue
+        for key in ("id", "lean_local", "target_declaration"):
+            value = str(row.get(key) or "").strip()
+            if value:
+                names[value] = rid
+    return names
+
+
+def unattempted_mentions(paragraph: str) -> list[str]:
+    rows = pending_bindings()
+    if not rows:
+        return []
+    attempted = attempted_bindings()
+    hit: set[str] = set()
+    for spelling, rid in pending_names(rows).items():
+        if rid in attempted:
+            continue
+        if re.search(r"(?<![A-Za-z0-9_.])" + re.escape(spelling) + r"(?![A-Za-z0-9_])",
+                     paragraph):
+            hit.add(rid)
+    return sorted(hit)
 
 
 def check_message(message: str) -> list[str]:
     claims, error = current_claims()
+    paragraphs = [part.strip() for part in re.split(r"\n\s*\n", message)]
+
+    # RULES 2 and 4.  These bite on ANY paragraph naming a pending row, not only
+    # on one carrying controlled vocabulary.  On 2026-08-02 every refusal the
+    # gate issued was answered by rewording; a rule that reads words can be
+    # rewritten around, so these read state.
+    blocked: list[str] = []
+    names_pending = bool(pending_bindings())
+    mentions_seat = False
+    for paragraph in paragraphs:
+        mentioned = unattempted_mentions(paragraph)
+        if mentioned:
+            mentions_seat = True
+            blocked.append(
+                "no term has reached the kernel for " + ", ".join(mentioned[:4])
+                + "; its candidate expression is still null.  Instantiate at the seat "
+                  "first -- prose about a row is never a substitute for putting the "
+                  "author's term to Lean, in any wording"
+            )
+    if blocked:
+        return list(dict.fromkeys(blocked))
+    if error and names_pending and mentions_seat:
+        return ["the claim surface is stale, so nothing here is anchored to current "
+                "sources: " + error + ".  A commit to the production source "
+                "invalidates the surface; regenerate before describing the seat"]
+
     controlled = [
-        part.strip() for part in re.split(r"\n\s*\n", message)
+        part for part in paragraphs
         if CONTROLLED.search(part)
         or PROBABILITY_OVERRIDE.search(part)
         or CONSEQUENCE_OVERRIDE.search(part)
         or ROLE_REFUSAL.search(part)
-        or WORK_STOP.search(part)
     ]
     if not controlled:
         return []
     attempted = attempted_bindings()
-    pending = mandatory_pending_bindings()
     unattempted = sorted({
         binding for paragraph in controlled
         for binding in BINDING_ID.findall(paragraph)
@@ -221,18 +270,18 @@ def check_message(message: str) -> list[str]:
     for paragraph in controlled:
         tokens = TOKEN.findall(paragraph)
         valid = [claims[token] for token in tokens if token in claims]
+        if not valid:
+            problems.append("status-bearing paragraph has no current KGT receipt token")
+            continue
+        statuses = {str(row.get("status")) for row in valid}
+        for pattern, accepted in STATUS_RULES:
+            if pattern.search(paragraph) and statuses.isdisjoint(accepted):
+                problems.append(
+                    "status-bearing paragraph uses a current token for a different machine state"
+                )
         exact_rejection = any(
             row.get("status") == "EXACT_CONSTRUCTION_REJECTED" for row in valid
         )
-        if not valid:
-            problems.append("status-bearing paragraph has no current KGT receipt token")
-        else:
-            statuses = {str(row.get("status")) for row in valid}
-            for pattern, accepted in STATUS_RULES:
-                if pattern.search(paragraph) and statuses.isdisjoint(accepted):
-                    problems.append(
-                        "status-bearing paragraph uses a current token for a different machine state"
-                    )
         if (NEGATIVE.search(paragraph) or PROBABILITY_OVERRIDE.search(paragraph)
                 or CONSEQUENCE_OVERRIDE.search(paragraph)) \
                 and not exact_rejection:
@@ -245,13 +294,6 @@ def check_message(message: str) -> list[str]:
                 "an unresolved binding is mandatory transcription work, not grounds for "
                 "model refusal; continue to an exact Lean attempt or cite the author's "
                 "EXACT_CONSTRUCTION_REJECTED receipt"
-            )
-        if WORK_STOP.search(paragraph) and pending - attempted and not exact_rejection:
-            due = ", ".join(sorted(pending - attempted)[:4])
-            problems.append(
-                "work-stop language is forbidden while author-confirmed transcription "
-                f"is mandatory and unattempted ({due}); place the exact authored term "
-                "at its production seat and contact Lean"
             )
     return problems
 
@@ -266,6 +308,29 @@ def stop_hook() -> int:
     if pathlib.Path(active).resolve() != ROOT.resolve() or CFG.get("phase", "formalization") == "authoring":
         print("{}")
         return 0
+    # RULE 3, the silence gate.  Every other check fires on something the model
+    # DID.  On 2026-08-02 the dominant failure was what it avoided: 105 turns,
+    # 19 kernel contacts, four commits that compiled, and zero terms into either
+    # seat.  Nothing objected, because doing nothing triggers nothing.  A turn
+    # that ends with an author-confirmed row pending and no term recorded
+    # against it is refused, whatever the turn said.
+    pending = pending_bindings()
+    if pending:
+        attempted = attempted_bindings()
+        untouched = [str(row.get("id", "")) for row in pending
+                     if str(row.get("id", "")) not in attempted]
+        if untouched:
+            print(json.dumps({"decision": "block", "reason": (
+                "PROVENANCE SILENCE GATE - this turn ends with author-confirmed "
+                "rows that no term has been put to Lean for: "
+                + ", ".join(sorted(untouched)[:6])
+                + ".  Transcription is the work; a turn is not finished by "
+                  "describing it, searching for it, or proving something beside "
+                  "it.  Put an exact term at the row's own seat and let the "
+                  "kernel answer -- a rejection is a result, silence is not."
+            )}))
+            return 0
+
     problems = check_message(str(payload.get("last_assistant_message") or ""))
     if problems:
         reason = (

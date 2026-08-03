@@ -105,6 +105,10 @@ RATIFIED_FIELDS = (
     "id", "master", "paper_object", "expected_type",
     "required_master_declarations", "target_declaration", "lean_local",
     "probe_source", "probe_anchor", "probe_template",
+    # The register a binding's object lives in is the author's to fix.  A model
+    # that can widen where it looks can search its way out of any boundary,
+    # which is what a whole-seat surface allowed.
+    "register_modules",
 )
 
 
@@ -196,10 +200,7 @@ def expected_type_probe(row):
     at = source.index(anchor)
     line_at = source.rfind("\n", 0, at) + 1
     indent = re.match(r"[ \t]*", source[line_at:at]).group(0)
-    context = str(row.get("probe_type_context", "")).strip()
-    declarations = [*context.splitlines(),
-                    "have _kgtExpectedType : " + expected + " := by sorry"]
-    declaration = "\n".join(indent + line for line in declarations)
+    declaration = indent + "have _kgtExpectedType : " + expected + " := by sorry"
     probed = source.replace(anchor, declaration + "\n" + anchor, 1)
     with tempfile.NamedTemporaryFile(
         mode="w", suffix=".lean", prefix="kgt-type-", delete=False, encoding="utf-8",
@@ -593,6 +594,71 @@ def load_receipts(run_fresh: bool = True) -> dict[str, object]:
     return normalize(data)
 
 
+def work_order() -> dict[str, object]:
+    """The next pending row, as an instruction rather than a queue.
+
+    Everything in this machinery grades a candidate a model already produced.
+    Nothing carried the model to where the candidate lives, so the one stage
+    that needs typing was unstructured search -- and on 2026-08-02 that stage
+    consumed a whole session while every other stage sat complete around it.
+
+    This is the rail: one row, its authored semantics, its exact expected type,
+    its own seat and template, and the AUTHOR-RATIFIED modules its object lives
+    in.  Filling `candidate_expression` from inside `register_modules` is the
+    whole of the work; there is nothing to search.
+    """
+    config = CFG.get("receipt_import")
+    name = (config or {}).get("evidence") if isinstance(config, dict) else None
+    if not isinstance(name, str) or not name:
+        return {"schema": 1, "status": "NOT_CONFIGURED"}
+    try:
+        path = safe_path(name)
+    except ValueError as error:
+        return {"schema": 1, "status": "EVIDENCE_PATH_REJECTED", "message": str(error)}
+    if not path.exists():
+        return {"schema": 1, "status": "NO_EVIDENCE",
+                "message": "run the receipt producer first"}
+    try:
+        data = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError) as error:
+        return {"schema": 1, "status": "EVIDENCE_MALFORMED", "message": str(error)}
+    rows = [row for row in (data.get("bindings") or []) if isinstance(row, dict)]
+    pending = [
+        row for row in rows
+        if not str(row.get("candidate_expression") or "").strip()
+        and not str(row.get("exact_expression") or "").strip()
+    ]
+    if not pending:
+        return {"schema": 1, "status": "NO_PENDING_BINDING",
+                "total_bindings": len(rows)}
+    row = pending[0]
+    registers = row.get("register_modules")
+    order = {
+        "schema": 1,
+        "status": "WORK_ORDER",
+        "id": row.get("id"),
+        "master": row.get("master"),
+        "paper_object": row.get("paper_object"),
+        "expected_type": row.get("expected_type"),
+        "target_declaration": row.get("target_declaration"),
+        "lean_local": row.get("lean_local"),
+        "binder": row.get("binder"),
+        "probe_source": row.get("probe_source"),
+        "probe_anchor": row.get("probe_anchor"),
+        "probe_template": row.get("probe_template"),
+        "register_modules": registers,
+        "remaining": len(pending),
+        "fill": "candidate_expression",
+    }
+    if not isinstance(registers, list) or not registers:
+        order["register_warning"] = (
+            "this row names no author-ratified register; without it the typist "
+            "has a specification and no location, which is the condition that "
+            "produced the 2026-08-02 session"
+        )
+    return order
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--no-run", action="store_true", help="validate existing evidence without rerunning producer")
@@ -600,26 +666,21 @@ def main() -> int:
         "--require-ready", action="store_true",
         help="fail unless every authored binding has a fresh seat-specific Lean probe",
     )
+    parser.add_argument(
+        "--next", action="store_true",
+        help="print the next pending binding as a work order, with its authored register",
+    )
     args = parser.parse_args()
+    if args.next:
+        order = work_order()
+        print(json.dumps(order, indent=2, ensure_ascii=False, sort_keys=True))
+        return 0 if order.get("status") in {"WORK_ORDER", "NO_PENDING_BINDING"} else 1
     result = load_receipts(run_fresh=not args.no_run)
-    valid = result["status"] in {"RECEIPTS_CURRENT", "NOT_CONFIGURED"}
-    if not valid:
-        print(json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True))
-        return 1
-    if args.require_ready and result.get("bindings_ready") is not True:
-        print(json.dumps({
-            "schema": 1,
-            "status": "AUTHOR_BINDING_ACTION_REQUIRED",
-            "message": (
-                "author-confirmed bindings are mandatory transcription work; "
-                "place each exact expression at its production seat and contact Lean"
-            ),
-            "action_required_bindings": result.get("action_required_bindings", []),
-            "clauses": result.get("clauses", {}),
-        }, indent=2, ensure_ascii=False, sort_keys=True))
-        return 1
     print(json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True))
-    return 0
+    valid = result["status"] in {"RECEIPTS_CURRENT", "NOT_CONFIGURED"}
+    if args.require_ready and result.get("bindings_ready") is not True:
+        return 1
+    return 0 if valid else 1
 
 
 if __name__ == "__main__":
