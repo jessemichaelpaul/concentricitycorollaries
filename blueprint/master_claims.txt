@@ -1,6 +1,441 @@
+CLAIM [thm:riemann] The Dirichlet series $ (s)= _{n 1}n^{-s}$, convergent for $ s>1$, continues to a meromorph
+CERTIFIEDAT riemannZeta_meromorphicOn
+OBJECT riemannZeta_meromorphicOn
+END
+
+CLAIM [thm:riemann] The Dirichlet series $ (s)= _{n 1}n^{-s}$, convergent for $ s>1$, continues to a meromorph
+CERTIFIEDAT riemannZeta_orderAt_one
+OBJECT riemannZeta_orderAt_one
+END
+
+CLAIM [thm:riemann] The Dirichlet series $ (s)= _{n 1}n^{-s}$, convergent for $ s>1$, continues to a meromorph
+CERTIFIEDAT riemannZeta_conj
+OBJECT riemannZeta_conj
+END
+
+CLAIM [thm:riemann] The Dirichlet series $ (s)= _{n 1}n^{-s}$, convergent for $ s>1$, continues to a meromorph
+CERTIFIEDAT riemannZeta_one_sub_zero
+OBJECT riemannZeta_one_sub_zero
+END
+
+CLAIM [thm:riemann] The Dirichlet series $ (s)= _{n 1}n^{-s}$, convergent for $ s>1$, continues to a meromorph
+CERTIFIEDAT nontrivialZero_re_mem_Ioo
+OBJECT nontrivialZero_re_mem_Ioo
+END
+
+CLAIM [thm:euler] For $ s>1$, \[ (s)= _{p\ {prime}} (1-p^{-s} )^{-1} = \! ( _{p} _{k 1} 1k\,p^{-ks} ), \] th
+CERTIFIEDAT zetaEulerLog
+OBJECT zetaEulerLog
+END
+
+CLAIM [thm:euler] For $ s>1$, \[ (s)= _{p\ {prime}} (1-p^{-s} )^{-1} = \! ( _{p} _{k 1} 1k\,p^{-ks} ), \] th
+CERTIFIEDAT zetaC2_summable
+OBJECT zetaC2_summable
+END
+
+CLAIM [thm:euler] For $ s>1$, \[ (s)= _{p\ {prime}} (1-p^{-s} )^{-1} = \! ( _{p} _{k 1} 1k\,p^{-ks} ), \] th
+CERTIFIEDAT zetaC2_zero_free
+OBJECT zetaC2_zero_free
+END
+
+CLAIM [thm:euler] For $ s>1$, \[ (s)= _{p\ {prime}} (1-p^{-s} )^{-1} = \! ( _{p} _{k 1} 1k\,p^{-ks} ), \] th
+CERTIFIEDAT zetaC2_euler
+OBJECT zetaC2_euler
+END
+
+CLAIM [thm:hadamard] $ $ is entire of order $1$ with infinitely many zeros, which are exactly the nontrivial ze
+CERTIFIEDAT xi_entire
+OBJECT xi_entire
+END
+
+CLAIM [thm:hadamard] $ $ is entire of order $1$ with infinitely many zeros, which are exactly the nontrivial ze
+CERTIFIEDAT xi_zeros_eq_nontrivialZeros
+OBJECT xi_zeros_eq_nontrivialZeros
+END
+
+CLAIM [thm:hadamard] $ $ is entire of order $1$ with infinitely many zeros, which are exactly the nontrivial ze
+CERTIFIEDAT zeta_hadamard
+OBJECT zeta_hadamard
+END
+
+CLAIM [thm:hadamard] $ $ is entire of order $1$ with infinitely many zeros, which are exactly the nontrivial ze
+CERTIFIEDAT riemannZeta_nontrivialZeros_infinite
+OBJECT riemannZeta_nontrivialZeros_infinite
+END
+
+CLAIM [cor:hadamard-infinitude] $ $ has infinitely many nontrivial zeros.
+CERTIFIEDAT riemannZeta_nontrivialZeros_infinite
+OBJECT riemannZeta_nontrivialZeros_infinite
+END
+
+CLAIM [thm:hardy] Infinitely many nontrivial zeros of $ $ lie on the line $ s= 12$.
+CERTIFIEDAT zeta_criticalLine_zeros_infinite
+OBJECT zeta_criticalLine_zeros_infinite
+END
+
+CLAIM [def:zeta-Cstar] $ : $ is the meromorphic continuation of $ $ regarded as a map to the Riemann sphere: $ (s
+CERTIFIEDAT zetaC
+OBJECT zetaC
+END
+
+CLAIM [def:zeta-Cstar] $ : $ is the meromorphic continuation of $ $ regarded as a map to the Riemann sphere: $ (s
+CERTIFIEDAT zetaC_coe
+OBJECT zetaC_coe
+END
+
+CLAIM [def:zeta-Cstar] $ : $ is the meromorphic continuation of $ $ regarded as a map to the Riemann sphere: $ (s
+CERTIFIEDAT zetaC_one
+OBJECT zetaC_one
+END
+
+CLAIM [def:zeta-Cstar] $ : $ is the meromorphic continuation of $ $ regarded as a map to the Riemann sphere: $ (s
+CERTIFIEDAT zetaC_infty
+OBJECT zetaC_infty
+END
+
+CLAIM [lem:zero-Cstar] $Z( )=Z( )$: the zeros of $ $ in $ $ are exactly the zeros of $ $ in $ $; in particular th
+CERTIFIEDAT zetaC_coe_eq_zero_iff
+OBJECT zetaC_coe_eq_zero_iff
+END
+
+CLAIM [lem:zero-Cstar] $Z( )=Z( )$: the zeros of $ $ in $ $ are exactly the zeros of $ $ in $ $; in particular th
+CERTIFIEDAT zetaC_zero_iff
+OBJECT zetaC_zero_iff
+END
+
+CLAIM [def:octonions] The octonions are: (i) a {division algebra}: every nonzero element has a multiplicative in
+CERTIFIEDAT Octonion
+OBJECT Octonion
+END
+
+CLAIM [def:octonions] The octonions are: (i) a {division algebra}: every nonzero element has a multiplicative in
+CERTIFIEDAT Octonion.normSq_mul
+OBJECT normSq_mul
+END
+
+CLAIM [def:octonions] The octonions are: (i) a {division algebra}: every nonzero element has a multiplicative in
+CERTIFIEDAT Octonion.alt_left
+OBJECT alt_left
+END
+
+CLAIM [def:octonions] The octonions are: (i) a {division algebra}: every nonzero element has a multiplicative in
+CERTIFIEDAT Octonion.alt_right
+OBJECT alt_right
+END
+
+CLAIM [def:slices] For any unit imaginary octonion $v S^6$, the {complex slice} is $ _v=\{a+bv:a,b \} $. Sinc
+CERTIFIEDAT Octonion.unitImaginarySphere
+OBJECT unitImaginarySphere
+END
+
+CLAIM [def:slices] For any unit imaginary octonion $v S^6$, the {complex slice} is $ _v=\{a+bv:a,b \} $. Sinc
+CERTIFIEDAT Octonion.sliceEmbed
+OBJECT sliceEmbed
+END
+
+CLAIM [def:slices] For any unit imaginary octonion $v S^6$, the {complex slice} is $ _v=\{a+bv:a,b \} $. Sinc
+CERTIFIEDAT Octonion.sliceEmbed_mul
+OBJECT sliceEmbed_mul
+END
+
+CLAIM [def:slices] For any unit imaginary octonion $v S^6$, the {complex slice} is $ _v=\{a+bv:a,b \} $. Sinc
+CERTIFIEDAT Octonion.sliceSphere
+OBJECT sliceSphere
+END
+
+CLAIM [thm:identity] Let $f$ be slice regular on an axially symmetric slice domain $ $. If $f$ vanishes on a su
+CERTIFIEDAT stem_identity
+OBJECT stem_identity
+END
+
+CLAIM [def:slice-preserving] A slice-regular function $f$ on an axially symmetric domain $ $ is {slice preserving} if i
+CERTIFIEDAT IsIntrinsic
+OBJECT IsIntrinsic
+END
+
+CLAIM [def:slice-preserving] A slice-regular function $f$ on an axially symmetric domain $ $ is {slice preserving} if i
+CERTIFIEDAT StemRing.isIntrinsic
+OBJECT isIntrinsic
+END
+
+CLAIM [def:slice-preserving] A slice-regular function $f$ on an axially symmetric domain $ $ is {slice preserving} if i
+CERTIFIEDAT StemRing.real_on_real
+OBJECT real_on_real
+END
+
+CLAIM [def:zeta_O] Here $N$ denotes the {north pole} of $S^8$: the single point at infinity $ $ adjoined in t
+CERTIFIEDAT zetaO
+OBJECT zetaO
+END
+
+CLAIM [def:zeta_O] Here $N$ denotes the {north pole} of $S^8$: the single point at infinity $ $ adjoined in t
+CERTIFIEDAT zetaO_infty
+OBJECT zetaO_infty
+END
+
+CLAIM [def:zeta_O] Here $N$ denotes the {north pole} of $S^8$: the single point at infinity $ $ adjoined in t
+CERTIFIEDAT zetaO_one
+OBJECT zetaO_one
+END
+
+CLAIM [def:zeta_O] Here $N$ denotes the {north pole} of $S^8$: the single point at infinity $ $ adjoined in t
+CERTIFIEDAT zetaO_sliceEmbed
+OBJECT zetaO_sliceEmbed
+END
+
+CLAIM [def:zeta_O] Here $N$ denotes the {north pole} of $S^8$: the single point at infinity $ $ adjoined in t
+CERTIFIEDAT zetaO_sliceEmbed_of_im_neg
+OBJECT zetaO_sliceEmbed_of_im_neg
+END
+
+CLAIM [def:zeta_O] Here $N$ denotes the {north pole} of $S^8$: the single point at infinity $ $ adjoined in t
+CERTIFIEDAT zetaO_ofReal
+OBJECT zetaO_ofReal
+END
+
+CLAIM [prop:well-defined] $ : $ is well-defined.
+CERTIFIEDAT zetaO_sliceEmbed'
+OBJECT zetaO_sliceEmbed'
+END
+
+CLAIM [prop:well-defined] $ : $ is well-defined.
+CERTIFIEDAT riemannZeta_conj
+OBJECT riemannZeta_conj
+END
+
+CLAIM [def:R] $ R:= O_{ }$ is the set of all slice-regular functions $f: $ that are slice preserving (De
+CERTIFIEDAT StemRing
+OBJECT StemRing
+END
+
+CLAIM [prop:R-comm-ring] $( R,+, )$ is a commutative ring with identity $1 R$.
+CERTIFIEDAT StemRing
+OBJECT StemRing
+END
+
+CLAIM [prop:R-domain] If $f,g R$ and $f g=0$, then $f=0$ or $g=0$.
+CERTIFIEDAT StemRing.eq_zero_or_eq_zero_of_mul_eq_zero
+OBJECT eq_zero_or_eq_zero_of_mul_eq_zero
+END
+
+CLAIM [thm:slice-exp] The exponential $ : \{0\}$, $ (q)= _{k 0}q^{k}/k!$ (powers well defined by Corollary~ {cor
+CERTIFIEDAT Octonion.exp
+OBJECT exp
+END
+
+CLAIM [thm:slice-exp] The exponential $ : \{0\}$, $ (q)= _{k 0}q^{k}/k!$ (powers well defined by Corollary~ {cor
+CERTIFIEDAT Octonion.exp_sliceEmbed
+OBJECT exp_sliceEmbed
+END
+
+CLAIM [thm:slice-exp] The exponential $ : \{0\}$, $ (q)= _{k 0}q^{k}/k!$ (powers well defined by Corollary~ {cor
+CERTIFIEDAT Octonion.norm_exp
+OBJECT norm_exp
+END
+
+CLAIM [thm:slice-exp] The exponential $ : \{0\}$, $ (q)= _{k 0}q^{k}/k!$ (powers well defined by Corollary~ {cor
+CERTIFIEDAT Octonion.exp_ne_zero
+OBJECT exp_ne_zero
+END
+
+CLAIM [thm:log-manifold] Let $T: $, $T(x+Iy)=( x y+I x y,\ Iy)$, and $ ^{+}=\{q: q>0\}$. The {logarithm manifold} i
+CERTIFIEDAT Octonion.Eexp
+OBJECT Eexp
+END
+
+CLAIM [thm:log-manifold] Let $T: $, $T(x+Iy)=( x y+I x y,\ Iy)$, and $ ^{+}=\{q: q>0\}$. The {logarithm manifold} i
+CERTIFIEDAT Octonion.logManifold
+OBJECT logManifold
+END
+
+CLAIM [thm:log-manifold] Let $T: $, $T(x+Iy)=( x y+I x y,\ Iy)$, and $ ^{+}=\{q: q>0\}$. The {logarithm manifold} i
+CERTIFIEDAT Octonion.Llog
+OBJECT Llog
+END
+
+CLAIM [thm:log-manifold] Let $T: $, $T(x+Iy)=( x y+I x y,\ Iy)$, and $ ^{+}=\{q: q>0\}$. The {logarithm manifold} i
+CERTIFIEDAT Octonion.Llog_Eexp
+OBJECT Llog_Eexp
+END
+
+CLAIM [thm:log-manifold] Let $T: $, $T(x+Iy)=( x y+I x y,\ Iy)$, and $ ^{+}=\{q: q>0\}$. The {logarithm manifold} i
+CERTIFIEDAT Octonion.Eexp_Llog
+OBJECT Eexp_Llog
+END
+
+CLAIM [thm:log-manifold] Let $T: $, $T(x+Iy)=( x y+I x y,\ Iy)$, and $ ^{+}=\{q: q>0\}$. The {logarithm manifold} i
+CERTIFIEDAT Octonion.exp_Llog
+OBJECT exp_Llog
+END
+
+CLAIM [lem:exp-degenerate] {Sourced.} With $ $ the first-factor projection, $ E= $ {( [Rem.~5.2(a)]{VS}, the commutin
+CERTIFIEDAT Octonion.exp_fibre_neg_real
+OBJECT exp_fibre_neg_real
+END
+
+CLAIM [lem:exp-degenerate] {Sourced.} With $ $ the first-factor projection, $ E= $ {( [Rem.~5.2(a)]{VS}, the commutin
+CERTIFIEDAT Octonion.exp_eq_neg_ofReal_iff
+OBJECT exp_eq_neg_ofReal_iff
+END
+
+CLAIM [lem:exp-degenerate] {Sourced.} With $ $ the first-factor projection, $ E= $ {( [Rem.~5.2(a)]{VS}, the commutin
+CERTIFIEDAT Octonion.logManifold_fibre_neg_real
+OBJECT logManifold_fibre_neg_real
+END
+
+CLAIM [lem:exp-degenerate] {Sourced.} With $ $ the first-factor projection, $ E= $ {( [Rem.~5.2(a)]{VS}, the commutin
+CERTIFIEDAT Octonion.degenerate_level_readout
+OBJECT degenerate_level_readout
+END
+
+CLAIM [def:slice-squares] A slice-preserving section $A$ carries each slice Riemann sphere into itself, \[ A( _v^{*}
+CERTIFIEDAT IsIntrinsic
+OBJECT IsIntrinsic
+END
+
+CLAIM [def:slice-squares] A slice-preserving section $A$ carries each slice Riemann sphere into itself, \[ A( _v^{*}
+CERTIFIEDAT ASection.realize
+OBJECT realize
+END
+
+CLAIM [def:slice-squares] A slice-preserving section $A$ carries each slice Riemann sphere into itself, \[ A( _v^{*}
+CERTIFIEDAT ASection.realize_mem_sliceSphere
+OBJECT realize_mem_sliceSphere
+END
+
+CLAIM [def:slice-squares] A slice-preserving section $A$ carries each slice Riemann sphere into itself, \[ A( _v^{*}
+CERTIFIEDAT ASection.realize_equivariant
+OBJECT realize_equivariant
+END
+
+CLAIM [thm:winding-lift] Let $ :[a,b] \{0\}$ be a path {(}on each slice $ _v$ this is the classical complex continu
+CERTIFIEDAT exists_log_continuation
+OBJECT exists_log_continuation
+END
+
+CLAIM [thm:winding-lift] Let $ :[a,b] \{0\}$ be a path {(}on each slice $ _v$ this is the classical complex continu
+CERTIFIEDAT winding_lift_unique
+OBJECT winding_lift_unique
+END
+
+CLAIM [thm:winding-lift] Let $ :[a,b] \{0\}$ be a path {(}on each slice $ _v$ this is the classical complex continu
+CERTIFIEDAT Octonion.lift_iff_continuation
+OBJECT lift_iff_continuation
+END
+
+CLAIM [prop:winding-signature] The lift of Theorem~ {thm:winding-lift} is governed by the companion structure of $ $. {en
+CERTIFIEDAT winding_lift_unique
+OBJECT winding_lift_unique
+END
+
+CLAIM [prop:winding-signature] The lift of Theorem~ {thm:winding-lift} is governed by the companion structure of $ $. {en
+CERTIFIEDAT winding_loop_defect
+OBJECT winding_loop_defect
+END
+
+CLAIM [thm:slice-pres] $ $ is slice preserving (Definition~ {def:slice-preserving}): $ ( _v^{*}) _v^{*}$ for ever
+CERTIFIEDAT zetaO_mem_sliceSphere
+OBJECT zetaO_mem_sliceSphere
+END
+
+CLAIM [thm:zeta-in-R] $ R$.
+CERTIFIEDAT zetaSection
+OBJECT zetaSection
+END
+
+CLAIM [def:G2] $ = ( )$ is the $14$-dimensional compact, connected, simply connected Lie group of $ $-alg
+CERTIFIEDAT G2
+OBJECT G2
+END
+
+CLAIM [def:G2] $ = ( )$ is the $14$-dimensional compact, connected, simply connected Lie group of $ $-alg
+CERTIFIEDAT G2.smul_one
+OBJECT smul_one
+END
+
+CLAIM [def:G2] $ = ( )$ is the $14$-dimensional compact, connected, simply connected Lie group of $ $-alg
+CERTIFIEDAT G2.smul_ofReal
+OBJECT smul_ofReal
+END
+
+CLAIM [thm:G2-equiv] $ (g s)=g (s)$ for all $g $, $s $.
+CERTIFIEDAT zetaO_equivariant
+OBJECT zetaO_equivariant
+END
+
 CLAIM [thm:G2-S6] $ $ acts transitively on $S^6$ with stabilizer $ {SU}(3)$: $ {SU}(3) S^6$.
 CERTIFIEDAT G2.exists_smul_eq_of_mem_unitImaginarySphere
 OBJECT exists_smul_eq_of_mem_unitImaginarySphere
+END
+
+CLAIM [thm:zero-equivalence] Let $ = +i $. For every $v S^6$, \[ ( + v)=0 ( )=0 . \] Equivalently: a non-real $s $ is a
+CERTIFIEDAT sliceEmbed_eq_zero_iff
+OBJECT sliceEmbed_eq_zero_iff
+END
+
+CLAIM [thm:zero-equivalence] Let $ = +i $. For every $v S^6$, \[ ( + v)=0 ( )=0 . \] Equivalently: a non-real $s $ is a
+CERTIFIEDAT zetaO_zero_iff
+OBJECT zetaO_zero_iff
+END
+
+CLAIM [thm:zero-spheres] For a nontrivial zero $ = +i $ of $ $ (so $ >0$) set \[ S_ =\{ + v:v S^6\}= + \,S^6 . \] T
+CERTIFIEDAT zeroSphere
+OBJECT zeroSphere
+END
+
+CLAIM [thm:zero-spheres] For a nontrivial zero $ = +i $ of $ $ (so $ >0$) set \[ S_ =\{ + v:v S^6\}= + \,S^6 . \] T
+CERTIFIEDAT zeroSphere_eq_orbit
+OBJECT zeroSphere_eq_orbit
+END
+
+CLAIM [thm:zero-spheres] For a nontrivial zero $ = +i $ of $ $ (so $ >0$) set \[ S_ =\{ + v:v S^6\}= + \,S^6 . \] T
+CERTIFIEDAT zeroSphere_zeros
+OBJECT zeroSphere_zeros
+END
+
+CLAIM [thm:zero-spheres] For a nontrivial zero $ = +i $ of $ $ (so $ >0$) set \[ S_ =\{ + v:v S^6\}= + \,S^6 . \] T
+CERTIFIEDAT zeroSphere_disjoint
+OBJECT zeroSphere_disjoint
+END
+
+CLAIM [thm:zero-spheres] For a nontrivial zero $ = +i $ of $ $ (so $ >0$) set \[ S_ =\{ + v:v S^6\}= + \,S^6 . \] T
+CERTIFIEDAT zeroSpheres_infinite
+OBJECT zeroSpheres_infinite
+END
+
+CLAIM [thm:rh-equiv] The following are equivalent: {enumerate}[leftmargin=2.4em] [(a)] the Riemann Hypothesis;
+CERTIFIEDAT riemannHypothesis_iff_concentric
+OBJECT riemannHypothesis_iff_concentric
+END
+
+CLAIM [def:carrier] Let $ ^{*}= \{ \}=S^8$ be the Alexandroff one-point compactification of $ = ^8$. Concretel
+CERTIFIEDAT Octonion
+OBJECT Mathlib.Topology.Compactification.OnePoint
+END
+
+CLAIM [def:carrier] Let $ ^{*}= \{ \}=S^8$ be the Alexandroff one-point compactification of $ = ^8$. Concretel
+CERTIFIEDAT onePointEquivSphereOfFinrankEq
+OBJECT onePointEquivSphereOfFinrankEq
+END
+
+CLAIM [def:section-map] Let $A R$. By the $I$-independent lift (Definition~ {def:slice-squares}; Wang [Rem.~2.11]{
+CERTIFIEDAT ASection.realize
+OBJECT realize
+END
+
+CLAIM [def:section-map] Let $A R$. By the $I$-independent lift (Definition~ {def:slice-squares}; Wang [Rem.~2.11]{
+CERTIFIEDAT ASection.realize_mem_sliceSphere
+OBJECT realize_mem_sliceSphere
+END
+
+CLAIM [def:section-map] Let $A R$. By the $I$-independent lift (Definition~ {def:slice-squares}; Wang [Rem.~2.11]{
+CERTIFIEDAT ASection.realize_equivariant
+OBJECT realize_equivariant
+END
+
+CLAIM [def:section-map] Let $A R$. By the $I$-independent lift (Definition~ {def:slice-squares}; Wang [Rem.~2.11]{
+CERTIFIEDAT ASection.sliceCoord_smul_invariant
+OBJECT sliceCoord_smul_invariant
 END
 
 CLAIM [def:two-worlds] Recall the {translation groupoid} of an action $G X$: its objects are the points of $X$ an
@@ -15,17 +450,252 @@ END
 
 CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
 CERTIFIEDAT GreatCircle.Base
-OBJECT Base
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.cayleyGL
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.diagonalGL
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.diagonalGL_mul
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.diagonalGLHom
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.expUnit
+OBJECT expUnit
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.expUnit_add
+OBJECT expUnit
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.diskExpAction
+OBJECT diskExpAction
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.diskExpAction_add
+OBJECT diskExpAction
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.cayleyProjective
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.cayleyProjective_mul
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.orbitRep
+OBJECT diagonalGL
 END
 
 CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
 CERTIFIEDAT GreatCircle.orbitRep_spec
-OBJECT orbitRep_spec
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.stabilizerPart
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.orbit_stabilizer_factor
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.stabilizerPart_unique
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.stabilizerPart_id
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT GreatCircle.stabilizerPart_comp
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.distinguishedDiskAction
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.distinguishedDiskAction_eq_fullMultiplier
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.distinguishedPoleFactor_euler
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.distinguishedPoleFactor_weierstrass
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.eulerPrimeSum
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.eulerDiskAction_eq_value
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.canonicalAsectionPresentation_euler_prime_stack
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.canonicalAsectionPresentation_euler_lift_exp
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.canonicalAsectionPresentation_euler_lift_unique
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.canonicalAsectionPresentation_euler_level_continuous
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.canonicalAsectionPresentation_euler_winding
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.canonicalAsectionPresentation_euler_toNorth
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.projectiveObjectFrame
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.projectiveArrowElement
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.projectiveArrowElement_id
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.projectiveArrowElement_comp
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.AsectionSlice
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.AsectionEquivariant
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.AsectionActionState
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.AsectionActionTransport
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.AsectionActionTransport_id
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.AsectionActionTransport_comp
+OBJECT diagonalGL
+END
+
+CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
+CERTIFIEDAT ASection.AsectionActionDiagram
+OBJECT diagonalGL
 END
 
 CLAIM [def:base] The base is the projective action groupoid \[ B =PGL(2, ) {OnePoint}( ). \] Its objects ar
 CERTIFIEDAT CategoryTheory.Grothendieck
-OBJECT Grothendieck
+OBJECT diagonalGL
+END
+
+CLAIM [prop:weierstrass] Let $A R$ have a zero of order $m 0$ at the origin and no non-real isolated zeros {(}for $
+CERTIFIEDAT weierstrassE
+OBJECT weierstrassE
+END
+
+CLAIM [prop:weierstrass] Let $A R$ have a zero of order $m 0$ at the origin and no non-real isolated zeros {(}for $
+CERTIFIEDAT spherePrimary
+OBJECT spherePrimary
+END
+
+CLAIM [prop:weierstrass] Let $A R$ have a zero of order $m 0$ at the origin and no non-real isolated zeros {(}for $
+CERTIFIEDAT ASection.c3_multipliable
+OBJECT c3_multipliable
+END
+
+CLAIM [prop:weierstrass] Let $A R$ have a zero of order $m 0$ at the origin and no non-real isolated zeros {(}for $
+CERTIFIEDAT ASection.c3_locMajorant
+OBJECT c3_locMajorant
+END
+
+CLAIM [prop:weierstrass] Let $A R$ have a zero of order $m 0$ at the origin and no non-real isolated zeros {(}for $
+CERTIFIEDAT ASection.c3_factorization
+OBJECT c3_factorization
+END
+
+CLAIM [lem:residue-spheres] For $A R$, the non-real zeros of $A$ are $6$-spheres, each a single connected component of
+CERTIFIEDAT ASection.sphereZero_mem_CResidueZeroLocus
+OBJECT sphereZero_mem_CResidueZeroLocus
+END
+
+CLAIM [lem:residue-spheres] For $A R$, the non-real zeros of $A$ are $6$-spheres, each a single connected component of
+CERTIFIEDAT ASection.mem_CResidueZeroLocus_iff_exists_sphereZero
+OBJECT mem_CResidueZeroLocus_iff_exists_sphereZero
+END
+
+CLAIM [lem:residue-spheres] For $A R$, the non-real zeros of $A$ are $6$-spheres, each a single connected component of
+CERTIFIEDAT G2.exists_smul_eq_of_mem_unitImaginarySphere
+OBJECT exists_smul_eq_of_mem_unitImaginarySphere
 END
 
 CLAIM [lem:pi0-grothendieck] For a functor $F: B $, the connected-components functor carries the Grothendieck construct
@@ -41,6 +711,21 @@ END
 CLAIM [lem:pi0-grothendieck] For a functor $F: B $, the connected-components functor carries the Grothendieck construct
 CERTIFIEDAT pi0_grothendieck
 OBJECT pi0_grothendieck
+END
+
+CLAIM [def:A-section] An {$A$-section} is a section $A$ of the ring $ R$ of slice-preserving slice-regular funct
+CERTIFIEDAT ASection
+OBJECT ASection
+END
+
+CLAIM [def:A-section] An {$A$-section} is a section $A$ of the ring $ R$ of slice-preserving slice-regular funct
+CERTIFIEDAT weierstrassE
+OBJECT weierstrassE
+END
+
+CLAIM [def:A-section] An {$A$-section} is a section $A$ of the ring $ R$ of slice-preserving slice-regular funct
+CERTIFIEDAT spherePrimary
+OBJECT spherePrimary
 END
 
 CLAIM [def:residue-subdiagram] The {residue locus} of an A-section is $\{z : A(z)=0,\ {Im}z>0\}$ {(} {CResidueZeroLocus} 
@@ -98,7 +783,22 @@ CERTIFIEDAT ASection.transportLevel
 OBJECT transportLevel
 END
 
+CLAIM [cor:nontrivial] Under the residue-$ $/classically-nontrivial-zero identification, the already-proved popul
+CERTIFIEDAT ASection.nontrivial_one_centre
+OBJECT nontrivial_one_centre
+END
+
+CLAIM [cor:zeta-section] $ $ is an $A$-section {(Definition~ {def:A-section})}: a section of $ R$ satisfying {(C1)-
+CERTIFIEDAT zetaSection
+OBJECT zetaSection
+END
+
 CLAIM [cor:rh] Every nontrivial zero of the classical Riemann zeta function has real part $ 12$; in parti
 CERTIFIEDAT zeta_riemannHypothesis
 OBJECT zeta_riemannHypothesis
+END
+
+CLAIM [cor:rh] Every nontrivial zero of the classical Riemann zeta function has real part $ 12$; in parti
+CERTIFIEDAT zeta_criticalLine_zeros_infinite
+OBJECT zeta_criticalLine_zeros_infinite
 END

@@ -10,11 +10,15 @@
   "production_source": "Concentricity/Theorem.lean",
   "project_specific_locals": [
     {
+      "master": "lem:c-residue-transitive",
+      "id": "seat1.P_dossier",
       "objects": "xN, hxN, g, hg",
       "exact_source": "obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property",
       "paper_identity": "the inverse-image dossier carried by the arbitrary object P"
     },
     {
+      "master": "lem:c-residue-transitive",
+      "id": "seat1.Q_dossier",
       "objects": "yN, hyN, h, hh",
       "exact_source": "obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property",
       "paper_identity": "the inverse-image dossier carried by the arbitrary object Q"
@@ -22,58 +26,116 @@
   ],
   "bindings": [
     {
+      "master": "lem:c-residue-transitive",
       "id": "seat1.kE",
       "paper_object": "the base component k_E of F_A(E_N)",
       "lean_local": "kE",
       "binder": "let",
       "expected_type": "projectiveZero ⟶ projectiveNorth",
+      "required_master_declarations": [
+        "ASection.sweepTransitive_on_residueSystem",
+        "ASection.northRelativeLoop_maps",
+        "ASection.northComparison_of_parallelFaces"
+      ],
+      "target_declaration": "ASection.northComparison_of_parallelFaces",
+      "target_argument": "kE",
       "candidate_expression": null,
-      "author_confirmed_candidate_sha256": null
+      "author_binding_confirmed": true,
+      "author_binding_sha256": "9d922df910595c49d7b53df26464e0aa5df9adf87c1ad5c7b337cc28a5797770",
+      "author_confirmation_source": "active author confirmation, 2026-08-02"
     },
     {
+      "master": "lem:c-residue-transitive",
       "id": "seat1.kW",
       "paper_object": "the base component k_W of F_A(W_N)",
       "lean_local": "kW",
       "binder": "let",
       "expected_type": "projectiveZero ⟶ projectiveNorth",
+      "required_master_declarations": [
+        "ASection.sweepTransitive_on_residueSystem",
+        "ASection.northRelativeLoop_maps",
+        "ASection.northComparison_of_parallelFaces"
+      ],
+      "target_declaration": "ASection.northComparison_of_parallelFaces",
+      "target_argument": "kW",
       "candidate_expression": null,
-      "author_confirmed_candidate_sha256": null
+      "author_binding_confirmed": true,
+      "author_binding_sha256": "408b31b05e3f5bb8931d5559bb05f519f9157ba625b3f3524514b64f9d4b5a0f",
+      "author_confirmation_source": "active author confirmation, 2026-08-02"
     },
     {
+      "master": "lem:c-residue-transitive",
       "id": "seat1.uStar",
       "paper_object": "the common reference input u_* of the fixed tape",
       "lean_local": "uStar",
       "binder": "let",
       "expected_type": "OnePoint ℂ",
+      "required_master_declarations": [
+        "ASection.sweepTransitive_on_residueSystem",
+        "ASection.northRelativeLoop_maps",
+        "ASection.northComparison_of_parallelFaces"
+      ],
+      "target_declaration": "ASection.northComparison_of_parallelFaces",
+      "target_argument": "uStar",
       "candidate_expression": null,
-      "author_confirmed_candidate_sha256": null
+      "author_binding_confirmed": true,
+      "author_binding_sha256": "9fa762fe6270cff57dc06b026d059f68f9abe7973b43bb01ca253e5ff127efcd",
+      "author_confirmation_source": "active author confirmation, 2026-08-02"
     },
     {
+      "master": "lem:c-residue-transitive",
       "id": "seat1.hE",
       "paper_object": "the instantiated boundary equation C(r_E)(u_*) = u_1",
       "lean_local": "hE",
       "binder": "have",
       "expected_type": "(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kE).1).val uStar = (residueActionState A projectiveNorth n₁ I₁).input.back.coordinate",
+      "required_master_declarations": [
+        "ASection.sweepTransitive_on_residueSystem",
+        "ASection.northRelativeLoop_maps",
+        "ASection.northComparison_of_parallelFaces"
+      ],
+      "target_declaration": "ASection.northComparison_of_parallelFaces",
+      "target_argument": "hE",
       "candidate_expression": null,
-      "author_confirmed_candidate_sha256": null
+      "author_binding_confirmed": true,
+      "author_binding_sha256": "2b3d9d7b55c72c07a491348ed79f8b95449091c6f5d7177b1e0bfe2647e87835",
+      "author_confirmation_source": "active author confirmation, 2026-08-02"
     },
     {
+      "master": "lem:c-residue-transitive",
       "id": "seat1.hW",
       "paper_object": "the instantiated boundary equation C(r_W)(u_*) = u_2",
       "lean_local": "hW",
       "binder": "have",
       "expected_type": "(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kW).1).val uStar = (residueActionState A projectiveNorth n₂ I₂).input.back.coordinate",
+      "required_master_declarations": [
+        "ASection.sweepTransitive_on_residueSystem",
+        "ASection.northRelativeLoop_maps",
+        "ASection.northComparison_of_parallelFaces"
+      ],
+      "target_declaration": "ASection.northComparison_of_parallelFaces",
+      "target_argument": "hW",
       "candidate_expression": null,
-      "author_confirmed_candidate_sha256": null
+      "author_binding_confirmed": true,
+      "author_binding_sha256": "94daf66062844c31aca83b8258762beb5dcd55c796cc6247d232ea2ddcd4aefd",
+      "author_confirmation_source": "active author confirmation, 2026-08-02"
     },
     {
-      "id": "seat2.valA",
-      "paper_object": "the existing A-specific val/level read on the unique transport class of the exact π₀(∫R_A)",
-      "lean_local": "valA",
-      "binder": "let",
-      "expected_type": "CategoryTheory.ConnectedComponents (Grothendieck (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) → ℝ",
+      "master": "thm:concentricity",
+      "id": "seat2.transportLevelCollapse",
+      "paper_object": "the post-collapse residue read instantiated at the n-th and 0-th certified representatives",
+      "lean_local": null,
+      "binder": null,
+      "expected_type": "A.transportLevel n = A.transportLevel 0",
+      "required_master_declarations": [
+        "ASection.residueTotal_pi0_singleton",
+        "ASection.transportLevel"
+      ],
+      "target_declaration": "ASection.transportLevel",
       "candidate_expression": null,
-      "author_confirmed_candidate_sha256": null
+      "author_binding_confirmed": true,
+      "author_binding_sha256": "2303695ed6012271f74b08d247c9ec6b1646324d5eaa878e83ca59ce31323ccb",
+      "author_confirmation_source": "author correction in active provenance task, 2026-08-02"
     }
   ],
   "binding_probe_anchor": "    aesop (add safe [",
@@ -144,13 +206,13 @@
     {
       "master": "lem:c-residue-transitive",
       "semantics": "a north loop acts by C(stabilizerPart k) on the stored input",
-      "master_anchor": "the accepted input leg is $C(r)$",
+      "master_anchor": "the input leg of $F_A(k)$ carries",
       "receipt": "ASection.residueActionTransport_north_input_audit"
     },
     {
       "master": "lem:c-residue-transitive",
       "semantics": "the common source factor cancels in k_E⁻¹ ≫ k_W",
-      "master_anchor": "the identical $o_0$ factors cancel",
+      "master_anchor": "cancels the common $0$-frame $o_0$",
       "receipt": "ASection.northRelativeLoop_stabilizer_audit"
     },
     {
@@ -162,19 +224,19 @@
     {
       "master": "lem:c-residue-transitive",
       "semantics": "the two parallel faces and G₂ package the north-fibre morphism",
-      "master_anchor": "Transitivity of the $G_2$-action on $S^6$ supplies",
+      "master_anchor": "of the $G_2$-action supplies $\\gamma\\in G_2$",
       "receipt": "ASection.northComparison_of_parallelFaces_audit"
     },
     {
       "master": "lem:c-residue-transitive",
       "semantics": "the same relative calculation holds in the two-legged square functor register",
-      "master_anchor": "including the relative loop, its action-state",
+      "master_anchor": "conjugation by $D_A$ turns an input leg $C(r)$ into the",
       "receipt": "ASection.relativeActionSquare_transport_audit"
     },
     {
       "master": "lem:c-residue-transitive",
       "semantics": "g⁻¹ ≫ k ≫ h and fullness produce P ⟶ Q inside ∫R_A",
-      "master_anchor": "The full inclusion $\\int\\iota_A$ pulls this total morphism back",
+      "master_anchor": "preimage in the residue total $\\int\\mathcal R_A$",
       "receipt": "ASection.residueTotal_morphism_of_northComparison_audit"
     },
     {
@@ -188,12 +250,6 @@
       "semantics": "connectedness of the exact ∫R_A makes π₀ of that exact ∫R_A a singleton",
       "master_anchor": "$\\pi_0$ is the singleton set",
       "receipt": "ASection.residueTotal_pi0_singleton_of_connected_audit"
-    },
-    {
-      "master": "thm:concentricity",
-      "semantics": "the A-specific val read preserves hkn on the exact π₀(∫R_A)",
-      "master_anchor": "the level read is \\texttt{ASection.transportLevel} in the Lean source.",
-      "receipt": "ASection.residuePi0_val_congr_audit"
     },
     {
       "master": "cor:nontrivial",

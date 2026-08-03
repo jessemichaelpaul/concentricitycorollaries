@@ -172,11 +172,6 @@ residueTotal_pi0_singleton_of_connected_audit : ∀ (A : ASection)
   [CategoryTheory.IsConnected (Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat))]
   (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),
   CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q
-residuePi0_val_congr_audit : ∀ (A : ASection)
-  (valA : CategoryTheory.ConnectedComponents (Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)) → ℝ)
-  (Pn P0 : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),
-  CategoryTheory.ConnectedComponents.mk Pn = CategoryTheory.ConnectedComponents.mk P0 →
-    valA (CategoryTheory.ConnectedComponents.mk Pn) = valA (CategoryTheory.ConnectedComponents.mk P0)
 'ASection.residueActionState_north_input_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.residueActionTransport_north_input_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.northFiberHom_of_coordinate_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -194,7 +189,6 @@ residuePi0_val_congr_audit : ∀ (A : ASection)
 'ASection.residueTotal_morphism_of_northComparison_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.residueTotal_isConnected_of_transitive_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.residueTotal_pi0_singleton_of_connected_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ASection.residuePi0_val_congr_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 
 
 ===== COROLLARY BUILD (tail) =====

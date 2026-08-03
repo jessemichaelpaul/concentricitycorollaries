@@ -65,6 +65,7 @@
 % declaration and its dependencies without any Lean names appearing in the prose.
 \providecommand{\lean}[1]{}
 \providecommand{\leanok}{}
+\providecommand{\authorobject}[2]{}
 \providecommand{\notready}{}
 \providecommand{\mathlibok}{}
 \providecommand{\uses}[1]{}
@@ -129,21 +130,27 @@ any such $A$ are concentric.
 
 The proof builds a concentricity detector from the section itself, out of groupoids,
 orbit--stabilizer, and categorical homotopy theory. Conditions \textup{(C1)--(C3)} determine one
-distinguished M\"obius element on the projective base
-$\mathcal B=PGL(2,\RR)\ltimes\operatorname{OnePoint}(\RR)$: the Euler product presenting it at
-$0$, the Weierstrass product at $N$, through the commuting triangle $\pi\circ E=\exp$.
-The slice-preserving normalization is $G_2$-equivariant on $\Ostar$, and
-orbit--stabilizer carries this whole point-valued action across the base. Its
-sphere-world projection records the directions and M\"obius legs; the genuine
-A-section functor
-$\mathcal A_A:\mathcal B\to\mathbf{Grpd}$ has the resulting normalized
-A-value states and their transports as its fibres. Its Grothendieck construction is the total
-$\mathcal T_A=\int_{\mathcal B}\mathcal A_A$; the residue-$\CC$ zero-spheres enter as its
-\textup{(C3)--(C4)} outputs. The readout
-$\pi_0(\mathcal T_A)\cong\operatorname{colim}_{\mathcal B}(\pi_0\circ\mathcal A_A)$ collapses the section's
-real-value transports to a single component carrying one real value $c\in\RR$, so every
-populated zero $6$-sphere has centre $c$. The theorem asserts a single shared centre $c$;
-naming that number is the task of the corollaries.
+distinguished exponential M\"obius action on the projective base
+$\mathcal B=PGL(2,\RR)\ltimes\operatorname{OnePoint}(\RR)$: a logarithmic coordinate $z$ is
+exponentiated in the diagonal matrix $\operatorname{diag}(e^z,1)$ and conjugated into the Cayley
+disk chart, with the Euler product presenting the action at $0$ and the Weierstrass product at
+$N$. The slice-preserving normalization is $G_2$-equivariant on $\Ostar$, and
+orbit--stabilizer carries this whole point-valued action across the base. Its sphere-world
+projection records the directions and M\"obius legs, while the genuine A-section functor
+$\mathcal A_A:\mathcal B\to\mathbf{Grpd}$ has the resulting normalized A-value states and their
+transports as its fibres. Its Grothendieck construction is
+$\mathcal T_A=\int_{\mathcal B}\mathcal A_A$.
+
+The C-residue system is the inverse-image action groupoid
+$\mathcal R_A$ selected inside $\mathcal A_A$, with fully faithful inclusion
+$\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$, and hence a fully faithful inclusion of totals
+$\int\iota_A:\int_{\mathcal B}\mathcal R_A\hookrightarrow\mathcal T_A$. The relative
+orbit--stabilizer comparison makes this inverse-image total transitive, therefore connected.
+Its component colimit is consequently a singleton. Instantiated at any two certified residue
+representatives, that singleton equality is already equality of their A-specific real-level
+reads; hence all of them have one real value $c\in\RR$. Thus every populated residue-$\CC$ zero
+$6$-sphere has centre $c$. The theorem asserts the shared centre; naming the number is the task
+of the corollaries.
 
 Downstream corollaries translate residue-$\CC$ zeros to classically nontrivial zeros and, for
 $\zetaO$, use its functional equation to identify $c=\tfrac12$: the Riemann Hypothesis.
@@ -157,7 +164,7 @@ $\zetaO$, use its functional equation to identify $c=\tfrac12$: the Riemann Hypo
 %=====================================================================
 The Riemann Hypothesis is usually met head-on, as a question about where the zeros of a single complex function fall along a line. This paper approaches it from the side. It asks instead whether a family of geometric objects, sitting a few dimensions up in the octonions, share a common centre, and shows that they must. The Riemann Hypothesis then follows, not as the thing we set out to prove, but as the shadow this larger fact casts back down onto the complex plane.
 
-A nontrivial zero of the zeta function, seen from the complex line alone, is a lone point in a strip. Seen from the compactified octonions, that same zero opens into a round six-dimensional sphere, and the critical-line question becomes a question of arrangement: are these spheres concentric, gathered about one shared real centre? It takes the whole continuum of imaginary directions in the octonions, read together, to see whether the alignment holds.
+A nontrivial zero of the zeta function, seen from the complex line alone, is a lone point in a strip. Seen from the compactified octonions, that same zero opens into a six-dimensional sphere, and the critical-line question becomes a question of arrangement: are these spheres concentric, or scattered into different hyperplanes? It takes the whole continuum of imaginary directions in the octonions, read together, to see whether the alignment holds.
 
 The paper is built to make that convergence visible and, at every step, checkable. Part 1 recalls the classical facts about the Riemann zeta function we will lean on. Part 2 develops the slice-preserving theory of functions on the octonions, builds the commutative ring $\mathcal R$ in which the octonionic zeta lives, and proves the reframing at the centre of everything: the classically nontrivial zeros are exactly the residue-$\CC$ zero six-spheres, and the Riemann Hypothesis holds precisely when those spheres are concentric. Part 3 proves the main result, the Concentricity Theorem, with a small piece of machinery I think of as a concentricity detector. From the section itself we build one distinguished action on a projective base, carry it across a continuum of Riemann spheres by orbit and stabilizer, and read off, through categorical homotopy theory, whether the zero-spheres land in a single connected piece. They do; and for the octonionic zeta, that is the Riemann Hypothesis.
 
@@ -175,6 +182,8 @@ compactified form, as a map to the Riemann sphere, which is the form in which it
 octonions.
 
 \begin{theorem}[Meromorphic continuation and functional equation; Riemann \cite{Riemann1859}]\label{thm:riemann}
+\lean{riemannZeta_meromorphicOn, riemannZeta_orderAt_one,
+riemannZeta_conj, riemannZeta_one_sub_zero, nontrivialZero_re_mem_Ioo}
 The Dirichlet series $\zeta(s)=\sum_{n\ge1}n^{-s}$, convergent for $\re s>1$, continues to a
 meromorphic function on $\CC$ with a single simple pole, at $s=1$; equivalently, a holomorphic map
 to the Riemann sphere
@@ -191,6 +200,7 @@ strip $0<\re s<1$. The Riemann Hypothesis asserts that every nontrivial zero has
 \end{theorem}
 
 \begin{theorem}[Infinite Euler product; {\cite[Ch.~1]{Titchmarsh86}}]\label{thm:euler}
+\lean{zetaEulerLog, zetaC2_summable, zetaC2_zero_free, zetaC2_euler}
 For $\re s>1$,
 \[
   \zeta(s)=\prod_{p\ \mathrm{prime}}\bigl(1-p^{-s}\bigr)^{-1}
@@ -201,6 +211,8 @@ $\re s>1$.
 \end{theorem}
 
 \begin{theorem}[Infinite Hadamard product; {\cite[Ch.~2]{Titchmarsh86}}]\label{thm:hadamard}
+\lean{xi_entire, xi_zeros_eq_nontrivialZeros, zeta_hadamard,
+riemannZeta_nontrivialZeros_infinite}
 $\xi$ is entire of order $1$ with infinitely many zeros, which are exactly the nontrivial zeros
 $\{\rho\}$ of $\zeta$, and admits the Hadamard factorization
 \[
@@ -210,6 +222,7 @@ the product taken over the infinitely many nontrivial zeros.
 \end{theorem}
 
 \begin{corollary}[Infinitude of the nontrivial zeros]\label{cor:hadamard-infinitude}
+\lean{riemannZeta_nontrivialZeros_infinite}
 \uses{thm:hadamard}
 $\zeta$ has infinitely many nontrivial zeros.
 \end{corollary}
@@ -219,6 +232,7 @@ the nontrivial zeros of $\zeta$.
 \end{proof}
 
 \begin{theorem}[Hardy \cite{Hardy14}]\label{thm:hardy}
+\lean{zeta_criticalLine_zeros_infinite}
 Infinitely many nontrivial zeros of $\zeta$ lie on the line $\re s=\tfrac12$.
 \end{theorem}
 
@@ -229,6 +243,7 @@ Riemann sphere $\Cstar=\CC\cup\{\infty\}=S^2$ (the one-point compactification of
 \cite{Munkres00}). The classical facts above are retained as stated.
 
 \begin{definition}[Compactified classical zeta]\label{def:zeta-Cstar}
+\lean{zetaC, zetaC_coe, zetaC_one, zetaC_infty}
 \uses{thm:riemann}
 $\zetaC:\Cstar\to\Cstar$ is the meromorphic continuation of $\zeta$ regarded as a map to
 the Riemann sphere: $\zetaC(s)=\zeta(s)$ for $s\in\CC\setminus\{1\}$; $\zetaC(1)=\infty$
@@ -240,15 +255,16 @@ $\zetaC(\bar s)=\overline{\zetaC(s)}$, and Hardy's infinitude (Theorem~\ref{thm:
 verbatim for $\zetaC$, as they concern values on $\CC\setminus\{1\}$ where $\zetaC=\zeta$.
 \end{definition}
 
-\begin{lemma}[Compactification does not move the zeros]\label{lem:zero-Cstar}
+\begin{lemma}[Compactification preserves the zero set]\label{lem:zero-Cstar}
+\lean{zetaC_coe_eq_zero_iff, zetaC_zero_iff}
 \uses{def:zeta-Cstar}
 $Z(\zetaC)=Z(\zeta)$: the zeros of $\zetaC$ in $\Cstar$ are exactly the zeros of $\zeta$
 in $\CC$; in particular the nontrivial zeros coincide.
 \end{lemma}
 \begin{proof}
 On $\CC\setminus\{1\}$ the two functions agree, so they share all zeros there. The two
-adjoined values are not zeros: $\zetaC(1)=\infty$ (a pole) and $\zetaC(\infty)=1$; and
-$s=1$, being a pole of $\zeta$, was never a zero. Hence no zero is gained or lost.
+adjoined values lie outside the zero set: $\zetaC(1)=\infty$ is a pole and
+$\zetaC(\infty)=1$. Hence compactification preserves the zero set exactly.
 \end{proof}
 
 %=====================================================================
@@ -268,6 +284,7 @@ turns around.
 The octonions $\OO$ have basis $\{1,e_1,\dots,e_7\}$ with each $e_i^2=-1$.
 
 \begin{definition}\label{def:octonions}
+\lean{Octonion, Octonion.normSq_mul, Octonion.alt_left, Octonion.alt_right}
 The octonions are: (i) a \emph{division algebra}: every nonzero element has a
 multiplicative inverse; (ii) a \emph{normed algebra}: $|ab|=|a||b|$; (iii)
 \emph{non-associative}: $(ab)c\neq a(bc)$ in general; (iv) \emph{alternative}:
@@ -288,6 +305,8 @@ Powers $s^n$ are well-defined for any $s\in\OO$.
 \end{corollary}
 
 \begin{definition}[Complex slices and slice Riemann spheres]\label{def:slices}
+\lean{Octonion.unitImaginarySphere, Octonion.sliceEmbed,
+Octonion.sliceEmbed_mul, Octonion.sliceSphere}
 \uses{def:octonions}
 For any unit imaginary octonion $v\in S^6$, the \emph{complex slice} is
 $\CC_v=\{a+bv:a,b\in\RR\}\subset\OO$. Since $v^2=-1$, this is a subalgebra isomorphic to
@@ -326,6 +345,7 @@ $\beta=\tfrac12 v_0^{-1}[f(\sigma-\gamma v_0)-f(\sigma+\gamma v_0)]$.
 \end{theorem}
 
 \begin{theorem}[Identity Theorem; {\cite[Cor.~5.1.9]{CSS12}}]\label{thm:identity}
+\lean{stem_identity}
 \uses{def:slice-regular}
 Let $f$ be slice regular on an axially symmetric slice domain $\Omega$. If $f$
 vanishes on a subset of a single slice $\Omega\cap\CC_{v_0}$ with an accumulation
@@ -342,6 +362,7 @@ $v_0$.
 \end{theorem}
 
 \begin{definition}[Slice-preserving functions; \protect{\cite[Def.~2.7, Rem.~2.8]{AdF}; \cite{VS,SeriesExp,Wang}}]\label{def:slice-preserving}
+\lean{IsIntrinsic, StemRing.isIntrinsic, StemRing.real_on_real}
 \uses{def:slice-regular, thm:rep-formula}
 A slice-regular function $f$ on an axially symmetric domain $\Omega$ is \emph{slice
 preserving} if it maps every slice into itself: $f(\Omega\cap\CC_v)\subseteq\CC_v$ for all
@@ -384,6 +405,8 @@ $\CC$ agree, so that $\zetaO$ is well-defined; they do, because conjugating the 
 the identification cancel. The pole of $\zeta$ at $s=1$ is carried to the north pole $N$.
 
 \begin{definition}[Octonionic zeta]\label{def:zeta_O}
+\lean{zetaO, zetaO_infty, zetaO_one, zetaO_sliceEmbed,
+zetaO_sliceEmbed_of_im_neg, zetaO_ofReal}
 \uses{def:zeta-Cstar, def:slices, thm:extension}
 Here $N$ denotes the \emph{north pole} of $S^8$: the single point at infinity $\infty$
 adjoined in the one-point compactification $\Ostar=\OO\cup\{\infty\}\cong S^8$ (inverse
@@ -407,6 +430,7 @@ by $\varphi_v(\infty)=N$; GPV \cite{VS}, Prop.~4.1/Thm.~4.2):
 \end{definition}
 
 \begin{proposition}[Well-definedness]\label{prop:well-defined}
+\lean{zetaO_sliceEmbed', riemannZeta_conj}
 \uses{def:zeta_O, thm:riemann}
 $\zetaO:\Ostar\to\Ostar$ is well-defined.
 \end{proposition}
@@ -439,6 +463,7 @@ We work on $\Ostar$; write $\Omega_v:=\Ostar\cap\CC_v=\CC_v^{*}=S^2_v$ for the s
 Riemann sphere (Definition~\ref{def:slices}).
 
 \begin{definition}[The ring of slice-preserving functions under the regular product]\label{def:R}
+\lean{StemRing}
 \uses{def:slice-preserving, def:slices}
 $\mathcal R:=\mathcal O_{\Ostar}$ is the set of all slice-regular functions
 $f:\Ostar\to\Ostar$ that are slice preserving (Definition~\ref{def:slice-preserving}),
@@ -458,6 +483,7 @@ Theorem~\ref{thm:artin}).
 \end{theorem}
 
 \begin{proposition}\label{prop:R-comm-ring}
+\lean{StemRing}
 \uses{thm:wang, thm:identity, def:R}
 $(\mathcal R,+,\ast)$ is a commutative ring with identity $1\in\mathcal R$.
 \end{proposition}
@@ -471,6 +497,7 @@ constant $1$ is the identity.
 \end{proof}
 
 \begin{proposition}[$\mathcal R$ is an integral domain]\label{prop:R-domain}
+\lean{StemRing.eq_zero_or_eq_zero_of_mul_eq_zero}
 \uses{thm:wang, thm:identity}
 If $f,g\in\mathcal R$ and $f\ast g=0$, then $f=0$ or $g=0$.
 \end{proposition}
@@ -491,6 +518,8 @@ $\Ostar=S^8$ and the slice Riemann spheres $\CC_v^{*}=S^2_v$ (the passage is rec
 Remark~\ref{rmk:slice-pres-compact}; the compactified slice-manifold structure itself is GPV's \cite{VS}).
 
 \begin{theorem}[The slice exponential; \protect{\cite[\S3]{GPVwind}; \cite[Prop.~5.1]{VS}; \cite[Rem.~2.23]{AdF}}]\label{thm:slice-exp}
+\lean{Octonion.exp, Octonion.exp_sliceEmbed, Octonion.norm_exp,
+Octonion.exp_ne_zero}
 \uses{def:slice-preserving, cor:powers}
 The exponential $\exp:\OO\to\OO\setminus\{0\}$, $\exp(q)=\sum_{k\ge0}q^{k}/k!$ (powers well defined by Corollary~\ref{cor:powers}), is a
 slice-regular, slice-preserving entire function (Definition~\ref{def:slice-preserving}),
@@ -502,6 +531,8 @@ Consequently $|\exp q|=e^{\re q}$ depends only on the real part, and $\exp$ is n
 \end{theorem}
 
 \begin{theorem}[The logarithm manifold $E^{+}_{\OO}$; \protect{\cite[Prop.~5.1, Rem.~5.2, Def.~5.3, Prop.~5.4, Def.~5.5]{VS}; \cite[\S3]{GPVwind}}]\label{thm:log-manifold}
+\lean{Octonion.Eexp, Octonion.logManifold, Octonion.Llog,
+Octonion.Llog_Eexp, Octonion.Eexp_Llog, Octonion.exp_Llog}
 \uses{thm:slice-exp}
 Let $T:\OO\to\OO\times\im\OO$, $T(x+Iy)=(\sinh x\cos y+I\sinh x\sin y,\ Iy)$, and
 $\OO^{+}=\{q:\re q>0\}$. The \emph{logarithm manifold} is $E^{+}_{\OO}:=T(\OO^{+})$, the
@@ -513,22 +544,24 @@ E(x+Iy)=(\exp(x+Iy),\,Iy)=(e^{x}\cos y+Ie^{x}\sin y,\ Iy),
 \]
 an immersion and a diffeomorphism, with inverse the \emph{$E^{+}_{\OO}$-logarithm}
 $L:E^{+}_{\OO}\to\OO$, $L(q,p)=\log|q|+p$ (here $p=\mathrm{Arg}(q)$). Writing $\pi$ for the
-projection to the first factor, $\pi\circ E=\exp$ (Theorem~\ref{thm:slice-exp}); but
-$\pi:E^{+}_{\OO}\to\OO\setminus\{0\}$ is \emph{not} a covering and not an open map, precisely
-because $\exp$ is not open. Thus $E^{+}_{\OO}$ is an adapted blow-up of $\OO$ along the real
-axis: it unwraps the multivalued logarithm into the single-valued $L$, and a branch of the
+projection to the first factor, $\pi\circ E=\exp$ (Theorem~\ref{thm:slice-exp}). The manifold
+$E^{+}_{\OO}$ is an adapted blow-up of $\OO$ along the real axis. Its projection
+$\pi:E^{+}_{\OO}\to\OO\setminus\{0\}$ has the degenerate real fibres responsible for the
+failure of covering and openness. The blow-up unwraps the multivalued logarithm into the
+single-valued $L$, and a branch of the
 hypercomplex logarithm is $\log_{\OO}=L\circ(\pi|_{\Omega})^{-1}$ on any path-connected
 $\Omega\subset E^{+}_{\OO}$ on which $\pi|_{\Omega}$ is injective.
 \end{theorem}
 
 \begin{lemma}[The degenerate set of the exponential; its fibre over a real value]\label{lem:exp-degenerate}
+\lean{Octonion.exp_fibre_neg_real, Octonion.exp_eq_neg_ofReal_iff,
+Octonion.logManifold_fibre_neg_real, Octonion.degenerate_level_readout}
 \uses{thm:slice-exp, thm:log-manifold}
 \emph{Sourced.} With $\pi$ the first-factor projection, $\pi\circ E=\exp$
-\textup{(\cite[Rem.~5.2(a)]{VS}, the commuting triangle)}; and, unlike the complex setting,
-$\pi:E^{+}_{\OO}\to\OO$ is not a covering and not an open map, because $\exp$ is not open: it has
-a non-empty \emph{degenerate set consisting of spheres} \textup{(\cite[Rem.~5.2(b)]{VS},
-verbatim)}. The direction $I(q)$ admits no continuous extension to any point of $\RR$
-\textup{(\cite[Rem.~2.1]{GPVwind})}.
+\textup{(\cite[Rem.~5.2(a)]{VS}, the commuting triangle)}. Its spherical
+\emph{degenerate set} makes the projection an adapted blow-up with failures of covering and
+openness \textup{(\cite[Rem.~5.2(b)]{VS})}. The direction $I(q)$ becomes singular at every
+point of $\RR$ \textup{(\cite[Rem.~2.1]{GPVwind})}.
 
 \emph{Proved from the slice form.} For $r>0$,
 \[
@@ -544,6 +577,8 @@ The fibre formula itself appears, stated without proof as Preface motivation, in
 \end{lemma}
 
 \begin{definition}[Slice restriction and the $I$-independent lift; \protect{\cite[Rem.~2.11]{Wang}; \cite[\S3.3,~\S3.7]{BisiWinkelmann}; \cite[Def.~2.1, Prop.~2.2]{SeriesExp}}]\label{def:slice-squares}
+\lean{IsIntrinsic, ASection.realize, ASection.realize_mem_sliceSphere,
+ASection.realize_equivariant}
 A slice-preserving section $A$ carries each slice Riemann sphere into itself,
 \[
   A(\CC_v^{*})\subseteq\CC_v^{*}=S^2_v\qquad(v\in S^6),
@@ -560,7 +595,7 @@ the \emph{same} for every $v$: there is one holomorphic $A_\circ:\Cstar\to\Cstar
 \]
 (Wang \cite[Rem.~2.11]{Wang}; Bisi--Winkelmann \cite[\S3.7]{BisiWinkelmann}). Equivalently, $A$ is
 \emph{intrinsic}, $A(q^c)=A(q)^c$, and is induced ($A=\mathcal I(F)$) by a single stem function
-$F=F_1+\iota F_2:D\to\OO_\CC$ on the symmetric $D\subset\CC$ whose components $F_1,F_2$ are
+$F=F_1+\iota F_2:D\to\OO_{\CC}$ on the symmetric $D\subset\CC$ whose components $F_1,F_2$ are
 $\RR$-valued (the stem-function formalism, Ghiloni--Perotti \cite[Def.~2.1, Prop.~2.2]{SeriesExp}):
 \[
   A(x+Iy)=F_1(x+iy)+I\,F_2(x+iy),\qquad F_1,F_2\ \RR\text{-valued}.
@@ -571,6 +606,8 @@ $\Gtwo$-equivariant, hence blind to the $\Gtwo$-orbit direction
 \end{definition}
 
 \begin{theorem}[The winding lift; \protect{\cite[Def.~3.4, Def.~4.1, Prop.~4.2, Def.~5.11]{GPVwind}}]\label{thm:winding-lift}
+\lean{exists_log_continuation, winding_lift_unique,
+Octonion.lift_iff_continuation}
 \uses{thm:log-manifold}
 Let $\gamma:[a,b]\to\OO\setminus\{0\}$ be a path \textup{(}on each slice $\CC_v$ this is the
 classical complex continuation\textup{)}. A \emph{continuation of the hypercomplex logarithm along
@@ -606,6 +643,7 @@ S^1 \arrow[r,"\gamma"'] & \OO\setminus\{0\}
 \end{theorem}
 
 \begin{proposition}[Tameness, existence, and the winding number; \protect{\cite[Def.~4.20, Cor.~5.21, Cor.~5.22]{GPVwind}}]\label{prop:winding-signature}
+\lean{winding_lift_unique, winding_loop_defect}
 \uses{thm:winding-lift}
 The lift of Theorem~\ref{thm:winding-lift} is governed by the companion structure of $\gamma$.
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.6em]
@@ -626,10 +664,11 @@ With the ring in hand, we check that $\zetaO$ actually lives in it, and record t
 organize its zeros. Slice preservation says $\zetaO$ keeps each slice inside itself; together with
 slice regularity this makes it a section of $\mathcal R$. The symmetry is the action of the
 automorphism group $\Gtwo=\Aut(\OO)$, which fixes the real axis and rotates the imaginary directions
-$S^6$, and $\zetaO$ is equivariant under it. This is what forces the non-real zeros to come in whole
-$6$-spheres rather than isolated points, the geometry the next section reads off.
+$S^6$, and $\zetaO$ is equivariant under it. This forces every non-real zero to fill a whole
+$6$-sphere, the geometry the next section reads off.
 
 \begin{theorem}[Slice preservation]\label{thm:slice-pres}
+\lean{zetaO_mem_sliceSphere}
 \uses{def:zeta_O, def:slice-preserving}
 $\zetaO$ is slice preserving (Definition~\ref{def:slice-preserving}):
 $\zetaO(\CC_v^{*})\subseteq\CC_v^{*}$ for every $v\in S^6$.
@@ -643,6 +682,7 @@ $\zetaO(\infty)=1\in\CC_v^{*}$. In every case the value remains in $\CC_v^{*}$.
 \end{proof}
 
 \begin{theorem}[$\zetaO$ is a section of $\mathcal R$]\label{thm:zeta-in-R}
+\lean{zetaSection}
 \uses{thm:slice-pres, thm:extension, def:R, prop:well-defined}
 $\zetaO\in\mathcal R$.
 \end{theorem}
@@ -658,17 +698,19 @@ Definition~\ref{def:slice-regular}). By Theorem~\ref{thm:slice-pres} it is slice
 preserving, $\zetaO(\CC_v^{*})\subseteq\CC_v^{*}$. A slice-regular, slice-preserving
 function $\Ostar\to\Ostar$ is by definition a section of $\mathcal R=\mathcal O_{\Ostar}$
 (Definition~\ref{def:R}); the regular product on such sections restricts on each slice to
-the ordinary product (Theorem~\ref{thm:wang}, Wang \cite[Rem.~2.11]{Wang}). Finally
-$\zetaO$ is not a unit, since it has zeros (Theorem~\ref{thm:zero-spheres}).
+the ordinary product (Theorem~\ref{thm:wang}, Wang \cite[Rem.~2.11]{Wang}). Its zeros
+\textup{(}Theorem~\ref{thm:zero-spheres}\textup{)} make $\zetaO$ a nonunit.
 \end{proof}
 
 \begin{definition}[The automorphism group $\Gtwo$]\label{def:G2}
+\lean{G2, G2.smul_one, G2.smul_ofReal}
 $\Gtwo=\Aut(\OO)$ is the $14$-dimensional compact, connected, simply connected Lie group of
 $\RR$-algebra automorphisms of $\OO$. Each $g\in\Gtwo$ fixes $1$, hence the real axis pointwise, and
 acts on $\im\OO\cong\RR^7$ as an element of $SO(7)$; thus $g\cdot(\sigma+\gamma v)=\sigma+\gamma\,g(v)$.
 \end{definition}
 
 \begin{theorem}[$\Gtwo$-equivariance]\label{thm:G2-equiv}
+\lean{zetaO_equivariant}
 \uses{def:G2, def:zeta_O}
 $\zetaO(g\cdot s)=g\cdot\zetaO(s)$ for all $g\in\Gtwo$, $s\in\OO$.
 \end{theorem}
@@ -714,6 +756,7 @@ that all these $6$-spheres share the same real part, that they are concentric. F
 with the spheres.
 
 \begin{theorem}[Zero Equivalence Theorem]\label{thm:zero-equivalence}
+\lean{sliceEmbed_eq_zero_iff, zetaO_zero_iff}
 \uses{def:zeta_O, thm:slice-pres, lem:zero-Cstar}
 Let $\rho=\sigma+i\gamma\in\Cstar$. For every $v\in S^6$,
 \[
@@ -736,6 +779,8 @@ Lemma~\ref{lem:zero-Cstar}.
 \end{proof}
 
 \begin{theorem}[Nontrivial zeros are infinitely many disjoint $6$-spheres]\label{thm:zero-spheres}
+\lean{zeroSphere, zeroSphere_eq_orbit, zeroSphere_zeros,
+zeroSphere_disjoint, zeroSpheres_infinite}
 \uses{thm:zero-equivalence, thm:G2-S6, thm:G2-equiv, cor:hadamard-infinitude}
 For a nontrivial zero $\rho=\sigma+i\gamma$ of $\zetaC$ (so $\gamma>0$) set
 \[
@@ -786,6 +831,7 @@ are disjoint.
 %  Theorem~\ref{thm:zero-spheres} above (items (ii)--(iv) and its proof).]
 
 \begin{theorem}[The equivalence: concentricity $\Leftrightarrow$ RH]\label{thm:rh-equiv}
+\lean{riemannHypothesis_iff_concentric}
 \uses{thm:zero-spheres, thm:riemann}
 The following are equivalent:
 \begin{enumerate}[leftmargin=2.4em]
@@ -823,17 +869,18 @@ The main result, the Concentricity Theorem, is that the residue-$\CC$ zeros of a
 concentric. The octonionic zeta is one A-section among many, and the Riemann Hypothesis is one of
 its corollaries.
 
-From the section's own data we
-read one distinguished M\"obius transformation of the Riemann sphere, presented at its two fixed
-points by the Euler product and the Weierstrass product; orbit--stabilizer carries that single
-transformation across the whole continuum of slice directions. The resulting
-map to $\SphereWorld$ is its geometric projection; lifting the same action to
-the normalized A-value states assembles the genuine A-section functor
-$\mathcal A_A:\mathcal B\to\mathbf{Grpd}$ over the projective base
-$\mathcal B$. Its Grothendieck construction
-$\mathcal T_A=\int_{\mathcal B}\mathcal A_A$ gathers every sphere and every value-transport into one object, and
-the components of that object, computed as a colimit, collapse the transports that carry the zeros
-down to a single class. That one class is one real centre, and the zero-spheres are concentric.
+From the section's own data we read one distinguished exponential M\"obius transformation of the
+Riemann sphere, presented at its two fixed points by the Euler product and the Weierstrass product;
+orbit--stabilizer carries that single transformation across the projective base. The resulting map
+to $\SphereWorld$ is its geometric projection, while the same action on normalized A-value states
+assembles the genuine functor $\mathcal A_A:\mathcal B\to\mathbf{Grpd}$. Its Grothendieck
+construction $\mathcal T_A=\int_{\mathcal B}\mathcal A_A$ gathers every state and every
+value-transport into one total object. The zero-sphere system is the inverse-image subdiagram
+$\mathcal R_A$, included by $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$; the relative
+orbit--stabilizer comparison makes $\int_{\mathcal B}\mathcal R_A$ transitive and hence connected.
+The component colimit therefore collapses to a singleton, and its A-specific real-value readout is
+one centre $c\in\RR$. The concentricity proof takes place in this residue-$\CC$ inverse-image
+system inside the ambient total.
 
 \section{The geometric worlds and the categorical construction}\label{sec:tower-stack}
 
@@ -848,8 +895,9 @@ and its Grothendieck total $\mathcal T_A$, the object the next section reads.
 \subsection*{The compactified octonions and the point at infinity}
 
 \begin{definition}[The compactified octonions $\OO^{*}=S^8$]\label{def:carrier}
+\lean{Octonion, onePointEquivSphereOfFinrankEq}
 Let $\OO^{*}=\OO\cup\{\infty\}=S^8$ be the Alexandroff one-point compactification of $\OO=\RR^8$.
-Concretely (GPV \cite{VS}, Prop.~4.1 and Thm.~4.2, for $m=\dim_\RR K\in\{4,8\}$): the inverse
+Concretely (GPV \cite{VS}, Prop.~4.1 and Thm.~4.2, for $m=\dim_{\RR}K\in\{4,8\}$): the inverse
 stereographic projections from the north and south poles,
 \[
 f(x+Iy)=\Big(\tfrac{2(x+Iy)}{1+x^2+y^2},\ \tfrac{-1+x^2+y^2}{1+x^2+y^2}\Big),\qquad
@@ -861,7 +909,7 @@ itself slice regular and slice preserving. The adjoined point is the north pole 
 point at infinity. In Lean the underlying compactification is
 \texttt{Mathlib.\-Topology.\-Compactification.\-OnePoint}, $\OO^{*}=\texttt{OnePoint }\OO$ with
 $\infty=\texttt{OnePoint.infty}$, and the homeomorphism $\OO^{*}\cong S^8$ is
-\texttt{onePoint\-Equiv\-Sphere\-Of\-Finrank\-Eq} applied to $\dim_\RR\OO=8$
+\texttt{onePoint\-Equiv\-Sphere\-Of\-Finrank\-Eq} applied to $\dim_{\RR}\OO=8$
 (\texttt{Mathlib.\-Topology.\-Compactification.\-OnePoint.\-Sphere}). The compactification is what makes
 the value of a section at its real pole a well-defined point of $\OO^{*}$, the point at
 infinity $\infty=N$. The two views $\mathcal H_1$ and $\mathcal S_2$ are built on
@@ -890,6 +938,8 @@ zero index.
 \subsection*{What a slice-preserving section does}
 
 \begin{definition}[The section's slice data and equivariance]\label{def:section-map}
+\lean{ASection.realize, ASection.realize_mem_sliceSphere,
+ASection.realize_equivariant, ASection.sliceCoord_smul_invariant}
 \uses{def:slice-squares, def:slice-preserving, thm:rep-formula}
 Let $A\in\mathcal R$. By the $I$-independent lift (Definition~\ref{def:slice-squares}; Wang
 \cite[Rem.~2.11]{Wang}, Bisi--Winkelmann \cite[\S3.7]{BisiWinkelmann}) there is one holomorphic
@@ -961,7 +1011,55 @@ These two geometric views hold the octonionic and slice-value geometry drawn on 
 \subsection*{The base of the degenerate set and the Grothendieck construction}
 
 \begin{definition}[The projective base, genuine section functor, and total category]\label{def:base}
-\lean{GreatCircle.Base, GreatCircle.orbitRep_spec, CategoryTheory.Grothendieck}
+\lean{GreatCircle.Base, GreatCircle.cayleyGL, GreatCircle.diagonalGL,
+GreatCircle.diagonalGL_mul, GreatCircle.diagonalGLHom, GreatCircle.expUnit,
+GreatCircle.expUnit_add, GreatCircle.diskExpAction, GreatCircle.diskExpAction_add,
+GreatCircle.cayleyProjective, GreatCircle.cayleyProjective_mul,
+GreatCircle.orbitRep, GreatCircle.orbitRep_spec, GreatCircle.stabilizerPart,
+GreatCircle.orbit_stabilizer_factor, GreatCircle.stabilizerPart_unique,
+GreatCircle.stabilizerPart_id, GreatCircle.stabilizerPart_comp,
+ASection.distinguishedDiskAction, ASection.distinguishedDiskAction_eq_fullMultiplier,
+ASection.distinguishedPoleFactor_euler, ASection.distinguishedPoleFactor_weierstrass,
+ASection.eulerPrimeSum, ASection.eulerDiskAction_eq_value,
+ASection.GpvTransport, ASection.GpvTransport.diskExpAction_eq_value,
+ASection.GpvTransport.diskExpAction_endpoint_eq,
+ASection.GpvTransport.lift_endpoint_re_eq, ASection.GpvTransport.level,
+ASection.GpvTransport.continuous_level, ASection.GpvTransport.lift_unique,
+ASection.GpvTransport.level_independent, ASection.GpvTransport.value_at_source,
+ASection.GpvTransport.value_at_target,
+ASection.GpvTransport.endpoint_log_norm_eq,
+ASection.GpvTransport.endpoint_norm_eq,
+ASection.projectiveGpvActionSquare, ASection.projectiveGpvActionSquare_level,
+ASection.projectiveGpvActionSquare_input_commutes,
+ASection.projectiveGpvActionSquare_output_commutes,
+ASection.canonicalAsectionPresentation_euler_prime_stack,
+ASection.canonicalAsectionPresentation_euler_lift_exp,
+ASection.canonicalAsectionPresentation_euler_lift_unique,
+ASection.canonicalAsectionPresentation_euler_level_continuous,
+ASection.canonicalAsectionPresentation_euler_winding,
+ASection.canonicalAsectionPresentation_euler_toNorth,
+ASection.projectiveObjectFrame, ASection.projectiveArrowElement,
+ASection.projectiveObjectFrame_north,
+ASection.distinguishedDiskAction_fixes_cayley_zero,
+ASection.distinguishedDiskAction_fixes_cayley_N,
+ASection.projectiveArrowElement_id, ASection.projectiveArrowElement_comp,
+ASection.AsectionSlice, ASection.AsectionEquivariant,
+ASection.AsectionStateInput, ASection.AsectionStateOutput,
+ASection.AsectionState_input_then_equivariant,
+ASection.ActionTransportSquare.coordinateTransport_commutes,
+ASection.ActionTransportSquare.input_commutes,
+ASection.ActionTransportSquare.output_commutes,
+ASection.AsectionActionState, ASection.AsectionActionTransport,
+ASection.AsectionActionState.ofInput,
+ASection.AsectionActionState_ofInput_value,
+ASection.AsectionActionTransport_obj_input,
+ASection.AsectionActionTransport_obj_positioned,
+ASection.AsectionActionTransport_obj_value,
+ASection.AsectionActionTransport_id, ASection.AsectionActionTransport_comp,
+ASection.AsectionActionDiagram, ASection.residueActionState,
+ASection.residueActionState_mem, ASection.c4_infinite,
+ASection.transportLevel,
+CategoryTheory.Grothendieck}
 \uses{def:A-section, def:two-worlds, thm:winding-lift, prop:winding-signature}
 The base is the projective action groupoid
 \[
@@ -971,43 +1069,223 @@ The base is the projective action groupoid
 Its objects are points of the compactified real projective line and its arrows are projective
 transformations together with their transport equations.
 
-The projective action is read in the direction-indexed sphere-world groupoid. Its objects are
-directions $I\in S^6$ equipped with their compactified slice spheres, and its morphisms carry
-the direction and M\"obius legs. A normalized value state pairs such a direction with a point
-of its slice.
+The matrix construction makes explicit why the analytic object is simultaneously a function and a
+group element. Let
+\[
+ C=\begin{pmatrix}1&-i\\[2pt]1&i\end{pmatrix},\qquad
+ M(z)=\begin{pmatrix}e^z&0\\[2pt]0&1\end{pmatrix},\qquad
+ D(z)=\bigl[C\,M(z)\,C^{-1}\bigr]\in\operatorname{M\ddot ob}(\CC^*).
+\]
+The matrix $C$ is the Cayley map $w\mapsto(w-i)/(w+i)$. Matrix multiplication and
+$e^{z+w}=e^ze^w$ give
+\[
+  M(z+w)=M(z)M(w),\qquad D(z+w)=D(z)D(w).
+\]
+Thus exponentiation is the homomorphism which turns addition of logarithmic lifts into composition
+of the actual slice M\"obius maps. In the Lean source these are the chain
+\texttt{diagonalGL}, \texttt{diagonalGLHom}, \texttt{expUnit}, and
+\texttt{diskExpAction}, with their multiplication laws. Conditions \textup{C1--C3} select the
+A-specific logarithm $\lambda_A$ of the continued nonzero pole factor and hence the one element
+\[
+  D_A=D(\lambda_A)
+     =\bigl[C\operatorname{diag}(e^{\lambda_A},1)C^{-1}\bigr].
+\]
+The Euler and Weierstrass expressions are the two presentations of this same multiplier. The
+function/group-element passage is the commuting dictionary
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+z \arrow[r,"\exp"] \arrow[d,mapsto] & e^z\in\CC^\times \arrow[d,mapsto]\\
+M(z)=\operatorname{diag}(e^z,1) \arrow[r,"C(-)C^{-1}"'] & D(z)\in\operatorname{M\ddot ob}(\CC^*).
+\end{tikzcd}
+\]
 
-Conditions \textup{C1--C3} determine one distinguished diagonal M\"obius element, the Euler
-product presenting it at $0$ and the Weierstrass product at $N$, its two fixed boundary
-points, through the commuting triangle $\pi\circ E=\exp$. That triangle makes the element an
-action, and orbit--stabilizer carries it across the base: the M\"obius group law gives the local
-action, orbit--stabilizer extends the element over every orbit, stabilizer compatibility makes
-the result independent of representatives, and the group identity and multiplication give the
-functor laws. Its direction-and-M\"obius projection is
+The common Euler--Weierstrass multiplier can be followed directly through this dictionary. Write
+$p_A$ for the pole of $A$ and $g_A=\texttt{distinguishedPoleFactor\,A}$. On the punctured pole chart, conditions
+\textup{C2} and \textup{C3} give the two identities
+\[
+\begin{aligned}
+ g_A(z)
+   &=(z-p_A)
+     \exp\!\left(\sum_{p\in A.\iota}\ell_p(z)\right),\\[2pt]
+ g_A(z)
+   &=z^{m_A}R_{\mathrm{fac},A}(z)e^{h_A(z)}
+     \prod_{n\geq0}\mathcal E\bigl(z;q_{A,n}\bigr).
+\end{aligned}
+\]
+Condition \textup{C1} continues this same factor through the simple pole and proves
+$u_A=g_A(p_A)\neq0$. Hence $u_A\in\CC^\times$, its logarithm
+$\lambda_A=\log u_A$ satisfies $e^{\lambda_A}=u_A$, and the distinguished element is
+\[
+ D_A=D(\lambda_A)
+   =\left[C\begin{pmatrix}u_A&0\\0&1\end{pmatrix}C^{-1}\right].
+\]
+This calculation also gives its two fixed boundary points. The diagonal matrix
+$\operatorname{diag}(u_A,1)$ fixes $0$ and $\infty$ in the standard projective chart; conjugation
+by $C$ carries those points to the projective zero and the shared north point $N$. Therefore
+\[
+  D_A(0)=0,\qquad D_A(N)=N,
+\]
+which are the declarations
+\[
+\begin{gathered}
+\texttt{ASection.distinguishedDiskAction\_fixes\_cayley\_zero},\\
+\texttt{ASection.distinguishedDiskAction\_fixes\_cayley\_N}.
+\end{gathered}
+\]
+The Euler expression at $0$ and the
+Weierstrass expression at $N$ are consequently the two boundary readings of this one matrix-built
+function.
+
+The GPV lift records how that function varies between its boundary presentations. Let
+$X,Y\in\mathcal B$. A projective-base transport from $X$ to $Y$ carries three continuous tapes:
+a compactified domain path $\delta^*$, a nonzero value path $v$, its compactification $v^*$,
+and a logarithmic lift $\Gamma$.
+Their defining equations are
+\[
+\begin{aligned}
+ \delta^*(0)&=\operatorname{cayleyCoord}(X),
+ &\delta^*(1)&=\operatorname{cayleyCoord}(Y),\\
+ v^*(t)&=A^*\bigl(\delta^*(t)\bigr),
+ &e^{\Gamma(t)}&=v(t),\\
+ \Gamma(1)-\Gamma(0)&=2\pi i k,
+ &&k\in\ZZ.
+\end{aligned}
+\]
+These are precisely the fields of \texttt{ASection.GpvTransport}. At each $t$ the lift equation
+passes through the matrix dictionary:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\Gamma(t) \arrow[r,"\exp"] \arrow[d,"D"'] &
+v(t)\in\CC^\times
+  \arrow[d,"{u\mapsto[C\operatorname{diag}(u,1)C^{-1}]}"]\\
+D(\Gamma(t)) \arrow[r,equal] &
+\bigl[C\operatorname{diag}(v(t),1)C^{-1}\bigr].
+\end{tikzcd}
+\]
+Thus every point of the lift is already an action of the same kind as $D_A$. Taking real parts
+and norms in the lift equation gives
+\[
+  \operatorname{Re}\Gamma(t)=\log\lVert v(t)\rVert.
+\]
+The right-hand side shows that the real level is continuous and depends only on the value tape.
+Any second continuous lift with the same initial rung equals $\Gamma$, while every lift of the
+same value tape has this same real part. Taking real parts in the winding equation gives
+\[
+  \operatorname{Re}\Gamma(0)=\operatorname{Re}\Gamma(1),
+\]
+and exponentiating the full equation gives
+\[
+  D(\Gamma(0))=D(\Gamma(1)).
+\]
+The winding integer therefore records the vertical displacement of the logarithmic rung, and the
+real level and the endpoint M\"obius action remain fixed.
+
+Condition \textup{C2} now supplies the canonical arithmetic instance of this construction. Along
+an Euler half-space loop $\delta$,
+\[
+  \Gamma_A(t)=\sum_{p\in A.\iota}\ell_p(\delta(t)),
+  \qquad e^{\Gamma_A(t)}=A(\delta(t)),
+\]
+with the prime index retained inside the complete summation. Local normal convergence makes
+$\Gamma_A$ continuous, the zero-free half-space makes its value tape lie in $\CC^\times$, and the
+GPV uniqueness theorem fixes the whole lift once $\Gamma_A(0)$ is chosen. Since $\delta(0)=
+\delta(1)$, the same prime sum occurs at both endpoints, so its checked winding is $k=0$. At every
+instant the square \texttt{canonicalAsectionPresentation\_euler\_toNorth} carries this complete
+prime tape to the common north frame. Condition \textup{C3} supplies the Weierstrass boundary
+presentation there, and condition \textup{C1} identifies both presentations with the continued
+factor $g_A$. The prime sum, its value under $A$, its logarithmic level and winding, and the matrix
+action it generates are therefore simultaneous coordinates of the distinguished element.
+
+The projective action is read in the direction-indexed sphere-world groupoid. Its objects are
+directions $I\in S^6$ equipped with their compactified slice spheres, and its morphisms carry the
+direction and M\"obius legs. A normalized value state pairs such a direction with a point of its
+slice. To position $D_A$ over the whole base, fix the canonical orbit representative
+$o_b:N\to b$. Every arrow $f:x\to y$ has the unique residual north-stabilizer factor
+\[
+  r_f=o_y^{-1}f\,o_x,\qquad
+  f=o_y r_f o_x^{-1}.
+\]
+The object frame and the full arrow element are therefore
+\[
+  a_A(b)=C(o_b)D_A,\qquad
+  a_A(f)=a_A(y)\,C(r_f)\,a_A(x)^{-1}.
+\]
+Here $C(-)$ denotes the multiplicative Cayley-projective homomorphism. The fixed orbit
+representatives force $r_f$ uniquely; $r_{1_x}=1$ and
+$r_{f\mathbin{\gg}g}=r_g r_f$. These identities, together with multiplicativity of $C(-)$,
+prove the identity and composition laws directly from the fixed representatives. This is the
+orbit--stabilizer well-definedness of both functors below.
+
+The preceding construction gives nine checkable readings on the projective base:
+\begin{enumerate}[label=\textup{(B\arabic*)},leftmargin=3.2em,itemsep=2pt]
+\item the C2 Euler and C3 Weierstrass formulas present the one C1-continued factor $g_A$;
+\item $u_A=g_A(p_A)$ and $\lambda_A=\log u_A$ generate the one matrix action $D_A$;
+\item the diagonal calculation fixes the two boundary points $0$ and $N$;
+\item the Euler lift retains the complete prime-indexed sum
+  $\sum_{p\in A.\iota}\ell_p$;
+\item exponentiation identifies the lift pointwise with the A-value and with its M\"obius matrix;
+\item the initial rung determines the unique tame continuous lift;
+\item its real level is $\log\lVert A\rVert$, continuous and independent of the lift branch;
+\item its winding lies in $2\pi i\ZZ$, preserves the endpoint action and real level, and equals
+  zero on the C2 Euler loop;
+\item the unique orbit and stabilizer factors carry every instant of this action through the base,
+  with identity and composition inherited from their factorization laws.
+\end{enumerate}
+Each line is a consequence of the construction above: \textup{(B1)--(B3)} come from the common
+pole factor and its matrix, \textup{(B4)--(B8)} from its GPV lift, and \textup{(B9)} from the
+projective orbit--stabilizer sweep.
+
+The direction-and-M\"obius projection is
 \[
   A^{\mathrm{slice}}:\mathcal B\longrightarrow\SphereWorld,
 \]
-written \texttt{AsectionSlice\,A} in the Lean source. This projection is not
-the full A-section functor: it remembers the slice sphere and its M\"obius
-transport, but not yet the normalized point and value produced on that sphere.
+written \texttt{AsectionSlice\,A} in the Lean source. It records the slice sphere and its
+M\"obius transport. The full A-section functor below additionally retains the normalized point
+and the value produced on that sphere.
 
-The slice-preserving realization on $\Ostar$ is $G_2$-equivariant, hence a
-functor on the octonionic action groupoid. Sweeping that whole point-valued
-action---rather than only its sphere projection---by the same
-orbit--stabilizer factorization gives the genuine A-section functor
+The slice-preserving realization on $\Ostar$ is the $G_2$-equivariant endofunctor
+$A_{\OO}:\mathcal H_1\to\mathcal H_1$. The normalized state world has functorial input and
+output eyes, and the round trip is the checked triangle
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+\operatorname{StateWorld}_A
+  \arrow[r,"\operatorname{In}_A"]
+  \arrow[dr,"\operatorname{Out}_A"'] &
+\mathcal H_1 \arrow[d,"A_{\OO}"]\\
+& \mathcal H_1,
+\end{tikzcd}
+\qquad
+\operatorname{Out}_A=\operatorname{In}_A\mathbin{\gg}A_{\OO}.
+\]
+This equality is
+\texttt{AsectionState\_input\_then\_equivariant}: it holds on arrows as well as objects, so
+the normalized input coordinates genuinely drive the realized A-values.
+
+Positioning this round trip over $b\in\mathcal B$ forms a constrained graph. An object in the
+fibre consists of an input state $x$, the forced positioned state
+$a_A(b)\cdot x$, and the forced value
+$\operatorname{Out}_A(a_A(b)\cdot x)$. Thus both the positioned point and its value are determined
+by the input and the action. For $f:b\to b'$, the two legs of the orbit--stabilizer square transport the input
+and positioned faces, and its already-proved commuting equation makes the target graph
+well-defined. Reading that same square through $\operatorname{In}_A$ and
+$\operatorname{Out}_A$ gives the checked input and output naturality squares. Identity and
+composition of these graph transports are inherited from the unique factorization of $r_f$.
+Sweeping the whole constrained graph through the base therefore gives the genuine A-section
+functor
 \[
   \mathcal A_A:\mathcal B\longrightarrow\mathbf{Grpd},
 \]
-written \texttt{AsectionFunctor\,A} in the Lean source. The winding,
-lift-uniqueness, tameness, crossing, welding, and GPV laws are readings of
-this one action. The objects of $\mathcal A_A(b)$ are normalized analytic and
-sphere-world value states produced by the action, and its arrows are
-the actual value transports. \textup{C1} supplies continuation through the unique simple real
-pole of value $N=\infty$; \textup{C2} the Euler exponential channel on its right half-space;
-\textup{C3} the Weierstrass channel over the full divisor; and \textup{C4} the infinite
-residue-$\CC$ population. From the \textup{C2} and \textup{C3} exponential channels,
-slice-preserving theory yields the unique continuous winding lift each transport carries. The
-real-value content is thus part of the A-section states and transports before the total object
-is formed.
+written \texttt{AsectionActionDiagram\,A} in the Lean source.
+
+The nine base readings \textup{(B1)--(B9)} pass through this constrained graph by the certified
+projective/GPV action squares. Three further readings are thereby realized in the generated
+states. First, condition \textup{C3} supplies the populated residue-$\CC$ sphere states, represented
+by \texttt{residueActionState} and certified by \texttt{residueActionState\_mem}. Second,
+condition \textup{C4} makes their population infinite through \texttt{c4\_infinite}. Third, every
+such state carries its intrinsic real coordinate through \texttt{transportLevel}. These are the
+three output readings. Together with \textup{(B1)--(B9)} they form the $9+3$ partition: nine
+properties of the one distinguished action on the base, followed functorially by three readings
+of the A-generated residue states in the total.
 
 The total value-transport category is
 \[
@@ -1034,6 +1312,8 @@ we define an A-section by its four conditions C1--C4, state and prove the Concen
 record the corollary that carries its conclusion back into the language of classical zeros.
 
 \begin{proposition}[Slice-regular Weierstrass factorization; the content of C3]\label{prop:weierstrass}
+\lean{weierstrassE, spherePrimary, ASection.c3_multipliable,
+ASection.c3_locMajorant, ASection.c3_factorization}
 \uses{def:R}
 Let $A\in\mathcal R$ have a zero of order $m\ge 0$ at the origin and no non-real isolated zeros
 \textup{(}for $A\in\mathcal R$ the latter is automatic: non-real zeros come in whole spheres,
@@ -1058,6 +1338,9 @@ number by \textup{C4}.
 \end{proof}
 
 \begin{lemma}[Residue-$\CC$ zeros are $6$-sphere components of $\mathcal H_1$]\label{lem:residue-spheres}
+\lean{ASection.sphereZero_mem_CResidueZeroLocus,
+ASection.mem_CResidueZeroLocus_iff_exists_sphereZero,
+G2.exists_smul_eq_of_mem_unitImaginarySphere}
 \uses{def:two-worlds, thm:G2-S6, thm:wang}
 For $A\in\mathcal R$, the non-real zeros of $A$ are $6$-spheres, each a single connected
 component of the translation groupoid $\mathcal H_1$.
@@ -1097,6 +1380,7 @@ generated by the maps of $F$. In the Lean development this equivalence is
 \end{proof}
 
 \begin{definition}[$A$-sections]\label{def:A-section}
+\lean{ASection, weierstrassE, spherePrimary}
 \uses{def:R, prop:weierstrass, lem:residue-spheres}
 An \emph{$A$-section} is a section $A$ of the ring $\mathcal R$ of slice-preserving
 slice-regular functions on $\OO^{*}=S^8$ \textup{(Definition~\ref{def:R})} with the following
@@ -1143,12 +1427,13 @@ $\mathcal R_A:\mathcal B\to\mathbf{Grpd}$ \textup{(}\texttt{AsectionCResidueDiag
 the preimage of the states this locus selects at the north frame --- a preimage taken in the
 total action groupoid, not of a set --- with the witnessing base arrow carried as data; its
 inclusion $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$
-\textup{(}\texttt{AsectionCResidueInclusion}\textup{)} is a faithful embedding onto its image,
-and its naturality squares commute definitionally.
+\textup{(}\texttt{AsectionCResidueInclusion}\textup{)} is the fibrewise fully faithful inclusion
+onto that inverse image. Its naturality squares retain the ambient A-section transport itself.
 \end{definition}
 
 \begin{lemma}[Transitivity of the C-residue total]\label{lem:c-residue-transitive}
-\lean{ASection.sweepTransitive_on_residueSystem}
+\lean{ASection.sweepTransitive_on_residueSystem,
+ASection.northRelativeLoop_maps, ASection.northComparison_of_parallelFaces}
 \leanok
 \uses{def:A-section, def:base, def:residue-subdiagram, prop:weierstrass,
 lem:residue-spheres, thm:G2-S6}
@@ -1159,37 +1444,103 @@ For an A-section $A$, the total inverse-image groupoid
 is transitive: any two of its objects are joined by a morphism.
 \end{lemma}
 \begin{proof}
+Let
+\[
+  P,Q\in\int_{\mathcal B}\mathcal R_A
+\]
+be arbitrary. By the inverse-image definition, the fibre data of $P$ and $Q$ supply north
+residue states $x_N,y_N$, together with base arrows
+\[
+  g:N\longrightarrow P_{\mathrm{base}},\qquad
+  h:N\longrightarrow Q_{\mathrm{base}},
+\]
+whose A-section transports recover the two given fibre states. Thus the arbitrary problem reduces
+to constructing a north endomorphism $k:N\to N$ and a fibre morphism
+\[
+  \varphi:F_A(k)(x_N)\longrightarrow y_N.
+\]
+Once these are obtained, functorial transport along
+$g^{-1}\mathbin{\gg}k\mathbin{\gg}h$ gives an ambient Grothendieck morphism $P\to Q$, and the
+full inclusion $\int\iota_A$ established above returns that same morphism to
+$\int_{\mathcal B}\mathcal R_A$. It therefore remains only to construct this north comparison.
+
 Write $F_A=\mathcal A_A$ for the A-section action functor,
 $D=D_A$ for its one distinguished Euler--Weierstrass disk action, and
 $C=\operatorname{cayleyProjective}$.  There is one projective base and one north
-object $N$.  The unique tame GPV lift is the one fixed $0$-to-$N$ tape; a zero
-index does not supply another base arrow.
+object $N$. The inverse-image construction above has already fixed the unique tame GPV
+$0$-to-$N$ tape and its unique orbit--stabilizer factorization; each zero index selects a state
+along that fixed base transport.
 
-First take two states $x_N,y_N$ in the north fibre of the C-residue inverse
-image.  Because the inverse image was taken in the C3 zero-sphere system, not in
-the ambient action groupoid, there are C-residue indices $n_1,n_2$ and
+Because the supplied states $x_N,y_N$ lie in the north fibre of the C-residue inverse
+image selected by the C3 zero-sphere system, there are C-residue indices $n_1,n_2$ and
 directions $I_1,I_2\in S^6$ for which their positioned coordinates are the
 actual C3 coordinates
 \[
   z_1=\operatorname{sphereZero}(n_1),\qquad
   z_2=\operatorname{sphereZero}(n_2).
 \]
-The north object frame is $D$, so their inputs are forced rather than chosen:
+The north object frame $D$ uniquely determines their inputs:
 \[
   u_i=D^{-1}(z_i),\qquad z_i=D(u_i).
 \]
-This is where C3 enters the argument.  It supplies the Weierstrass face of the
-distinguished action and the precise inputs on which that action is being
-evaluated; it does not supply transitivity.
+This is where C3 enters the argument. It supplies the Weierstrass face of the
+distinguished action and the precise inputs on which that action is evaluated. The relative
+orbit--stabilizer comparison below supplies transitivity.
 
-The two states are two evaluations, swept out by $F_A$, of that same
-distinguished action in the same normalized north frame.  More precisely,
-the two rectangles are the functorial arrows
-$F_A(E_N)$ and $F_A(W_N)$, where $E_N$ and $W_N$ are the distinguished
-north Euler and Weierstrass actions.  They are the two eyes of the one
-action, not arrows manufactured from the residue coordinates.  Both run on
-the one fixed tape from the common projective zero frame to the one north
-frame.  Write
+\newpage
+And now we can conjugate all of these points of view.  The A-section round trip
+\[
+  \operatorname{Out}_A
+  =\operatorname{In}_A\mathbin{\gg}A_{\OO}
+\]
+starts with a normalized slice state $(I,u)$, retains its input coordinate $u$,
+and realizes its A-value equivariantly as the direction $I\in S^6$ varies.  Its
+projective eye is the A-slice functor
+$A^{\mathrm{slice}}:\mathcal B\to\SphereWorld$, which carries the direction,
+the compactified slice sphere, and the M\"obius leg that positions that sphere
+over the base.  At the north object the orbit representative is $o_N=1$;
+hence the positioned frame is the distinguished action itself,
+\[
+  a_A(N)=D_A,\qquad
+  D_A=\left[C
+    \begin{pmatrix}e^{\lambda_A}&0\\[2pt]0&1\end{pmatrix}
+    C^{-1}\right],\qquad
+  \lambda_A=\log g_A(p_A).
+\]
+The common pole datum is therefore read directly in the north action, with
+Euler and Weierstrass giving its two boundary presentations along the same
+$0$-to-$N$ tape.
+
+The full functor $F_A=\mathcal A_A$ joins these views in one constrained graph:
+at $N$ it records
+\[
+  (I,u)\longmapsto
+  \bigl((I,u),\;D_A\mathbin{\cdot}(I,u),\;
+    A_{\OO}(D_A\mathbin{\cdot}(I,u))\bigr).          \tag{A}
+\]
+The inverse-image groupoid $\mathcal R_A(N)$ supplies the inputs occurring in
+this graph.  Its residue condition identifies the positioned entries of
+$x_N,y_N$ with the authored C3 coordinates
+$z_i=\operatorname{sphereZero}(n_i)$, and the graph equation then pulls each
+one back uniquely through the north action:
+\[
+  u_i=D_A^{-1}(z_i),\qquad D_A(u_i)=z_i.              \tag{P}
+\]
+Accordingly, the inputs used in the comparison are the canonical preimages of
+the selected residue states in the inverse-image groupoid.
+
+Thus $u$ is the normalized input coordinate, $I$ is the slice direction,
+$z=D_A(u)$ is the positioned coordinate, and the third entry is its realized
+A-value.  On arrows, conjugation by $D_A$ turns an input leg $C(r)$ into the
+positioned leg $D_A C(r)D_A^{-1}$, while $G_2$ carries the slice direction.
+The coordinate comparison, the sphere normalization, and the pole-generated
+action are consequently three readings of a single $F_A$-state.
+
+In particular, $x_N$ and $y_N$ are two evaluations of this same graph in the
+normalized north frame.  The rectangles used below are the functorial arrows
+$F_A(E_N)$ and $F_A(W_N)$, where $E_N$ and $W_N$ are the north Euler and
+Weierstrass boundary actions.  Both run on the one fixed tape from the common
+projective zero frame to the one north frame.  Write
 \[
   k_E,k_W:0\longrightarrow N
 \]
@@ -1198,51 +1549,69 @@ for their base components and
   r_E=\operatorname{stabilizerPart}(k_E),\qquad
   r_W=\operatorname{stabilizerPart}(k_W).
 \]
-The remaining projective assertion is that these exact functorial
-evaluations attach the two inputs to the common reference input $u_\ast$ of
-the fixed tape:
+These residual factors are forced. For each of the two boundary arrows,
+orbit--stabilizer gives
 \[
-  u_1=C(r_E)(u_\ast),\qquad
-  u_2=C(r_W)(u_\ast),\qquad z_\ast=D(u_\ast).
+  k_\bullet=o_N\,r_\bullet\,o_0^{-1},
 \]
-Equivalently, the two action rectangles are
+and \texttt{stabilizerPart\_unique} says that any north-stabilizer element giving this same
+factorization equals $r_\bullet$. Hence the Euler and Weierstrass faces are the two boundary
+presentations on the one fixed $0$-to-$N$ transport, with uniquely determined stabilizer parts.
+We now read the two boundary faces as commuting action squares.  Let $S$ be the
+common source frame of the fixed tape and let $D$ be its north frame.  Write
+$L_E,L_W$ for the positioned legs of the Euler and Weierstrass faces.  Their
+input legs are the Cayley actions of the uniquely determined stabilizer parts,
+\[
+  R_E=C(r_E),\qquad R_W=C(r_W),
+\]
+and the two square identities are
+\[
+  L_E S=D R_E,\qquad L_W S=D R_W.                 \tag{S}\label{eq:north-face-squares}
+\]
+Thus $F_A(E_N)$ and $F_A(W_N)$ carry both horizontal legs of the two
+rectangles together with these equations.  The C3 boundary readings select a
+single input $u_\ast$ on the common source tape and identify the corresponding
+positioned outputs as
+\[
+  L_E\bigl(S(u_\ast)\bigr)=z_1=D(u_1),\qquad
+  L_W\bigl(S(u_\ast)\bigr)=z_2=D(u_2).             \tag{B}\label{eq:north-boundary-readings}
+\]
+The two faces may therefore be displayed as
 \[
 \begin{tikzcd}[column sep=large,row sep=large]
-u_\ast \arrow[r,"C(r_E)"] \arrow[d,"D"']&
+u_\ast \arrow[r,"R_E=C(r_E)"] \arrow[d,"S"']&
 u_1 \arrow[d,"D"]&
-u_\ast \arrow[r,"C(r_W)"] \arrow[d,"D"']&
+u_\ast \arrow[r,"R_W=C(r_W)"] \arrow[d,"S"']&
 u_2 \arrow[d,"D"]\\
-z_\ast \arrow[r,"D\,C(r_E)\,D^{-1}"']&
+S(u_\ast) \arrow[r,"L_E"']&
 z_1&
-z_\ast \arrow[r,"D\,C(r_W)\,D^{-1}"']&
+S(u_\ast) \arrow[r,"L_W"']&
 z_2 .
 \end{tikzcd}
 \]
-The vertical arrow is not new data: $D$ acts on every input carried by the
-A-section equivariant functor, and the inverse-image definition says that the
-outputs here are precisely $z_1,z_2$.
-
-In Lean the next step is only to name these two already-built boundary
-faces at their functorial type and instantiate their displayed equations.
-Write those local declarations as $F_A(E_N)$ and $F_A(W_N)$.  Their common
-source, common $0$-to-$N$ tape, and one north target are fixed by the
-construction; no new arrow, normalization, or transitivity premise is
-declared.  Applying the two squares to $u_\ast$ gives exactly
+Evaluating \eqref{eq:north-face-squares} at $u_\ast$ and then using
+\eqref{eq:north-boundary-readings} gives
 \[
-  C(r_E)(u_\ast)=u_1,\qquad C(r_W)(u_\ast)=u_2.
+\begin{aligned}
+ D\bigl(C(r_E)(u_\ast)\bigr)
+   &=L_E\bigl(S(u_\ast)\bigr)=D(u_1),\\
+ D\bigl(C(r_W)(u_\ast)\bigr)
+   &=L_W\bigl(S(u_\ast)\bigr)=D(u_2).
+\end{aligned}
 \]
-All subsequent steps, including the relative loop, its action-state
-transport, the $G_2$ direction morphism, and the final Grothendieck
-morphism, are already kernel-checked once these two instantiations are
-supplied.
-
-Once those two exact faces have been exposed, the rest is algebraic
-cancellation.  Put
+The north frame $D$ is a M\"obius automorphism, so cancellation by $D^{-1}$
+yields the two input equations
+\[
+  C(r_E)(u_\ast)=u_1,\qquad C(r_W)(u_\ast)=u_2.    \tag{I}\label{eq:north-input-readings}
+\]
+This is the precise passage from the two functorial boundary faces to their
+values at the common input.  The north comparison now follows by algebraic
+cancellation. Put
 \[
   r=r_Wr_E^{-1}.
 \]
-The required comparison is the elementary group calculation, applied only to
-the certified faces of the distinguished action:
+The required comparison is the elementary group calculation for these two
+boundary faces of the distinguished action:
 \[
 \begin{aligned}
  C(r)(u_1)
@@ -1256,53 +1625,70 @@ the certified faces of the distinguished action:
  &=D(u_2)=z_2 .
 \end{aligned}
 \]
-Categorically the comparison loop is
+The corresponding loop in the projective base is
 \[
   k=k_E^{-1}\mathbin{\gg}k_W:N\longrightarrow N.
 \]
-The action-category composition convention and the common source and target
-give
+Composition of stabilizer parts is multiplication in the same order as the
+action, while inversion sends a stabilizer part to its inverse.  Consequently
 \[
-\begin{aligned}
- k.\mathrm{val}
- &=k_W.\mathrm{val}\,k_E.\mathrm{val}^{-1}\\
- &=(o_Nr_Wo_0^{-1})(o_Nr_Eo_0^{-1})^{-1}\\
- &=r_Wr_E^{-1},
-\end{aligned}
+  \operatorname{stabilizerPart}(k)
+  =\operatorname{stabilizerPart}(k_W)
+     \operatorname{stabilizerPart}(k_E)^{-1}
+  =r_Wr_E^{-1}=r.                                  \tag{R}\label{eq:north-relative-stabilizer}
 \]
-because $o_N=1$ and the identical $o_0$ factors cancel.  Now both endpoints
-of $k$ are $N$, so their orbit representatives are identities and uniqueness
-of the orbit--stabilizer factor gives
-\[
-  \operatorname{stabilizerPart}(k)=k.\mathrm{val}.
-\]
-Thus the accepted input leg is $C(r)$ and the positioned leg is exactly
-$D\,C(r)\,D^{-1}$.  Transitivity of the $G_2$-action on $S^6$ supplies the
-remaining direction component $I_1\mapsto I_2$.  Together these are one
-morphism
-\[
-  F_A(k)(x_N)\longrightarrow y_N
-\]
-in the north action fibre, hence one Grothendieck morphism at the same
-categorical level as $\int\mathcal R_A$.
+The same identity can be seen directly from the unique factorizations
+$k_\bullet=o_Nr_\bullet o_0^{-1}$: the inverse Euler face followed by the
+Weierstrass face cancels the common $0$-frame $o_0$, and $o_N=1$ at the north
+frame.  Equations \eqref{eq:north-input-readings} and
+\eqref{eq:north-relative-stabilizer} say that the input leg of $F_A(k)$ carries
+$u_1$ to $u_2$; conjugating by $D$ says that its positioned leg carries
+$z_1$ to $z_2$.
 
-Finally let $P,Q\in\int_{\mathcal B}\mathcal R_A$ be arbitrary.  Their
-inverse-image witnesses consist of north states $x_N,y_N$ as above and base
-arrows $g:N\to P_{\mathrm{base}}$, $h:N\to Q_{\mathrm{base}}$.  Transporting
-the north comparison along the functor gives the total base leg
+The two north states also carry directions $I_1,I_2\in S^6$.  Transitivity
+of the $G_2$-action supplies $\gamma\in G_2$ with
+$\gamma I_1=I_2$.  The equality of the transported coordinates and this
+direction action are precisely the two components of an arrow
 \[
-  g^{-1}\mathbin{\gg}k\mathbin{\gg}h.
+  \varphi:F_A(k)(x_N)\longrightarrow y_N             \tag{$\Phi$}\label{eq:north-fibre-arrow}
 \]
-The full inclusion $\int\iota_A$ pulls this total morphism back into
-$\int\mathcal R_A$.  Hence the lemma follows from the displayed local
-producer.  Notice that this reduction neither identifies $z_1$ with $z_2$
-nor assumes a common real part: after the producer, the load-bearing
-inference is only the relative stabilizer cancellation through the one
-common frame.
+in the north action fibre.
+
+It remains to return from the north fibre to the arbitrary objects $P,Q$.
+Their inverse-image data supply arrows
+\[
+  g:N\longrightarrow P.\mathrm{base},\qquad
+  h:N\longrightarrow Q.\mathrm{base}
+\]
+and identifications
+\[
+  F_A(g)(x_N)=P.\mathrm{fiber},\qquad
+  F_A(h)(y_N)=Q.\mathrm{fiber}.                       \tag{N}\label{eq:north-witness-readings}
+\]
+The base component of the required total arrow is
+\[
+  (g^{-1}\mathbin{\gg}k)\mathbin{\gg}h:
+  P.\mathrm{base}\longrightarrow Q.\mathrm{base}.    \tag{G}\label{eq:residue-total-base-arrow}
+\]
+Functoriality first carries $P.\mathrm{fiber}$ back along $g^{-1}$ to $x_N$;
+then \eqref{eq:north-fibre-arrow} carries the result along $k$ to $y_N$;
+finally $F_A(h)$ carries that arrow forward to $Q.\mathrm{fiber}$, with
+\eqref{eq:north-witness-readings} identifying its two ends.  This fibre arrow
+over \eqref{eq:residue-total-base-arrow} is a morphism from $P$ to $Q$ in the
+ambient Grothendieck construction.  Since $\iota_A$ is full, it has a
+preimage in the residue total $\int\mathcal R_A$; faithfulness makes that
+preimage unique.  Hence $P$ and $Q$ are joined.  Since they were arbitrary,
+$\int\mathcal R_A$ is transitive.
+
+Throughout the calculation $z_1$ and $z_2$ are arbitrary C3 coordinates.
+Their common real value is extracted from the singleton colimit in the next
+step.  The comparison above rests on the relative stabilizer cancellation
+through the single common source tape and north frame.
 \end{proof}
 
 \begin{theorem}[Concentricity]\label{thm:concentricity}
-\lean{ASection.concentricity, ASection.residueTotal_isConnected, ASection.residueTotal_pi0_singleton, ASection.transportLevel}
+\lean{ASection.concentricity, ASection.residueTotal_isConnected,
+ASection.residueTotal_pi0_singleton, ASection.transportLevel}
 \leanok
 \uses{def:A-section, def:base, def:residue-subdiagram, lem:c-residue-transitive,
 lem:residue-spheres, lem:pi0-grothendieck,
@@ -1317,54 +1703,63 @@ carries one real value
   c\in\RR.
 \]
 Consequently every populated residue-$\CC$ zero $6$-sphere has centre $c$, so the infinitely
-many populated residue-$\CC$ zero spheres are concentric. The theorem does not prescribe the
-numerical value of $c$.
+many populated residue-$\CC$ zero spheres are concentric.
 \end{theorem}
 \begin{proof}
 We consider a slice-preserving section $A$ of the ring $\mathcal R$ on the compactified
-octonions $\OO^{*}$. Slice preservation hands us, for each slice, an isomorphism onto a
-Riemann sphere, pinned down by a normalization of $\OO^{*}$; and this is already the push
-toward a functorial point of view, because the spheres do not come one at a time --- they come
-as a family with coherent identifications, and such a family is organized by a functor. The
+octonions $\OO^{*}$. Slice preservation hands us a coherently identified family of normalized
+Riemann spheres, naturally organized by a functor. The
 hypotheses push in the same direction. Specifying the analytic object, the theory suggests
 exponential equations; and $\OO^{*}$ comes from the Cayley--Dickson construction with only one
 real axis. The projective great circle that axis compactifies to is framed by $PGL(2,\RR)$: a
 projective coordinate frame in which $\exp(I\theta)$ lives, and the analytic sections of
 $\mathcal R$ themselves transform as M\"obius transformations --- self-transformations of the
 slice-preserving section. Frames and transformations compose, invert, and act: they are
-groupoids. That is the base $\mathcal B$ of Definition~\ref{def:base}
-\textup{(}\texttt{GreatCircle.Base}\textup{)}, arrived at by the shape of the ring rather than
-by choice.
+groupoids. The shape of the ring therefore determines the base $\mathcal B$ of
+Definition~\ref{def:base} \textup{(}\texttt{GreatCircle.Base}\textup{)}.
 
-Conditions C1--C4 now determine what kind of distinguished action the A-section is. The
-exponential equations lead to the commuting triangle $\pi\circ E=\exp$ of the logarithm
-manifold \textup{(}Theorems~\ref{thm:slice-exp} and~\ref{thm:log-manifold}\textup{)}, giving
-the unique tame lift of any exponential base \textup{(}Theorem~\ref{thm:winding-lift},
-Proposition~\ref{prop:winding-signature}\textup{)}; since C2 supplies an Euler product, the
-winding of that lift is partitioned and well-defined at every prime, all of it carried in one
-diagonal M\"obius element --- a group and a function, and a functor. C3 supplies the unique
-factorization at $N$ \textup{(}Proposition~\ref{prop:weierstrass}\textup{)}. That the Euler
-diagonal element and the Weierstrass factorization are connected by the same unique tame lift
-is what gives the distinguished disk action its structure: the degenerate fibre of
-Lemma~\ref{lem:exp-degenerate}, with its one real level and its winding heights, is this
-action's own level-and-height bookkeeping. Each of these points of view is by itself
-fragmentary; conjugated, they show how A-section functors act. And they act on groupoids, so
-the construction is completed by categorified orbit--stabilizer theory, which is how such a
-functor is made well-defined on all of $\OO^{*}$: the M\"obius group law gives the local
-action, orbit representatives position the element at every footpoint, stabilizer
-compatibility makes the positioning independent of the representatives, and the group identity
-and multiplication supply the functor laws. The $G_2$-equivariant realization
-\textup{(}Theorem~\ref{thm:G2-equiv}\textup{)} lifts the same action to the value states,
-along the continuum of Riemann spheres through the one point $N$. The result is the A-section
-functor $\mathcal A_A:\mathcal B\to\mathbf{Grpd}$ of Definition~\ref{def:base}, whose states
-carry their real-value data and whose arrows are the element's actual value transports.
+Conditions C1--C4 now determine the distinguished action of the A-section. The exponential
+equations lead to the commuting triangle $\pi\circ E=\exp$ of the logarithm manifold
+\textup{(}Theorems~\ref{thm:slice-exp} and~\ref{thm:log-manifold}\textup{)}, giving the unique
+tame lift of an exponential base \textup{(}Theorem~\ref{thm:winding-lift},
+Proposition~\ref{prop:winding-signature}\textup{)}. In the matrix dictionary of
+Definition~\ref{def:base}, every instant of a lift $\Gamma$ is the actual group element
+\[
+ D(\Gamma(t))
+ =\left[C
+   \begin{pmatrix}e^{\Gamma(t)}&0\\[2pt]0&1\end{pmatrix}
+   C^{-1}\right].
+\]
+This element is also the slice function $w\mapsto D(\Gamma(t))(w)$. Hence the analytic and
+symbolic readings are two faces of the same object: the exponential equation proves which matrix
+acts, and matrix multiplication proves how those actions compose.
+
+Definition~\ref{def:base} has already constructed the complete prime-indexed GPV tape beside the
+matrix element it generates, including its exponential square, uniqueness, continuous real
+level, winding equation, and transport to the north frame. Condition C3 supplies its Weierstrass
+presentation at $N$
+\textup{(}Proposition~\ref{prop:weierstrass}\textup{)}. C1 continues both presentations to the
+same nonzero pole factor, whose logarithm selects $D_A$. Consequently the Euler and Weierstrass
+faces are the two boundary presentations of the same matrix-built function/group element at its
+fixed points $0$ and $N$. The degenerate fibre of
+Lemma~\ref{lem:exp-degenerate}, with its real level and winding heights, is this action's own
+bookkeeping.
+
+Orbit--stabilizer now sweeps the element across the base. The canonical $o_b$ positions $D_A$ at
+each footpoint; the uniquely forced $r_f=o_y^{-1}fo_x$ supplies the residual north action; and the
+identity and multiplication laws for $r_f$ give the functor laws. The $G_2$-equivariant realization
+\textup{(}Theorem~\ref{thm:G2-equiv}\textup{)} applies the same positioned M\"obius function to
+the normalized value states along the continuum of Riemann spheres. The result is the production
+A-section functor $\mathcal A_A=\texttt{AsectionActionDiagram\,A}$ of
+Definition~\ref{def:base}; its states carry their authored inputs, positioned values, and realized
+A-outputs, and its arrows are the action's actual two-legged transports.
 
 From the functor we form its total Grothendieck construction,
 $\mathcal T_A=\int_{\mathcal B}\mathcal A_A$ \textup{(}Definition~\ref{def:base}\textup{)}: an
 object is a base position together with a normalized value state in its fibre, a morphism is a
 base channel together with the compatible transport, and the whole is an action groupoid
-formed from the distinguished element. It is in this total, and not in any set, that the
-residue-$\CC$ zeros are found. The distinguished element fixes $0$ and $N$, and between them
+formed from the distinguished element. The residue-$\CC$ zeros occur as states of this total
+categorical object. The distinguished element fixes $0$ and $N$, and between them
 the upper half-space; at the north frame, where the positioning factor is trivial and the
 frame is the element itself, the equation $A=0$ on that half-space selects the residue states,
 with Euler presenting at one end, Weierstrass at the other. The preimage of this selection
@@ -1373,26 +1768,111 @@ composition in the base --- is the residue subdiagram $\mathcal R_A$ of
 Definition~\ref{def:residue-subdiagram}, included in $\mathcal A_A$ by $\iota_A$. The
 restriction of the total object to this preimage sits over the same base.
 
-The preimage above assembles over the base into a total of its own, whose objects are the
-positioned squares of the C-residue image and whose morphisms are the value transports of
-$\mathcal T_A$ between them.  Its inclusion is the total reading of $\iota_A$,
+This restriction carries the same unique fixed $0$-to-$N$ tape for every residue zero. At the
+north object the canonical positioning factor is the identity, so the frame is $D_A$ itself. The
+checked north-frame and endpoint-fixation declarations identify its two fixed boundary points.
+The Euler and Weierstrass expressions are the two endpoint presentations of this one action, and
+the checked GPV continuation between them is unique once its initial rung is fixed. Moreover every
+projective arrow has the factorization
+\[
+  f=o_y\,r_f\,o_x^{-1},
+  \qquad r_f=\operatorname{stabilizerPart}(f),
+\]
+and \texttt{stabilizerPart\_unique} identifies $r_f$ as the unique north-stabilizer element in
+this factorization. Thus the inverse-image witness carries the already determined $0$-to-$N$ tape
+and its unique residual stabilizer part; a C3 zero index selects a state on that fixed base
+channel.
+
+\emph{The fibrewise inverse image.}
+For each base object $X$, an object of $\mathcal R_A(X)$ consists of an ambient state
+$x\in\mathcal A_A(X)$ together with a north residue state $x_N$ and an arrow
+$g:N\to X$ satisfying
+\[
+  F_A(g)(x_N)=x.                                      \tag{W}
+\]
+This is the object property \texttt{IsCResidueState\,A\,X}.  The fibre
+$\mathcal R_A(X)$ is the full subgroupoid of $\mathcal A_A(X)$ on precisely these objects.
+Its inclusion
+\[
+  \iota_{A,X}:\mathcal R_A(X)\hookrightarrow\mathcal A_A(X)
+\]
+sends a witnessed object to its ambient state.  For two such objects $x,y$, the induced map
+\[
+  \operatorname{Hom}_{\mathcal R_A(X)}(x,y)
+  \longrightarrow
+  \operatorname{Hom}_{\mathcal A_A(X)}
+    (\iota_{A,X}x,\iota_{A,X}y)                       \tag{H}
+\]
+is a bijection: every ambient arrow between the selected states is already an arrow of the full
+subgroupoid, and its ambient arrow determines it uniquely.  Surjectivity of \textup{(H)} is
+fullness of $\iota_{A,X}$; injectivity is faithfulness.
+
+\emph{Transport of the inverse image.}
+Let $f:X\to Y$.  If $x$ has witness \textup{(W)}, then $F_A(f)(x)$ has the same north state
+$x_N$ and the composite witness $g\mathbin{\gg}f:N\to Y$, because
+\[
+\begin{aligned}
+  F_A(g\mathbin{\gg}f)(x_N)
+    &=F_A(f)\bigl(F_A(g)(x_N)\bigr)\\
+    &=F_A(f)(x).
+\end{aligned}                                         \tag{C}
+\]
+This is the calculation recorded by \texttt{cResidue\_lands}.  It defines the restricted
+transport
+\[
+  \mathcal R_A(f):\mathcal R_A(X)\longrightarrow\mathcal R_A(Y):
+\]
+on objects it uses the composite witness in \textup{(C)}, and on arrows it applies the ambient
+transport $F_A(f)$.  Composition in the projective base therefore supplies closure of the
+inverse-image system under every A-section transport.
+
+\emph{The natural inclusion.}
+The fibrewise inclusions assemble over $\mathcal B$ in the square
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\mathcal R_A(X) \arrow[r,"\mathcal R_A(f)"] \arrow[d,hook,"\iota_{A,X}"'] &
+\mathcal R_A(Y) \arrow[d,hook,"\iota_{A,Y}"]\\
+\mathcal A_A(X) \arrow[r,"F_A(f)"'] & \mathcal A_A(Y).
+\end{tikzcd}                                           \tag{Nat}
+\]
+For an object $x$, both routes in \textup{(Nat)} have underlying state $F_A(f)(x)$; for an arrow
+$\alpha$, both routes have underlying arrow $F_A(f)(\alpha)$.  The upper route additionally
+carries the residue witness $g\mathbin{\gg}f$ established in \textup{(C)}.  Hence
+\[
+  \mathcal R_A(f)\mathbin{\gg}\iota_{A,Y}
+  =\iota_{A,X}\mathbin{\gg}F_A(f).                    \tag{Inc}
+\]
+and these equations for every $f$ are the naturality of
+$\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$.
+
+The preimage now assembles over the base into a total of its own. Its objects are the positioned
+squares of the C-residue image and its morphisms are the value transports of $\mathcal T_A$
+between them. Its inclusion is the total reading of $\iota_A$,
 \[
 \begin{tikzcd}[column sep=huge]
 \int_{\mathcal B}\mathcal R_A \arrow[r, hook, "\int\iota_A"] & \int_{\mathcal B}\mathcal A_A=\mathcal T_A
 \end{tikzcd}
 \]
 \textup{(}\texttt{Asection\-CResidue\-Inclusion\-Total} in the Lean source, the Grothendieck
-functoriality of $\iota_A$ applied to it\textup{)}. There it is full and faithful
+functoriality of $\iota_A$ applied to it\textup{)}. On objects it sends $(X,x)$ to
+$(X,\iota_{A,X}x)$ and leaves the base position unchanged; on a Grothendieck morphism it leaves
+the base arrow unchanged and applies the fibre inclusion only to the compatible transport.
+Consequently equality after inclusion forces equality of the base legs and, by fibrewise
+faithfulness, equality of the transport legs: the total inclusion is faithful. Conversely, an
+ambient total morphism between two objects in the image already has a base leg $f$ and a fibre
+morphism between selected target states; fibrewise fullness gives its preimage in
+$\mathcal R_A$, with the same $f$. Hence the total inclusion is full
 \textup{(}\texttt{Asection\-CResidue\-Inclusion\-Total\-\_full} and
-\texttt{Asection\-CResidue\-Inclusion\-Total\-\_faithful}\textup{)}, hence an isomorphism onto
-its image; the C-residue system is therefore the image itself, carrying the total's own morphisms
-and nothing added.
+\texttt{Asection\-CResidue\-Inclusion\-Total\-\_faithful}\textup{)}. It is therefore an
+isomorphism onto its image. The C-residue total is that image itself: it consists exactly of the
+selected objects together with the fixed tape and all ambient total morphisms between them.
 
 Lemma~\ref{lem:c-residue-transitive} proves, in this exact inverse-image groupoid, that any
 two objects are joined by one Grothendieck morphism: the relative
 orbit--stabilizer face is its base component and the $G_2$ transport is its fibre component.
 Thus $\int_{\mathcal B}\mathcal R_A$ is connected.  This is a groupoid-register statement:
-no equality of residue coordinates, common centre, or concentricity conclusion has been used.
+at this stage the established conclusion is connectedness; equality of real coordinates and the
+common centre arise from the colimit readout below.
 
 By Remark~8.3.5 of \cite{Riehl}, a category is nonempty and connected if and only if its
 $\pi_0$ is the singleton set. Condition C4 supplies nonemptiness --- infinitely many
@@ -1402,16 +1882,25 @@ established. Therefore, by Lemma~\ref{lem:pi0-grothendieck}
 \[
 \pi_0\Bigl(\int_{\mathcal B}\mathcal R_A\Bigr)\;\cong\;\operatorname*{colim}_{\mathcal B}\,(\pi_0\circ\mathcal R_A)
 \]
-collapses to a singleton $\kappa$. The class and its value are kept apart, as two different things read off one object:
-$\kappa$ is the unique transport class, and $c\in\RR$ is the one real level present in the
-states $\kappa$ identifies, conserved along every connecting transport by the lift's level
-law; the level read is \texttt{ASection.transportLevel} in the Lean source. Reading the level
-on $\kappa$ returns a single number. The populated residue-$\CC$ zero $6$-sphere states all
-represent $\kappa$, so each has centre $c$. Hence, the infinitely many residue-$\CC$ zero
-spheres of the A-section are concentric.
+collapses to a singleton $\kappa$. Here $\operatorname{val}$ is exactly the A-specific
+instantiation of that singleton equality at certified residue representatives. Their real
+coordinate is definitionally the project's level read
+\[
+  \operatorname{transportLevel}_A(n)
+  =\operatorname{Re}\bigl(A.\operatorname{sphereZero}(n)\bigr).
+\]
+Instantiating the singleton equality at the $n$-th and $0$-th certified representatives is itself
+the $\operatorname{val}$ step:
+\[
+  \operatorname{transportLevel}_A(n)=\operatorname{transportLevel}_A(0).
+\]
+The proof then sets $c=\operatorname{transportLevel}_A(0)$. Every populated residue-$\CC$ zero
+$6$-sphere has real centre $c$, so the infinitely many residue-$\CC$ zero spheres of the A-section
+are concentric.
 \end{proof}
 
 \begin{corollary}[Translation to the classical framework]\label{cor:nontrivial}
+\lean{ASection.nontrivial_one_centre}
 \uses{thm:concentricity, thm:zero-equivalence, thm:zero-spheres, lem:residue-spheres}
 Under the residue-$\CC$/classically-nontrivial-zero identification, the already-proved
 populated residue-$\CC$ zero spheres are the classically nontrivial zero spheres and retain the
@@ -1419,9 +1908,9 @@ common centre $c$ supplied by Theorem~\ref{thm:concentricity}.
 \end{corollary}
 \begin{proof}
 This is the translation of the C-residue population through
-Theorems~\ref{thm:zero-equivalence} and~\ref{thm:zero-spheres}. It neither constructs the centre
-nor proves a second concentricity statement; infinitude and disjointness are \textup{C4} and
-Lemma~\ref{lem:residue-spheres}.
+Theorems~\ref{thm:zero-equivalence} and~\ref{thm:zero-spheres}. The centre comes directly from
+Theorem~\ref{thm:concentricity}, while \textup{C4} and Lemma~\ref{lem:residue-spheres} supply
+infinitude and disjointness.
 \end{proof}
 
 % The superseded great-circle/F-based proof frame was removed from the active
@@ -1438,6 +1927,7 @@ pins that centre: it sends a zero of real part $c$ to one of real part $1-c$, an
 common centre it forces $c=1-c$, so $c=\tfrac12$. Every nontrivial zero lies on the critical line.
 
 \begin{corollary}[$\zetaO$ is an $A$-section]\label{cor:zeta-section}
+\lean{zetaSection}
 \uses{def:A-section, thm:zeta-in-R, thm:riemann, thm:euler, cor:hadamard-infinitude, prop:weierstrass, thm:zero-spheres}
 $\zetaO$ is an $A$-section \textup{(Definition~\ref{def:A-section})}: a section of
 $\mathcal R$ satisfying \textup{(C1)--(C4)}.
@@ -1467,8 +1957,8 @@ slice-regular zero-geometry that translates them:
   Theorem~\ref{thm:hardy}). By the residue dictionary below these are exactly the residue-$\CC$
   zeros, so $\{q_n\}$ is infinite.
 \end{itemize}
-The one remaining classical fact enters the downstream centre-pinning rather than
-\textup{(C1)--(C4)}: the \emph{functional equation} $\xi(s)=\xi(1-s)$,
+After the \textup{(C1)--(C4)} verification, the downstream centre-pinning uses the
+\emph{functional equation} $\xi(s)=\xi(1-s)$,
 $\xi(\bar s)=\overline{\xi(s)}$ (Theorem~\ref{thm:riemann}), used in Corollary~\ref{cor:rh}. The
 \emph{residue dictionary}, a closed zero of $\zetaO$ is a real point (residue field $\RR$, the
 classically \emph{trivial} zeros) or a $6$-sphere $S_{(\sigma,\gamma)}$ (residue field $\CC$, the
@@ -1478,7 +1968,7 @@ Theorem~\ref{thm:zero-spheres} and \cite{AdF}; it is what makes ``residue-$\CC$'
 \end{proof}
 
 \begin{corollary}[Riemann Hypothesis]\label{cor:rh}
-\lean{zeta_riemannHypothesis}
+\lean{zeta_riemannHypothesis, zeta_criticalLine_zeros_infinite}
 \leanok
 \uses{cor:zeta-section, thm:concentricity, cor:nontrivial, thm:rh-equiv}
 Every nontrivial zero of the classical Riemann zeta function has real part $\tfrac12$; in
@@ -1515,9 +2005,9 @@ the image,
 \]
 the backward leg being an isomorphism of categories onto the image and the forward leg the
 canonical inclusion. It is a general fact, available here for $\iota_A$ and for
-$\int\iota_A$, and it is the shape a length-two zigzag argument would use. The proof of
-Theorem~\ref{thm:concentricity} does not use it: connectedness there comes from transitivity
-at the total, by a single element, not from a zigzag through a roof.
+$\int\iota_A$, and it is the shape a length-two zigzag argument would use.
+Theorem~\ref{thm:concentricity} obtains connectedness directly from transitivity at the total,
+by a single element. The image span records the corresponding length-two alternative.
 \end{remark}
 
 \begin{remark}[Two alternative routes]\label{rmk:thomason}
@@ -1531,16 +2021,15 @@ base. The restriction sits over $\mathcal B$ through its two projections,
 \end{tikzcd}
 \]
 and one may connect residue states footpoint by footpoint: zigzags in the connected base,
-lifted through the fibres. That zigzag is a different one from the single arrow used above ---
-it travels through $\mathcal B$ and reassembles the value data leg by leg --- and it is not the
-proof given here. The second is Thomason's homotopy colimit theorem \cite{Thomason79}: the
+lifted through the fibres. That route travels through $\mathcal B$ and reassembles the value data
+leg by leg. The second is Thomason's homotopy colimit theorem \cite{Thomason79}: the
 classifying space of a Grothendieck construction is homotopy equivalent to the homotopy
 colimit of the classifying spaces of its fibres, and reading connected components through that
 equivalence yields the same collapse of $\pi_0\bigl(\int_{\mathcal B}\mathcal R_A\bigr)$. The
 proof given here stays at the level of categories, where Lemma~\ref{lem:pi0-grothendieck}
 suffices: the base route assembles what the action already supplies whole, the Thomason route
-is the topological shadow of the same computation, and neither path has been formalized in
-Lean.
+is the topological shadow of the same computation, and both remain expository routes outside
+the Lean development.
 \end{remark}
 
 %=====================================================================

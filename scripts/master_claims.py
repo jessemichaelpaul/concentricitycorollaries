@@ -30,7 +30,10 @@ def environments():
     and the first line of its statement (for the author-readable column)."""
     txt = MASTER.read_text()
     out = []
-    for m in re.finditer(rf"\\begin\{{{ENVS}\}}(\[[^\]]*\])?\\label\{{([^}}]+)\}}", txt):
+    # Titles may themselves contain citation brackets, for example
+    # ``[Theorem; {\cite[Ch. 1]{...}}]``.  Restrict the optional title to its
+    # source line so the final bracket before ``\label`` wins.
+    for m in re.finditer(rf"\\begin\{{{ENVS}\}}(\[[^\n]*\])?\\label\{{([^}}]+)\}}", txt):
         kind, _, label = m.group(1), m.group(2), m.group(3)
         end = txt.find(f"\\end{{{kind}}}", m.end())
         body = txt[m.end(): end if end > 0 else m.end() + 4000]

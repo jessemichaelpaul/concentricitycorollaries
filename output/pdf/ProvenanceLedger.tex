@@ -1,0 +1,3179 @@
+%=====================================================================
+%  CONCENTRICITY OVER THE OCTONIONS -- MASTER
+%  Part 1: classical zeta facts (continuation, functional equation,
+%          infinite Euler product, infinite Hadamard product) -- cited.
+%  Part 2: slice-preserving theory, the ring R under the *-product, and the
+%          equivalence/translation theorems (concentric zero-spheres <=> RH).
+%  Part 3: the Concentricity Theorem. The base is
+%          B = PGL(2,R) \ltimes OnePoint(R) and the sphere world SphereWorld.
+%          Conditions C1--C3 determine one distinguished Mobius/exponential
+%          element; orbit--stabilizer carries its whole O*-valued action
+%          across the base. Its sphere projection is AsectionSlice, while
+%          the value-bearing AsectionFunctor A : B -> Grpd has normalized
+%          A-value states as fibres. Then T_A = Int_B A_A is formed. The
+%          readout is pi_0(T_A) = colim_B(pi_0 . A_A). The colimit performs the
+%          transport-generated identifications and yields one C-residue
+%          real-value singleton {c}, c in R. Hence the populated C-residue
+%          zero 6-spheres have common centre c and are concentric. Classical
+%          translation and the numerical identification c=1/2 are downstream.
+%=====================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{amscd}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+%---------------------------------------------------------------------
+%  Macros
+%---------------------------------------------------------------------
+\newcommand{\OO}{\mathbb{O}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\Ostar}{\OO^{*}}
+\newcommand{\Cstar}{\CC^{*}}
+\newcommand{\zetaO}{\zeta_{\Ostar}}
+\newcommand{\zetaC}{\zeta_{\Cstar}}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\providecommand{\Gtwo}{G_2}
+
+% Conspicuous markers (visible in compiled output):
+\newcommand{\TODO}[1]{\medskip\noindent\textcolor{red}{\textbf{[TODO:} #1\textbf{]}}\medskip}
+\newcommand{\PROGRAM}[1]{\medskip\noindent\textcolor{red}{\textbf{[PROGRAM:} #1\textbf{]}}\medskip}
+\newcommand{\SOURCE}[1]{\textcolor{purple}{\small$\langle$source: #1$\rangle$}}
+\newcommand{\stag}[1]{\href{https://stacks.math.columbia.edu/tag/#1}{\texttt{#1}}}
+\providecommand{\Grpd}{\mathrm{Grpd}}
+\providecommand{\SphereWorld}{\mathrm{SphereWorld}}
+\providecommand{\nfr}{\mathfrak{n}}
+
+% Lean blueprint macros: no-ops when this file is compiled standalone; the
+% leanblueprint package redefines them when the dependency graph and the Lean
+% linkage are built. Keeping them here lets every statement carry its Lean
+% declaration and its dependencies without any Lean names appearing in the prose.
+\providecommand{\lean}[1]{}
+\providecommand{\leanok}{}
+\providecommand{\authorobject}[2]{}
+\providecommand{\notready}{}
+\providecommand{\mathlibok}{}
+\providecommand{\uses}[1]{}
+\providecommand{\proves}[1]{}
+
+%---------------------------------------------------------------------
+%  Theorem environments (document-wide numbering)
+%---------------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{condition}[theorem]{Condition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\title{Concentric Zero-Spheres of a class of sections of the commutative ring $\mathcal R$\\ of slice preserving functions
+over the compactified Octonions\\[0.4em]
+\large
+with the Riemann Hypothesis as a corollary}
+\author{Jesse Michael Paul\\[2pt]
+{\normalsize PhD Candidate, Department of Mathematics \& Statistics}\\
+{\normalsize University of North Carolina at Greensboro}}
+\date{June 2026}
+
+
+
+\makeatletter
+\@ifpackageloaded{xcolor}{}{\usepackage{xcolor}}
+\@ifpackageloaded{geometry}{}{\usepackage[margin=0.72in]{geometry}}
+\@ifpackageloaded{tcolorbox}{}{\usepackage[most]{tcolorbox}}
+\@ifpackageloaded{tabularx}{}{\usepackage{tabularx}}
+\@ifpackageloaded{url}{}{\usepackage{url}}
+\@ifpackageloaded{seqsplit}{}{\usepackage{seqsplit}}
+\@ifpackageloaded{fvextra}{}{\usepackage{fvextra}}
+\makeatother
+\definecolor{KgtBlue}{RGB}{25,74,120}
+\definecolor{KgtPale}{RGB}{242,247,251}
+\definecolor{KgtGreen}{RGB}{30,112,74}
+\definecolor{KgtRed}{RGB}{150,38,38}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\tcbset{provenancecard/.style={enhanced,breakable,colback=KgtPale,colframe=KgtBlue,
+  boxrule=0.7pt,arc=2mm,left=3mm,right=3mm,top=2mm,bottom=2mm,
+  fonttitle=\bfseries,coltitle=white,colbacktitle=KgtBlue}}
+
+\makeatletter
+\newlabel{thm:riemann}{{1.1}{3}{Meromorphic continuation and functional equation; Riemann \cite {Riemann1859}}{theorem.1.1}{}}
+\newlabel{thm:euler}{{1.2}{3}{Infinite Euler product; {\cite [Ch.~1]{Titchmarsh86}}}{theorem.1.2}{}}
+\newlabel{thm:hadamard}{{1.3}{4}{Infinite Hadamard product; {\cite [Ch.~2]{Titchmarsh86}}}{theorem.1.3}{}}
+\newlabel{cor:hadamard-infinitude}{{1.4}{4}{Infinitude of the nontrivial zeros}{theorem.1.4}{}}
+\newlabel{thm:hardy}{{1.5}{4}{Hardy \cite {Hardy14}}{theorem.1.5}{}}
+\newlabel{def:zeta-Cstar}{{1.6}{4}{Compactified classical zeta}{theorem.1.6}{}}
+\newlabel{lem:zero-Cstar}{{1.7}{4}{Compactification preserves the zero set}{theorem.1.7}{}}
+\newlabel{def:octonions}{{2.1}{5}{}{theorem.2.1}{}}
+\newlabel{thm:artin}{{2.2}{5}{Artin \cite {Schafer66}}{theorem.2.2}{}}
+\newlabel{cor:powers}{{2.3}{5}{}{theorem.2.3}{}}
+\newlabel{def:slices}{{2.4}{5}{Complex slices and slice Riemann spheres}{theorem.2.4}{}}
+\newlabel{def:slice-regular}{{3.1}{5}{Slice regularity; {\cite [Def.~5.1.1]{CSS12}}}{theorem.3.1}{}}
+\newlabel{thm:rep-formula}{{3.2}{5}{Representation Formula; {\cite [Thm.~5.1.7]{CSS12}}}{theorem.3.2}{}}
+\newlabel{thm:identity}{{3.3}{5}{Identity Theorem; {\cite [Cor.~5.1.9]{CSS12}}}{theorem.3.3}{}}
+\newlabel{thm:extension}{{3.4}{5}{Extension Theorem; {\cite [Thm.~5.1.5]{CSS12}}}{theorem.3.4}{}}
+\newlabel{def:slice-preserving}{{3.5}{6}{Slice-preserving functions; \protect {\cite [Def.~2.7, Rem.~2.8]{AdF}; \cite {VS,SeriesExp,Wang}}}{theorem.3.5}{}}
+\newlabel{rmk:slice-pres-compact}{{3.6}{6}{Compactified extension}{theorem.3.6}{}}
+\newlabel{def:zeta_O}{{4.1}{6}{Octonionic zeta}{theorem.4.1}{}}
+\newlabel{prop:well-defined}{{4.2}{7}{Well-definedness}{theorem.4.2}{}}
+\newlabel{sec:R-ring}{{5}{7}{\texorpdfstring {$\mathcal R$}{R} is a commutative ring}{section.5}{}}
+\newlabel{def:R}{{5.1}{7}{The ring of slice-preserving functions under the regular product}{theorem.5.1}{}}
+\newlabel{thm:wang}{{5.2}{7}{Regular product on slice-preserving functions; {\cite [Rem.~2.11]{Wang}}}{theorem.5.2}{}}
+\newlabel{prop:R-comm-ring}{{5.3}{7}{}{theorem.5.3}{}}
+\newlabel{prop:R-domain}{{5.4}{7}{$\mathcal R$ is an integral domain}{theorem.5.4}{}}
+\newlabel{sec:toolkit}{{6}{8}{The slice-preserving analytic toolkit on the compactified octonions}{section.6}{}}
+\newlabel{thm:slice-exp}{{6.1}{8}{The slice exponential; \protect {\cite [\S 3]{GPVwind}; \cite [Prop.~5.1]{VS}; \cite [Rem.~2.23]{AdF}}}{theorem.6.1}{}}
+\newlabel{thm:log-manifold}{{6.2}{8}{The logarithm manifold $E^{+}_{\OO }$; \protect {\cite [Prop.~5.1, Rem.~5.2, Def.~5.3, Prop.~5.4, Def.~5.5]{VS}; \cite [\S 3]{GPVwind}}}{theorem.6.2}{}}
+\newlabel{lem:exp-degenerate}{{6.3}{8}{The degenerate set of the exponential; its fibre over a real value}{theorem.6.3}{}}
+\newlabel{def:slice-squares}{{6.4}{8}{Slice restriction and the $I$-independent lift; \protect {\cite [Rem.~2.11]{Wang}; \cite [\S 3.3,~\S 3.7]{BisiWinkelmann}; \cite [Def.~2.1, Prop.~2.2]{SeriesExp}}}{theorem.6.4}{}}
+\newlabel{thm:winding-lift}{{6.5}{9}{The winding lift; \protect {\cite [Def.~3.4, Def.~4.1, Prop.~4.2, Def.~5.11]{GPVwind}}}{theorem.6.5}{}}
+\newlabel{prop:winding-signature}{{6.6}{9}{Tameness, existence, and the winding number; \protect {\cite [Def.~4.20, Cor.~5.21, Cor.~5.22]{GPVwind}}}{theorem.6.6}{}}
+\newlabel{thm:slice-pres}{{7.1}{10}{Slice preservation}{theorem.7.1}{}}
+\newlabel{thm:zeta-in-R}{{7.2}{10}{$\zetaO $ is a section of $\mathcal R$}{theorem.7.2}{}}
+\newlabel{def:G2}{{7.3}{10}{The automorphism group $\Gtwo $}{theorem.7.3}{}}
+\newlabel{thm:G2-equiv}{{7.4}{10}{$\Gtwo $-equivariance}{theorem.7.4}{}}
+\newlabel{thm:G2-S6}{{7.5}{10}{\protect {\cite {Baez02}}}{theorem.7.5}{}}
+\newlabel{rmk:G2-compact}{{7.6}{10}{The $\Gtwo $-action extends to $\Ostar =S^8$}{theorem.7.6}{}}
+\newlabel{thm:zero-equivalence}{{8.1}{11}{Zero Equivalence Theorem}{theorem.8.1}{}}
+\newlabel{thm:zero-spheres}{{8.2}{11}{Nontrivial zeros are infinitely many disjoint $6$-spheres}{theorem.8.2}{}}
+\newlabel{thm:rh-equiv}{{8.3}{12}{The equivalence: concentricity $\Leftrightarrow $ RH}{theorem.8.3}{}}
+\newlabel{part:stack}{{III}{12}{The Categorical Construction and the Concentricity Theorem}{part.3}{}}
+\newlabel{sec:tower-stack}{{9}{12}{The geometric worlds and the categorical construction}{section.9}{}}
+\newlabel{def:carrier}{{9.1}{13}{The compactified octonions $\OO ^{*}=S^8$}{theorem.9.1}{}}
+\newlabel{def:section-map}{{9.2}{13}{The section's slice data and equivariance}{theorem.9.2}{}}
+\newlabel{def:two-worlds}{{9.3}{14}{The octonionic and slice-value worlds}{theorem.9.3}{}}
+\newlabel{def:base}{{9.4}{14}{The projective base, genuine section functor, and total category}{theorem.9.4}{}}
+\newlabel{sec:detector}{{10}{18}{The concentricity theorem}{section.10}{}}
+\newlabel{prop:weierstrass}{{10.1}{18}{Slice-regular Weierstrass factorization; the content of C3}{theorem.10.1}{}}
+\newlabel{lem:residue-spheres}{{10.2}{18}{Residue-$\CC $ zeros are $6$-sphere components of $\mathcal H_1$}{theorem.10.2}{}}
+\newlabel{lem:pi0-grothendieck}{{10.3}{19}{$\pi _0$ of a Grothendieck construction}{theorem.10.3}{}}
+\newlabel{def:A-section}{{10.4}{19}{$A$-sections}{theorem.10.4}{}}
+\newlabel{def:residue-subdiagram}{{10.5}{20}{The residue subdiagram and its inclusion}{theorem.10.5}{}}
+\newlabel{lem:c-residue-transitive}{{10.6}{20}{Transitivity of the C-residue total}{theorem.10.6}{}}
+\newlabel{eq:north-face-squares}{{{S}}{22}{The concentricity theorem}{AMS.10}{}}
+\newlabel{eq:north-boundary-readings}{{{B}}{22}{The concentricity theorem}{AMS.11}{}}
+\newlabel{eq:north-input-readings}{{{I}}{22}{The concentricity theorem}{AMS.12}{}}
+\newlabel{eq:north-relative-stabilizer}{{{R}}{22}{The concentricity theorem}{AMS.13}{}}
+\newlabel{eq:north-fibre-arrow}{{{$\Phi $}}{23}{The concentricity theorem}{AMS.14}{}}
+\newlabel{eq:north-witness-readings}{{{N}}{23}{The concentricity theorem}{AMS.15}{}}
+\newlabel{eq:residue-total-base-arrow}{{{G}}{23}{The concentricity theorem}{AMS.16}{}}
+\newlabel{thm:concentricity}{{10.7}{23}{Concentricity}{theorem.10.7}{}}
+\newlabel{cor:nontrivial}{{10.8}{26}{Translation to the classical framework}{theorem.10.8}{}}
+\newlabel{sec:verification}{{11}{26}{Corollaries}{section.11}{}}
+\newlabel{cor:zeta-section}{{11.1}{26}{$\zetaO $ is an $A$-section}{theorem.11.1}{}}
+\newlabel{cor:rh}{{11.2}{27}{Riemann Hypothesis}{theorem.11.2}{}}
+\newlabel{rmk:image-span}{{11.3}{27}{The image span of a fully faithful inclusion}{theorem.11.3}{}}
+\bibcite{AdF}{1}
+\bibcite{AdFslice}{2}
+\bibcite{Baez02}{3}
+\bibcite{BisiWinkelmann}{4}
+\bibcite{CSS12}{5}
+\bibcite{GP11}{6}
+\bibcite{SeriesExp}{7}
+\bibcite{GS07}{8}
+\newlabel{rmk:thomason}{{11.4}{28}{Two alternative routes}{theorem.11.4}{}}
+\bibcite{GSS13}{9}
+\bibcite{GV}{10}
+\bibcite{Hardy14}{11}
+\bibcite{Munkres00}{12}
+\bibcite{Riemann1859}{13}
+\bibcite{Schafer66}{14}
+\bibcite{Titchmarsh86}{15}
+\bibcite{Wang}{16}
+\bibcite{VS}{17}
+\bibcite{Stacks}{18}
+\bibcite{Mathlib}{19}
+\bibcite{GJ}{20}
+\bibcite{GPVwind}{21}
+\bibcite{Quillen73}{22}
+\bibcite{Riehl}{23}
+\bibcite{RiehlContext}{24}
+\bibcite{Thomason79}{25}
+\bibcite{Vistoli}{26}
+\makeatother
+\begin{document}
+{\LARGE\bfseries Provenance Ledger}\par
+\vspace{2mm}{\large Concentricity}\par\medskip
+This document is generated from the author's master and fresh Lean checks. Each statement is typeset from the master. Every axiom line below is Lean's literal output.
+\par\medskip\textbf{Master revision.} {\ttfamily\small\seqsplit{c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a}}
+\par\textbf{Lean-source revision.} {\ttfamily\small\seqsplit{ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5}}
+\bigskip
+\begin{tcolorbox}[provenancecard,title={1. Theorem - Meromorphic continuation and functional equation; Riemann \textbackslash{}cite\{Riemann1859\}},title after break={1. Theorem - Meromorphic continuation and functional equation; Riemann \textbackslash{}cite\{Riemann1859\} (continued)}]
+\textbf{Author's statement}\par
+The Dirichlet series $\zeta(s)=\sum_{n\ge1}n^{-s}$, convergent for $\re s>1$, continues to a
+meromorphic function on $\CC$ with a single simple pole, at $s=1$; equivalently, a holomorphic map
+to the Riemann sphere
+\[
+  \zeta:\Cstar\longrightarrow\Cstar,\qquad \Cstar=\CC\cup\{\infty\}=S^2,\qquad \zeta(1)=\infty .
+\]
+The completed function $\xi(s)=\tfrac12 s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s)$ is entire and satisfies
+\[
+  \xi(s)=\xi(1-s),\qquad \xi(\bar s)=\overline{\xi(s)} .
+\]
+Consequently, if $\rho$ is a nontrivial zero of $\zeta$ then so are $\bar\rho$, $1-\rho$, and
+$1-\bar\rho$. The trivial zeros of $\zeta$ are at $s=-2,-4,\dots$; the nontrivial zeros lie in the
+strip $0<\re s<1$. The Riemann Hypothesis asserts that every nontrivial zero has $\re s=\tfrac12$.
+\tcblower
+\textbf{Lean declaration.} \url{riemannZeta_meromorphicOn}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms riemannZeta_meromorphicOn
+'riemannZeta_meromorphicOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{riemannZeta_orderAt_one}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms riemannZeta_orderAt_one
+'riemannZeta_orderAt_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{riemannZeta_conj}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms riemannZeta_conj
+'riemannZeta_conj' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{riemannZeta_one_sub_zero}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms riemannZeta_one_sub_zero
+'riemannZeta_one_sub_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{nontrivialZero_re_mem_Ioo}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms nontrivialZero_re_mem_Ioo
+'nontrivialZero_re_mem_Ioo' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={2. Theorem - Infinite Euler product; \{\textbackslash{}cite[Ch.\textasciitilde{}1]\{Titchmarsh86\}\}},title after break={2. Theorem - Infinite Euler product; \{\textbackslash{}cite[Ch.\textasciitilde{}1]\{Titchmarsh86\}\} (continued)}]
+\textbf{Author's statement}\par
+For $\re s>1$,
+\[
+  \zeta(s)=\prod_{p\ \mathrm{prime}}\bigl(1-p^{-s}\bigr)^{-1}
+         =\exp\!\Bigl(\sum_{p}\sum_{k\ge1}\tfrac1k\,p^{-ks}\Bigr),
+\]
+the product taken over the infinitely many primes; it converges absolutely and is zero-free on
+$\re s>1$.
+\tcblower
+\textbf{Lean declaration.} \url{zetaEulerLog}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaEulerLog
+'zetaEulerLog' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaC2_summable}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaC2_summable
+'zetaC2_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaC2_zero_free}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaC2_zero_free
+'zetaC2_zero_free' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaC2_euler}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaC2_euler
+'zetaC2_euler' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={3. Theorem - Infinite Hadamard product; \{\textbackslash{}cite[Ch.\textasciitilde{}2]\{Titchmarsh86\}\}},title after break={3. Theorem - Infinite Hadamard product; \{\textbackslash{}cite[Ch.\textasciitilde{}2]\{Titchmarsh86\}\} (continued)}]
+\textbf{Author's statement}\par
+$\xi$ is entire of order $1$ with infinitely many zeros, which are exactly the nontrivial zeros
+$\{\rho\}$ of $\zeta$, and admits the Hadamard factorization
+\[
+  \xi(s)=\xi(0)\prod_{\rho}\Bigl(1-\tfrac{s}{\rho}\Bigr)e^{s/\rho},
+\]
+the product taken over the infinitely many nontrivial zeros.
+\tcblower
+\textbf{Lean declaration.} \url{xi_entire}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms xi_entire
+'xi_entire' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{xi_zeros_eq_nontrivialZeros}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms xi_zeros_eq_nontrivialZeros
+'xi_zeros_eq_nontrivialZeros' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zeta_hadamard}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zeta_hadamard
+'zeta_hadamard' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{riemannZeta_nontrivialZeros_infinite}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms riemannZeta_nontrivialZeros_infinite
+'riemannZeta_nontrivialZeros_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={4. Corollary - Infinitude of the nontrivial zeros},title after break={4. Corollary - Infinitude of the nontrivial zeros (continued)}]
+\textbf{Author's statement}\par
+$\zeta$ has infinitely many nontrivial zeros.
+\tcblower
+\textbf{Lean declaration.} \url{riemannZeta_nontrivialZeros_infinite}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms riemannZeta_nontrivialZeros_infinite
+'riemannZeta_nontrivialZeros_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={5. Theorem - Hardy \textbackslash{}cite\{Hardy14\}},title after break={5. Theorem - Hardy \textbackslash{}cite\{Hardy14\} (continued)}]
+\textbf{Author's statement}\par
+Infinitely many nontrivial zeros of $\zeta$ lie on the line $\re s=\tfrac12$.
+\tcblower
+\textbf{Lean declaration.} \url{zeta_criticalLine_zeros_infinite}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={6. Definition - Compactified classical zeta},title after break={6. Definition - Compactified classical zeta (continued)}]
+\textbf{Author's statement}\par
+$\zetaC:\Cstar\to\Cstar$ is the meromorphic continuation of $\zeta$ regarded as a map to
+the Riemann sphere: $\zetaC(s)=\zeta(s)$ for $s\in\CC\setminus\{1\}$; $\zetaC(1)=\infty$
+(the simple pole, Theorem~\ref{thm:riemann}); and $\zetaC(\infty)=1$, since
+$\zeta(s)\to1$ as $\re(s)\to+\infty$ (the $p$-test: only the $n=1$ term of
+$\sum_n n^{-s}$ survives). It is holomorphic into $\Cstar$ on $\Cstar\setminus\{1\}$,
+its sole pole being $s=1$. The functional equation, the conjugate symmetry
+$\zetaC(\bar s)=\overline{\zetaC(s)}$, and Hardy's infinitude (Theorem~\ref{thm:hardy}) hold
+verbatim for $\zetaC$, as they concern values on $\CC\setminus\{1\}$ where $\zetaC=\zeta$.
+\tcblower
+\textbf{Lean declaration.} \url{zetaC}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaC
+'zetaC' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaC_coe}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaC_coe
+'zetaC_coe' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaC_one}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaC_one
+'zetaC_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaC_infty}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaC_infty
+'zetaC_infty' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={7. Lemma - Compactification preserves the zero set},title after break={7. Lemma - Compactification preserves the zero set (continued)}]
+\textbf{Author's statement}\par
+$Z(\zetaC)=Z(\zeta)$: the zeros of $\zetaC$ in $\Cstar$ are exactly the zeros of $\zeta$
+in $\CC$; in particular the nontrivial zeros coincide.
+\tcblower
+\textbf{Lean declaration.} \url{zetaC_coe_eq_zero_iff}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaC_coe_eq_zero_iff
+'zetaC_coe_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaC_zero_iff}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaC_zero_iff
+'zetaC_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={8. Definition},title after break={8. Definition (continued)}]
+\textbf{Author's statement}\par
+The octonions are: (i) a \emph{division algebra}: every nonzero element has a
+multiplicative inverse; (ii) a \emph{normed algebra}: $|ab|=|a||b|$; (iii)
+\emph{non-associative}: $(ab)c\neq a(bc)$ in general; (iv) \emph{alternative}:
+$(aa)b=a(ab)$ and $a(bb)=(ab)b$.
+\tcblower
+\textbf{Lean declaration.} \url{Octonion}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion
+'Octonion' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.normSq_mul}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.normSq_mul
+'Octonion.normSq_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.alt_left}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.alt_left
+'Octonion.alt_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.alt_right}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.alt_right
+'Octonion.alt_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={9. Theorem - Artin \textbackslash{}cite\{Schafer66\}},title after break={9. Theorem - Artin \textbackslash{}cite\{Schafer66\} (continued)}]
+\textbf{Author's statement}\par
+In an alternative algebra, the subalgebra generated by any two elements is
+associative.
+\tcblower
+\textcolor{KgtRed}{No exact declaration/object check is available for this clause.}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={10. Corollary},title after break={10. Corollary (continued)}]
+\textbf{Author's statement}\par
+Powers $s^n$ are well-defined for any $s\in\OO$.
+\tcblower
+\textcolor{KgtRed}{No exact declaration/object check is available for this clause.}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={11. Definition - Complex slices and slice Riemann spheres},title after break={11. Definition - Complex slices and slice Riemann spheres (continued)}]
+\textbf{Author's statement}\par
+For any unit imaginary octonion $v\in S^6$, the \emph{complex slice} is
+$\CC_v=\{a+bv:a,b\in\RR\}\subset\OO$. Since $v^2=-1$, this is a subalgebra isomorphic to
+$\CC$ via the $\RR$-algebra isomorphism $\varphi_v:\CC\to\CC_v$, $i\mapsto v$. All slices
+share the real axis: $\CC_v\cap\CC_w=\RR$ for $v\neq\pm w$. Its one-point compactification
+is the \emph{slice Riemann sphere} $\CC_v^{*}:=\CC_v\cup\{\infty\}=S^2_v$, and $\varphi_v$
+extends to an isomorphism of Riemann spheres $\varphi_v:\Cstar\xrightarrow{\sim}\CC_v^{*}$
+with $\varphi_v(\infty)=\infty$ (GPV \cite{VS}, Prop.~4.1/Thm.~4.2). All slice spheres
+share the single point at infinity, as well as the real axis.
+\tcblower
+\textbf{Lean declaration.} \url{Octonion.unitImaginarySphere}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.unitImaginarySphere
+'Octonion.unitImaginarySphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.sliceEmbed}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.sliceEmbed
+'Octonion.sliceEmbed' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.sliceEmbed_mul}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.sliceEmbed_mul
+'Octonion.sliceEmbed_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.sliceSphere}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.sliceSphere
+'Octonion.sliceSphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={12. Definition - Slice regularity; \{\textbackslash{}cite[Def.\textasciitilde{}5.1.1]\{CSS12\}\}},title after break={12. Definition - Slice regularity; \{\textbackslash{}cite[Def.\textasciitilde{}5.1.1]\{CSS12\}\} (continued)}]
+\textbf{Author's statement}\par
+Let $\Omega\subseteq\OO$ be open. A function $f:\Omega\to\OO$ is \emph{slice regular}
+if for each $v\in S^6$, $\varphi_v^{-1}\circ f\circ\varphi_v$ satisfies the
+Cauchy--Riemann equations on $\varphi_v^{-1}(\Omega\cap\CC_v)\subseteq\CC$. A domain
+$\Omega$ is \emph{axially symmetric} if $\sigma+\gamma v\in\Omega$ implies
+$\sigma+\gamma w\in\Omega$ for all $w\in S^6$.
+\tcblower
+\textcolor{KgtRed}{No exact declaration/object check is available for this clause.}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={13. Theorem - Representation Formula; \{\textbackslash{}cite[Thm.\textasciitilde{}5.1.7]\{CSS12\}\}},title after break={13. Theorem - Representation Formula; \{\textbackslash{}cite[Thm.\textasciitilde{}5.1.7]\{CSS12\}\} (continued)}]
+\textbf{Author's statement}\par
+Let $f$ be slice regular on an axially symmetric slice domain $\Omega$. Fix
+$v_0\in S^6$ and write $f(\sigma+\gamma v_0)=\alpha(\sigma,\gamma)+v_0\cdot\beta(\sigma,\gamma)$
+with $\alpha,\beta:\RR^2\to\RR$. Then for every $v\in S^6$,
+$f(\sigma+\gamma v)=\alpha(\sigma,\gamma)+v\cdot\beta(\sigma,\gamma)$, where
+$\alpha=\tfrac12[f(\sigma+\gamma v_0)+f(\sigma-\gamma v_0)]$ and
+$\beta=\tfrac12 v_0^{-1}[f(\sigma-\gamma v_0)-f(\sigma+\gamma v_0)]$.
+\tcblower
+\textcolor{KgtRed}{No exact declaration/object check is available for this clause.}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={14. Theorem - Identity Theorem; \{\textbackslash{}cite[Cor.\textasciitilde{}5.1.9]\{CSS12\}\}},title after break={14. Theorem - Identity Theorem; \{\textbackslash{}cite[Cor.\textasciitilde{}5.1.9]\{CSS12\}\} (continued)}]
+\textbf{Author's statement}\par
+Let $f$ be slice regular on an axially symmetric slice domain $\Omega$. If $f$
+vanishes on a subset of a single slice $\Omega\cap\CC_{v_0}$ with an accumulation
+point in $\Omega\cap\CC_{v_0}$, then $f\equiv0$ on all of $\Omega$.
+\tcblower
+\textbf{Lean declaration.} \url{stem_identity}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms stem_identity
+'stem_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={15. Theorem - Extension Theorem; \{\textbackslash{}cite[Thm.\textasciitilde{}5.1.5]\{CSS12\}\}},title after break={15. Theorem - Extension Theorem; \{\textbackslash{}cite[Thm.\textasciitilde{}5.1.5]\{CSS12\}\} (continued)}]
+\textbf{Author's statement}\par
+Let $U\subseteq\CC$ be a domain symmetric under conjugation and $g:U\to\CC$
+holomorphic. There is a unique slice regular $\mathrm{ext}(g):\Omega_U\to\OO$ on
+$\Omega_U=\{\sigma+\gamma v:\sigma+i\gamma\in U,\ v\in S^6\}$ with
+$\mathrm{ext}(g)|_{\CC_{v_0}}=\varphi_{v_0}\circ g\circ\varphi_{v_0}^{-1}$ for every
+$v_0$.
+\tcblower
+\textcolor{KgtRed}{No exact declaration/object check is available for this clause.}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={16. Definition - Slice-preserving functions; \textbackslash{}protect\{\textbackslash{}cite[Def.\textasciitilde{}2.7, Rem.\textasciitilde{}2.8]\{AdF\}; \textbackslash{}cite\{VS,SeriesExp,Wang\}\}},title after break={16. Definition - Slice-preserving functions; \textbackslash{}protect\{\textbackslash{}cite[Def.\textasciitilde{}2.7, Rem.\textasciitilde{}2.8]\{AdF\}; \textbackslash{}cite\{VS,SeriesExp,Wang\}\} (continued)}]
+\textbf{Author's statement}\par
+A slice-regular function $f$ on an axially symmetric domain $\Omega$ is \emph{slice
+preserving} if it maps every slice into itself: $f(\Omega\cap\CC_v)\subseteq\CC_v$ for all
+$v\in S^6$. For octonions ($\#S^6>2$) the following are equivalent characterisations:
+\begin{enumerate}[leftmargin=2.4em]
+\item[(i)] $f$ is \emph{intrinsic}: $f(q^{c})=f(q)^{c}$ for all $q\in\Omega$, where $q^{c}$
+  is octonionic conjugation (on a slice, $a+bv\mapsto a-bv$);
+\item[(ii)] its representation-formula components are $\RR$-valued: writing
+  $f(\sigma+\gamma v)=\alpha(\sigma,\gamma)+v\,\beta(\sigma,\gamma)$
+  (Theorem~\ref{thm:rep-formula}), one has $\alpha,\beta:\RR^2\to\RR$, equivalently the
+  inducing stem function $F=F_1+\iota F_2$ has $\RR$-valued components $F_1,F_2$;
+\item[(iii)] $f$ preserves two distinct slices; equivalently $f(\Omega\cap\RR)\subseteq\RR$
+  when $\Omega$ is a slice domain.
+\end{enumerate}
+Slice-preserving functions are the more restrictive subclass of slice-regular functions on
+which classical complex methods apply slicewise. They are precisely the sections of
+$\mathcal R$ (Definition~\ref{def:R}), and on them the regular product is the ordinary
+pointwise product, so the product is commutative (Theorem~\ref{thm:wang}; Ghiloni--Perotti--
+Stoppato \cite[Rem.~1.8]{SeriesExp}).
+\tcblower
+\textbf{Lean declaration.} \url{IsIntrinsic}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms IsIntrinsic
+'IsIntrinsic' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{StemRing.isIntrinsic}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms StemRing.isIntrinsic
+'StemRing.isIntrinsic' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{StemRing.real_on_real}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms StemRing.real_on_real
+'StemRing.real_on_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={17. Definition - Octonionic zeta},title after break={17. Definition - Octonionic zeta (continued)}]
+\textbf{Author's statement}\par
+Here $N$ denotes the \emph{north pole} of $S^8$: the single point at infinity $\infty$
+adjoined in the one-point compactification $\Ostar=\OO\cup\{\infty\}\cong S^8$ (inverse
+stereographic projection; GPV \cite{VS}). It is one point with two names, so $\infty=N$;
+it is the only point at infinity, shared by $\Ostar$ and by every slice Riemann sphere
+$\CC_v^{*}=S^2_v$.
+
+The \emph{octonionic zeta function} $\zetaO:\Ostar\to\Ostar$ is defined slicewise from the
+compactified classical zeta (Definition~\ref{def:zeta-Cstar}) through the slice
+identifications $\varphi_v:\Cstar\xrightarrow{\sim}\CC_v^{*}=S^2_v$ (the $\RR$-algebra
+isomorphism $\CC\to\CC_v$ of Definition~\ref{def:slices}, extended to the Riemann spheres
+by $\varphi_v(\infty)=N$; GPV \cite{VS}, Prop.~4.1/Thm.~4.2):
+\begin{itemize}[leftmargin=2.2em]
+\item[(i)] for $s\in\OO\setminus\RR$, with $w=\im(s)$, $v=w/|w|\in S^6$, $\gamma=|w|>0$,
+  $\sigma=\re(s)$, so $s=\sigma+\gamma v$:\quad $\zetaO(s):=\varphi_v(\zetaC(\sigma+i\gamma))$;
+\item[(ii)] for $s\in\RR\setminus\{1\}$:\quad $\zetaO(s):=\zetaC(s)=\zeta(s)\in\RR$;
+\item[(iii)] for $s=1$ (the simple pole, Definition~\ref{def:zeta-Cstar}):\quad
+  $\zetaO(1):=\infty=N$;
+\item[(iv)] for $s=\infty=N$:\quad $\zetaO(\infty):=\zetaC(\infty)=1$.
+\end{itemize}
+\tcblower
+\textbf{Lean declaration.} \url{zetaO}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaO
+'zetaO' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaO_infty}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaO_infty
+'zetaO_infty' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaO_one}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaO_one
+'zetaO_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaO_sliceEmbed}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaO_sliceEmbed
+'zetaO_sliceEmbed' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaO_sliceEmbed_of_im_neg}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaO_sliceEmbed_of_im_neg
+'zetaO_sliceEmbed_of_im_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaO_ofReal}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaO_ofReal
+'zetaO_ofReal' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={18. Proposition - Well-definedness},title after break={18. Proposition - Well-definedness (continued)}]
+\textbf{Author's statement}\par
+$\zetaO:\Ostar\to\Ostar$ is well-defined.
+\tcblower
+\textbf{Lean declaration.} \url{zetaO_sliceEmbed'}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaO_sliceEmbed'
+'zetaO_sliceEmbed'' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{riemannZeta_conj}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms riemannZeta_conj
+'riemannZeta_conj' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={19. Definition - The ring of slice-preserving functions under the regular product},title after break={19. Definition - The ring of slice-preserving functions under the regular product (continued)}]
+\textbf{Author's statement}\par
+$\mathcal R:=\mathcal O_{\Ostar}$ is the set of all slice-regular functions
+$f:\Ostar\to\Ostar$ that are slice preserving (Definition~\ref{def:slice-preserving}),
+$f(\Omega_v)\subseteq\CC_v^{*}$ for all $v\in S^6$, equipped with pointwise addition and
+the regular ($\ast$) product.
+\tcblower
+\textbf{Lean declaration.} \url{StemRing}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms StemRing
+'StemRing' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={20. Theorem - Regular product on slice-preserving functions; \{\textbackslash{}cite[Rem.\textasciitilde{}2.11]\{Wang\}\}},title after break={20. Theorem - Regular product on slice-preserving functions; \{\textbackslash{}cite[Rem.\textasciitilde{}2.11]\{Wang\}\} (continued)}]
+\textbf{Author's statement}\par
+For slice-preserving $f,g$ (with $f(\Omega_v)\subseteq\CC_v$), the regular product
+restricts on each slice to the pointwise product, $(f\ast g)|_{\Omega_v}(w)=f(w)\cdot
+g(w)\in\CC_v$, and $f\ast g=g\ast f$, $(f\ast g)\ast h=f\ast(g\ast h)$ (via Artin,
+Theorem~\ref{thm:artin}).
+\tcblower
+\textcolor{KgtRed}{No exact declaration/object check is available for this clause.}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={21. Proposition},title after break={21. Proposition (continued)}]
+\textbf{Author's statement}\par
+$(\mathcal R,+,\ast)$ is a commutative ring with identity $1\in\mathcal R$.
+\tcblower
+\textbf{Lean declaration.} \url{StemRing}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms StemRing
+'StemRing' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={22. Proposition - \$\textbackslash{}mathcal R\$ is an integral domain},title after break={22. Proposition - \$\textbackslash{}mathcal R\$ is an integral domain (continued)}]
+\textbf{Author's statement}\par
+If $f,g\in\mathcal R$ and $f\ast g=0$, then $f=0$ or $g=0$.
+\tcblower
+\textbf{Lean declaration.} \url{StemRing.eq_zero_or_eq_zero_of_mul_eq_zero}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms StemRing.eq_zero_or_eq_zero_of_mul_eq_zero
+'StemRing.eq_zero_or_eq_zero_of_mul_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={23. Theorem - The slice exponential; \textbackslash{}protect\{\textbackslash{}cite[\textbackslash{}S3]\{GPVwind\}; \textbackslash{}cite[Prop.\textasciitilde{}5.1]\{VS\}; \textbackslash{}cite[Rem.\textasciitilde{}2.23]\{AdF\}\}},title after break={23. Theorem - The slice exponential; \textbackslash{}protect\{\textbackslash{}cite[\textbackslash{}S3]\{GPVwind\}; \textbackslash{}cite[Prop.\textasciitilde{}5.1]\{VS\}; \textbackslash{}cite[Rem.\textasciitilde{}2.23]\{AdF\}\} (continued)}]
+\textbf{Author's statement}\par
+The exponential $\exp:\OO\to\OO\setminus\{0\}$, $\exp(q)=\sum_{k\ge0}q^{k}/k!$ (powers well defined by Corollary~\ref{cor:powers}), is a
+slice-regular, slice-preserving entire function (Definition~\ref{def:slice-preserving}),
+given on each slice by
+\[
+\exp(x+Iy)=e^{x}(\cos y+I\sin y),\qquad x,y\in\RR,\ I\in S^6 .
+\]
+Consequently $|\exp q|=e^{\re q}$ depends only on the real part, and $\exp$ is nowhere zero.
+\tcblower
+\textbf{Lean declaration.} \url{Octonion.exp}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.exp
+'Octonion.exp' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.exp_sliceEmbed}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.exp_sliceEmbed
+'Octonion.exp_sliceEmbed' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.norm_exp}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.norm_exp
+'Octonion.norm_exp' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.exp_ne_zero}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.exp_ne_zero
+'Octonion.exp_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={24. Theorem - The logarithm manifold \$E\textasciicircum{}\{+\}\_\{\textbackslash{}OO\}\$; \textbackslash{}protect\{\textbackslash{}cite[Prop.\textasciitilde{}5.1, Rem.\textasciitilde{}5.2, Def.\textasciitilde{}5.3, Prop.\textasciitilde{}5.4, Def.\textasciitilde{}5.5]\{VS\}; \textbackslash{}cite[\textbackslash{}S3]\{GPVwind\}\}},title after break={24. Theorem - The logarithm manifold \$E\textasciicircum{}\{+\}\_\{\textbackslash{}OO\}\$; \textbackslash{}protect\{\textbackslash{}cite[Prop.\textasciitilde{}5.1, Rem.\textasciitilde{}5.2, Def.\textasciitilde{}5.3, Prop.\textasciitilde{}5.4, Def.\textasciitilde{}5.5]\{VS\}; \textbackslash{}cite[\textbackslash{}S3]\{GPVwind\}\} (continued)}]
+\textbf{Author's statement}\par
+Let $T:\OO\to\OO\times\im\OO$, $T(x+Iy)=(\sinh x\cos y+I\sinh x\sin y,\ Iy)$, and
+$\OO^{+}=\{q:\re q>0\}$. The \emph{logarithm manifold} is $E^{+}_{\OO}:=T(\OO^{+})$, the
+semi-helicoidal hypercomplex $8$-manifold; equivalently it is the image of the exponential
+graph, parametrised by the \emph{$E^{+}_{\OO}$-exponential}
+\[
+E:\OO\longrightarrow E^{+}_{\OO}\subset\OO\times\im\OO,\qquad
+E(x+Iy)=(\exp(x+Iy),\,Iy)=(e^{x}\cos y+Ie^{x}\sin y,\ Iy),
+\]
+an immersion and a diffeomorphism, with inverse the \emph{$E^{+}_{\OO}$-logarithm}
+$L:E^{+}_{\OO}\to\OO$, $L(q,p)=\log|q|+p$ (here $p=\mathrm{Arg}(q)$). Writing $\pi$ for the
+projection to the first factor, $\pi\circ E=\exp$ (Theorem~\ref{thm:slice-exp}). The manifold
+$E^{+}_{\OO}$ is an adapted blow-up of $\OO$ along the real axis. Its projection
+$\pi:E^{+}_{\OO}\to\OO\setminus\{0\}$ has the degenerate real fibres responsible for the
+failure of covering and openness. The blow-up unwraps the multivalued logarithm into the
+single-valued $L$, and a branch of the
+hypercomplex logarithm is $\log_{\OO}=L\circ(\pi|_{\Omega})^{-1}$ on any path-connected
+$\Omega\subset E^{+}_{\OO}$ on which $\pi|_{\Omega}$ is injective.
+\tcblower
+\textbf{Lean declaration.} \url{Octonion.Eexp}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.Eexp
+'Octonion.Eexp' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.logManifold}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.logManifold
+'Octonion.logManifold' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.Llog}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.Llog
+'Octonion.Llog' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.Llog_Eexp}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.Llog_Eexp
+'Octonion.Llog_Eexp' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.Eexp_Llog}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.Eexp_Llog
+'Octonion.Eexp_Llog' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.exp_Llog}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.exp_Llog
+'Octonion.exp_Llog' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={25. Lemma - The degenerate set of the exponential; its fibre over a real value},title after break={25. Lemma - The degenerate set of the exponential; its fibre over a real value (continued)}]
+\textbf{Author's statement}\par
+\emph{Sourced.} With $\pi$ the first-factor projection, $\pi\circ E=\exp$
+\textup{(\cite[Rem.~5.2(a)]{VS}, the commuting triangle)}. Its spherical
+\emph{degenerate set} makes the projection an adapted blow-up with failures of covering and
+openness \textup{(\cite[Rem.~5.2(b)]{VS})}. The direction $I(q)$ becomes singular at every
+point of $\RR$ \textup{(\cite[Rem.~2.1]{GPVwind})}.
+
+\emph{Proved from the slice form.} For $r>0$,
+\[
+\exp^{-1}(-r)=\bigl\{\,\log r+I(2k{+}1)\pi:\ I\in S^6,\ k\in\ZZ\,\bigr\}:
+\]
+by Theorem~\ref{thm:slice-exp}, $\exp(x+Iy)=e^{x}\cos y+Ie^{x}\sin y=-r$ forces
+$e^{x}\sin y=0$, hence $y\in\pi\ZZ$; negativity of the value forces $y=(2k{+}1)\pi$ and
+$x=\log r$; the direction $I$ is unconstrained. The fibre is thus indexed by the single real
+\emph{level} $\log r=\log|{-}r|$ and, within it, by the odd winding indices $2k{+}1$ carried as
+band data (the winding lift, Theorem~\ref{thm:winding-lift}; \cite[Cor.~5.21]{GPVwind}).
+The fibre formula itself appears, stated without proof as Preface motivation, in \cite{VS}
+(p.~972); the slice-form derivation above is the load-bearing statement.
+\tcblower
+\textbf{Lean declaration.} \url{Octonion.exp_fibre_neg_real}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.exp_fibre_neg_real
+'Octonion.exp_fibre_neg_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.exp_eq_neg_ofReal_iff}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.exp_eq_neg_ofReal_iff
+'Octonion.exp_eq_neg_ofReal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.logManifold_fibre_neg_real}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.logManifold_fibre_neg_real
+'Octonion.logManifold_fibre_neg_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.degenerate_level_readout}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.degenerate_level_readout
+'Octonion.degenerate_level_readout' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={26. Definition - Slice restriction and the \$I\$-independent lift; \textbackslash{}protect\{\textbackslash{}cite[Rem.\textasciitilde{}2.11]\{Wang\}; \textbackslash{}cite[\textbackslash{}S3.3,\textasciitilde{}\textbackslash{}S3.7]\{BisiWinkelmann\}; \textbackslash{}cite[Def.\textasciitilde{}2.1, Prop.\textasciitilde{}2.2]\{SeriesExp\}\}},title after break={26. Definition - Slice restriction and the \$I\$-independent lift; \textbackslash{}protect\{\textbackslash{}cite[Rem.\textasciitilde{}2.11]\{Wang\}; \textbackslash{}cite[\textbackslash{}S3.3,\textasciitilde{}\textbackslash{}S3.7]\{BisiWinkelmann\}; \textbackslash{}cite[Def.\textasciitilde{}2.1, Prop.\textasciitilde{}2.2]\{SeriesExp\}\} (continued)}]
+\textbf{Author's statement}\par
+A slice-preserving section $A$ carries each slice Riemann sphere into itself,
+\[
+  A(\CC_v^{*})\subseteq\CC_v^{*}=S^2_v\qquad(v\in S^6),
+\]
+so its restriction to a slice is a holomorphic self-map of that slice sphere,
+\[
+  A_v:=\varphi_v^{-1}\circ A\circ\varphi_v:\ \Cstar\longrightarrow\Cstar,
+\]
+through the identification $\varphi_v:\Cstar\xrightarrow{\sim}\CC_v^{*}$ of
+Definition~\ref{def:slices}. The \emph{$I$-independent lift} is the fact that this holomorphic stem is
+the \emph{same} for every $v$: there is one holomorphic $A_\circ:\Cstar\to\Cstar$ with
+\[
+  A|_{\CC_v^{*}}=\varphi_v\circ A_\circ\circ\varphi_v^{-1}\qquad\text{for all }v\in S^6
+\]
+(Wang \cite[Rem.~2.11]{Wang}; Bisi--Winkelmann \cite[\S3.7]{BisiWinkelmann}). Equivalently, $A$ is
+\emph{intrinsic}, $A(q^c)=A(q)^c$, and is induced ($A=\mathcal I(F)$) by a single stem function
+$F=F_1+\iota F_2:D\to\OO_{\CC}$ on the symmetric $D\subset\CC$ whose components $F_1,F_2$ are
+$\RR$-valued (the stem-function formalism, Ghiloni--Perotti \cite[Def.~2.1, Prop.~2.2]{SeriesExp}):
+\[
+  A(x+Iy)=F_1(x+iy)+I\,F_2(x+iy),\qquad F_1,F_2\ \RR\text{-valued}.
+\]
+It is this single $I$-independent slice stem that makes a slice-preserving section
+$\Gtwo$-equivariant, hence blind to the $\Gtwo$-orbit direction
+(Definition~\ref{def:section-map}).
+\tcblower
+\textbf{Lean declaration.} \url{IsIntrinsic}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms IsIntrinsic
+'IsIntrinsic' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.realize}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.realize
+'ASection.realize' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.realize_mem_sliceSphere}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.realize_mem_sliceSphere
+'ASection.realize_mem_sliceSphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.realize_equivariant}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.realize_equivariant
+'ASection.realize_equivariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={27. Theorem - The winding lift; \textbackslash{}protect\{\textbackslash{}cite[Def.\textasciitilde{}3.4, Def.\textasciitilde{}4.1, Prop.\textasciitilde{}4.2, Def.\textasciitilde{}5.11]\{GPVwind\}\}},title after break={27. Theorem - The winding lift; \textbackslash{}protect\{\textbackslash{}cite[Def.\textasciitilde{}3.4, Def.\textasciitilde{}4.1, Prop.\textasciitilde{}4.2, Def.\textasciitilde{}5.11]\{GPVwind\}\} (continued)}]
+\textbf{Author's statement}\par
+Let $\gamma:[a,b]\to\OO\setminus\{0\}$ be a path \textup{(}on each slice $\CC_v$ this is the
+classical complex continuation\textup{)}. A \emph{continuation of the hypercomplex logarithm along
+$\gamma$} is a path $\tilde\gamma:[a,b]\to\OO$ with $\exp\circ\tilde\gamma=\gamma$, and a \emph{lift
+of $\gamma$} to the logarithm manifold $E^{+}_{\OO}$ \textup{(}Theorem~\ref{thm:log-manifold}\textup{)}
+is a path $\Gamma:[a,b]\to E^{+}_{\OO}$ with $\mathrm{pr}_1\circ\Gamma=\gamma$:
+\[
+\begin{tikzcd}[row sep=1.6em, column sep=2.6em]
+& \OO\\
+{[a,b]} \arrow[ur,"\tilde\gamma"] \arrow[r,"\gamma"'] & \OO\setminus\{0\} \arrow[u,"\exp"']
+\end{tikzcd}
+\qquad\qquad
+\begin{tikzcd}[row sep=1.6em, column sep=2.6em]
+& E^{+}_{\OO} \arrow[d,"\mathrm{pr}_1"]\\
+{[a,b]} \arrow[ur,"\Gamma"] \arrow[r,"\gamma"'] & \OO\setminus\{0\}
+\end{tikzcd}
+\]
+The two data are \emph{equivalent}: a lift $\Gamma$ exists if and only if a continuation
+$\tilde\gamma$ exists, and they correspond by
+\[
+\tilde\gamma=L\circ\Gamma,\qquad \Gamma=(\exp\circ\tilde\gamma,\ \im\tilde\gamma),
+\]
+where $L$ is the $E^{+}_{\OO}$-logarithm of Theorem~\ref{thm:log-manifold}
+\textup{(}\cite[Prop.~4.2]{GPVwind}\textup{)}. For a \emph{loop} $\gamma:S^1\to\OO\setminus\{0\}$ the
+lift is taken on the universal cover $\exp:i\RR\to S^1$, as a continuous $\Gamma:i\RR\to E^{+}_{\OO}$
+with $\mathrm{pr}_1\circ\Gamma=\gamma\circ\exp$ \textup{(}\cite[Def.~5.11]{GPVwind}\textup{)}:
+\[
+\begin{tikzcd}[row sep=1.6em, column sep=2.6em]
+i\RR \arrow[r,"\Gamma"] \arrow[d,"\exp"'] & E^{+}_{\OO} \arrow[d,"\mathrm{pr}_1"]\\
+S^1 \arrow[r,"\gamma"'] & \OO\setminus\{0\}
+\end{tikzcd}
+\]
+\tcblower
+\textbf{Lean declaration.} \url{exists_log_continuation}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms exists_log_continuation
+'exists_log_continuation' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{winding_lift_unique}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms winding_lift_unique
+'winding_lift_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{Octonion.lift_iff_continuation}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion.lift_iff_continuation
+'Octonion.lift_iff_continuation' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={28. Proposition - Tameness, existence, and the winding number; \textbackslash{}protect\{\textbackslash{}cite[Def.\textasciitilde{}4.20, Cor.\textasciitilde{}5.21, Cor.\textasciitilde{}5.22]\{GPVwind\}\}},title after break={28. Proposition - Tameness, existence, and the winding number; \textbackslash{}protect\{\textbackslash{}cite[Def.\textasciitilde{}4.20, Cor.\textasciitilde{}5.21, Cor.\textasciitilde{}5.22]\{GPVwind\}\} (continued)}]
+\textbf{Author's statement}\par
+The lift of Theorem~\ref{thm:winding-lift} is governed by the companion structure of $\gamma$.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.6em]
+\item \emph{Uniqueness (tameness).} $\gamma$ is \emph{tame} when it admits a \emph{unique} companion
+  imaginary-unit field; its lift is then unique \textup{(}\cite[Def.~4.20]{GPVwind}\textup{)}.
+\item \emph{Existence and closure.} A lift of a loop $\gamma$ exists if and only if the signature
+  satisfies $\sigma(\gamma|_{[\xi_l,\xi_{l+1}]})\in\{0,-1\}$ on each obstruction interval; and
+  \emph{if it exists, the lift is itself a loop} \textup{(}\cite[Cor.~5.13]{GPVwind}; pinned
+  against the arXiv text; the earlier citation to Cor.~5.22 is superseded\textup{)}.
+\item \emph{Winding number.} For an untwisted tame loop with even circular signature $\sigma^c$, the
+  winding number is $\omega=|\sigma^c|/2$ \textup{(}\cite[Cor.~5.21]{GPVwind}\textup{)}.
+\end{enumerate}
+\tcblower
+\textbf{Lean declaration.} \url{winding_lift_unique}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms winding_lift_unique
+'winding_lift_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{winding_loop_defect}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms winding_loop_defect
+'winding_loop_defect' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={29. Theorem - Slice preservation},title after break={29. Theorem - Slice preservation (continued)}]
+\textbf{Author's statement}\par
+$\zetaO$ is slice preserving (Definition~\ref{def:slice-preserving}):
+$\zetaO(\CC_v^{*})\subseteq\CC_v^{*}$ for every $v\in S^6$.
+\tcblower
+\textbf{Lean declaration.} \url{zetaO_mem_sliceSphere}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaO_mem_sliceSphere
+'zetaO_mem_sliceSphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={30. Theorem - \$\textbackslash{}zetaO\$ is a section of \$\textbackslash{}mathcal R\$},title after break={30. Theorem - \$\textbackslash{}zetaO\$ is a section of \$\textbackslash{}mathcal R\$ (continued)}]
+\textbf{Author's statement}\par
+$\zetaO\in\mathcal R$.
+\tcblower
+\textbf{Lean declaration.} \url{zetaSection}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaSection
+'zetaSection' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={31. Definition - The automorphism group \$\textbackslash{}Gtwo\$},title after break={31. Definition - The automorphism group \$\textbackslash{}Gtwo\$ (continued)}]
+\textbf{Author's statement}\par
+$\Gtwo=\Aut(\OO)$ is the $14$-dimensional compact, connected, simply connected Lie group of
+$\RR$-algebra automorphisms of $\OO$. Each $g\in\Gtwo$ fixes $1$, hence the real axis pointwise, and
+acts on $\im\OO\cong\RR^7$ as an element of $SO(7)$; thus $g\cdot(\sigma+\gamma v)=\sigma+\gamma\,g(v)$.
+\tcblower
+\textbf{Lean declaration.} \url{G2}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms G2
+'G2' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{G2.smul_one}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms G2.smul_one
+'G2.smul_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{G2.smul_ofReal}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms G2.smul_ofReal
+'G2.smul_ofReal' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={32. Theorem - \$\textbackslash{}Gtwo\$-equivariance},title after break={32. Theorem - \$\textbackslash{}Gtwo\$-equivariance (continued)}]
+\textbf{Author's statement}\par
+$\zetaO(g\cdot s)=g\cdot\zetaO(s)$ for all $g\in\Gtwo$, $s\in\OO$.
+\tcblower
+\textbf{Lean declaration.} \url{zetaO_equivariant}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaO_equivariant
+'zetaO_equivariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={33. Theorem - \textbackslash{}protect\{\textbackslash{}cite\{Baez02\}\}},title after break={33. Theorem - \textbackslash{}protect\{\textbackslash{}cite\{Baez02\}\} (continued)}]
+\textbf{Author's statement}\par
+$\Gtwo$ acts transitively on $S^6$ with stabilizer $\mathrm{SU}(3)$:
+$\mathrm{SU}(3)\hookrightarrow\Gtwo\twoheadrightarrow S^6$.
+\tcblower
+\textbf{Lean declaration.} \url{G2.exists_smul_eq_of_mem_unitImaginarySphere}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms G2.exists_smul_eq_of_mem_unitImaginarySphere
+'G2.exists_smul_eq_of_mem_unitImaginarySphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={34. Theorem - Zero Equivalence Theorem},title after break={34. Theorem - Zero Equivalence Theorem (continued)}]
+\textbf{Author's statement}\par
+Let $\rho=\sigma+i\gamma\in\Cstar$. For every $v\in S^6$,
+\[
+\zetaO(\sigma+\gamma v)=0\quad\Longleftrightarrow\quad\zetaC(\rho)=0 .
+\]
+Equivalently: a non-real $s\in\Ostar$ is a zero of $\zetaO$ if and only if its slice
+coordinate $\varphi_v^{-1}(s)$ is a zero of $\zetaC$; by Lemma~\ref{lem:zero-Cstar} these
+are exactly the nontrivial zeros of the classical $\zeta$.
+\tcblower
+\textbf{Lean declaration.} \url{sliceEmbed_eq_zero_iff}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms sliceEmbed_eq_zero_iff
+'sliceEmbed_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zetaO_zero_iff}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaO_zero_iff
+'zetaO_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={35. Theorem - Nontrivial zeros are infinitely many disjoint \$6\$-spheres},title after break={35. Theorem - Nontrivial zeros are infinitely many disjoint \$6\$-spheres (continued)}]
+\textbf{Author's statement}\par
+For a nontrivial zero $\rho=\sigma+i\gamma$ of $\zetaC$ (so $\gamma>0$) set
+\[
+S_\rho=\{\sigma+\gamma v:v\in S^6\}=\sigma+\gamma\,S^6\subset\OO .
+\]
+Then:
+\begin{enumerate}[leftmargin=2.4em]
+\item[(i)] $S_\rho$ \emph{is} a $6$-sphere, the round sphere of radius $\gamma$ centred
+  at the real point $\sigma$, equivalently the $\Gtwo$-orbit of any one of its points
+  $\sigma+\gamma v_0$ (Theorem~\ref{thm:G2-equiv}; $\Gtwo$ acts transitively on $S^6$ with
+  stabiliser $\mathrm{SU}(3)$, Theorem~\ref{thm:G2-S6}, Baez \cite{Baez02}).
+\item[(ii)] every point of $S_\rho$ is a zero of $\zetaO$, and conjugate zeros give the
+  same sphere, $S_\rho=S_{\bar\rho}$;
+\item[(iii)] the nontrivial-zero set is the disjoint union
+  $Z^{\mathrm{nt}}_{\Ostar}=\bigsqcup_{[\rho]}S_\rho$ over conjugate pairs
+  $[\rho]=\{\rho,\bar\rho\}$, with distinct pairs giving disjoint spheres;
+\item[(iv)] there are infinitely many such spheres (Corollary~\ref{cor:hadamard-infinitude};
+  also Hardy \cite{Hardy14}, Theorem~\ref{thm:hardy}).
+\end{enumerate}
+\tcblower
+\textbf{Lean declaration.} \url{zeroSphere}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zeroSphere
+'zeroSphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zeroSphere_eq_orbit}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zeroSphere_eq_orbit
+'zeroSphere_eq_orbit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zeroSphere_zeros}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zeroSphere_zeros
+'zeroSphere_zeros' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zeroSphere_disjoint}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zeroSphere_disjoint
+'zeroSphere_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zeroSpheres_infinite}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zeroSpheres_infinite
+'zeroSpheres_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={36. Theorem - The equivalence: concentricity \$\textbackslash{}Leftrightarrow\$ RH},title after break={36. Theorem - The equivalence: concentricity \$\textbackslash{}Leftrightarrow\$ RH (continued)}]
+\textbf{Author's statement}\par
+The following are equivalent:
+\begin{enumerate}[leftmargin=2.4em]
+\item[(a)] the Riemann Hypothesis;
+\item[(b)] the nontrivial-zero $6$-spheres $\{S_\rho\}$ of $\zetaO$
+  (Theorem~\ref{thm:zero-spheres}) are \emph{concentric}: they share a single common
+  centre, necessarily a point of the real axis.
+\end{enumerate}
+When they hold, the common centre is $\tfrac12$.
+\tcblower
+\textbf{Lean declaration.} \url{riemannHypothesis_iff_concentric}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms riemannHypothesis_iff_concentric
+'riemannHypothesis_iff_concentric' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={37. Definition - The compactified octonions \$\textbackslash{}OO\textasciicircum{}\{*\}=S\textasciicircum{}8\$},title after break={37. Definition - The compactified octonions \$\textbackslash{}OO\textasciicircum{}\{*\}=S\textasciicircum{}8\$ (continued)}]
+\textbf{Author's statement}\par
+Let $\OO^{*}=\OO\cup\{\infty\}=S^8$ be the Alexandroff one-point compactification of $\OO=\RR^8$.
+Concretely (GPV \cite{VS}, Prop.~4.1 and Thm.~4.2, for $m=\dim_{\RR}K\in\{4,8\}$): the inverse
+stereographic projections from the north and south poles,
+\[
+f(x+Iy)=\Big(\tfrac{2(x+Iy)}{1+x^2+y^2},\ \tfrac{-1+x^2+y^2}{1+x^2+y^2}\Big),\qquad
+h(x+Iy)=\Big(\tfrac{2(x-Iy)}{1+x^2+y^2},\ \tfrac{1-x^2-y^2}{1+x^2+y^2}\Big),
+\]
+give a conformal atlas $\{(K,f),(K,h)\}$ endowing $S^m$ with the structure of a slice
+(quaternionic/octonionic) Riemann manifold, with transition map $h^{-1}\circ f(q)=\bar q/q^2=1/q$,
+itself slice regular and slice preserving. The adjoined point is the north pole $N$; this is the
+point at infinity. In Lean the underlying compactification is
+\texttt{Mathlib.\-Topology.\-Compactification.\-OnePoint}, $\OO^{*}=\texttt{OnePoint }\OO$ with
+$\infty=\texttt{OnePoint.infty}$, and the homeomorphism $\OO^{*}\cong S^8$ is
+\texttt{onePoint\-Equiv\-Sphere\-Of\-Finrank\-Eq} applied to $\dim_{\RR}\OO=8$
+(\texttt{Mathlib.\-Topology.\-Compactification.\-OnePoint.\-Sphere}). The compactification is what makes
+the value of a section at its real pole a well-defined point of $\OO^{*}$, the point at
+infinity $\infty=N$. The two views $\mathcal H_1$ and $\mathcal S_2$ are built on
+these compactified values (Definition~\ref{def:two-worlds}); the distinct projective base
+$\mathcal B$ and direction-indexed sphere world used in the construction below are introduced in
+Definition~\ref{def:base}.
+\tcblower
+\textbf{Lean declaration.} \url{Octonion}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms Octonion
+'Octonion' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{onePointEquivSphereOfFinrankEq}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} External library dependency; approved kernel-reported axiom surface; no authored-object anchor required
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms onePointEquivSphereOfFinrankEq
+'onePointEquivSphereOfFinrankEq' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={38. Definition - The section's slice data and equivariance},title after break={38. Definition - The section's slice data and equivariance (continued)}]
+\textbf{Author's statement}\par
+Let $A\in\mathcal R$. By the $I$-independent lift (Definition~\ref{def:slice-squares}; Wang
+\cite[Rem.~2.11]{Wang}, Bisi--Winkelmann \cite[\S3.7]{BisiWinkelmann}) there is one holomorphic
+stem with $\RR$-valued components,
+\[
+  A(x+Iy)=F_1(x+iy)+I\,F_2(x+iy),\qquad F_1,F_2\ \RR\text{-valued},
+\]
+the same for every $I\in S^6$. Three consequences used below:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.6em]
+\item \emph{Slice preservation of values.} $A(\CC_I^{*})\subseteq\CC_I^{*}$ for every $I$: the
+  value at a point lies on that point's own slice sphere (Definition~\ref{def:R}).
+\item \emph{$\Gtwo$-equivariance.} For $g\in\Gtwo$ and non-real $q=x+Iy$,
+  \[
+    A(g\cdot q)=F_1+g(I)\,F_2=g\cdot\bigl(F_1+I\,F_2\bigr)=g\cdot A(q),
+  \]
+  since $g\cdot(x+Iy)=x+g(I)y$ (Definition~\ref{def:G2}) and $F_1,F_2$ are real; for
+  $q\in\RR\cup\{N\}$ both sides are $\Gtwo$-fixed, because $A(\RR)\subseteq\RR$ and
+  $A(N)\in\bigcap_I\CC_I^{*}=\RR\cup\{N\}$ by \textup{(i)}. (For $\zetaO$ this is
+  Theorem~\ref{thm:G2-equiv}; the computation above is the same one, run for an arbitrary
+  intrinsic section.)
+\item \emph{Blindness to the sphere direction.} On a $\Gtwo$-orbit $S_{(\sigma,\gamma)}$ the stem
+  coordinates $(F_1,F_2)(\sigma+i\gamma)$ are constant; in particular if $A$ vanishes at one
+  point of the orbit it vanishes on the whole orbit (Lemma~\ref{lem:residue-spheres}).
+\end{enumerate}
+A slice-preserving section carries one holomorphic stem per slice, and the direction $S^6$ is
+traversed only by the $\Gtwo$-morphisms already present in both worlds.
+\tcblower
+\textbf{Lean declaration.} \url{ASection.realize}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.realize
+'ASection.realize' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.realize_mem_sliceSphere}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.realize_mem_sliceSphere
+'ASection.realize_mem_sliceSphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.realize_equivariant}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.realize_equivariant
+'ASection.realize_equivariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.sliceCoord_smul_invariant}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.sliceCoord_smul_invariant
+'ASection.sliceCoord_smul_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={39. Definition - The octonionic and slice-value worlds},title after break={39. Definition - The octonionic and slice-value worlds (continued)}]
+\textbf{Author's statement}\par
+Recall the \emph{translation groupoid} of an action $G\curvearrowright X$: its objects are the
+points of $X$ and its morphisms $x\to y$ are the elements $g\in G$ satisfying $g\cdot x=y$.
+Thus $\pi_0(G\ltimes X)=X/G$ (Quillen \cite[\S1]{Quillen73}; in Lean,
+\texttt{CategoryTheory.ActionCategory}).
+
+The octonionic world is
+\[
+  \mathcal H_1=\Gtwo\ltimes\OO^{*}.
+\]
+Its components are the $\Gtwo$-orbits: the compactified real fixed locus $\RR\cup\{N\}$ and,
+for each $\sigma\in\RR$ and $\gamma>0$, the residue-$\CC$ sphere
+$S_{(\sigma,\gamma)}=\{\sigma+\gamma v:v\in S^6\}$, labelled by its real centre $\sigma$ and
+radius $\gamma$ (Baez \cite{Baez02}; Theorem~\ref{thm:G2-S6}).
+
+The slice-value world $\mathcal S_2$ organizes the same compactified values by their slice
+decomposition. Every slice contains the real axis, and
+\[
+  \OO^{*}=\bigcup_{I\in S^6}\CC_I^{*},\qquad
+  \CC_I^{*}\cap\CC_J^{*}=\RR\cup\{N\}\quad(J\neq\pm I).
+\]
+Its objects are the points of $\OO^{*}$. Its generating paths are the direction arrows induced
+by $\Gtwo$ and the band phases $z\mapsto e^{I\theta}z$ within a compactified slice; the Lean
+object \texttt{S2} is the quotient path category by the direction-composition relations. In
+particular $0$ and $N$ are shared values, not new objects indexed by a zero.
+
+These two geometric views hold the octonionic and slice-value geometry drawn on below.
+\tcblower
+\textbf{Lean declaration.} \url{H1}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms H1
+'H1' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{SphereWorld}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms SphereWorld
+'SphereWorld' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={40. Definition - The projective base, genuine section functor, and total category},title after break={40. Definition - The projective base, genuine section functor, and total category (continued)}]
+\textbf{Author's statement}\par
+The base is the projective action groupoid
+\[
+  \mathcal B
+  =PGL(2,\RR)\ltimes\operatorname{OnePoint}(\RR).
+\]
+Its objects are points of the compactified real projective line and its arrows are projective
+transformations together with their transport equations.
+
+The matrix construction makes explicit why the analytic object is simultaneously a function and a
+group element. Let
+\[
+ C=\begin{pmatrix}1&-i\\[2pt]1&i\end{pmatrix},\qquad
+ M(z)=\begin{pmatrix}e^z&0\\[2pt]0&1\end{pmatrix},\qquad
+ D(z)=\bigl[C\,M(z)\,C^{-1}\bigr]\in\operatorname{M\ddot ob}(\CC^*).
+\]
+The matrix $C$ is the Cayley map $w\mapsto(w-i)/(w+i)$. Matrix multiplication and
+$e^{z+w}=e^ze^w$ give
+\[
+  M(z+w)=M(z)M(w),\qquad D(z+w)=D(z)D(w).
+\]
+Thus exponentiation is the homomorphism which turns addition of logarithmic lifts into composition
+of the actual slice M\"obius maps. In the Lean source these are the chain
+\texttt{diagonalGL}, \texttt{diagonalGLHom}, \texttt{expUnit}, and
+\texttt{diskExpAction}, with their multiplication laws. Conditions \textup{C1--C3} select the
+A-specific logarithm $\lambda_A$ of the continued nonzero pole factor and hence the one element
+\[
+  D_A=D(\lambda_A)
+     =\bigl[C\operatorname{diag}(e^{\lambda_A},1)C^{-1}\bigr].
+\]
+The Euler and Weierstrass expressions are the two presentations of this same multiplier. The
+function/group-element passage is the commuting dictionary
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+z \arrow[r,"\exp"] \arrow[d,mapsto] & e^z\in\CC^\times \arrow[d,mapsto]\\
+M(z)=\operatorname{diag}(e^z,1) \arrow[r,"C(-)C^{-1}"'] & D(z)\in\operatorname{M\ddot ob}(\CC^*).
+\end{tikzcd}
+\]
+
+The common Euler--Weierstrass multiplier can be followed directly through this dictionary. Write
+$p_A$ for the pole of $A$ and $g_A=\texttt{distinguishedPoleFactor\,A}$. On the punctured pole chart, conditions
+\textup{C2} and \textup{C3} give the two identities
+\[
+\begin{aligned}
+ g_A(z)
+   &=(z-p_A)
+     \exp\!\left(\sum_{p\in A.\iota}\ell_p(z)\right),\\[2pt]
+ g_A(z)
+   &=z^{m_A}R_{\mathrm{fac},A}(z)e^{h_A(z)}
+     \prod_{n\geq0}\mathcal E\bigl(z;q_{A,n}\bigr).
+\end{aligned}
+\]
+Condition \textup{C1} continues this same factor through the simple pole and proves
+$u_A=g_A(p_A)\neq0$. Hence $u_A\in\CC^\times$, its logarithm
+$\lambda_A=\log u_A$ satisfies $e^{\lambda_A}=u_A$, and the distinguished element is
+\[
+ D_A=D(\lambda_A)
+   =\left[C\begin{pmatrix}u_A&0\\0&1\end{pmatrix}C^{-1}\right].
+\]
+This calculation also gives its two fixed boundary points. The diagonal matrix
+$\operatorname{diag}(u_A,1)$ fixes $0$ and $\infty$ in the standard projective chart; conjugation
+by $C$ carries those points to the projective zero and the shared north point $N$. Therefore
+\[
+  D_A(0)=0,\qquad D_A(N)=N,
+\]
+which are the declarations
+\[
+\begin{gathered}
+\texttt{ASection.distinguishedDiskAction\_fixes\_cayley\_zero},\\
+\texttt{ASection.distinguishedDiskAction\_fixes\_cayley\_N}.
+\end{gathered}
+\]
+The Euler expression at $0$ and the
+Weierstrass expression at $N$ are consequently the two boundary readings of this one matrix-built
+function.
+
+The GPV lift records how that function varies between its boundary presentations. Let
+$X,Y\in\mathcal B$. A projective-base transport from $X$ to $Y$ carries three continuous tapes:
+a compactified domain path $\delta^*$, a nonzero value path $v$, its compactification $v^*$,
+and a logarithmic lift $\Gamma$.
+Their defining equations are
+\[
+\begin{aligned}
+ \delta^*(0)&=\operatorname{cayleyCoord}(X),
+ &\delta^*(1)&=\operatorname{cayleyCoord}(Y),\\
+ v^*(t)&=A^*\bigl(\delta^*(t)\bigr),
+ &e^{\Gamma(t)}&=v(t),\\
+ \Gamma(1)-\Gamma(0)&=2\pi i k,
+ &&k\in\ZZ.
+\end{aligned}
+\]
+These are precisely the fields of \texttt{ASection.GpvTransport}. At each $t$ the lift equation
+passes through the matrix dictionary:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\Gamma(t) \arrow[r,"\exp"] \arrow[d,"D"'] &
+v(t)\in\CC^\times
+  \arrow[d,"{u\mapsto[C\operatorname{diag}(u,1)C^{-1}]}"]\\
+D(\Gamma(t)) \arrow[r,equal] &
+\bigl[C\operatorname{diag}(v(t),1)C^{-1}\bigr].
+\end{tikzcd}
+\]
+Thus every point of the lift is already an action of the same kind as $D_A$. Taking real parts
+and norms in the lift equation gives
+\[
+  \operatorname{Re}\Gamma(t)=\log\lVert v(t)\rVert.
+\]
+The right-hand side shows that the real level is continuous and depends only on the value tape.
+Any second continuous lift with the same initial rung equals $\Gamma$, while every lift of the
+same value tape has this same real part. Taking real parts in the winding equation gives
+\[
+  \operatorname{Re}\Gamma(0)=\operatorname{Re}\Gamma(1),
+\]
+and exponentiating the full equation gives
+\[
+  D(\Gamma(0))=D(\Gamma(1)).
+\]
+The winding integer therefore records the vertical displacement of the logarithmic rung, and the
+real level and the endpoint M\"obius action remain fixed.
+
+Condition \textup{C2} now supplies the canonical arithmetic instance of this construction. Along
+an Euler half-space loop $\delta$,
+\[
+  \Gamma_A(t)=\sum_{p\in A.\iota}\ell_p(\delta(t)),
+  \qquad e^{\Gamma_A(t)}=A(\delta(t)),
+\]
+with the prime index retained inside the complete summation. Local normal convergence makes
+$\Gamma_A$ continuous, the zero-free half-space makes its value tape lie in $\CC^\times$, and the
+GPV uniqueness theorem fixes the whole lift once $\Gamma_A(0)$ is chosen. Since $\delta(0)=
+\delta(1)$, the same prime sum occurs at both endpoints, so its checked winding is $k=0$. At every
+instant the square \texttt{canonicalAsectionPresentation\_euler\_toNorth} carries this complete
+prime tape to the common north frame. Condition \textup{C3} supplies the Weierstrass boundary
+presentation there, and condition \textup{C1} identifies both presentations with the continued
+factor $g_A$. The prime sum, its value under $A$, its logarithmic level and winding, and the matrix
+action it generates are therefore simultaneous coordinates of the distinguished element.
+
+The projective action is read in the direction-indexed sphere-world groupoid. Its objects are
+directions $I\in S^6$ equipped with their compactified slice spheres, and its morphisms carry the
+direction and M\"obius legs. A normalized value state pairs such a direction with a point of its
+slice. To position $D_A$ over the whole base, fix the canonical orbit representative
+$o_b:N\to b$. Every arrow $f:x\to y$ has the unique residual north-stabilizer factor
+\[
+  r_f=o_y^{-1}f\,o_x,\qquad
+  f=o_y r_f o_x^{-1}.
+\]
+The object frame and the full arrow element are therefore
+\[
+  a_A(b)=C(o_b)D_A,\qquad
+  a_A(f)=a_A(y)\,C(r_f)\,a_A(x)^{-1}.
+\]
+Here $C(-)$ denotes the multiplicative Cayley-projective homomorphism. The fixed orbit
+representatives force $r_f$ uniquely; $r_{1_x}=1$ and
+$r_{f\mathbin{\gg}g}=r_g r_f$. These identities, together with multiplicativity of $C(-)$,
+prove the identity and composition laws directly from the fixed representatives. This is the
+orbit--stabilizer well-definedness of both functors below.
+
+The preceding construction gives nine checkable readings on the projective base:
+\begin{enumerate}[label=\textup{(B\arabic*)},leftmargin=3.2em,itemsep=2pt]
+\item the C2 Euler and C3 Weierstrass formulas present the one C1-continued factor $g_A$;
+\item $u_A=g_A(p_A)$ and $\lambda_A=\log u_A$ generate the one matrix action $D_A$;
+\item the diagonal calculation fixes the two boundary points $0$ and $N$;
+\item the Euler lift retains the complete prime-indexed sum
+  $\sum_{p\in A.\iota}\ell_p$;
+\item exponentiation identifies the lift pointwise with the A-value and with its M\"obius matrix;
+\item the initial rung determines the unique tame continuous lift;
+\item its real level is $\log\lVert A\rVert$, continuous and independent of the lift branch;
+\item its winding lies in $2\pi i\ZZ$, preserves the endpoint action and real level, and equals
+  zero on the C2 Euler loop;
+\item the unique orbit and stabilizer factors carry every instant of this action through the base,
+  with identity and composition inherited from their factorization laws.
+\end{enumerate}
+Each line is a consequence of the construction above: \textup{(B1)--(B3)} come from the common
+pole factor and its matrix, \textup{(B4)--(B8)} from its GPV lift, and \textup{(B9)} from the
+projective orbit--stabilizer sweep.
+
+The direction-and-M\"obius projection is
+\[
+  A^{\mathrm{slice}}:\mathcal B\longrightarrow\SphereWorld,
+\]
+written \texttt{AsectionSlice\,A} in the Lean source. It records the slice sphere and its
+M\"obius transport. The full A-section functor below additionally retains the normalized point
+and the value produced on that sphere.
+
+The slice-preserving realization on $\Ostar$ is the $G_2$-equivariant endofunctor
+$A_{\OO}:\mathcal H_1\to\mathcal H_1$. The normalized state world has functorial input and
+output eyes, and the round trip is the checked triangle
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+\operatorname{StateWorld}_A
+  \arrow[r,"\operatorname{In}_A"]
+  \arrow[dr,"\operatorname{Out}_A"'] &
+\mathcal H_1 \arrow[d,"A_{\OO}"]\\
+& \mathcal H_1,
+\end{tikzcd}
+\qquad
+\operatorname{Out}_A=\operatorname{In}_A\mathbin{\gg}A_{\OO}.
+\]
+This equality is 
+\texttt{AsectionState\_input\_then\_equivariant}: it holds on arrows as well as objects, so
+the normalized input coordinates genuinely drive the realized A-values.
+
+Positioning this round trip over $b\in\mathcal B$ forms a constrained graph. An object in the
+fibre consists of an input state $x$, the forced positioned state
+$a_A(b)\cdot x$, and the forced value
+$\operatorname{Out}_A(a_A(b)\cdot x)$. Thus both the positioned point and its value are determined
+by the input and the action. For $f:b\to b'$, the two legs of the orbit--stabilizer square transport the input
+and positioned faces, and its already-proved commuting equation makes the target graph
+well-defined. Reading that same square through $\operatorname{In}_A$ and
+$\operatorname{Out}_A$ gives the checked input and output naturality squares. Identity and
+composition of these graph transports are inherited from the unique factorization of $r_f$.
+Sweeping the whole constrained graph through the base therefore gives the genuine A-section
+functor
+\[
+  \mathcal A_A:\mathcal B\longrightarrow\mathbf{Grpd},
+\]
+written \texttt{AsectionActionDiagram\,A} in the Lean source.
+
+The nine base readings \textup{(B1)--(B9)} pass through this constrained graph by the certified
+projective/GPV action squares. Three further readings are thereby realized in the generated
+states. First, condition \textup{C3} supplies the populated residue-$\CC$ sphere states, represented
+by \texttt{residueActionState} and certified by \texttt{residueActionState\_mem}. Second,
+condition \textup{C4} makes their population infinite through \texttt{c4\_infinite}. Third, every
+such state carries its intrinsic real coordinate through \texttt{transportLevel}. These are the
+three output readings. Together with \textup{(B1)--(B9)} they form the $9+3$ partition: nine
+properties of the one distinguished action on the base, followed functorially by three readings
+of the A-generated residue states in the total.
+
+The total value-transport category is
+\[
+  \mathcal T_A=\int_{\mathcal B}\mathcal A_A.
+\]
+An object is a base position together with a normalized A-section value state in its fibre. A
+morphism is a base channel together with the compatible A-section transport supplied by $A$.
+The populated residue-$\CC$ zero-sphere states are the degenerate-fibre outputs of this
+completed construction, produced by \textup{C3--C4}. The associated diagram
+$\pi_0\circ\mathcal A_A:\mathcal B\to\mathbf{Set}$ is the components diagram required by the
+Grothendieck/colimit readout (Lemma~\ref{lem:pi0-grothendieck}).
+\tcblower
+\textbf{Lean declaration.} \url{GreatCircle.Base}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.Base
+'GreatCircle.Base' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.cayleyGL}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.cayleyGL
+'GreatCircle.cayleyGL' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.diagonalGL}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.diagonalGL
+'GreatCircle.diagonalGL' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.diagonalGL_mul}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.diagonalGL_mul
+'GreatCircle.diagonalGL_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.diagonalGLHom}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.diagonalGLHom
+'GreatCircle.diagonalGLHom' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.expUnit}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.expUnit
+'GreatCircle.expUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.expUnit_add}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.expUnit_add
+'GreatCircle.expUnit_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.diskExpAction}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.diskExpAction
+'GreatCircle.diskExpAction' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.diskExpAction_add}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.diskExpAction_add
+'GreatCircle.diskExpAction_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.cayleyProjective}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.cayleyProjective
+'GreatCircle.cayleyProjective' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.cayleyProjective_mul}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.cayleyProjective_mul
+'GreatCircle.cayleyProjective_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.orbitRep}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.orbitRep
+'GreatCircle.orbitRep' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.orbitRep_spec}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.orbitRep_spec
+'GreatCircle.orbitRep_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.stabilizerPart}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.stabilizerPart
+'GreatCircle.stabilizerPart' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.orbit_stabilizer_factor}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.orbit_stabilizer_factor
+'GreatCircle.orbit_stabilizer_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.stabilizerPart_unique}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.stabilizerPart_unique
+'GreatCircle.stabilizerPart_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.stabilizerPart_id}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.stabilizerPart_id
+'GreatCircle.stabilizerPart_id' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{GreatCircle.stabilizerPart_comp}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms GreatCircle.stabilizerPart_comp
+'GreatCircle.stabilizerPart_comp' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.distinguishedDiskAction}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.distinguishedDiskAction
+'ASection.distinguishedDiskAction' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.distinguishedDiskAction_eq_fullMultiplier}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.distinguishedDiskAction_eq_fullMultiplier
+'ASection.distinguishedDiskAction_eq_fullMultiplier' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.distinguishedPoleFactor_euler}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.distinguishedPoleFactor_euler
+'ASection.distinguishedPoleFactor_euler' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.distinguishedPoleFactor_weierstrass}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.distinguishedPoleFactor_weierstrass
+'ASection.distinguishedPoleFactor_weierstrass' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.eulerPrimeSum}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.eulerPrimeSum
+'ASection.eulerPrimeSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.eulerDiskAction_eq_value}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.eulerDiskAction_eq_value
+'ASection.eulerDiskAction_eq_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport
+'ASection.GpvTransport' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport.diskExpAction_eq_value}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport.diskExpAction_eq_value
+'ASection.GpvTransport.diskExpAction_eq_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport.diskExpAction_endpoint_eq}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport.diskExpAction_endpoint_eq
+'ASection.GpvTransport.diskExpAction_endpoint_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport.lift_endpoint_re_eq}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport.lift_endpoint_re_eq
+'ASection.GpvTransport.lift_endpoint_re_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport.level}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport.level
+'ASection.GpvTransport.level' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport.continuous_level}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport.continuous_level
+'ASection.GpvTransport.continuous_level' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport.lift_unique}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport.lift_unique
+'ASection.GpvTransport.lift_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport.level_independent}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport.level_independent
+'ASection.GpvTransport.level_independent' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport.value_at_source}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport.value_at_source
+'ASection.GpvTransport.value_at_source' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport.value_at_target}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport.value_at_target
+'ASection.GpvTransport.value_at_target' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport.endpoint_log_norm_eq}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport.endpoint_log_norm_eq
+'ASection.GpvTransport.endpoint_log_norm_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.GpvTransport.endpoint_norm_eq}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.GpvTransport.endpoint_norm_eq
+'ASection.GpvTransport.endpoint_norm_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.projectiveGpvActionSquare}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.projectiveGpvActionSquare
+'ASection.projectiveGpvActionSquare' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.projectiveGpvActionSquare_level}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.projectiveGpvActionSquare_level
+'ASection.projectiveGpvActionSquare_level' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.projectiveGpvActionSquare_input_commutes}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.projectiveGpvActionSquare_input_commutes
+'ASection.projectiveGpvActionSquare_input_commutes' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.projectiveGpvActionSquare_output_commutes}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.projectiveGpvActionSquare_output_commutes
+'ASection.projectiveGpvActionSquare_output_commutes' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.canonicalAsectionPresentation_euler_prime_stack}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.canonicalAsectionPresentation_euler_prime_stack
+'ASection.canonicalAsectionPresentation_euler_prime_stack' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.canonicalAsectionPresentation_euler_lift_exp}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.canonicalAsectionPresentation_euler_lift_exp
+'ASection.canonicalAsectionPresentation_euler_lift_exp' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.canonicalAsectionPresentation_euler_lift_unique}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.canonicalAsectionPresentation_euler_lift_unique
+'ASection.canonicalAsectionPresentation_euler_lift_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.canonicalAsectionPresentation_euler_level_continuous}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.canonicalAsectionPresentation_euler_level_continuous
+'ASection.canonicalAsectionPresentation_euler_level_continuous' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.canonicalAsectionPresentation_euler_winding}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.canonicalAsectionPresentation_euler_winding
+'ASection.canonicalAsectionPresentation_euler_winding' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.canonicalAsectionPresentation_euler_toNorth}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.canonicalAsectionPresentation_euler_toNorth
+'ASection.canonicalAsectionPresentation_euler_toNorth' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.projectiveObjectFrame}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.projectiveObjectFrame
+'ASection.projectiveObjectFrame' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.projectiveArrowElement}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.projectiveArrowElement
+'ASection.projectiveArrowElement' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.projectiveObjectFrame_north}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.projectiveObjectFrame_north
+'ASection.projectiveObjectFrame_north' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.distinguishedDiskAction_fixes_cayley_zero}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.distinguishedDiskAction_fixes_cayley_zero
+'ASection.distinguishedDiskAction_fixes_cayley_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.distinguishedDiskAction_fixes_cayley_N}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.distinguishedDiskAction_fixes_cayley_N
+'ASection.distinguishedDiskAction_fixes_cayley_N' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.projectiveArrowElement_id}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.projectiveArrowElement_id
+'ASection.projectiveArrowElement_id' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.projectiveArrowElement_comp}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.projectiveArrowElement_comp
+'ASection.projectiveArrowElement_comp' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionSlice}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionSlice
+'ASection.AsectionSlice' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionEquivariant}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionEquivariant
+'ASection.AsectionEquivariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionStateInput}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionStateInput
+'ASection.AsectionStateInput' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionStateOutput}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionStateOutput
+'ASection.AsectionStateOutput' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionState_input_then_equivariant}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionState_input_then_equivariant
+'ASection.AsectionState_input_then_equivariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.ActionTransportSquare.coordinateTransport_commutes}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.ActionTransportSquare.coordinateTransport_commutes
+'ASection.ActionTransportSquare.coordinateTransport_commutes' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.ActionTransportSquare.input_commutes}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.ActionTransportSquare.input_commutes
+'ASection.ActionTransportSquare.input_commutes' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.ActionTransportSquare.output_commutes}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.ActionTransportSquare.output_commutes
+'ASection.ActionTransportSquare.output_commutes' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionActionState}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionActionState
+'ASection.AsectionActionState' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionActionTransport}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionActionTransport
+'ASection.AsectionActionTransport' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionActionState.ofInput}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionActionState.ofInput
+'ASection.AsectionActionState.ofInput' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionActionState_ofInput_value}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionActionState_ofInput_value
+'ASection.AsectionActionState_ofInput_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionActionTransport_obj_input}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionActionTransport_obj_input
+'ASection.AsectionActionTransport_obj_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionActionTransport_obj_positioned}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionActionTransport_obj_positioned
+'ASection.AsectionActionTransport_obj_positioned' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionActionTransport_obj_value}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionActionTransport_obj_value
+'ASection.AsectionActionTransport_obj_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionActionTransport_id}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionActionTransport_id
+'ASection.AsectionActionTransport_id' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionActionTransport_comp}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionActionTransport_comp
+'ASection.AsectionActionTransport_comp' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionActionDiagram}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionActionDiagram
+'ASection.AsectionActionDiagram' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.residueActionState}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.residueActionState
+'ASection.residueActionState' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.residueActionState_mem}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.c4_infinite}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.c4_infinite
+'ASection.c4_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.transportLevel}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{CategoryTheory.Grothendieck}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} External library dependency; approved kernel-reported axiom surface; no authored-object anchor required
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms CategoryTheory.Grothendieck
+'CategoryTheory.Grothendieck' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={41. Proposition - Slice-regular Weierstrass factorization; the content of C3},title after break={41. Proposition - Slice-regular Weierstrass factorization; the content of C3 (continued)}]
+\textbf{Author's statement}\par
+Let $A\in\mathcal R$ have a zero of order $m\ge 0$ at the origin and no non-real isolated zeros
+\textup{(}for $A\in\mathcal R$ the latter is automatic: non-real zeros come in whole spheres,
+Lemma~\ref{lem:residue-spheres}\textup{)}. Then on $\OO^{*}\setminus\{N\}$ it factors as
+\[
+  A=q^{m}\,R\,S\,h,
+\]
+where $q$ denotes the octonionic coordinate function \textup{(}the identity section, so $q^m$
+carries the order-$m$ zero at the origin\textup{)}, $R$ is a slice-preserving factor vanishing
+exactly at the real zeros of $A$, $S$ is a factor vanishing exactly at its spherical
+\textup{(}residue-$\CC$\textup{)} zero-spheres, and $h$ is never vanishing; each of $R,S$ is the
+slice-regular Weierstrass product over the corresponding zeros. The factorization holds
+\emph{including the case where either family of zeros is infinite}.
+\tcblower
+\textbf{Lean declaration.} \url{weierstrassE}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms weierstrassE
+'weierstrassE' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{spherePrimary}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms spherePrimary
+'spherePrimary' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.c3_multipliable}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.c3_multipliable
+'ASection.c3_multipliable' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.c3_locMajorant}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.c3_locMajorant
+'ASection.c3_locMajorant' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.c3_factorization}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.c3_factorization
+'ASection.c3_factorization' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={42. Lemma - Residue-\$\textbackslash{}CC\$ zeros are \$6\$-sphere components of \$\textbackslash{}mathcal H\_1\$},title after break={42. Lemma - Residue-\$\textbackslash{}CC\$ zeros are \$6\$-sphere components of \$\textbackslash{}mathcal H\_1\$ (continued)}]
+\textbf{Author's statement}\par
+For $A\in\mathcal R$, the non-real zeros of $A$ are $6$-spheres, each a single connected
+component of the translation groupoid $\mathcal H_1$.
+\tcblower
+\textbf{Lean declaration.} \url{ASection.sphereZero_mem_CResidueZeroLocus}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.sphereZero_mem_CResidueZeroLocus
+'ASection.sphereZero_mem_CResidueZeroLocus' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.mem_CResidueZeroLocus_iff_exists_sphereZero}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.mem_CResidueZeroLocus_iff_exists_sphereZero
+'ASection.mem_CResidueZeroLocus_iff_exists_sphereZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{G2.exists_smul_eq_of_mem_unitImaginarySphere}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms G2.exists_smul_eq_of_mem_unitImaginarySphere
+'G2.exists_smul_eq_of_mem_unitImaginarySphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={43. Lemma - \$\textbackslash{}pi\_0\$ of a Grothendieck construction},title after break={43. Lemma - \$\textbackslash{}pi\_0\$ of a Grothendieck construction (continued)}]
+\textbf{Author's statement}\par
+For a functor $F:\mathcal B\to\Grpd$, the connected-components functor carries the Grothendieck
+construction to the colimit of the component diagram:
+\[
+  \pi_0\Bigl(\int_{\mathcal B}F\Bigr)\ \cong\ \operatorname*{colim}_{\mathcal B}\,(\pi_0\circ F).
+\]
+\tcblower
+\textbf{Lean declaration.} \url{CategoryTheory.Grothendieck}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} External library dependency; approved kernel-reported axiom surface; no authored-object anchor required
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms CategoryTheory.Grothendieck
+'CategoryTheory.Grothendieck' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{pi0GrothendieckEquiv}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{pi0_grothendieck}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={44. Definition - \$A\$-sections},title after break={44. Definition - \$A\$-sections (continued)}]
+\textbf{Author's statement}\par
+An \emph{$A$-section} is a section $A$ of the ring $\mathcal R$ of slice-preserving
+slice-regular functions on $\OO^{*}=S^8$ \textup{(Definition~\ref{def:R})} with the following
+four properties.
+\begin{enumerate}[label=\textup{(C\arabic*)},leftmargin=3.2em]
+\item \emph{Meromorphic continuation; single simple pole.} $A$ is meromorphically continued to
+  $\OO^{*}$ with exactly one pole; it is simple, lies at a real point, and its value there is the
+  point at infinity $\infty=N$.
+\item \emph{Infinite Euler product.} On a slice right half-space $\Omega_0\subset\OO^{*}$,
+  $A=\exp\!\big(\sum_p\ell_p\big)$ for an \emph{infinite} family $\{\ell_p\}$ of
+  slice-preserving slice-regular functions each zero-free on $\Omega_0$, the family summable
+  \emph{locally normally} on $\Omega_0$ \textup{(}the sense in which the cited Euler products
+  converge; Theorem~\ref{thm:euler}\textup{)}; in particular $A$ is
+  zero-free on $\Omega_0$.
+\item \emph{Infinite Weierstrass factorization.} Over the \emph{full divisor} of $A$,
+  including the single pole of \textup{(C1)}, at the real point $p_0$, multiplicity $-1$,
+  carried by the explicit left factor, on $\OO^{*}\setminus\{p_0\}$,
+  \[
+    (q-p_0)\,A\;=\;q^{m}\,R\;e^{g}\prod_n\mathcal E(\,\cdot\,;q_n),
+  \]
+  where $q$ is the octonionic coordinate, $m\ge0$, $R$ is the slice-regular Weierstrass product
+  over the \emph{nonzero} residue-$\RR$ \textup{(}real\textup{)} zeros of $A$, vanishing only
+  on $\RR$, $g$ is slice-preserving entire, $\{q_n\}$ enumerates the residue-$\CC$ zero-spheres
+  of $A$, and $\mathcal E(\,\cdot\,;q_n)$ is the slice-regular Weierstrass primary factor of
+  $q_n$ \textup{(}Proposition~\ref{prop:weierstrass}; \cite[Prop.~3.1, Thm.~3.2]{AdFslice},
+  \cite{GV}\textup{)}; the factorization holds with either family infinite, the product
+  converging \emph{locally normally} on $\OO^{*}\setminus\{p_0\}$ \textup{(}the convergence of
+  Proposition~\ref{prop:weierstrass}\textup{)}. \textup{(}The left
+  factor makes ``full divisor'' literal: the divisor of a meromorphic section includes its
+  single pole; classically, Hadamard factors $(s-1)\zeta(s)$.\textup{)}
+\item \emph{Infinitely many residue-$\CC$ zeros.} The index set $\{q_n\}$ is infinite. A closed
+  zero of such a section is a real point \textup{(}residue field $\RR$\textup{)} or a $6$-sphere
+  $S_{(\sigma,\gamma)}$ \textup{(}residue field $\CC$; \cite{AdFslice}\textup{)}; residue-$\CC$
+  names the classically nontrivial zeros \textup{(}Part~2\textup{)}.
+\end{enumerate}
+\tcblower
+\textbf{Lean declaration.} \url{ASection}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection
+'ASection' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{weierstrassE}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms weierstrassE
+'weierstrassE' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{spherePrimary}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms spherePrimary
+'spherePrimary' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={45. Definition - The residue subdiagram and its inclusion},title after break={45. Definition - The residue subdiagram and its inclusion (continued)}]
+\textbf{Author's statement}\par
+The \emph{residue locus} of an A-section is $\{z : A(z)=0,\ \operatorname{Im}z>0\}$
+\textup{(}\texttt{CResidueZeroLocus}\textup{)}. The \emph{residue subdiagram}
+$\mathcal R_A:\mathcal B\to\mathbf{Grpd}$ \textup{(}\texttt{AsectionCResidueDiagram}\textup{)} is
+the preimage of the states this locus selects at the north frame --- a preimage taken in the
+total action groupoid, not of a set --- with the witnessing base arrow carried as data; its
+inclusion $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$
+\textup{(}\texttt{AsectionCResidueInclusion}\textup{)} is the fibrewise fully faithful inclusion
+onto that inverse image. Its naturality squares retain the ambient A-section transport itself.
+\tcblower
+\textbf{Lean declaration.} \url{ASection.CResidueZeroLocus}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.CResidueZeroLocus
+'ASection.CResidueZeroLocus' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionCResidueDiagram}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionCResidueDiagram
+'ASection.AsectionCResidueDiagram' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionCResidueInclusion}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms ASection.AsectionCResidueInclusion
+'ASection.AsectionCResidueInclusion' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionCResidueInclusionTotal}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionCResidueInclusionTotal_full}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.AsectionCResidueInclusionTotal_faithful}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={46. Lemma - Transitivity of the C-residue total},title after break={46. Lemma - Transitivity of the C-residue total (continued)}]
+\textbf{Author's statement}\par
+For an A-section $A$, the total inverse-image groupoid
+\[
+  \int_{\mathcal B}\mathcal R_A
+\]
+is transitive: any two of its objects are joined by a morphism.
+\tcblower
+\textbf{Lean declaration.} \url{ASection.sweepTransitive_on_residueSystem}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.northRelativeLoop_maps}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.northComparison_of_parallelFaces}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Receipt classification.} INFERENCE\_CERTIFIED\_AUTHOR\_BOUND\_LEAN\_PENDING
+\par\smallskip\textbf{Certified inference.} \url{ASection.northState_is_residueActionState_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'ASection.northState_is_residueActionState_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\par\smallskip\textbf{Certified inference.} \url{ASection.residueActionState_north_input_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'ASection.residueActionState_north_input_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\par\smallskip\textbf{Certified inference.} \url{ASection.residueActionTransport_north_input_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'ASection.residueActionTransport_north_input_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\par\smallskip\textbf{Certified inference.} \url{ASection.northRelativeLoop_stabilizer_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'ASection.northRelativeLoop_stabilizer_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\par\smallskip\textbf{Certified inference.} \url{ASection.northRelativeLoop_maps_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'ASection.northRelativeLoop_maps_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\par\smallskip\textbf{Certified inference.} \url{ASection.northComparison_of_parallelFaces_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'ASection.northComparison_of_parallelFaces_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\par\smallskip\textbf{Certified inference.} \url{ASection.relativeActionSquare_transport_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'ASection.relativeActionSquare_transport_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\par\smallskip\textbf{Certified inference.} \url{ASection.residueTotal_morphism_of_northComparison_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'ASection.residueTotal_morphism_of_northComparison_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\par\textbf{Authored binding.} \url{seat1.kE}: AUTHOR\_BOUND\_LEAN\_PENDING
+\par\textbf{Authored binding.} \url{seat1.kW}: AUTHOR\_BOUND\_LEAN\_PENDING
+\par\textbf{Authored binding.} \url{seat1.uStar}: AUTHOR\_BOUND\_LEAN\_PENDING
+\par\textbf{Authored binding.} \url{seat1.hE}: AUTHOR\_BOUND\_LEAN\_PENDING
+\par\textbf{Authored binding.} \url{seat1.hW}: AUTHOR\_BOUND\_LEAN\_PENDING
+\par\textbf{Production seat.} \url{ASection.sweepTransitive_on_residueSystem}: OPEN\_SEAT
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={47. Theorem - Concentricity},title after break={47. Theorem - Concentricity (continued)}]
+\textbf{Author's statement}\par
+Let $A$ be an $A$-section. The infinitely many C-residue zero $S^6$ spheres transported by the A-section functor
+$\mathcal A_A:\mathcal B\to\mathbf{Grpd}$, from the projective great-circle base
+$\mathcal B$ to the A-generated normalized value groupoids, form exactly one
+colimit/component class, and that
+singleton class
+carries one real value
+\[
+  c\in\RR.
+\]
+Consequently every populated residue-$\CC$ zero $6$-sphere has centre $c$, so the infinitely
+many populated residue-$\CC$ zero spheres are concentric.
+\tcblower
+\textbf{Lean declaration.} \url{ASection.concentricity}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.residueTotal_isConnected}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.residueTotal_pi0_singleton}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{ASection.transportLevel}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Receipt classification.} INFERENCE\_CERTIFIED\_AUTHOR\_BOUND\_LEAN\_PENDING
+\par\smallskip\textbf{Certified inference.} \url{ASection.residueTotal_isConnected_of_transitive_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'ASection.residueTotal_isConnected_of_transitive_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\par\smallskip\textbf{Certified inference.} \url{ASection.residueTotal_pi0_singleton_of_connected_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'ASection.residueTotal_pi0_singleton_of_connected_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\par\textbf{Authored binding.} \url{seat2.transportLevelCollapse}: AUTHOR\_BOUND\_LEAN\_PENDING
+\par\textbf{Production seat.} \url{ASection.concentricity}: OPEN\_SEAT
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={48. Corollary - Translation to the classical framework},title after break={48. Corollary - Translation to the classical framework (continued)}]
+\textbf{Author's statement}\par
+Under the residue-$\CC$/classically-nontrivial-zero identification, the already-proved
+populated residue-$\CC$ zero spheres are the classically nontrivial zero spheres and retain the
+common centre $c$ supplied by Theorem~\ref{thm:concentricity}.
+\tcblower
+\textbf{Lean declaration.} \url{ASection.nontrivial_one_centre}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Receipt classification.} INFERENCE\_CERTIFIED
+\par\smallskip\textbf{Certified inference.} \url{ASection.nontrivial_one_centre_of_concentricity_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'ASection.nontrivial_one_centre_of_concentricity_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={49. Corollary - \$\textbackslash{}zetaO\$ is an \$A\$-section},title after break={49. Corollary - \$\textbackslash{}zetaO\$ is an \$A\$-section (continued)}]
+\textbf{Author's statement}\par
+$\zetaO$ is an $A$-section \textup{(Definition~\ref{def:A-section})}: a section of
+$\mathcal R$ satisfying \textup{(C1)--(C4)}.
+\tcblower
+\textbf{Lean declaration.} \url{zetaSection}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Lean declaration accepted; approved axiom surface; authored-object anchor unratified
+\par\smallskip\textbf{Lean command and literal axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+#print axioms zetaSection
+'zetaSection' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\medskip\hrule\medskip
+\textbf{Supporting inference and bindings.} No local receipt is registered for this clause.
+\end{tcolorbox}
+\medskip
+\begin{tcolorbox}[provenancecard,title={50. Corollary - Riemann Hypothesis},title after break={50. Corollary - Riemann Hypothesis (continued)}]
+\textbf{Author's statement}\par
+Every nontrivial zero of the classical Riemann zeta function has real part $\tfrac12$; in
+particular infinitely many zeros lie on the line $\Re s=\tfrac12$.
+\tcblower
+\textbf{Lean declaration.} \url{zeta_riemannHypothesis}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Lean declaration.} \url{zeta_criticalLine_zeros_infinite}
+\par\textbf{Author's object.} \url{—}
+\par\textbf{Object relation.} Object relation not checked
+\par\textbf{Exact state.} Exact production module does not currently build; independent receipts remain visible
+\par\textbf{Literal Lean axiom print.} Not available because the axiom query was not reached.
+\medskip\hrule\medskip
+\textbf{Receipt classification.} INFERENCE\_CERTIFIED
+\par\smallskip\textbf{Certified inference.} \url{zeta_riemannHypothesis_of_concentricity_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'zeta_riemannHypothesis_of_concentricity_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\par\smallskip\textbf{Certified inference.} \url{zeta_criticalLine_zeros_infinite_of_RH_audit}
+\par\textbf{Status.} INFERENCE\_CERTIFIED
+\par\textbf{Literal Lean axiom print.}
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\small]
+'zeta_criticalLine_zeros_infinite_of_RH_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{Verbatim}
+\end{tcolorbox}
+\medskip
+\end{document}

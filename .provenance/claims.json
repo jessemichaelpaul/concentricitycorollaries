@@ -1,0 +1,3539 @@
+{
+  "claims": [
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'riemannZeta_meromorphicOn' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "riemannZeta_meromorphicOn",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:riemann",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|25aa540a6258b90e]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'riemannZeta_orderAt_one' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "riemannZeta_orderAt_one",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:riemann",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|a239cc2a5b00e359]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'riemannZeta_conj' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "riemannZeta_conj",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:riemann",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|82248dd0e5cac465]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'riemannZeta_one_sub_zero' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "riemannZeta_one_sub_zero",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:riemann",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|1a8277194503bd53]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'nontrivialZero_re_mem_Ioo' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "nontrivialZero_re_mem_Ioo",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:riemann",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|91cd98b7fd9f30a9]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaEulerLog' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaEulerLog",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:euler",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|2e27591afbcd77dd]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaC2_summable' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaC2_summable",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:euler",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|90a4c383f072e296]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaC2_zero_free' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaC2_zero_free",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:euler",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|0f1f0b9871730bc4]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaC2_euler' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaC2_euler",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:euler",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|1c04b6749de65dda]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'xi_entire' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "xi_entire",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:hadamard",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|3e4580c9b8f35a97]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'xi_zeros_eq_nontrivialZeros' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "xi_zeros_eq_nontrivialZeros",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:hadamard",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|47da4c874c3a188a]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zeta_hadamard' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zeta_hadamard",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:hadamard",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|a3f89da6b9d50dd0]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'riemannZeta_nontrivialZeros_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "riemannZeta_nontrivialZeros_infinite",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:hadamard",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|f8b66e4695b6d85b]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'riemannZeta_nontrivialZeros_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "riemannZeta_nontrivialZeros_infinite",
+        "semantic_relation": "not_checked"
+      },
+      "label": "cor:hadamard-infinitude",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[cor:hadamard-infinitude|AXIOM_CERTIFIED_UNANCHORED|fdd39d2576e4c6bd]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "zeta_criticalLine_zeros_infinite",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:hardy",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[thm:hardy|PRODUCTION_MODULE_OPEN|20aa506d3889cd37]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaC' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaC",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:zeta-Cstar",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|39db91369b0ccc9c]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaC_coe' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaC_coe",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:zeta-Cstar",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|5073e4e3f126e6d5]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaC_one' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaC_one",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:zeta-Cstar",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|34862d26ca545369]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaC_infty' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaC_infty",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:zeta-Cstar",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|0458bd7d9cbd2163]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaC_coe_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaC_coe_eq_zero_iff",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:zero-Cstar",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[lem:zero-Cstar|AXIOM_CERTIFIED_UNANCHORED|a34f32353599d4bc]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaC_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaC_zero_iff",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:zero-Cstar",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[lem:zero-Cstar|AXIOM_CERTIFIED_UNANCHORED|0229cd0d2ca49fa5]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:octonions",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|863af2af70a49f40]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.normSq_mul' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.normSq_mul",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:octonions",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|fe84933aee859874]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.alt_left' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.alt_left",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:octonions",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|f508da0b36f3d8d6]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.alt_right' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.alt_right",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:octonions",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|10834186e8875d7b]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.unitImaginarySphere' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.unitImaginarySphere",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:slices",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|8e77cc13006681b0]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.sliceEmbed' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.sliceEmbed",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:slices",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|83d5e86f0b96a496]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.sliceEmbed_mul' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.sliceEmbed_mul",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:slices",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|2b973a221017b8f1]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.sliceSphere' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.sliceSphere",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:slices",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|ae98b8c1f82c42f5]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'stem_identity' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "stem_identity",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:identity",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:identity|AXIOM_CERTIFIED_UNANCHORED|ac0a8823ebea3813]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'IsIntrinsic' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "IsIntrinsic",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:slice-preserving",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:slice-preserving|AXIOM_CERTIFIED_UNANCHORED|45062ef7c23dae0f]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'StemRing.isIntrinsic' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "StemRing.isIntrinsic",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:slice-preserving",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:slice-preserving|AXIOM_CERTIFIED_UNANCHORED|3405f3c1524a8476]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'StemRing.real_on_real' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "StemRing.real_on_real",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:slice-preserving",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:slice-preserving|AXIOM_CERTIFIED_UNANCHORED|a4e7c44fd2ec9852]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaO' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaO",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:zeta_O",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|02b43b69e13cdf7e]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaO_infty' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaO_infty",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:zeta_O",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|3195da530f487c8c]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaO_one' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaO_one",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:zeta_O",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|e422e8c9db338c77]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaO_sliceEmbed' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaO_sliceEmbed",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:zeta_O",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|c8313b92d6e4e37a]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaO_sliceEmbed_of_im_neg' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaO_sliceEmbed_of_im_neg",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:zeta_O",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|c02d0f059fed7c4c]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaO_ofReal' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaO_ofReal",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:zeta_O",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|3c60220061669ae1]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaO_sliceEmbed'' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaO_sliceEmbed'",
+        "semantic_relation": "not_checked"
+      },
+      "label": "prop:well-defined",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[prop:well-defined|AXIOM_CERTIFIED_UNANCHORED|2aef3ab2ac0eb6a0]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'riemannZeta_conj' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "riemannZeta_conj",
+        "semantic_relation": "not_checked"
+      },
+      "label": "prop:well-defined",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[prop:well-defined|AXIOM_CERTIFIED_UNANCHORED|a509c83b26b95cc0]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'StemRing' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "StemRing",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:R",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:R|AXIOM_CERTIFIED_UNANCHORED|c154e5b30e7b33b5]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'StemRing' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "StemRing",
+        "semantic_relation": "not_checked"
+      },
+      "label": "prop:R-comm-ring",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[prop:R-comm-ring|AXIOM_CERTIFIED_UNANCHORED|52ff70b3817f3bf8]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'StemRing.eq_zero_or_eq_zero_of_mul_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "StemRing.eq_zero_or_eq_zero_of_mul_eq_zero",
+        "semantic_relation": "not_checked"
+      },
+      "label": "prop:R-domain",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[prop:R-domain|AXIOM_CERTIFIED_UNANCHORED|6bb50eeba29bcc32]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.exp' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.exp",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:slice-exp",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|cb83bbae110e7749]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.exp_sliceEmbed' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.exp_sliceEmbed",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:slice-exp",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|f73bba470856e829]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.norm_exp' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.norm_exp",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:slice-exp",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|cb1840353abfa980]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.exp_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.exp_ne_zero",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:slice-exp",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|ebab560546b81ac5]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.Eexp' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.Eexp",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:log-manifold",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|19eea34fd74e40ff]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.logManifold' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.logManifold",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:log-manifold",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|dbdaabf0f9334d08]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.Llog' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.Llog",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:log-manifold",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|af884f94a4993901]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.Llog_Eexp' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.Llog_Eexp",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:log-manifold",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|20ddaa6f4716f8b1]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.Eexp_Llog' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.Eexp_Llog",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:log-manifold",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|c2b71eafcc58f597]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.exp_Llog' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.exp_Llog",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:log-manifold",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|83a98e6bf96c1db2]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.exp_fibre_neg_real' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.exp_fibre_neg_real",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:exp-degenerate",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|04da17d62c77fe4c]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.exp_eq_neg_ofReal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.exp_eq_neg_ofReal_iff",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:exp-degenerate",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|1c1578cdacaa1c6a]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.logManifold_fibre_neg_real' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.logManifold_fibre_neg_real",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:exp-degenerate",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|c9513b99b7a3a815]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.degenerate_level_readout' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.degenerate_level_readout",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:exp-degenerate",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|974352823440465d]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'IsIntrinsic' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "IsIntrinsic",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:slice-squares",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|f12553c183a5a709]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.realize' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.realize",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:slice-squares",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|cb74c5ff436538a6]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.realize_mem_sliceSphere' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.realize_mem_sliceSphere",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:slice-squares",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|0ab92efb91dc861b]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.realize_equivariant' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.realize_equivariant",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:slice-squares",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|73ea6c43febe92a0]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'exists_log_continuation' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "exists_log_continuation",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:winding-lift",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:winding-lift|AXIOM_CERTIFIED_UNANCHORED|c52776656ebcadbb]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'winding_lift_unique' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "winding_lift_unique",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:winding-lift",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:winding-lift|AXIOM_CERTIFIED_UNANCHORED|3ada96fe64105284]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion.lift_iff_continuation' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion.lift_iff_continuation",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:winding-lift",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:winding-lift|AXIOM_CERTIFIED_UNANCHORED|c13cc8f861126967]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'winding_lift_unique' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "winding_lift_unique",
+        "semantic_relation": "not_checked"
+      },
+      "label": "prop:winding-signature",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[prop:winding-signature|AXIOM_CERTIFIED_UNANCHORED|68fd73ef4c88f0e5]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'winding_loop_defect' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "winding_loop_defect",
+        "semantic_relation": "not_checked"
+      },
+      "label": "prop:winding-signature",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[prop:winding-signature|AXIOM_CERTIFIED_UNANCHORED|e731e259430edcf4]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaO_mem_sliceSphere' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaO_mem_sliceSphere",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:slice-pres",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:slice-pres|AXIOM_CERTIFIED_UNANCHORED|ff87a57fcab9d4c9]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaSection' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaSection",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:zeta-in-R",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:zeta-in-R|AXIOM_CERTIFIED_UNANCHORED|4389632c8864ca15]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'G2' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "G2",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:G2",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:G2|AXIOM_CERTIFIED_UNANCHORED|158e661a73fa3b5e]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'G2.smul_one' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "G2.smul_one",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:G2",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:G2|AXIOM_CERTIFIED_UNANCHORED|a6abe5d0420fa295]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'G2.smul_ofReal' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "G2.smul_ofReal",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:G2",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:G2|AXIOM_CERTIFIED_UNANCHORED|69776b04fa7362bc]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaO_equivariant' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaO_equivariant",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:G2-equiv",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:G2-equiv|AXIOM_CERTIFIED_UNANCHORED|f550e4c040b715c3]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'G2.exists_smul_eq_of_mem_unitImaginarySphere' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "G2.exists_smul_eq_of_mem_unitImaginarySphere",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:G2-S6",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:G2-S6|AXIOM_CERTIFIED_UNANCHORED|2fa4675057753772]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'sliceEmbed_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "sliceEmbed_eq_zero_iff",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:zero-equivalence",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:zero-equivalence|AXIOM_CERTIFIED_UNANCHORED|821447a1525e2642]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaO_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaO_zero_iff",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:zero-equivalence",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:zero-equivalence|AXIOM_CERTIFIED_UNANCHORED|26fb9c8940c4253c]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zeroSphere' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zeroSphere",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:zero-spheres",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|af45eb852e28d1e8]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zeroSphere_eq_orbit' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zeroSphere_eq_orbit",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:zero-spheres",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|5279d0ac13e2863b]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zeroSphere_zeros' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zeroSphere_zeros",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:zero-spheres",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|a12e1c0433471729]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zeroSphere_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zeroSphere_disjoint",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:zero-spheres",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|d692a4aa5eb1d925]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zeroSpheres_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zeroSpheres_infinite",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:zero-spheres",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|08fc29fd3af947ff]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'riemannHypothesis_iff_concentric' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "riemannHypothesis_iff_concentric",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:rh-equiv",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[thm:rh-equiv|AXIOM_CERTIFIED_UNANCHORED|06305d985d0b8810]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'Octonion' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "Octonion",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:carrier",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:carrier|AXIOM_CERTIFIED_UNANCHORED|5d7971e9b3dc6a8e]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'onePointEquivSphereOfFinrankEq' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "onePointEquivSphereOfFinrankEq",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:carrier",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "EXTERNAL_AXIOM_CERTIFIED",
+      "token": "KGT[def:carrier|EXTERNAL_AXIOM_CERTIFIED|2f359af045fed1bc]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.realize' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.realize",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:section-map",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|17db1056f108b1ba]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.realize_mem_sliceSphere' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.realize_mem_sliceSphere",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:section-map",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|0fa926a46101f8dc]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.realize_equivariant' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.realize_equivariant",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:section-map",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|ef70f90a9068ea9c]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.sliceCoord_smul_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.sliceCoord_smul_invariant",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:section-map",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|3f9c8dd76ecfe77a]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'H1' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "H1",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:two-worlds",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:two-worlds|AXIOM_CERTIFIED_UNANCHORED|662a164d5eb24d0d]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'SphereWorld' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "SphereWorld",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:two-worlds",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:two-worlds|AXIOM_CERTIFIED_UNANCHORED|e25cc88c972b9e32]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.Base' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.Base",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|16aa497089f37eca]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.cayleyGL' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.cayleyGL",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|4348c4b241593be6]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.diagonalGL' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.diagonalGL",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|84a6efc201923eb4]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.diagonalGL_mul' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.diagonalGL_mul",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|a914124f369af202]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.diagonalGLHom' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.diagonalGLHom",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|be6e5841126e3491]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.expUnit' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.expUnit",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|efbcc5d2640a1ede]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.expUnit_add' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.expUnit_add",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1c93eca2826ea38a]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.diskExpAction' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.diskExpAction",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|e05e98944d57df72]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.diskExpAction_add' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.diskExpAction_add",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|15bb8868c7da0111]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.cayleyProjective' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.cayleyProjective",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|80afa0938ed53a8b]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.cayleyProjective_mul' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.cayleyProjective_mul",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3b66e1e61bd88af4]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.orbitRep' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.orbitRep",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3621473bc7afdc25]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.orbitRep_spec' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.orbitRep_spec",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|482da0f7128d1a79]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.stabilizerPart' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.stabilizerPart",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|aba878058bd367e9]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.orbit_stabilizer_factor' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.orbit_stabilizer_factor",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|8482459e1d9bd28e]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.stabilizerPart_unique' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.stabilizerPart_unique",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|bf0904a262388a20]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.stabilizerPart_id' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.stabilizerPart_id",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|61e88546772a6cf4]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'GreatCircle.stabilizerPart_comp' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "GreatCircle.stabilizerPart_comp",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|bdb2b10b410bed9a]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.distinguishedDiskAction' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.distinguishedDiskAction",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|a9c97a9692eb9d0b]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.distinguishedDiskAction_eq_fullMultiplier' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.distinguishedDiskAction_eq_fullMultiplier",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|85256da89a122706]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.distinguishedPoleFactor_euler' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.distinguishedPoleFactor_euler",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1a844116441fc0f1]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.distinguishedPoleFactor_weierstrass' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.distinguishedPoleFactor_weierstrass",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3b91dc39f96d0eb6]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.eulerPrimeSum' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.eulerPrimeSum",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|4193dee4cd70e26e]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.eulerDiskAction_eq_value' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.eulerDiskAction_eq_value",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b77b291921774576]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|5b9393fe182d206c]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport.diskExpAction_eq_value' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport.diskExpAction_eq_value",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|c10bdb617d986b89]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport.diskExpAction_endpoint_eq' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport.diskExpAction_endpoint_eq",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|d038034807bf7e54]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport.lift_endpoint_re_eq' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport.lift_endpoint_re_eq",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3c920e5fd4e84e39]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport.level' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport.level",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3888982952d822c7]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport.continuous_level' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport.continuous_level",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|5239b2d98df406c2]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport.lift_unique' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport.lift_unique",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|135dc332cd54163b]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport.level_independent' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport.level_independent",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|70bcddf50cf9e9af]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport.value_at_source' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport.value_at_source",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|8fc4b4811e3e9724]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport.value_at_target' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport.value_at_target",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3a2d82655cad8ba8]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport.endpoint_log_norm_eq' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport.endpoint_log_norm_eq",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|9a4f9687bf0f3cd9]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.GpvTransport.endpoint_norm_eq' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.GpvTransport.endpoint_norm_eq",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|d79e597c05b7022a]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.projectiveGpvActionSquare' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.projectiveGpvActionSquare",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|c893249eacd2c7d9]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.projectiveGpvActionSquare_level' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.projectiveGpvActionSquare_level",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|27240a34eec6c783]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.projectiveGpvActionSquare_input_commutes' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.projectiveGpvActionSquare_input_commutes",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|c91497aaa6259eaf]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.projectiveGpvActionSquare_output_commutes' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.projectiveGpvActionSquare_output_commutes",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|bcbe5d804308f8ea]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.canonicalAsectionPresentation_euler_prime_stack' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.canonicalAsectionPresentation_euler_prime_stack",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|01ea91389dd3c2c3]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.canonicalAsectionPresentation_euler_lift_exp' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.canonicalAsectionPresentation_euler_lift_exp",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|cd1805cee7ab1c1e]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.canonicalAsectionPresentation_euler_lift_unique' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.canonicalAsectionPresentation_euler_lift_unique",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|f1fe027cf5497ff4]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.canonicalAsectionPresentation_euler_level_continuous' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.canonicalAsectionPresentation_euler_level_continuous",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|5abae6a7cb11b104]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.canonicalAsectionPresentation_euler_winding' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.canonicalAsectionPresentation_euler_winding",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|4b0b9cd4bb37a5d9]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.canonicalAsectionPresentation_euler_toNorth' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.canonicalAsectionPresentation_euler_toNorth",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|101331045dca3b58]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.projectiveObjectFrame' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.projectiveObjectFrame",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1091c2e2df2d8c0f]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.projectiveArrowElement' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.projectiveArrowElement",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|48fa5a343ddc9ead]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.projectiveObjectFrame_north' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.projectiveObjectFrame_north",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|fffe92f4acf944cf]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.distinguishedDiskAction_fixes_cayley_zero' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.distinguishedDiskAction_fixes_cayley_zero",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|2517e500a467abbd]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.distinguishedDiskAction_fixes_cayley_N' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.distinguishedDiskAction_fixes_cayley_N",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|982d5dbc76230caf]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.projectiveArrowElement_id' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.projectiveArrowElement_id",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|cf7a3bab42d50106]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.projectiveArrowElement_comp' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.projectiveArrowElement_comp",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|9e4a6e85e28dbd9c]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionSlice' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionSlice",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|9ee63cd443acd32e]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionEquivariant' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionEquivariant",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|5804ccf73eafd2e5]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionStateInput' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionStateInput",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|a626191bd9041ec7]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionStateOutput' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionStateOutput",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|96c0202ca4f3c19e]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionState_input_then_equivariant' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionState_input_then_equivariant",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|36ba3fbd5cb0a474]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.ActionTransportSquare.coordinateTransport_commutes' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.ActionTransportSquare.coordinateTransport_commutes",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3c291d27af644ef9]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.ActionTransportSquare.input_commutes' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.ActionTransportSquare.input_commutes",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|964c0c98343f09d8]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.ActionTransportSquare.output_commutes' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.ActionTransportSquare.output_commutes",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|0059187ff2331f64]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionActionState' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionActionState",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|e3867b569859afdb]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionActionTransport' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionActionTransport",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|ea866aa52b87b47b]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionActionState.ofInput' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionActionState.ofInput",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3aaa3a082ffec8c8]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionActionState_ofInput_value' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionActionState_ofInput_value",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3194a99a49ffd6e8]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionActionTransport_obj_input' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionActionTransport_obj_input",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|41bfc12a5b325c8b]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionActionTransport_obj_positioned' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionActionTransport_obj_positioned",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|4889cc8cfd1374e1]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionActionTransport_obj_value' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionActionTransport_obj_value",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|663e1a2d833d0185]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionActionTransport_id' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionActionTransport_id",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|a55828ceb7835ec6]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionActionTransport_comp' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionActionTransport_comp",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|bda9c0d33eeb53f8]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionActionDiagram' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionActionDiagram",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|96be01a21134c424]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.residueActionState' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.residueActionState",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|e0259d3a4f785edd]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.residueActionState_mem",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[def:base|PRODUCTION_MODULE_OPEN|daffecc13b6c864d]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.c4_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.c4_infinite",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|c1e5d984e18e60df]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.transportLevel",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[def:base|PRODUCTION_MODULE_OPEN|20b0994d816e3cde]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'CategoryTheory.Grothendieck' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "CategoryTheory.Grothendieck",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:base",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "EXTERNAL_AXIOM_CERTIFIED",
+      "token": "KGT[def:base|EXTERNAL_AXIOM_CERTIFIED|266572575c8fac7c]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'weierstrassE' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "weierstrassE",
+        "semantic_relation": "not_checked"
+      },
+      "label": "prop:weierstrass",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|0e2efaf7d3fc177f]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'spherePrimary' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "spherePrimary",
+        "semantic_relation": "not_checked"
+      },
+      "label": "prop:weierstrass",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|5a8d9fa3d5be49e9]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.c3_multipliable' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.c3_multipliable",
+        "semantic_relation": "not_checked"
+      },
+      "label": "prop:weierstrass",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|0d12a3c32235a377]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.c3_locMajorant' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.c3_locMajorant",
+        "semantic_relation": "not_checked"
+      },
+      "label": "prop:weierstrass",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|4204f60cc5d3abab]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.c3_factorization' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.c3_factorization",
+        "semantic_relation": "not_checked"
+      },
+      "label": "prop:weierstrass",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|588dfb76c11b92c4]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.sphereZero_mem_CResidueZeroLocus' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.sphereZero_mem_CResidueZeroLocus",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:residue-spheres",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[lem:residue-spheres|AXIOM_CERTIFIED_UNANCHORED|d1736b8677b4c213]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.mem_CResidueZeroLocus_iff_exists_sphereZero' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.mem_CResidueZeroLocus_iff_exists_sphereZero",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:residue-spheres",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[lem:residue-spheres|AXIOM_CERTIFIED_UNANCHORED|c5d5edf2ebfe8159]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'G2.exists_smul_eq_of_mem_unitImaginarySphere' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "G2.exists_smul_eq_of_mem_unitImaginarySphere",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:residue-spheres",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[lem:residue-spheres|AXIOM_CERTIFIED_UNANCHORED|e7309f906a1e94aa]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'CategoryTheory.Grothendieck' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "CategoryTheory.Grothendieck",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:pi0-grothendieck",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "EXTERNAL_AXIOM_CERTIFIED",
+      "token": "KGT[lem:pi0-grothendieck|EXTERNAL_AXIOM_CERTIFIED|e7504b9570e91f29]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "pi0GrothendieckEquiv",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:pi0-grothendieck",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[lem:pi0-grothendieck|PRODUCTION_MODULE_OPEN|ef9d65ec10eef9e1]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "pi0_grothendieck",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:pi0-grothendieck",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[lem:pi0-grothendieck|PRODUCTION_MODULE_OPEN|d956b0e5a12a6ffe]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:A-section",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:A-section|AXIOM_CERTIFIED_UNANCHORED|5fb7f6335ed8f282]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'weierstrassE' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "weierstrassE",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:A-section",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:A-section|AXIOM_CERTIFIED_UNANCHORED|8785fff6a3ada33e]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'spherePrimary' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "spherePrimary",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:A-section",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:A-section|AXIOM_CERTIFIED_UNANCHORED|6754ead34e39fd0f]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.CResidueZeroLocus' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.CResidueZeroLocus",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:residue-subdiagram",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|4b7b217da901ddfe]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionCResidueDiagram' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionCResidueDiagram",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:residue-subdiagram",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|6297b34ab8167179]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'ASection.AsectionCResidueInclusion' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "ASection.AsectionCResidueInclusion",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:residue-subdiagram",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|ab124bd5afebb1bc]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.AsectionCResidueInclusionTotal",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:residue-subdiagram",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[def:residue-subdiagram|PRODUCTION_MODULE_OPEN|4abe2b256155d2c2]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.AsectionCResidueInclusionTotal_full",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:residue-subdiagram",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[def:residue-subdiagram|PRODUCTION_MODULE_OPEN|afae84c2d459385c]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.AsectionCResidueInclusionTotal_faithful",
+        "semantic_relation": "not_checked"
+      },
+      "label": "def:residue-subdiagram",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[def:residue-subdiagram|PRODUCTION_MODULE_OPEN|d00dc0d10c2906cf]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.sweepTransitive_on_residueSystem",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:c-residue-transitive",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[lem:c-residue-transitive|PRODUCTION_MODULE_OPEN|d807b69979cc57cf]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.northRelativeLoop_maps",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:c-residue-transitive",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[lem:c-residue-transitive|PRODUCTION_MODULE_OPEN|b651a3a35bd9f71e]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.northComparison_of_parallelFaces",
+        "semantic_relation": "not_checked"
+      },
+      "label": "lem:c-residue-transitive",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[lem:c-residue-transitive|PRODUCTION_MODULE_OPEN|31a70a56df59755b]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.concentricity",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:concentricity",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[thm:concentricity|PRODUCTION_MODULE_OPEN|ba553b3c12c99f77]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.residueTotal_isConnected",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:concentricity",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[thm:concentricity|PRODUCTION_MODULE_OPEN|42aa8838b16db803]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.residueTotal_pi0_singleton",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:concentricity",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[thm:concentricity|PRODUCTION_MODULE_OPEN|e0cb65c6390e5cb3]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.transportLevel",
+        "semantic_relation": "not_checked"
+      },
+      "label": "thm:concentricity",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[thm:concentricity|PRODUCTION_MODULE_OPEN|0e68676888408912]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "ASection.nontrivial_one_centre",
+        "semantic_relation": "not_checked"
+      },
+      "label": "cor:nontrivial",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[cor:nontrivial|PRODUCTION_MODULE_OPEN|9af2c752b43b77c9]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": "'zetaSection' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "declaration": "zetaSection",
+        "semantic_relation": "not_checked"
+      },
+      "label": "cor:zeta-section",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "AXIOM_CERTIFIED_UNANCHORED",
+      "token": "KGT[cor:zeta-section|AXIOM_CERTIFIED_UNANCHORED|fbd1a803c09a81ba]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "zeta_riemannHypothesis",
+        "semantic_relation": "not_checked"
+      },
+      "label": "cor:rh",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[cor:rh|PRODUCTION_MODULE_OPEN|f528bc7a5e46be40]"
+    },
+    {
+      "details": {
+        "author_object": "—",
+        "axiom_print": null,
+        "axioms": null,
+        "declaration": "zeta_criticalLine_zeros_infinite",
+        "semantic_relation": "not_checked"
+      },
+      "label": "cor:rh",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "PRODUCTION_MODULE_OPEN",
+      "token": "KGT[cor:rh|PRODUCTION_MODULE_OPEN|b871ad2441e82bf3]"
+    },
+    {
+      "details": {
+        "binding_count": 5,
+        "certified_inference_count": 8,
+        "inference_count": 8,
+        "rejections": [],
+        "unresolved_binding_count": 5
+      },
+      "label": "lem:c-residue-transitive",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "INFERENCE_CERTIFIED_AUTHOR_BOUND_LEAN_PENDING",
+      "token": "KGT[lem:c-residue-transitive|INFERENCE_CERTIFIED_AUTHOR_BOUND_LEAN_PENDING|88cf6b9c45f0413b]"
+    },
+    {
+      "details": {
+        "binding_count": 1,
+        "certified_inference_count": 2,
+        "inference_count": 2,
+        "rejections": [],
+        "unresolved_binding_count": 1
+      },
+      "label": "thm:concentricity",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "INFERENCE_CERTIFIED_AUTHOR_BOUND_LEAN_PENDING",
+      "token": "KGT[thm:concentricity|INFERENCE_CERTIFIED_AUTHOR_BOUND_LEAN_PENDING|72f7cce3da635cf4]"
+    },
+    {
+      "details": {
+        "binding_count": 0,
+        "certified_inference_count": 1,
+        "inference_count": 1,
+        "rejections": [],
+        "unresolved_binding_count": 0
+      },
+      "label": "cor:nontrivial",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "INFERENCE_CERTIFIED",
+      "token": "KGT[cor:nontrivial|INFERENCE_CERTIFIED|763b9a4a3a7e2929]"
+    },
+    {
+      "details": {
+        "binding_count": 0,
+        "certified_inference_count": 2,
+        "inference_count": 2,
+        "rejections": [],
+        "unresolved_binding_count": 0
+      },
+      "label": "cor:rh",
+      "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+      "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5",
+      "status": "INFERENCE_CERTIFIED",
+      "token": "KGT[cor:rh|INFERENCE_CERTIFIED|277a0df7d4c6d72c]"
+    }
+  ],
+  "ledger_pdf_hash": "9266949611719cc94b51aed44853f21186605190219f9fcdbd8f9bb357a50a6b",
+  "master_hash": "c023ddc2e00c24cc344839b150b23b11fa8478949e78666fd4784a28a894f33a",
+  "project": "Concentricity",
+  "schema": 1,
+  "source_hash": "ee9eafeb23721f66d80cf5ad488e7fde77be068c85a92c466459e4b3952de6e5"
+}

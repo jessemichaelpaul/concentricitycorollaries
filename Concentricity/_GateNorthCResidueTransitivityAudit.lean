@@ -382,21 +382,6 @@ theorem residueTotal_pi0_singleton_of_connected_audit
   exact fun P Q =>
     _root_.Quotient.sound (CategoryTheory.isPreconnected_zigzag P Q)
 
-/-- Reading an equality through `val` is certified on the exact component
-space of the C-residue total.  The local `valA` slot is the A-specific
-binding/instantiation seat; the inference itself introduces no new object. -/
-theorem residuePi0_val_congr_audit
-    (A : ASection)
-    (valA : CategoryTheory.ConnectedComponents (Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) → ℝ)
-    (Pn P0 : Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat))
-    (hkn : CategoryTheory.ConnectedComponents.mk Pn =
-      CategoryTheory.ConnectedComponents.mk P0) :
-    valA (CategoryTheory.ConnectedComponents.mk Pn) =
-      valA (CategoryTheory.ConnectedComponents.mk P0) := by
-  exact congrArg valA hkn
-
 #check @residueActionState_north_input_audit
 #check @residueActionTransport_north_input_audit
 #check @northFiberHom_of_coordinate_audit
@@ -414,7 +399,6 @@ theorem residuePi0_val_congr_audit
 #check @residueTotal_morphism_of_northComparison_audit
 #check @residueTotal_isConnected_of_transitive_audit
 #check @residueTotal_pi0_singleton_of_connected_audit
-#check @residuePi0_val_congr_audit
 
 #print axioms residueActionState_north_input_audit
 #print axioms residueActionTransport_north_input_audit
@@ -433,6 +417,5 @@ theorem residuePi0_val_congr_audit
 #print axioms residueTotal_morphism_of_northComparison_audit
 #print axioms residueTotal_isConnected_of_transitive_audit
 #print axioms residueTotal_pi0_singleton_of_connected_audit
-#print axioms residuePi0_val_congr_audit
 
 end ASection

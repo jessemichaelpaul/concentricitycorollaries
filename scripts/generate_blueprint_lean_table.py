@@ -43,6 +43,16 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def tree_digest(paths: list[Path]) -> str:
+    value = hashlib.sha256()
+    for path in sorted(paths):
+        value.update(str(path.resolve().relative_to(ROOT.resolve())).encode())
+        value.update(b"\0")
+        value.update(path.read_bytes())
+        value.update(b"\0")
+    return value.hexdigest()
+
+
 def master_block(master: str, label: str) -> tuple[str, int]:
     marker = rf"\label{{{label}}}"
     at = master.find(marker)
@@ -63,6 +73,17 @@ def parse_axioms(output: str) -> dict[str, list[str]]:
     for match in pattern.finditer(output):
         axioms = [item.strip() for item in match.group(2).split(",") if item.strip()]
         result[match.group(1)] = axioms
+    return result
+
+
+def parse_axiom_prints(output: str) -> dict[str, str]:
+    result: dict[str, str] = {}
+    pattern = re.compile(
+        r"^'(.+)' (?:depends on axioms: \[[^\]]*\]|does not depend on any axioms)$",
+        re.M,
+    )
+    for match in pattern.finditer(output):
+        result[match.group(1)] = match.group(0)
     return result
 
 
@@ -108,12 +129,32 @@ def find_declaration_line(path: Path, declaration: str) -> int:
     return find_line(path, declaration)
 
 
+def declaration_header(path: Path, declaration: str) -> str:
+    """Return the live declaration header through its `:=` marker."""
+    if not path.exists():
+        return ""
+    lines = path.read_text(encoding="utf-8").splitlines()
+    start = find_declaration_line(path, declaration)
+    if start == 0:
+        return ""
+    header: list[str] = []
+    for line in lines[start - 1:]:
+        header.append(line)
+        if ":=" in line:
+            break
+    return "\n".join(header)
+
+
 def md_escape(value: str) -> str:
     return value.replace("|", r"\|").replace("\n", " ")
 
 
 def exact_axiom_surface(actual: list[str] | None, allowed: list[str]) -> bool:
-    return actual is not None and actual == allowed
+    return actual is not None and "sorryAx" not in actual and set(actual).issubset(set(allowed))
+
+
+def diagnostic_line(output: str, needle: str) -> str:
+    return next((line.strip() for line in output.splitlines() if needle in line), "")
 
 
 def binding_digest(row: dict[str, object], identity_hashes: dict[str, str]) -> str:
@@ -126,6 +167,26 @@ def binding_digest(row: dict[str, object], identity_hashes: dict[str, str]) -> s
     payload_parts.extend(f"{path}:{digest}" for path, digest in sorted(identity_hashes.items()))
     payload = "\0".join(payload_parts)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def author_binding_digest(row: dict[str, object]) -> str:
+    """Identity of the author's semantic binding, independent of Lean spelling."""
+    fields = ("id", "master", "paper_object", "expected_type")
+    parts = [str(row[field]) for field in fields]
+    parts.extend(str(item) for item in row.get("required_master_declarations", []))
+    parts.append(str(row.get("target_declaration", "")))
+    payload = "\0".join(parts)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def receipt_binding_identity(
+    expression: str, expected_type: str, master_hash: str, source_hash: str,
+) -> str:
+    value = hashlib.sha256()
+    for part in (expression, expected_type, master_hash, source_hash):
+        value.update(part.encode("utf-8"))
+        value.update(b"\0")
+    return value.hexdigest()
 
 
 def run_binding_probe(manifest: dict[str, object]) -> tuple[dict[str, bool], dict[str, object]]:
@@ -196,10 +257,15 @@ def main() -> int:
     terminal_names = [row["declaration"] for row in manifest["terminal"]]
     inference_names = [row["receipt"] for row in manifest["inference"]]
     terminal_axioms = parse_axioms(terminal_probe.stdout)
+    terminal_axiom_prints = parse_axiom_prints(terminal_probe.stdout)
     inference_output = inference_probe.stdout + "\n" + corollary_inference_probe.stdout
     transitivity_inference_axioms = parse_axioms(inference_probe.stdout)
     corollary_inference_axioms = parse_axioms(corollary_inference_probe.stdout)
     inference_axioms = {**transitivity_inference_axioms, **corollary_inference_axioms}
+    inference_axiom_prints = {
+        **parse_axiom_prints(inference_probe.stdout),
+        **parse_axiom_prints(corollary_inference_probe.stdout),
+    }
     terminal_types = parse_types(terminal_probe.stdout, terminal_names)
     inference_types = {
         **parse_types(inference_probe.stdout, inference_names),
@@ -223,6 +289,7 @@ def main() -> int:
                 "kernel_green": kernel_ok,
                 "type": terminal_types.get(decl, ""),
                 "axioms": terminal_axioms.get(decl),
+                "axiom_print": terminal_axiom_prints.get(decl, ""),
                 "axiom_ok": axiom_ok,
                 "status": status,
             }
@@ -259,6 +326,7 @@ def main() -> int:
                 "kernel_green": kernel_ok,
                 "type": inference_types.get(receipt, ""),
                 "axioms": inference_axioms.get(receipt),
+                "axiom_print": inference_axiom_prints.get(receipt, ""),
                 "axiom_ok": axiom_ok,
                 "production_identity_ok": production_identity_ok,
                 "source": source,
@@ -282,6 +350,8 @@ def main() -> int:
                 "master_line": master_line,
                 "semantic_link": semantic_link,
                 "diagnostic_seen": diagnostic_seen,
+                "command": f"lake env lean {row.get('source', manifest['production_source'])}",
+                "kernel_message": diagnostic_line(production_probe.stdout, row["diagnostic"]),
                 "source": row.get("source", manifest["production_source"]),
                 "source_line": find_declaration_line(
                     ROOT / row.get("source", manifest["production_source"]), row["declaration"]
@@ -309,17 +379,64 @@ def main() -> int:
     identity_hashes = {
         path: sha256(ROOT / path) for path in manifest.get("identity_hash_sources", [])
     }
+    receipt_master_hash = sha256(MASTER_PATH)
+    receipt_source_hash = tree_digest(list((ROOT / "Concentricity").rglob("*.lean")))
     binding_rows = []
     for row in manifest.get("bindings", []):
         candidate = row.get("candidate_expression")
         digest = binding_digest(row, identity_hashes) if candidate else None
+        author_digest = author_binding_digest(row)
+        block, _ = master_block(master, str(row["master"]))
+        linked_declarations = {
+            declaration.strip()
+            for group in re.findall(r"\\lean\{([^}]*)\}", block)
+            for declaration in group.split(",")
+            if declaration.strip()
+        }
+        required_declarations = set(row.get("required_master_declarations", []))
+        master_targets_linked = required_declarations.issubset(linked_declarations)
+        target_declaration = str(row.get("target_declaration", ""))
+        target_header = declaration_header(ROOT / manifest["production_source"], target_declaration)
+        target_argument = str(row.get("target_argument", ""))
+        target_typed = not target_declaration or (
+            bool(target_header)
+            and (
+                bool(re.search(rf"\b{re.escape(target_argument)}\b", target_header))
+                if target_argument
+                else target_declaration.rsplit(".", 1)[-1] in str(row["expected_type"])
+            )
+        )
         typechecked = bool(candidate) and binding_checks.get(row["id"], False)
-        author_confirmed = bool(digest) and row.get("author_confirmed_candidate_sha256") == digest
-        status = "BINDING_READY" if typechecked and author_confirmed else "BINDING_UNRESOLVED"
+        author_confirmed = (
+            row.get("author_binding_confirmed") is True
+            and row.get("author_binding_sha256") == author_digest
+        )
+        if not master_targets_linked or not target_typed:
+            status = "AUTHOR_BINDING_TARGET_MISMATCH"
+        elif not author_confirmed:
+            status = "AUTHOR_CONFIRMATION_REQUIRED"
+        elif not candidate:
+            status = "AUTHOR_BOUND_LEAN_PENDING"
+        elif not typechecked:
+            status = "LEAN_BINDING_REJECTED"
+        else:
+            status = "BINDING_READY"
         binding_rows.append(
             {
                 **row,
                 "candidate_sha256": digest,
+                "author_binding_digest": author_digest,
+                "master_targets_linked": master_targets_linked,
+                "target_typed": target_typed,
+                "target_header": target_header,
+                "exact_expression": str(candidate) if candidate else "",
+                "identity_hash": (
+                    receipt_binding_identity(
+                        str(candidate), str(row["expected_type"]),
+                        receipt_master_hash, receipt_source_hash,
+                    )
+                    if candidate else None
+                ),
                 "typechecked": typechecked,
                 "author_confirmed": author_confirmed,
                 "status": status,
@@ -340,6 +457,9 @@ def main() -> int:
         ROOT / "lakefile.toml",
     ]
     fingerprints = {str(path.relative_to(ROOT)): sha256(path) for path in fingerprint_paths}
+    fingerprints["lean_source_tree"] = tree_digest(
+        list((ROOT / "Concentricity").rglob("*.lean"))
+    )
 
     terminal_failures = [row for row in terminal_rows if row["status"] == "NOT_CERTIFIED"]
     inference_failures = [row for row in inference_rows if row["status"] == "NOT_CERTIFIED"]
@@ -355,6 +475,7 @@ def main() -> int:
                 "receipt": name,
                 "kernel_green": probe_green,
                 "axioms": axioms,
+                "axiom_print": inference_axiom_prints.get(name, ""),
                 "axiom_ok": axiom_ok,
                 "status": "INFERENCE_CERTIFIED" if probe_green and axiom_ok else "NOT_CERTIFIED",
             }
@@ -466,7 +587,7 @@ def main() -> int:
         "The manifest is the single human-ratified mapping from a master clause to a Lean declaration; the generator verifies the exact master anchor, exact Lean type, fresh kernel run, axiom surface, and source fingerprints.",
         "Regenerate with `scripts/generate_blueprint_lean_table.py`. The generator reads and probes `Concentricity/Theorem.lean`; it does not edit either production seat.",
         "",
-        f"Current count: {sum(row['status'] == 'TERMINAL_CERTIFIED' for row in terminal_rows)} terminal certificates; {sum(row['status'] == 'INFERENCE_CERTIFIED' for row in inference_rows)} inference certificates; {sum(row['status'] == 'BINDING_READY' for row in project_local_rows)} unpacked dossier bindings ready; {sum(row['status'] == 'BINDING_UNRESOLVED' for row in binding_rows)} identity bindings unresolved; {sum(row['status'] == 'OPEN_SEAT' for row in open_rows)} production seats open.",
+        f"Current count: {sum(row['status'] == 'TERMINAL_CERTIFIED' for row in terminal_rows)} terminal certificates; {sum(row['status'] == 'INFERENCE_CERTIFIED' for row in inference_rows)} inference certificates; {sum(row['status'] == 'BINDING_READY' for row in project_local_rows)} unpacked dossier bindings ready; {sum(row['author_confirmed'] for row in binding_rows)} author bindings confirmed; {sum(row['status'] == 'AUTHOR_BOUND_LEAN_PENDING' for row in binding_rows)} confirmed bindings awaiting Lean spelling; {sum(row['status'] == 'OPEN_SEAT' for row in open_rows)} production seats open.",
         "",
         "Certificate meanings:",
         "",
@@ -522,7 +643,7 @@ def main() -> int:
             "",
             "## Binding identity layer",
             "",
-            "The first table records the project-specific objects already unpacked from the two arbitrary objects. The second table is the only unresolved identity bridge. A candidate becomes ready only when Lean elaborates the exact expression at the expected type and the author-confirmed hash matches that expression together with the current master and production-source fingerprints.",
+            "The first table records the project-specific objects already unpacked from the two arbitrary objects. The second table separates the author's confirmed mathematical binding from the typist's Lean spelling. Author confirmation hashes the master label, paper object, local role, and expected type; Lean then checks the recovered candidate expression independently at that exact type.",
             "",
             "| Exact project-specific locals | Provenance | Source exact | Kernel reached consumer | Status |",
             "|---|---|---:|---:|---|",
@@ -536,15 +657,18 @@ def main() -> int:
     lines.extend(
         [
             "",
-            "| Paper object | Lean local | Expected type | Candidate expression | Lean elaboration | Author identity confirmation | Status |",
-            "|---|---|---|---|---:|---:|---|",
+            "| Paper object | Lean local | Expected type | Author binding | Master link and target | Candidate expression | Lean elaboration | Status |",
+            "|---|---|---|---|---:|---|---:|---|",
         ]
     )
     for row in binding_rows:
         candidate = f"`{md_escape(str(row['candidate_expression']))}`" if row["candidate_expression"] else "—"
+        lean_local = f"`{row['lean_local']}`" if row.get("lean_local") else "—"
         lines.append(
-            f"| {md_escape(row['paper_object'])} | `{row['lean_local']}` | `{md_escape(row['expected_type'])}` | {candidate} | "
-            f"{'✓' if row['typechecked'] else '—'} | {'✓' if row['author_confirmed'] else '—'} | `{row['status']}` |"
+            f"| {md_escape(row['paper_object'])} | {lean_local} | `{md_escape(row['expected_type'])}` | "
+            f"{'✓ confirmed' if row['author_confirmed'] else '—'} | "
+            f"{'✓' if row['master_targets_linked'] and row['target_typed'] else '✗'} | {candidate} | "
+            f"{'✓' if row['typechecked'] else '—'} | `{row['status']}` |"
         )
     lines.extend(
         [
@@ -554,7 +678,7 @@ def main() -> int:
             (
                 "`EXACT ATTEMPT` is enabled because every consumed binding is `BINDING_READY`."
                 if exact_attempt_emitted
-                else "`EXACT ATTEMPT` is mechanically suppressed because at least one consumed binding is `BINDING_UNRESOLVED`. No tactic text is proposed or printed."
+                else "`EXACT ATTEMPT` is mechanically suppressed until every author-confirmed binding has a Lean expression accepted at its exact type. No substitute object or tactic text is proposed or printed."
             ),
         ]
     )

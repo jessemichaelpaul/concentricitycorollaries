@@ -1,6 +1,17 @@
 {
+  "description": "Project-local provenance boundary for Codex; existing Concentricity guidance is preserved.",
   "hooks": {
     "PreToolUse": [
+      {
+        "matcher": "^(Bash|apply_patch|Edit|Write)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/provenance_project_lock.py\"",
+            "statusMessage": "checking active provenance project and authoring phase"
+          }
+        ]
+      },
       {
         "matcher": "Write|Edit",
         "hooks": [
@@ -11,12 +22,35 @@
         ]
       }
     ],
+    "PermissionRequest": [
+      {
+        "matcher": "^(Bash|apply_patch|Edit|Write)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/provenance_project_lock.py\"",
+            "statusMessage": "enforcing provenance sandbox"
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [
           {
             "type": "command",
             "command": "jq -Rs '{hookSpecificOutput:{hookEventName:\"SessionStart\",additionalContext:.}}' /Users/jessepaul/Desktop/concentricity/register/00-register.md"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/python3 \"$(git rev-parse --show-toplevel)/tools/claim_gate.py\"",
+            "statusMessage": "validating provenance claims"
           }
         ]
       }
