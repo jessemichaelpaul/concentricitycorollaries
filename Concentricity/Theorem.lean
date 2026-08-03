@@ -827,13 +827,10 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
           (GreatCircle.cayleyProjective rE.1).val uStar =
               xN.input.back.coordinate ∧
             (GreatCircle.cayleyProjective rW.1).val uStar =
-              yN.input.back.coordinate := by
-      -- Instantiate uStar and stabilizer parts. The boundary equations follow
-      -- from inputEquation_of_boundaryReading applied to the distinguished action.
-      exact ⟨xN.input.back.coordinate,
-        GreatCircle.stabilizerPart g,
-        GreatCircle.stabilizerPart h,
-        by sorry, by sorry⟩
+              yN.input.back.coordinate :=
+      -- OPEN.  Master (B): the C3 boundary readings of the one fixed 0-to-N
+      -- tape.  This is NOT proved; it is the transcription that remains.
+      ?boundaryFaceReadings
     refine ⟨CategoryTheory.Groupoid.inv (faceOfStabilizerPart rE)
         ≫ faceOfStabilizerPart rW,
       northComparison_of_parallelFaces A (faceOfStabilizerPart rE)
@@ -968,8 +965,8 @@ theorem ASection.concentricity (A : ASection) :
         ⟨A.residueActionState ASection.projectiveNorth n baseWorld, hmem n⟩⟩
       ⟨ASection.projectiveNorth,
         ⟨A.residueActionState ASection.projectiveNorth 0 baseWorld, hmem 0⟩⟩
-    -- The singleton equality: both representatives are in the same component.
-    -- By definition of the singleton in ConnectedComponents, their transported
-    -- levels must be equal (they differ only by a morphism in the same component).
-    sorry
+    -- OPEN.  `hkn` is an equality of π₀ classes; the target is the real-valued
+    -- level equality.  The class-value readout that carries one to the other is
+    -- NOT proved here; this is the transcription that remains.
+    ?valReadout
   exact hval hk
