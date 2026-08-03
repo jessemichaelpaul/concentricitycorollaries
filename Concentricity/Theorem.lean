@@ -498,8 +498,7 @@ theorem ASection.northRelativeLoop_maps {X : GreatCircle.Base}
 /-- Inversion sends a stabilizer part to its inverse (master `lem:c-residue-
 transitive`, (R)).  This is the `hinv` argument already used inline inside
 `northRelativeLoop_maps`, hoisted so both consumers share one proof. -/
-theorem ASection.stabilizerPart_inv {X : GreatCircle.Base}
-    (k : X ⟶ ASection.projectiveNorth) :
+theorem ASection.stabilizerPart_inv {X Y : GreatCircle.Base} (k : X ⟶ Y) :
     GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv k)
       = (GreatCircle.stabilizerPart k)⁻¹ := by
   have hmul :
@@ -510,14 +509,14 @@ theorem ASection.stabilizerPart_inv {X : GreatCircle.Base}
             GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv k) =
           GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv k ≫ k) :=
         (GreatCircle.stabilizerPart_comp (CategoryTheory.Groupoid.inv k) k).symm
-      _ = GreatCircle.stabilizerPart (𝟙 ASection.projectiveNorth) :=
+      _ = GreatCircle.stabilizerPart (𝟙 Y) :=
         congrArg GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv_comp k)
-      _ = 1 := GreatCircle.stabilizerPart_id ASection.projectiveNorth
+      _ = 1 := GreatCircle.stabilizerPart_id Y
   exact eq_inv_of_mul_eq_one_right hmul
 
 /-- The Cayley reading of the same fact; `cayleyProjective` is a monoid map. -/
-theorem ASection.cayleyProjective_stabilizerPart_inv {X : GreatCircle.Base}
-    (k : X ⟶ ASection.projectiveNorth) :
+theorem ASection.cayleyProjective_stabilizerPart_inv {X Y : GreatCircle.Base}
+    (k : X ⟶ Y) :
     (GreatCircle.cayleyProjective (GreatCircle.stabilizerPart k).1)⁻¹
       = GreatCircle.cayleyProjective
           (GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv k)).1 := by
@@ -525,7 +524,7 @@ theorem ASection.cayleyProjective_stabilizerPart_inv {X : GreatCircle.Base}
 
 /-- Reversing a boundary square is the square of the reversed base arrow. -/
 theorem ASection.orbitStabilizerActionSquare_inv (A : ASection)
-    {X : GreatCircle.Base} (k : X ⟶ ASection.projectiveNorth) :
+    {X Y : GreatCircle.Base} (k : X ⟶ Y) :
     (A.orbitStabilizerActionSquare k).inv
       = A.orbitStabilizerActionSquare (CategoryTheory.Groupoid.inv k) := by
   apply ASection.ActionTransportSquare.ext <;>
@@ -586,7 +585,7 @@ the Weierstrass square, read on the A-generated value states.  The two boundary
 presentations are parallel squares `S ⟶ D` with `D = A.distinguishedDiskAction`
 by `projectiveObjectFrame_north`. -/
 theorem ASection.relativeSquare_transport (A : ASection)
-    {X : GreatCircle.Base} (kE kW : X ⟶ ASection.projectiveNorth) :
+    {X Y Z : GreatCircle.Base} (kE : X ⟶ Y) (kW : X ⟶ Z) :
     A.AsectionActionTransport (CategoryTheory.Groupoid.inv kE ≫ kW)
       = ((A.orbitStabilizerActionSquare kE).inv.comp
           (A.orbitStabilizerActionSquare kW)).actionStateTransport A := by
