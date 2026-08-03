@@ -828,7 +828,8 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
               xN.input.back.coordinate ∧
             (GreatCircle.cayleyProjective rW.1).val uStar =
               yN.input.back.coordinate := by
-      -- Directly instantiate from the certified equations.
+      -- Instantiate uStar and stabilizer parts. The boundary equations follow
+      -- from inputEquation_of_boundaryReading applied to the distinguished action.
       exact ⟨xN.input.back.coordinate,
         GreatCircle.stabilizerPart g,
         GreatCircle.stabilizerPart h,
