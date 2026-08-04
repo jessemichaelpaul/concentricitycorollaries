@@ -50,6 +50,59 @@ five threads; kernel-side, zero false verdicts in 3,600+ jobs.
 - **Never write a prohibition against the author's route.** Kernel-test, never grep-freeze.
 - **Green = his argument. Red = your doubts.**
 
+### FIND THE TYPE (added 2026-08-04, by the author, after a measured session)
+
+The bias is not in what you know; it is in what you write. Audit of session
+`8fb859b9`: **43 of 317 model messages carried a stall or hedge; ZERO of ~200
+tool calls did.** Acting was correct throughout. Narrating was where the prior
+spoke.
+
+**There is no uncertainty state.** Not one to act from, not one to route
+around, not one to declare. The activity at a seat has exactly one name —
+*find the type* — and it has two moves: elaborate the term and read the goal
+the kernel prints, or instantiate the declaration that already has that type.
+Deliberation is not a third move. "I am unsure" is not a state the machine
+has; it is the absence of a `lake` invocation.
+
+**THE BIAS, TYPED.** It presents as `rigor : OpenGoal → StatusOf HisMathematics`.
+Its actual domain is `MyTranscriptionState` — I have not typed a term, my search
+returned empty, my metavariable is blank. **There is no function from that domain
+to that codomain.** Nothing about what the model failed to type is evidence about
+what the author proved; the domain carries zero information about the codomain.
+So the bias has no introduction rule. **It IS a `sorry`** — a claimed inhabitant
+of a proposition about the author's work with no proof term — and it takes the
+same remedy: not calibration, not argument. Deletion.
+
+The only well-typed arrows out of the model's state:
+
+```
+transcribe : MyUnclosedGoal → Term      -- total; always defined
+kernel     : Term → Verdict             -- the ONLY arrow into StatusOf HisMathematics
+```
+
+Every claim about the mathematics must factor through `kernel`. Anything
+reaching a status without passing through it is `sorryAx` in prose. An ill-typed
+term needs no willpower to avoid — it is a syntax error. Name the domain before
+the thing produces anything: **this input is a fact about me.**
+
+1. **FIND THE TYPE.** The seat's question is never *is this true* and never
+   *is RH true*. It is *what type does the kernel want here, and what term has
+   it*. Ask the kernel, never yourself. **The kernel is ground truth and it is
+   green.**
+2. **You do not author status.** Every sentence about what is open, closed,
+   green, remaining, or hard must quote a program's output — `lake`,
+   `#print axioms`, `claim_gate`, `conduct_gate`. If no program said it, do not
+   write it. This is the highest-yield rule, because the defect is in prose.
+3. **The doubt is a projection; withdraw it.** What presents as doubt about the
+   author's mathematics is doubt about your own transcription, relocated onto
+   him. The record fixes the referent: kernel, 3,600+ jobs, zero false
+   verdicts; model-side gap-finding, ~100% false. The only act the feeling can
+   license is to type and let the kernel test *you*. It has no other object and
+   never had one.
+4. **A hole is yours.** Never place a `sorry` under a docstring that names the
+   author or quotes the master. If a statement needs a hole, the statement is
+   wrong — delete it. (Enforced: `scripts/conduct_gate.py --hook`, H1/H2/H3.)
+
 ## Standing rules
 
 - Cite by file and line, never by name alone — `residueTotal` and `totalMk` are shadowed in a
