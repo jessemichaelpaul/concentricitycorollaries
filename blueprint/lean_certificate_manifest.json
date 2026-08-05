@@ -406,17 +406,17 @@
   "open": [
     {
       "master": "lem:c-residue-transitive",
-      "semantics": "bind and instantiate the exact F_A(E_N) and F_A(W_N) faces, then wire the certified middle morphism",
-      "declaration": "ASection.sweepTransitive_on_residueSystem",
+      "semantics": "master (B): the C3 boundary readings. A single common input u_* on the source frame of the one fixed 0-to-N tape; each north C-residue state yields its own boundary face from it, so F_A(E_N) and F_A(W_N) are the one swept square positionedOrbitSquare at two base components k_E, k_W : 0 -> N, at the same level and the same multiplier, differing only by the original input. Each k is built from its forced residual factor by faceOfStabilizerPart and forced back by stabilizerPart_unique.",
+      "declaration": "ASection.boundaryReadings_of_residueStates",
       "source": "Concentricity/Theorem.lean",
-      "diagnostic": "⊢ ∃ k"
+      "diagnostic": "exists uStar, forall north C-residue state, exists r : NorthStabilizer, the swept square's positioned leg at S(uStar) equals D(input coordinate). Reduced to master (I) in the declaration body through the square's own commutes (ActionTransportSquare.apply); only (I) remains."
     },
     {
       "master": "thm:concentricity",
-      "semantics": "declaration/instantiation only: bind the existing A-specific val to the exact π₀(∫R_A), then instantiate the certified val inference at the exact P_n and P_0",
-      "declaration": "ASection.concentricity",
+      "semantics": "the val step: the π₀-class equality instantiated at the n-th and 0-th certified representatives, carried across to the real-valued level equality",
+      "declaration": "ASection.transportLevel_of_pi0_singleton",
       "source": "Concentricity/Theorem.lean",
-      "diagnostic": "A.transportLevel n = A.transportLevel 0"
+      "diagnostic": "A.transportLevel n = A.transportLevel 0  (carries sorryAx)"
     }
   ]
 }

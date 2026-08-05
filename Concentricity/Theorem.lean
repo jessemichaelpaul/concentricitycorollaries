@@ -741,12 +741,284 @@ noncomputable instance ASection.residueTotalGroupoid (A : ASection) :
     CategoryTheory.Groupoid A.residueTotalCategory :=
   grothendieckGrpdGroupoid A.AsectionCResidueDiagram
 
-/-- **(Φ) IN THE AMBIENT — derived from (B).**  The two readings at the common
-`u_*` give the forced residual factors `r_E`, `r_W`; `faceOfStabilizerPart`
-builds each boundary face from its factor and `stabilizerPart_unique` forces the
-factor back; the relative loop `k = k_E⁻¹ ≫ k_W` then carries the first input to
-the second by (I), and `G₂` supplies the direction.  That pair `(k, φ)` IS the
-ambient Grothendieck morphism. -/
+/-- **STEP 2 OF THE ACTION-GROUPOID ARGUMENT, master (P).**  A north
+C-residue state IS the enumerated residue action state at its own zero index
+and its own direction.  Positioned determines input (`D_A` invertible,
+`coordinateTransport_mul`), input determines the state (`ofInput`), so this is
+read off the state and nothing is constructed.  Imported from the certified
+receipt `northState_is_residueActionState_audit`. -/
+theorem ASection.northState_is_residueActionState
+    (A : ASection) (zN : AsectionActionFiber A projectiveNorth)
+    (hzN : IsNorthCResidueState A zN) :
+    ∃ n : ℕ, ∃ I : SphereWorld,
+      zN = residueActionState A projectiveNorth n I := by
+  obtain ⟨z, hz, hzcoord⟩ := hzN
+  obtain ⟨n, hn⟩ :=
+    (A.mem_CResidueZeroLocus_iff_exists_sphereZero z).mp hz
+  let I : SphereWorld := zN.positioned.back.world
+  refine ⟨n, I, ?_⟩
+  have hpositioned_world :
+      zN.positioned.back.world = I := rfl
+  have hpositioned_coordinate :
+      zN.positioned.back.coordinate =
+        (A.sphereZero n : OnePoint ℂ) :=
+    hzcoord.symm.trans
+      (congrArg (fun w : ℂ => (w : OnePoint ℂ)) hn).symm
+  have hpositioned :
+      zN.positioned =
+        ((A.residueState n I : AsectionState A) :
+          AsectionStateWorld A) := by
+    have state_eq :
+        ∀ s t : AsectionState A,
+          s.world = t.world →
+          s.coordinate = t.coordinate →
+          s = t := by
+      rintro ⟨sw, sc⟩ ⟨tw, tc⟩ hw hc
+      cases hw
+      cases hc
+      rfl
+    rw [← CategoryTheory.ActionCategory.back_coe zN.positioned]
+    apply congrArg
+    exact state_eq _ _ hpositioned_world hpositioned_coordinate
+  have hinput :
+      zN.input =
+        (coordinateTransport A
+          (projectiveObjectFrame A projectiveNorth)⁻¹).obj
+            ((A.residueState n I : AsectionState A) :
+              AsectionStateWorld A) := by
+    have hgraph := zN.positioned_by_action
+    rw [hpositioned] at hgraph
+    have hinv := congrArg
+      (fun y => (coordinateTransport A
+        (projectiveObjectFrame A projectiveNorth)⁻¹).obj y) hgraph
+    calc
+      zN.input =
+          (coordinateTransport A
+            (projectiveObjectFrame A projectiveNorth)⁻¹).obj
+              ((coordinateTransport A
+                (projectiveObjectFrame A projectiveNorth)).obj
+                  zN.input) := by
+            change zN.input =
+              ((coordinateTransport A
+                (projectiveObjectFrame A projectiveNorth) ⋙
+                coordinateTransport A
+                  (projectiveObjectFrame A projectiveNorth)⁻¹).obj
+                    zN.input)
+            rw [coordinateTransport_mul]
+            simp [coordinateTransport_one]
+      _ = (coordinateTransport A
+            (projectiveObjectFrame A projectiveNorth)⁻¹).obj
+              ((A.residueState n I : AsectionState A) :
+                AsectionStateWorld A) := hinv.symm
+  apply AsectionActionState.ext
+  · exact hinput
+  · simpa only [residueActionState_positioned] using hpositioned
+  · rw [zN.value_realized,
+      (residueActionState A projectiveNorth n I).value_realized,
+      residueActionState_positioned, hpositioned]
+
+/-- **THE INPUT IS $D_A^{-1}(z_n)$, computed.**  Master (P): the enumerated
+residue action state's stored input coordinate is the canonical preimage of
+the `n`-th C3 zero under the distinguished disk action.  Imported from the
+certified receipt `residueActionState_north_input_audit`. -/
+theorem ASection.residueActionState_north_input
+    (A : ASection) (n : ℕ) (I : SphereWorld) :
+    (residueActionState A projectiveNorth n I).input.back.coordinate =
+      (A.distinguishedDiskAction⁻¹).val
+        (A.sphereZero n : OnePoint ℂ) := by
+  simp [residueActionState, AsectionActionState.ofInput,
+    residueState, projectiveNorth, projectiveObjectFrame_north]
+
+/-- **THE TRANSPORTED INPUT** (master `lem:c-residue-transitive`).  A north
+loop acts on the stored input by the Cayley action of its stabilizer part.
+Imported from the certified receipt `residueActionTransport_north_input_audit`. -/
+theorem ASection.residueActionTransport_north_input
+    (A : ASection) (n : ℕ) (I : SphereWorld)
+    (k : projectiveNorth ⟶ projectiveNorth) :
+    (((AsectionActionTransport A k).obj
+        (residueActionState A projectiveNorth n I)).input.back.coordinate) =
+      (GreatCircle.cayleyProjective
+        (GreatCircle.stabilizerPart k).1).val
+          ((A.distinguishedDiskAction⁻¹).val
+            (A.sphereZero n : OnePoint ℂ)) := by
+  rw [AsectionActionTransport_obj_input]
+  simp [orbitStabilizerActionSquare, residueActionState,
+    AsectionActionState.ofInput, residueState, projectiveNorth,
+    projectiveObjectFrame_north]
+
+/-- **(R), THE RELATIVE STABILIZER** (master
+`eq:north-relative-stabilizer`): `stabilizerPart (k_E⁻¹ ≫ k_W) =
+stabilizerPart k_W · (stabilizerPart k_E)⁻¹`.  Imported from the certified
+receipt `northRelativeLoop_stabilizer_audit`. -/
+theorem ASection.northRelativeLoop_stabilizer {X : GreatCircle.Base}
+    (kE kW : X ⟶ projectiveNorth) :
+    GreatCircle.stabilizerPart
+        (CategoryTheory.Groupoid.inv kE ≫ kW) =
+      GreatCircle.stabilizerPart kW *
+        (GreatCircle.stabilizerPart kE)⁻¹ := by
+  rw [GreatCircle.stabilizerPart_comp, ASection.stabilizerPart_inv]
+
+/-- **THE SLICE-WORLD REGISTER.**  A sphere morphism already carries its
+Möbius stem; no projective element is chosen here.  Imported from the
+certified receipt `sphereWorld_relative_stem_audit`. -/
+theorem ASection.sphereWorld_relative_stem
+    {I J : SphereWorld} (E W : I ⟶ J) :
+    (CategoryTheory.Groupoid.inv E ≫ W).mob =
+      W.mob * E.mob⁻¹ := rfl
+
+/-- The north-pole A-action conjugates that stem by the distinguished disk
+action.  Imported from `northPoleAction_relative_stem_audit`. -/
+theorem ASection.northPoleAction_relative_stem
+    (A : ASection) {I J : SphereWorld} (E W : I ⟶ J) :
+    ((northPoleAction A).map
+      (CategoryTheory.Groupoid.inv E ≫ W)).mob =
+        A.distinguishedDiskAction *
+          (W.mob * E.mob⁻¹) *
+            A.distinguishedDiskAction⁻¹ := rfl
+
+/-- **(I) IN THE SLICE-WORLD REGISTER.**  The relative stem carries the first
+reading to the second — the master's input equations, read where the morphism
+carries its own stem.  Imported from `sphereWorld_relative_stem_maps_audit`. -/
+theorem ASection.sphereWorld_relative_stem_maps
+    {I J : SphereWorld} (E W : I ⟶ J)
+    (uStar uE uW : OnePoint ℂ)
+    (hE : E.mob.val uStar = uE)
+    (hW : W.mob.val uStar = uW) :
+    (CategoryTheory.Groupoid.inv E ≫ W).mob.val uE = uW := by
+  rw [sphereWorld_relative_stem, ← hE]
+  simpa using hW
+
+/-- The same relative stem as a composite of distinguished world actions.
+Imported from `sphereWorld_relative_functor_audit`. -/
+theorem ASection.sphereWorld_relative_functor
+    {I J : SphereWorld} (E W : I ⟶ J) :
+    distinguishedWorldAction E.mob⁻¹ ⋙
+        distinguishedWorldAction W.mob =
+      distinguishedWorldAction (W.mob * E.mob⁻¹) :=
+  distinguishedWorldAction_comp E.mob⁻¹ W.mob
+
+/-- **THE ROUND-TRIP PACKAGING.**  Euler and Weierstrass are parallel
+two-legged action squares; reversing the Euler square and composing the
+Weierstrass square produces an endosquare of their common target, whose two
+stems are the relative Möbius elements.  Imported from
+`relativeActionSquare_left_audit` / `_right_audit`. -/
+theorem ASection.relativeActionSquare_left
+    {source target : Moebius}
+    (E W : ASection.ActionTransportSquare source target) :
+    (E.inv.comp W).left = W.left * E.left⁻¹ := rfl
+
+theorem ASection.relativeActionSquare_right
+    {source target : Moebius}
+    (E W : ASection.ActionTransportSquare source target) :
+    (E.inv.comp W).right = W.right * E.right⁻¹ := rfl
+
+/-- The endosquare's action-state transport is the composite supplied by the
+round trip.  Imported from `relativeActionSquare_transport_audit`. -/
+theorem ASection.relativeActionSquare_transport
+    (A : ASection) {source target : Moebius}
+    (E W : ASection.ActionTransportSquare source target) :
+    (E.inv.comp W).actionStateTransport A =
+      E.inv.actionStateTransport A ⋙ W.actionStateTransport A :=
+  ASection.ActionTransportSquare.actionStateTransport_comp A E.inv W
+
+/-- **(N)/(G) — THE MORPHISM.**  Given a north comparison `(k, φ)`, functorial
+transport along `(g⁻¹ ≫ k) ≫ h` carries it to arbitrary `P, Q`, and fullness
+returns it to `∫𝓡_A`.  This is the master's closing paragraph.  Imported from
+the certified receipt `residueTotal_morphism_of_northComparison_audit`. -/
+theorem ASection.residueTotal_morphism_of_northComparison
+    (A : ASection)
+    (P Q : Grothendieck
+      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat))
+    (xN yN : AsectionActionFiber A projectiveNorth)
+    (g : projectiveNorth ⟶ P.base)
+    (hg : (AsectionActionTransport A g).obj xN = P.fiber.obj)
+    (h : projectiveNorth ⟶ Q.base)
+    (hh : (AsectionActionTransport A h).obj yN = Q.fiber.obj)
+    (k : projectiveNorth ⟶ projectiveNorth)
+    (φ : (AsectionActionTransport A k).obj xN ⟶ yN) :
+    Nonempty (P ⟶ Q) := by
+  refine ⟨⟨(CategoryTheory.Groupoid.inv g ≫ k) ≫ h,
+    ((AsectionCResidueInclusion A).app Q.base).preimage ?_⟩⟩
+  have hback : (AsectionActionTransport A
+      (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN := by
+    calc
+      (AsectionActionTransport A
+          (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj =
+          (AsectionActionTransport A
+            (CategoryTheory.Groupoid.inv g)).obj
+              ((AsectionActionTransport A g).obj xN) := by rw [hg]
+      _ = (AsectionActionTransport A
+            (g ≫ CategoryTheory.Groupoid.inv g)).obj xN :=
+          (congrArg (fun F => F.obj xN)
+            (AsectionActionTransport_comp A g
+              (CategoryTheory.Groupoid.inv g))).symm
+      _ = xN := by
+        have harrow : g ≫ CategoryTheory.Groupoid.inv g =
+            𝟙 projectiveNorth := CategoryTheory.Groupoid.comp_inv g
+        rw [harrow, AsectionActionTransport_id]
+        rfl
+  have hsrc : (AsectionActionTransport A
+      ((CategoryTheory.Groupoid.inv g ≫ k) ≫ h)).obj P.fiber.obj =
+      (AsectionActionTransport A h).obj
+        ((AsectionActionTransport A k).obj xN) := by
+    calc
+      (AsectionActionTransport A
+          ((CategoryTheory.Groupoid.inv g ≫ k) ≫ h)).obj P.fiber.obj =
+          (AsectionActionTransport A h).obj
+            ((AsectionActionTransport A
+              (CategoryTheory.Groupoid.inv g ≫ k)).obj P.fiber.obj) :=
+        congrArg (fun F => F.obj P.fiber.obj)
+          (AsectionActionTransport_comp A
+            (CategoryTheory.Groupoid.inv g ≫ k) h)
+      _ = (AsectionActionTransport A h).obj
+            ((AsectionActionTransport A k).obj
+              ((AsectionActionTransport A
+                (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj)) := by
+          rw [AsectionActionTransport_comp]
+          rfl
+      _ = (AsectionActionTransport A h).obj
+            ((AsectionActionTransport A k).obj xN) := by rw [hback]
+  refine eqToHom ?_ ≫
+    (AsectionActionTransport A h).map φ ≫
+    eqToHom ?_
+  · exact hsrc
+  · exact hh
+
+/-- **CONNECTED FROM TRANSITIVE**, on this exact C-residue total — not a
+generic category.  C4 supplies nonemptiness.  Imported from the certified
+receipt `residueTotal_isConnected_of_transitive_audit`. -/
+theorem ASection.residueTotal_isConnected_of_transitive
+    (A : ASection)
+    (htrans : ∀ P Q : Grothendieck
+      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+      Nonempty (P ⟶ Q)) :
+    CategoryTheory.IsConnected (Grothendieck
+      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
+  haveI : Nonempty (Grothendieck
+      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) :=
+    ⟨⟨projectiveNorth,
+      ⟨residueActionState A projectiveNorth 0 baseWorld,
+        A.residueActionState_mem 0⟩⟩⟩
+  exact zigzag_isConnected fun P Q =>
+    CategoryTheory.Zigzag.of_hom (htrans P Q).some
+
+/-- **π₀ SINGLETON FROM CONNECTED** (CHT Remark 8.3.5), on this exact total.
+Imported from `residueTotal_pi0_singleton_of_connected_audit`. -/
+theorem ASection.residueTotal_pi0_singleton_of_connected
+    (A : ASection)
+    [CategoryTheory.IsConnected (Grothendieck
+      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat))] :
+    ∀ P Q : Grothendieck
+      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+      CategoryTheory.ConnectedComponents.mk P =
+        CategoryTheory.ConnectedComponents.mk Q :=
+  fun P Q => _root_.Quotient.sound (CategoryTheory.isPreconnected_zigzag P Q)
+
+/-- **(Φ) IN THE AMBIENT.**  The inverse image is taken over the semantic
+locus, so each state's positioned entry IS an authored C3 coordinate and
+`residueState_graph` reads its zero index off the state.  The pair `(k, φ)` —
+a north loop and a fibre arrow over it — IS the ambient Grothendieck morphism;
+`residueTotal_morphism_of_northComparison` transports it to arbitrary `P, Q`. -/
 theorem ASection.northProducersConnectedAmbient (A : ASection)
     {x0 y0 : A.AsectionActionFiber ASection.projectiveNorth}
     (hx0 : ASection.IsNorthCResidueState A x0)
@@ -758,21 +1030,16 @@ theorem ASection.northProducersConnectedAmbient (A : ASection)
         (A.AsectionCResidueInclusionTotal).obj
           ⟨ASection.projectiveNorth, ⟨y0, ⟨y0, hy0, 𝟙 ASection.projectiveNorth, by
             rw [AsectionActionTransport_id]; rfl⟩⟩⟩) := by
-  -- TRANSCRIPTION HOLE, MINE, NOT THE AUTHOR'S.  The master derives the two
-  -- residual factors from the two boundary presentations of the one tape; this
-  -- typist has not yet written that term.  No statement is posted in the
-  -- author's name to stand in for it.
-  have hfactors : ∃ (rE rW : GreatCircle.NorthStabilizer) (uStar : OnePoint ℂ),
-      (GreatCircle.cayleyProjective rE.1).val uStar
-          = (CategoryTheory.ActionCategory.back x0.input).coordinate ∧
-        (GreatCircle.cayleyProjective rW.1).val uStar
-          = (CategoryTheory.ActionCategory.back y0.input).coordinate := by
-    sorry
-  obtain ⟨rE, rW, uStar, hE, hW⟩ := hfactors
-  obtain ⟨φ⟩ :=
-    ASection.northComparison_of_residualFactors A rE rW x0 y0 uStar hE hW
-  exact ⟨⟨CategoryTheory.Groupoid.inv (ASection.faceOfStabilizerPart rE)
-      ≫ ASection.faceOfStabilizerPart rW, φ⟩⟩
+  -- The inverse image is taken over the semantic locus: each state's positioned
+  -- entry IS an authored C3 coordinate, so `residueState_graph` reads its zero
+  -- index off the state rather than solving for it.
+  obtain ⟨n, hn⟩ := A.residueState_graph x0 hx0
+  obtain ⟨m, hm⟩ := A.residueState_graph y0 hy0
+  -- MINE, NOT THE AUTHOR'S.  `northComparison_of_residualFactors` (:640, green
+  -- on the three axioms) is the step this seat consumes; its arguments are
+  -- `rE`, `rW`, `uStar` and the two readings at `uStar`.  Those five have not
+  -- been typed.
+  sorry
 
 /-- **(Φ) RETURNED TO `∫𝓡_A` BY FULLNESS.**  The master's own step: the arrow
 is obtained in the ambient total and `ι_A`, full, returns that same arrow to
@@ -821,7 +1088,7 @@ theorem ASection.northMembersConnected (A : ASection)
   obtain ⟨mid⟩ := A.northProducersConnected hx0 hy0
   exact ⟨CategoryTheory.Groupoid.inv wx ≫ mid ≫ wy⟩
 
-/-- **THE RESULT.**  Two arbitrary members of the C-residue system are connected
+/-- **THE RESULT** — Two arbitrary members of the C-residue system are connected
 by a morphism of `∫𝓡_A`.  Nothing is solved for and no coordinate is compared:
 each object's inverse-image dossier IS a morphism from its north producer — base
 leg the witness arrow, transport leg the identification the dossier carries —
@@ -854,24 +1121,20 @@ natural isomorphism onto its image (certified, `57384ae`; naturality
 `rfl`).  Consumes THE RESULT — closes on contact, no proof of its own. -/
 instance ASection.residueTotal_isConnected (A : ASection) :
     CategoryTheory.IsConnected (Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
-  haveI : Nonempty (Grothendieck
       (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) :=
-    ⟨⟨projectiveNorth,
-      ⟨residueActionState A projectiveNorth 0 baseWorld,
-        A.residueActionState_mem 0⟩⟩⟩
-  exact zigzag_isConnected fun P Q =>
-    CategoryTheory.Zigzag.of_hom (A.sweepTransitive_on_residueSystem P Q).some
+  A.residueTotal_isConnected_of_transitive A.sweepTransitive_on_residueSystem
+
 /-- **THE DECLARATION**: `π₀(∫𝓡_A)` IS A SINGLETON — CHT Remark 8.3.5 on
-the connected action groupoid: nonempty and connected, so one class. -/
+the connected action groupoid: nonempty and connected, so one class.
+Instantiates the certified receipt
+`residueTotal_pi0_singleton_of_connected`. -/
 theorem ASection.residueTotal_pi0_singleton (A : ASection) :
     ∀ P Q : Grothendieck
       (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
       CategoryTheory.ConnectedComponents.mk P =
         CategoryTheory.ConnectedComponents.mk Q := by
   letI := A.residueTotal_isConnected
-  exact fun P Q =>
-    _root_.Quotient.sound (CategoryTheory.isPreconnected_zigzag P Q)
+  exact A.residueTotal_pi0_singleton_of_connected
 
 /-- **THE VAL STEP — THE SECOND UNFORMALIZED INPUT** (master
 `thm:concentricity`, the readout paragraph).  The singleton `κ` is reached;

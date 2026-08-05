@@ -4,7 +4,7 @@ Generated mechanically from the current master, current Lean sources, and the pi
 The manifest is the single human-ratified mapping from a master clause to a Lean declaration; the generator verifies the exact master anchor, exact Lean type, fresh kernel run, axiom surface, and source fingerprints.
 Regenerate with `scripts/generate_blueprint_lean_table.py`. The generator reads and probes `Concentricity/Theorem.lean`; it does not edit either production seat.
 
-Current count: 9 terminal certificates; 13 inference certificates; 0 unpacked dossier bindings ready; 6 author bindings confirmed; 0 confirmed bindings awaiting Lean spelling; 1 production seats open.
+Current count: 9 terminal certificates; 13 inference certificates; 0 unpacked dossier bindings ready; 6 author bindings confirmed; 0 confirmed bindings awaiting Lean spelling; 0 production seats open.
 
 Certificate meanings:
 
@@ -72,8 +72,8 @@ Lean was contacted with the exact candidate expression for: `seat1.hE`, `seat1.h
 
 | Master result | Exact remaining role | Production declaration | Lean contact | Status |
 |---|---|---|---:|---|
-| `lem:c-residue-transitive` | bind and instantiate the exact F_A(E_N) and F_A(W_N) faces, then wire the certified middle morphism | `ASection.sweepTransitive_on_residueSystem` (Concentricity/Theorem.lean:669) | — | `UNLOCATED_OPEN_SEAT` |
-| `thm:concentricity` | declaration/instantiation only: bind the existing A-specific val to the exact π₀(∫R_A), then instantiate the certified val inference at the exact P_n and P_0 | `ASection.concentricity` (Concentricity/Theorem.lean:919) | ✓ | `OPEN_SEAT` |
+| `lem:c-residue-transitive` | master (B): the C3 boundary readings. A single common input u_* on the source frame of the one fixed 0-to-N tape; each north C-residue state yields its own boundary face from it, so F_A(E_N) and F_A(W_N) are the one swept square positionedOrbitSquare at two base components k_E, k_W : 0 -> N, at the same level and the same multiplier, differing only by the original input. Each k is built from its forced residual factor by faceOfStabilizerPart and forced back by stabilizerPart_unique. | `ASection.boundaryReadings_of_residueStates` (downstream) | — | `UNLOCATED_OPEN_SEAT` |
+| `thm:concentricity` | the val step: the π₀-class equality instantiated at the n-th and 0-th certified representatives, carried across to the real-valued level equality | `ASection.transportLevel_of_pi0_singleton` (Concentricity/Theorem.lean:966) | — | `UNLOCATED_OPEN_SEAT` |
 
 The current production run reaches exactly two errors: the north existential in `sweepTransitive_on_residueSystem` and the real-valued equality in `concentricity`. The inference table above is independently green against the exact current source prefix; the open seats do not downgrade those receipts.
 
@@ -246,17 +246,17 @@ zeta_criticalLine_zeros_infinite_of_RH_audit : RiemannHypothesis → {s | rieman
 
 | Source | SHA-256 |
 |---|---|
-| `Octonionic_RH_master.tex` | `2af455a80c111536cf748b9e6b169440ed1e73a33460f48148edb24fa2e7d0c2` |
-| `blueprint/lean_certificate_manifest.json` | `29d410e29d71d90c48a622d2ad59d97646a5d5992931bf1f7f502394297e9be8` |
+| `Octonionic_RH_master.tex` | `6b4147cb04683d2e441f157af628e50df70124d0eb90efed89fbe5bb23d7bc73` |
+| `blueprint/lean_certificate_manifest.json` | `d3f5f722782bc1b6af4cf865ca2a2a24d9659c13aabbbf97ceabd29c264e9daa` |
 | `Concentricity/_BlueprintTerminalCertificateProbe.lean` | `2e898992124efa19b135e96f87d14813b03809f27f9cc7a69f85fb8d5f257d37` |
-| `Concentricity/Theorem.lean` | `38953ad48b8c660e1512c9b98f95da6fa2237ee42378db20fb0e27a28ceb84fe` |
+| `Concentricity/Theorem.lean` | `a01e844ca0cd7bc906c08e9669bed6ef2521cd30d39ddf075ed07e4b0aa2f50e` |
 | `Concentricity/_GateNorthCResidueTransitivityAudit.lean` | `07ddbe960df820ab93c25f87f4b963077f058fd3c79b739430a3c5ff6533d99a` |
 | `scripts/build_transitivity_inference_probe.sh` | `e0982829e4937b00e01bda1b7b4a4e767c09f3a907ae65393a4590125a686683` |
 | `Concentricity/_GateCorollaryInferenceAudit.lean` | `8bac693ca5c93deae6b9f1511e3f058efab47a8b657c061fc178176fe5636efb` |
 | `Concentricity/Corollaries.lean` | `4866f494cf62579778905d6dd93b912a868a880b827c4456a060bdb08d441248` |
 | `lean-toolchain` | `efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee` |
 | `lakefile.toml` | `361be5c558f10fbc113a616222d2db2c08c9b353ddb12f0cac6d5ad9a0d0287d` |
-| `lean_source_tree` | `67fe2ddf12717c5ef509a0578c647ed42e2bf14f3f77d0088fe97e783beae8a5` |
+| `lean_source_tree` | `f4c7618ecf3ef70d76b2f0161d7ed7668554822787eb4291f4b2adb4b5d4cbfb` |
 
 Raw kernel output: `blueprint/lean_certificate_probe.txt`.
 Machine-readable evidence: `blueprint/lean_certificate_evidence.json`.
