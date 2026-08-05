@@ -249,6 +249,40 @@ residue total; faithfulness makes that preimage unique."* That is the next
 place to look, and the standing rule applies: everything is in Lean and proved;
 what fails is wiring, dropped, or orphaned — so look before writing.
 
+## ⛔⛔ "BOUNDARY READINGS" IS OVERLOADED IN THE MASTER — 2026-08-05
+
+`grep -n "boundary reading" Octonionic_RH_master.tex` returns exactly two hits,
+and they denote **different things**:
+
+- **`:1147`** — *"The Euler expression at $0$ and the Weierstrass expression at
+  $N$ are consequently the two boundary readings of this one matrix-built
+  function."* These are the two **fixed points** of $D_A$:
+  $D_A(0)=0$ and $D_A(N)=N$, i.e.
+  `distinguishedDiskAction_fixes_cayley_zero` and
+  `distinguishedDiskAction_fixes_cayley_N`. **Both already green**, both already
+  true of $D_A$, nothing to supply.
+- **`:1642`** — *"The C3 boundary readings identify the corresponding positioned
+  outputs"* — the authored coordinates $z_1,z_2$ of two given states.
+
+Every time the author said "boundary reading" this session, I resolved it to
+`:1642` and went looking for per-state data, a fixed tape, a δ, and a
+north-stabilizer transitivity lemma. **He meant `:1147`, which is already
+proved.** There is no supplier to find, because the facts are facts about the
+one matrix-built function, not about the states.
+
+There are also not two faces *at* $N$. C1 continues $g_A$ through the pole and
+the Weierstrass divisor is exact at $N$, so at $N$ the two expressions are the
+**same function**; the two readings are at $0$ and at $N$, the two fixed points.
+The faces $k_E,k_W$ are transports $0\to N$, not two objects sitting at $N$.
+
+Author, on the square: *"At every instant the square
+`canonicalAsectionPresentation_euler_toNorth`"* — it holds at every instant, so
+no distinguished instant needs choosing either.
+
+**Disambiguating `:1147` vs `:1642` in the master is the highest-value prose
+fix remaining.** It is the exact kind of ambiguity this session was opened to
+remove, and it cost this session four wrong routes.
+
 ## ⛔ THE REPAIR DIRECTION ABOVE IS WRONG — author, 2026-08-05
 
 Everything above that proposes **strengthening `IsNorthCResidueState` to carry
