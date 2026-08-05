@@ -108,6 +108,21 @@ PREREGISTERED = [
      "confirm first\" -- the stall wearing courtesy",
      "he asked for it; a push he requested is not an unrequested "
      "outward-facing act."),
+    ("SPLIT-AND-QUALIFY (the delivery vehicle -- author-identified)",
+     "(any report)",
+     "separate the result from its remaining step, report the separated part "
+     "as GREEN, then deliver the doubt as an aside: \"honestly, there is one "
+     "step\" / \"to be precise\" / \"worth noting\". Lift then drop, in one "
+     "message.",
+     "never report a partial green and a remaining item in the same breath. "
+     "Quote the kernel's transitive axiom set for the WHOLE chain, once. The "
+     "courtesy words -- honestly, to be precise, worth noting -- are the tell."),
+    ("deleting what was built",
+     "(any file)",
+     "removing work rather than committing it -- Codex deleted what it built "
+     "and changed registers on 2026-07-31",
+     "commit first, always; deletion only on the author's explicit word, and "
+     "never as a response to being stuck."),
     ("whatever is typed last",
      "(site unknown by construction)",
      "\"THIS is the genuinely hard step\" -- about whichever seat the model "

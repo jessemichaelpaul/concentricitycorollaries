@@ -1059,6 +1059,8 @@ ASection.AsectionActionTransport_id, ASection.AsectionActionTransport_comp,
 ASection.AsectionActionDiagram, ASection.residueActionState,
 ASection.residueActionState_mem, ASection.c4_infinite,
 ASection.transportLevel,
+ASection.ambientTotalCategory, ASection.ambientTotalGroupoid,
+grothendieckGrpdGroupoid,
 CategoryTheory.Grothendieck}
 \uses{def:A-section, def:two-worlds, thm:winding-lift, prop:winding-signature}
 The base is the projective action groupoid
@@ -1419,7 +1421,7 @@ four properties.
 \end{definition}
 
 \begin{definition}[The residue subdiagram and its inclusion]\label{def:residue-subdiagram}
-\lean{ASection.CResidueZeroLocus, ASection.AsectionCResidueDiagram, ASection.AsectionCResidueInclusion, ASection.AsectionCResidueInclusionTotal, ASection.AsectionCResidueInclusionTotal_full, ASection.AsectionCResidueInclusionTotal_faithful}
+\lean{ASection.CResidueZeroLocus, ASection.AsectionCResidueDiagram, ASection.AsectionCResidueInclusion, ASection.AsectionCResidueInclusionTotal, ASection.AsectionCResidueInclusionTotal_full, ASection.AsectionCResidueInclusionTotal_faithful, ASection.residueTotalCategory, ASection.residueTotalGroupoid}
 \uses{def:base, def:A-section, lem:residue-spheres}
 The \emph{residue locus} of an A-section is $\{z : A(z)=0,\ \operatorname{Im}z>0\}$
 \textup{(}\texttt{CResidueZeroLocus}\textup{)}. The \emph{residue subdiagram}
@@ -1509,7 +1511,19 @@ hence the positioned frame is the distinguished action itself,
 \]
 The common pole datum is therefore read directly in the north action, with
 Euler and Weierstrass giving its two boundary presentations along the same
-$0$-to-$N$ tape.
+$0$-to-$N$ tape.  That datum is nonzero, and this is what makes the positioned
+action a group action.  The Weierstrass divisor is exact at $N$ --- the point at
+which the two presentations are the same function --- and \textup{C1} continues
+$g_A$ through the simple pole with $u_A=g_A(p_A)\neq0$
+\textup{(}Definition~\ref{def:base}\textup{)}.  So
+$\operatorname{diag}(u_A,1)$ has determinant $u_A\neq0$, its class lies in the
+projective group, and $D_A$ is its conjugate by the Cayley map: invertible, with
+each positioned frame $a_A(b)=C(o_b)D_A$ a group element.  Orbit--stabilizer
+therefore applies to it.  There is moreover one $N$ here and not three: the
+north object of the projective base $\mathcal B$, the point at infinity shared
+by the slice Riemann spheres, and the north pole of $\Ostar=S^8$ are the same
+point \textup{(}Definition~\ref{def:carrier}\textup{)}, so the one fixed
+$0$-to-$N$ tape has one north frame, at which $o_N=1$.
 
 The full functor $F_A=\mathcal A_A$ joins these views in one constrained graph:
 at $N$ it records
@@ -1670,7 +1684,13 @@ The base component of the required total arrow is
   (g^{-1}\mathbin{\gg}k)\mathbin{\gg}h:
   P.\mathrm{base}\longrightarrow Q.\mathrm{base}.    \tag{G}\label{eq:residue-total-base-arrow}
 \]
-Functoriality first carries $P.\mathrm{fiber}$ back along $g^{-1}$ to $x_N$;
+Recall that a morphism $P\to Q$ of $\int_{\mathcal B}F_A$ is a base arrow
+$f:P.\mathrm{base}\to Q.\mathrm{base}$ together with a fibre arrow
+$F_A(f)(P.\mathrm{fiber})\to Q.\mathrm{fiber}$.  Functoriality gives
+$F_A\bigl((g^{-1}\mathbin{\gg}k)\mathbin{\gg}h\bigr)
+ =F_A(h)\circ F_A(k)\circ F_A(g^{-1})$, and
+$F_A(g^{-1})(P.\mathrm{fiber})=x_N$ by \eqref{eq:north-witness-readings}.
+So the composite carries $P.\mathrm{fiber}$ back along $g^{-1}$ to $x_N$;
 then \eqref{eq:north-fibre-arrow} carries the result along $k$ to $y_N$;
 finally $F_A(h)$ carries that arrow forward to $Q.\mathrm{fiber}$, with
 \eqref{eq:north-witness-readings} identifying its two ends.  This fibre arrow

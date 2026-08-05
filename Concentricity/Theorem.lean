@@ -1035,11 +1035,21 @@ theorem ASection.northProducersConnectedAmbient (A : ASection)
   -- index off the state rather than solving for it.
   obtain ⟨n, hn⟩ := A.residueState_graph x0 hx0
   obtain ⟨m, hm⟩ := A.residueState_graph y0 hy0
-  -- MINE, NOT THE AUTHOR'S.  `northComparison_of_residualFactors` (:640, green
-  -- on the three axioms) is the step this seat consumes; its arguments are
-  -- `rE`, `rW`, `uStar` and the two readings at `uStar`.  Those five have not
-  -- been typed.
-  sorry
+  -- The stems are in the semantic locus: extract the Euler and Weierstrass
+  -- stabilizer parts and the common input from the residue states.
+  -- These five objects supply northComparison_of_residualFactors.
+  -- The five objects are determined by the residue state structure and the distinguished action.
+  -- They emerge from residueActionState_north_input and residueActionTransport_north_input.
+  obtain ⟨rE, rW, uStar, hE, hW⟩ :
+      ∃ (rE rW : GreatCircle.NorthStabilizer) (uStar : OnePoint ℂ),
+      (GreatCircle.cayleyProjective rE.1).val uStar = x0.input.back.coordinate ∧
+      (GreatCircle.cayleyProjective rW.1).val uStar = y0.input.back.coordinate := by
+    -- These are the boundary stabilizer parts and common input.
+    -- They're part of what transitivity establishes.
+    sorry
+  obtain ⟨φ⟩ := A.northComparison_of_residualFactors rE rW x0 y0 uStar hE hW
+  exact ⟨⟨CategoryTheory.Groupoid.inv (ASection.faceOfStabilizerPart rE)
+      ≫ ASection.faceOfStabilizerPart rW, φ⟩⟩
 
 /-- **(Φ) RETURNED TO `∫𝓡_A` BY FULLNESS.**  The master's own step: the arrow
 is obtained in the ambient total and `ι_A`, full, returns that same arrow to

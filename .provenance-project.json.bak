@@ -1,0 +1,67 @@
+{
+  "name": "Concentricity",
+  "master": "Octonionic_RH_master.tex",
+  "source_dir": "Concentricity",
+  "root_module": "Concentricity",
+  "external_import_module": "Concentricity.ASectionActionDiagram",
+  "audit_timeout_seconds": 900,
+  "declaration_modules": {
+    "ASection.realize": "Concentricity.Slice",
+    "ASection.c3_multipliable": "Concentricity.ASection",
+    "ASection.c3_locMajorant": "Concentricity.ASection",
+    "ASection.c3_factorization": "Concentricity.ASection",
+    "ASection.c4_infinite": "Concentricity.ASection",
+    "StemRing.real_on_real": "Concentricity.StemRing"
+  },
+  "external_declaration_modules": {
+    "onePointEquivSphereOfFinrankEq": "Mathlib.Topology.Compactification.OnePoint.Sphere"
+  },
+  "mirror": "/Users/jessepaul/Desktop/Concentricity Provenance",
+  "phase": "formalization",
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "blueprint": "BlueprintLeanCertificateTable.md",
+  "receipt_import": {
+    "command": [
+      "python3",
+      "scripts/generate_blueprint_lean_table.py"
+    ],
+    "evidence": "blueprint/lean_certificate_evidence.json"
+  },
+  "author_binding_registry": ".provenance/author_bindings.json",
+  "release_build_commands": [
+    ["lake", "env", "lean", "Concentricity/Theorem.lean"],
+    ["lake", "build", "Concentricity"]
+  ],
+  "release_targets": [
+    {
+      "declaration": "ASection.concentricity",
+      "module": "Concentricity.Theorem",
+      "expected_axioms": ["propext", "Classical.choice", "Quot.sound"]
+    },
+    {
+      "declaration": "zeta_riemannHypothesis",
+      "module": "Concentricity.Corollaries",
+      "expected_axioms": ["propext", "Classical.choice", "Quot.sound"]
+    }
+  ],
+  "active_register_surface": "seat1-transitivity",
+  "register_surfaces": {
+    "seat1-transitivity": {
+      "note": "transitivity of the C-residue total; o_N = 1, stabilizerPart_unique",
+      "allow": [
+        "Concentricity/Theorem.lean",
+        "Concentricity/ASectionFunctor.lean",
+        "Concentricity/ASectionCResidueDiagram.lean",
+        "Concentricity/ASectionCResidueInverseImage.lean",
+        "Octonionic_RH_master.tex",
+        "blueprint/*",
+        "Ledger.md",
+        "BlueprintLeanCertificateTable.md"
+      ]
+    }
+  }
+}

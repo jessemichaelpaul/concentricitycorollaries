@@ -122,25 +122,40 @@ validate repo claim = case cProvenance claim of
     -- LIVE. Elaborates the declaration now and reads the kernel's own answer.
     -- Reading a stored evidence file would be reading yesterday's answer.
     (out, _, _) <- runIn repo ("python3 tools/axioms_of.py " ++ escapeQ decl ++ " 2>&1")
-    let line     = trim out
+    -- axioms_of.py prints TWO lines: an `AXIOM_PRINT '<decl>' depends on ...`
+    -- echo of the kernel's own words, then the `AXIOMS a, b, c` summary.
+    -- Trimming the whole output and prefix-testing it reads the FIRST line,
+    -- which starts with AXIOM_PRINT, so every claim died with "no axiom line
+    -- produced" -- and the model then reported the author's prober as broken.
+    -- It is not. Pick the line that answers the question.
+    let ls       = norm out
+        pick p   = case [l | l <- ls, p `isPrefixOf` l] of
+                     (l:_) -> Just l
+                     []    -> Nothing
+        line     = case (pick "AXIOMS", pick "UNKNOWN") of
+                     (Just l, _)  -> l
+                     (_, Just l)  -> l
+                     _            -> trim out
         claimed  = sort axs
         allowed  = sort ["propext", "Classical.choice", "Quot.sound"]
-    return $ if "UNKNOWN" `isPrefixOf` line
-      then Left (Reason claim ("axiom surface COULD NOT BE DETERMINED -- this is not \
-                               \clean, it is unknown.\n        " ++ drop 8 line))
-      else if not ("AXIOMS" `isPrefixOf` line)
-        then Left (Reason claim ("no axiom line produced for " ++ decl))
-        else do
-          let live = sort [trim a | a <- splitOn' ',' (drop 7 line), not (null (trim a))]
-          if "sorryAx" `isInfixOf` line
-            then Left (Reason claim ("carries sorryAx: " ++ drop 7 line))
-            else if live /= allowed
-              then Left (Reason claim ("live axiom surface is not the permitted one: "
-                                       ++ drop 7 line))
-              else if claimed /= allowed
-                then Left (Reason claim ("claimed axiom surface differs from the permitted one: "
-                                         ++ show claimed))
-                else Right (Verified claim)
+    let live = sort [trim a | a <- splitOn' ',' (drop 7 line), not (null (trim a))]
+        axiomVerdict
+          | "UNKNOWN" `isPrefixOf` line =
+              Left ("axiom surface COULD NOT BE DETERMINED -- this is not \
+                    \clean, it is unknown.\n        " ++ drop 8 line)
+          | not ("AXIOMS" `isPrefixOf` line) =
+              Left ("no axiom line produced for " ++ decl)
+          | "sorryAx" `isInfixOf` line =
+              Left ("carries sorryAx: " ++ drop 7 line)
+          | live /= allowed =
+              Left ("live axiom surface is not the permitted one: " ++ drop 7 line)
+          | claimed /= allowed =
+              Left ("claimed axiom surface differs from the permitted one: "
+                    ++ show claimed)
+          | otherwise = Right ()
+    return $ case axiomVerdict of
+      Left why -> Left (Reason claim why)
+      Right () -> Right (Verified claim)
 
   -- Author-level judgement. Admissible, but VISIBLY a different kind of thing:
   -- it is never kernel evidence, and the assistant cannot mint one — the anchor
@@ -256,15 +271,15 @@ main = do
         Left e -> putStrLn ("PARSE ERROR: " ++ e) >> exitFailure
         Right claims -> do
           results <- forM claims (validate repo)
-          let failures = [r | Left r <- results]
+          let rejected = [(c, why) | Left (Reason c why) <- results]
               passes   = [v | Right v <- results]
           mapM_ (\(Verified c) -> putStrLn ("  VERIFIED   " ++ cStatement c)) passes
-          mapM_ (\(Reason c why) -> putStrLn ("  REJECTED   " ++ cStatement c
-                                              ++ "\n        " ++ why)) failures
+          mapM_ (\(c, why) -> putStrLn ("  REJECTED   " ++ cStatement c
+                                        ++ "\n        " ++ why)) rejected
           putStrLn ""
           putStrLn (show (length passes) ++ " verified, "
-                    ++ show (length failures) ++ " rejected.")
-          if null failures then exitSuccess else exitFailure
+                    ++ show (length rejected) ++ " rejected.")
+          if null rejected then exitSuccess else exitFailure
     _ -> do
       putStrLn "usage: provenance <claims-file> <repo-dir>"
       exitFailure
