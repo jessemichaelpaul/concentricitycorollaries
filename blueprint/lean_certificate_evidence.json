@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-08-05T21:22:00.810286+00:00",
+  "generated_utc": "2026-08-05T23:03:53.398381+00:00",
   "allowed_axioms": [
     "propext",
     "Classical.choice",
@@ -54,14 +54,14 @@
     "Octonionic_RH_master.tex": "0710c55eb236911b742f7dab052fdc2260e82d3e861099f02975b667f430b4e5",
     "blueprint/lean_certificate_manifest.json": "b372ae0c20ab57f66e4ab928b7866efca69c8272becd95f11d5b8b1f01a384fe",
     "Concentricity/_BlueprintTerminalCertificateProbe.lean": "2e898992124efa19b135e96f87d14813b03809f27f9cc7a69f85fb8d5f257d37",
-    "Concentricity/Theorem.lean": "645aa5c1294982801bd6f6360e99c8de45f10e5818c805fe8f035497a5b2d947",
+    "Concentricity/Theorem.lean": "591e5be0488f2b782901296413142eccaa3380c9bd415ecfba38d2161fcd89cb",
     "Concentricity/_GateNorthCResidueTransitivityAudit.lean": "07ddbe960df820ab93c25f87f4b963077f058fd3c79b739430a3c5ff6533d99a",
     "scripts/build_transitivity_inference_probe.sh": "e0982829e4937b00e01bda1b7b4a4e767c09f3a907ae65393a4590125a686683",
     "Concentricity/_GateCorollaryInferenceAudit.lean": "8bac693ca5c93deae6b9f1511e3f058efab47a8b657c061fc178176fe5636efb",
     "Concentricity/Corollaries.lean": "4866f494cf62579778905d6dd93b912a868a880b827c4456a060bdb08d441248",
     "lean-toolchain": "efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee",
     "lakefile.toml": "361be5c558f10fbc113a616222d2db2c08c9b353ddb12f0cac6d5ad9a0d0287d",
-    "lean_source_tree": "89518144a67d39a37ad326dd32458e3b68419c48a9b6d0c71dc3393a365cab28"
+    "lean_source_tree": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c"
   },
   "terminal": [
     {
@@ -751,7 +751,7 @@
       "diagnostic_seen": false,
       "command": "lake env lean Concentricity/Theorem.lean",
       "kernel_message": "",
-      "source_line": 0,
+      "source_line": 1058,
       "status": "UNLOCATED_OPEN_SEAT"
     },
     {
@@ -765,7 +765,7 @@
       "diagnostic_seen": false,
       "command": "lake env lean Concentricity/Theorem.lean",
       "kernel_message": "",
-      "source_line": 1065,
+      "source_line": 1150,
       "status": "UNLOCATED_OPEN_SEAT"
     }
   ],
@@ -832,13 +832,13 @@
         "lem:residue-spheres",
         "thm:G2-S6"
       ],
-      "candidate_sha256": "2b570d9dfaf8a7f32eba5e90a795be93e3dfd0255486654a4f78f02259217fde",
+      "candidate_sha256": "8d00294755629e704522c38bc34e50f7bc1eca88dfea1ed6fb6da585380f8ccd",
       "author_binding_digest": "10ed350c4c6a038cf6911a05cad214dfb352b8d8822850e80c50538772367445",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
       "exact_expression": "GreatCircle.toNHom 0",
-      "identity_hash": "a26fd61e93133c0e056d65375b54ece57413ba35f123b56769ad1a4ac21ede35",
+      "identity_hash": "3ed4adaf8c7d893cce796070b20b5d7ccfe3d49b44ebb5bf05eb42b407f18209",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
@@ -881,13 +881,13 @@
         "lem:residue-spheres",
         "thm:G2-S6"
       ],
-      "candidate_sha256": "0c82b62d1e10f339b93bb258bc958db7e012e890c919577c226218d8cf5777e8",
+      "candidate_sha256": "7fe512f847ced8b3ef13f27dd9dc4c4fcbd64dde4f21f1f08eae6d8379f014a0",
       "author_binding_digest": "f0601c8d2b14969676e517298355daa3f12f151730a2b439cd363c5ff79065a5",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
       "exact_expression": "GreatCircle.toNHom 0",
-      "identity_hash": "6b6fa68dc8d236fc6c512e13d1e3cf72ae2b6385fadfc73f4d8b30eda6f38e34",
+      "identity_hash": "27ae8c8388a692c5784a0a67d1dd125bb5121f5aad972324b1a2c6c524773a9b",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
@@ -927,13 +927,13 @@
         "lem:residue-spheres",
         "thm:G2-S6"
       ],
-      "candidate_sha256": "8cf686a716c94924ea61df7bfff2e5468429f77df27648b4c01fb46c9d7e9faf",
+      "candidate_sha256": "d84108283cbe3333c8bc9f534114567424a0d37ed0de65515a29e1a8c93425a2",
       "author_binding_digest": "9fa762fe6270cff57dc06b026d059f68f9abe7973b43bb01ca253e5ff127efcd",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
       "exact_expression": "(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kE).1).val.symm ((A.distinguishedDiskAction⁻¹).val (A.sphereZero n₁ : OnePoint ℂ))",
-      "identity_hash": "f1b61e621b7533c0e21f75a3f52f2bb41507db9a250fdd64be3cc759536b2bcf",
+      "identity_hash": "efb69465415fffab1954c5ff6761421b68da403409c87707b32e572d131cf837",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
@@ -978,13 +978,13 @@
         "lem:residue-spheres",
         "thm:G2-S6"
       ],
-      "candidate_sha256": "bd51c701e468b31f9fd7710336941bbed3a6ebe81472e4052c48f6a467cb2b2a",
+      "candidate_sha256": "9f5fac12dddf3312c95ce6776822d41d9b46a5baf6e53fb461764d03005b30f3",
       "author_binding_digest": "2b3d9d7b55c72c07a491348ed79f8b95449091c6f5d7177b1e0bfe2647e87835",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
       "exact_expression": "by simp [uStar, residueActionState, AsectionActionState.ofInput, residueState, projectiveNorth, projectiveObjectFrame_north]",
-      "identity_hash": "21e5a4a5ced4b8fceffd31206cf61799558f1d0f218ddc111e759918164ad4aa",
+      "identity_hash": "5ad04df6882ce909cbf030980eb0b872de69e10e41dfe356bd6ad6f11d8b7c24",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
@@ -1029,13 +1029,13 @@
         "lem:residue-spheres",
         "thm:G2-S6"
       ],
-      "candidate_sha256": "aa1d17ddc04ffa24f7676d110f0e5bc47f1f2d46220e71ec5c428728b008ada7",
+      "candidate_sha256": "80f6dd26bd79954dc699db45fc42205b8798e90ff28c975232d4e23fed43e167",
       "author_binding_digest": "94daf66062844c31aca83b8258762beb5dcd55c796cc6247d232ea2ddcd4aefd",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
       "exact_expression": "by simp [uStar, residueActionState, AsectionActionState.ofInput, residueState, projectiveNorth, projectiveObjectFrame_north]",
-      "identity_hash": "8e9fe1d9fc0a343fc79d9546b6a3939a885be8d24dfae46c2f10f832a2c7f456",
+      "identity_hash": "7b57c061b51528ad7f0e1aeba37ebd4dbb6d9fc303e8fa13675362d7a53679e5",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
@@ -1077,13 +1077,13 @@
         "prop:winding-signature",
         "thm:identity"
       ],
-      "candidate_sha256": "dc67205aa74467417184fe85217809e1bc185d527ea294607cbdb85e97b6613e",
+      "candidate_sha256": "b31a2cddb85e30633651a478ee6003b7bdffe18739d2c75935a22d6a362d561c",
       "author_binding_digest": "2303695ed6012271f74b08d247c9ec6b1646324d5eaa878e83ca59ce31323ccb",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "def ASection.transportLevel (A : ASection) (n : ℕ) : ℝ :=",
       "exact_expression": "hkn",
-      "identity_hash": "52e6bd6b061fefb068782cb8e6c4115a72f6a4b5c20d15a7287f89fb58210ea9",
+      "identity_hash": "7e549f4de931439ea1a627f053eb3268cdeaf6d0c32686b3545b78a75f3d2a42",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
@@ -1091,7 +1091,7 @@
   ],
   "binding_identity_hash_sources": {
     "Octonionic_RH_master.tex": "0710c55eb236911b742f7dab052fdc2260e82d3e861099f02975b667f430b4e5",
-    "Concentricity/Theorem.lean": "645aa5c1294982801bd6f6360e99c8de45f10e5818c805fe8f035497a5b2d947"
+    "Concentricity/Theorem.lean": "591e5be0488f2b782901296413142eccaa3380c9bd415ecfba38d2161fcd89cb"
   },
   "exact_attempt_binding_ids": [
     "seat1.hE",

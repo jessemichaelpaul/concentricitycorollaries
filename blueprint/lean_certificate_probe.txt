@@ -117,6 +117,7 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲F̵u̵n̵c̵t̵o̵r̵.̵c̵o̵n̵s̵t̵_̵o̵b̵j̵_̵m̵a̵p̵,̵ ̵t̵y̵p̵e̵s̵_̵i̵d̵_̵a̵p̵p̵l̵y̵]̵F̲u̲n̲c̲t̲o̲r̲.̲c̲o̲n̲s̲t̲_̲o̲b̲j̲_̲m̲a̲p̲]̲
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/0y/7v5zvs314z9blmbpt3mqx6g80000gn/T//concentricity-transitivity-inference-probe.lean:1022:8: warning: declaration uses `sorry`
 residueActionState_north_input_audit : ∀ (A : ASection) (n : ℕ) (I : SphereWorld),
   (ActionCategory.back (A.residueActionState projectiveNorth n I).input).coordinate =
     ↑A.distinguishedDiskAction⁻¹ ↑(A.sphereZero n)
@@ -297,8 +298,9 @@ Hint: Omit it from the simp argument list.
   ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲F̵u̵n̵c̵t̵o̵r̵.̵c̵o̵n̵s̵t̵_̵o̵b̵j̵_̵m̵a̵p̵,̵ ̵t̵y̵p̵e̵s̵_̵i̵d̵_̵a̵p̵p̵l̵y̵]̵F̲u̲n̲c̲t̲o̲r̲.̲c̲o̲n̲s̲t̲_̲o̲b̲j̲_̲m̲a̲p̲]̲
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-Concentricity/Theorem.lean:1023:8: warning: declaration uses `sorry`
-Concentricity/Theorem.lean:1065:8: warning: declaration uses `sorry`
+Concentricity/Theorem.lean:1022:8: warning: declaration uses `sorry`
+Concentricity/Theorem.lean:1108:8: warning: declaration uses `sorry`
+Concentricity/Theorem.lean:1150:8: warning: declaration uses `sorry`
 
 
 ===== BINDING IDENTITY PROBE =====

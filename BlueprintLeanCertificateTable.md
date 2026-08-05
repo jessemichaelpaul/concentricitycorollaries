@@ -72,8 +72,8 @@ Lean was contacted with the exact candidate expression for: `seat1.hE`, `seat1.h
 
 | Master result | Exact remaining role | Production declaration | Lean contact | Status |
 |---|---|---|---:|---|
-| `lem:c-residue-transitive` | the action-groupoid composition in ∫R_A, instantiated at the two semantic inverse-image objects ι_A(x₀) and ι_A(y₀) | `ASection.northProducersConnected` (downstream) | — | `UNLOCATED_OPEN_SEAT` |
-| `thm:concentricity` | the val step: the π₀-class equality instantiated at the n-th and 0-th certified representatives, carried across to the real-valued level equality | `ASection.transportLevel_of_pi0_singleton` (Concentricity/Theorem.lean:1065) | — | `UNLOCATED_OPEN_SEAT` |
+| `lem:c-residue-transitive` | the action-groupoid composition in ∫R_A, instantiated at the two semantic inverse-image objects ι_A(x₀) and ι_A(y₀) | `ASection.northProducersConnected` (Concentricity/Theorem.lean:1058) | — | `UNLOCATED_OPEN_SEAT` |
+| `thm:concentricity` | the val step: the π₀-class equality instantiated at the n-th and 0-th certified representatives, carried across to the real-valued level equality | `ASection.transportLevel_of_pi0_singleton` (Concentricity/Theorem.lean:1150) | — | `UNLOCATED_OPEN_SEAT` |
 
 The current production run reaches exactly two errors: the north existential in `sweepTransitive_on_residueSystem` and the real-valued equality in `concentricity`. The inference table above is independently green against the exact current source prefix; the open seats do not downgrade those receipts.
 
@@ -249,14 +249,14 @@ zeta_criticalLine_zeros_infinite_of_RH_audit : RiemannHypothesis → {s | rieman
 | `Octonionic_RH_master.tex` | `0710c55eb236911b742f7dab052fdc2260e82d3e861099f02975b667f430b4e5` |
 | `blueprint/lean_certificate_manifest.json` | `b372ae0c20ab57f66e4ab928b7866efca69c8272becd95f11d5b8b1f01a384fe` |
 | `Concentricity/_BlueprintTerminalCertificateProbe.lean` | `2e898992124efa19b135e96f87d14813b03809f27f9cc7a69f85fb8d5f257d37` |
-| `Concentricity/Theorem.lean` | `645aa5c1294982801bd6f6360e99c8de45f10e5818c805fe8f035497a5b2d947` |
+| `Concentricity/Theorem.lean` | `591e5be0488f2b782901296413142eccaa3380c9bd415ecfba38d2161fcd89cb` |
 | `Concentricity/_GateNorthCResidueTransitivityAudit.lean` | `07ddbe960df820ab93c25f87f4b963077f058fd3c79b739430a3c5ff6533d99a` |
 | `scripts/build_transitivity_inference_probe.sh` | `e0982829e4937b00e01bda1b7b4a4e767c09f3a907ae65393a4590125a686683` |
 | `Concentricity/_GateCorollaryInferenceAudit.lean` | `8bac693ca5c93deae6b9f1511e3f058efab47a8b657c061fc178176fe5636efb` |
 | `Concentricity/Corollaries.lean` | `4866f494cf62579778905d6dd93b912a868a880b827c4456a060bdb08d441248` |
 | `lean-toolchain` | `efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee` |
 | `lakefile.toml` | `361be5c558f10fbc113a616222d2db2c08c9b353ddb12f0cac6d5ad9a0d0287d` |
-| `lean_source_tree` | `89518144a67d39a37ad326dd32458e3b68419c48a9b6d0c71dc3393a365cab28` |
+| `lean_source_tree` | `8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c` |
 
 Raw kernel output: `blueprint/lean_certificate_probe.txt`.
 Machine-readable evidence: `blueprint/lean_certificate_evidence.json`.
