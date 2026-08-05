@@ -249,6 +249,49 @@ residue total; faithfulness makes that preimage unique."* That is the next
 place to look, and the standing rule applies: everything is in Lean and proved;
 what fails is wiring, dropped, or orphaned — so look before writing.
 
+## ⛔ THE REPAIR DIRECTION ABOVE IS WRONG — author, 2026-08-05
+
+Everything above that proposes **strengthening `IsNorthCResidueState` to carry
+a face** is misconceived. The author's correction, exact:
+
+> Of course it doesn't retain a boundary face. It's a preimage.
+
+A preimage does not store the map that produced its elements. The faces are
+**applied**, not retained. Storing them would put data on an object property
+whose entire job is selection.
+
+### How the faces actually enter
+
+1. **`AsectionState_input_then_equivariant`** (`ASectionFunctor.lean:352`,
+   green, proved by `Functor.ext` on *both* components):
+   ```lean
+   AsectionStateInput A ⋙ A.AsectionEquivariant = AsectionStateOutput A
+   ```
+   It holds on arrows as well as objects, so the normalized input coordinates
+   genuinely drive the realized A-values.
+2. That composite's result carries the preimage property — the zero-locus
+   selection at `:48`.
+3. **`canonicalAsectionPresentation_euler_toNorth`** (`:1097`) carries the
+   complete prime tape to the common north frame **at every instant**. C3
+   supplies the Weierstrass boundary presentation there; C1 identifies both
+   presentations with the continued factor `g_A`.
+4. Sweeping the constrained graph through the base gives the A-section functor
+   `AsectionActionDiagram A` (master `A_A : B ⥤ Grpd`).
+5. The fibrewise inverse image is witness (W) — `IsCResidueState A X` — and
+   `ι_{A,X}` is full and faithful by (H).
+6. Transport is (C), recorded by `cResidue_lands`; naturality is (Nat)/(Inc);
+   the total inclusion is `AsectionCResidueInclusionTotal`, with
+   `_full` and `_faithful`.
+
+**So the `sorry` in `northProducersConnectedAmbient` should be discharged by
+applying the `euler_toNorth` square at the instant, not by adding a field to
+the predicate.** The face is available because `toNorth` is supplied at every
+instant; nothing needs to be remembered by the state.
+
+Every "strengthen the predicate" probe recorded above therefore tests the wrong
+design. They are kept only because their kernel receipts are honest about what
+they assumed — not because the design is right.
+
 ### An invalid inference of mine, retracted 2026-08-05
 
 I proved a coordinate lemma with `IsNorthCResidueState` as a hypothesis, then
