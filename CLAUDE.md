@@ -41,6 +41,33 @@ Three files under `archive/` and two under `.attic_old_bases/` are retained **on
 Lean comments cite them by name and deleting them would create ghost citations. They are not
 instructions.
 
+## Nothing is generic — this is a constructible proof
+
+Not one object in this paper is a generic choice. Each was built to realize
+$\int\mathcal R_A$, and each for a stated reason: the **projective base
+groupoid** so the disk action lives there; the **`SphereWorld` groupoid with
+Möbius self-maps** for slice preservation and to extend via orbit–stabilizer;
+**$G_2$ on $\mathbb{O}^*$** because of what a slice-preserving function is by
+definition. The whole construction exists to hold a graph no one can picture:
+each slice direction is one viewpoint, the A-section functor gathers them over
+the base, the total holds them together, and the colimit conjugates them into a
+single answer.
+
+So substituting a generic object is never a simplification. It discards the
+only property that made the step work — a generic lemma that compiles proves
+nothing about these objects, and one that fails diagnoses nothing about them.
+
+**Everything is built and green. Things get dropped, orphaned, or left
+uninstantiated — they are not missing.** So look before writing.
+
+> **"Looking for a producer" is the symptom.** The failure runs: *this fact
+> would need something to produce it, per object — let me go find that
+> producer.* There is no producer. The object was already constructed to have
+> it. On 2026-08-05 that single move generated four dead ends in a row — a face
+> stored on the residue predicate, a producer of north residue states, a
+> canonical Euler loop on `ASection`, and a north-stabilizer transitivity
+> lemma. None exist; none were needed.
+
 ## The stance
 
 **The kernel is the check.** Three roles, and only three: the author supplies the argument, the
