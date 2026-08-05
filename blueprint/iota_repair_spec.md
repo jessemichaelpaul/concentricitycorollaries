@@ -1,5 +1,48 @@
 # The ι repair — spec derived from live types
 
+## ⭐ THE CONNECTOR IS GREEN AND IN-REPO — 2026-08-05
+
+The author: *"it is transitive on unit imaginary octonions (from that
+functor)"*, and that is what **eats** the inverse-image C-residue locus.
+
+```
+G2.exists_smul_eq_of_mem_unitImaginarySphere :
+  ∀ {u v : Octonion},
+    u ∈ Octonion.unitImaginarySphere → v ∈ Octonion.unitImaginarySphere →
+      ∃ g, g • u = v
+depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+Master `thm:G2-S6`, **proved in-repo** (`G2.lean:183`), closed against the P4.2
+decomposition — extend both points to basic triples (P4.2.e), match the triples
+(P4.2.f). Not an axiom, not a citation.
+
+It is **already consumed** at `SliceSphereWorld.lean:284`:
+
+```lean
+theorem sphereWorld_zigzag (I J : SphereWorld) : CategoryTheory.Zigzag I J := by
+  obtain ⟨g, hg⟩ := G2.exists_smul_eq_of_mem_unitImaginarySphere I.prop J.prop
+  exact CategoryTheory.Zigzag.of_hom (dirHomTo g hg)
+```
+
+**Any two sphere worlds are joined by a direction morphism built straight from
+the G₂ element.** That is the "connected because of G₂" of master (Φ), and it is
+a named green declaration — nothing to construct.
+
+Why this is the whole point, in the author's words: $F_A$ **sweeps the slice**;
+the direction $I$ ranges over $S^6$ and $G_2$ carries it; $D_A$ positions the
+coordinate in the slice it selects; $A_{\OO}$ realizes the value.
+`residueActionState_positioned` shows a residue state is indexed by exactly
+$(n, I)$ — zero index and direction. **$G_2$ transitive on the unit imaginary
+octonions is why $\int\mathcal R_A$ is transitive while the ambient is not**,
+and it is why this is a constructible proof rather than a search.
+
+**Care note:** the transitivity lemma as currently written is repetitive and
+carries too much. Simplifying it means routing through this connector rather
+than through the relative-loop apparatus. Do not discard the working parts
+while doing so — `northProducersConnected` (fullness) and
+`northMembersConnected` (arbitrary members) are already built.
+
 ## ⛔ FIRST: "EMPTY" IS WITHDRAWN — 2026-08-05
 
 This file repeatedly characterised parts of the construction as empty, hollow,
