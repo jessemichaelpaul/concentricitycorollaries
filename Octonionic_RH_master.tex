@@ -23,6 +23,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{stmaryrd}   % \fatsemi — diagrammatic composition
 \usepackage{amscd}
 \usepackage{tikz-cd}
 \usepackage{enumitem}
@@ -1223,9 +1224,9 @@ The object frame and the full arrow element are therefore
                               \tag{OS}\label{eq:orbit-stabilizer}
 \]
 Here $C(-)$ denotes the multiplicative Cayley-projective homomorphism, and
-$f\mathbin{;}g$ denotes composition in diagrammatic order: $f$ first, then $g$.
+$f\fatsemi g$ denotes composition in diagrammatic order: $f$ first, then $g$.
 The fixed orbit representatives force $r_f$ uniquely; $r_{1_x}=1$ and
-$r_{f\mathbin{;}g}=r_g r_f$. These identities, together with multiplicativity of $C(-)$,
+$r_{f\fatsemi g}=r_g r_f$. These identities, together with multiplicativity of $C(-)$,
 prove the identity and composition laws directly from the fixed representatives.
 
 Equation \eqref{eq:orbit-stabilizer} is the orbit--stabilizer well-definedness of
@@ -1278,7 +1279,7 @@ output eyes, and the round trip is the checked triangle
 & \mathcal H_1,
 \end{tikzcd}
 \qquad
-\operatorname{Out}_A=\operatorname{In}_A\mathbin{;}A_{\OO}.
+\operatorname{Out}_A=\operatorname{In}_A\fatsemi A_{\OO}.
 \]
 This equality is
 \texttt{AsectionState\_input\_then\_equivariant}: it holds on arrows as well as objects, so
@@ -1483,7 +1484,7 @@ to constructing a north endomorphism $k:N\to N$ and a fibre morphism
   \varphi:F_A(k)(x_N)\longrightarrow y_N.
 \]
 Once these are obtained, functorial transport along
-$g^{-1}\mathbin{;}k\mathbin{;}h$ gives an ambient Grothendieck morphism $P\to Q$, and the
+$g^{-1}\fatsemi k\fatsemi h$ gives an ambient Grothendieck morphism $P\to Q$, and the
 full inclusion $\int\iota_A$ established above returns that same morphism to
 $\int_{\mathcal B}\mathcal R_A$. It therefore remains only to construct this north comparison.
 
@@ -1514,7 +1515,7 @@ orbit--stabilizer comparison below supplies transitivity.
 And now we can conjugate all of these points of view.  The A-section round trip
 \[
   \operatorname{Out}_A
-  =\operatorname{In}_A\mathbin{;}A_{\OO}
+  =\operatorname{In}_A\fatsemi A_{\OO}
 \]
 starts with a normalized slice state $(I,u)$, retains its input coordinate $u$,
 and realizes its A-value equivariantly as the direction $I\in S^6$ varies.  Its
@@ -1530,14 +1531,13 @@ hence the positioned frame is the distinguished action itself,
     C^{-1}\right],\qquad
   \lambda_A=\log g_A(p_A).
 \]
-The common pole datum is therefore read directly in the north action, with
-Euler and Weierstrass giving its two boundary presentations along the same
-$0$-to-$N$ tape.  Two facts about $N$ make that datum nonzero, and they are what
-puts \eqref{eq:orbit-stabilizer} at our disposal here.  First, the Weierstrass
-divisor is exact at $N$: that is the one point at which the two presentations
-are the same function, so the datum they share is read off a single value there
-rather than compared across two.  Second, \textup{C1} continues $g_A$
-\emph{through} the simple pole, so that value exists and is
+The common pole datum is therefore read directly in the north action.  There is
+one construction here and not two: \emph{Euler to north}, for each square.
+Euler presents at $0$, and the same presentation arriving at $N$ \emph{is}
+Weierstrass --- \textup{C1} continues $g_A$ \emph{through} the simple pole and
+the Weierstrass divisor is exact at $N$, so at $N$ the two expressions are the
+same function.  That is what makes the datum nonzero and puts
+\eqref{eq:orbit-stabilizer} at our disposal:
 $u_A=g_A(p_A)\neq0$ \textup{(}Definition~\ref{def:base}\textup{)}.  The
 nonvanishing is thus not a hypothesis imposed on $D_A$; it is what the
 continuation delivers at the point where the two presentations agree.  It is
@@ -1567,7 +1567,7 @@ swept over all directions, is the whole content of the functor.
 Its well-definedness is \eqref{eq:orbit-stabilizer} and nothing else.  On
 objects, $F_A$ inherits the frame $a_A(b)=C(o_b)D_A$; on arrows, it inherits
 $a_A(f)$, so the identity and composition laws it must satisfy are exactly the
-two forced identities $r_{1_x}=1$ and $r_{f\mathbin{;}g}=r_g r_f$ transported
+two forced identities $r_{1_x}=1$ and $r_{f\fatsemi g}=r_g r_f$ transported
 by the homomorphism $C(-)$.  This is why every rectangle later in the proof
 commutes without a separate argument: each one is
 \eqref{eq:orbit-stabilizer} read at a particular pair of objects.  The same
@@ -1598,66 +1598,67 @@ the pole-generated action are consequently three readings of a single
 $F_A$-state.
 
 In particular, $x_N$ and $y_N$ are two evaluations of this same graph in the
-normalized north frame.  The rectangles used below are the functorial arrows
-$F_A(E_N)$ and $F_A(W_N)$, where $E_N$ and $W_N$ are the north Euler and
-Weierstrass boundary actions.  Both run on the one fixed tape from the common
-projective zero frame to the one north frame.  Write
+normalized north frame.  They are not two constructions: each is Euler to north,
+run at its own input.  Let $\iota_1,\iota_2\in\int\mathcal R_A$ be arbitrary; by
+the inverse-image definition they differ in nothing but their inputs, and those
+inputs lie in the C-residue zero locus.  One square apiece, the same square.
+
+The rectangles used below are therefore the functorial arrows $F_A(k_{EN,1})$ and
+$F_A(k_{EN,2})$, both running on the one fixed tape from the common projective zero
+frame to the one north frame.  Write
 \[
-  k_E,k_W:0\longrightarrow N
+  k_{EN,1},k_{EN,2}:0\longrightarrow N
 \]
 for their base components and
 \[
-  r_E=\operatorname{stabilizerPart}(k_E),\qquad
-  r_W=\operatorname{stabilizerPart}(k_W).
+  r_1=\operatorname{stabilizerPart}(k_{EN,1}),\qquad
+  r_2=\operatorname{stabilizerPart}(k_{EN,2}).
 \]
-These residual factors are forced. For each of the two boundary arrows,
-orbit--stabilizer gives
-\[
-  k_\bullet=o_N\,r_\bullet\,o_0^{-1},
-\]
-and \texttt{stabilizerPart\_unique} says that any north-stabilizer element giving this same
-factorization equals $r_\bullet$. Hence the Euler and Weierstrass faces are the two boundary
-presentations on the one fixed $0$-to-$N$ transport, with uniquely determined stabilizer parts.
+These residual factors are forced.  Orbit--stabilizer gives
+$k_{EN,i}=o_N\,r_i\,o_0^{-1}$, and \texttt{stabilizerPart\_unique} says
+that any north-stabilizer element giving this same factorization equals
+$r_i$.
 
-We now read the two boundary faces as commuting action squares.  Their vertical
-arrows are the object frames: $a_A(0)$ at the source of the fixed tape, and
-$a_A(N)=D_A$ at its north frame.  Their horizontal arrows are the two legs of
-\eqref{eq:orbit-stabilizer}.  On top, the input legs are the Cayley actions of
-the uniquely determined stabilizer parts,
+We now read the two runs as commuting action squares.  Their vertical arrows are
+the object frames: $a_A(0)$ at the source of the fixed tape, and $a_A(N)=D_A$ at
+its north frame.  Their horizontal arrows are the two legs of
+\eqref{eq:orbit-stabilizer}: on top the input legs
 \[
-  R_E=C(r_E),\qquad R_W=C(r_W);
+  R_1=C(r_1),\qquad R_2=C(r_2);
 \]
-along the bottom, the positioned legs are the arrow elements $a_A(k_E)$ and
-$a_A(k_W)$.  Read at $x=0$, $y=N$, \eqref{eq:orbit-stabilizer} says that each
-square commutes:
+along the bottom the arrow elements $a_A(k_{EN,1})$ and $a_A(k_{EN,2})$.  Read at $x=0$,
+$y=N$, \eqref{eq:orbit-stabilizer} says that each square commutes:
 \[
-  a_A(k_E)\,a_A(0)=D_A\,R_E,\qquad
-  a_A(k_W)\,a_A(0)=D_A\,R_W.       \tag{S}\label{eq:north-face-squares}
+  a_A(k_{EN,1})\,a_A(0)=D_A\,R_1,\qquad
+  a_A(k_{EN,2})\,a_A(0)=D_A\,R_2.       \tag{S}\label{eq:north-face-squares}
 \]
-What $F_A(E_N)$ and $F_A(W_N)$ contribute is that they carry both horizontal
+What $F_A(k_{EN,1})$ and $F_A(k_{EN,2})$ contribute is that they carry both horizontal
 legs together with these equations.
 
-The fixed tape supplies the input at which the two faces are read: they leave
-the same source object, so they share its normalized input coordinate, which we
+The fixed tape supplies the input at which the two runs are read: they leave the
+same source object, so they share its normalized input coordinate, which we
 write $u_\ast$.  The C3 boundary readings identify the corresponding positioned
 outputs with the authored coordinates,
 \[
-  a_A(k_E)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_1,\qquad
-  a_A(k_W)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_2,
+  a_A(k_{EN,1})\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_1,\qquad
+  a_A(k_{EN,2})\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_2,
                                    \tag{B}\label{eq:north-boundary-readings}
 \]
 and \eqref{eq:north-preimages} rewrites each authored coordinate as
-$z_i=D_A\mathbin{\cdot}u_i$.  The two faces may therefore be displayed as
+$z_i=D_A\mathbin{\cdot}u_i$.  The two runs may therefore be displayed as
 \[
-\begin{tikzcd}[column sep=large,row sep=large]
-u_\ast \arrow[r,"R_E=C(r_E)"] \arrow[d,"a_A(0)"']&
-u_1 \arrow[d,"D_A"]&
-u_\ast \arrow[r,"R_W=C(r_W)"] \arrow[d,"a_A(0)"']&
+\begin{tikzcd}[column sep=6em,row sep=4em,ampersand replacement=\&]
+u_\ast \arrow[r,"R_1=C(r_1)"] \arrow[d,"a_A(0)"']\&
+u_1 \arrow[d,"D_A"]\\
+a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(k_{EN,1})"']\&
+z_1
+\end{tikzcd}
+\qquad\qquad
+\begin{tikzcd}[column sep=6em,row sep=4em,ampersand replacement=\&]
+u_\ast \arrow[r,"R_2=C(r_2)"] \arrow[d,"a_A(0)"']\&
 u_2 \arrow[d,"D_A"]\\
-a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(k_E)"']&
-z_1&
-a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(k_W)"']&
-z_2 .
+a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(k_{EN,2})"']\&
+z_2
 \end{tikzcd}
 \]
 Evaluating \eqref{eq:north-face-squares} at $u_\ast$, then reading the left
@@ -1665,33 +1666,33 @@ side by \eqref{eq:north-boundary-readings} and the right side by
 \eqref{eq:north-preimages}, gives
 \[
 \begin{aligned}
- D_A\mathbin{\cdot}\bigl(C(r_E)\mathbin{\cdot}u_\ast\bigr)
-   &=a_A(k_E)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
+ D_A\mathbin{\cdot}\bigl(C(r_1)\mathbin{\cdot}u_\ast\bigr)
+   &=a_A(k_{EN,1})\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
     =z_1=D_A\mathbin{\cdot}u_1,\\
- D_A\mathbin{\cdot}\bigl(C(r_W)\mathbin{\cdot}u_\ast\bigr)
-   &=a_A(k_W)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
+ D_A\mathbin{\cdot}\bigl(C(r_2)\mathbin{\cdot}u_\ast\bigr)
+   &=a_A(k_{EN,2})\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
     =z_2=D_A\mathbin{\cdot}u_2.
 \end{aligned}
 \]
 $D_A$ was shown above to be invertible, so cancelling it on the left yields the
 two input equations
 \[
-  C(r_E)\mathbin{\cdot}u_\ast=u_1,\qquad
-  C(r_W)\mathbin{\cdot}u_\ast=u_2.    \tag{I}\label{eq:north-input-readings}
+  C(r_1)\mathbin{\cdot}u_\ast=u_1,\qquad
+  C(r_2)\mathbin{\cdot}u_\ast=u_2.    \tag{I}\label{eq:north-input-readings}
 \]
-This is the precise passage from the two functorial boundary faces to their
+This is the precise passage from the two functorial runs to their
 values at the common input.  The north comparison now follows by algebraic
 cancellation. Put
 \[
-  r=r_Wr_E^{-1}.
+  r=r_2r_1^{-1}.
 \]
 The required comparison is the elementary group calculation for these two
-boundary faces of the distinguished action:
+runs of the distinguished action:
 \[
 \begin{aligned}
  C(r)\mathbin{\cdot}u_1
- &=C(r_Wr_E^{-1})\,C(r_E)\mathbin{\cdot}u_\ast\\
- &=C(r_W)\mathbin{\cdot}u_\ast=u_2,
+ &=C(r_2r_1^{-1})\,C(r_1)\mathbin{\cdot}u_\ast\\
+ &=C(r_2)\mathbin{\cdot}u_\ast=u_2,
 \end{aligned}
 \qquad
 \begin{aligned}
@@ -1702,19 +1703,19 @@ boundary faces of the distinguished action:
 \]
 The corresponding loop in the projective base is
 \[
-  k=k_E^{-1}\mathbin{;}k_W:N\longrightarrow N.
+  k=k_{EN,1}^{-1}\fatsemi k_{EN,2}:N\longrightarrow N.
 \]
 Composition of stabilizer parts is multiplication in the same order as the
 action, while inversion sends a stabilizer part to its inverse.  Consequently
 \[
   \operatorname{stabilizerPart}(k)
-  =\operatorname{stabilizerPart}(k_W)
-     \operatorname{stabilizerPart}(k_E)^{-1}
-  =r_Wr_E^{-1}=r.                                  \tag{R}\label{eq:north-relative-stabilizer}
+  =\operatorname{stabilizerPart}(k_{EN,2})
+     \operatorname{stabilizerPart}(k_{EN,1})^{-1}
+  =r_2r_1^{-1}=r.                                  \tag{R}\label{eq:north-relative-stabilizer}
 \]
 The same identity can be seen directly from the unique factorizations
-$k_\bullet=o_Nr_\bullet o_0^{-1}$: the inverse Euler face followed by the
-Weierstrass face cancels the common $0$-frame $o_0$, and $o_N=1$ at the north
+$k_{EN,i}=o_Nr_i o_0^{-1}$: the first run inverted, followed by the second,
+cancels the common $0$-frame $o_0$, and $o_N=1$ at the north
 frame.  Equations \eqref{eq:north-input-readings} and
 \eqref{eq:north-relative-stabilizer} say that the input leg of $F_A(k)$ carries
 $u_1$ to $u_2$; conjugating by $D_A$ says that its positioned leg carries
@@ -1742,13 +1743,13 @@ and identifications
 \]
 The base component of the required total arrow is
 \[
-  (g^{-1}\mathbin{;}k)\mathbin{;}h:
+  (g^{-1}\fatsemi k)\fatsemi h:
   P.\mathrm{base}\longrightarrow Q.\mathrm{base}.    \tag{G}\label{eq:residue-total-base-arrow}
 \]
 Recall that a morphism $P\to Q$ of $\int_{\mathcal B}F_A$ is a base arrow
 $f:P.\mathrm{base}\to Q.\mathrm{base}$ together with a fibre arrow
 $F_A(f)(P.\mathrm{fiber})\to Q.\mathrm{fiber}$.  Functoriality gives
-$F_A\bigl((g^{-1}\mathbin{;}k)\mathbin{;}h\bigr)
+$F_A\bigl((g^{-1}\fatsemi k)\fatsemi h\bigr)
  =F_A(h)\circ F_A(k)\circ F_A(g^{-1})$, and
 $F_A(g^{-1})(P.\mathrm{fiber})=x_N$ by \eqref{eq:north-witness-readings}.
 So the composite carries $P.\mathrm{fiber}$ back along $g^{-1}$ to $x_N$;
@@ -1890,10 +1891,10 @@ fullness of $\iota_{A,X}$; injectivity is faithfulness.
 
 \emph{Transport of the inverse image.}
 Let $f:X\to Y$.  If $x$ has witness \textup{(W)}, then $F_A(f)(x)$ has the same north state
-$x_N$ and the composite witness $g\mathbin{;}f:N\to Y$, because
+$x_N$ and the composite witness $g\fatsemi f:N\to Y$, because
 \[
 \begin{aligned}
-  F_A(g\mathbin{;}f)(x_N)
+  F_A(g\fatsemi f)(x_N)
     &=F_A(f)\bigl(F_A(g)(x_N)\bigr)\\
     &=F_A(f)(x).
 \end{aligned}                                         \tag{C}
@@ -1918,10 +1919,10 @@ The fibrewise inclusions assemble over $\mathcal B$ in the square
 \]
 For an object $x$, both routes in \textup{(Nat)} have underlying state $F_A(f)(x)$; for an arrow
 $\alpha$, both routes have underlying arrow $F_A(f)(\alpha)$.  The upper route additionally
-carries the residue witness $g\mathbin{;}f$ established in \textup{(C)}.  Hence
+carries the residue witness $g\fatsemi f$ established in \textup{(C)}.  Hence
 \[
-  \mathcal R_A(f)\mathbin{;}\iota_{A,Y}
-  =\iota_{A,X}\mathbin{;}F_A(f).                    \tag{Inc}
+  \mathcal R_A(f)\fatsemi \iota_{A,Y}
+  =\iota_{A,X}\fatsemi F_A(f).                    \tag{Inc}
 \]
 and these equations for every $f$ are the naturality of
 $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$.
