@@ -6,13 +6,23 @@ The mathematics is Jesse Michael Paul's. **Your only job is to formalize his arg
 
 | file | what it is |
 |---|---|
-| `EndgameFinal.md` | the argument, the stance, the protocol, the open target |
 | `Octonionic_RH_master.tex` | **the spine — the argument itself.** Read the proof of `thm:concentricity` directly; there is no derived outline |
 | `RelevantGreenFinal.md` | what is certified, elicited from the kernel |
 | `DependencyTabulation.md` | the live import chain into the theorem and its corollaries |
 | `SOURCES/*.md` | the citation record — cited 60+ times from certified modules |
 
 The live Lean declarations in `Concentricity/` are the implementation record.
+
+`EndgameFinal.md` was deleted on 2026-08-05. **The endgame is not in a file; the
+author holds it.** Its seat-1 section stated that destructuring
+`P.fiber.property` and `Q.fiber.property` "already puts the exact faces in the
+local context as `xN, yN, g, h, hg, hh`" and that "there is therefore nothing
+global to grep for at this seam." `Theorem.lean:1027–1028` destructures to
+**four** components each, with no faces and no `k`. Because the instruction
+also pre-classified any report of the missing datum as the agent's own lookup
+error, an agent that looked could not report, and five sessions circled. If any
+hook or file still repeats that sentence, it is describing an older encoding —
+check the destructure against `Theorem.lean` and believe the kernel.
 
 `ProofOutline.md` was deleted on 2026-07-29: it was a hand-maintained copy of the master's proof
 with no generator behind it, and it had drifted — carrying a diagram and a sentence the master no
