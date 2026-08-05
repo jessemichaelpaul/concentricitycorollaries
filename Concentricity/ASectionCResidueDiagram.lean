@@ -24,51 +24,15 @@ private theorem cResidue_lands
     (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     ∀ x : InverseImageCResidueStateWorldGroupoid A X,
       IsCResidueState A Y ((AsectionActionTransport A f).obj x.obj) := by
-  let squareAtOne :
-      ActionTransportSquare
-        (projectiveObjectFrame A X)
-        (projectiveObjectFrame A Y) := by
-    simpa only [mul_one] using
-      positionedOrbitSquare A f (1 : Moebius)
   intro x
-  have hsquare :
-      squareAtOne = orbitStabilizerActionSquare A f := by
-    apply ActionTransportSquare.ext
-    · rfl
-    · change
-        (1 : Moebius)⁻¹ *
-            GreatCircle.cayleyProjective
-              (GreatCircle.stabilizerPart f).1 * 1 =
-          GreatCircle.cayleyProjective
-            (GreatCircle.stabilizerPart f).1
-      group
-  have htransport :
-      squareAtOne.actionStateTransport A =
-        AsectionActionTransport A f := by
-    rw [hsquare]
-    rfl
-  let xN := Classical.choose x.property
-  have hxN_and := Classical.choose_spec x.property
-  have hxN : IsNorthCResidueState A xN := hxN_and.1
-  let g := Classical.choose hxN_and.2
-  have hg := Classical.choose_spec hxN_and.2
+  obtain ⟨xN, hxN, g, hg⟩ := x.property
   refine ⟨xN, hxN, g ≫ f, ?_⟩
-  have hcomp :
-      (AsectionActionTransport A (g ≫ f)).obj xN =
-        (AsectionActionTransport A f).obj
+  calc (AsectionActionTransport A (g ≫ f)).obj xN
+      = (AsectionActionTransport A f).obj
           ((AsectionActionTransport A g).obj xN) :=
-    congrArg (fun F => F.obj xN)
-      (AsectionActionTransport_comp A g f)
-  have hsource :
-      (AsectionActionTransport A f).obj
-          ((AsectionActionTransport A g).obj xN) =
-        (AsectionActionTransport A f).obj x.obj :=
-    congrArg (fun y => (AsectionActionTransport A f).obj y) hg
-  have hprovenance :
-      (AsectionActionTransport A f).obj x.obj =
-        (AsectionActionTransport A f).obj x.obj := by
-    rw [← htransport, htransport]
-  exact hcomp.trans (hsource.trans hprovenance)
+        congrArg (fun F => F.obj xN) (AsectionActionTransport_comp A g f)
+    _ = (AsectionActionTransport A f).obj x.obj :=
+        congrArg (fun y => (AsectionActionTransport A f).obj y) hg
 
 /-- The existing A-section transport, restricted to the certified residue
 groupoid preimages.  The literal `d = 1` positioned square is the native
