@@ -249,6 +249,51 @@ residue total; faithfulness makes that preimage unique."* That is the next
 place to look, and the standing rule applies: everything is in Lean and proved;
 what fails is wiring, dropped, or orphaned — so look before writing.
 
+### An invalid inference of mine, retracted 2026-08-05
+
+I proved a coordinate lemma with `IsNorthCResidueState` as a hypothesis, then
+proved the same conclusion with **no** residue hypothesis and an arbitrary base
+object, and concluded the residue hypothesis was "decoration."
+
+**That does not follow.** A strictly weaker statement also being provable says
+only that my lemma's hypotheses were non-minimal. It says nothing about whether
+the residue structure is load-bearing in the argument — and the argument is
+about `∫𝓡_A`, which **is** a total C-residue system: `P.fiber.property` gives
+`IsCResidueState A P.base P.fiber.obj` for *every* object, by construction
+(checked: the `example` elaborates). The residue condition is not a hypothesis
+one chooses to add; it is what the objects are.
+
+The move was the generic-object substitution again, in a new costume: prove
+something about a surrogate, then transfer a property of the surrogate
+("hypothesis unused") back onto the author's object. Nothing about a generic
+fibre transfers to `∫𝓡_A`.
+
+It also inverted the logic. I said the open thing was "a production fact" and
+that the residue hypothesis was idle — when **being a C-residue state is that
+production fact**.
+
+### Where north residue states come from — the author, 2026-08-05
+
+There is no separate producer to hunt. The population is the preimage itself:
+
+- `:48` selects at north — a state is a north residue state exactly when its
+  positioned back-coordinate lies in `CResidueZeroLocus`, which C4 makes
+  nonempty;
+- `:60` spreads those over the base along `g`.
+
+So `IsNorthCResidueState` is not missing a **constructor**. It is missing
+**retention**: the selection records that the coordinate is an authored C3
+zero and forgets the boundary face of the distinguished action that evaluates
+there. Per the master, that face is what C3 supplies, together with the precise
+inputs — `residueState_graph` already delivers the index `n` and, with
+`projectiveObjectFrame_north`, the input `u = D_A⁻¹ z_n`.
+
+Note also that `r_E`, `r_W` are **not per-state data**: master `(R)` makes them
+the stabilizer parts of the two boundary faces of the *one* fixed tape, with
+`u_*` the common source input. The states' inputs are the images of `u_*` under
+those two faces. Any encoding that lets each state carry its own face or its
+own input has already lost the statement.
+
 ### Locus facts confirmed from source
 
 - `ASectionCResidue.lean:26` — `CResidueZeroLocus A = {z | A.F z = 0 ∧ 0 < z.im}`
