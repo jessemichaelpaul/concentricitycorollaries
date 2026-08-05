@@ -1,5 +1,31 @@
 # The ι repair — spec derived from live types
 
+## ⛔ FIRST: "EMPTY" IS WITHDRAWN — 2026-08-05
+
+This file repeatedly characterised parts of the construction as empty, hollow,
+or contributing nothing. **That word was mine, it came from a code report, and
+it is withdrawn.** It was never a statement about the mathematics and there was
+no basis for it.
+
+What is actually true is narrow and local: **one line in one Lean proof** —
+`hprovenance : X = X` in `cResidue_lands` (`ASectionCResidueDiagram.lean:67`) —
+is trivial. That is a fact about how that one proof was written. It says
+nothing whatever about:
+
+- **Euler-to-North.** `canonicalAsectionPresentation_euler_toNorth` carries the
+  complete prime tape to the common north frame at every instant.
+- **GPV unique winding.** The lift is unique and the winding is fixed; that is
+  what pins the tape.
+- **The commuting dictionary**
+  $$z \;\longmapsto\; e^{z}\in\mathbb C^{\times} \;\longmapsto\;
+    M(z)=\operatorname{diag}(e^{z},1) \;\longmapsto\; D(z)\in\mathrm{M\ddot ob}(\mathbb C^{*})$$
+  through $C(-)C^{-1}$. The common Euler–Weierstrass multiplier is followed
+  directly through it. **It is a commuting square, and its input is now the
+  C-residue locus.**
+
+None of those is empty. Read every later section of this file with that
+correction in force, and do not repeat the word.
+
 Codex's diagnosis is confirmed against source. This file records what the
 kernel already has, what is missing, and the exact chain that closes seat 1.
 Every line cites file:line.
