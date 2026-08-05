@@ -406,10 +406,10 @@
   "open": [
     {
       "master": "lem:c-residue-transitive",
-      "semantics": "master (B): the C3 boundary readings. A single common input u_* on the source frame of the one fixed 0-to-N tape; each north C-residue state yields its own boundary face from it, so F_A(E_N) and F_A(W_N) are the one swept square positionedOrbitSquare at two base components k_E, k_W : 0 -> N, at the same level and the same multiplier, differing only by the original input. Each k is built from its forced residual factor by faceOfStabilizerPart and forced back by stabilizerPart_unique.",
-      "declaration": "ASection.boundaryReadings_of_residueStates",
+      "semantics": "the action-groupoid composition in ∫R_A, instantiated at the two semantic inverse-image objects ι_A(x₀) and ι_A(y₀)",
+      "declaration": "ASection.northProducersConnected",
       "source": "Concentricity/Theorem.lean",
-      "diagnostic": "exists uStar, forall north C-residue state, exists r : NorthStabilizer, the swept square's positioned leg at S(uStar) equals D(input coordinate). Reduced to master (I) in the declaration body through the square's own commutes (ActionTransportSquare.apply); only (I) remains."
+      "diagnostic": "Nonempty (ι_A(x₀) ⟶ ι_A(y₀)) in the residue total; no ambient connectedness assertion and no standalone coordinate existential"
     },
     {
       "master": "thm:concentricity",

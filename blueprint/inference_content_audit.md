@@ -32,7 +32,7 @@ conclusion is the clause's consumer, not its supplier; in the limit it is
 | inference | `cor:nontrivial` | `ASection.nontrivial_one_centre_of_concentricity_audit` | **NO — probe only** | **IDENTITY** | a hypothesis is literally the conclusion |
 | inference | `cor:rh` | `zeta_riemannHypothesis_of_concentricity_audit` | **NO — probe only** | **CONDITIONAL** | 1 hypothesis(es) stand between it and the conclusion |
 | inference | `cor:rh` | `zeta_criticalLine_zeros_infinite_of_RH_audit` | **NO — probe only** | **CONDITIONAL** | 1 hypothesis(es) stand between it and the conclusion |
-| open | `lem:c-residue-transitive` | `ASection.boundaryReadings_of_residueStates` | yes | **CONSUMER** | assumes `∃ uStar, ∀ (zN : ↑(A.AsectionActionFiber ASection.projectiveNorth)), A` — same head as the conclusion |
+| open | `lem:c-residue-transitive` | `ASection.northProducersConnected` | yes | **WIRING** | composes in `∫𝓡_A` at the two semantic inverse-image objects `ι_A(x₀)` and `ι_A(y₀)` |
 | open | `thm:concentricity` | `ASection.transportLevel_of_pi0_singleton` | yes | **CONDITIONAL** | 1 hypothesis(es) stand between it and the conclusion |
 
 ## Coverage
