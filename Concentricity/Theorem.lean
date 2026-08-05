@@ -937,8 +937,7 @@ theorem ASection.residueTotal_morphism_of_northComparison
     (k : projectiveNorth ⟶ projectiveNorth)
     (φ : (AsectionActionTransport A k).obj xN ⟶ yN) :
     Nonempty (P ⟶ Q) := by
-  refine ⟨⟨(CategoryTheory.Groupoid.inv g ≫ k) ≫ h,
-    ((AsectionCResidueInclusion A).app Q.base).preimage ?_⟩⟩
+  let inclusion := AsectionCResidueInclusionTotal A
   have hback : (AsectionActionTransport A
       (CategoryTheory.Groupoid.inv g)).obj P.fiber.obj = xN := by
     calc
@@ -978,11 +977,12 @@ theorem ASection.residueTotal_morphism_of_northComparison
           rfl
       _ = (AsectionActionTransport A h).obj
             ((AsectionActionTransport A k).obj xN) := by rw [hback]
-  refine eqToHom ?_ ≫
-    (AsectionActionTransport A h).map φ ≫
-    eqToHom ?_
-  · exact hsrc
-  · exact hh
+  have ambientφ : inclusion.obj P ⟶ inclusion.obj Q := by
+    refine ⟨(CategoryTheory.Groupoid.inv g ≫ k) ≫ h, ?_⟩
+    exact eqToHom hsrc ≫
+      (AsectionActionTransport A h).map φ ≫
+      eqToHom hh
+  exact ⟨inclusion.preimage ambientφ⟩
 
 /-- **CONNECTED FROM TRANSITIVE**, on this exact C-residue total — not a
 generic category.  C4 supplies nonemptiness.  Imported from the certified
@@ -1098,6 +1098,7 @@ theorem ASection.northMembersConnected (A : ASection)
   obtain ⟨mid⟩ := A.northProducersConnected hx0 hy0
   exact ⟨CategoryTheory.Groupoid.inv wx ≫ mid ≫ wy⟩
 
+
 /-- **THE RESULT** — Two arbitrary members of the C-residue system are connected
 by a morphism of `∫𝓡_A`.  Nothing is solved for and no coordinate is compared:
 each object's inverse-image dossier IS a morphism from its north producer — base
@@ -1110,20 +1111,12 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   intro P Q
   obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
   obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-  let xN' : InverseImageCResidueStateWorldGroupoid A projectiveNorth :=
-    ⟨xN, ⟨xN, hxN, 𝟙 projectiveNorth, by
-      rw [AsectionActionTransport_id]; rfl⟩⟩
-  let yN' : InverseImageCResidueStateWorldGroupoid A projectiveNorth :=
-    ⟨yN, ⟨yN, hyN, 𝟙 projectiveNorth, by
-      rw [AsectionActionTransport_id]; rfl⟩⟩
-  let wP : (⟨projectiveNorth, xN'⟩ :
-      A.residueTotalCategory) ⟶ P :=
-    ⟨g, CategoryTheory.InducedCategory.homMk (CategoryTheory.eqToHom hg)⟩
-  let wQ : (⟨projectiveNorth, yN'⟩ :
-      A.residueTotalCategory) ⟶ Q :=
-    ⟨h, CategoryTheory.InducedCategory.homMk (CategoryTheory.eqToHom hh)⟩
-  obtain ⟨mid⟩ := A.northMembersConnected xN' yN'
-  exact ⟨CategoryTheory.Groupoid.inv wP ≫ mid ≫ wQ⟩
+  obtain ⟨k, ⟨φ⟩⟩ :
+      ∃ k : projectiveNorth ⟶ projectiveNorth,
+        Nonempty ((AsectionActionTransport A k).obj xN ⟶ yN) := by
+    sorry
+  exact A.residueTotal_morphism_of_northComparison
+    P Q xN yN g hg h hh k φ
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a

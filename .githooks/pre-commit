@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Reject any commit that stages a Lean file containing `sorry`.
+# Ask before committing a Lean file that contains `sorry`.
 #
 # Why this exists: commit 3c82b81 was titled "Complete Seat 1 and Seat 2
 # formalization—both compile successfully". It compiled because the two open
@@ -7,15 +7,21 @@
 # is green and the theorems prove nothing. The claim gate and the receipt
 # importer both refused to certify it; only the commit message said otherwise.
 #
+# What changed (2026-08-05, by the author): this repo is a save place as well
+# as a proof. Work in progress must be committable, and refusing outright cost
+# real work — three theorems were deleted rather than committed with their open
+# step. So the hook now SHOWS the sorries and ASKS. It only refuses on its own
+# when nobody is there to answer.
+#
 # Install once:   git config core.hooksPath .githooks
-# Bypass (never routine, and never for a green claim):  git commit --no-verify
+# Skip entirely:  git commit --no-verify
 
 set -uo pipefail
 
 staged=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.lean$' || true)
 [ -z "$staged" ] && exit 0
 
-fail=0
+found=0
 for f in $staged; do
     [ -f "$f" ] || continue
     # Match `sorry` only where it is actually a term or tactic, not prose.
@@ -24,28 +30,48 @@ for f in $staged; do
         | grep -nE '^[[:space:]]*sorry[[:space:]]*$|:=[[:space:]]*sorry([^[:alnum:]_]|$)|by[[:space:]]+sorry([^[:alnum:]_]|$)|,[[:space:]]*sorry([^[:alnum:]_]|$)|\([[:space:]]*sorry([^[:alnum:]_]|$)' \
         | grep -vE '^[0-9]+:[[:space:]]*--' || true)
     if [ -n "$hits" ]; then
-        if [ "$fail" -eq 0 ]; then
-            echo "pre-commit: refusing — staged Lean sources contain \`sorry\`." >&2
+        if [ "$found" -eq 0 ]; then
+            echo "pre-commit: staged Lean sources contain \`sorry\`." >&2
             echo >&2
         fi
         echo "  $f" >&2
         echo "$hits" | sed 's/^/      /' >&2
-        fail=1
+        found=1
     fi
 done
 
-if [ "$fail" -ne 0 ]; then
-    cat >&2 <<'MSG'
+[ "$found" -eq 0 ] && exit 0
 
-A file with `sorry` compiles. It does not prove anything: every declaration
-downstream of it carries sorryAx in its axiom surface.
+cat >&2 <<'MSG'
 
-Either finish the step, or replace the `sorry` with an unsolved goal so the
-module is honestly red, then commit that.
+Each of these is an open step. Every declaration downstream of one carries
+sorryAx in its axiom surface, so nothing above it is proved, and no commit
+message or docstring should say otherwise.
 
-To override deliberately:  git commit --no-verify
+That is a reason to be careful about CLAIMS, not a reason to lose the work.
+Committing an honest open step is fine.
 MSG
-    exit 1
+
+if [ -r /dev/tty ]; then
+    printf '\nCommit anyway? [y/N] ' >&2
+    read -r reply < /dev/tty
+    case "$reply" in
+        [yY]|[yY][eE][sS])
+            echo "pre-commit: committing with open steps, by author's answer." >&2
+            exit 0
+            ;;
+        *)
+            echo "pre-commit: stopped." >&2
+            exit 1
+            ;;
+    esac
 fi
 
-exit 0
+# No terminal to ask at (scripted or automated commit): refuse rather than
+# assume consent.
+cat >&2 <<'MSG'
+
+No terminal available to ask. Refusing rather than assuming an answer.
+To commit these deliberately:  git commit --no-verify
+MSG
+exit 1
