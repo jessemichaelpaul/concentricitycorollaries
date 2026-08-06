@@ -47,14 +47,21 @@ scaffolding for my structure, not his.**
 The wall was never in the Lean. It was in the statement I drafted, which I then
 transcribed into the Lean and spent an afternoon trying to prove.
 
-## What is open
+## The coordinate half was never open — author, 2026-08-06
 
-With one $D_A$ carrying the tape, and two inputs:
+> The coordinate half was never open at any point in time anywhere in any
+> place, because the C-residue system **supplies** the C-residue zero locus from
+> the inverse image groupoid, and we don't need a chart.
 
-- the **direction half** is $G_2$ transitive on the unit imaginary octonions,
-  and `zeroSphere_eq_orbit` records that a zero sphere **is** a $G_2$ orbit;
-- the **coordinate half** — what relates $u_1$ and $u_2$, or $z_1$ and $z_2$ —
-  is not settled, and is not $u_\ast$ plus two runs.
+So there is no coordinate obligation to discharge. The locus is supplied by the
+construction; the inverse image is taken over it; the coordinates are what the
+system hands you, not something to be produced or compared in a chart. Treating
+"relate $u_1$ and $u_2$" as an open step is the same mistake one level down —
+it invents a comparison the construction already performed.
 
-Do not guess it. Four guesses so far, all the same shape: positing a producer
-for a structure the author does not have.
+The direction half is $G_2$ transitive on the unit imaginary octonions, with
+`zeroSphere_eq_orbit` recording that a zero sphere **is** a $G_2$ orbit.
+
+**Standing instruction:** do not open a coordinate obligation here. Five guesses
+so far, every one the same shape — positing a producer or a comparison for
+structure the author already has.
