@@ -70,7 +70,6 @@ on its carrier in this file or on the certified board:
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8); this file carries none.
 -/
-import Concentricity.FlipWeld
 import Concentricity.LogManifold
 import Concentricity.InboxWire
 
