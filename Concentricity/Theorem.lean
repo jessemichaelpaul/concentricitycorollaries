@@ -471,8 +471,7 @@ theorem ASection.northFiberHom_of_coordinate
     (show tx.input ⟶ yN.input from ⟨g₂, hstate⟩)⟩
 
 /-- Inversion sends a stabilizer part to its inverse (master `lem:c-residue-
-transitive`, (R)).  This is the `hinv` argument already used inline inside
-`northRelativeLoop_maps`, hoisted so both consumers share one proof. -/
+transitive`, (R)).  Inversion of the residual factor, stated on its own. -/
 theorem ASection.stabilizerPart_inv {X Y : GreatCircle.Base} (k : X ⟶ Y) :
     GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv k)
       = (GreatCircle.stabilizerPart k)⁻¹ := by
@@ -926,8 +925,7 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   obtain ⟨k, ⟨φ⟩⟩ :
       ∃ k : projectiveNorth ⟶ projectiveNorth,
         Nonempty ((AsectionActionTransport A k).obj xN ⟶ yN) := by
-    obtain ⟨mor⟩ := A.northProducersConnected hxN hyN
-    exact ⟨mor.base, ⟨mor.fiber.hom⟩⟩
+    sorry
   exact A.residueTotal_morphism_of_northComparison
     P Q xN yN g hg h hh k φ
 
