@@ -4,7 +4,7 @@ Generated mechanically from the current master, current Lean sources, and the pi
 The manifest is the single human-ratified mapping from a master clause to a Lean declaration; the generator verifies the exact master anchor, exact Lean type, fresh kernel run, axiom surface, and source fingerprints.
 Regenerate with `scripts/generate_blueprint_lean_table.py`. The generator reads and probes `Concentricity/Theorem.lean`; it does not edit either production seat.
 
-Current count: 9 terminal certificates; 7 inference certificates; 0 unpacked dossier bindings ready; 6 author bindings confirmed; 0 confirmed bindings awaiting Lean spelling; 0 production seats open.
+Current count: 9 terminal certificates; 6 inference certificates; 0 unpacked dossier bindings ready; 6 author bindings confirmed; 0 confirmed bindings awaiting Lean spelling; 0 production seats open.
 
 Certificate meanings:
 
@@ -32,14 +32,14 @@ Allowed axiom surface: `['propext', 'Classical.choice', 'Quot.sound']`.
 
 | Master clause | Focused Lean receipt | Edge | Master/identity | Kernel/type | Axioms | Status |
 |---|---|---|---:|---:|---:|---|
-| a north C-residue state is the exact C3 residue action state | `ASection.northState_is_residueActionState_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:61) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| a north C-residue state is the exact C3 residue action state | `ASection.northState_is_residueActionState_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:61) | `inference` | ✗ | ✓ | ✓ | `NOT_CERTIFIED` |
 | the north input is D_A⁻¹(sphereZero n) | `ASection.residueActionState_north_input_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:18) | `inference` | ✗ | ✓ | ✓ | `NOT_CERTIFIED` |
 | a north loop acts by C(stabilizerPart k) on the stored input | `ASection.residueActionTransport_north_input_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:26) | `inference` | ✗ | ✓ | ✓ | `NOT_CERTIFIED` |
-| the common source factor cancels in k_E⁻¹ ≫ k_W | `ASection.northRelativeLoop_stabilizer_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:137) | `inference` | ✗ | ✓ | ✓ | `NOT_CERTIFIED` |
+| the common source factor cancels in k_E⁻¹ ≫ k_W | `ASection.northRelativeLoop_stabilizer_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:137) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
 | the relative loop carries the first certified input to the second | `ASection.northRelativeLoop_maps_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:165) | `inference` | ✗ | ✓ | ✓ | `NOT_CERTIFIED` |
 | the two parallel faces and G₂ package the north-fibre morphism | `ASection.northComparison_of_parallelFaces_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:201) | `inference` | ✗ | ✓ | ✓ | `NOT_CERTIFIED` |
 | the same relative calculation holds in the two-legged square functor register | `ASection.relativeActionSquare_transport_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:286) | `inference` | ✗ | ✓ | ✓ | `NOT_CERTIFIED` |
-| g⁻¹ ≫ k ≫ h and fullness produce P ⟶ Q inside ∫R_A | `ASection.residueTotal_morphism_of_northComparison_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:293) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
+| g⁻¹ ≫ k ≫ h and fullness produce P ⟶ Q inside ∫R_A | `ASection.residueTotal_morphism_of_northComparison_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:293) | `inference` | ✗ | ✓ | ✓ | `NOT_CERTIFIED` |
 | transitivity of the exact ∫R_A implies IsConnected for that exact ∫R_A | `ASection.residueTotal_isConnected_of_transitive_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:359) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
 | connectedness of the exact ∫R_A makes π₀ of that exact ∫R_A a singleton | `ASection.residueTotal_pi0_singleton_of_connected_audit` (Concentricity/_GateNorthCResidueTransitivityAudit.lean:374) | `inference` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
 | the general one-centre corollary is exactly the concentricity conclusion | `ASection.nontrivial_one_centre_of_concentricity_audit` (Concentricity/_GateCorollaryInferenceAudit.lean:13) | `identity` | ✓ | ✓ | ✓ | `INFERENCE_CERTIFIED` |
@@ -246,7 +246,7 @@ zeta_criticalLine_zeros_infinite_of_RH_audit : RiemannHypothesis → {s | rieman
 
 | Source | SHA-256 |
 |---|---|
-| `Octonionic_RH_master.tex` | `126637d3a952fbb27a3ac97d5018dbfcab54761302c96855fe9ddc0e1efd73ca` |
+| `Octonionic_RH_master.tex` | `7b9b36e522094b92866c88f6db408266433d3626e4e5d7f9d4d5b840c0143938` |
 | `blueprint/lean_certificate_manifest.json` | `b372ae0c20ab57f66e4ab928b7866efca69c8272becd95f11d5b8b1f01a384fe` |
 | `Concentricity/_BlueprintTerminalCertificateProbe.lean` | `2e898992124efa19b135e96f87d14813b03809f27f9cc7a69f85fb8d5f257d37` |
 | `Concentricity/Theorem.lean` | `591e5be0488f2b782901296413142eccaa3380c9bd415ecfba38d2161fcd89cb` |

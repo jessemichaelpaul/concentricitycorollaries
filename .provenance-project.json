@@ -84,7 +84,9 @@
         "CLAUDE.md",
         "EndgameFinal.md",
         "scripts/*",
-        ".githooks/*"
+        ".githooks/*",
+        "Concentricity/ProjectiveTransport.lean",
+        "Concentricity/ProjectiveSection.lean"
       ]
     }
   }

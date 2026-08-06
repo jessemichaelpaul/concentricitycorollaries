@@ -83,7 +83,8 @@
         "BlueprintLeanCertificateTable.md",
         "CLAUDE.md",
         "EndgameFinal.md",
-        "scripts/*"
+        "scripts/*",
+        ".githooks/*"
       ]
     }
   }
