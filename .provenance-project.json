@@ -17,7 +17,7 @@
     "onePointEquivSphereOfFinrankEq": "Mathlib.Topology.Compactification.OnePoint.Sphere"
   },
   "mirror": "/Users/jessepaul/Desktop/Concentricity Provenance",
-  "phase": "authoring",
+  "phase": "formalization",
   "release_remote": "corollaries",
   "release_remote_url": "https://github.com/jessemichaelpaul/concentricitycorollaries.git",
   "release_branch": "main",
