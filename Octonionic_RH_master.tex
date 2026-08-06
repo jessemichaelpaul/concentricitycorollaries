@@ -1510,188 +1510,126 @@ Let
 \[
   P,Q\in\int_{\mathcal B}\mathcal R_A
 \]
-be arbitrary. By the inverse-image definition, the fibre data of $P$ and $Q$ supply north
-residue states $x_N,y_N$, together with base arrows
+be arbitrary. By the inverse-image definition, the fibre data of $P$ and $Q$
+supply north residue states $x_N,y_N$ together with base arrows
 \[
-  g:N\longrightarrow P_{\mathrm{base}},\qquad
-  h:N\longrightarrow Q_{\mathrm{base}},
+  g:N\longrightarrow P.\mathrm{base},\qquad
+  h:N\longrightarrow Q.\mathrm{base},
 \]
-whose A-section transports recover the two given fibre states. Thus the arbitrary problem reduces
-to constructing a north endomorphism $k:N\to N$ and a fibre morphism
+whose A-section transports recover the two given fibre states. So the arbitrary
+problem reduces to a north endomorphism $k:N\to N$ and a fibre morphism
 \[
-  \varphi:\mathcal A_A(k)(x_N)\longrightarrow y_N.
+  \varphi:\mathcal A_A(k)(x_N)\longrightarrow y_N .
 \]
-Once these are obtained, functorial transport along
-$g^{-1}\fatsemi k\fatsemi h$ gives an ambient Grothendieck morphism $P\to Q$, and the
-full inclusion $\int\iota_A$ established above returns that same morphism to
-$\int_{\mathcal B}\mathcal R_A$. It therefore remains only to construct this north comparison.
+Once these are in hand, functorial transport along
+$g^{-1}\fatsemi k\fatsemi h$ gives an ambient Grothendieck morphism $P\to Q$,
+and the full inclusion $\int\iota_A$ returns that morphism to
+$\int_{\mathcal B}\mathcal R_A$. It remains only to construct the north
+comparison.
 
-There is one projective base and one north object $N$. The inverse-image
-construction above has already fixed the unique tame GPV $0$-to-$N$ tape and its
-unique orbit--stabilizer factorization; each zero index selects a state along
-that fixed base transport.
-
-Because the supplied states $x_N,y_N$ lie in the north fibre of the C-residue inverse
-image selected by the C3 zero-sphere system, there are C-residue indices $n_1,n_2$ and
-directions $I_1,I_2\in S^6$ for which their positioned coordinates are the
-actual C3 coordinates
-\[
-  z_1=\operatorname{sphereZero}(n_1),\qquad
-  z_2=\operatorname{sphereZero}(n_2).
-\]
-The north object frame $D_A$ uniquely determines their inputs:
-\[
-  u_i=D_A^{-1}\mathbin{\cdot}z_i,\qquad z_i=D_A\mathbin{\cdot}u_i.
-\]
-This is where C3 enters the argument. It supplies the Weierstrass face of the
-distinguished action and the precise inputs on which that action is evaluated. The relative
-orbit--stabilizer comparison below supplies transitivity.
-
-\newpage
-And now we can conjugate all of these points of view.  The A-section round trip
-\[
-  \operatorname{Out}_A
-  =\operatorname{In}_A\fatsemi A_{\OO}
-\]
-starts with a normalized slice state $(I,u)$, retains its input coordinate $u$,
-and realizes its A-value equivariantly as the direction $I\in S^6$ varies.  Its
-projective eye is the A-slice functor
-$A^{\mathrm{slice}}:\mathcal B\to\SphereWorld$, which carries the direction,
-the compactified slice sphere, and the M\"obius leg that positions that sphere
-over the base.  At the north object the orbit representative is $o_N=1$;
-hence the positioned frame is the distinguished action itself,
-\[
-  a_A(N)=D_A,\qquad
-  D_A=\left[C
-    \begin{pmatrix}e^{\lambda_A}&0\\[2pt]0&1\end{pmatrix}
-    C^{-1}\right],\qquad
-  \lambda_A=\log g_A(p_A).
-\]
-The common pole datum is therefore read directly in the north action.  There is
-one construction here and not two: \emph{Euler to north}, for each square.
-Euler presents at $0$, and the same presentation arriving at $N$ \emph{is}
-Weierstrass --- \textup{C1} continues $g_A$ \emph{through} the simple pole and
-the Weierstrass divisor is exact at $N$, so at $N$ the two expressions are the
-same function.  That is what makes the datum nonzero and puts
-\eqref{eq:orbit-stabilizer} at our disposal:
-$u_A=g_A(p_A)\neq0$ \textup{(}Definition~\ref{def:base}\textup{)}.  The
-nonvanishing is thus not a hypothesis imposed on $D_A$; it is what the
-continuation delivers at the point where the two presentations agree.  It is
-also exactly what makes the positioned action a group action:
-$\operatorname{diag}(u_A,1)$ has determinant $u_A\neq0$, so its class lies in
-the projective group, and $D_A$ is its conjugate by the Cayley map, hence
-invertible.  Each object frame $a_A(b)=\operatorname{cayleyProjective}(o_b)D_A$ is then a group element as
-well, and orbit--stabilizer applies to the action they generate.  There is
-moreover one $N$ here and not three: the
-north object of the projective base $\mathcal B$, the point at infinity shared
-by the slice Riemann spheres, and the north pole of $\Ostar=S^8$ are the same
-point \textup{(}Definition~\ref{def:carrier}\textup{)}, so the one fixed
-$0$-to-$N$ tape has one north frame, at which $o_N=1$.
-
-The A-section action functor $\mathcal A_A$ joins these views in one
-constrained graph: at $N$ it records
+\medskip
+\noindent\emph{The state is a triple.}
+At $N$ the A-section action functor records
 \[
   (I,u)\longmapsto
-  \bigl((I,u),\;D_A\mathbin{\cdot}(I,u),\;
-    A_{\OO}(D_A\mathbin{\cdot}(I,u))\bigr).
+  \bigl(\,\underbrace{(I,u)}_{\text{input}},\;
+        \underbrace{D_A\mathbin{\cdot}(I,u)}_{\text{positioned}},\;
+        \underbrace{A_{\OO}(D_A\mathbin{\cdot}(I,u))}_{\text{realized value}}\,\bigr).
                                     \tag{A}\label{eq:north-graph}
 \]
-What $\mathcal A_A$ does is sweep the slice.  The direction $I$ ranges over $S^6$ and
-$G_2$ carries it; the distinguished element $D_A$ positions the coordinate $u$
-in the slice it selects; and $A_{\OO}$ realizes the value there.  One element,
-swept over all directions, is the whole content of the functor.
+The three entries carry the three things the comparison needs, and they carry
+them separately. The residue condition of $\mathcal R_A(N)$ selects on the
+\emph{middle} entry: a north residue state is one whose positioned coordinate is
+an authored C3 coordinate. That is the entry the inverse-image construction is
+built on.
 
-Its well-definedness is \eqref{eq:orbit-stabilizer} and nothing else.  On
-objects, $\mathcal A_A$ inherits the frame $a_A(b)=\operatorname{cayleyProjective}(o_b)D_A$; on arrows, it inherits
-$a_A(f)$, so the identity and composition laws it must satisfy are exactly the
-two forced identities $r_{1_x}=1$ and $r_{f\fatsemi g}=r_g r_f$ transported
-by the homomorphism $\operatorname{cayleyProjective}(-)$.  This is why every rectangle later in the proof
-commutes without a separate argument: each one is
-\eqref{eq:orbit-stabilizer} read at a particular pair of objects.  The same
-holds for the A-slice functor and for $\mathcal R_A$, which is why the two
-levels can be compared at all.
-
-The inverse-image groupoid $\mathcal R_A(N)$ supplies the inputs occurring in
-this graph.  Its residue condition identifies the positioned entries of
-$x_N,y_N$ with the authored C3 coordinates $z_i$, and the graph equation then
-pulls each one back uniquely through the north action:
+\medskip
+\noindent\emph{The two states, and where they differ.}
+Write the two supplied states as evaluations of \eqref{eq:north-graph}:
 \[
-  u_i=D_A^{-1}\mathbin{\cdot}z_i,\qquad
-  D_A\mathbin{\cdot}u_i=z_i.                         \tag{P}\label{eq:north-preimages}
+\begin{aligned}
+  x_N&=\bigl((I_1,u_1),\;z_1,\;A_{\OO}(z_1)\bigr),
+    &z_1&=D_A\mathbin{\cdot}u_1,\\[0.5ex]
+  y_N&=\bigl((I_2,u_2),\;z_2,\;A_{\OO}(z_2)\bigr),
+    &z_2&=D_A\mathbin{\cdot}u_2,
+\end{aligned}
+                                    \tag{P}\label{eq:north-preimages}
 \]
-Accordingly, the inputs used in the comparison are the canonical preimages of
-the selected residue states in the inverse-image groupoid.
+with $z_1,z_2$ the authored C3 coordinates their residue condition selects and
+$I_1,I_2\in S^6$ their slice directions. Since $D_A$ is invertible, each middle
+entry has exactly one input behind it, so \eqref{eq:north-preimages} determines
+$u_1$ and $u_2$ rather than choosing them. The two states differ in their left
+entries and in nothing else.
 
-Thus $u$ is the normalized input coordinate, $I$ is the slice direction,
-$z=D_A\mathbin{\cdot}u$ is the positioned coordinate, and the third entry is
-its realized A-value.  On arrows, \eqref{eq:orbit-stabilizer} positions an arrow
-$f:x\to y$ with input leg $\operatorname{cayleyProjective}(r_f)$ as $a_A(f)=a_A(y)\,\operatorname{cayleyProjective}(r_f)\,a_A(x)^{-1}$,
-while $G_2$ carries the slice direction.  At a loop on $N$ the frames at both
-ends are $a_A(N)=D_A$, and this reads as conjugation,
-$a_A(f)=D_A\,\operatorname{cayleyProjective}(r_f)\,D_A^{-1}$; that is the form the relative loop takes at the
-end of the comparison.  The coordinate comparison, the sphere normalization, and
-the pole-generated action are consequently three readings of a single
-$\mathcal A_A$-state.
+These inputs sit at $N$. They are not the input the two runs are read at: that
+one sits at the source of the tape and is written $u_\ast$, and the two runs
+carry it to $u_1$ and to $u_2$ respectively.
 
-In particular, $x_N$ and $y_N$ are two evaluations of this same graph in the
-normalized north frame.  They are not two constructions: each is Euler to north,
-run at its own input.  By the inverse-image definition they differ in nothing
-but those inputs, and the inputs lie in the C-residue zero locus.
-
-The rectangles used below are therefore the functorial arrows
+\medskip
+\noindent\emph{What they share.}
+Each state is one sweep of the one construction, and each sweep runs the fixed
+$0$-to-$N$ tape once:
 \[
-  \mathcal A_A(\operatorname{eulerToNorth}_1),\qquad
-  \mathcal A_A(\operatorname{eulerToNorth}_2),
+  \operatorname{eulerToNorth}_1,\ \operatorname{eulerToNorth}_2
+    \;:\;0\longrightarrow N .
 \]
-both running on the one fixed tape from the common projective zero frame to the
-one north frame.  Write
+Along that tape condition \textup{C2} supplies the arithmetic instance
 \[
-  \operatorname{eulerToNorth}_1,\ \operatorname{eulerToNorth}_2:0\longrightarrow N
+  \Gamma_A(t)=\sum_{p\in A.\iota}\ell_p(\delta(t)),
+  \qquad e^{\Gamma_A(t)}=A(\delta(t)),
 \]
-for their base components and
+with the prime index retained inside the complete
+summation. Local normal convergence makes $\Gamma_A$ continuous, the zero-free
+half-space keeps its value tape in $\CC^\times$, and GPV uniqueness fixes the
+whole lift once $\Gamma_A(0)$ is chosen; since $\delta(0)=\delta(1)$ the same
+prime sum occurs at both endpoints, so the checked winding is $k=0$. At every
+instant the \texttt{euler\_toNorth} square of the canonical presentation
+carries this complete prime tape to the common north frame, where \textup{C3}
+supplies the Weierstrass boundary presentation and \textup{C1} identifies both
+presentations with the continued factor $g_A$.
+
+So there is one construction and not two. Euler presents at $0$, and the same
+presentation arriving at $N$ \emph{is} Weierstrass. That identity is what makes
+the common datum nonzero, $u_A=g_A(p_A)\neq0$
+\textup{(}Definition~\ref{def:base}\textup{)}, hence $D_A$ invertible, hence
+\eqref{eq:orbit-stabilizer} available at every instant of the tape up to and
+including $N$. Invertibility at $N$ is not an assumption imposed on $D_A$; it is
+what the continuation delivers at the point where the two presentations agree.
+
+\medskip
+\noindent\emph{The two sweeps as squares.}
+Write
 \[
   r_1=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}_1),\qquad
-  r_2=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}_2).
+  r_2=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}_2)
 \]
-These residual factors are forced.  Orbit--stabilizer gives
+for their residual factors. These are forced, not chosen: orbit--stabilizer
+gives
 \[
   \operatorname{eulerToNorth}_i=o_N\,r_i\,o_0^{-1},
 \]
-and \texttt{stabilizerPart\_unique} says that any north-stabilizer element
-giving this same factorization equals $r_i$.
+and \texttt{stabilizerPart\_unique} says any north-stabilizer element with this
+same factorization equals $r_i$.
 
-We now read the two runs as commuting action squares.  Their vertical arrows are
-the object frames: $a_A(0)$ at the source of the fixed tape, and $a_A(N)=D_A$ at
-its north frame.  Their horizontal arrows are the two legs of
-\eqref{eq:orbit-stabilizer}: on top the input legs
+Read each sweep as a commuting square. The verticals are the object frames
+already fixed --- $a_A(0)$ at the source, $a_A(N)=D_A$ at north. The horizontals
+are the two legs of \eqref{eq:orbit-stabilizer}: on top the input leg
+$R_i=\operatorname{cayleyProjective}(r_i)$, along the bottom the arrow element
+$a_A(\operatorname{eulerToNorth}_i)$. Read at $x=0$, $y=N$,
+\eqref{eq:orbit-stabilizer} says each square commutes:
 \[
-  R_1=\operatorname{cayleyProjective}(r_1),\qquad R_2=\operatorname{cayleyProjective}(r_2);
+  a_A(\operatorname{eulerToNorth}_i)\,a_A(0)=D_A\,R_i .
+                                    \tag{S}\label{eq:north-face-squares}
 \]
-along the bottom the arrow elements $a_A(\operatorname{eulerToNorth}_1)$ and $a_A(\operatorname{eulerToNorth}_2)$.  Read at $x=0$,
-$y=N$, \eqref{eq:orbit-stabilizer} says that each square commutes:
-\[
-  a_A(\operatorname{eulerToNorth}_1)\,a_A(0)=D_A\,R_1,\qquad
-  a_A(\operatorname{eulerToNorth}_2)\,a_A(0)=D_A\,R_2.       \tag{S}\label{eq:north-face-squares}
-\]
-What $\mathcal A_A(\operatorname{eulerToNorth}_1)$ and $\mathcal A_A(\operatorname{eulerToNorth}_2)$ contribute is that they carry both horizontal
-legs together with these equations.
-
-The fixed tape supplies the input at which the two runs are read: they leave the
-same source object, so they share its normalized input coordinate, which we
-write $u_\ast$.  The C3 boundary readings identify the corresponding positioned
-outputs with the authored coordinates,
-\[
-  a_A(\operatorname{eulerToNorth}_1)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_1,\qquad
-  a_A(\operatorname{eulerToNorth}_2)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_2,
-                                   \tag{B}\label{eq:north-boundary-readings}
-\]
-and \eqref{eq:north-preimages} rewrites each authored coordinate as
-$z_i=D_A\mathbin{\cdot}u_i$.  The two runs may therefore be displayed as
+Nothing here is assumed: \eqref{eq:north-face-squares} is
+\eqref{eq:orbit-stabilizer} instantiated on the base component of each sweep.
+The two sweeps are therefore
 \[
 \begin{tikzcd}[column sep=3em,row sep=3.2em,ampersand replacement=\&]
 u_\ast \arrow[r,"R_1"] \arrow[d,"a_A(0)"']\&
 u_1 \arrow[d,"D_A"]\\
-a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(\operatorname{eulerToNorth}_1)"']\&
+a_A(0)\mathbin{\cdot}u_\ast
+  \arrow[r,"a_A(\operatorname{eulerToNorth}_1)"']\&
 z_1
 \end{tikzcd}
 \]
@@ -1699,120 +1637,128 @@ z_1
 \begin{tikzcd}[column sep=3em,row sep=3.2em,ampersand replacement=\&]
 u_\ast \arrow[r,"R_2"] \arrow[d,"a_A(0)"']\&
 u_2 \arrow[d,"D_A"]\\
-a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(\operatorname{eulerToNorth}_2)"']\&
+a_A(0)\mathbin{\cdot}u_\ast
+  \arrow[r,"a_A(\operatorname{eulerToNorth}_2)"']\&
 z_2
 \end{tikzcd}
 \]
-Evaluating \eqref{eq:north-face-squares} at $u_\ast$, then reading the left
-side by \eqref{eq:north-boundary-readings} and the right side by
-\eqref{eq:north-preimages}, gives
+one square apiece, sharing their top-left corner.
+
+\medskip
+\noindent\emph{Both sweeps read at the one source input.}
+The two runs leave the same source object, so they are read at its normalized
+input coordinate $u_\ast$. The C3 boundary readings identify the positioned
+outputs with the authored coordinates,
+\[
+  a_A(\operatorname{eulerToNorth}_i)\mathbin{\cdot}
+    \bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_i ,
+                                    \tag{B}\label{eq:north-boundary-readings}
+\]
+and \eqref{eq:north-preimages} rewrites each as $z_i=D_A\mathbin{\cdot}u_i$.
+Evaluating \eqref{eq:north-face-squares} at $u_\ast$, reading the left side by
+\eqref{eq:north-boundary-readings} and the right by
+\eqref{eq:north-preimages}:
+\[
+  D_A\mathbin{\cdot}\bigl(R_i\mathbin{\cdot}u_\ast\bigr)
+    =a_A(\operatorname{eulerToNorth}_i)\mathbin{\cdot}
+      \bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
+    =z_i=D_A\mathbin{\cdot}u_i .
+\]
+$D_A$ is invertible, so cancelling it on the left gives the two input equations
+\[
+  R_1\mathbin{\cdot}u_\ast=u_1,\qquad
+  R_2\mathbin{\cdot}u_\ast=u_2 .
+                                    \tag{I}\label{eq:north-input-readings}
+\]
+Both sweeps are now read at the one source input, and their difference is
+exactly the difference of their residual factors.
+
+\medskip
+\noindent\emph{The coordinate half.}
+Put $r=r_2r_1^{-1}$, the residual factor of the second sweep relative to the
+first. Then \eqref{eq:north-input-readings} gives
 \[
 \begin{aligned}
- D_A\mathbin{\cdot}\bigl(\operatorname{cayleyProjective}(r_1)\mathbin{\cdot}u_\ast\bigr)
-   &=a_A(\operatorname{eulerToNorth}_1)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
-    =z_1=D_A\mathbin{\cdot}u_1,\\
- D_A\mathbin{\cdot}\bigl(\operatorname{cayleyProjective}(r_2)\mathbin{\cdot}u_\ast\bigr)
-   &=a_A(\operatorname{eulerToNorth}_2)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
-    =z_2=D_A\mathbin{\cdot}u_2.
+  \operatorname{cayleyProjective}(r)\mathbin{\cdot}u_1
+    &=\operatorname{cayleyProjective}(r_2r_1^{-1})\,
+       R_1\mathbin{\cdot}u_\ast
+     =R_2\mathbin{\cdot}u_\ast=u_2,\\[0.6ex]
+  D_A\,\operatorname{cayleyProjective}(r)\,D_A^{-1}\mathbin{\cdot}z_1
+    &=D_A\mathbin{\cdot}
+       \bigl(\operatorname{cayleyProjective}(r)\mathbin{\cdot}u_1\bigr)
+     =D_A\mathbin{\cdot}u_2=z_2 .
 \end{aligned}
 \]
-$D_A$ was shown above to be invertible, so cancelling it on the left yields the
-two input equations
-\[
-  \operatorname{cayleyProjective}(r_1)\mathbin{\cdot}u_\ast=u_1,\qquad
-  \operatorname{cayleyProjective}(r_2)\mathbin{\cdot}u_\ast=u_2.    \tag{I}\label{eq:north-input-readings}
-\]
-The north comparison is now algebra.  Put
-\[
-  r=r_2r_1^{-1},
-\]
-the residual factor of the second run relative to the first:
-\[
-\begin{aligned}
- \operatorname{cayleyProjective}(r)\mathbin{\cdot}u_1
- &=\operatorname{cayleyProjective}(r_2r_1^{-1})\,
-    \operatorname{cayleyProjective}(r_1)\mathbin{\cdot}u_\ast\\
- &=\operatorname{cayleyProjective}(r_2)\mathbin{\cdot}u_\ast=u_2,\\[1ex]
- D_A\,\operatorname{cayleyProjective}(r)\,D_A^{-1}\mathbin{\cdot}z_1
- &=D_A\mathbin{\cdot}\bigl(\operatorname{cayleyProjective}(r)
-     \mathbin{\cdot}u_1\bigr)\\
- &=D_A\mathbin{\cdot}u_2=z_2 .
-\end{aligned}
-\]
-The corresponding loop in the projective base is
+The corresponding base loop is
 \[
   k=\operatorname{eulerToNorth}_1^{-1}
-    \fatsemi \operatorname{eulerToNorth}_2
-    \;:\;N\longrightarrow N.
+    \fatsemi\operatorname{eulerToNorth}_2\;:\;N\longrightarrow N,
 \]
-Composition of stabilizer parts is multiplication in the same order as the
-action, while inversion sends a stabilizer part to its inverse.  Consequently
+and since composing stabilizer parts multiplies them in the same order as the
+action while inversion inverts them,
 \[
-  \operatorname{stabilizerPart}(k)
-  =\operatorname{stabilizerPart}(\operatorname{eulerToNorth}_2)
-     \operatorname{stabilizerPart}(\operatorname{eulerToNorth}_1)^{-1}
-  =r_2r_1^{-1}=r.                                  \tag{R}\label{eq:north-relative-stabilizer}
+  \operatorname{stabilizerPart}(k)=r_2r_1^{-1}=r .
+                                    \tag{R}\label{eq:north-relative-stabilizer}
 \]
---- equivalently, from the unique factorizations $\operatorname{eulerToNorth}_i=o_Nr_i o_0^{-1}$,
-the first run inverted and followed by the second cancels the common $0$-frame
-$o_0$, and $o_N=1$.  So \eqref{eq:north-input-readings} and
-\eqref{eq:north-relative-stabilizer} say that the input leg of $\mathcal A_A(k)$ carries
-$u_1$ to $u_2$, and conjugating by $D_A$ says its positioned leg carries $z_1$
-to $z_2$.  That is the coordinate half.
+Equivalently, from $\operatorname{eulerToNorth}_i=o_N\,r_i\,o_0^{-1}$: the first
+sweep inverted and followed by the second cancels the common $0$-frame $o_0$,
+and $o_N=1$ at north. So the input leg of $\mathcal A_A(k)$ carries $u_1$ to
+$u_2$, and conjugating by $D_A$ carries $z_1$ to $z_2$.
 
-The other half is the direction, and it is where the sweep does the work.  Each
-north state carries a slice direction $I_i\in S^6$, and $G_2$ acts
-\emph{transitively} on the unit imaginary octonions
+\medskip
+\noindent\emph{The direction half, and why it is available here.}
+The coordinate half moves the middle entry. The right entry still has to move,
+and that is the entry the sweep produced. What $\mathcal A_A$ does is sweep the
+slice: the direction $I$ ranges over $S^6$, $D_A$ positions the coordinate in
+the slice that direction selects, and $A_{\OO}$ realizes the value there. $G_2$
+acts transitively on the unit imaginary octonions
 \textup{(}Theorem~\ref{thm:G2-S6}\textup{)}, so there is $\gamma\in G_2$ with
-$\gamma I_1=I_2$.  This is the step the ambient total cannot take.  $\mathcal A_A$ sweeps
-the slice --- $I$ ranges over $S^6$ with $G_2$ carrying it, $D_A$ positions the
-coordinate in the slice that selects, $A_{\OO}$ realizes the value --- and
-transitivity holds on what is swept.  The inverse image is taken over exactly
-that output, which is why $\int\mathcal R_A$ is transitive where
-$\int_{\mathcal B}\mathcal A_A$ is not.
+$\gamma I_1=I_2$. This is the step the ambient total cannot take: the inverse
+image is taken over exactly what the sweep produces, so transitivity on the
+swept output is available inside $\int_{\mathcal B}\mathcal R_A$ and nowhere
+else.
 
 The transported coordinate equality and this direction action are the two
 components of an arrow
 \[
-  \varphi:\mathcal A_A(k)(x_N)\longrightarrow y_N             \tag{$\Phi$}\label{eq:north-fibre-arrow}
+  \varphi:\mathcal A_A(k)(x_N)\longrightarrow y_N .
+                                    \tag{$\Phi$}\label{eq:north-fibre-arrow}
 \]
-in the north action fibre.
 
-It remains to return from the north fibre to the arbitrary objects $P,Q$.
-Their inverse-image data supply arrows
-\[
-  g:N\longrightarrow P.\mathrm{base},\qquad
-  h:N\longrightarrow Q.\mathrm{base}
-\]
-and identifications
+\medskip
+\noindent\emph{Return to $P$ and $Q$.}
+Their inverse-image data supply the arrows $g,h$ above together with
 \[
   \mathcal A_A(g)(x_N)=P.\mathrm{fiber},\qquad
-  \mathcal A_A(h)(y_N)=Q.\mathrm{fiber}.                       \tag{N}\label{eq:north-witness-readings}
+  \mathcal A_A(h)(y_N)=Q.\mathrm{fiber},
+                                    \tag{N}\label{eq:north-witness-readings}
 \]
-The base component of the required total arrow is
+and the base component of the required total arrow is
 \[
   (g^{-1}\fatsemi k)\fatsemi h:
-  P.\mathrm{base}\longrightarrow Q.\mathrm{base}.    \tag{G}\label{eq:residue-total-base-arrow}
+  P.\mathrm{base}\longrightarrow Q.\mathrm{base}.
+                                    \tag{G}\label{eq:residue-total-base-arrow}
 \]
-Recall that a morphism $P\to Q$ of $\int_{\mathcal B}\mathcal A_A$ is a base arrow
+A morphism $P\to Q$ of $\int_{\mathcal B}\mathcal A_A$ is a base arrow
 $f:P.\mathrm{base}\to Q.\mathrm{base}$ together with a fibre arrow
-$\mathcal A_A(f)(P.\mathrm{fiber})\to Q.\mathrm{fiber}$.  Functoriality gives
+$\mathcal A_A(f)(P.\mathrm{fiber})\to Q.\mathrm{fiber}$. Functoriality gives
 $\mathcal A_A\bigl((g^{-1}\fatsemi k)\fatsemi h\bigr)
- =\mathcal A_A(h)\circ \mathcal A_A(k)\circ \mathcal A_A(g^{-1})$, and
-$\mathcal A_A(g^{-1})(P.\mathrm{fiber})=x_N$ by \eqref{eq:north-witness-readings}.
-So the composite carries $P.\mathrm{fiber}$ back along $g^{-1}$ to $x_N$;
-then \eqref{eq:north-fibre-arrow} carries the result along $k$ to $y_N$;
-finally $\mathcal A_A(h)$ carries that arrow forward to $Q.\mathrm{fiber}$, with
-\eqref{eq:north-witness-readings} identifying its two ends.  This fibre arrow
+ =\mathcal A_A(h)\circ\mathcal A_A(k)\circ\mathcal A_A(g^{-1})$, and
+$\mathcal A_A(g^{-1})(P.\mathrm{fiber})=x_N$ by
+\eqref{eq:north-witness-readings}. So the composite carries
+$P.\mathrm{fiber}$ back along $g^{-1}$ to $x_N$; then
+\eqref{eq:north-fibre-arrow} carries the result along $k$ to $y_N$; finally
+$\mathcal A_A(h)$ carries that arrow forward to $Q.\mathrm{fiber}$, with
+\eqref{eq:north-witness-readings} identifying its two ends. This fibre arrow
 over \eqref{eq:residue-total-base-arrow} is a morphism from $P$ to $Q$ in the
-ambient Grothendieck construction.  Since $\iota_A$ is full, it has a
-preimage in the residue total $\int\mathcal R_A$; faithfulness makes that
-preimage unique.  Hence $P$ and $Q$ are joined.  Since they were arbitrary,
+ambient Grothendieck construction. Since $\iota_A$ is full it has a preimage in
+the residue total $\int\mathcal R_A$, and faithfulness makes that preimage
+unique. Hence $P$ and $Q$ are joined. Since they were arbitrary,
 $\int\mathcal R_A$ is transitive.
 
 Throughout the calculation $z_1$ and $z_2$ are arbitrary C3 coordinates.
 Their common real value is extracted from the singleton colimit in the next
-step.  The comparison above rests on the relative stabilizer cancellation
+step. The comparison above rests on the relative stabilizer cancellation
 through the single common source tape and north frame.
 \end{proof}
 
