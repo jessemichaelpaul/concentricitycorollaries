@@ -1312,24 +1312,41 @@ functor
 \]
 written \texttt{AsectionActionDiagram\,A} in the Lean source.
 
-It sends a base object $b$ to the groupoid of normalized A-section states
-positioned by the object frame
-$a_A(b)=\operatorname{cayleyProjective}(o_b)D_A$. An object of that groupoid is
-one constrained graph \eqref{eq:north-graph}: a slice direction $I\in S^6$ and
-a normalized input coordinate $u$, together with the positioned coordinate
-$a_A(b)\mathbin{\cdot}(I,u)$ that the frame determines and the A-value realized
-there. An arrow of that groupoid is a single element $\gamma\in G_2$, acting on
-the slice direction and carrying the rest of the graph with it, so the fibre is
-the action groupoid of $G_2$ on those states.
+It is a functor of action groupoids at both ends. Its source
+$\mathcal B=\mathrm{PGL}(2,\RR)\ltimes\mathrm{OnePoint}(\RR)$ is the projective
+action groupoid: an object is a point of the compactified real projective line,
+and an arrow $f:x\to y$ is a projective transformation together with its
+transport equation, so it is one element of $\mathrm{PGL}(2,\RR)$ carrying $x$
+to $y$. Each value is an action groupoid too, and the element acting there is
+the distinguished one, $D_A$.
 
-It sends a base arrow $f:x\to y$ to transport by the arrow element
-$a_A(f)=a_A(y)\,\operatorname{cayleyProjective}(r_f)\,a_A(x)^{-1}$ of
-\eqref{eq:orbit-stabilizer}. On a state this moves the input coordinate by the
-input leg $\operatorname{cayleyProjective}(r_f)$ and the positioned coordinate
-by the positioned leg, the two horizontal legs of the square whose verticals
-are the frames at the two ends; on an arrow it is the identity on $\gamma$,
-since $G_2$ commutes past the positioning. The identity and composition laws
-hold because the fixed representatives force $r_{1_x}=1$ and
+On a base object $b$, the value $\mathcal A_A(b)$ is the groupoid of normalized
+A-section states carrying $D_A$ to that object. The carrying is done by the
+object frame $a_A(b)=\operatorname{cayleyProjective}(o_b)D_A$, which is $D_A$
+conjugated along the canonical orbit representative $o_b$ --- the same element
+at every base object, moved into position. An object of
+$\mathcal A_A(b)$ is one constrained graph \eqref{eq:north-graph}: a slice
+direction $I\in S^6$ and a normalized input coordinate $u$, together with the
+positioned coordinate $a_A(b)\mathbin{\cdot}(I,u)$ that this frame determines
+and the A-value realized there. An arrow is a single element $\gamma\in G_2$
+acting on the slice direction and carrying the rest of the graph with it, so
+$\mathcal A_A(b)$ is the action groupoid of $G_2$ on those states.
+
+On a base arrow $f:x\to y$ --- that is, on one projective transformation ---
+the value $\mathcal A_A(f)$ is transport by the arrow element
+\[
+  a_A(f)=a_A(y)\,\operatorname{cayleyProjective}(r_f)\,a_A(x)^{-1}
+\]
+of \eqref{eq:orbit-stabilizer}: the distinguished action read at the target
+frame, composed with the Cayley action of the residual factor $r_f$ that $f$
+leaves after its orbit part is stripped, composed with the inverse of the
+distinguished action read at the source frame. On a state this moves the input
+coordinate by the input leg $\operatorname{cayleyProjective}(r_f)$ and the
+positioned coordinate by the positioned leg, the two horizontal legs of the
+square whose verticals are those two frames. On an arrow it is the identity on
+$\gamma$, since $G_2$ acts on the slice direction while $a_A(f)$ acts on the
+coordinate, so the two commute. The identity and composition laws hold because
+the fixed representatives force $r_{1_x}=1$ and
 $r_{f\fatsemi g}=r_g r_f$, and $\operatorname{cayleyProjective}(-)$ is a
 homomorphism.
 
@@ -1483,19 +1500,30 @@ $\mathcal R_A:\mathcal B\to\mathbf{Grpd}$ \textup{(}\texttt{AsectionCResidueDiag
 the preimage of the states this locus selects at the north frame --- a preimage taken in the
 total action groupoid, not of a set --- with the witnessing base arrow carried as data.
 
-It sends a base object $X$ to the full subgroupoid of $\mathcal A_A(X)$ on the
-witnessed states. An object there is a state $x$ of $\mathcal A_A(X)$ together
-with a north residue state $x_N$ and a base arrow $g:N\to X$ satisfying
-$\mathcal A_A(g)(x_N)=x$; the witness travels with the object. An arrow is an
-arrow of $\mathcal A_A(X)$ between two such states, so a single element
-$\gamma\in G_2$, as in the ambient fibre.
+It has the same source as $\mathcal A_A$, the projective action groupoid
+$\mathcal B$, and its values are again action groupoids of $G_2$ --- the
+selection cuts down which states are present without altering what acts on
+them.
 
-It sends a base arrow $f:X\to Y$ to the restriction of the ambient transport
-$\mathcal A_A(f)$. That restriction lands in the subgroupoid because a
-witnessed state stays witnessed, with the \emph{same} north state and the
-composite witness $g\fatsemi f$: functoriality of $\mathcal A_A$ gives
+On a base object $X$, the value $\mathcal R_A(X)$ is the full subgroupoid of
+$\mathcal A_A(X)$ on the witnessed states. An object there is a state $x$ of
+$\mathcal A_A(X)$ together with a north residue state $x_N$ and a base arrow
+$g:N\to X$ --- one projective transformation carrying the north point to $X$
+--- satisfying $\mathcal A_A(g)(x_N)=x$; the witness travels with the object.
+An arrow is an arrow of $\mathcal A_A(X)$ between two such states, so again a
+single element $\gamma\in G_2$: the selection is on objects, and $G_2$ still
+acts.
+
+On a base arrow $f:X\to Y$, the value $\mathcal R_A(f)$ is the restriction of
+the ambient transport $\mathcal A_A(f)$, which is transport by the arrow
+element $a_A(f)$ carrying $D_A$ between the frames at $X$ and $Y$. That
+restriction lands in the subgroupoid because a witnessed state stays witnessed,
+with the \emph{same} north state and the composite witness $g\fatsemi f$:
+functoriality of $\mathcal A_A$ gives
 $\mathcal A_A(g\fatsemi f)(x_N)=\mathcal A_A(f)\bigl(\mathcal A_A(g)(x_N)\bigr)
  =\mathcal A_A(f)(x)$.
+So the north state is what is preserved, and the witnessing projective
+transformation is what accumulates.
 Its inclusion $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$
 \textup{(}\texttt{AsectionCResidueInclusion}\textup{)} sends a witnessed object
 to its ambient state and is the identity on arrows; it is fibrewise fully
