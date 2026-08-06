@@ -20,13 +20,27 @@ open CategoryTheory
 
 namespace ASection
 
+/-- The A-section transport **is** the positioned orbit square's transport, at
+the native `d = 1` member of the all-`d` family.  The fixed `0`-to-`N` tape
+lives in that same family at `d = diskExpAction (tape.lift t)`
+\(`canonicalAsectionPresentation_euler_toNorth`\), so this equation is the link
+between the inverse-image construction and the tape: one family, two
+multipliers.  It holds definitionally; naming it keeps the link findable from
+the residue side. -/
+theorem AsectionActionTransport_eq_squareTransport
+    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
+    (A.orbitStabilizerActionSquare f).actionStateTransport A
+      = A.AsectionActionTransport f := rfl
+
 private theorem cResidue_lands
     (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     ∀ x : InverseImageCResidueStateWorldGroupoid A X,
-      IsCResidueState A Y ((AsectionActionTransport A f).obj x.obj) := by
+      IsCResidueState A Y
+        (((A.orbitStabilizerActionSquare f).actionStateTransport A).obj x.obj) := by
   intro x
   obtain ⟨xN, hxN, g, hg⟩ := x.property
   refine ⟨xN, hxN, g ≫ f, ?_⟩
+  rw [AsectionActionTransport_eq_squareTransport]
   calc (AsectionActionTransport A (g ≫ f)).obj xN
       = (AsectionActionTransport A f).obj
           ((AsectionActionTransport A g).obj xN) :=
