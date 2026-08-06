@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-08-06T00:02:39.591886+00:00",
+  "generated_utc": "2026-08-06T13:34:13.236665+00:00",
   "allowed_axioms": [
     "propext",
     "Classical.choice",
@@ -9,7 +9,43 @@
   "project_inference_verdict": "NOT_CERTIFIED",
   "findings": [
     {
+      "declaration": "ASection.residueActionState_north_input_audit",
+      "failed_checks": [
+        "master_or_production_identity"
+      ],
+      "failing_command": "python3 scripts/generate_blueprint_lean_table.py",
+      "failing_exit_code": 1,
+      "literal_evidence_file": "blueprint/lean_certificate_probe.txt"
+    },
+    {
+      "declaration": "ASection.residueActionTransport_north_input_audit",
+      "failed_checks": [
+        "master_or_production_identity"
+      ],
+      "failing_command": "python3 scripts/generate_blueprint_lean_table.py",
+      "failing_exit_code": 1,
+      "literal_evidence_file": "blueprint/lean_certificate_probe.txt"
+    },
+    {
+      "declaration": "ASection.northRelativeLoop_stabilizer_audit",
+      "failed_checks": [
+        "master_or_production_identity"
+      ],
+      "failing_command": "python3 scripts/generate_blueprint_lean_table.py",
+      "failing_exit_code": 1,
+      "literal_evidence_file": "blueprint/lean_certificate_probe.txt"
+    },
+    {
       "declaration": "ASection.northRelativeLoop_maps_audit",
+      "failed_checks": [
+        "master_or_production_identity"
+      ],
+      "failing_command": "python3 scripts/generate_blueprint_lean_table.py",
+      "failing_exit_code": 1,
+      "literal_evidence_file": "blueprint/lean_certificate_probe.txt"
+    },
+    {
+      "declaration": "ASection.northComparison_of_parallelFaces_audit",
       "failed_checks": [
         "master_or_production_identity"
       ],
@@ -51,7 +87,7 @@
     }
   },
   "fingerprints": {
-    "Octonionic_RH_master.tex": "4d0b4155a566aaecac409853b1da12a8b9ab82d4aadad10c7c91a8c6b0d6a267",
+    "Octonionic_RH_master.tex": "126637d3a952fbb27a3ac97d5018dbfcab54761302c96855fe9ddc0e1efd73ca",
     "blueprint/lean_certificate_manifest.json": "b372ae0c20ab57f66e4ab928b7866efca69c8272becd95f11d5b8b1f01a384fe",
     "Concentricity/_BlueprintTerminalCertificateProbe.lean": "2e898992124efa19b135e96f87d14813b03809f27f9cc7a69f85fb8d5f257d37",
     "Concentricity/Theorem.lean": "591e5be0488f2b782901296413142eccaa3380c9bd415ecfba38d2161fcd89cb",
@@ -170,7 +206,7 @@
       "master": "def:residue-subdiagram",
       "semantics": "C-residue zero locus",
       "declaration": "ASection.CResidueZeroLocus",
-      "master_line": 1445,
+      "master_line": 1469,
       "semantic_link": true,
       "kernel_green": true,
       "type": "ASection → Set ℂ",
@@ -187,7 +223,7 @@
       "master": "def:residue-subdiagram",
       "semantics": "C-residue inverse-image diagram",
       "declaration": "ASection.AsectionCResidueDiagram",
-      "master_line": 1445,
+      "master_line": 1469,
       "semantic_link": true,
       "kernel_green": true,
       "type": "ASection → CategoryTheory.Functor GreatCircle.Base CategoryTheory.Grpd",
@@ -204,7 +240,7 @@
       "master": "def:residue-subdiagram",
       "semantics": "inclusion of the inverse-image diagram in the total action diagram",
       "declaration": "ASection.AsectionCResidueInclusion",
-      "master_line": 1445,
+      "master_line": 1469,
       "semantic_link": true,
       "kernel_green": true,
       "type": "(A : ASection) → A.AsectionCResidueDiagram ⟶ A.AsectionActionDiagram",
@@ -224,7 +260,7 @@
       "semantics": "a north C-residue state is the exact C3 residue action state",
       "master_anchor": "there are C-residue indices $n_1,n_2$",
       "receipt": "ASection.northState_is_residueActionState_audit",
-      "master_line": 1458,
+      "master_line": 1496,
       "semantic_link": true,
       "kernel_green": true,
       "type": "∀ (A : ASection) (zN : ↑(A.AsectionActionFiber projectiveNorth)),\n  A.IsNorthCResidueState zN → ∃ n I, zN = A.residueActionState projectiveNorth n I",
@@ -245,8 +281,8 @@
       "semantics": "the north input is D_A⁻¹(sphereZero n)",
       "master_anchor": "u_i=D^{-1}(z_i)",
       "receipt": "ASection.residueActionState_north_input_audit",
-      "master_line": 1458,
-      "semantic_link": true,
+      "master_line": 1496,
+      "semantic_link": false,
       "kernel_green": true,
       "type": "∀ (A : ASection) (n : ℕ) (I : SphereWorld),\n  (ActionCategory.back (A.residueActionState projectiveNorth n I).input).coordinate =\n    ↑A.distinguishedDiskAction⁻¹ ↑(A.sphereZero n)",
       "axioms": [
@@ -259,15 +295,15 @@
       "production_identity_ok": true,
       "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
       "source_line": 18,
-      "status": "INFERENCE_CERTIFIED"
+      "status": "NOT_CERTIFIED"
     },
     {
       "master": "lem:c-residue-transitive",
       "semantics": "a north loop acts by C(stabilizerPart k) on the stored input",
       "master_anchor": "the input leg of $F_A(k)$ carries",
       "receipt": "ASection.residueActionTransport_north_input_audit",
-      "master_line": 1458,
-      "semantic_link": true,
+      "master_line": 1496,
+      "semantic_link": false,
       "kernel_green": true,
       "type": "∀ (A : ASection) (n : ℕ) (I : SphereWorld)\n  (k : projectiveNorth ⟶ projectiveNorth),\n  (ActionCategory.back\n        ((A.AsectionActionTransport k).obj (A.residueActionState projectiveNorth n I)).input).coordinate =\n    ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart k)) (↑A.distinguishedDiskAction⁻¹ ↑(A.sphereZero n))",
       "axioms": [
@@ -280,15 +316,15 @@
       "production_identity_ok": true,
       "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
       "source_line": 26,
-      "status": "INFERENCE_CERTIFIED"
+      "status": "NOT_CERTIFIED"
     },
     {
       "master": "lem:c-residue-transitive",
       "semantics": "the common source factor cancels in k_E⁻¹ ≫ k_W",
       "master_anchor": "cancels the common $0$-frame $o_0$",
       "receipt": "ASection.northRelativeLoop_stabilizer_audit",
-      "master_line": 1458,
-      "semantic_link": true,
+      "master_line": 1496,
+      "semantic_link": false,
       "kernel_green": true,
       "type": "∀ {X : GreatCircle.Base} (kE kW : X ⟶ projectiveNorth),\n  GreatCircle.stabilizerPart (Groupoid.inv kE ≫ kW) = GreatCircle.stabilizerPart kW * (GreatCircle.stabilizerPart kE)⁻¹",
       "axioms": [
@@ -301,14 +337,14 @@
       "production_identity_ok": true,
       "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
       "source_line": 137,
-      "status": "INFERENCE_CERTIFIED"
+      "status": "NOT_CERTIFIED"
     },
     {
       "master": "lem:c-residue-transitive",
       "semantics": "the relative loop carries the first certified input to the second",
       "master_anchor": "C(r_W)(u_\\ast)=u_2",
       "receipt": "ASection.northRelativeLoop_maps_audit",
-      "master_line": 1458,
+      "master_line": 1496,
       "semantic_link": false,
       "kernel_green": true,
       "type": "∀ {X : GreatCircle.Base} (kE kW : X ⟶ projectiveNorth) (uStar u₁ u₂ : OnePoint ℂ),\n  ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kE)) uStar = u₁ →\n    ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kW)) uStar = u₂ →\n      ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart (Groupoid.inv kE ≫ kW))) u₁ = u₂",
@@ -329,8 +365,8 @@
       "semantics": "the two parallel faces and G₂ package the north-fibre morphism",
       "master_anchor": "of the $G_2$-action supplies $\\gamma\\in G_2$",
       "receipt": "ASection.northComparison_of_parallelFaces_audit",
-      "master_line": 1458,
-      "semantic_link": true,
+      "master_line": 1496,
+      "semantic_link": false,
       "kernel_green": true,
       "type": "∀ (A : ASection) {X : GreatCircle.Base} (kE kW : X ⟶ projectiveNorth)\n  (xN yN : ↑(A.AsectionActionFiber projectiveNorth)) (uStar : OnePoint ℂ),\n  ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kE)) uStar = (ActionCategory.back xN.input).coordinate →\n    ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kW)) uStar = (ActionCategory.back yN.input).coordinate →\n      Nonempty ((A.AsectionActionTransport (Groupoid.inv kE ≫ kW)).obj xN ⟶ yN)",
       "axioms": [
@@ -343,14 +379,14 @@
       "production_identity_ok": true,
       "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
       "source_line": 201,
-      "status": "INFERENCE_CERTIFIED"
+      "status": "NOT_CERTIFIED"
     },
     {
       "master": "lem:c-residue-transitive",
       "semantics": "the same relative calculation holds in the two-legged square functor register",
       "master_anchor": "conjugation by $D_A$ turns an input leg $C(r)$ into the",
       "receipt": "ASection.relativeActionSquare_transport_audit",
-      "master_line": 1458,
+      "master_line": 1496,
       "semantic_link": false,
       "kernel_green": true,
       "type": "∀ (A : ASection) {source target : ↥Moebius}\n  (E W : ActionTransportSquare source target),\n  (E.inv.comp W).actionStateTransport A = E.inv.actionStateTransport A ⋙ W.actionStateTransport A",
@@ -371,7 +407,7 @@
       "semantics": "g⁻¹ ≫ k ≫ h and fullness produce P ⟶ Q inside ∫R_A",
       "master_anchor": "preimage in the residue total $\\int\\mathcal R_A$",
       "receipt": "ASection.residueTotal_morphism_of_northComparison_audit",
-      "master_line": 1458,
+      "master_line": 1496,
       "semantic_link": true,
       "kernel_green": true,
       "type": "∀ (A : ASection)\n  (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)) (xN yN : ↑(A.AsectionActionFiber projectiveNorth))\n  (g : projectiveNorth ⟶ P.base),\n  (A.AsectionActionTransport g).obj xN = P.fiber.obj →\n    ∀ (h : projectiveNorth ⟶ Q.base),\n      (A.AsectionActionTransport h).obj yN = Q.fiber.obj →\n        ∀ (k : projectiveNorth ⟶ projectiveNorth) (φ : (A.AsectionActionTransport k).obj xN ⟶ yN), Nonempty (P ⟶ Q)",
@@ -392,7 +428,7 @@
       "semantics": "transitivity of the exact ∫R_A implies IsConnected for that exact ∫R_A",
       "master_anchor": "Thus $\\int_{\\mathcal B}\\mathcal R_A$ is connected.",
       "receipt": "ASection.residueTotal_isConnected_of_transitive_audit",
-      "master_line": 1771,
+      "master_line": 1819,
       "semantic_link": true,
       "kernel_green": true,
       "type": "∀ (A : ASection),\n  (∀ (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)), Nonempty (P ⟶ Q)) →\n    CategoryTheory.IsConnected (Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat))",
@@ -413,7 +449,7 @@
       "semantics": "connectedness of the exact ∫R_A makes π₀ of that exact ∫R_A a singleton",
       "master_anchor": "$\\pi_0$ is the singleton set",
       "receipt": "ASection.residueTotal_pi0_singleton_of_connected_audit",
-      "master_line": 1771,
+      "master_line": 1819,
       "semantic_link": true,
       "kernel_green": true,
       "type": "∀ (A : ASection)\n  [CategoryTheory.IsConnected (Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat))]\n  (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),\n  CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q",
@@ -439,7 +475,7 @@
       "upstream_declaration": "ASection.concentricity",
       "production_declaration": "ASection.nontrivial_one_centre",
       "production_exact": "theorem ASection.nontrivial_one_centre (A : ASection) :\n    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c :=\n  A.concentricity",
-      "master_line": 1984,
+      "master_line": 2032,
       "semantic_link": true,
       "kernel_green": true,
       "type": "∀ (A : ASection),\n  (∃ c, ∀ (n : ℕ), (A.sphereZero n).re = c) → ∃ c, ∀ (n : ℕ), (A.sphereZero n).re = c",
@@ -460,7 +496,7 @@
       "master_anchor": "Every nontrivial zero of the classical Riemann zeta function has real part $\\tfrac12$",
       "receipt": "zeta_riemannHypothesis_of_concentricity_audit",
       "source": "Concentricity/_GateCorollaryInferenceAudit.lean",
-      "master_line": 2052,
+      "master_line": 2100,
       "semantic_link": true,
       "kernel_green": true,
       "type": "(∃ c, ∀ (n : ℕ), (zetaSection.sphereZero n).re = c) → RiemannHypothesis",
@@ -481,7 +517,7 @@
       "master_anchor": "infinitely many zeros lie on the line $\\Re s=\\tfrac12$",
       "receipt": "zeta_criticalLine_zeros_infinite_of_RH_audit",
       "source": "Concentricity/_GateCorollaryInferenceAudit.lean",
-      "master_line": 2052,
+      "master_line": 2100,
       "semantic_link": true,
       "kernel_green": true,
       "type": "RiemannHypothesis → {s | riemannZeta s = 0 ∧ s.re = 1 / 2}.Infinite",
@@ -746,7 +782,7 @@
       "declaration": "ASection.northProducersConnected",
       "source": "Concentricity/Theorem.lean",
       "diagnostic": "Nonempty (ι_A(x₀) ⟶ ι_A(y₀)) in the residue total; no ambient connectedness assertion and no standalone coordinate existential",
-      "master_line": 1458,
+      "master_line": 1496,
       "semantic_link": false,
       "diagnostic_seen": false,
       "command": "lake env lean Concentricity/Theorem.lean",
@@ -760,7 +796,7 @@
       "declaration": "ASection.transportLevel_of_pi0_singleton",
       "source": "Concentricity/Theorem.lean",
       "diagnostic": "A.transportLevel n = A.transportLevel 0  (carries sorryAx)",
-      "master_line": 1771,
+      "master_line": 1819,
       "semantic_link": false,
       "diagnostic_seen": false,
       "command": "lake env lean Concentricity/Theorem.lean",
@@ -832,13 +868,13 @@
         "lem:residue-spheres",
         "thm:G2-S6"
       ],
-      "candidate_sha256": "8f679df3cb2e8bcfec8606cae4886409adca394324475c033b295f5acaec16a3",
+      "candidate_sha256": "573f0f9ee4b7e5c60055cadeae6d94f06ab4c2ccf9d904709464b155149ca1c7",
       "author_binding_digest": "10ed350c4c6a038cf6911a05cad214dfb352b8d8822850e80c50538772367445",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
       "exact_expression": "GreatCircle.toNHom 0",
-      "identity_hash": "8e8e0efe2f197e9476199ad6ab406afd79b78f1964f084163e107d91cd462b4d",
+      "identity_hash": "0c48ad38dbbbe4809f5ea3e4dfc09c3ab3ef84ac6344944be5888d68fc40e01e",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
@@ -881,13 +917,13 @@
         "lem:residue-spheres",
         "thm:G2-S6"
       ],
-      "candidate_sha256": "4bcd0db1107a9e4cd7ed312fd48484e238b578de5b9d016060f1bc6afc019f19",
+      "candidate_sha256": "954fd9683359d1f70ebfb9968a09cb311b69e08ebddf2924e1e85bb07b9da460",
       "author_binding_digest": "f0601c8d2b14969676e517298355daa3f12f151730a2b439cd363c5ff79065a5",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
       "exact_expression": "GreatCircle.toNHom 0",
-      "identity_hash": "4b930e20db09f00ac94917767c74d0e8a9baab1d3ff07a0048617e2d3647bb16",
+      "identity_hash": "bea1527f72bb7b5abcd41c67fb3871ada673cd2fd5b6bd6604a835035e111398",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
@@ -927,13 +963,13 @@
         "lem:residue-spheres",
         "thm:G2-S6"
       ],
-      "candidate_sha256": "46fccb85733a22c44ca11b51024c7f33965a387dd00458e34baf9a6ed437581a",
+      "candidate_sha256": "d4076ed456518123a85dcfaee2fb3a62aeaff8e8daf2e94d6a65a79c3a65d21b",
       "author_binding_digest": "9fa762fe6270cff57dc06b026d059f68f9abe7973b43bb01ca253e5ff127efcd",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
       "exact_expression": "(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kE).1).val.symm ((A.distinguishedDiskAction⁻¹).val (A.sphereZero n₁ : OnePoint ℂ))",
-      "identity_hash": "1d970ec940ecb50388020d46c8df1d96ae7b887d2fcf93c2cd4b80483f40ea8f",
+      "identity_hash": "9dcb44f65c36a72486b765783f99213b73d4a9157400b61e7404c46dcd27d2ac",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
@@ -978,13 +1014,13 @@
         "lem:residue-spheres",
         "thm:G2-S6"
       ],
-      "candidate_sha256": "3d0e723175193f87901c38535feb730b1419d3fef88a66ea789db280a883dc24",
+      "candidate_sha256": "d50664f98e2c70559040593332e062ce056d98f0960a6dfd4f4e2510c00abf74",
       "author_binding_digest": "2b3d9d7b55c72c07a491348ed79f8b95449091c6f5d7177b1e0bfe2647e87835",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
       "exact_expression": "by simp [uStar, residueActionState, AsectionActionState.ofInput, residueState, projectiveNorth, projectiveObjectFrame_north]",
-      "identity_hash": "5e123cacebedb83aa90c0005c5ec9a1337b53c8c2a456747c4c69d4594173c9f",
+      "identity_hash": "9169c0d6f9566d448831dd50d1ee92a2dd8dc3d6b655728536c07f078a306114",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
@@ -1029,13 +1065,13 @@
         "lem:residue-spheres",
         "thm:G2-S6"
       ],
-      "candidate_sha256": "b1a8a42fc362b754e79598e4ce4fde201d1bdd8aeae93fadf467f6e1ed54e257",
+      "candidate_sha256": "4956e7f70acfd497169933aa95a6a836542e68afb0b4063988ffc05a392164a1",
       "author_binding_digest": "94daf66062844c31aca83b8258762beb5dcd55c796cc6247d232ea2ddcd4aefd",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "theorem ASection.northComparison_of_parallelFaces\n    (A : ASection) {X : GreatCircle.Base}\n    (kE kW : X ⟶ projectiveNorth)\n    (xN yN : AsectionActionFiber A projectiveNorth)\n    (uStar : OnePoint ℂ)\n    (hE :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kE).1).val uStar =\n          xN.input.back.coordinate)\n    (hW :\n      (GreatCircle.cayleyProjective\n        (GreatCircle.stabilizerPart kW).1).val uStar =\n          yN.input.back.coordinate) :\n    Nonempty\n      ((AsectionActionTransport A\n        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by",
       "exact_expression": "by simp [uStar, residueActionState, AsectionActionState.ofInput, residueState, projectiveNorth, projectiveObjectFrame_north]",
-      "identity_hash": "4a3ade53c095e7f20b8ab1d69f1121cb46cd1119ee2b23133731df129d97e9a1",
+      "identity_hash": "1cc6da9e4a3a0b6cabc8579528a6ffcee82350deb4ea71589cc7bbc637e90653",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
@@ -1077,20 +1113,20 @@
         "prop:winding-signature",
         "thm:identity"
       ],
-      "candidate_sha256": "0812a41687fe0b09b9ad4afa72e7fa9639df4b715dc664ef311ae2904f5a06c0",
+      "candidate_sha256": "434f246c4b16ce5d14b43d28930de33579b0f595f451bd45c24403bda1d5808e",
       "author_binding_digest": "2303695ed6012271f74b08d247c9ec6b1646324d5eaa878e83ca59ce31323ccb",
       "master_targets_linked": true,
       "target_typed": true,
       "target_header": "def ASection.transportLevel (A : ASection) (n : ℕ) : ℝ :=",
       "exact_expression": "hkn",
-      "identity_hash": "8c1eb04bac08e8f6d378cc189ad152511804ef9b16ff059b10d823646ef67491",
+      "identity_hash": "74319593d1b8739b35059e33ef6dcf44fe539a8a76c07c14725f7413f838461d",
       "typechecked": false,
       "author_confirmed": true,
       "status": "LEAN_BINDING_REJECTED"
     }
   ],
   "binding_identity_hash_sources": {
-    "Octonionic_RH_master.tex": "4d0b4155a566aaecac409853b1da12a8b9ab82d4aadad10c7c91a8c6b0d6a267",
+    "Octonionic_RH_master.tex": "126637d3a952fbb27a3ac97d5018dbfcab54761302c96855fe9ddc0e1efd73ca",
     "Concentricity/Theorem.lean": "591e5be0488f2b782901296413142eccaa3380c9bd415ecfba38d2161fcd89cb"
   },
   "exact_attempt_binding_ids": [
