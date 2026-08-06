@@ -1219,23 +1219,23 @@ $o_b:N\to b$. Every arrow $f:x\to y$ has the unique residual north-stabilizer fa
 \]
 The object frame and the full arrow element are therefore
 \[
-  a_A(b)=C(o_b)D_A,\qquad
-  a_A(f)=a_A(y)\,C(r_f)\,a_A(x)^{-1}.
+  a_A(b)=\operatorname{cayleyProjective}(o_b)D_A,\qquad
+  a_A(f)=a_A(y)\,\operatorname{cayleyProjective}(r_f)\,a_A(x)^{-1}.
                               \tag{OS}\label{eq:orbit-stabilizer}
 \]
-Here $C(-)$ denotes the multiplicative Cayley-projective homomorphism, and
+Here $\operatorname{cayleyProjective}(-)$ denotes the multiplicative Cayley-projective homomorphism, and
 $f\fatsemi g$ denotes composition in diagrammatic order: $f$ first, then $g$.
 The fixed orbit representatives force $r_f$ uniquely; $r_{1_x}=1$ and
-$r_{f\fatsemi g}=r_g r_f$. These identities, together with multiplicativity of $C(-)$,
+$r_{f\fatsemi g}=r_g r_f$. These identities, together with multiplicativity of $\operatorname{cayleyProjective}(-)$,
 prove the identity and composition laws directly from the fixed representatives.
 
 Equation \eqref{eq:orbit-stabilizer} is the orbit--stabilizer well-definedness of
 every functor in this paper, and it is the only device used to obtain one.  Each
 is built the same way: the distinguished element $D_A$, carried to every object
 by the Cayley map along the fixed orbit representatives.  An object is positioned
-by $a_A(b)=C(o_b)D_A$; an arrow is positioned by $a_A(f)$, which is nothing but
+by $a_A(b)=\operatorname{cayleyProjective}(o_b)D_A$; an arrow is positioned by $a_A(f)$, which is nothing but
 its residual stabilizer factor $r_f$ conjugated between the frames at its two
-ends.  Because $r_f$ is forced and $C(-)$ is a homomorphism, the functor laws
+ends.  Because $r_f$ is forced and $\operatorname{cayleyProjective}(-)$ is a homomorphism, the functor laws
 are not separate obligations --- they are the two identities just displayed.
 We refer to \eqref{eq:orbit-stabilizer} by name throughout, and every later
 positioning statement is an instance of it rather than a new hypothesis.
@@ -1303,7 +1303,7 @@ written \texttt{AsectionActionDiagram\,A} in the Lean source.  Explicitly, on
 objects and on arrows:
 \begin{itemize}
 \item \textbf{On objects.} A base object $b$ is sent to the groupoid of
-  normalized A-section states positioned by its object frame $a_A(b)=C(o_b)D_A$.
+  normalized A-section states positioned by its object frame $a_A(b)=\operatorname{cayleyProjective}(o_b)D_A$.
   An object of that groupoid is one constrained graph \eqref{eq:north-graph} ---
   a slice direction $I\in S^6$ and a normalized input coordinate $u$, together
   with the positioned coordinate $a_A(b)\mathbin{\cdot}(I,u)$ and its realized
@@ -1311,13 +1311,13 @@ objects and on arrows:
   acting on the slice direction and carrying the whole graph with it: the fibre
   is the action groupoid of $G_2$ on the states, and nothing else.
 \item \textbf{On arrows.} A base arrow $f:x\to y$ is sent to transport by its
-  arrow element $a_A(f)=a_A(y)\,C(r_f)\,a_A(x)^{-1}$ of
+  arrow element $a_A(f)=a_A(y)\,\operatorname{cayleyProjective}(r_f)\,a_A(x)^{-1}$ of
   \eqref{eq:orbit-stabilizer}.  On a state this moves the input coordinate by
-  the input leg $C(r_f)$ and the positioned coordinate by the positioned leg,
+  the input leg $\operatorname{cayleyProjective}(r_f)$ and the positioned coordinate by the positioned leg,
   the two horizontal legs of the square whose verticals are the frames at the
   two ends; on an arrow it is the identity on $\gamma$, since $G_2$ commutes
   past the positioning.  Functoriality is the two forced identities
-  $r_{1_x}=1$ and $r_{f\fatsemi g}=r_g r_f$ carried by the homomorphism $C(-)$,
+  $r_{1_x}=1$ and $r_{f\fatsemi g}=r_g r_f$ carried by the homomorphism $\operatorname{cayleyProjective}(-)$,
   and is therefore not a separate obligation.
 \end{itemize}
 
@@ -1475,12 +1475,12 @@ Explicitly, on objects and on arrows:
 \item \textbf{On objects.} A base object $X$ is sent to the full subgroupoid of
   $\mathcal A_A(X)$ on the witnessed states: those $x$ for which there are a
   north residue state $x_N$ and a base arrow $g:N\to X$ with
-  $F_A(g)(x_N)=x$.  The witness travels with the object.
+  $\mathcal A_A(g)(x_N)=x$.  The witness travels with the object.
 \item \textbf{On arrows.} A base arrow $f:X\to Y$ is sent to the restriction of
-  the ambient transport $F_A(f)$.  It lands, because a witnessed state stays
+  the ambient transport $\mathcal A_A(f)$.  It lands, because a witnessed state stays
   witnessed with the \emph{same} north state and the composite witness
   $g\fatsemi f$ --- that is the whole content, and it is functoriality of
-  $F_A$ and nothing further.
+  $\mathcal A_A$ and nothing further.
 \end{itemize}
 Its inclusion $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$
 \textup{(}\texttt{AsectionCResidueInclusion}\textup{)} sends a witnessed object
@@ -1515,19 +1515,17 @@ residue states $x_N,y_N$, together with base arrows
 whose A-section transports recover the two given fibre states. Thus the arbitrary problem reduces
 to constructing a north endomorphism $k:N\to N$ and a fibre morphism
 \[
-  \varphi:F_A(k)(x_N)\longrightarrow y_N.
+  \varphi:\mathcal A_A(k)(x_N)\longrightarrow y_N.
 \]
 Once these are obtained, functorial transport along
 $g^{-1}\fatsemi k\fatsemi h$ gives an ambient Grothendieck morphism $P\to Q$, and the
 full inclusion $\int\iota_A$ established above returns that same morphism to
 $\int_{\mathcal B}\mathcal R_A$. It therefore remains only to construct this north comparison.
 
-Write $F_A=\mathcal A_A$ for the A-section action functor,
-$D=D_A$ for its one distinguished Euler--Weierstrass disk action, and
-$C=\operatorname{cayleyProjective}$.  There is one projective base and one north
-object $N$. The inverse-image construction above has already fixed the unique tame GPV
-$0$-to-$N$ tape and its unique orbit--stabilizer factorization; each zero index selects a state
-along that fixed base transport.
+There is one projective base and one north object $N$. The inverse-image
+construction above has already fixed the unique tame GPV $0$-to-$N$ tape and its
+unique orbit--stabilizer factorization; each zero index selects a state along
+that fixed base transport.
 
 Because the supplied states $x_N,y_N$ lie in the north fibre of the C-residue inverse
 image selected by the C3 zero-sphere system, there are C-residue indices $n_1,n_2$ and
@@ -1537,9 +1535,9 @@ actual C3 coordinates
   z_1=\operatorname{sphereZero}(n_1),\qquad
   z_2=\operatorname{sphereZero}(n_2).
 \]
-The north object frame $D$ uniquely determines their inputs:
+The north object frame $D_A$ uniquely determines their inputs:
 \[
-  u_i=D^{-1}(z_i),\qquad z_i=D(u_i).
+  u_i=D_A^{-1}\mathbin{\cdot}z_i,\qquad z_i=D_A\mathbin{\cdot}u_i.
 \]
 This is where C3 enters the argument. It supplies the Weierstrass face of the
 distinguished action and the precise inputs on which that action is evaluated. The relative
@@ -1578,7 +1576,7 @@ continuation delivers at the point where the two presentations agree.  It is
 also exactly what makes the positioned action a group action:
 $\operatorname{diag}(u_A,1)$ has determinant $u_A\neq0$, so its class lies in
 the projective group, and $D_A$ is its conjugate by the Cayley map, hence
-invertible.  Each object frame $a_A(b)=C(o_b)D_A$ is then a group element as
+invertible.  Each object frame $a_A(b)=\operatorname{cayleyProjective}(o_b)D_A$ is then a group element as
 well, and orbit--stabilizer applies to the action they generate.  There is
 moreover one $N$ here and not three: the
 north object of the projective base $\mathcal B$, the point at infinity shared
@@ -1586,24 +1584,24 @@ by the slice Riemann spheres, and the north pole of $\Ostar=S^8$ are the same
 point \textup{(}Definition~\ref{def:carrier}\textup{)}, so the one fixed
 $0$-to-$N$ tape has one north frame, at which $o_N=1$.
 
-The full functor $F_A=\mathcal A_A$ is the A-section action functor.  It joins
-these views in one constrained graph: at $N$ it records
+The A-section action functor $\mathcal A_A$ joins these views in one
+constrained graph: at $N$ it records
 \[
   (I,u)\longmapsto
   \bigl((I,u),\;D_A\mathbin{\cdot}(I,u),\;
     A_{\OO}(D_A\mathbin{\cdot}(I,u))\bigr).
                                     \tag{A}\label{eq:north-graph}
 \]
-What $F_A$ does is sweep the slice.  The direction $I$ ranges over $S^6$ and
+What $\mathcal A_A$ does is sweep the slice.  The direction $I$ ranges over $S^6$ and
 $G_2$ carries it; the distinguished element $D_A$ positions the coordinate $u$
 in the slice it selects; and $A_{\OO}$ realizes the value there.  One element,
 swept over all directions, is the whole content of the functor.
 
 Its well-definedness is \eqref{eq:orbit-stabilizer} and nothing else.  On
-objects, $F_A$ inherits the frame $a_A(b)=C(o_b)D_A$; on arrows, it inherits
+objects, $\mathcal A_A$ inherits the frame $a_A(b)=\operatorname{cayleyProjective}(o_b)D_A$; on arrows, it inherits
 $a_A(f)$, so the identity and composition laws it must satisfy are exactly the
 two forced identities $r_{1_x}=1$ and $r_{f\fatsemi g}=r_g r_f$ transported
-by the homomorphism $C(-)$.  This is why every rectangle later in the proof
+by the homomorphism $\operatorname{cayleyProjective}(-)$.  This is why every rectangle later in the proof
 commutes without a separate argument: each one is
 \eqref{eq:orbit-stabilizer} read at a particular pair of objects.  The same
 holds for the A-slice functor and for $\mathcal R_A$, which is why the two
@@ -1624,13 +1622,13 @@ the selected residue states in the inverse-image groupoid.
 Thus $u$ is the normalized input coordinate, $I$ is the slice direction,
 $z=D_A\mathbin{\cdot}u$ is the positioned coordinate, and the third entry is
 its realized A-value.  On arrows, \eqref{eq:orbit-stabilizer} positions an arrow
-$f:x\to y$ with input leg $C(r_f)$ as $a_A(f)=a_A(y)\,C(r_f)\,a_A(x)^{-1}$,
+$f:x\to y$ with input leg $\operatorname{cayleyProjective}(r_f)$ as $a_A(f)=a_A(y)\,\operatorname{cayleyProjective}(r_f)\,a_A(x)^{-1}$,
 while $G_2$ carries the slice direction.  At a loop on $N$ the frames at both
 ends are $a_A(N)=D_A$, and this reads as conjugation,
-$a_A(f)=D_A\,C(r_f)\,D_A^{-1}$; that is the form the relative loop takes at the
+$a_A(f)=D_A\,\operatorname{cayleyProjective}(r_f)\,D_A^{-1}$; that is the form the relative loop takes at the
 end of the comparison.  The coordinate comparison, the sphere normalization, and
 the pole-generated action are consequently three readings of a single
-$F_A$-state.
+$\mathcal A_A$-state.
 
 In particular, $x_N$ and $y_N$ are two evaluations of this same graph in the
 normalized north frame.  They are not two constructions: each is Euler to north,
@@ -1638,19 +1636,19 @@ run at its own input.  Let $\iota_1,\iota_2\in\int\mathcal R_A$ be arbitrary; by
 the inverse-image definition they differ in nothing but their inputs, and those
 inputs lie in the C-residue zero locus.
 
-The rectangles used below are therefore the functorial arrows $F_A(k_{EN,1})$ and
-$F_A(k_{EN,2})$, both running on the one fixed tape from the common projective zero
+The rectangles used below are therefore the functorial arrows $\mathcal A_A(\operatorname{eulerToNorth}(\iota_1))$ and
+$\mathcal A_A(\operatorname{eulerToNorth}(\iota_2))$, both running on the one fixed tape from the common projective zero
 frame to the one north frame.  Write
 \[
-  k_{EN,1},k_{EN,2}:0\longrightarrow N
+  \operatorname{eulerToNorth}(\iota_1),\operatorname{eulerToNorth}(\iota_2):0\longrightarrow N
 \]
 for their base components and
 \[
-  r_1=\operatorname{stabilizerPart}(k_{EN,1}),\qquad
-  r_2=\operatorname{stabilizerPart}(k_{EN,2}).
+  r_1=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}(\iota_1)),\qquad
+  r_2=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}(\iota_2)).
 \]
 These residual factors are forced.  Orbit--stabilizer gives
-$k_{EN,i}=o_N\,r_i\,o_0^{-1}$, and \texttt{stabilizerPart\_unique} says
+$\operatorname{eulerToNorth}(\iota_i)=o_N\,r_i\,o_0^{-1}$, and \texttt{stabilizerPart\_unique} says
 that any north-stabilizer element giving this same factorization equals
 $r_i$.
 
@@ -1659,15 +1657,15 @@ the object frames: $a_A(0)$ at the source of the fixed tape, and $a_A(N)=D_A$ at
 its north frame.  Their horizontal arrows are the two legs of
 \eqref{eq:orbit-stabilizer}: on top the input legs
 \[
-  R_1=C(r_1),\qquad R_2=C(r_2);
+  R_1=\operatorname{cayleyProjective}(r_1),\qquad R_2=\operatorname{cayleyProjective}(r_2);
 \]
-along the bottom the arrow elements $a_A(k_{EN,1})$ and $a_A(k_{EN,2})$.  Read at $x=0$,
+along the bottom the arrow elements $a_A(\operatorname{eulerToNorth}(\iota_1))$ and $a_A(\operatorname{eulerToNorth}(\iota_2))$.  Read at $x=0$,
 $y=N$, \eqref{eq:orbit-stabilizer} says that each square commutes:
 \[
-  a_A(k_{EN,1})\,a_A(0)=D_A\,R_1,\qquad
-  a_A(k_{EN,2})\,a_A(0)=D_A\,R_2.       \tag{S}\label{eq:north-face-squares}
+  a_A(\operatorname{eulerToNorth}(\iota_1))\,a_A(0)=D_A\,R_1,\qquad
+  a_A(\operatorname{eulerToNorth}(\iota_2))\,a_A(0)=D_A\,R_2.       \tag{S}\label{eq:north-face-squares}
 \]
-What $F_A(k_{EN,1})$ and $F_A(k_{EN,2})$ contribute is that they carry both horizontal
+What $\mathcal A_A(\operatorname{eulerToNorth}(\iota_1))$ and $\mathcal A_A(\operatorname{eulerToNorth}(\iota_2))$ contribute is that they carry both horizontal
 legs together with these equations.
 
 The fixed tape supplies the input at which the two runs are read: they leave the
@@ -1675,24 +1673,24 @@ same source object, so they share its normalized input coordinate, which we
 write $u_\ast$.  The C3 boundary readings identify the corresponding positioned
 outputs with the authored coordinates,
 \[
-  a_A(k_{EN,1})\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_1,\qquad
-  a_A(k_{EN,2})\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_2,
+  a_A(\operatorname{eulerToNorth}(\iota_1))\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_1,\qquad
+  a_A(\operatorname{eulerToNorth}(\iota_2))\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_2,
                                    \tag{B}\label{eq:north-boundary-readings}
 \]
 and \eqref{eq:north-preimages} rewrites each authored coordinate as
 $z_i=D_A\mathbin{\cdot}u_i$.  The two runs may therefore be displayed as
 \[
 \begin{tikzcd}[column sep=6em,row sep=4em,ampersand replacement=\&]
-u_\ast \arrow[r,"R_1=C(r_1)"] \arrow[d,"a_A(0)"']\&
+u_\ast \arrow[r,"R_1=\operatorname{cayleyProjective}(r_1)"] \arrow[d,"a_A(0)"']\&
 u_1 \arrow[d,"D_A"]\\
-a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(k_{EN,1})"']\&
+a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(\operatorname{eulerToNorth}(\iota_1))"']\&
 z_1
 \end{tikzcd}
 \qquad\qquad
 \begin{tikzcd}[column sep=6em,row sep=4em,ampersand replacement=\&]
-u_\ast \arrow[r,"R_2=C(r_2)"] \arrow[d,"a_A(0)"']\&
+u_\ast \arrow[r,"R_2=\operatorname{cayleyProjective}(r_2)"] \arrow[d,"a_A(0)"']\&
 u_2 \arrow[d,"D_A"]\\
-a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(k_{EN,2})"']\&
+a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(\operatorname{eulerToNorth}(\iota_2))"']\&
 z_2
 \end{tikzcd}
 \]
@@ -1701,19 +1699,19 @@ side by \eqref{eq:north-boundary-readings} and the right side by
 \eqref{eq:north-preimages}, gives
 \[
 \begin{aligned}
- D_A\mathbin{\cdot}\bigl(C(r_1)\mathbin{\cdot}u_\ast\bigr)
-   &=a_A(k_{EN,1})\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
+ D_A\mathbin{\cdot}\bigl(\operatorname{cayleyProjective}(r_1)\mathbin{\cdot}u_\ast\bigr)
+   &=a_A(\operatorname{eulerToNorth}(\iota_1))\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
     =z_1=D_A\mathbin{\cdot}u_1,\\
- D_A\mathbin{\cdot}\bigl(C(r_2)\mathbin{\cdot}u_\ast\bigr)
-   &=a_A(k_{EN,2})\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
+ D_A\mathbin{\cdot}\bigl(\operatorname{cayleyProjective}(r_2)\mathbin{\cdot}u_\ast\bigr)
+   &=a_A(\operatorname{eulerToNorth}(\iota_2))\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
     =z_2=D_A\mathbin{\cdot}u_2.
 \end{aligned}
 \]
 $D_A$ was shown above to be invertible, so cancelling it on the left yields the
 two input equations
 \[
-  C(r_1)\mathbin{\cdot}u_\ast=u_1,\qquad
-  C(r_2)\mathbin{\cdot}u_\ast=u_2.    \tag{I}\label{eq:north-input-readings}
+  \operatorname{cayleyProjective}(r_1)\mathbin{\cdot}u_\ast=u_1,\qquad
+  \operatorname{cayleyProjective}(r_2)\mathbin{\cdot}u_\ast=u_2.    \tag{I}\label{eq:north-input-readings}
 \]
 The north comparison is now algebra.  Put
 \[
@@ -1722,33 +1720,33 @@ The north comparison is now algebra.  Put
 the residual factor of the second run relative to the first:
 \[
 \begin{aligned}
- C(r)\mathbin{\cdot}u_1
- &=C(r_2r_1^{-1})\,C(r_1)\mathbin{\cdot}u_\ast\\
- &=C(r_2)\mathbin{\cdot}u_\ast=u_2,
+ \operatorname{cayleyProjective}(r)\mathbin{\cdot}u_1
+ &=C(r_2r_1^{-1})\,\operatorname{cayleyProjective}(r_1)\mathbin{\cdot}u_\ast\\
+ &=\operatorname{cayleyProjective}(r_2)\mathbin{\cdot}u_\ast=u_2,
 \end{aligned}
 \qquad
 \begin{aligned}
- D_A\,C(r)\,D_A^{-1}\mathbin{\cdot}z_1
- &=D_A\,C(r)\mathbin{\cdot}u_1\\
+ D_A\,\operatorname{cayleyProjective}(r)\,D_A^{-1}\mathbin{\cdot}z_1
+ &=D_A\,\operatorname{cayleyProjective}(r)\mathbin{\cdot}u_1\\
  &=D_A\mathbin{\cdot}u_2=z_2 .
 \end{aligned}
 \]
 The corresponding loop in the projective base is
 \[
-  k=k_{EN,1}^{-1}\fatsemi k_{EN,2}:N\longrightarrow N.
+  k=\operatorname{eulerToNorth}(\iota_1)^{-1}\fatsemi \operatorname{eulerToNorth}(\iota_2):N\longrightarrow N.
 \]
 Composition of stabilizer parts is multiplication in the same order as the
 action, while inversion sends a stabilizer part to its inverse.  Consequently
 \[
   \operatorname{stabilizerPart}(k)
-  =\operatorname{stabilizerPart}(k_{EN,2})
-     \operatorname{stabilizerPart}(k_{EN,1})^{-1}
+  =\operatorname{stabilizerPart}(\operatorname{eulerToNorth}(\iota_2))
+     \operatorname{stabilizerPart}(\operatorname{eulerToNorth}(\iota_1))^{-1}
   =r_2r_1^{-1}=r.                                  \tag{R}\label{eq:north-relative-stabilizer}
 \]
---- equivalently, from the unique factorizations $k_{EN,i}=o_Nr_i o_0^{-1}$,
+--- equivalently, from the unique factorizations $\operatorname{eulerToNorth}(\iota_i)=o_Nr_i o_0^{-1}$,
 the first run inverted and followed by the second cancels the common $0$-frame
 $o_0$, and $o_N=1$.  So \eqref{eq:north-input-readings} and
-\eqref{eq:north-relative-stabilizer} say that the input leg of $F_A(k)$ carries
+\eqref{eq:north-relative-stabilizer} say that the input leg of $\mathcal A_A(k)$ carries
 $u_1$ to $u_2$, and conjugating by $D_A$ says its positioned leg carries $z_1$
 to $z_2$.  That is the coordinate half.
 
@@ -1756,17 +1754,17 @@ The other half is the direction, and it is where the sweep does the work.  Each
 north state carries a slice direction $I_i\in S^6$, and $G_2$ acts
 \emph{transitively} on the unit imaginary octonions
 \textup{(}Theorem~\ref{thm:G2-S6}\textup{)}, so there is $\gamma\in G_2$ with
-$\gamma I_1=I_2$.  This is the step the ambient total cannot take.  $F_A$ sweeps
+$\gamma I_1=I_2$.  This is the step the ambient total cannot take.  $\mathcal A_A$ sweeps
 the slice --- $I$ ranges over $S^6$ with $G_2$ carrying it, $D_A$ positions the
 coordinate in the slice that selects, $A_{\OO}$ realizes the value --- and
 transitivity holds on what is swept.  The inverse image is taken over exactly
 that output, which is why $\int\mathcal R_A$ is transitive where
-$\int_{\mathcal B}F_A$ is not.
+$\int_{\mathcal B}\mathcal A_A$ is not.
 
 The transported coordinate equality and this direction action are the two
 components of an arrow
 \[
-  \varphi:F_A(k)(x_N)\longrightarrow y_N             \tag{$\Phi$}\label{eq:north-fibre-arrow}
+  \varphi:\mathcal A_A(k)(x_N)\longrightarrow y_N             \tag{$\Phi$}\label{eq:north-fibre-arrow}
 \]
 in the north action fibre.
 
@@ -1778,23 +1776,23 @@ Their inverse-image data supply arrows
 \]
 and identifications
 \[
-  F_A(g)(x_N)=P.\mathrm{fiber},\qquad
-  F_A(h)(y_N)=Q.\mathrm{fiber}.                       \tag{N}\label{eq:north-witness-readings}
+  \mathcal A_A(g)(x_N)=P.\mathrm{fiber},\qquad
+  \mathcal A_A(h)(y_N)=Q.\mathrm{fiber}.                       \tag{N}\label{eq:north-witness-readings}
 \]
 The base component of the required total arrow is
 \[
   (g^{-1}\fatsemi k)\fatsemi h:
   P.\mathrm{base}\longrightarrow Q.\mathrm{base}.    \tag{G}\label{eq:residue-total-base-arrow}
 \]
-Recall that a morphism $P\to Q$ of $\int_{\mathcal B}F_A$ is a base arrow
+Recall that a morphism $P\to Q$ of $\int_{\mathcal B}\mathcal A_A$ is a base arrow
 $f:P.\mathrm{base}\to Q.\mathrm{base}$ together with a fibre arrow
-$F_A(f)(P.\mathrm{fiber})\to Q.\mathrm{fiber}$.  Functoriality gives
-$F_A\bigl((g^{-1}\fatsemi k)\fatsemi h\bigr)
- =F_A(h)\circ F_A(k)\circ F_A(g^{-1})$, and
-$F_A(g^{-1})(P.\mathrm{fiber})=x_N$ by \eqref{eq:north-witness-readings}.
+$\mathcal A_A(f)(P.\mathrm{fiber})\to Q.\mathrm{fiber}$.  Functoriality gives
+$\mathcal A_A\bigl((g^{-1}\fatsemi k)\fatsemi h\bigr)
+ =\mathcal A_A(h)\circ \mathcal A_A(k)\circ \mathcal A_A(g^{-1})$, and
+$\mathcal A_A(g^{-1})(P.\mathrm{fiber})=x_N$ by \eqref{eq:north-witness-readings}.
 So the composite carries $P.\mathrm{fiber}$ back along $g^{-1}$ to $x_N$;
 then \eqref{eq:north-fibre-arrow} carries the result along $k$ to $y_N$;
-finally $F_A(h)$ carries that arrow forward to $Q.\mathrm{fiber}$, with
+finally $\mathcal A_A(h)$ carries that arrow forward to $Q.\mathrm{fiber}$, with
 \eqref{eq:north-witness-readings} identifying its two ends.  This fibre arrow
 over \eqref{eq:residue-total-base-arrow} is a morphism from $P$ to $Q$ in the
 ambient Grothendieck construction.  Since $\iota_A$ is full, it has a
@@ -1910,7 +1908,7 @@ For each base object $X$, an object of $\mathcal R_A(X)$ consists of an ambient 
 $x\in\mathcal A_A(X)$ together with a north residue state $x_N$ and an arrow
 $g:N\to X$ satisfying
 \[
-  F_A(g)(x_N)=x.                                      \tag{W}
+  \mathcal A_A(g)(x_N)=x.                                      \tag{W}
 \]
 This is the object property \texttt{IsCResidueState\,A\,X}.  The fibre
 $\mathcal R_A(X)$ is the full subgroupoid of $\mathcal A_A(X)$ on precisely these objects.
@@ -1930,13 +1928,13 @@ subgroupoid, and its ambient arrow determines it uniquely.  Surjectivity of \tex
 fullness of $\iota_{A,X}$; injectivity is faithfulness.
 
 \emph{Transport of the inverse image.}
-Let $f:X\to Y$.  If $x$ has witness \textup{(W)}, then $F_A(f)(x)$ has the same north state
+Let $f:X\to Y$.  If $x$ has witness \textup{(W)}, then $\mathcal A_A(f)(x)$ has the same north state
 $x_N$ and the composite witness $g\fatsemi f:N\to Y$, because
 \[
 \begin{aligned}
-  F_A(g\fatsemi f)(x_N)
-    &=F_A(f)\bigl(F_A(g)(x_N)\bigr)\\
-    &=F_A(f)(x).
+  \mathcal A_A(g\fatsemi f)(x_N)
+    &=\mathcal A_A(f)\bigl(\mathcal A_A(g)(x_N)\bigr)\\
+    &=\mathcal A_A(f)(x).
 \end{aligned}                                         \tag{C}
 \]
 This is the calculation recorded by \texttt{cResidue\_lands}.  It defines the restricted
@@ -1945,7 +1943,7 @@ transport
   \mathcal R_A(f):\mathcal R_A(X)\longrightarrow\mathcal R_A(Y):
 \]
 on objects it uses the composite witness in \textup{(C)}, and on arrows it applies the ambient
-transport $F_A(f)$.  Composition in the projective base therefore supplies closure of the
+transport $\mathcal A_A(f)$.  Composition in the projective base therefore supplies closure of the
 inverse-image system under every A-section transport.
 
 \emph{The natural inclusion.}
@@ -1954,15 +1952,15 @@ The fibrewise inclusions assemble over $\mathcal B$ in the square
 \begin{tikzcd}[column sep=huge,row sep=large]
 \mathcal R_A(X) \arrow[r,"\mathcal R_A(f)"] \arrow[d,hook,"\iota_{A,X}"'] &
 \mathcal R_A(Y) \arrow[d,hook,"\iota_{A,Y}"]\\
-\mathcal A_A(X) \arrow[r,"F_A(f)"'] & \mathcal A_A(Y).
+\mathcal A_A(X) \arrow[r,"\mathcal A_A(f)"'] & \mathcal A_A(Y).
 \end{tikzcd}                                           \tag{Nat}
 \]
-For an object $x$, both routes in \textup{(Nat)} have underlying state $F_A(f)(x)$; for an arrow
-$\alpha$, both routes have underlying arrow $F_A(f)(\alpha)$.  The upper route additionally
+For an object $x$, both routes in \textup{(Nat)} have underlying state $\mathcal A_A(f)(x)$; for an arrow
+$\alpha$, both routes have underlying arrow $\mathcal A_A(f)(\alpha)$.  The upper route additionally
 carries the residue witness $g\fatsemi f$ established in \textup{(C)}.  Hence
 \[
   \mathcal R_A(f)\fatsemi \iota_{A,Y}
-  =\iota_{A,X}\fatsemi F_A(f).                    \tag{Inc}
+  =\iota_{A,X}\fatsemi \mathcal A_A(f).                    \tag{Inc}
 \]
 and these equations for every $f$ are the naturality of
 $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$.
