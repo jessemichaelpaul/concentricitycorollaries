@@ -1,5 +1,33 @@
 # The ι repair — spec derived from live types
 
+## 🎯 THE PLAN FOR THE TRANSITIVITY LEMMA — author, 2026-08-05
+
+To be taken up next. His words:
+
+> I think we just **HAVE** my action groupoid $\int\mathcal R_A$, then **LET**
+> $\iota_1$ and $\iota_2$ be arbitrary, and then produce the morphism from one
+> to the other **in the A-section equivariant register** — i.e. the thing that
+> swept out the total — via orbit–stabilizer and $G_2$ as we laid out. And I'd
+> imagine the typist's role is even simpler now. Or we use the pretransitive
+> pullback and inclusion — I don't know what Lean wants, but that actually is
+> probably included in *have* $\int\mathcal R_A$.
+
+Two facts checked against the tree before he takes it up:
+
+- **`IsPretransitive` occurs nowhere in the live modules.** The
+  pretransitive-pullback route is an option, not something already present.
+- **The authorship split runs exactly where he expects.** By
+  `scripts/authored.sh`: `residueTotalCategory` and `residueTotalGroupoid` are
+  CLAIMED; `residueTotal_isConnected_of_transitive` and
+  `residueTotal_pi0_singleton_of_connected` are UNCLAIMED. The objects are his;
+  the connecting theorems stacked on them are not. Same split as
+  `sweepTransitive_on_residueSystem` (CLAIMED) versus the three
+  `northProducers*`/`northMembers*` theorems (all UNCLAIMED).
+
+So the question for the rewrite is **what to keep and what genuinely remains**,
+and the authored/unclaimed split is the first cut — not because unclaimed means
+wrong, but because unclaimed means nobody has checked it against his text.
+
 ## ⭐⭐ THE LINE RUNS AT ι — author, 2026-08-05
 
 > I **am** confident everything from hypotheses forward up to $\iota$ full and
