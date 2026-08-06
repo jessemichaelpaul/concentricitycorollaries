@@ -1217,7 +1217,11 @@ $o_b:N\to b$. Every arrow $f:x\to y$ has the unique residual north-stabilizer fa
   r_f=o_y^{-1}f\,o_x,\qquad
   f=o_y r_f o_x^{-1}.
 \]
-The object frame and the full arrow element are therefore
+Write $a_A$ for the positioning of the distinguished element over the base. It
+assigns to each object $b$ the M\"obius element $a_A(b)$ carrying $D_A$ to the
+frame at $b$, and to each arrow $f:x\to y$ the M\"obius element $a_A(f)$
+carrying the frame at $x$ to the frame at $y$. Both are given by the orbit and
+stabilizer factors just fixed:
 \[
   a_A(b)=\operatorname{cayleyProjective}(o_b)D_A,\qquad
   a_A(f)=a_A(y)\,\operatorname{cayleyProjective}(r_f)\,a_A(x)^{-1}.
@@ -1609,9 +1613,8 @@ levels can be compared at all.
 
 The inverse-image groupoid $\mathcal R_A(N)$ supplies the inputs occurring in
 this graph.  Its residue condition identifies the positioned entries of
-$x_N,y_N$ with the authored C3 coordinates
-$z_i=\operatorname{sphereZero}(n_i)$, and the graph equation then pulls each
-one back uniquely through the north action:
+$x_N,y_N$ with the authored C3 coordinates $z_i$, and the graph equation then
+pulls each one back uniquely through the north action:
 \[
   u_i=D_A^{-1}\mathbin{\cdot}z_i,\qquad
   D_A\mathbin{\cdot}u_i=z_i.                         \tag{P}\label{eq:north-preimages}
@@ -1632,25 +1635,30 @@ $\mathcal A_A$-state.
 
 In particular, $x_N$ and $y_N$ are two evaluations of this same graph in the
 normalized north frame.  They are not two constructions: each is Euler to north,
-run at its own input.  Let $\iota_1,\iota_2\in\int\mathcal R_A$ be arbitrary; by
-the inverse-image definition they differ in nothing but their inputs, and those
-inputs lie in the C-residue zero locus.
+run at its own input.  By the inverse-image definition they differ in nothing
+but those inputs, and the inputs lie in the C-residue zero locus.
 
-The rectangles used below are therefore the functorial arrows $\mathcal A_A(\operatorname{eulerToNorth}(\iota_1))$ and
-$\mathcal A_A(\operatorname{eulerToNorth}(\iota_2))$, both running on the one fixed tape from the common projective zero
-frame to the one north frame.  Write
+The rectangles used below are therefore the functorial arrows
 \[
-  \operatorname{eulerToNorth}(\iota_1),\operatorname{eulerToNorth}(\iota_2):0\longrightarrow N
+  \mathcal A_A(\operatorname{eulerToNorth}_1),\qquad
+  \mathcal A_A(\operatorname{eulerToNorth}_2),
+\]
+both running on the one fixed tape from the common projective zero frame to the
+one north frame.  Write
+\[
+  \operatorname{eulerToNorth}_1,\ \operatorname{eulerToNorth}_2:0\longrightarrow N
 \]
 for their base components and
 \[
-  r_1=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}(\iota_1)),\qquad
-  r_2=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}(\iota_2)).
+  r_1=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}_1),\qquad
+  r_2=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}_2).
 \]
 These residual factors are forced.  Orbit--stabilizer gives
-$\operatorname{eulerToNorth}(\iota_i)=o_N\,r_i\,o_0^{-1}$, and \texttt{stabilizerPart\_unique} says
-that any north-stabilizer element giving this same factorization equals
-$r_i$.
+\[
+  \operatorname{eulerToNorth}_i=o_N\,r_i\,o_0^{-1},
+\]
+and \texttt{stabilizerPart\_unique} says that any north-stabilizer element
+giving this same factorization equals $r_i$.
 
 We now read the two runs as commuting action squares.  Their vertical arrows are
 the object frames: $a_A(0)$ at the source of the fixed tape, and $a_A(N)=D_A$ at
@@ -1659,13 +1667,13 @@ its north frame.  Their horizontal arrows are the two legs of
 \[
   R_1=\operatorname{cayleyProjective}(r_1),\qquad R_2=\operatorname{cayleyProjective}(r_2);
 \]
-along the bottom the arrow elements $a_A(\operatorname{eulerToNorth}(\iota_1))$ and $a_A(\operatorname{eulerToNorth}(\iota_2))$.  Read at $x=0$,
+along the bottom the arrow elements $a_A(\operatorname{eulerToNorth}_1)$ and $a_A(\operatorname{eulerToNorth}_2)$.  Read at $x=0$,
 $y=N$, \eqref{eq:orbit-stabilizer} says that each square commutes:
 \[
-  a_A(\operatorname{eulerToNorth}(\iota_1))\,a_A(0)=D_A\,R_1,\qquad
-  a_A(\operatorname{eulerToNorth}(\iota_2))\,a_A(0)=D_A\,R_2.       \tag{S}\label{eq:north-face-squares}
+  a_A(\operatorname{eulerToNorth}_1)\,a_A(0)=D_A\,R_1,\qquad
+  a_A(\operatorname{eulerToNorth}_2)\,a_A(0)=D_A\,R_2.       \tag{S}\label{eq:north-face-squares}
 \]
-What $\mathcal A_A(\operatorname{eulerToNorth}(\iota_1))$ and $\mathcal A_A(\operatorname{eulerToNorth}(\iota_2))$ contribute is that they carry both horizontal
+What $\mathcal A_A(\operatorname{eulerToNorth}_1)$ and $\mathcal A_A(\operatorname{eulerToNorth}_2)$ contribute is that they carry both horizontal
 legs together with these equations.
 
 The fixed tape supplies the input at which the two runs are read: they leave the
@@ -1673,24 +1681,25 @@ same source object, so they share its normalized input coordinate, which we
 write $u_\ast$.  The C3 boundary readings identify the corresponding positioned
 outputs with the authored coordinates,
 \[
-  a_A(\operatorname{eulerToNorth}(\iota_1))\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_1,\qquad
-  a_A(\operatorname{eulerToNorth}(\iota_2))\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_2,
+  a_A(\operatorname{eulerToNorth}_1)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_1,\qquad
+  a_A(\operatorname{eulerToNorth}_2)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_2,
                                    \tag{B}\label{eq:north-boundary-readings}
 \]
 and \eqref{eq:north-preimages} rewrites each authored coordinate as
 $z_i=D_A\mathbin{\cdot}u_i$.  The two runs may therefore be displayed as
 \[
-\begin{tikzcd}[column sep=6em,row sep=4em,ampersand replacement=\&]
-u_\ast \arrow[r,"R_1=\operatorname{cayleyProjective}(r_1)"] \arrow[d,"a_A(0)"']\&
+\begin{tikzcd}[column sep=3em,row sep=3.2em,ampersand replacement=\&]
+u_\ast \arrow[r,"R_1"] \arrow[d,"a_A(0)"']\&
 u_1 \arrow[d,"D_A"]\\
-a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(\operatorname{eulerToNorth}(\iota_1))"']\&
+a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(\operatorname{eulerToNorth}_1)"']\&
 z_1
 \end{tikzcd}
-\qquad\qquad
-\begin{tikzcd}[column sep=6em,row sep=4em,ampersand replacement=\&]
-u_\ast \arrow[r,"R_2=\operatorname{cayleyProjective}(r_2)"] \arrow[d,"a_A(0)"']\&
+\]
+\[
+\begin{tikzcd}[column sep=3em,row sep=3.2em,ampersand replacement=\&]
+u_\ast \arrow[r,"R_2"] \arrow[d,"a_A(0)"']\&
 u_2 \arrow[d,"D_A"]\\
-a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(\operatorname{eulerToNorth}(\iota_2))"']\&
+a_A(0)\mathbin{\cdot}u_\ast \arrow[r,"a_A(\operatorname{eulerToNorth}_2)"']\&
 z_2
 \end{tikzcd}
 \]
@@ -1700,10 +1709,10 @@ side by \eqref{eq:north-boundary-readings} and the right side by
 \[
 \begin{aligned}
  D_A\mathbin{\cdot}\bigl(\operatorname{cayleyProjective}(r_1)\mathbin{\cdot}u_\ast\bigr)
-   &=a_A(\operatorname{eulerToNorth}(\iota_1))\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
+   &=a_A(\operatorname{eulerToNorth}_1)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
     =z_1=D_A\mathbin{\cdot}u_1,\\
  D_A\mathbin{\cdot}\bigl(\operatorname{cayleyProjective}(r_2)\mathbin{\cdot}u_\ast\bigr)
-   &=a_A(\operatorname{eulerToNorth}(\iota_2))\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
+   &=a_A(\operatorname{eulerToNorth}_2)\mathbin{\cdot}\bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
     =z_2=D_A\mathbin{\cdot}u_2.
 \end{aligned}
 \]
@@ -1721,29 +1730,30 @@ the residual factor of the second run relative to the first:
 \[
 \begin{aligned}
  \operatorname{cayleyProjective}(r)\mathbin{\cdot}u_1
- &=C(r_2r_1^{-1})\,\operatorname{cayleyProjective}(r_1)\mathbin{\cdot}u_\ast\\
- &=\operatorname{cayleyProjective}(r_2)\mathbin{\cdot}u_\ast=u_2,
-\end{aligned}
-\qquad
-\begin{aligned}
+ &=\operatorname{cayleyProjective}(r_2r_1^{-1})\,
+    \operatorname{cayleyProjective}(r_1)\mathbin{\cdot}u_\ast\\
+ &=\operatorname{cayleyProjective}(r_2)\mathbin{\cdot}u_\ast=u_2,\\[1ex]
  D_A\,\operatorname{cayleyProjective}(r)\,D_A^{-1}\mathbin{\cdot}z_1
- &=D_A\,\operatorname{cayleyProjective}(r)\mathbin{\cdot}u_1\\
+ &=D_A\mathbin{\cdot}\bigl(\operatorname{cayleyProjective}(r)
+     \mathbin{\cdot}u_1\bigr)\\
  &=D_A\mathbin{\cdot}u_2=z_2 .
 \end{aligned}
 \]
 The corresponding loop in the projective base is
 \[
-  k=\operatorname{eulerToNorth}(\iota_1)^{-1}\fatsemi \operatorname{eulerToNorth}(\iota_2):N\longrightarrow N.
+  k=\operatorname{eulerToNorth}_1^{-1}
+    \fatsemi \operatorname{eulerToNorth}_2
+    \;:\;N\longrightarrow N.
 \]
 Composition of stabilizer parts is multiplication in the same order as the
 action, while inversion sends a stabilizer part to its inverse.  Consequently
 \[
   \operatorname{stabilizerPart}(k)
-  =\operatorname{stabilizerPart}(\operatorname{eulerToNorth}(\iota_2))
-     \operatorname{stabilizerPart}(\operatorname{eulerToNorth}(\iota_1))^{-1}
+  =\operatorname{stabilizerPart}(\operatorname{eulerToNorth}_2)
+     \operatorname{stabilizerPart}(\operatorname{eulerToNorth}_1)^{-1}
   =r_2r_1^{-1}=r.                                  \tag{R}\label{eq:north-relative-stabilizer}
 \]
---- equivalently, from the unique factorizations $\operatorname{eulerToNorth}(\iota_i)=o_Nr_i o_0^{-1}$,
+--- equivalently, from the unique factorizations $\operatorname{eulerToNorth}_i=o_Nr_i o_0^{-1}$,
 the first run inverted and followed by the second cancels the common $0$-frame
 $o_0$, and $o_N=1$.  So \eqref{eq:north-input-readings} and
 \eqref{eq:north-relative-stabilizer} say that the input leg of $\mathcal A_A(k)$ carries
