@@ -1299,7 +1299,27 @@ functor
 \[
   \mathcal A_A:\mathcal B\longrightarrow\mathbf{Grpd},
 \]
-written \texttt{AsectionActionDiagram\,A} in the Lean source.
+written \texttt{AsectionActionDiagram\,A} in the Lean source.  Explicitly, on
+objects and on arrows:
+\begin{itemize}
+\item \textbf{On objects.} A base object $b$ is sent to the groupoid of
+  normalized A-section states positioned by its object frame $a_A(b)=C(o_b)D_A$.
+  An object of that groupoid is one constrained graph \eqref{eq:north-graph} ---
+  a slice direction $I\in S^6$ and a normalized input coordinate $u$, together
+  with the positioned coordinate $a_A(b)\mathbin{\cdot}(I,u)$ and its realized
+  A-value.  An arrow of that groupoid is a single element $\gamma\in G_2$,
+  acting on the slice direction and carrying the whole graph with it: the fibre
+  is the action groupoid of $G_2$ on the states, and nothing else.
+\item \textbf{On arrows.} A base arrow $f:x\to y$ is sent to transport by its
+  arrow element $a_A(f)=a_A(y)\,C(r_f)\,a_A(x)^{-1}$ of
+  \eqref{eq:orbit-stabilizer}.  On a state this moves the input coordinate by
+  the input leg $C(r_f)$ and the positioned coordinate by the positioned leg,
+  the two horizontal legs of the square whose verticals are the frames at the
+  two ends; on an arrow it is the identity on $\gamma$, since $G_2$ commutes
+  past the positioning.  Functoriality is the two forced identities
+  $r_{1_x}=1$ and $r_{f\fatsemi g}=r_g r_f$ carried by the homomorphism $C(-)$,
+  and is therefore not a separate obligation.
+\end{itemize}
 
 The nine base readings \textup{(B1)--(B9)} pass through this constrained graph by the certified
 projective/GPV action squares. Three further readings are thereby realized in the generated
@@ -1449,10 +1469,24 @@ The \emph{residue locus} of an A-section is $\{z : A(z)=0,\ \operatorname{Im}z>0
 \textup{(}\texttt{CResidueZeroLocus}\textup{)}. The \emph{residue subdiagram}
 $\mathcal R_A:\mathcal B\to\mathbf{Grpd}$ \textup{(}\texttt{AsectionCResidueDiagram}\textup{)} is
 the preimage of the states this locus selects at the north frame --- a preimage taken in the
-total action groupoid, not of a set --- with the witnessing base arrow carried as data; its
-inclusion $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$
-\textup{(}\texttt{AsectionCResidueInclusion}\textup{)} is the fibrewise fully faithful inclusion
-onto that inverse image. Its naturality squares retain the ambient A-section transport itself.
+total action groupoid, not of a set --- with the witnessing base arrow carried as data.
+Explicitly, on objects and on arrows:
+\begin{itemize}
+\item \textbf{On objects.} A base object $X$ is sent to the full subgroupoid of
+  $\mathcal A_A(X)$ on the witnessed states: those $x$ for which there are a
+  north residue state $x_N$ and a base arrow $g:N\to X$ with
+  $F_A(g)(x_N)=x$.  The witness travels with the object.
+\item \textbf{On arrows.} A base arrow $f:X\to Y$ is sent to the restriction of
+  the ambient transport $F_A(f)$.  It lands, because a witnessed state stays
+  witnessed with the \emph{same} north state and the composite witness
+  $g\fatsemi f$ --- that is the whole content, and it is functoriality of
+  $F_A$ and nothing further.
+\end{itemize}
+Its inclusion $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$
+\textup{(}\texttt{AsectionCResidueInclusion}\textup{)} sends a witnessed object
+to its ambient state and is the identity on arrows; it is fibrewise fully
+faithful onto that inverse image, and its naturality squares retain the ambient
+A-section transport itself.
 \end{definition}
 
 \begin{lemma}[Transitivity of the C-residue total]\label{lem:c-residue-transitive}
@@ -1557,7 +1591,8 @@ these views in one constrained graph: at $N$ it records
 \[
   (I,u)\longmapsto
   \bigl((I,u),\;D_A\mathbin{\cdot}(I,u),\;
-    A_{\OO}(D_A\mathbin{\cdot}(I,u))\bigr).          \tag{A}
+    A_{\OO}(D_A\mathbin{\cdot}(I,u))\bigr).
+                                    \tag{A}\label{eq:north-graph}
 \]
 What $F_A$ does is sweep the slice.  The direction $I$ ranges over $S^6$ and
 $G_2$ carries it; the distinguished element $D_A$ positions the coordinate $u$
@@ -1680,14 +1715,11 @@ two input equations
   C(r_1)\mathbin{\cdot}u_\ast=u_1,\qquad
   C(r_2)\mathbin{\cdot}u_\ast=u_2.    \tag{I}\label{eq:north-input-readings}
 \]
-This is the precise passage from the two functorial runs to their
-values at the common input.  The north comparison now follows by algebraic
-cancellation. Put
+The north comparison is now algebra.  Put
 \[
-  r=r_2r_1^{-1}.
+  r=r_2r_1^{-1},
 \]
-The required comparison is the elementary group calculation for these two
-runs of the distinguished action:
+the residual factor of the second run relative to the first:
 \[
 \begin{aligned}
  C(r)\mathbin{\cdot}u_1
@@ -1713,18 +1745,26 @@ action, while inversion sends a stabilizer part to its inverse.  Consequently
      \operatorname{stabilizerPart}(k_{EN,1})^{-1}
   =r_2r_1^{-1}=r.                                  \tag{R}\label{eq:north-relative-stabilizer}
 \]
-The same identity can be seen directly from the unique factorizations
-$k_{EN,i}=o_Nr_i o_0^{-1}$: the first run inverted, followed by the second,
-cancels the common $0$-frame $o_0$, and $o_N=1$ at the north
-frame.  Equations \eqref{eq:north-input-readings} and
+--- equivalently, from the unique factorizations $k_{EN,i}=o_Nr_i o_0^{-1}$,
+the first run inverted and followed by the second cancels the common $0$-frame
+$o_0$, and $o_N=1$.  So \eqref{eq:north-input-readings} and
 \eqref{eq:north-relative-stabilizer} say that the input leg of $F_A(k)$ carries
-$u_1$ to $u_2$; conjugating by $D_A$ says that its positioned leg carries
-$z_1$ to $z_2$.
+$u_1$ to $u_2$, and conjugating by $D_A$ says its positioned leg carries $z_1$
+to $z_2$.  That is the coordinate half.
 
-The two north states also carry directions $I_1,I_2\in S^6$.  Transitivity
-of the $G_2$-action supplies $\gamma\in G_2$ with
-$\gamma I_1=I_2$.  The equality of the transported coordinates and this
-direction action are precisely the two components of an arrow
+The other half is the direction, and it is where the sweep does the work.  Each
+north state carries a slice direction $I_i\in S^6$, and $G_2$ acts
+\emph{transitively} on the unit imaginary octonions
+\textup{(}Theorem~\ref{thm:G2-S6}\textup{)}, so there is $\gamma\in G_2$ with
+$\gamma I_1=I_2$.  This is the step the ambient total cannot take.  $F_A$ sweeps
+the slice --- $I$ ranges over $S^6$ with $G_2$ carrying it, $D_A$ positions the
+coordinate in the slice that selects, $A_{\OO}$ realizes the value --- and
+transitivity holds on what is swept.  The inverse image is taken over exactly
+that output, which is why $\int\mathcal R_A$ is transitive where
+$\int_{\mathcal B}F_A$ is not.
+
+The transported coordinate equality and this direction action are the two
+components of an arrow
 \[
   \varphi:F_A(k)(x_N)\longrightarrow y_N             \tag{$\Phi$}\label{eq:north-fibre-arrow}
 \]
