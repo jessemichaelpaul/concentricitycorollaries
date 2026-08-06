@@ -18,6 +18,9 @@
   },
   "mirror": "/Users/jessepaul/Desktop/Concentricity Provenance",
   "phase": "formalization",
+  "release_remote": "corollaries",
+  "release_remote_url": "https://github.com/jessemichaelpaul/concentricitycorollaries.git",
+  "release_branch": "main",
   "allowed_axioms": [
     "propext",
     "Classical.choice",
@@ -33,19 +36,36 @@
   },
   "author_binding_registry": ".provenance/author_bindings.json",
   "release_build_commands": [
-    ["lake", "env", "lean", "Concentricity/Theorem.lean"],
-    ["lake", "build", "Concentricity"]
+    [
+      "lake",
+      "env",
+      "lean",
+      "Concentricity/Theorem.lean"
+    ],
+    [
+      "lake",
+      "build",
+      "Concentricity"
+    ]
   ],
   "release_targets": [
     {
       "declaration": "ASection.concentricity",
       "module": "Concentricity.Theorem",
-      "expected_axioms": ["propext", "Classical.choice", "Quot.sound"]
+      "expected_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
     },
     {
       "declaration": "zeta_riemannHypothesis",
       "module": "Concentricity.Corollaries",
-      "expected_axioms": ["propext", "Classical.choice", "Quot.sound"]
+      "expected_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
     }
   ],
   "active_register_surface": "seat1-transitivity",
@@ -60,7 +80,10 @@
         "Octonionic_RH_master.tex",
         "blueprint/*",
         "Ledger.md",
-        "BlueprintLeanCertificateTable.md"
+        "BlueprintLeanCertificateTable.md",
+        "CLAUDE.md",
+        "EndgameFinal.md",
+        "scripts/*"
       ]
     }
   }

@@ -50,7 +50,17 @@ REWRITES = re.compile(
     r"(?:^|[;&|]\s*|\s)(?:mv|truncate|sed\s+-i|perl\s+-i\S*|"
     r"git\s+checkout|git\s+restore)(?:\s|$)", re.I)
 # `> file` but not `>> file`, and not a file descriptor like 2>&1.
-TRUNCATING_REDIRECT = re.compile(r"(?<![>\d])>(?![>&])\s*([^\s;&|<>]+)")
+# The target must look like a path with an extension, or the guard reads Python
+# format specs -- `{'ln':>5}`, `{name:>42}` -- as truncating redirects and
+# refuses read-only scripts. That happened on the first script run after wiring.
+TRUNCATING_REDIRECT = re.compile(
+    r"(?<![>\d])>(?![>&])\s*((?:[^\s;&|<>]*/)?[^\s;&|<>/]*\.[A-Za-z][A-Za-z0-9]*)")
+# A heredoc body is DATA, not a command line. Scanning it tokenises whatever
+# language it holds and finds paths and redirects that no shell will ever act
+# on. Strip it before anything else looks at the command.
+HEREDOC = re.compile(
+    r"<<-?\s*['\"]?([A-Za-z_][A-Za-z0-9_]*)['\"]?\r?\n.*?^\1[ \t]*$",
+    re.S | re.M)
 TEE_OVERWRITE = re.compile(r"\|\s*tee\s+(?!-a\b|--append\b)([^\s;&|]+)")
 # Commands with no explicit path that can still take out the whole tree.
 SWEEPING = re.compile(
@@ -116,8 +126,14 @@ def decls_in(paths) -> set:
     return found
 
 
-def lean_targets(command: str, project: pathlib.Path):
-    """Existing .lean files this command line could reach."""
+def lean_targets(command: str, project: pathlib.Path, removing: bool):
+    """Existing .lean files this command line could reach.
+
+    A directory is expanded only for a command that actually removes things.
+    Otherwise any bare `.` in the line -- and `pathlib.Path(".")` inside a
+    quoted script is a bare `.` to a tokeniser -- pulls in every .lean file in
+    the repository and refuses the whole tree.
+    """
     candidates = [t.strip("\"'") for t in TOKEN.findall(command)]
     candidates += TRUNCATING_REDIRECT.findall(command)
     candidates += TEE_OVERWRITE.findall(command)
@@ -131,7 +147,7 @@ def lean_targets(command: str, project: pathlib.Path):
             p = p if p.is_absolute() else project / raw
             if p.is_file() and p.suffix == ".lean":
                 hits.append(p)
-            elif p.is_dir():
+            elif removing and p.is_dir() and p.resolve() != project:
                 hits.extend(sorted(p.rglob("*.lean")))
         except OSError:
             continue
@@ -174,16 +190,17 @@ def main() -> int:
 
     # ---- the shell surface ------------------------------------------------
     if tool == "Bash":
-        command = str(inp.get("command") or "")
+        command = HEREDOC.sub("<<DATA\n", str(inp.get("command") or ""))
         if not command:
             return 0
         sweeping = bool(SWEEPING.search(command))
-        touches = bool(REMOVES.search(command) or REWRITES.search(command)
+        removing = bool(REMOVES.search(command) or sweeping)
+        touches = bool(removing or REWRITES.search(command)
                        or TRUNCATING_REDIRECT.search(command)
                        or TEE_OVERWRITE.search(command))
-        if not (sweeping or touches):
+        if not touches:
             return 0
-        targets = lean_targets(command, project)
+        targets = lean_targets(command, project, removing)
         if sweeping and not targets:
             # No path named, but the command reaches the whole working tree.
             targets = all_lean(project)

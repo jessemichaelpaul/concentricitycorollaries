@@ -23,6 +23,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{stmaryrd}   % \fatsemi — diagrammatic composition
 \usepackage{amscd}
 \usepackage{tikz-cd}
 \usepackage{enumitem}
@@ -189,17 +190,17 @@ with the Riemann Hypothesis as a corollary}
 \newlabel{eq:north-witness-readings}{{{N}}{24}{The concentricity theorem}{AMS.16}{}}
 \newlabel{eq:residue-total-base-arrow}{{{G}}{24}{The concentricity theorem}{AMS.17}{}}
 \newlabel{thm:concentricity}{{10.7}{25}{Concentricity}{theorem.10.7}{}}
-\newlabel{cor:nontrivial}{{10.8}{28}{Translation to the classical framework}{theorem.10.8}{}}
+\newlabel{cor:nontrivial}{{10.8}{27}{Translation to the classical framework}{theorem.10.8}{}}
 \newlabel{sec:verification}{{11}{28}{Corollaries}{section.11}{}}
 \newlabel{cor:zeta-section}{{11.1}{28}{$\zetaO $ is an $A$-section}{theorem.11.1}{}}
+\newlabel{cor:rh}{{11.2}{28}{Riemann Hypothesis}{theorem.11.2}{}}
 \bibcite{AdF}{1}
-\newlabel{cor:rh}{{11.2}{29}{Riemann Hypothesis}{theorem.11.2}{}}
-\newlabel{rmk:image-span}{{11.3}{29}{The image span of a fully faithful inclusion}{theorem.11.3}{}}
-\newlabel{rmk:thomason}{{11.4}{29}{Two alternative routes}{theorem.11.4}{}}
 \bibcite{AdFslice}{2}
 \bibcite{Baez02}{3}
 \bibcite{BisiWinkelmann}{4}
 \bibcite{CSS12}{5}
+\newlabel{rmk:image-span}{{11.3}{29}{The image span of a fully faithful inclusion}{theorem.11.3}{}}
+\newlabel{rmk:thomason}{{11.4}{29}{Two alternative routes}{theorem.11.4}{}}
 \bibcite{GP11}{6}
 \bibcite{SeriesExp}{7}
 \bibcite{GS07}{8}
@@ -226,7 +227,7 @@ with the Riemann Hypothesis as a corollary}
 {\LARGE\bfseries Provenance Ledger}\par
 \vspace{2mm}{\large Concentricity}\par\medskip
 This document is generated from the author's master and fresh Lean checks. Each statement is typeset from the master. Every axiom line below is Lean's literal output.
-\par\medskip\textbf{Master revision.} {\ttfamily\small\seqsplit{fb6b67512a322512cffbda4ca6e993b015fb53ea325a9b387e5a518a5e00ffef}}
+\par\medskip\textbf{Master revision.} {\ttfamily\small\seqsplit{3aad0ffd0f225c515a9d345e7f76dc2234a1e173c2a9466301981adcc2e76e25}}
 \par\textbf{Lean-source revision.} {\ttfamily\small\seqsplit{8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c}}
 \bigskip
 \begin{tcolorbox}[provenancecard,title={1. Theorem - Meromorphic continuation and functional equation; Riemann \textbackslash{}cite\{Riemann1859\}},title after break={1. Theorem - Meromorphic continuation and functional equation; Riemann \textbackslash{}cite\{Riemann1859\} (continued)}]
@@ -1868,9 +1869,9 @@ The object frame and the full arrow element are therefore
                               \tag{OS}\label{eq:orbit-stabilizer}
 \]
 Here $C(-)$ denotes the multiplicative Cayley-projective homomorphism, and
-$f\mathbin{;}g$ denotes composition in diagrammatic order: $f$ first, then $g$.
+$f\fatsemi g$ denotes composition in diagrammatic order: $f$ first, then $g$.
 The fixed orbit representatives force $r_f$ uniquely; $r_{1_x}=1$ and
-$r_{f\mathbin{;}g}=r_g r_f$. These identities, together with multiplicativity of $C(-)$,
+$r_{f\fatsemi g}=r_g r_f$. These identities, together with multiplicativity of $C(-)$,
 prove the identity and composition laws directly from the fixed representatives.
 
 Equation \eqref{eq:orbit-stabilizer} is the orbit--stabilizer well-definedness of
@@ -1923,7 +1924,7 @@ output eyes, and the round trip is the checked triangle
 & \mathcal H_1,
 \end{tikzcd}
 \qquad
-\operatorname{Out}_A=\operatorname{In}_A\mathbin{;}A_{\OO}.
+\operatorname{Out}_A=\operatorname{In}_A\fatsemi A_{\OO}.
 \]
 This equality is
 \texttt{AsectionState\_input\_then\_equivariant}: it holds on arrows as well as objects, so

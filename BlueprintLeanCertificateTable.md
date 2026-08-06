@@ -246,7 +246,7 @@ zeta_criticalLine_zeros_infinite_of_RH_audit : RiemannHypothesis → {s | rieman
 
 | Source | SHA-256 |
 |---|---|
-| `Octonionic_RH_master.tex` | `0710c55eb236911b742f7dab052fdc2260e82d3e861099f02975b667f430b4e5` |
+| `Octonionic_RH_master.tex` | `4d0b4155a566aaecac409853b1da12a8b9ab82d4aadad10c7c91a8c6b0d6a267` |
 | `blueprint/lean_certificate_manifest.json` | `b372ae0c20ab57f66e4ab928b7866efca69c8272becd95f11d5b8b1f01a384fe` |
 | `Concentricity/_BlueprintTerminalCertificateProbe.lean` | `2e898992124efa19b135e96f87d14813b03809f27f9cc7a69f85fb8d5f257d37` |
 | `Concentricity/Theorem.lean` | `591e5be0488f2b782901296413142eccaa3380c9bd415ecfba38d2161fcd89cb` |
