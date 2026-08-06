@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-08-06T15:03:26.854882+00:00",
+  "generated_utc": "2026-08-06T15:29:38.922815+00:00",
   "allowed_axioms": [
     "propext",
     "Classical.choice",

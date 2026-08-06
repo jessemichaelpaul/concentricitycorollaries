@@ -187,8 +187,8 @@ with the Riemann Hypothesis as a corollary}
 \newlabel{eq:north-boundary-readings}{{{B}}{23}{The concentricity theorem}{AMS.12}{}}
 \newlabel{eq:north-input-readings}{{{I}}{23}{The concentricity theorem}{AMS.13}{}}
 \newlabel{eq:north-relative-stabilizer}{{{R}}{23}{The concentricity theorem}{AMS.14}{}}
-\newlabel{eq:north-fibre-arrow}{{{$\Phi $}}{23}{The concentricity theorem}{AMS.15}{}}
-\newlabel{eq:north-witness-readings}{{{N}}{23}{The concentricity theorem}{AMS.16}{}}
+\newlabel{eq:north-fibre-arrow}{{{$\Phi $}}{24}{The concentricity theorem}{AMS.15}{}}
+\newlabel{eq:north-witness-readings}{{{N}}{24}{The concentricity theorem}{AMS.16}{}}
 \newlabel{eq:residue-total-base-arrow}{{{G}}{24}{The concentricity theorem}{AMS.17}{}}
 \newlabel{thm:concentricity}{{10.7}{24}{Concentricity}{theorem.10.7}{}}
 \newlabel{cor:nontrivial}{{10.8}{27}{Translation to the classical framework}{theorem.10.8}{}}
@@ -196,7 +196,6 @@ with the Riemann Hypothesis as a corollary}
 \newlabel{cor:zeta-section}{{11.1}{27}{$\zetaO $ is an $A$-section}{theorem.11.1}{}}
 \newlabel{cor:rh}{{11.2}{28}{Riemann Hypothesis}{theorem.11.2}{}}
 \newlabel{rmk:image-span}{{11.3}{28}{The image span of a fully faithful inclusion}{theorem.11.3}{}}
-\newlabel{rmk:thomason}{{11.4}{28}{Two alternative routes}{theorem.11.4}{}}
 \bibcite{AdF}{1}
 \bibcite{AdFslice}{2}
 \bibcite{Baez02}{3}
@@ -205,6 +204,7 @@ with the Riemann Hypothesis as a corollary}
 \bibcite{GP11}{6}
 \bibcite{SeriesExp}{7}
 \bibcite{GS07}{8}
+\newlabel{rmk:thomason}{{11.4}{29}{Two alternative routes}{theorem.11.4}{}}
 \bibcite{GSS13}{9}
 \bibcite{GV}{10}
 \bibcite{Hardy14}{11}
@@ -228,8 +228,8 @@ with the Riemann Hypothesis as a corollary}
 {\LARGE\bfseries Provenance Ledger}\par
 \vspace{2mm}{\large Concentricity}\par\medskip
 This document is generated from the author's master and fresh Lean checks. Each statement is typeset from the master. Every axiom line below is Lean's literal output.
-\par\medskip\textbf{Master revision.} {\ttfamily\small\seqsplit{52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79}}
-\par\textbf{Lean-source revision.} {\ttfamily\small\seqsplit{8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c}}
+\par\medskip\textbf{Master revision.} {\ttfamily\small\seqsplit{30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84}}
+\par\textbf{Lean-source revision.} {\ttfamily\small\seqsplit{bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5}}
 \bigskip
 \begin{tcolorbox}[provenancecard,title={1. Theorem - Meromorphic continuation and functional equation; Riemann \textbackslash{}cite\{Riemann1859\}},title after break={1. Theorem - Meromorphic continuation and functional equation; Riemann \textbackslash{}cite\{Riemann1859\} (continued)}]
 \textbf{Author's statement}\par
@@ -1858,11 +1858,18 @@ The projective action is read in the direction-indexed sphere-world groupoid. It
 directions $I\in S^6$ equipped with their compactified slice spheres, and its morphisms carry the
 direction and M\"obius legs. A normalized value state pairs such a direction with a point of its
 slice. To position $D_A$ over the whole base, fix the canonical orbit representative
-$o_b:N\to b$. Every arrow $f:x\to y$ has the unique residual north-stabilizer factor
+$o_b:N\to b$. Every arrow $f:x\to y$ then has a residual north-stabilizer factor
 \[
   r_f=o_y^{-1}f\,o_x,\qquad
-  f=o_y r_f o_x^{-1}.
+  f=o_y r_f o_x^{-1},
 \]
+and it is the only one: the representatives $o_x,o_y$ are fixed, so
+$f=o_y r o_x^{-1}$ determines $r=o_y^{-1}f o_x$ outright. Uniqueness of the
+stabilizer part is therefore not an extra hypothesis but the invertibility of
+the representatives, and every later appeal to it --- including at the two
+boundary transports of the comparison in Lemma~\ref{lem:c-residue-transitive}
+--- is this one line
+\textup{(}\texttt{GreatCircle.stabilizerPart\_unique}\textup{)}.
 Write $a_A$ for the positioning of the distinguished element over the base. It
 assigns to each object $b$ the M\"obius element $a_A(b)$ carrying $D_A$ to the
 frame at $b$, and to each arrow $f:x\to y$ the M\"obius element $a_A(f)$

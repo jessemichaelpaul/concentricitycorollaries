@@ -13,10 +13,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:riemann",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|74fc0d228fcbc2cd]"
+      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|fcaac6b5c9f16fbe]"
     },
     {
       "details": {
@@ -31,10 +31,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:riemann",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|e0b081d08030b384]"
+      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|1c46cf5373c46163]"
     },
     {
       "details": {
@@ -49,10 +49,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:riemann",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|9c79c9f8b99b2cf0]"
+      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|0676b3f9c481e07e]"
     },
     {
       "details": {
@@ -67,10 +67,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:riemann",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|3dd8ff0abac65007]"
+      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|8052a6a56d001bcd]"
     },
     {
       "details": {
@@ -85,10 +85,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:riemann",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|af0ebfefeb99be46]"
+      "token": "KGT[thm:riemann|AXIOM_CERTIFIED_UNANCHORED|81816064d2d87d9b]"
     },
     {
       "details": {
@@ -103,10 +103,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:euler",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|bae5bc0f1793dfe3]"
+      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|e709b089a6a81613]"
     },
     {
       "details": {
@@ -121,10 +121,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:euler",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|d169013ebd7f9eba]"
+      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|88a34ea9764f4f29]"
     },
     {
       "details": {
@@ -139,10 +139,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:euler",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|ea071e8c748d3402]"
+      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|306154c5de7ce801]"
     },
     {
       "details": {
@@ -157,10 +157,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:euler",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|566ba1c3d524302a]"
+      "token": "KGT[thm:euler|AXIOM_CERTIFIED_UNANCHORED|697bea2ea794308f]"
     },
     {
       "details": {
@@ -175,10 +175,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:hadamard",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|d78b0bb5c91840b5]"
+      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|f833eb9e5d887d9c]"
     },
     {
       "details": {
@@ -193,10 +193,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:hadamard",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|fe1decf148305b74]"
+      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|60b0e1cbc0d6179e]"
     },
     {
       "details": {
@@ -211,10 +211,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:hadamard",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|3c9efe8de5c41df5]"
+      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|dbc170a4b1ecf11a]"
     },
     {
       "details": {
@@ -229,10 +229,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:hadamard",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|f4f356c771b7ad05]"
+      "token": "KGT[thm:hadamard|AXIOM_CERTIFIED_UNANCHORED|5f2b3c9ec52bc140]"
     },
     {
       "details": {
@@ -247,10 +247,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "cor:hadamard-infinitude",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[cor:hadamard-infinitude|AXIOM_CERTIFIED_UNANCHORED|886f05a1b3f93443]"
+      "token": "KGT[cor:hadamard-infinitude|AXIOM_CERTIFIED_UNANCHORED|85b8a3ffd09a2e77]"
     },
     {
       "details": {
@@ -266,10 +266,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:hardy",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "INFERENCE_OPEN_UNANCHORED",
-      "token": "KGT[thm:hardy|INFERENCE_OPEN_UNANCHORED|ca32a70068bde762]"
+      "token": "KGT[thm:hardy|INFERENCE_OPEN_UNANCHORED|5da3b444accae425]"
     },
     {
       "details": {
@@ -284,10 +284,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:zeta-Cstar",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|3a93b05cbff85420]"
+      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|2d9b665cc2eb95df]"
     },
     {
       "details": {
@@ -302,10 +302,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:zeta-Cstar",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|d017a438905c1972]"
+      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|dc2bf2d01398905c]"
     },
     {
       "details": {
@@ -320,10 +320,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:zeta-Cstar",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|b0c7ebe628871059]"
+      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|2f3b10b276d2daa6]"
     },
     {
       "details": {
@@ -338,10 +338,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:zeta-Cstar",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|3b01b6105943c2ed]"
+      "token": "KGT[def:zeta-Cstar|AXIOM_CERTIFIED_UNANCHORED|becc5053094a7d9a]"
     },
     {
       "details": {
@@ -356,10 +356,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:zero-Cstar",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:zero-Cstar|AXIOM_CERTIFIED_UNANCHORED|0e4027ce0b49b830]"
+      "token": "KGT[lem:zero-Cstar|AXIOM_CERTIFIED_UNANCHORED|fd664af9e6e94dd7]"
     },
     {
       "details": {
@@ -374,10 +374,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:zero-Cstar",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:zero-Cstar|AXIOM_CERTIFIED_UNANCHORED|e3bbf7592aea927a]"
+      "token": "KGT[lem:zero-Cstar|AXIOM_CERTIFIED_UNANCHORED|577c1e080fcfacaa]"
     },
     {
       "details": {
@@ -392,10 +392,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:octonions",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|5a6953aeda5e5207]"
+      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|f8e744d5229a6213]"
     },
     {
       "details": {
@@ -410,10 +410,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:octonions",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|dbdeafc3c47095d8]"
+      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|d01432a0e9f78274]"
     },
     {
       "details": {
@@ -428,10 +428,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:octonions",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|b8e17e7327c3a0f7]"
+      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|786178bce01f3df9]"
     },
     {
       "details": {
@@ -446,10 +446,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:octonions",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|b979fc35be413463]"
+      "token": "KGT[def:octonions|AXIOM_CERTIFIED_UNANCHORED|2843df992fed3a4b]"
     },
     {
       "details": {
@@ -464,10 +464,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:slices",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|c901dc525b9e0390]"
+      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|881870ed539e727f]"
     },
     {
       "details": {
@@ -482,10 +482,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:slices",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|49abbc4a3bba6fb1]"
+      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|d9f9559a2e2fe6eb]"
     },
     {
       "details": {
@@ -500,10 +500,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:slices",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|31f18b9b32c7bd9b]"
+      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|c72abfcd227726d4]"
     },
     {
       "details": {
@@ -518,10 +518,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:slices",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|c321027f75ec969f]"
+      "token": "KGT[def:slices|AXIOM_CERTIFIED_UNANCHORED|9b9dedd3a6cbac38]"
     },
     {
       "details": {
@@ -536,10 +536,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:identity",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:identity|AXIOM_CERTIFIED_UNANCHORED|5d71743abc9fc334]"
+      "token": "KGT[thm:identity|AXIOM_CERTIFIED_UNANCHORED|663ff99d4bc37676]"
     },
     {
       "details": {
@@ -554,10 +554,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:slice-preserving",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:slice-preserving|AXIOM_CERTIFIED_UNANCHORED|ad9432699109afff]"
+      "token": "KGT[def:slice-preserving|AXIOM_CERTIFIED_UNANCHORED|112e4b142d302e61]"
     },
     {
       "details": {
@@ -572,10 +572,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:slice-preserving",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:slice-preserving|AXIOM_CERTIFIED_UNANCHORED|6e90e70c6809fa60]"
+      "token": "KGT[def:slice-preserving|AXIOM_CERTIFIED_UNANCHORED|1c19202bc2621582]"
     },
     {
       "details": {
@@ -590,10 +590,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:slice-preserving",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:slice-preserving|AXIOM_CERTIFIED_UNANCHORED|84f394f45c61ac6c]"
+      "token": "KGT[def:slice-preserving|AXIOM_CERTIFIED_UNANCHORED|8a219caaa95d1d43]"
     },
     {
       "details": {
@@ -608,10 +608,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:zeta_O",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|e55dc38c15060235]"
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|dd4eec2fab2ae8e1]"
     },
     {
       "details": {
@@ -626,10 +626,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:zeta_O",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|5d0ad85b2782d57d]"
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|65cf03a9847ff817]"
     },
     {
       "details": {
@@ -644,10 +644,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:zeta_O",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|d58743245bde39ee]"
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|fa1fdd867fe5eb07]"
     },
     {
       "details": {
@@ -662,10 +662,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:zeta_O",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|0d62b840779cd0dd]"
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|8f431b47fa63560c]"
     },
     {
       "details": {
@@ -680,10 +680,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:zeta_O",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|44d27d617c271b78]"
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|b196523c6adee485]"
     },
     {
       "details": {
@@ -698,10 +698,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:zeta_O",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|9c15b62e749742f7]"
+      "token": "KGT[def:zeta_O|AXIOM_CERTIFIED_UNANCHORED|aac5b266ecc3a17a]"
     },
     {
       "details": {
@@ -716,10 +716,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "prop:well-defined",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[prop:well-defined|AXIOM_CERTIFIED_UNANCHORED|05e12889be7fbc71]"
+      "token": "KGT[prop:well-defined|AXIOM_CERTIFIED_UNANCHORED|e7994f082a0aa917]"
     },
     {
       "details": {
@@ -734,10 +734,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "prop:well-defined",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[prop:well-defined|AXIOM_CERTIFIED_UNANCHORED|89bb35e049106649]"
+      "token": "KGT[prop:well-defined|AXIOM_CERTIFIED_UNANCHORED|55216f9cd6153955]"
     },
     {
       "details": {
@@ -752,10 +752,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:R",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:R|AXIOM_CERTIFIED_UNANCHORED|e789cec64558e5dd]"
+      "token": "KGT[def:R|AXIOM_CERTIFIED_UNANCHORED|754db66592b82aac]"
     },
     {
       "details": {
@@ -770,10 +770,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "prop:R-comm-ring",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[prop:R-comm-ring|AXIOM_CERTIFIED_UNANCHORED|e5162cd17ad87a55]"
+      "token": "KGT[prop:R-comm-ring|AXIOM_CERTIFIED_UNANCHORED|86d91cc3dcb1d0ab]"
     },
     {
       "details": {
@@ -788,10 +788,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "prop:R-domain",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[prop:R-domain|AXIOM_CERTIFIED_UNANCHORED|dcec87383c96a8ac]"
+      "token": "KGT[prop:R-domain|AXIOM_CERTIFIED_UNANCHORED|686f1f8f2e824440]"
     },
     {
       "details": {
@@ -806,10 +806,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:slice-exp",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|a6d0488671fa1421]"
+      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|71e51491693ea3ab]"
     },
     {
       "details": {
@@ -824,10 +824,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:slice-exp",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|36bab0a9657d127c]"
+      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|278f7efabdf5e880]"
     },
     {
       "details": {
@@ -842,10 +842,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:slice-exp",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|6755550b77531f49]"
+      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|c6cbb82a47142311]"
     },
     {
       "details": {
@@ -860,10 +860,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:slice-exp",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|121877fd58672eb7]"
+      "token": "KGT[thm:slice-exp|AXIOM_CERTIFIED_UNANCHORED|dc3138e500423961]"
     },
     {
       "details": {
@@ -878,10 +878,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:log-manifold",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|32f974c521ce1912]"
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|e0f127601321030f]"
     },
     {
       "details": {
@@ -896,10 +896,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:log-manifold",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|06a8b9afbcfaa29c]"
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|66fbaf56a34cd900]"
     },
     {
       "details": {
@@ -914,10 +914,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:log-manifold",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|6f7cbf03e35a0140]"
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|30eceb7152f74688]"
     },
     {
       "details": {
@@ -932,10 +932,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:log-manifold",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|019bd2adca48363d]"
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|98999800db96fcd0]"
     },
     {
       "details": {
@@ -950,10 +950,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:log-manifold",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|da078647332eebe2]"
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|b2f39834845e6ebc]"
     },
     {
       "details": {
@@ -968,10 +968,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:log-manifold",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|57dcf33f46393c0b]"
+      "token": "KGT[thm:log-manifold|AXIOM_CERTIFIED_UNANCHORED|1b7008243f8e55ab]"
     },
     {
       "details": {
@@ -986,10 +986,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:exp-degenerate",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|715da6421e3b3e75]"
+      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|8591deca7c70b901]"
     },
     {
       "details": {
@@ -1004,10 +1004,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:exp-degenerate",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|63f579c876820807]"
+      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|ad3b18ba460b62ab]"
     },
     {
       "details": {
@@ -1022,10 +1022,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:exp-degenerate",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|1c61506f6464232e]"
+      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|cfdcdc707f8baf8a]"
     },
     {
       "details": {
@@ -1040,10 +1040,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:exp-degenerate",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|67c22964259a3cc3]"
+      "token": "KGT[lem:exp-degenerate|AXIOM_CERTIFIED_UNANCHORED|0ef673f6403d2da0]"
     },
     {
       "details": {
@@ -1058,10 +1058,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:slice-squares",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|12d5688029de4215]"
+      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|27b4dc2cbaa45c4e]"
     },
     {
       "details": {
@@ -1076,10 +1076,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:slice-squares",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|4bb7214f6f4bb5fe]"
+      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|9173c423cc822cd2]"
     },
     {
       "details": {
@@ -1094,10 +1094,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:slice-squares",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|9b3068aabbb7c38c]"
+      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|1e22e9b2b923246b]"
     },
     {
       "details": {
@@ -1112,10 +1112,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:slice-squares",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|88c453bc03aaa8f1]"
+      "token": "KGT[def:slice-squares|AXIOM_CERTIFIED_UNANCHORED|aaa5272d7d14b3ae]"
     },
     {
       "details": {
@@ -1130,10 +1130,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:winding-lift",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:winding-lift|AXIOM_CERTIFIED_UNANCHORED|a3c6c2bb996dea79]"
+      "token": "KGT[thm:winding-lift|AXIOM_CERTIFIED_UNANCHORED|ab0a74301d20c96a]"
     },
     {
       "details": {
@@ -1148,10 +1148,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:winding-lift",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:winding-lift|AXIOM_CERTIFIED_UNANCHORED|10de64d5dce84cbe]"
+      "token": "KGT[thm:winding-lift|AXIOM_CERTIFIED_UNANCHORED|d7b6177f76c3aae4]"
     },
     {
       "details": {
@@ -1166,10 +1166,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:winding-lift",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:winding-lift|AXIOM_CERTIFIED_UNANCHORED|19e8c0e5d2710b90]"
+      "token": "KGT[thm:winding-lift|AXIOM_CERTIFIED_UNANCHORED|eb846c99a5bffffc]"
     },
     {
       "details": {
@@ -1184,10 +1184,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "prop:winding-signature",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[prop:winding-signature|AXIOM_CERTIFIED_UNANCHORED|fbffe28463e3fc29]"
+      "token": "KGT[prop:winding-signature|AXIOM_CERTIFIED_UNANCHORED|fd0f08c22e7764f1]"
     },
     {
       "details": {
@@ -1202,10 +1202,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "prop:winding-signature",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[prop:winding-signature|AXIOM_CERTIFIED_UNANCHORED|0a4e5ff75fb84929]"
+      "token": "KGT[prop:winding-signature|AXIOM_CERTIFIED_UNANCHORED|bcf6b0ad628857f3]"
     },
     {
       "details": {
@@ -1220,10 +1220,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:slice-pres",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:slice-pres|AXIOM_CERTIFIED_UNANCHORED|2323cdfae987b91f]"
+      "token": "KGT[thm:slice-pres|AXIOM_CERTIFIED_UNANCHORED|483a839ec9f3edf1]"
     },
     {
       "details": {
@@ -1238,10 +1238,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:zeta-in-R",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:zeta-in-R|AXIOM_CERTIFIED_UNANCHORED|bdfd7dc15c9438cb]"
+      "token": "KGT[thm:zeta-in-R|AXIOM_CERTIFIED_UNANCHORED|853b1261826362c6]"
     },
     {
       "details": {
@@ -1256,10 +1256,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:G2",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:G2|AXIOM_CERTIFIED_UNANCHORED|8f1b6cf46dd1a11b]"
+      "token": "KGT[def:G2|AXIOM_CERTIFIED_UNANCHORED|e83e9c047f14c7e3]"
     },
     {
       "details": {
@@ -1274,10 +1274,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:G2",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:G2|AXIOM_CERTIFIED_UNANCHORED|40d6d576dabf4bed]"
+      "token": "KGT[def:G2|AXIOM_CERTIFIED_UNANCHORED|e44c49fe77ecd4bf]"
     },
     {
       "details": {
@@ -1292,10 +1292,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:G2",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:G2|AXIOM_CERTIFIED_UNANCHORED|57289652263fde10]"
+      "token": "KGT[def:G2|AXIOM_CERTIFIED_UNANCHORED|873bed8f34cea254]"
     },
     {
       "details": {
@@ -1310,10 +1310,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:G2-equiv",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:G2-equiv|AXIOM_CERTIFIED_UNANCHORED|b6555695a728839a]"
+      "token": "KGT[thm:G2-equiv|AXIOM_CERTIFIED_UNANCHORED|196577f301ce4a62]"
     },
     {
       "details": {
@@ -1328,10 +1328,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:G2-S6",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:G2-S6|AXIOM_CERTIFIED_UNANCHORED|4766f8e2404f48a4]"
+      "token": "KGT[thm:G2-S6|AXIOM_CERTIFIED_UNANCHORED|ecf1809fcae557a8]"
     },
     {
       "details": {
@@ -1346,10 +1346,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:zero-equivalence",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:zero-equivalence|AXIOM_CERTIFIED_UNANCHORED|a642795d6d199431]"
+      "token": "KGT[thm:zero-equivalence|AXIOM_CERTIFIED_UNANCHORED|184b0e8292f6827b]"
     },
     {
       "details": {
@@ -1364,10 +1364,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:zero-equivalence",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:zero-equivalence|AXIOM_CERTIFIED_UNANCHORED|fa5670f92166293b]"
+      "token": "KGT[thm:zero-equivalence|AXIOM_CERTIFIED_UNANCHORED|fad3c8b9142b897f]"
     },
     {
       "details": {
@@ -1382,10 +1382,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:zero-spheres",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|3e6233d3b1e92e6c]"
+      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|a7024f3e4c0bbf58]"
     },
     {
       "details": {
@@ -1400,10 +1400,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:zero-spheres",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|98dee99286bf51a1]"
+      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|0760a605eba99a7c]"
     },
     {
       "details": {
@@ -1418,10 +1418,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:zero-spheres",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|aba7d411a98caa88]"
+      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|22eca963c2eb17c3]"
     },
     {
       "details": {
@@ -1436,10 +1436,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:zero-spheres",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|21d7b521ec349c12]"
+      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|de5fdc30299ef30c]"
     },
     {
       "details": {
@@ -1454,10 +1454,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:zero-spheres",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|0c013bbbb4473ef4]"
+      "token": "KGT[thm:zero-spheres|AXIOM_CERTIFIED_UNANCHORED|febee210c9289a4d]"
     },
     {
       "details": {
@@ -1472,10 +1472,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:rh-equiv",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:rh-equiv|AXIOM_CERTIFIED_UNANCHORED|b31a314b0fbc9339]"
+      "token": "KGT[thm:rh-equiv|AXIOM_CERTIFIED_UNANCHORED|632764c4696e1212]"
     },
     {
       "details": {
@@ -1490,10 +1490,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:carrier",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:carrier|AXIOM_CERTIFIED_UNANCHORED|aefba05ac1eb65c6]"
+      "token": "KGT[def:carrier|AXIOM_CERTIFIED_UNANCHORED|ec3392380f06af4a]"
     },
     {
       "details": {
@@ -1508,10 +1508,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:carrier",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "EXTERNAL_AXIOM_CERTIFIED",
-      "token": "KGT[def:carrier|EXTERNAL_AXIOM_CERTIFIED|bfb2f2fa38ed0bd5]"
+      "token": "KGT[def:carrier|EXTERNAL_AXIOM_CERTIFIED|b8d11fccb664b14f]"
     },
     {
       "details": {
@@ -1526,10 +1526,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:section-map",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|45161d309466534e]"
+      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|513b8603816fb910]"
     },
     {
       "details": {
@@ -1544,10 +1544,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:section-map",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|35accc5b72f5cfde]"
+      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|39e4a527e46d5323]"
     },
     {
       "details": {
@@ -1562,10 +1562,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:section-map",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|1dd36ac45f51cf38]"
+      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|6d3d8117db1b4f19]"
     },
     {
       "details": {
@@ -1580,10 +1580,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:section-map",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|8b660d057aefdc7b]"
+      "token": "KGT[def:section-map|AXIOM_CERTIFIED_UNANCHORED|47eea2134867670d]"
     },
     {
       "details": {
@@ -1598,10 +1598,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:two-worlds",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:two-worlds|AXIOM_CERTIFIED_UNANCHORED|de364e9d71dd018f]"
+      "token": "KGT[def:two-worlds|AXIOM_CERTIFIED_UNANCHORED|2d8c0b56a821d5ae]"
     },
     {
       "details": {
@@ -1616,10 +1616,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:two-worlds",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:two-worlds|AXIOM_CERTIFIED_UNANCHORED|a105b41ee7e724ae]"
+      "token": "KGT[def:two-worlds|AXIOM_CERTIFIED_UNANCHORED|f3061df0a0e71b4f]"
     },
     {
       "details": {
@@ -1634,10 +1634,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|48689a07bfcf53ba]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|79cfb3812613ccef]"
     },
     {
       "details": {
@@ -1652,10 +1652,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|5e0ff4fc1af2bd50]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|4ee420f100da5b6f]"
     },
     {
       "details": {
@@ -1670,10 +1670,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|4a6f2e2551647e8c]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|c64fc84c484cae4a]"
     },
     {
       "details": {
@@ -1688,10 +1688,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1ed7962981fe2b53]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|34116f6d2d39637a]"
     },
     {
       "details": {
@@ -1706,10 +1706,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|ebbd0084bdaa225d]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|db9f705080a64369]"
     },
     {
       "details": {
@@ -1724,10 +1724,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|6044e8528ccf907c]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|e2f41f8979c6f222]"
     },
     {
       "details": {
@@ -1742,10 +1742,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b84df916ebcbbc60]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|f393b6afa4b6f640]"
     },
     {
       "details": {
@@ -1760,10 +1760,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|e919280b5ed92c81]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b4c442958320c10f]"
     },
     {
       "details": {
@@ -1778,10 +1778,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|89cbff2d0784453c]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|e5d8ca8b37ab06c2]"
     },
     {
       "details": {
@@ -1796,10 +1796,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|c40dc60b77800108]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|774471e4336ba458]"
     },
     {
       "details": {
@@ -1814,10 +1814,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|fe686eecb32ac2be]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|f31b077e89141e00]"
     },
     {
       "details": {
@@ -1832,10 +1832,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|f8329ceeb541ea37]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1a1b0e2a51d71da8]"
     },
     {
       "details": {
@@ -1850,10 +1850,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|36f79f88f2bb486a]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|a1e01631f895170f]"
     },
     {
       "details": {
@@ -1868,10 +1868,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|6cf94ef279172b30]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b81e1e1e7a3a57c1]"
     },
     {
       "details": {
@@ -1886,10 +1886,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|dcf81527ea465ae7]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|2f90999a9c626833]"
     },
     {
       "details": {
@@ -1904,10 +1904,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|fda49e1dfe701f65]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|23659963ebff12ca]"
     },
     {
       "details": {
@@ -1922,10 +1922,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|6c62b693cbd367c4]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|15d5b4a00c04949b]"
     },
     {
       "details": {
@@ -1940,10 +1940,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|8902c270701f75b4]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|7ed4faf47ac27c9a]"
     },
     {
       "details": {
@@ -1958,10 +1958,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|7551049b5b5e2367]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|81f0274456ada1d7]"
     },
     {
       "details": {
@@ -1976,10 +1976,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|d0d08de5a51c39e4]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|5e42ea1e59b80f6f]"
     },
     {
       "details": {
@@ -1994,10 +1994,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b40d8230abbee15d]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|7182603ea4c6508d]"
     },
     {
       "details": {
@@ -2012,10 +2012,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b9a32c4547ffe912]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|106d9b76dc6e8ba3]"
     },
     {
       "details": {
@@ -2030,10 +2030,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|69bd9cd507f804d4]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|0d3605b4fbd629f1]"
     },
     {
       "details": {
@@ -2048,10 +2048,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b4b915b2c0e7009d]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3ee3445a72c585b1]"
     },
     {
       "details": {
@@ -2066,10 +2066,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|80d471b9989c4297]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|286c1a3f7f14cfa1]"
     },
     {
       "details": {
@@ -2084,10 +2084,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|13ca3cbc015e8d0e]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|441e37b0dbae73d3]"
     },
     {
       "details": {
@@ -2102,10 +2102,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|5c1399b1d13c65e3]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|90833f72d5d7dd48]"
     },
     {
       "details": {
@@ -2120,10 +2120,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|292abebda6bc4f68]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|ebc964b26e4ad8ab]"
     },
     {
       "details": {
@@ -2138,10 +2138,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|8b41b1eebfb1662d]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1cfd4ddde717f7ed]"
     },
     {
       "details": {
@@ -2156,10 +2156,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|6121d810ae4d2de5]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1075892b6f56b098]"
     },
     {
       "details": {
@@ -2174,10 +2174,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|0d3e582c0d48efc0]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|18403351f0e3a74d]"
     },
     {
       "details": {
@@ -2192,10 +2192,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3692533bd322ae8e]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|dac3bd25c58926ac]"
     },
     {
       "details": {
@@ -2210,10 +2210,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|7b3fd5aa361a2570]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|8020799d15122c51]"
     },
     {
       "details": {
@@ -2228,10 +2228,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|17ea6051f0be4240]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|ee1c6ffe3def4fb4]"
     },
     {
       "details": {
@@ -2246,10 +2246,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|fa104f3f57ef4097]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|d3604c1626677977]"
     },
     {
       "details": {
@@ -2264,10 +2264,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|c8b22d40a75fdb7b]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3e983febfae73324]"
     },
     {
       "details": {
@@ -2282,10 +2282,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|7ebccda7df114635]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|f9ebe43af113cb84]"
     },
     {
       "details": {
@@ -2300,10 +2300,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|53d727403747486c]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|a747a5ce4f293fca]"
     },
     {
       "details": {
@@ -2318,10 +2318,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|c5c32143cb64b33a]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|f6827c4b2a2e930f]"
     },
     {
       "details": {
@@ -2336,10 +2336,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|e61ac6c3580b2d29]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|5a09b07e45c25843]"
     },
     {
       "details": {
@@ -2354,10 +2354,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|298b463371110d5a]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3ac776989186a956]"
     },
     {
       "details": {
@@ -2372,10 +2372,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|80de15c755cc61ae]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|fb9e78bd19518ac4]"
     },
     {
       "details": {
@@ -2390,10 +2390,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|dc2c02a63d204409]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|dc07872fd8076d26]"
     },
     {
       "details": {
@@ -2408,10 +2408,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|8667771868cf0b7d]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|925bf3483a631bf7]"
     },
     {
       "details": {
@@ -2426,10 +2426,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|7ce2374aec410ab1]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|f6c5a05b6f1e54c6]"
     },
     {
       "details": {
@@ -2444,10 +2444,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b9ccae73f48044ef]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b1f0ed3ffc7b91f8]"
     },
     {
       "details": {
@@ -2462,10 +2462,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|983505c300a40f05]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|a5b90b6aa3f0a862]"
     },
     {
       "details": {
@@ -2480,10 +2480,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|c5f7e8b622819401]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|92d1fefd831cf5c2]"
     },
     {
       "details": {
@@ -2498,10 +2498,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|24c75bde557edda6]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|6c6ed576580a6990]"
     },
     {
       "details": {
@@ -2516,10 +2516,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1c54cf56671e403e]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|4fd766748d7d09f1]"
     },
     {
       "details": {
@@ -2534,10 +2534,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|49a954db8bcdf43b]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|cefe878e778be4df]"
     },
     {
       "details": {
@@ -2552,10 +2552,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1f9904dd99f363c4]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|a8bfa5e3388d7025]"
     },
     {
       "details": {
@@ -2570,10 +2570,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|de88c0c82bbe722c]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|4c14147be402cdf5]"
     },
     {
       "details": {
@@ -2588,10 +2588,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|81ae01086350901a]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|6bf20f9c41b2d2e8]"
     },
     {
       "details": {
@@ -2606,10 +2606,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b6a85fbc653d80d8]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|fabfc35caf1bba4f]"
     },
     {
       "details": {
@@ -2624,10 +2624,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|f256943e9189fac6]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|5c4017a63a6c79bd]"
     },
     {
       "details": {
@@ -2642,10 +2642,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|6c96ed9123152327]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1fe22e0197b710e4]"
     },
     {
       "details": {
@@ -2660,10 +2660,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|7cf86350509ca84e]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|12d3165a12d73c04]"
     },
     {
       "details": {
@@ -2678,10 +2678,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|2549d7b4b5ef3e5c]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|a4d2cda609b058cb]"
     },
     {
       "details": {
@@ -2696,10 +2696,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|3c111617517d656c]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|29c70b7cc6e63444]"
     },
     {
       "details": {
@@ -2714,10 +2714,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|7d4f254bf42ea615]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|53e43513d1b77572]"
     },
     {
       "details": {
@@ -2732,10 +2732,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b83d7fd746431209]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|fb2f661d4a65bbad]"
     },
     {
       "details": {
@@ -2750,10 +2750,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|4d8bd03818f48d06]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|eb5a76bf4747773a]"
     },
     {
       "details": {
@@ -2768,10 +2768,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1b994bcf5243a8ea]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|87c629bd15abe55a]"
     },
     {
       "details": {
@@ -2786,10 +2786,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|88e3cedd9f313ad8]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|e9a8873a236a4fd4]"
     },
     {
       "details": {
@@ -2804,10 +2804,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|73b26878a4948535]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|55378147c127e775]"
     },
     {
       "details": {
@@ -2822,10 +2822,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|53356869cbcc8fae]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|7262f0fd46ce7d22]"
     },
     {
       "details": {
@@ -2840,10 +2840,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|268263b53abdf73d]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|fcc3663239317d76]"
     },
     {
       "details": {
@@ -2858,10 +2858,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|130861386287fee7]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|41e3db6784ec69d9]"
     },
     {
       "details": {
@@ -2876,10 +2876,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b95ce06f66cb256f]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|cdcf5460f0fe8980]"
     },
     {
       "details": {
@@ -2894,10 +2894,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|e537c33e2cd134a7]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|6ce8ffe985f682eb]"
     },
     {
       "details": {
@@ -2912,10 +2912,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|c327fc5ed9b56737]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|07c34d66a9bd2abc]"
     },
     {
       "details": {
@@ -2930,10 +2930,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|a9323df27ea3a6b4]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b2bca8c18d641933]"
     },
     {
       "details": {
@@ -2948,10 +2948,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|5a098fd3c7db3001]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|4e83f22d47ef7fec]"
     },
     {
       "details": {
@@ -2966,10 +2966,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|b7c422f6164573c3]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|e8976d6a95f2a41a]"
     },
     {
       "details": {
@@ -2984,10 +2984,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|6ed05779f60af2d0]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|c62a064c6868e538]"
     },
     {
       "details": {
@@ -3002,10 +3002,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|75f3fd4464b3faa2]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|1690d518151ba8f4]"
     },
     {
       "details": {
@@ -3020,10 +3020,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|ac11cf98779d7f66]"
+      "token": "KGT[def:base|AXIOM_CERTIFIED_UNANCHORED|6b06bc7c445b1bf8]"
     },
     {
       "details": {
@@ -3038,10 +3038,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:base",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "EXTERNAL_AXIOM_CERTIFIED",
-      "token": "KGT[def:base|EXTERNAL_AXIOM_CERTIFIED|1c8d386e1993c5e2]"
+      "token": "KGT[def:base|EXTERNAL_AXIOM_CERTIFIED|43f394e123a3f314]"
     },
     {
       "details": {
@@ -3056,10 +3056,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "prop:weierstrass",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|29c3de625b682648]"
+      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|3b8cabb63c00e90a]"
     },
     {
       "details": {
@@ -3074,10 +3074,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "prop:weierstrass",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|21857d8633448e0c]"
+      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|f87d3ccf1394be96]"
     },
     {
       "details": {
@@ -3092,10 +3092,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "prop:weierstrass",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|2964b8116e2c29a9]"
+      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|ca7df7523cd5ed39]"
     },
     {
       "details": {
@@ -3110,10 +3110,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "prop:weierstrass",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|a2de08800c6c96d7]"
+      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|92a9a7a4fbc3e8d0]"
     },
     {
       "details": {
@@ -3128,10 +3128,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "prop:weierstrass",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|b45f8357d7795d66]"
+      "token": "KGT[prop:weierstrass|AXIOM_CERTIFIED_UNANCHORED|4a469f0b3a86e0e9]"
     },
     {
       "details": {
@@ -3146,10 +3146,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:residue-spheres",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:residue-spheres|AXIOM_CERTIFIED_UNANCHORED|5a5602699d5eeea0]"
+      "token": "KGT[lem:residue-spheres|AXIOM_CERTIFIED_UNANCHORED|457bce4beb32f556]"
     },
     {
       "details": {
@@ -3164,10 +3164,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:residue-spheres",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:residue-spheres|AXIOM_CERTIFIED_UNANCHORED|dd19fde329042525]"
+      "token": "KGT[lem:residue-spheres|AXIOM_CERTIFIED_UNANCHORED|7564b8fa00e82a6a]"
     },
     {
       "details": {
@@ -3182,10 +3182,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:residue-spheres",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:residue-spheres|AXIOM_CERTIFIED_UNANCHORED|02b3d15610045fd2]"
+      "token": "KGT[lem:residue-spheres|AXIOM_CERTIFIED_UNANCHORED|9b00f53694b08515]"
     },
     {
       "details": {
@@ -3200,10 +3200,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:pi0-grothendieck",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "EXTERNAL_AXIOM_CERTIFIED",
-      "token": "KGT[lem:pi0-grothendieck|EXTERNAL_AXIOM_CERTIFIED|0eb9d3e4b66cc43a]"
+      "token": "KGT[lem:pi0-grothendieck|EXTERNAL_AXIOM_CERTIFIED|276539e8be38d319]"
     },
     {
       "details": {
@@ -3218,10 +3218,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:pi0-grothendieck",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:pi0-grothendieck|AXIOM_CERTIFIED_UNANCHORED|068db8fd0fff7301]"
+      "token": "KGT[lem:pi0-grothendieck|AXIOM_CERTIFIED_UNANCHORED|c8201fc058eea778]"
     },
     {
       "details": {
@@ -3236,10 +3236,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:pi0-grothendieck",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:pi0-grothendieck|AXIOM_CERTIFIED_UNANCHORED|9bb42da28a677d42]"
+      "token": "KGT[lem:pi0-grothendieck|AXIOM_CERTIFIED_UNANCHORED|03d42b4860ad7a2b]"
     },
     {
       "details": {
@@ -3254,10 +3254,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:A-section",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:A-section|AXIOM_CERTIFIED_UNANCHORED|49b05dd00f19e3cf]"
+      "token": "KGT[def:A-section|AXIOM_CERTIFIED_UNANCHORED|031547fedb48b825]"
     },
     {
       "details": {
@@ -3272,10 +3272,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:A-section",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:A-section|AXIOM_CERTIFIED_UNANCHORED|a0c954701e48dd4e]"
+      "token": "KGT[def:A-section|AXIOM_CERTIFIED_UNANCHORED|46e7bdc630f70e1b]"
     },
     {
       "details": {
@@ -3290,10 +3290,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:A-section",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:A-section|AXIOM_CERTIFIED_UNANCHORED|20d6da71571636d7]"
+      "token": "KGT[def:A-section|AXIOM_CERTIFIED_UNANCHORED|35129796963e787f]"
     },
     {
       "details": {
@@ -3308,10 +3308,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:residue-subdiagram",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|74b45a47ad2ab56c]"
+      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|b73842d88b666d07]"
     },
     {
       "details": {
@@ -3326,10 +3326,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:residue-subdiagram",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|f9b2bfc7ae777234]"
+      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|bdf33fb0f3c6d4f0]"
     },
     {
       "details": {
@@ -3344,10 +3344,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:residue-subdiagram",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|5598d776b7194f62]"
+      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|8081aa6f6faf465f]"
     },
     {
       "details": {
@@ -3362,10 +3362,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:residue-subdiagram",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|9f27e6da2cbd7179]"
+      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|14baa54ac927ef7d]"
     },
     {
       "details": {
@@ -3380,10 +3380,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:residue-subdiagram",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|6618da3f618f008a]"
+      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|806e3299c7948963]"
     },
     {
       "details": {
@@ -3398,10 +3398,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:residue-subdiagram",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|c9fa2806b210c903]"
+      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|7cfb2531c0163dba]"
     },
     {
       "details": {
@@ -3416,10 +3416,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:residue-subdiagram",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|2e2ed05e8b4bf167]"
+      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|e27e0a1711938dcb]"
     },
     {
       "details": {
@@ -3434,10 +3434,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "def:residue-subdiagram",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|b3e10c6448c7f598]"
+      "token": "KGT[def:residue-subdiagram|AXIOM_CERTIFIED_UNANCHORED|c038d7dbfb613263]"
     },
     {
       "details": {
@@ -3453,10 +3453,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:c-residue-transitive",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "INFERENCE_OPEN_UNANCHORED",
-      "token": "KGT[lem:c-residue-transitive|INFERENCE_OPEN_UNANCHORED|74a44420b03c8f3d]"
+      "token": "KGT[lem:c-residue-transitive|INFERENCE_OPEN_UNANCHORED|04869b2c43722521]"
     },
     {
       "details": {
@@ -3471,10 +3471,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:c-residue-transitive",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:c-residue-transitive|AXIOM_CERTIFIED_UNANCHORED|0d1c301e71ad2146]"
+      "token": "KGT[lem:c-residue-transitive|AXIOM_CERTIFIED_UNANCHORED|bdd213d063dd34ef]"
     },
     {
       "details": {
@@ -3489,10 +3489,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "lem:c-residue-transitive",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[lem:c-residue-transitive|AXIOM_CERTIFIED_UNANCHORED|08844e81a4780f3c]"
+      "token": "KGT[lem:c-residue-transitive|AXIOM_CERTIFIED_UNANCHORED|615f51da2e890880]"
     },
     {
       "details": {
@@ -3508,10 +3508,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:concentricity",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "INFERENCE_OPEN_UNANCHORED",
-      "token": "KGT[thm:concentricity|INFERENCE_OPEN_UNANCHORED|0539e567cdc7290a]"
+      "token": "KGT[thm:concentricity|INFERENCE_OPEN_UNANCHORED|be09bf8385dd520a]"
     },
     {
       "details": {
@@ -3527,10 +3527,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:concentricity",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "INFERENCE_OPEN_UNANCHORED",
-      "token": "KGT[thm:concentricity|INFERENCE_OPEN_UNANCHORED|dad9c9d6cfe35e47]"
+      "token": "KGT[thm:concentricity|INFERENCE_OPEN_UNANCHORED|acca182ea1718653]"
     },
     {
       "details": {
@@ -3546,10 +3546,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:concentricity",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "INFERENCE_OPEN_UNANCHORED",
-      "token": "KGT[thm:concentricity|INFERENCE_OPEN_UNANCHORED|be62a7ce0194d5be]"
+      "token": "KGT[thm:concentricity|INFERENCE_OPEN_UNANCHORED|61200feeb4dd930d]"
     },
     {
       "details": {
@@ -3564,10 +3564,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "thm:concentricity",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[thm:concentricity|AXIOM_CERTIFIED_UNANCHORED|609f91900e269890]"
+      "token": "KGT[thm:concentricity|AXIOM_CERTIFIED_UNANCHORED|7d1d0936952401bc]"
     },
     {
       "details": {
@@ -3583,10 +3583,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "cor:nontrivial",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "INFERENCE_OPEN_UNANCHORED",
-      "token": "KGT[cor:nontrivial|INFERENCE_OPEN_UNANCHORED|12b3658a5488cb54]"
+      "token": "KGT[cor:nontrivial|INFERENCE_OPEN_UNANCHORED|7fa8090435d12a58]"
     },
     {
       "details": {
@@ -3601,10 +3601,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "cor:zeta-section",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "AXIOM_CERTIFIED_UNANCHORED",
-      "token": "KGT[cor:zeta-section|AXIOM_CERTIFIED_UNANCHORED|aa8c84b71f528acd]"
+      "token": "KGT[cor:zeta-section|AXIOM_CERTIFIED_UNANCHORED|3c1956fceb81b30d]"
     },
     {
       "details": {
@@ -3620,10 +3620,10 @@
         "semantic_relation": "not_checked"
       },
       "label": "cor:rh",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "INFERENCE_OPEN_UNANCHORED",
-      "token": "KGT[cor:rh|INFERENCE_OPEN_UNANCHORED|2a93ec16d91a6392]"
+      "token": "KGT[cor:rh|INFERENCE_OPEN_UNANCHORED|b89fa82c629a6a99]"
     },
     {
       "details": {
@@ -3639,15 +3639,15 @@
         "semantic_relation": "not_checked"
       },
       "label": "cor:rh",
-      "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
-      "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c",
+      "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
+      "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5",
       "status": "INFERENCE_OPEN_UNANCHORED",
-      "token": "KGT[cor:rh|INFERENCE_OPEN_UNANCHORED|0f7b5cb362cab3a1]"
+      "token": "KGT[cor:rh|INFERENCE_OPEN_UNANCHORED|b7aa04752757e8c3]"
     }
   ],
-  "ledger_pdf_hash": "45d189840aa25f3dc48028787f622720803ee771bd6a716b9ec673de1b27f03a",
-  "master_hash": "52d6ef624851250b1d260a46820b5cfc8829fcedeb5ad790beee91d3ec9e2e79",
+  "ledger_pdf_hash": "6ec8e76d33d5d60a206afc10ab52671ca6a68eb546e703edef5d12cbe6c19b6e",
+  "master_hash": "30fd1bc9ed39d120fc0fe0343bbf820a0456492c55ee301f5cfcf4a4545faf84",
   "project": "Concentricity",
   "schema": 1,
-  "source_hash": "8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c"
+  "source_hash": "bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5"
 }
