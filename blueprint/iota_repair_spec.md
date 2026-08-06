@@ -1,5 +1,37 @@
 # The ι repair — spec derived from live types
 
+## ⚠️ `euler_toNorth` IS ORPHANED — measured 2026-08-05
+
+The author asked whether the ι proof has Euler-to-north, and hence the tape,
+and uses his machinery. Traced:
+
+**`canonicalAsectionPresentation_euler_toNorth`
+(`ASectionFunctor.lean:1097`) is consumed by nothing.** Its only occurrences
+outside its own definition are a `#check` and a `#print axioms` in
+`_GeometricWalkKernelAudit.lean`. Built, green, imported by no live
+declaration.
+
+**What the ι chain rests on instead** is
+`projectiveObjectFrame A (pointObj ∞) = distinguishedDiskAction A`
+(`ASectionCResidueInverseImage.lean:19`) — that is, on $D_A$ directly.
+
+So the answer splits:
+
+- **Uses his machinery: yes.** $D_A=D(\lambda_A)$ with
+  $\lambda_A=\log g_A(p_A)$ *is* the Euler–Weierstrass multiplier, and
+  orbit–stabilizer positions it over the whole base.
+- **Uses the `euler_toNorth` square: no.**
+- **Uses the GPV tape: only through $D_A$ being the multiplier the tape
+  produces** — not through the transport itself.
+
+**Consequence for the master.** The lemma says *"at every instant the square
+`canonicalAsectionPresentation_euler_toNorth` carries this complete prime tape
+to the common north frame."* The Lean does not go that way; it takes $D_A$ at
+north directly. The prose and the formalization describe two different routes
+to the same element. Either the square gets wired in, or the prose should cite
+what the chain actually uses. **This is a wiring question, not a gap** — the
+square exists and is green.
+
 ## 🎯 THE PLAN FOR THE TRANSITIVITY LEMMA — author, 2026-08-05
 
 To be taken up next. His words:

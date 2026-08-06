@@ -33,6 +33,26 @@ $a_A(\operatorname{eulerToNorth}_i)$. Read at $x=0$, $y=N$,
 \]
 Nothing here is assumed. \eqref{eq:north-face-squares} is
 \eqref{eq:orbit-stabilizer} instantiated on the base component of each sweep.
+The two sweeps are therefore
+\[
+\begin{tikzcd}[column sep=3em,row sep=3.2em,ampersand replacement=\&]
+u_\ast \arrow[r,"R_1"] \arrow[d,"a_A(0)"']\&
+u_1 \arrow[d,"D_A"]\\
+a_A(0)\mathbin{\cdot}u_\ast
+  \arrow[r,"a_A(\operatorname{eulerToNorth}_1)"']\&
+z_1
+\end{tikzcd}
+\]
+\[
+\begin{tikzcd}[column sep=3em,row sep=3.2em,ampersand replacement=\&]
+u_\ast \arrow[r,"R_2"] \arrow[d,"a_A(0)"']\&
+u_2 \arrow[d,"D_A"]\\
+a_A(0)\mathbin{\cdot}u_\ast
+  \arrow[r,"a_A(\operatorname{eulerToNorth}_2)"']\&
+z_2
+\end{tikzcd}
+\]
+one square apiece, sharing their top-left corner.
 
 \medskip
 \noindent\emph{Reading both sweeps at the one source input.}
