@@ -70,10 +70,27 @@ for path in sorted(pathlib.Path("Concentricity").glob("*.lean")):
 
 claimed_tails = {n.split(".")[-1] for n in claimed}
 
-def is_claimed(full, short):
-    return (full in claimed or short in claimed
+def status(full, short):
+    """TAGGED  — the master names it in a \\lean{} tag.
+       NAMED   — it appears in the master's prose but in no tag.
+       ABSENT  — it appears nowhere in the master.
+
+    ABSENT does NOT mean the step is not the author's.  The master states its
+    argument in prose; a declaration can be the typist's name for a step the
+    author writes without naming.  ABSENT means only: nobody has tied this
+    declaration to a place in his text, so it has not been checked against it.
+    """
+    if (full in claimed or short in claimed
             or full.split(".")[-1] in claimed_tails
-            or short.split(".")[-1] in claimed_tails)
+            or short.split(".")[-1] in claimed_tails):
+        return "TAGGED"
+    tail = full.split(".")[-1]
+    if tail in master or short in master:
+        return "NAMED"
+    return "ABSENT"
+
+def is_claimed(full, short):
+    return status(full, short) != "ABSENT"
 
 if cmd == "check":
     if not arg:
@@ -84,11 +101,14 @@ if cmd == "check":
     if not hits:
         print(f"{arg}: no live declaration by that name")
         raise SystemExit(1)
+    note = {
+        "TAGGED": "the master names it in a \\lean tag",
+        "NAMED":  "named in the master's prose, but in no \\lean tag",
+        "ABSENT": "appears nowhere in the master — not checked against his text",
+    }
     for full, (fname, short) in hits:
-        if is_claimed(full, short):
-            print(f"CLAIMED    {full}  ({fname}) — the master names it in a \\lean tag")
-        else:
-            print(f"UNCLAIMED  {full}  ({fname}) — the master never names it")
+        st = status(full, short)
+        print(f"{st:8}  {full}  ({fname}) — {note[st]}")
     raise SystemExit(0)
 
 unclaimed = {f: v for f, v in live.items() if not is_claimed(f, v[1])}
