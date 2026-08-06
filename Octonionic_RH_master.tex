@@ -1212,11 +1212,18 @@ The projective action is read in the direction-indexed sphere-world groupoid. It
 directions $I\in S^6$ equipped with their compactified slice spheres, and its morphisms carry the
 direction and M\"obius legs. A normalized value state pairs such a direction with a point of its
 slice. To position $D_A$ over the whole base, fix the canonical orbit representative
-$o_b:N\to b$. Every arrow $f:x\to y$ has the unique residual north-stabilizer factor
+$o_b:N\to b$. Every arrow $f:x\to y$ then has a residual north-stabilizer factor
 \[
   r_f=o_y^{-1}f\,o_x,\qquad
-  f=o_y r_f o_x^{-1}.
+  f=o_y r_f o_x^{-1},
 \]
+and it is the only one: the representatives $o_x,o_y$ are fixed, so
+$f=o_y r o_x^{-1}$ determines $r=o_y^{-1}f o_x$ outright. Uniqueness of the
+stabilizer part is therefore not an extra hypothesis but the invertibility of
+the representatives, and every later appeal to it --- including at the two
+boundary transports of the comparison in Lemma~\ref{lem:c-residue-transitive}
+--- is this one line
+\textup{(}\texttt{GreatCircle.stabilizerPart\_unique}\textup{)}.
 Write $a_A$ for the positioning of the distinguished element over the base. It
 assigns to each object $b$ the M\"obius element $a_A(b)$ carrying $D_A$ to the
 frame at $b$, and to each arrow $f:x\to y$ the M\"obius element $a_A(f)$
@@ -1588,7 +1595,7 @@ carries this complete prime tape to the common north frame, where \textup{C3}
 supplies the Weierstrass boundary presentation and \textup{C1} identifies both
 presentations with the continued factor $g_A$.
 
-So there is one construction and not two. Euler presents at $0$, and the same
+Euler presents at $0$, and the same
 presentation arriving at $N$ \emph{is} Weierstrass. That identity is what makes
 the common datum nonzero, $u_A=g_A(p_A)\neq0$
 \textup{(}Definition~\ref{def:base}\textup{)}, hence $D_A$ invertible, hence
@@ -1603,27 +1610,31 @@ Write
   r_1=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}_1),\qquad
   r_2=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}_2)
 \]
-for their residual factors. These are forced, not chosen: orbit--stabilizer
-gives
+for their residual factors, and write
+\[
+  R_i=\operatorname{cayleyProjective}(r_i)
+\]
+for the Cayley action each one generates. The $r_i$ are forced, not chosen:
+orbit--stabilizer gives
 \[
   \operatorname{eulerToNorth}_i=o_N\,r_i\,o_0^{-1},
 \]
-and \texttt{stabilizerPart\_unique} says any north-stabilizer element with this
-same factorization equals $r_i$.
+and the fixed representatives determine the stabilizer part of that
+factorization outright, as shown at \eqref{eq:orbit-stabilizer}.
 
 Read each sweep as a commuting square. The verticals are the object frames
 already fixed --- $a_A(0)$ at the source, $a_A(N)=D_A$ at north. The horizontals
-are the two legs of \eqref{eq:orbit-stabilizer}: on top the input leg
-$R_i=\operatorname{cayleyProjective}(r_i)$, along the bottom the arrow element
+are the two legs of \eqref{eq:orbit-stabilizer}: on top the input leg $R_i$,
+along the bottom the arrow element
 $a_A(\operatorname{eulerToNorth}_i)$. Read at $x=0$, $y=N$,
 \eqref{eq:orbit-stabilizer} says each square commutes:
 \[
   a_A(\operatorname{eulerToNorth}_i)\,a_A(0)=D_A\,R_i .
                                     \tag{S}\label{eq:north-face-squares}
 \]
-Nothing here is assumed: \eqref{eq:north-face-squares} is
-\eqref{eq:orbit-stabilizer} instantiated on the base component of each sweep.
-The two sweeps are therefore
+Equation \eqref{eq:north-face-squares} is \eqref{eq:orbit-stabilizer} read at
+the base component of each sweep, so it is derived from the positioning already
+fixed. The two sweeps are therefore
 \[
 \begin{tikzcd}[column sep=3em,row sep=3.2em,ampersand replacement=\&]
 u_\ast \arrow[r,"R_1"] \arrow[d,"a_A(0)"']\&
@@ -1708,15 +1719,27 @@ $u_2$, and conjugating by $D_A$ carries $z_1$ to $z_2$.
 \medskip
 \noindent\emph{The direction half, and why it is available here.}
 The coordinate half moves the middle entry. The right entry still has to move,
-and that is the entry the sweep produced. What $\mathcal A_A$ does is sweep the
-slice: the direction $I$ ranges over $S^6$, $D_A$ positions the coordinate in
-the slice that direction selects, and $A_{\OO}$ realizes the value there. $G_2$
-acts transitively on the unit imaginary octonions
-\textup{(}Theorem~\ref{thm:G2-S6}\textup{)}, so there is $\gamma\in G_2$ with
-$\gamma I_1=I_2$. This is the step the ambient total cannot take: the inverse
-image is taken over exactly what the sweep produces, so transitivity on the
-swept output is available inside $\int_{\mathcal B}\mathcal R_A$ and nowhere
-else.
+and that is the entry the sweep produced.
+
+What $\mathcal A_A$ sweeps is the slice, and what indexes the slices is the
+direction: $I$ ranges over $S^6$, the unit imaginary octonions, $D_A$ positions
+the coordinate in the slice that $I$ selects, and $A_{\OO}$ realizes the value
+there. So the directions carried by $x_N$ and $y_N$ are not labels attached
+afterwards --- they are the indices the functor swept over, and every one of
+them is a unit imaginary octonion because that is what a slice direction is
+\textup{(}Definition~\ref{def:carrier}\textup{)}. This is exactly the set on
+which $G_2$ is transitive \textup{(}Theorem~\ref{thm:G2-S6}\textup{)}, so it
+supplies $\gamma\in G_2$ with
+\[
+  \gamma I_1=I_2 .
+\]
+The ambient total cannot take this step. Its objects are all the states of
+$\mathcal A_A$, and $G_2$ moves a state only within the sphere its direction
+already lies on. The inverse image, by contrast, is taken over precisely what
+the sweep produces --- the residue states on the C3 zero spheres --- so the
+transitivity of $G_2$ on the unit imaginary octonions acts on the whole of what
+$\int_{\mathcal B}\mathcal R_A$ contains, and on nothing larger. That is why
+this comparison is available there and not in $\int_{\mathcal B}\mathcal A_A$.
 
 The transported coordinate equality and this direction action are the two
 components of an arrow
