@@ -1087,14 +1087,18 @@ group element. Let
  C=\begin{pmatrix}1&-i\\[2pt]1&i\end{pmatrix},\qquad
  M(z)=\begin{pmatrix}e^z&0\\[2pt]0&1\end{pmatrix}.
 \]
-The matrix $C$ is the Cayley map $w\mapsto(w-i)/(w+i)$. Conjugating by it and
-passing to the projective class is a single operation, used at every level of
-what follows; write it
+The matrix $C$ is the Cayley map $w\mapsto(w-i)/(w+i)$, and $M$ is
+exponentiation in matrix form: it takes a complex number $z$ to the diagonal
+matrix whose entry is $e^z$. Conjugating an invertible matrix by $C$ and
+passing to the projective class is a single further operation, used at every
+level of what follows; for $h\in\mathrm{GL}(2,\CC)$ write
 \[
-  \operatorname{cayleyProjective}(g)=\bigl[C\,g\,C^{-1}\bigr],
+  \operatorname{cayleyProjective}(h)=\bigl[C\,h\,C^{-1}\bigr].
 \]
-so that the slice M\"obius map attached to a logarithm is
+The passage from a complex number to a slice M\"obius map is therefore two
+steps, exponentiate then conjugate:
 \[
+  z\;\longmapsto\;M(z)\;\longmapsto\;
   D(z)=\operatorname{cayleyProjective}\bigl(M(z)\bigr)
       \in\operatorname{M\ddot ob}(\CC^*).
 \]
@@ -1112,26 +1116,35 @@ of the actual slice M\"obius maps. In the Lean source these are the chain
 \texttt{diskExpAction}, with their multiplication laws. Conditions \textup{C1--C3} select the
 A-specific logarithm $\lambda_A$ of the continued nonzero pole factor and hence the one element
 \[
-  D_A=D(\lambda_A)
-     =\operatorname{cayleyProjective}\bigl(M(\lambda_A)\bigr),
+  D_A=D(\lambda_A)=\operatorname{cayleyProjective}\bigl(M(\lambda_A)\bigr),
   \qquad
-  M(\lambda_A)=\operatorname{diag}(e^{\lambda_A},1).
+  M(\lambda_A)=\operatorname{diag}\bigl(e^{\lambda_A},1\bigr)
+              =\operatorname{diag}(u_A,1).
 \]
-That $\lambda_A$ is a \emph{logarithm} and not merely a number is what the GPV
-facts of Part~2 supply, and it is a fact about slice-preserving exponentials
-rather than an extra choice here. The slice exponential is a covering onto the
-nonzero slice values \textup{(}Theorem~\ref{thm:slice-exp}\textup{)}, its
-logarithm manifold carries the branches
-\textup{(}Theorem~\ref{thm:log-manifold}\textup{)}, and a tame lift along a path
-is unique once its initial rung is fixed, with the ambiguity between branches
-exactly the winding rung in $2\pi i\ZZ$
+Here $\lambda_A$ is the logarithm and $M$ is what undoes it: the entry of
+$M(\lambda_A)$ is $e^{\lambda_A}=u_A$, the multiplier itself, so $D_A$ is an
+exponential action and not a logarithmic one. The logarithm is the coordinate
+in which the tape moves; the element it generates lives one exponential above
+it.
+
+Which logarithm $\lambda_A$ is, and that it is one at all, is supplied by the
+slice facts of Part~2 rather than chosen here. The slice exponential is
+slice-preserving and nowhere zero, with $\lvert\exp q\rvert=e^{\operatorname{Re}q}$
+\textup{(}Theorem~\ref{thm:slice-exp}\textup{)}; its logarithm manifold
+unwraps the multivalued logarithm into a single-valued one, with the branches
+carried by the manifold and not by the value
+\textup{(}Theorem~\ref{thm:log-manifold}\textup{)}; and a tame lift along a path
+is unique once its initial rung is fixed, the ambiguity between branches being
+exactly a winding rung in $2\pi i\ZZ$
 \textup{(}Theorem~\ref{thm:winding-lift},
-Proposition~\ref{prop:winding-signature}\textup{)}. Since
-$e^{\lambda_A+2\pi i k}=e^{\lambda_A}$, every branch gives the same
-$M(\lambda_A)$ and hence the same $D_A$: the logarithm is what carries the
-winding, and the element it generates does not see it. This is why the tape can
-run through the whole base while the distinguished element stays one element,
-and it is recorded again below as \textup{(B6)--(B8)}.
+Proposition~\ref{prop:winding-signature}\textup{)}.
+
+That ambiguity dies under $M$. Since $e^{\lambda_A+2\pi ik}=e^{\lambda_A}$,
+every branch gives the same $M(\lambda_A)$ and hence the same $D_A$: the
+logarithm carries the winding, and the exponential action it generates does not
+see it. This is what lets the tape run through the whole base while the
+distinguished element stays one element, and it is recorded again below as
+\textup{(B6)--(B8)}.
 The Euler and Weierstrass expressions are the two presentations of this same multiplier. The
 function/group-element passage is the commuting dictionary
 \[
@@ -1161,11 +1174,14 @@ $u_A=g_A(p_A)\neq0$. Hence $u_A\in\CC^\times$, its logarithm
 $\lambda_A=\log u_A$ satisfies $e^{\lambda_A}=u_A$, and the distinguished element is
 \[
  D_A=D(\lambda_A)
-   =\left[C\begin{pmatrix}u_A&0\\0&1\end{pmatrix}C^{-1}\right].
+   =\operatorname{cayleyProjective}\bigl(\operatorname{diag}(u_A,1)\bigr).
 \]
-This calculation also gives its two fixed boundary points. The diagonal matrix
-$\operatorname{diag}(u_A,1)$ fixes $0$ and $\infty$ in the standard projective chart; conjugation
-by $C$ carries those points to the projective zero and the shared north point $N$. Therefore
+This calculation also gives its two fixed boundary points. In the standard
+projective chart $\operatorname{diag}(u_A,1)$ acts as $w\mapsto u_Aw$, which
+fixes $0$ and $\infty$ and moves everything else. Conjugation carries a fixed
+point to its Cayley coordinate, so the fixed points of $D_A$ are those of
+$\operatorname{diag}(u_A,1)$ read through $C$: the projective zero and the
+shared north point $N$. Therefore
 \[
   D_A(0)=0,\qquad D_A(N)=N,
 \]
