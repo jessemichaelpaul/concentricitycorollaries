@@ -1,0 +1,131 @@
+% Working draft, MOVEMENT 2 of the transitivity lemma: the morphism.
+% Follows movement 1 (blueprint/lemma_draft.tex).  Not yet in the master.
+%
+% Framing settled in chat: each C-residue state IS one sweep of the one
+% construction with the winding embedded, not one of two constructions.  Two
+% states are two sweeps.  u_* sits at the source of the tape; u_1, u_2 sit at N.
+
+\medskip
+\noindent\emph{The two sweeps as squares.}
+Each state is one sweep, so each carries its own run of the tape, and the two
+runs share their source. Write
+\[
+  r_1=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}_1),\qquad
+  r_2=\operatorname{stabilizerPart}(\operatorname{eulerToNorth}_2)
+\]
+for their residual factors. These are forced, not chosen: orbit--stabilizer
+gives
+\[
+  \operatorname{eulerToNorth}_i=o_N\,r_i\,o_0^{-1},
+\]
+and \texttt{stabilizerPart\_unique} says any north-stabilizer element with this
+same factorization equals $r_i$.
+
+Read each run as a commuting square. The verticals are the object frames
+already fixed --- $a_A(0)$ at the source, $a_A(N)=D_A$ at north. The horizontals
+are the two legs of \eqref{eq:orbit-stabilizer}: on top the input leg
+$R_i=\operatorname{cayleyProjective}(r_i)$, along the bottom the arrow element
+$a_A(\operatorname{eulerToNorth}_i)$. Read at $x=0$, $y=N$,
+\eqref{eq:orbit-stabilizer} says each square commutes:
+\[
+  a_A(\operatorname{eulerToNorth}_i)\,a_A(0)=D_A\,R_i .
+                                    \tag{S}\label{eq:north-face-squares}
+\]
+Nothing here is assumed. \eqref{eq:north-face-squares} is
+\eqref{eq:orbit-stabilizer} instantiated on the base component of each sweep.
+
+\medskip
+\noindent\emph{Reading both sweeps at the one source input.}
+The two runs leave the same source object, so they are read at its normalized
+input coordinate, which we write $u_\ast$. This is the input at $0$; the states'
+own inputs $u_1,u_2$ sit at $N$, and the runs are what carry $u_\ast$ to them.
+The C3 boundary readings identify the positioned outputs with the authored
+coordinates,
+\[
+  a_A(\operatorname{eulerToNorth}_i)\mathbin{\cdot}
+    \bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)=z_i ,
+                                    \tag{B}\label{eq:north-boundary-readings}
+\]
+and \eqref{eq:north-preimages} rewrites each as $z_i=D_A\mathbin{\cdot}u_i$.
+Evaluating \eqref{eq:north-face-squares} at $u_\ast$, reading the left side by
+\eqref{eq:north-boundary-readings} and the right by
+\eqref{eq:north-preimages}:
+\[
+  D_A\mathbin{\cdot}\bigl(R_i\mathbin{\cdot}u_\ast\bigr)
+    =a_A(\operatorname{eulerToNorth}_i)\mathbin{\cdot}
+      \bigl(a_A(0)\mathbin{\cdot}u_\ast\bigr)
+    =z_i=D_A\mathbin{\cdot}u_i .
+\]
+$D_A$ is invertible, so cancelling it on the left gives the two input equations
+\[
+  R_1\mathbin{\cdot}u_\ast=u_1,\qquad
+  R_2\mathbin{\cdot}u_\ast=u_2 .
+                                    \tag{I}\label{eq:north-input-readings}
+\]
+Both sweeps are now read at the one source input, and their difference is
+exactly the difference of their residual factors.
+
+\medskip
+\noindent\emph{The coordinate half.}
+Put $r=r_2r_1^{-1}$, the residual factor of the second sweep relative to the
+first. Then \eqref{eq:north-input-readings} gives
+\[
+\begin{aligned}
+  \operatorname{cayleyProjective}(r)\mathbin{\cdot}u_1
+    &=\operatorname{cayleyProjective}(r_2r_1^{-1})\,R_1\mathbin{\cdot}u_\ast
+     =R_2\mathbin{\cdot}u_\ast=u_2,\\[0.6ex]
+  D_A\,\operatorname{cayleyProjective}(r)\,D_A^{-1}\mathbin{\cdot}z_1
+    &=D_A\mathbin{\cdot}
+       \bigl(\operatorname{cayleyProjective}(r)\mathbin{\cdot}u_1\bigr)
+     =D_A\mathbin{\cdot}u_2=z_2 .
+\end{aligned}
+\]
+The corresponding base loop is
+\[
+  k=\operatorname{eulerToNorth}_1^{-1}
+    \fatsemi\operatorname{eulerToNorth}_2\;:\;N\longrightarrow N,
+\]
+and since composing stabilizer parts multiplies them in the same order as the
+action while inversion inverts them,
+\[
+  \operatorname{stabilizerPart}(k)=r_2r_1^{-1}=r .
+                                    \tag{R}\label{eq:north-relative-stabilizer}
+\]
+Equivalently, from $\operatorname{eulerToNorth}_i=o_N\,r_i\,o_0^{-1}$: the first
+sweep inverted and followed by the second cancels the common $0$-frame $o_0$,
+and $o_N=1$ at north. So the input leg of $\mathcal A_A(k)$ carries $u_1$ to
+$u_2$, and conjugating by $D_A$ carries $z_1$ to $z_2$.
+
+\medskip
+\noindent\emph{The direction half, and why it is available here.}
+The coordinate half moves the middle entry. The right entry still has to move,
+and that is the entry the sweep produced: each state carries a slice direction
+$I_i\in S^6$, and $G_2$ acts transitively on the unit imaginary octonions
+\textup{(}Theorem~\ref{thm:G2-S6}\textup{)}, so there is $\gamma\in G_2$ with
+$\gamma I_1=I_2$. This is the step the ambient total cannot take. The inverse
+image was taken over exactly what the sweep produces, so transitivity on the
+swept output is available inside $\int_{\mathcal B}\mathcal R_A$ and nowhere
+else.
+
+The transported coordinate equality and this direction action are the two
+components of an arrow
+\[
+  \varphi:\mathcal A_A(k)(x_N)\longrightarrow y_N .
+                                    \tag{$\Phi$}\label{eq:north-fibre-arrow}
+\]
+
+\medskip
+\noindent\emph{Return to $P$ and $Q$.}
+Their inverse-image data supply $g,h$ with
+$\mathcal A_A(g)(x_N)=P.\mathrm{fiber}$ and
+$\mathcal A_A(h)(y_N)=Q.\mathrm{fiber}$. The base component of the required
+total arrow is $(g^{-1}\fatsemi k)\fatsemi h$, and functoriality gives
+$\mathcal A_A\bigl((g^{-1}\fatsemi k)\fatsemi h\bigr)
+ =\mathcal A_A(h)\circ\mathcal A_A(k)\circ\mathcal A_A(g^{-1})$. So the
+composite carries $P.\mathrm{fiber}$ back along $g^{-1}$ to $x_N$, then
+\eqref{eq:north-fibre-arrow} carries it along $k$ to $y_N$, then
+$\mathcal A_A(h)$ carries that forward to $Q.\mathrm{fiber}$. This is a
+morphism $P\to Q$ in the ambient Grothendieck construction; since $\iota_A$ is
+full it has a preimage in $\int_{\mathcal B}\mathcal R_A$, and faithfulness
+makes that preimage unique. Hence $P$ and $Q$ are joined, and since they were
+arbitrary, $\int_{\mathcal B}\mathcal R_A$ is transitive.
