@@ -633,3 +633,46 @@ their types as `D_A (cayleyCoord 0) = cayleyCoord 0` and
 `projectiveObjectFrame_north : projectiveObjectFrame A (pointObj ∞) = distinguishedDiskAction A` —
 which is the header's claim at `:22` that the element holds both boundary
 faces, Euler presenting at `0` and Weierstrass at `N`.
+
+## The downstream chain aims at his object — checked 2026-08-05
+
+He asked that `sweepTransitive_on_residueSystem` be a statement about the action
+groupoid $\int_{\mathcal B}\mathcal R_A$, and that connectivity and the
+$\pi_0$-singleton be pointed at that same object. Typed, and all four
+elaborate:
+
+```lean
+example (A : ASection) :
+    A.residueTotalCategory
+      = Grothendieck (A.AsectionCResidueDiagram.comp Grpd.forgetToCat) := rfl
+
+noncomputable example (A : ASection) : Groupoid A.residueTotalCategory :=
+  A.residueTotalGroupoid
+
+noncomputable example (A : ASection) :
+    IsConnected (Grothendieck (A.AsectionCResidueDiagram.comp Grpd.forgetToCat)) :=
+  A.residueTotal_isConnected
+
+example (A : ASection) (P Q : A.residueTotalCategory) :
+    ConnectedComponents.mk P = ConnectedComponents.mk Q :=
+  A.residueTotal_pi0_singleton P Q
+```
+
+Four facts, in order:
+
+1. **The two spellings are the same object, by `rfl`.** `residueTotalCategory`
+   and `Grothendieck (AsectionCResidueDiagram ⋙ Grpd.forgetToCat)` are
+   definitionally equal, so the seam between rung one and rung two needs no
+   glue.
+2. **It carries his groupoid structure** — `residueTotalGroupoid`. So
+   transitivity is being asserted of the action groupoid, not of a bare
+   category.
+3. **Connectivity is stated at that object.**
+4. **The singleton statement accepts objects of `residueTotalCategory`
+   directly**, so the final instantiation lands on his total rather than on a
+   restated copy.
+
+The generic Mathlib operations that remain downstream — `IsConnected`,
+`ConnectedComponents.mk` — are therefore instantiated **on his transitive,
+connected action groupoid**, which is the shape he asked for: generic
+operations, his objects.
