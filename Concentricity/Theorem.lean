@@ -553,6 +553,56 @@ theorem ASection.inputEquation_of_boundaryReading
   rw [hB] at h2
   exact ((EquivLike.apply_eq_iff_eq (D : OnePoint ℂ ≃ OnePoint ℂ)).mp h2).symm
 
+/-- **(Φ) FROM THE TWO C3 BOUNDARY READINGS** (master
+`lem:c-residue-transitive`, the comparison).  Two runs `k₁, k₂` of the one
+construction out of the one source object, read at its one input `u_*`.  Their
+C3 boundary readings land the positioned outputs on the authored coordinates —
+`hB₁`, `hB₂` state that against `D_A` itself, since the north frame **is** `D_A`
+(`projectiveObjectFrame_north`), and `residueState_graph` is what says the
+right-hand sides are `sphereZero n`, `sphereZero m`.  Then:
+
+  (S)+(B)+(P) ⟹ (I)   `inputEquation_of_boundaryReading`, once per run
+  (R)                 `stabilizerPart_comp`, `stabilizerPart_inv`
+  (Φ)                 `northFiberHom_of_coordinate`, `G₂` on the direction
+
+The residual factors are `stabilizerPart` of the two runs — determined by the
+orbit--stabilizer factorization, never quantified over. -/
+theorem ASection.northComparison_of_boundaryReadings
+    (A : ASection) {X : GreatCircle.Base}
+    (k₁ k₂ : X ⟶ ASection.projectiveNorth)
+    (xN yN : A.AsectionActionFiber ASection.projectiveNorth)
+    (uStar : OnePoint ℂ)
+    (hB₁ : (A.orbitStabilizerActionSquare k₁).left.val
+              ((A.projectiveObjectFrame X).val uStar)
+            = (A.distinguishedDiskAction).val xN.input.back.coordinate)
+    (hB₂ : (A.orbitStabilizerActionSquare k₂).left.val
+              ((A.projectiveObjectFrame X).val uStar)
+            = (A.distinguishedDiskAction).val yN.input.back.coordinate) :
+    Nonempty ((A.AsectionActionTransport
+      (CategoryTheory.Groupoid.inv k₁ ≫ k₂)).obj xN ⟶ yN) := by
+  rw [← ASection.projectiveObjectFrame_north A] at hB₁ hB₂
+  have hI₁ : (GreatCircle.cayleyProjective
+      (GreatCircle.stabilizerPart k₁).1).val uStar
+      = xN.input.back.coordinate :=
+    ASection.inputEquation_of_boundaryReading
+      (A.orbitStabilizerActionSquare k₁) uStar _ hB₁
+  have hI₂ : (GreatCircle.cayleyProjective
+      (GreatCircle.stabilizerPart k₂).1).val uStar
+      = yN.input.back.coordinate :=
+    ASection.inputEquation_of_boundaryReading
+      (A.orbitStabilizerActionSquare k₂) uStar _ hB₂
+  refine A.northFiberHom_of_coordinate _ _ _ ?_
+  rw [ASection.AsectionActionTransport_obj_input]
+  change
+    (GreatCircle.cayleyProjective
+      (GreatCircle.stabilizerPart
+        (CategoryTheory.Groupoid.inv k₁ ≫ k₂)).1).val
+          xN.input.back.coordinate =
+      yN.input.back.coordinate
+  rw [GreatCircle.stabilizerPart_comp, ASection.stabilizerPart_inv,
+      Subgroup.coe_mul, Subgroup.coe_inv, map_mul, map_inv, ← hI₁]
+  simpa using hI₂
+
 /-- **(R)** (master `lem:c-residue-transitive`): the relative base arrow's
 transport is the endosquare's transport — the inverse Euler square followed by
 the Weierstrass square, read on the A-generated value states.  The two boundary
