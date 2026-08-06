@@ -83,6 +83,41 @@ never of a symbol.
 Drops the `\newpage`, the restart sentence, and the pole-datum rebuild — the
 last belongs where $D_A$ is first defined, not inside the comparison.
 
+## 3b. Symbol inventory of the lemma body (`:1504–:1800`), measured
+
+| symbol | uses | issue |
+|---|---|---|
+| `a_A` | 32 | one symbol, two argument kinds — $a_A(b)$ object frame, $a_A(f)$ arrow element. Principled, but never stated |
+| `F_A` | 23 | **aliased**: also written $\mathcal A_A$; both live in the lemma |
+| `D_A` | 17 | **aliased**: $D=D_A$ introduced at `:1526`, then both used |
+| `C` | 17 | **overloaded**: the Cayley matrix, and the homomorphism $C(-)$ |
+| `k_{EN,1}`, `k_{EN,2}` | 11 each | a construction's name serving as a base-arrow symbol |
+| $u_\ast,u_i,z_i$ | ~30 | points; never separated in prose from the elements acting on them |
+| $\iota$ | 4 | the protagonists appear four times in their own lemma |
+
+**Three abbreviations are introduced mid-lemma** — $D=D_A$, $F_A=\mathcal A_A$,
+and $C$ — all in the two paragraphs at `:1525–:1530`. That is the shorthand to
+remove: this is a constructible proof, so names stay spelled out and compression
+happens only at a display that needs it, announced there.
+
+### Naming the transports — `e_i` WITHDRAWN
+
+`e_1,e_2` was my proposal and it is wrong for this paper: `e` occurs nowhere,
+so it is a *new* bare letter, which is the very thing being removed. A bare
+letter also hides the reason the object exists, and in a constructible proof
+every object has one.
+
+**Proposed instead**, spelled out, indexed by the thing that actually differs:
+
+$$\operatorname{eulerToNorth}(\iota_1),\quad
+  \operatorname{eulerToNorth}(\iota_2)\;:\;0\longrightarrow N$$
+$$r_i=\operatorname{stabilizerPart}\bigl(\operatorname{eulerToNorth}(\iota_i)\bigr)$$
+
+This matches the Lean name `canonicalAsectionPresentation_euler_toNorth`, keeps
+*Euler to north* as the name of the **construction** and never of a symbol,
+carries the one real difference (the input) in the index, introduces no new
+letters, and leaves $k$ free for the loop alone.
+
 ## 4. Still open before drafting
 
 - Is $e_1,e_2$ the naming he wants for the two transports (freeing $k$ for the
