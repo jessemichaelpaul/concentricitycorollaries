@@ -1,0 +1,71 @@
+% Working draft of the transitivity lemma, curated in chat.
+% MOVEMENT 1 of 4: the Let, the two states displayed, and what built them.
+% Not yet in the master.
+
+\begin{proof}
+Let
+\[
+  P,Q\in\int_{\mathcal B}\mathcal R_A
+\]
+be arbitrary. By the inverse-image definition, the fibre data of $P$ and $Q$
+supply north residue states $x_N,y_N$ together with base arrows
+\[
+  g:N\longrightarrow P.\mathrm{base},\qquad
+  h:N\longrightarrow Q.\mathrm{base},
+\]
+whose A-section transports recover the two given fibre states. So the arbitrary
+problem reduces to a north endomorphism $k:N\to N$ and a fibre morphism
+\[
+  \varphi:\mathcal A_A(k)(x_N)\longrightarrow y_N .
+\]
+Once these are in hand, functorial transport along
+$g^{-1}\fatsemi k\fatsemi h$ gives an ambient Grothendieck morphism $P\to Q$,
+and the full inclusion $\int\iota_A$ returns that morphism to
+$\int_{\mathcal B}\mathcal R_A$. It remains only to construct the north
+comparison.
+
+Both north states are selected by the C3 zero-sphere system, so each carries a
+C-residue index and a slice direction, and its positioned coordinate is the
+authored C3 coordinate at that index:
+\[
+\begin{array}{l@{\qquad\qquad}l}
+  x_N:\ \text{index }n_1,\ \text{direction }I_1\in S^6
+    & y_N:\ \text{index }n_2,\ \text{direction }I_2\in S^6\\[0.4ex]
+  \qquad z_1=\operatorname{sphereZero}(n_1)
+    & \qquad z_2=\operatorname{sphereZero}(n_2)\\[0.4ex]
+  \qquad u_1=D_A^{-1}\mathbin{\cdot}z_1
+    & \qquad u_2=D_A^{-1}\mathbin{\cdot}z_2
+\end{array}
+\]
+The north object frame is $D_A$ itself, and it is invertible, so each positioned
+coordinate has exactly one input behind it. These are the two objects to be
+joined, and they differ in nothing but $n_1$ and $n_2$.
+
+What built each of them is one evaluation of the A-section action functor. At
+$N$ the functor records
+\[
+  (I,u)\longmapsto
+  \bigl((I,u),\;D_A\mathbin{\cdot}(I,u),\;
+    A_{\OO}(D_A\mathbin{\cdot}(I,u))\bigr),
+                                    \tag{A}\label{eq:north-graph}
+\]
+and the two states are \eqref{eq:north-graph} run at their own inputs:
+\[
+\begin{array}{l}
+  (I_1,u_1)\longmapsto
+    \bigl((I_1,u_1),\;z_1,\;A_{\OO}(z_1)\bigr),\\[0.8ex]
+  (I_2,u_2)\longmapsto
+    \bigl((I_2,u_2),\;z_2,\;A_{\OO}(z_2)\bigr).
+\end{array}
+\]
+The input is the left entry, the positioned coordinate is the middle entry, and
+the realized value is the right one. Reading the middle entries recovers
+$z_i=D_A\mathbin{\cdot}u_i$, which is the residue condition; reading the left
+entries recovers the inputs the comparison is evaluated at.
+
+What $\mathcal A_A$ does is sweep the slice. The direction $I$ ranges over $S^6$
+and $G_2$ carries it; the distinguished element $D_A$ positions the coordinate
+$u$ in the slice that direction selects; and $A_{\OO}$ realizes the value there.
+One element, swept over all directions, is the whole content of the functor, and
+its well-definedness is \eqref{eq:orbit-stabilizer} and nothing else.
+\end{proof}
