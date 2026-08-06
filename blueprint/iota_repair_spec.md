@@ -1,5 +1,46 @@
 # The ι repair — spec derived from live types
 
+## 🔬 DEEP DIVE: what makes $D_A$ the Euler–Weierstrass multiplier — 2026-08-05
+
+The author's challenge: being *defined from* $g_A(p_A)$ is not the same as
+*being the Euler–Weierstrass multiplier*. That sense needs the tape,
+$e^{\Gamma_A(t)}=A(\delta(t))$, together with the two fixed points that make
+Euler-at-$0$ and Weierstrass-at-$N$ the two boundary readings. My earlier
+claim — "it uses his machinery because $D_A$ is the multiplier" — skipped that
+distinction. Traced:
+
+```
+distinguishedPoleLog A    = Complex.log (A.distinguishedPoleFactor ↑A.pole)
+distinguishedPoleUnit A   = Units.mk0 (A.distinguishedPoleFactor ↑A.pole) _
+distinguishedDiskAction A = GreatCircle.diskExpAction A.distinguishedPoleLog
+```
+
+**The Lean's $D_A$ is built from one number** — the pole factor's value at the
+pole, exponentiated into a Möbius element. It carries nothing about the tape,
+the Euler product, or the Weierstrass product. What identifies that number as
+the common multiplier lives in the `ASection` conditions constraining
+`distinguishedPoleFactor`, which are available to every `A` but are a separate
+matter from being invoked.
+
+| fact | live status |
+|---|---|
+| `distinguishedDiskAction_fixes_cayley_N` (Weierstrass at $N$) | one live use, `ProjectiveSection.lean:286` |
+| `distinguishedDiskAction_fixes_cayley_zero` (Euler at $0$) | **no live use** — own declaration and a docstring only |
+| `canonicalAsectionPresentation_euler_toNorth` | **no live use** |
+| `distinguishedPoleFactor` | one live file, `ProjectiveTransport.lean` |
+| `GpvTransport` **and** `distinguishedDiskAction` together | `ProjectiveTransport.lean` only |
+
+**The asymmetry is the finding.** The master presents the two boundary readings
+as a matched pair. In the encoding the $N$ reading is used once and the $0$
+reading never, and the square that carries the tape between them is used
+nowhere. So the prose's symmetric pair is, in the Lean, one used fact, one
+unused fact, and an orphaned transport.
+
+`ProjectiveTransport.lean` is the only live file where the tape and $D_A$
+coexist, so any statement tying $D_A$ to the tape's value at $N$ would have to
+live there. **Whether one does is the next thing to read** — that file is
+outside the current seat surface.
+
 ## ⚠️ `euler_toNorth` IS ORPHANED — measured 2026-08-05
 
 The author asked whether the ι proof has Euler-to-north, and hence the tape,
