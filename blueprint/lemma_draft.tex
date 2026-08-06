@@ -1,6 +1,8 @@
 % Working draft of the transitivity lemma, curated in chat.
-% MOVEMENT 1 of 4: the Let, the two states displayed, and what built them.
-% Not yet in the master.
+% MOVEMENT 1 of 4, revision 2: the Let, the two states, the tape and the disk
+% action visible, and the block reorganized around its logical core --
+% one element, invertible at N, hence orbit-stabilizer at every t, hence the
+% sweep.  Not yet in the master.
 
 \begin{proof}
 Let
@@ -24,48 +26,80 @@ and the full inclusion $\int\iota_A$ returns that morphism to
 $\int_{\mathcal B}\mathcal R_A$. It remains only to construct the north
 comparison.
 
-Both north states are selected by the C3 zero-sphere system, so each carries a
-C-residue index and a slice direction, and its positioned coordinate is the
-authored C3 coordinate at that index:
+\medskip
+\noindent\emph{The two states.}
+Both are selected by the C3 zero-sphere system, so each carries a slice
+direction and its positioned coordinate is an authored C3 coordinate:
 \[
-\begin{array}{l@{\qquad\qquad}l}
-  x_N:\ \text{index }n_1,\ \text{direction }I_1\in S^6
-    & y_N:\ \text{index }n_2,\ \text{direction }I_2\in S^6\\[0.4ex]
-  \qquad z_1=\operatorname{sphereZero}(n_1)
-    & \qquad z_2=\operatorname{sphereZero}(n_2)\\[0.4ex]
-  \qquad u_1=D_A^{-1}\mathbin{\cdot}z_1
-    & \qquad u_2=D_A^{-1}\mathbin{\cdot}z_2
-\end{array}
+  x_N=(I_1,z_1),\qquad y_N=(I_2,z_2),
+  \qquad I_1,I_2\in S^6 .
 \]
-The north object frame is $D_A$ itself, and it is invertible, so each positioned
-coordinate has exactly one input behind it. These are the two objects to be
-joined, and they differ in nothing but $n_1$ and $n_2$.
+The north object frame is the distinguished disk action $D_A$ itself, so each
+positioned coordinate has exactly one input behind it,
+\[
+  z_1=D_A\mathbin{\cdot}u_1,\qquad z_2=D_A\mathbin{\cdot}u_2 .
+                                    \tag{P}\label{eq:north-preimages}
+\]
+These are the two objects to be joined, and they differ in nothing but their
+inputs.
 
-What built each of them is one evaluation of the A-section action functor. At
-$N$ the functor records
+\medskip
+\noindent\emph{What built them.}
+Each is one evaluation of the A-section action functor along the fixed tape.
+The tape is the $0$-to-$N$ transport of the inverse-image construction, run once
+for each state,
+\[
+  \operatorname{eulerToNorth}_1,\ \operatorname{eulerToNorth}_2
+    \;:\;0\longrightarrow N,
+\]
+and at $N$ the functor records
 \[
   (I,u)\longmapsto
   \bigl((I,u),\;D_A\mathbin{\cdot}(I,u),\;
-    A_{\OO}(D_A\mathbin{\cdot}(I,u))\bigr),
+    A_{\OO}(D_A\mathbin{\cdot}(I,u))\bigr).
                                     \tag{A}\label{eq:north-graph}
 \]
-and the two states are \eqref{eq:north-graph} run at their own inputs:
+Run at the two inputs, with the disk action left standing:
 \[
 \begin{array}{l}
   (I_1,u_1)\longmapsto
-    \bigl((I_1,u_1),\;z_1,\;A_{\OO}(z_1)\bigr),\\[0.8ex]
+    \bigl((I_1,u_1),\;D_A\mathbin{\cdot}(I_1,u_1),\;
+      A_{\OO}(D_A\mathbin{\cdot}(I_1,u_1))\bigr),\\[0.9ex]
   (I_2,u_2)\longmapsto
-    \bigl((I_2,u_2),\;z_2,\;A_{\OO}(z_2)\bigr).
+    \bigl((I_2,u_2),\;D_A\mathbin{\cdot}(I_2,u_2),\;
+      A_{\OO}(D_A\mathbin{\cdot}(I_2,u_2))\bigr).
 \end{array}
 \]
-The input is the left entry, the positioned coordinate is the middle entry, and
-the realized value is the right one. Reading the middle entries recovers
-$z_i=D_A\mathbin{\cdot}u_i$, which is the residue condition; reading the left
-entries recovers the inputs the comparison is evaluated at.
+The left entry is the input, the middle entry is the positioned coordinate, and
+the right entry is the realized value. Reading the middle entries gives
+\eqref{eq:north-preimages}, which is the residue condition; reading the left
+entries gives the inputs the comparison is evaluated at.
 
-What $\mathcal A_A$ does is sweep the slice. The direction $I$ ranges over $S^6$
-and $G_2$ carries it; the distinguished element $D_A$ positions the coordinate
-$u$ in the slice that direction selects; and $A_{\OO}$ realizes the value there.
-One element, swept over all directions, is the whole content of the functor, and
-its well-definedness is \eqref{eq:orbit-stabilizer} and nothing else.
+\medskip
+\noindent\emph{Why one element suffices.}
+There is one construction here and not two. Euler presents at $0$, and the same
+presentation arriving at $N$ \emph{is} Weierstrass: \textup{C1} continues $g_A$
+through the simple pole and the Weierstrass divisor is exact at $N$, so at $N$
+the two expressions are the same function. That is what makes the common datum
+nonzero, $u_A=g_A(p_A)\neq0$ \textup{(}Definition~\ref{def:base}\textup{)}, and
+hence what makes $D_A$ invertible: $\operatorname{diag}(u_A,1)$ has determinant
+$u_A\neq0$, its class lies in the projective group, and $D_A$ is its conjugate
+by the Cayley map. Invertibility at $N$ is not an assumption about $D_A$; it is
+what the continuation delivers at the point where the two presentations agree.
+
+Because $D_A$ is invertible, every object frame
+$a_A(b)=\operatorname{cayleyProjective}(o_b)D_A$ is a group element, and
+\eqref{eq:orbit-stabilizer} applies at every object of the base --- in
+particular at every instant of the tape, up to and including $N$. The one
+element positioned everywhere is what the sweep sweeps.
+
+\medskip
+\noindent\emph{What the sweep gives.}
+The direction $I$ ranges over $S^6$ and $G_2$ carries it; $D_A$ positions the
+coordinate $u$ in the slice that direction selects; and $A_{\OO}$ realizes the
+value there. One element, swept over all directions, is the whole content of
+$\mathcal A_A$, and its well-definedness is \eqref{eq:orbit-stabilizer} and
+nothing else. The inverse image is taken over exactly what is swept, which is
+why the comparison below is available in $\int_{\mathcal B}\mathcal R_A$ and not
+in the ambient total.
 \end{proof}
