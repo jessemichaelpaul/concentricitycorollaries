@@ -1085,10 +1085,23 @@ The matrix construction makes explicit why the analytic object is simultaneously
 group element. Let
 \[
  C=\begin{pmatrix}1&-i\\[2pt]1&i\end{pmatrix},\qquad
- M(z)=\begin{pmatrix}e^z&0\\[2pt]0&1\end{pmatrix},\qquad
- D(z)=\bigl[C\,M(z)\,C^{-1}\bigr]\in\operatorname{M\ddot ob}(\CC^*).
+ M(z)=\begin{pmatrix}e^z&0\\[2pt]0&1\end{pmatrix}.
 \]
-The matrix $C$ is the Cayley map $w\mapsto(w-i)/(w+i)$. Matrix multiplication and
+The matrix $C$ is the Cayley map $w\mapsto(w-i)/(w+i)$. Conjugating by it and
+passing to the projective class is a single operation, used at every level of
+what follows; write it
+\[
+  \operatorname{cayleyProjective}(g)=\bigl[C\,g\,C^{-1}\bigr],
+\]
+so that the slice M\"obius map attached to a logarithm is
+\[
+  D(z)=\operatorname{cayleyProjective}\bigl(M(z)\bigr)
+      \in\operatorname{M\ddot ob}(\CC^*).
+\]
+Conjugation preserves products, so $\operatorname{cayleyProjective}$ is a
+homomorphism; every later appearance of it --- positioning the distinguished
+element over the base, and acting by a residual stabilizer factor --- is this
+same map applied to a different matrix. Matrix multiplication and
 $e^{z+w}=e^ze^w$ give
 \[
   M(z+w)=M(z)M(w),\qquad D(z+w)=D(z)D(w).
@@ -1279,8 +1292,17 @@ M\"obius transport. The full A-section functor below additionally retains the no
 and the value produced on that sphere.
 
 The slice-preserving realization on $\Ostar$ is the $G_2$-equivariant endofunctor
-$A_{\OO}:\mathcal H_1\to\mathcal H_1$. The normalized state world has functorial input and
-output eyes, and the round trip is the checked triangle
+$A_{\OO}:\mathcal H_1\to\mathcal H_1$.
+
+The states these functors act on form the \emph{normalized state world}
+$\operatorname{StateWorld}_A$ \textup{(}\texttt{AsectionStateWorld\,A}\textup{)}:
+the action groupoid of $G_2$ on normalized A-section states. An object is a
+slice direction $I\in S^6$ together with a normalized coordinate $u$ in the
+slice that direction selects; an arrow is a single element $\gamma\in G_2$,
+moving the direction and carrying the coordinate with it. It has two functors
+to $\mathcal H_1$, reading a state's coordinate before and after $A_{\OO}$ acts:
+the input eye $\operatorname{In}_A$ and the output eye $\operatorname{Out}_A$.
+The round trip is the checked triangle
 \[
 \begin{tikzcd}[column sep=large,row sep=large]
 \operatorname{StateWorld}_A
@@ -1312,15 +1334,15 @@ functor
 \]
 written \texttt{AsectionActionDiagram\,A} in the Lean source.
 
-It is a functor of action groupoids at both ends. Its source
+Both its source and its targets are action groupoids. The source
 $\mathcal B=\mathrm{PGL}(2,\RR)\ltimes\mathrm{OnePoint}(\RR)$ is the projective
 action groupoid: an object is a point of the compactified real projective line,
 and an arrow $f:x\to y$ is a projective transformation together with its
 transport equation, so it is one element of $\mathrm{PGL}(2,\RR)$ carrying $x$
-to $y$. Each value is an action groupoid too, and the element acting there is
-the distinguished one, $D_A$.
+to $y$. Each groupoid it produces is an action groupoid of $G_2$ on states, and
+the element positioned there is the distinguished one, $D_A$.
 
-On a base object $b$, the value $\mathcal A_A(b)$ is the groupoid of normalized
+On a base object $b$, the groupoid $\mathcal A_A(b)$ consists of the normalized
 A-section states carrying $D_A$ to that object. The carrying is done by the
 object frame $a_A(b)=\operatorname{cayleyProjective}(o_b)D_A$, which is $D_A$
 conjugated along the canonical orbit representative $o_b$ --- the same element
