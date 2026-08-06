@@ -1,5 +1,29 @@
 # The ι repair — spec derived from live types
 
+## ⭐⭐ THE LINE RUNS AT ι — author, 2026-08-05
+
+> I **am** confident everything from hypotheses forward up to $\iota$ full and
+> faithful was built correctly. Because I just forced you to use my hypotheses
+> and objects that I built instead of generic ones. **I'm not confident what is
+> above this is my stuff, probably not. Maybe some of it.**
+
+- **Below the line — trusted.** Hypotheses → the residue subdiagram → the
+  inclusion → full and faithful. Built with his objects. Do not re-audit it and
+  do not "simplify" it.
+- **Above the line — suspect.** The transitivity lemma and everything after.
+  Possibly a paraphrase shaped like his argument rather than his argument.
+
+**One confirmed instance already.** The existential inside
+`northProducersConnectedAmbient` asks for two **state-indexed** stabilizer
+parts, `rE`/`rW` attached to `x0`/`y0`. That is shaped like master (I), but his
+$r_1,r_2$ are the residual factors of the two *runs* of one construction — not
+data attached to states. The statement was never his, which is why it could not
+be closed.
+
+**Standing test above the line:** when a statement resists, first ask whether it
+is the author's or someone's paraphrase of the author's — *before* trying to
+prove it. That check is free and would have saved most of 2026-08-05.
+
 ## ⭐ THE CONNECTOR IS GREEN AND IN-REPO — 2026-08-05
 
 The author: *"it is transitive on unit imaginary octonions (from that
