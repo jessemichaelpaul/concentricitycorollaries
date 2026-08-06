@@ -36,28 +36,56 @@ never of a symbol.
   `Definition~\ref{def:base}` already gave, inside the comparison.
 - Net effect: the reader meets each object twice, and neither time in place.
 
-## 3. The order he asked for
+## 3. The order he asked for (revised by him, 2026-08-05)
 
 1. **Let.** $\iota_1,\iota_2\in\int\mathcal R_A$ arbitrary. Nothing else.
-2. **What built each one.** The equivariant functor supplies the input; $F_A$
-   records $\bigl((I,u),\,D_A\!\cdot\!(I,u),\,A_{\OO}(D_A\!\cdot\!(I,u))\bigr)$
-   — state (A) *here*, once, and read the input off its **middle entry**. Fix
-   the three registers in one place.
-3. **Display the two.** $\iota_1,\iota_2$ side by side, each recalling what
-   built it: index $n_i$, direction $I_i$, positioned $z_i=\operatorname{sphereZero}(n_i)$,
+
+2. **Display the two.** Side by side, each recalling what built it: index
+   $n_i$, direction $I_i$, positioned $z_i=\operatorname{sphereZero}(n_i)$,
    input $u_i=D_A^{-1}\!\cdot z_i$. **Their only difference is the input.**
-4. **What connects them is what produced the total.** The A-section equivariant
-   register — the thing that swept out $\mathcal T_A$ — restricted to the
-   zero-sphere locus. State this *before* constructing anything.
-5. **Construct the morphism.** (S) → (B) → (I) → $r=r_2r_1^{-1}$ → $k$ and (R)
-   for the coordinate; $G_2$ transitive on $S^6$ for the direction; (Φ) as the
-   two components. Then $g,h$, (G), fullness, done.
+
+3. **What built each one**, below that: display
+
+   $$(I,u)\longmapsto \bigl((I,u),\;D_A\!\cdot\!(I,u),\;A_{\OO}(D_A\!\cdot\!(I,u))\bigr)$$
+
+   **twice, one per $\iota$, next to each other**, each carrying its C3
+   coordinate, the Euler-to-north action, and the $G_2$ transitivity. The input
+   is read off the **middle entry**. Fix the three registers here.
+
+4. **Redisplay the GPV winding passage** — *before* the explanation in 5,
+   because a reader will otherwise be confused about how we get squares from
+   "one input each" when a real winding is happening by construction:
+
+   > Along an Euler half-space loop $\delta$, $\Gamma_A(t)=\sum_{p\in A.\iota}\ell_p(\delta(t))$
+   > and $e^{\Gamma_A(t)}=A(\delta(t))$, with the prime index retained inside
+   > the complete summation. Local normal convergence makes $\Gamma_A$
+   > continuous, the zero-free half-space makes its value tape lie in
+   > $\mathbb C^\times$, and the GPV uniqueness theorem fixes the whole lift
+   > once $\Gamma_A(0)$ is chosen. Since $\delta(0)=\delta(1)$, the same prime
+   > sum occurs at both endpoints, so its checked winding is $k=0$. At every
+   > instant the square `canonicalAsectionPresentation_euler_toNorth` carries
+   > this complete prime tape to the common north frame.
+
+5. **The explanation**, in his words: even though we begin with two
+   coordinates, **the Euler-to-north winding is the mystery of the critical
+   strip**. In the squares above, as $t$ runs from $0$ to $N$,
+   orbit–stabilizer is well defined at **all** $t$ up through $N$ — where Euler
+   becomes Weierstrass and there is an exact divisor through $N$. That is what
+   makes the matrix invertible there, and it is what allows the argument to
+   close. Whereas **$G_2$ transitive on unit imaginary octonions is the
+   morphism that connects these two C-residue systems.**
+
+6. **(S), (B), (I)** — simpler now, and the display can be cleaner.
+
+7. Then $r=r_2r_1^{-1}$, the loop $k$, (R); $G_2$ for the direction; (Φ) as the
+   two components; then $g,h$, (G), fullness, done.
 
 Drops the `\newpage`, the restart sentence, and the pole-datum rebuild — the
 last belongs where $D_A$ is first defined, not inside the comparison.
 
-## 4. Open for his call before drafting
+## 4. Still open before drafting
 
-- Is $e_1,e_2$ the naming he wants for the two transports?
-- Should step 4 name $\mathcal T_A$ explicitly as "the total this restricts", or
+- Is $e_1,e_2$ the naming he wants for the two transports (freeing $k$ for the
+  loop alone)?
+- Should step 5 name $\mathcal T_A$ explicitly as "the total this restricts", or
   stay at the level of the equivariant register?
