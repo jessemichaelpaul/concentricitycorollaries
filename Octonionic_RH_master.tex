@@ -1613,7 +1613,7 @@ A-section transport itself.
 
 \begin{lemma}[Transitivity of the C-residue total]\label{lem:c-residue-transitive}
 \lean{ASection.sweepTransitive_on_residueSystem,
-ASection.northRelativeLoop_maps, ASection.northComparison_of_parallelFaces}
+ASection.residueTotal_morphism_of_northComparison}
 \leanok
 \uses{def:A-section, def:base, def:residue-subdiagram, prop:weierstrass,
 lem:residue-spheres, thm:G2-S6}
@@ -1898,7 +1898,8 @@ through the single common source tape and north frame.
 
 \begin{theorem}[Concentricity]\label{thm:concentricity}
 \lean{ASection.concentricity, ASection.residueTotal_isConnected,
-ASection.residueTotal_pi0_singleton, ASection.transportLevel}
+ASection.residueTotal_pi0_singleton, ASection.transportLevel,
+ASection.transportLevel_of_pi0_singleton, ASection.residueActionState_mem}
 \leanok
 \uses{def:A-section, def:base, def:residue-subdiagram, lem:c-residue-transitive,
 lem:residue-spheres, lem:pi0-grothendieck,

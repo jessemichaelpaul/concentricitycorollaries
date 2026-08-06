@@ -52,19 +52,23 @@ That is a reason to be careful about CLAIMS, not a reason to lose the work.
 Committing an honest open step is fine.
 MSG
 
-if [ -r /dev/tty ]; then
+reply=""
+if [ -r /dev/tty ] && [ -t 0 ] || { exec 3</dev/tty; } 2>/dev/null; then
     printf '\nCommit anyway? [y/N] ' >&2
-    read -r reply < /dev/tty
-    case "$reply" in
-        [yY]|[yY][eE][sS])
-            echo "pre-commit: committing with open steps, by author's answer." >&2
-            exit 0
-            ;;
-        *)
-            echo "pre-commit: stopped." >&2
-            exit 1
-            ;;
-    esac
+    if read -r reply <&3 2>/dev/null || read -r reply < /dev/tty 2>/dev/null; then
+        exec 3<&- 2>/dev/null || true
+        case "$reply" in
+            [yY]|[yY][eE][sS])
+                echo "pre-commit: committing with open steps, by author's answer." >&2
+                exit 0
+                ;;
+            *)
+                echo "pre-commit: stopped." >&2
+                exit 1
+                ;;
+        esac
+    fi
+    exec 3<&- 2>/dev/null || true
 fi
 
 # No terminal to ask at (scripted or automated commit): refuse rather than

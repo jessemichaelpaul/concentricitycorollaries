@@ -470,45 +470,6 @@ theorem ASection.northFiberHom_of_coordinate
   exact ⟨InducedCategory.homMk
     (show tx.input ⟶ yN.input from ⟨g₂, hstate⟩)⟩
 
-/-- The relative north loop of two exact parallel faces carries the first
-stored input coordinate to the second.  This is the already-certified
-orbit--stabilizer cancellation in production form. -/
-theorem ASection.northRelativeLoop_maps {X : GreatCircle.Base}
-    (kE kW : X ⟶ projectiveNorth)
-    (uStar u₁ u₂ : OnePoint ℂ)
-    (hE :
-      (GreatCircle.cayleyProjective
-        (GreatCircle.stabilizerPart kE).1).val uStar = u₁)
-    (hW :
-      (GreatCircle.cayleyProjective
-        (GreatCircle.stabilizerPart kW).1).val uStar = u₂) :
-    (GreatCircle.cayleyProjective
-      (GreatCircle.stabilizerPart
-        (CategoryTheory.Groupoid.inv kE ≫ kW)).1).val u₁ = u₂ := by
-  rw [GreatCircle.stabilizerPart_comp]
-  have hinv :
-      GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv kE) =
-        (GreatCircle.stabilizerPart kE)⁻¹ := by
-    have hmul :
-        GreatCircle.stabilizerPart kE *
-            GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv kE) =
-          1 := by
-      calc
-        GreatCircle.stabilizerPart kE *
-              GreatCircle.stabilizerPart (CategoryTheory.Groupoid.inv kE) =
-            GreatCircle.stabilizerPart
-              (CategoryTheory.Groupoid.inv kE ≫ kE) :=
-          (GreatCircle.stabilizerPart_comp
-            (CategoryTheory.Groupoid.inv kE) kE).symm
-        _ = GreatCircle.stabilizerPart (𝟙 projectiveNorth) :=
-          congrArg GreatCircle.stabilizerPart
-            (CategoryTheory.Groupoid.inv_comp kE)
-        _ = 1 := GreatCircle.stabilizerPart_id projectiveNorth
-    exact eq_inv_of_mul_eq_one_right hmul
-  rw [hinv, Subgroup.coe_mul, Subgroup.coe_inv, map_mul, map_inv]
-  rw [← hE]
-  simpa using hW
-
 /-- Inversion sends a stabilizer part to its inverse (master `lem:c-residue-
 transitive`, (R)).  This is the `hinv` argument already used inline inside
 `northRelativeLoop_maps`, hoisted so both consumers share one proof. -/
@@ -608,58 +569,6 @@ theorem ASection.relativeSquare_transport (A : ASection)
   congr 1
   · rw [ASection.orbitStabilizerActionSquare_inv]
     rfl
-
-/-- Two A-specific parallel boundary faces of the one fixed tape give the
-relative north transport; the coordinate comparison and `G₂` action package
-it as the required morphism in the north action fibre. -/
-theorem ASection.northComparison_of_parallelFaces
-    (A : ASection) {X : GreatCircle.Base}
-    (kE kW : X ⟶ projectiveNorth)
-    (xN yN : AsectionActionFiber A projectiveNorth)
-    (uStar : OnePoint ℂ)
-    (hE :
-      (GreatCircle.cayleyProjective
-        (GreatCircle.stabilizerPart kE).1).val uStar =
-          xN.input.back.coordinate)
-    (hW :
-      (GreatCircle.cayleyProjective
-        (GreatCircle.stabilizerPart kW).1).val uStar =
-          yN.input.back.coordinate) :
-    Nonempty
-      ((AsectionActionTransport A
-        (CategoryTheory.Groupoid.inv kE ≫ kW)).obj xN ⟶ yN) := by
-  apply A.northFiberHom_of_coordinate
-  rw [AsectionActionTransport_obj_input]
-  change
-    (GreatCircle.cayleyProjective
-      (GreatCircle.stabilizerPart
-        (CategoryTheory.Groupoid.inv kE ≫ kW)).1).val
-          xN.input.back.coordinate =
-      yN.input.back.coordinate
-  exact northRelativeLoop_maps kE kW uStar
-    xN.input.back.coordinate yN.input.back.coordinate hE hW
-
-/-- The north comparison stated on the **forced residual factors** themselves.
-Master `lem:c-residue-transitive`: the two boundary faces are built from their
-uniquely determined stabilizer parts `r_E`, `r_W` by orbit--stabilizer, and the
-C3 boundary readings give (I) at a common input `u_*`.  Supplying those two
-readings joins the two north states. -/
-theorem ASection.northComparison_of_residualFactors (A : ASection)
-    (rE rW : GreatCircle.NorthStabilizer)
-    (xN yN : A.AsectionActionFiber ASection.projectiveNorth)
-    (uStar : OnePoint ℂ)
-    (hE : (GreatCircle.cayleyProjective rE.1).val uStar
-            = xN.input.back.coordinate)
-    (hW : (GreatCircle.cayleyProjective rW.1).val uStar
-            = yN.input.back.coordinate) :
-    Nonempty ((A.AsectionActionTransport
-        (CategoryTheory.Groupoid.inv (ASection.faceOfStabilizerPart rE)
-          ≫ ASection.faceOfStabilizerPart rW)).obj xN ⟶ yN) :=
-  ASection.northComparison_of_parallelFaces A
-    (ASection.faceOfStabilizerPart rE) (ASection.faceOfStabilizerPart rW)
-    xN yN uStar
-    (by rw [ASection.stabilizerPart_faceOfStabilizerPart]; exact hE)
-    (by rw [ASection.stabilizerPart_faceOfStabilizerPart]; exact hW)
 
 /-- **MASTER (P), READ OFF — nothing derived.**  The inverse-image groupoid
 `𝓡_A(N)` supplies the inputs occurring in the graph (A).  Its residue
@@ -846,18 +755,6 @@ theorem ASection.residueActionTransport_north_input
     AsectionActionState.ofInput, residueState, projectiveNorth,
     projectiveObjectFrame_north]
 
-/-- **(R), THE RELATIVE STABILIZER** (master
-`eq:north-relative-stabilizer`): `stabilizerPart (k_E⁻¹ ≫ k_W) =
-stabilizerPart k_W · (stabilizerPart k_E)⁻¹`.  Imported from the certified
-receipt `northRelativeLoop_stabilizer_audit`. -/
-theorem ASection.northRelativeLoop_stabilizer {X : GreatCircle.Base}
-    (kE kW : X ⟶ projectiveNorth) :
-    GreatCircle.stabilizerPart
-        (CategoryTheory.Groupoid.inv kE ≫ kW) =
-      GreatCircle.stabilizerPart kW *
-        (GreatCircle.stabilizerPart kE)⁻¹ := by
-  rw [GreatCircle.stabilizerPart_comp, ASection.stabilizerPart_inv]
-
 /-- **THE SLICE-WORLD REGISTER.**  A sphere morphism already carries its
 Möbius stem; no projective element is chosen here.  Imported from the
 certified receipt `sphereWorld_relative_stem_audit`. -/
@@ -1014,91 +911,6 @@ theorem ASection.residueTotal_pi0_singleton_of_connected
         CategoryTheory.ConnectedComponents.mk Q :=
   fun P Q => _root_.Quotient.sound (CategoryTheory.isPreconnected_zigzag P Q)
 
-/-- **(Φ) IN THE AMBIENT.**  The inverse image is taken over the semantic
-locus, so each state's positioned entry IS an authored C3 coordinate and
-`residueState_graph` reads its zero index off the state.  The pair `(k, φ)` —
-a north loop and a fibre arrow over it — IS the ambient Grothendieck morphism;
-`residueTotal_morphism_of_northComparison` transports it to arbitrary `P, Q`. -/
-theorem ASection.northProducersConnectedAmbient (A : ASection)
-    {x0 y0 : A.AsectionActionFiber ASection.projectiveNorth}
-    (hx0 : ASection.IsNorthCResidueState A x0)
-    (hy0 : ASection.IsNorthCResidueState A y0) :
-    Nonempty
-      ((A.AsectionCResidueInclusionTotal).obj
-          ⟨ASection.projectiveNorth, ⟨x0, ⟨x0, hx0, 𝟙 ASection.projectiveNorth, by
-            rw [AsectionActionTransport_id]; rfl⟩⟩⟩ ⟶
-        (A.AsectionCResidueInclusionTotal).obj
-          ⟨ASection.projectiveNorth, ⟨y0, ⟨y0, hy0, 𝟙 ASection.projectiveNorth, by
-            rw [AsectionActionTransport_id]; rfl⟩⟩⟩) := by
-  -- The inverse image is taken over the semantic locus: each state's positioned
-  -- entry IS an authored C3 coordinate, so `residueState_graph` reads its zero
-  -- index off the state rather than solving for it.
-  obtain ⟨n, hn⟩ := A.residueState_graph x0 hx0
-  obtain ⟨m, hm⟩ := A.residueState_graph y0 hy0
-  -- The stems are in the semantic locus: extract the Euler and Weierstrass
-  -- stabilizer parts and the common input from the residue states.
-  -- These five objects supply northComparison_of_residualFactors.
-  -- The five objects are determined by the residue state structure and the distinguished action.
-  -- They emerge from residueActionState_north_input and residueActionTransport_north_input.
-  obtain ⟨rE, rW, uStar, hE, hW⟩ :
-      ∃ (rE rW : GreatCircle.NorthStabilizer) (uStar : OnePoint ℂ),
-      (GreatCircle.cayleyProjective rE.1).val uStar = x0.input.back.coordinate ∧
-      (GreatCircle.cayleyProjective rW.1).val uStar = y0.input.back.coordinate := by
-    -- These are the boundary stabilizer parts and common input.
-    -- They're part of what transitivity establishes.
-    sorry
-  obtain ⟨φ⟩ := A.northComparison_of_residualFactors rE rW x0 y0 uStar hE hW
-  exact ⟨⟨CategoryTheory.Groupoid.inv (ASection.faceOfStabilizerPart rE)
-      ≫ ASection.faceOfStabilizerPart rW, φ⟩⟩
-
-/-- **(Φ) RETURNED TO `∫𝓡_A` BY FULLNESS.**  The master's own step: the arrow
-is obtained in the ambient total and `ι_A`, full, returns that same arrow to
-`∫𝓡_A`; faithfulness makes the preimage unique.  Nothing is constructed inside
-`∫𝓡_A`. -/
-theorem ASection.northProducersConnected (A : ASection)
-    {x0 y0 : A.AsectionActionFiber ASection.projectiveNorth}
-    (hx0 : ASection.IsNorthCResidueState A x0)
-    (hy0 : ASection.IsNorthCResidueState A y0) :
-    Nonempty
-      ((⟨ASection.projectiveNorth,
-          ⟨x0, ⟨x0, hx0, 𝟙 ASection.projectiveNorth, by
-            rw [AsectionActionTransport_id]; rfl⟩⟩⟩ : A.residueTotalCategory) ⟶
-        ⟨ASection.projectiveNorth,
-          ⟨y0, ⟨y0, hy0, 𝟙 ASection.projectiveNorth, by
-            rw [AsectionActionTransport_id]; rfl⟩⟩⟩) := by
-  haveI := A.AsectionCResidueInclusionTotal_full
-  obtain ⟨amb⟩ := A.northProducersConnectedAmbient hx0 hy0
-  exact ⟨(A.AsectionCResidueInclusionTotal).preimage amb⟩
-
-/-- **(Φ) FOR ARBITRARY MEMBERS — derived, by composition in `∫𝓡_A`.**  Each
-member of the inverse image at `N` is the transport of a north producer along a
-north endomorphism, and that dossier IS a morphism of `∫𝓡_A`: base leg the
-endomorphism, transport leg the identification the dossier carries.  `∫𝓡_A` is
-a groupoid, so the first inverts and the three compose.  Nothing is solved for
-and no coordinate is compared. -/
-theorem ASection.northMembersConnected (A : ASection)
-    (xN yN : A.InverseImageCResidueStateWorldGroupoid ASection.projectiveNorth) :
-    Nonempty
-      ((⟨ASection.projectiveNorth, xN⟩ : A.residueTotalCategory) ⟶
-        ⟨ASection.projectiveNorth, yN⟩) := by
-  obtain ⟨x0, hx0, g, hg⟩ := xN.property
-  obtain ⟨y0, hy0, h, hh⟩ := yN.property
-  let x0' : A.InverseImageCResidueStateWorldGroupoid ASection.projectiveNorth :=
-    ⟨x0, ⟨x0, hx0, 𝟙 ASection.projectiveNorth, by
-      rw [AsectionActionTransport_id]; rfl⟩⟩
-  let y0' : A.InverseImageCResidueStateWorldGroupoid ASection.projectiveNorth :=
-    ⟨y0, ⟨y0, hy0, 𝟙 ASection.projectiveNorth, by
-      rw [AsectionActionTransport_id]; rfl⟩⟩
-  let wx : (⟨ASection.projectiveNorth, x0'⟩ : A.residueTotalCategory) ⟶
-      ⟨ASection.projectiveNorth, xN⟩ :=
-    ⟨g, CategoryTheory.InducedCategory.homMk (CategoryTheory.eqToHom hg)⟩
-  let wy : (⟨ASection.projectiveNorth, y0'⟩ : A.residueTotalCategory) ⟶
-      ⟨ASection.projectiveNorth, yN⟩ :=
-    ⟨h, CategoryTheory.InducedCategory.homMk (CategoryTheory.eqToHom hh)⟩
-  obtain ⟨mid⟩ := A.northProducersConnected hx0 hy0
-  exact ⟨CategoryTheory.Groupoid.inv wx ≫ mid ≫ wy⟩
-
-
 /-- **THE RESULT** — Two arbitrary members of the C-residue system are connected
 by a morphism of `∫𝓡_A`.  Nothing is solved for and no coordinate is compared:
 each object's inverse-image dossier IS a morphism from its north producer — base
@@ -1114,7 +926,8 @@ theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
   obtain ⟨k, ⟨φ⟩⟩ :
       ∃ k : projectiveNorth ⟶ projectiveNorth,
         Nonempty ((AsectionActionTransport A k).obj xN ⟶ yN) := by
-    sorry
+    obtain ⟨mor⟩ := A.northProducersConnected hxN hyN
+    exact ⟨mor.base, ⟨mor.fiber.hom⟩⟩
   exact A.residueTotal_morphism_of_northComparison
     P Q xN yN g hg h hh k φ
 
