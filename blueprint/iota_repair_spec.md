@@ -1,6 +1,60 @@
 # The ι repair — spec derived from live types
 
-## 🔬 DEEP DIVE: what makes $D_A$ the Euler–Weierstrass multiplier — 2026-08-05
+## ✅ RESOLVED — $D_A$ *is* the Euler–Weierstrass multiplier, definitionally
+
+Read directly, `ProjectiveTransport.lean:136`:
+
+```lean
+noncomputable def distinguishedPoleFactor (A : ASection) : ℂ → ℂ :=
+  Classical.choose (distinguishedPoleFactor_exists A)
+```
+
+with the chosen spec carrying **four** properties: analytic at the pole,
+nonzero there, and both presentations —
+
+```lean
+distinguishedPoleFactor_euler  (:147) :
+  … A.distinguishedPoleFactor z = (z - pole) * Complex.exp (∑' p : A.ι, A.ℓ p z)
+
+distinguishedPoleFactor_weierstrass (:154) :
+  … A.distinguishedPoleFactor z
+      = z ^ A.m * A.Rfac z * Complex.exp (A.gfac z)
+        * ∏' n, spherePrimary (A.genus n) (A.sphereZero n) z
+```
+
+Its own docstring: *"The one A-determined analytic factor carrying both the
+Euler and Weierstrass presentations through the pole."* And
+`diskExpAction_distinguishedPoleLog` (`:186`): *"C1's continuation and C3's
+Weierstrass presentation land in the same Cayley-disk exponential action as
+C2's prime-sum lift."*
+
+Since `distinguishedPoleLog = log (distinguishedPoleFactor pole)` and
+`distinguishedDiskAction = diskExpAction distinguishedPoleLog`, the element
+$D_A$ carries both presentations **by construction**. The tape does not have to
+supply that identification; it is already in the factor $D_A$ is built from.
+
+### Correcting the section below
+
+The deep dive that follows claimed $D_A$ "carries nothing about the Euler
+product or the Weierstrass product." **That is wrong** — it carries both, via
+the spec `Classical.choose` selects against. What the trace of
+`distinguishedPoleLog` showed was only that $D_A$ is built from the factor's
+*value at one point*; it did not show, and cannot show, what that factor is
+constrained to be. Reading the definition settles it.
+
+**What still stands from below**, unchanged and still worth fixing:
+
+- `canonicalAsectionPresentation_euler_toNorth` is consumed by no live
+  declaration.
+- `distinguishedDiskAction_fixes_cayley_zero` is consumed by no live
+  declaration; `_fixes_cayley_N` has one live use.
+
+Those are genuine orphans. But they are a *second* route to the same element,
+not the only route — the ι chain reaches the Euler–Weierstrass multiplier
+through the definition of `distinguishedPoleFactor`, and does use the author's
+construction.
+
+## 🔬 DEEP DIVE (superseded above on its central claim) — 2026-08-05
 
 The author's challenge: being *defined from* $g_A(p_A)$ is not the same as
 *being the Euler–Weierstrass multiplier*. That sense needs the tape,
