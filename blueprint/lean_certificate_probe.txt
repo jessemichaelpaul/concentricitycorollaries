@@ -3,11 +3,11 @@ warning: Concentricity/LogManifold.lean:698:2: The `show` tactic should only be 
 However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
 
 Note: This linter can be disabled with `set_option linter.style.show false`
-⚠ [3644/3653] Replayed Concentricity.FaithfulApply
-warning: Concentricity/FaithfulApply.lean:546:100: This line exceeds the 100 character limit, please shorten it!
+⚠ [3642/3651] Replayed Concentricity.FaithfulApply
+warning: Concentricity/FaithfulApply.lean:545:100: This line exceeds the 100 character limit, please shorten it!
 
 Note: This linter can be disabled with `set_option linter.style.longLine false`
-⚠ [3649/3653] Replayed Concentricity.ASectionFunctor
+⚠ [3647/3651] Replayed Concentricity.ASectionFunctor
 warning: Concentricity/ASectionFunctor.lean:719:7: Variable name `hstart` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
@@ -38,7 +38,7 @@ warning: Concentricity/ASectionFunctor.lean:890:9: Variable name `Y` is not expl
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-Build completed successfully (3653 jobs).
+Build completed successfully (3651 jobs).
 
 ===== TERMINAL TYPE/AXIOM PROBE =====
 @G2.exists_smul_eq_of_mem_unitImaginarySphere : ∀ {u v : Octonion},

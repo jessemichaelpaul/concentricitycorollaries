@@ -246,7 +246,7 @@ zeta_criticalLine_zeros_infinite_of_RH_audit : RiemannHypothesis → {s | rieman
 
 | Source | SHA-256 |
 |---|---|
-| `Octonionic_RH_master.tex` | `7b9b36e522094b92866c88f6db408266433d3626e4e5d7f9d4d5b840c0143938` |
+| `Octonionic_RH_master.tex` | `19d9d74dea6aad4af848118408e62401835207c38093300c1443518264fda2b0` |
 | `blueprint/lean_certificate_manifest.json` | `b372ae0c20ab57f66e4ab928b7866efca69c8272becd95f11d5b8b1f01a384fe` |
 | `Concentricity/_BlueprintTerminalCertificateProbe.lean` | `2e898992124efa19b135e96f87d14813b03809f27f9cc7a69f85fb8d5f257d37` |
 | `Concentricity/Theorem.lean` | `591e5be0488f2b782901296413142eccaa3380c9bd415ecfba38d2161fcd89cb` |
@@ -256,7 +256,7 @@ zeta_criticalLine_zeros_infinite_of_RH_audit : RiemannHypothesis → {s | rieman
 | `Concentricity/Corollaries.lean` | `4866f494cf62579778905d6dd93b912a868a880b827c4456a060bdb08d441248` |
 | `lean-toolchain` | `efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee` |
 | `lakefile.toml` | `361be5c558f10fbc113a616222d2db2c08c9b353ddb12f0cac6d5ad9a0d0287d` |
-| `lean_source_tree` | `8a34e2f2bf85bd8c3e5fdb4bbc737cb4dd88ddb9063b2b7d1065e79c3b861b2c` |
+| `lean_source_tree` | `bce3459cf809434e0b25d19e5685dedfe07ae0aa7db45d0cdf1dd05b3f7f75f5` |
 
 Raw kernel output: `blueprint/lean_certificate_probe.txt`.
 Machine-readable evidence: `blueprint/lean_certificate_evidence.json`.
