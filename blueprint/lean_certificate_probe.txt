@@ -7,7 +7,7 @@ Note: This linter can be disabled with `set_option linter.style.show false`
 warning: Concentricity/FaithfulApply.lean:545:100: This line exceeds the 100 character limit, please shorten it!
 
 Note: This linter can be disabled with `set_option linter.style.longLine false`
-⚠ [3647/3652] Replayed Concentricity.ASectionFunctor
+⚠ [3648/3652] Replayed Concentricity.ASectionFunctor
 warning: Concentricity/ASectionFunctor.lean:719:7: Variable name `hstart` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).

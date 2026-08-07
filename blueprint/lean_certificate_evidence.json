@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-08-07T02:07:54.354007+00:00",
+  "generated_utc": "2026-08-07T02:19:00.819531+00:00",
   "allowed_axioms": [
     "propext",
     "Classical.choice",
@@ -33,7 +33,7 @@
   },
   "fingerprints": {
     "Octonionic_RH_master.tex": "5b533b14bed378b93acacc0e732a8c800c84bae38605d19beffdabd5bc39fb8a",
-    "blueprint/lean_certificate_manifest.json": "767925e0c35a56b55e0fe1b1cc4b7b2efa2f120e7201d194cc1b98129a810aab",
+    "blueprint/lean_certificate_manifest.json": "5d1a8ec9cf2c3590d8c4d7e5aa87b278bb3f6906b13df44e5702f2a25b15a58f",
     "Concentricity/_BlueprintTerminalCertificateProbe.lean": "aeabd54553ba32bacb31183e3a2eff9f8cba0ca3973f2b518f127cfb249c4f18",
     "Concentricity/Theorem.lean": "2c11a6501285c9ab7cb5dcd4af89eca72b36e95cd047e7a9e1e254e397821d14",
     "Concentricity/_GateNorthCResidueTransitivityAudit.lean": "efd2bd6d7f5f6437b7d32bae8cbb51299c3724e148386a3b701add58edebeb8a",
@@ -853,7 +853,7 @@
       ],
       "consumer_module": "Concentricity/Theorem.lean",
       "consumed_as_binder": true,
-      "object_status": "AUTHOR_BOUND_LEAN_PENDING",
+      "object_status": "AUTHOR_BOUND_LEAN_CONFIRMED",
       "witness_suppliers": [
         "def:A-section",
         "def:base",
