@@ -1,0 +1,2099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Categorical Construction and the Concentricity Theorem</title>
+<link rel="prev" href="sect0002.html" title="Slice-Preserving Theory, the Ring R, and the Equivalence" />
+<link rel="up" href="index.html" title="Concentric Zero-Spheres of a class of sections of the commutative ring R of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Concentric Zero-Spheres of a class of sections of the commutative ring \(\mathcal R\) of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="index.html#a0000000004"><span class="toc_ref"></span> <span class="toc_entry">Introduction</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Classical Background</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000005"><span class="toc_ref">1</span> <span class="toc_entry">The Riemann zeta function</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000011"><span class="toc_ref"></span> <span class="toc_entry">The compactified Riemann zeta on \(\mathbb {C}^{*}\)</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Slice-Preserving Theory, the Ring \(\mathcal R\), and the Equivalence</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000013"><span class="toc_ref">2</span> <span class="toc_entry">Octonions and slices</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000014"><span class="toc_ref">3</span> <span class="toc_entry">Slice-preserving functions</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000015"><span class="toc_ref">4</span> <span class="toc_entry">The octonionic zeta function \(\zeta _{\mathbb {O}^{*}}\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:R-ring"><span class="toc_ref">5</span> <span class="toc_entry">\(\mathcal R\) is a commutative ring</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:toolkit"><span class="toc_ref">6</span> <span class="toc_entry">The slice-preserving analytic toolkit on the compactified octonions</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000016"><span class="toc_ref">7</span> <span class="toc_entry">Slice preservation and symmetries</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000017"><span class="toc_ref">8</span> <span class="toc_entry">Zero geometry and the equivalence</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="part-stack.html"><span class="toc_ref">3</span> <span class="toc_entry">The Categorical Construction and the Concentricity Theorem</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="part-stack.html#sec:tower-stack"><span class="toc_ref">9</span> <span class="toc_entry">The geometric worlds and the categorical construction</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="part-stack.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">The compactified octonions and the point at infinity</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">What a slice-preserving section does</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Two geometric viewpoints</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The base of the degenerate set and the Grothendieck construction</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="part-stack.html#sec:detector"><span class="toc_ref">10</span> <span class="toc_entry">The concentricity theorem</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#sec:verification"><span class="toc_ref">11</span> <span class="toc_entry">Corollaries</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="part:stack">3 The Categorical Construction and the Concentricity Theorem</h1>
+
+<p>Part 2 revealed that \(\zeta \) carries a special geometry: spread onto the octonions, its zeros are concentric exactly when the Riemann Hypothesis holds. That raises the question this part answers. What general properties of a section of the ring \(\mathcal R\) of slice-preserving functions force its residue-\(\mathbb {C}\) zeros to be concentric? Following that question leads to four conditions, <span class="upshape">C1–C4</span>, and to the whole class of functions satisfying them, which we call the A-sections. The main result, the Concentricity Theorem, is that the residue-\(\mathbb {C}\) zeros of any A-section are concentric. The octonionic zeta is one A-section among many, and the Riemann Hypothesis is one of its corollaries. </p>
+<p>From the section’s own data we read one distinguished exponential Möbius transformation of the Riemann sphere, presented at its two fixed points by the Euler product and the Weierstrass product; orbit–stabilizer carries that single transformation across the projective base. The resulting map to \(\mathrm{SphereWorld}\) is its geometric projection, while the same action on normalized A-value states assembles the genuine functor \(\mathcal A_A:\mathcal B\to \mathbf{Grpd}\). Its Grothendieck construction \(\mathcal T_A=\int _{\mathcal B}\mathcal A_A\) gathers every state and every value-transport into one total object. The zero-sphere system is the inverse-image subdiagram \(\mathcal R_A\), included by \(\iota _A:\mathcal R_A\Rightarrow \mathcal A_A\); the relative orbit–stabilizer comparison makes \(\int _{\mathcal B}\mathcal R_A\) transitive and hence connected. The component colimit therefore collapses to a singleton, and its A-specific real-value readout is one centre \(c\in \mathbb {R}\). The concentricity proof takes place in this residue-\(\mathbb {C}\) inverse-image system inside the ambient total. </p>
+<h1 id="sec:tower-stack">9 The geometric worlds and the categorical construction</h1>
+
+<p>This section assembles the parts the detector runs on. We begin with the compactified octonions \(\mathbb {O}^{*}=S^8\) and their north pole \(N\), the point at infinity where a section sends its pole. We then describe what a slice-preserving section does on each slice, one holomorphic stem repeated in every direction, which is why its non-real zeros fill whole \(6\)-spheres. We set up the two geometric viewpoints that carry this data, the octonionic world \(\mathcal H_1\) and the slice-value world \(\mathcal S_2\). And we close with the projective base \(\mathcal B\), the A-section functor over it, and its Grothendieck total \(\mathcal T_A\), the object the next section reads. </p>
+<h2 id="a0000000018">The compactified octonions and the point at infinity</h2>
+<div class="definition_thmwrapper theorem-style-definition" id="def:carrier">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">9.1</span>
+    <span class="definition_thmtitle">The compactified octonions \(\mathbb {O}^{*}=S^8\)</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#def:carrier">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/Octonion" class="lean_decl">Octonion</a></li>
+          
+          <li><a href="/find/#doc/onePointEquivSphereOfFinrankEq" class="lean_decl">onePointEquivSphereOfFinrankEq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  Let \(\mathbb {O}^{*}=\mathbb {O}\cup \{ \infty \} =S^8\) be the Alexandroff one-point compactification of \(\mathbb {O}=\mathbb {R}^8\). Concretely (GPV <span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	]
+</span>, Prop.&#160;4.1 and Thm.&#160;4.2, for \(m=\dim _{\mathbb {R}}K\in \{ 4,8\} \)): the inverse stereographic projections from the north and south poles, </p>
+<div class="displaymath" id="a0000000044">
+  \[  f(x+Iy)=\Big(\tfrac {2(x+Iy)}{1+x^2+y^2},\  \tfrac {-1+x^2+y^2}{1+x^2+y^2}\Big),\qquad h(x+Iy)=\Big(\tfrac {2(x-Iy)}{1+x^2+y^2},\  \tfrac {1-x^2-y^2}{1+x^2+y^2}\Big),  \]
+</div>
+<p> give a conformal atlas \(\{ (K,f),(K,h)\} \) endowing \(S^m\) with the structure of a slice (quaternionic/octonionic) Riemann manifold, with transition map \(h^{-1}\circ f(q)=\bar q/q^2=1/q\), itself slice regular and slice preserving. The adjoined point is the north pole \(N\); this is the point at infinity. In Lean the underlying compactification is <span class="ttfamily">Mathlib.Topology.Compactification.OnePoint</span>, \(\mathbb {O}^{*}=\texttt{OnePoint }\mathbb {O}\) with \(\infty =\texttt{OnePoint.infty}\), and the homeomorphism \(\mathbb {O}^{*}\cong S^8\) is <span class="ttfamily">onePointEquivSphereOfFinrankEq</span> applied to \(\dim _{\mathbb {R}}\mathbb {O}=8\) (<span class="ttfamily">Mathlib.Topology.Compactification.OnePoint.Sphere</span>). The compactification is what makes the value of a section at its real pole a well-defined point of \(\mathbb {O}^{*}\), the point at infinity \(\infty =N\). The two views \(\mathcal H_1\) and \(\mathcal S_2\) are built on these compactified values (Definition&#160;<a href="part-stack.html#def:two-worlds">9.3</a>); the distinct projective base \(\mathcal B\) and direction-indexed sphere world used in the construction below are introduced in Definition&#160;<a href="part-stack.html#eq:orbit-stabilizer">9.4</a>. </p>
+
+  </div>
+</div>
+<p>There is one geometric north pole \(N=\infty \), seen from two categorical points of view. In \(\mathcal H_1\) this point of \(\mathbb {O}^{*}\) is a \(G_2\)-fixed object: its own connected component, with \(\operatorname{Aut}(N)=G_2\), carrying no universal property. In the slice-value world \(\mathcal S_2\) the same geometric point is represented by the object </p>
+<div class="displaymath" id="a0000000045">
+  \[  \mathfrak {n}\; :=\; \infty =N\  \text{regarded as an object of }\mathcal S_2,  \]
+</div>
+<p> the common point at infinity of the slice Riemann spheres, fixed by band and direction alike. The two representatives belong to <em>different</em> categorical viewpoints and are related by the section through <span class="upshape">C1</span>: the pole of \(A\) has value \(\infty \), so the section carries the pole point to \(\mathfrak {n}\). The residue field of a closed zero sorts the picture: residue-\(\mathbb {R}\) (the \(G_2\)-fixed locus \(\mathbb {R}\cup \{ N\} \), classically trivial) versus residue-\(\mathbb {C}\) (the \(6\)-sphere orbits, classically nontrivial; the dictionary is Part&#160;2 and Theorem&#160;<a href="sect0002.html#thm:zero-spheres">8.2</a>). The later total construction uses this one shared compactified witness \(N\), the same for every zero index. </p>
+<h2 id="a0000000019">What a slice-preserving section does</h2>
+<div class="definition_thmwrapper theorem-style-definition" id="def:section-map">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">9.2</span>
+    <span class="definition_thmtitle">The section’s slice data and equivariance</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#def:section-map">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:slice-squares">Definition 6.4</a></li>
+          
+          <li><a href="sect0002.html#def:slice-preserving">Definition 3.5</a></li>
+          
+          <li><a href="sect0002.html#thm:rep-formula">Theorem 3.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/ASection.realize" class="lean_decl">ASection.realize</a></li>
+          
+          <li><a href="/find/#doc/ASection.realize_mem_sliceSphere" class="lean_decl">ASection.realize_mem_sliceSphere</a></li>
+          
+          <li><a href="/find/#doc/ASection.realize_equivariant" class="lean_decl">ASection.realize_equivariant</a></li>
+          
+          <li><a href="/find/#doc/ASection.sliceCoord_smul_invariant" class="lean_decl">ASection.sliceCoord_smul_invariant</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   Let \(A\in \mathcal R\). By the \(I\)-independent lift (Definition&#160;<a href="sect0002.html#def:slice-squares">6.4</a>; Wang <span class="cite">
+	[
+	<a href="part-stack.html#Wang" >16</a>
+	, 
+	Rem.
+	
+	2.11
+	]
+</span>, Bisi–Winkelmann <span class="cite">
+	[
+	<a href="part-stack.html#BisiWinkelmann" >4</a>
+	, 
+	§
+	3.7
+	]
+</span>) there is one holomorphic stem with \(\mathbb {R}\)-valued components, </p>
+<div class="displaymath" id="a0000000046">
+  \[  A(x+Iy)=F_1(x+iy)+I\, F_2(x+iy),\qquad F_1,F_2\  \mathbb {R}\text{-valued},  \]
+</div>
+<p> the same for every \(I\in S^6\). Three consequences used below: </p>
+<ol class="enumerate">
+  <li><p><em>Slice preservation of values.</em> \(A(\mathbb {C}_I^{*})\subseteq \mathbb {C}_I^{*}\) for every \(I\): the value at a point lies on that point’s own slice sphere (Definition&#160;<a href="sect0002.html#def:R">5.1</a>). </p>
+</li>
+  <li><p><em>\(G_2\)-equivariance.</em> For \(g\in G_2\) and non-real \(q=x+Iy\), </p>
+<div class="displaymath" id="a0000000047">
+  \[  A(g\cdot q)=F_1+g(I)\, F_2=g\cdot \bigl(F_1+I\, F_2\bigr)=g\cdot A(q),  \]
+</div>
+<p> since \(g\cdot (x+Iy)=x+g(I)y\) (Definition&#160;<a href="sect0002.html#def:G2">7.3</a>) and \(F_1,F_2\) are real; for \(q\in \mathbb {R}\cup \{ N\} \) both sides are \(G_2\)-fixed, because \(A(\mathbb {R})\subseteq \mathbb {R}\) and \(A(N)\in \bigcap _I\mathbb {C}_I^{*}=\mathbb {R}\cup \{ N\} \) by <span class="upshape">(i)</span>. (For \(\zeta _{\mathbb {O}^{*}}\) this is Theorem&#160;<a href="sect0002.html#thm:G2-equiv">7.4</a>; the computation above is the same one, run for an arbitrary intrinsic section.) </p>
+</li>
+  <li><p><em>Blindness to the sphere direction.</em> On a \(G_2\)-orbit \(S_{(\sigma ,\gamma )}\) the stem coordinates \((F_1,F_2)(\sigma +i\gamma )\) are constant; in particular if \(A\) vanishes at one point of the orbit it vanishes on the whole orbit (Lemma&#160;<a href="part-stack.html#lem:residue-spheres">10.2</a>). </p>
+</li>
+</ol>
+<p> A slice-preserving section carries one holomorphic stem per slice, and the direction \(S^6\) is traversed only by the \(G_2\)-morphisms already present in both worlds. </p>
+
+  </div>
+</div>
+<p>Condition <span class="upshape">C4</span>, infinitely many residue-\(\mathbb {C}\) zeros, matches the class to its infinite structure (the infinite Euler family of <span class="upshape">C2</span>, the infinite Weierstrass divisor of <span class="upshape">C3</span>) and gives the collapse its force: the degenerate fibre of the transport is an infinite family, so that whether it lies in one connected component of \(\mathcal T_A\) (Definition&#160;<a href="part-stack.html#eq:orbit-stabilizer">9.4</a>) is an infinite alignment, decided by Theorem&#160;<a href="part-stack.html#thm:concentricity">10.7</a>. </p>
+<h2 id="a0000000020">Two geometric viewpoints</h2>
+<div class="definition_thmwrapper theorem-style-definition" id="def:two-worlds">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">9.3</span>
+    <span class="definition_thmtitle">The octonionic and slice-value worlds</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#def:two-worlds">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="part-stack.html#def:carrier">Definition 9.1</a></li>
+          
+          <li><a href="sect0002.html#def:G2">Definition 7.3</a></li>
+          
+          <li><a href="sect0002.html#thm:G2-S6">Theorem 7.5</a></li>
+          
+          <li><a href="sect0002.html#rmk:G2-compact">Remark 7.6</a></li>
+          
+          <li><a href="sect0002.html#def:slices">Definition 2.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/H1" class="lean_decl">H1</a></li>
+          
+          <li><a href="/find/#doc/SphereWorld" class="lean_decl">SphereWorld</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   Recall the <em>translation groupoid</em> of an action \(G\curvearrowright X\): its objects are the points of \(X\) and its morphisms \(x\to y\) are the elements \(g\in G\) satisfying \(g\cdot x=y\). Thus \(\pi _0(G\ltimes X)=X/G\) (Quillen <span class="cite">
+	[
+	<a href="part-stack.html#Quillen73" >22</a>
+	, 
+	§
+	1
+	]
+</span>; in Lean, <span class="ttfamily">CategoryTheory.ActionCategory</span>). </p>
+<p>The octonionic world is </p>
+<div class="displaymath" id="a0000000048">
+  \[  \mathcal H_1=G_2\ltimes \mathbb {O}^{*}.  \]
+</div>
+<p> Its components are the \(G_2\)-orbits: the compactified real fixed locus \(\mathbb {R}\cup \{ N\} \) and, for each \(\sigma \in \mathbb {R}\) and \(\gamma {\gt}0\), the residue-\(\mathbb {C}\) sphere \(S_{(\sigma ,\gamma )}=\{ \sigma +\gamma v:v\in S^6\} \), labelled by its real centre \(\sigma \) and radius \(\gamma \) (Baez <span class="cite">
+	[
+	<a href="part-stack.html#Baez02" >3</a>
+	]
+</span>; Theorem&#160;<a href="sect0002.html#thm:G2-S6">7.5</a>). </p>
+<p>The slice-value world \(\mathcal S_2\) organizes the same compactified values by their slice decomposition. Every slice contains the real axis, and </p>
+<div class="displaymath" id="a0000000049">
+  \[  \mathbb {O}^{*}=\bigcup _{I\in S^6}\mathbb {C}_I^{*},\qquad \mathbb {C}_I^{*}\cap \mathbb {C}_J^{*}=\mathbb {R}\cup \{ N\} \quad (J\neq \pm I).  \]
+</div>
+<p> Its objects are the points of \(\mathbb {O}^{*}\). Its generating paths are the direction arrows induced by \(G_2\) and the band phases \(z\mapsto e^{I\theta }z\) within a compactified slice; the Lean object <span class="ttfamily">S2</span> is the quotient path category by the direction-composition relations. In particular \(0\) and \(N\) are shared values, not new objects indexed by a zero. </p>
+<p>These two geometric views hold the octonionic and slice-value geometry drawn on below. </p>
+
+  </div>
+</div>
+<h2 id="a0000000021">The base of the degenerate set and the Grothendieck construction</h2>
+<div class="definition_thmwrapper theorem-style-definition" id="eq:orbit-stabilizer">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">9.4</span>
+    <span class="definition_thmtitle">The projective base, genuine section functor, and total category</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#eq:orbit-stabilizer">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="part-stack.html#def:A-section">Definition 10.4</a></li>
+          
+          <li><a href="part-stack.html#def:two-worlds">Definition 9.3</a></li>
+          
+          <li><a href="sect0002.html#thm:winding-lift">Theorem 6.5</a></li>
+          
+          <li><a href="sect0002.html#prop:winding-signature">Proposition 6.6</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/GreatCircle.Base" class="lean_decl">GreatCircle.Base</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.cayleyGL" class="lean_decl">GreatCircle.cayleyGL</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.diagonalGL" class="lean_decl">GreatCircle.diagonalGL</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.diagonalGL_mul" class="lean_decl">GreatCircle.diagonalGL_mul</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.diagonalGLHom" class="lean_decl">GreatCircle.diagonalGLHom</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.expUnit" class="lean_decl">GreatCircle.expUnit</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.expUnit_add" class="lean_decl">GreatCircle.expUnit_add</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.diskExpAction" class="lean_decl">GreatCircle.diskExpAction</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.diskExpAction_add" class="lean_decl">GreatCircle.diskExpAction_add</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.cayleyProjective" class="lean_decl">GreatCircle.cayleyProjective</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.cayleyProjective_mul" class="lean_decl">GreatCircle.cayleyProjective_mul</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.orbitRep" class="lean_decl">GreatCircle.orbitRep</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.orbitRep_spec" class="lean_decl">GreatCircle.orbitRep_spec</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.stabilizerPart" class="lean_decl">GreatCircle.stabilizerPart</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.orbit_stabilizer_factor" class="lean_decl">GreatCircle.orbit_stabilizer_factor</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.stabilizerPart_unique" class="lean_decl">GreatCircle.stabilizerPart_unique</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.stabilizerPart_id" class="lean_decl">GreatCircle.stabilizerPart_id</a></li>
+          
+          <li><a href="/find/#doc/GreatCircle.stabilizerPart_comp" class="lean_decl">GreatCircle.stabilizerPart_comp</a></li>
+          
+          <li><a href="/find/#doc/ASection.distinguishedDiskAction" class="lean_decl">ASection.distinguishedDiskAction</a></li>
+          
+          <li><a href="/find/#doc/ASection.distinguishedDiskAction_eq_fullMultiplier" class="lean_decl">ASection.distinguishedDiskAction_eq_fullMultiplier</a></li>
+          
+          <li><a href="/find/#doc/ASection.distinguishedPoleFactor_euler" class="lean_decl">ASection.distinguishedPoleFactor_euler</a></li>
+          
+          <li><a href="/find/#doc/ASection.distinguishedPoleFactor_weierstrass" class="lean_decl">ASection.distinguishedPoleFactor_weierstrass</a></li>
+          
+          <li><a href="/find/#doc/ASection.eulerPrimeSum" class="lean_decl">ASection.eulerPrimeSum</a></li>
+          
+          <li><a href="/find/#doc/ASection.eulerDiskAction_eq_value" class="lean_decl">ASection.eulerDiskAction_eq_value</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport" class="lean_decl">ASection.GpvTransport</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport.diskExpAction_eq_value" class="lean_decl">ASection.GpvTransport.diskExpAction_eq_value</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport.diskExpAction_endpoint_eq" class="lean_decl">ASection.GpvTransport.diskExpAction_endpoint_eq</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport.lift_endpoint_re_eq" class="lean_decl">ASection.GpvTransport.lift_endpoint_re_eq</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport.level" class="lean_decl">ASection.GpvTransport.level</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport.continuous_level" class="lean_decl">ASection.GpvTransport.continuous_level</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport.lift_unique" class="lean_decl">ASection.GpvTransport.lift_unique</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport.level_independent" class="lean_decl">ASection.GpvTransport.level_independent</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport.value_at_source" class="lean_decl">ASection.GpvTransport.value_at_source</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport.value_at_target" class="lean_decl">ASection.GpvTransport.value_at_target</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport.endpoint_log_norm_eq" class="lean_decl">ASection.GpvTransport.endpoint_log_norm_eq</a></li>
+          
+          <li><a href="/find/#doc/ASection.GpvTransport.endpoint_norm_eq" class="lean_decl">ASection.GpvTransport.endpoint_norm_eq</a></li>
+          
+          <li><a href="/find/#doc/ASection.projectiveGpvActionSquare" class="lean_decl">ASection.projectiveGpvActionSquare</a></li>
+          
+          <li><a href="/find/#doc/ASection.projectiveGpvActionSquare_level" class="lean_decl">ASection.projectiveGpvActionSquare_level</a></li>
+          
+          <li><a href="/find/#doc/ASection.projectiveGpvActionSquare_input_commutes" class="lean_decl">ASection.projectiveGpvActionSquare_input_commutes</a></li>
+          
+          <li><a href="/find/#doc/ASection.projectiveGpvActionSquare_output_commutes" class="lean_decl">ASection.projectiveGpvActionSquare_output_commutes</a></li>
+          
+          <li><a href="/find/#doc/ASection.canonicalAsectionPresentation_euler_prime_stack" class="lean_decl">ASection.canonicalAsectionPresentation_euler_prime_stack</a></li>
+          
+          <li><a href="/find/#doc/ASection.canonicalAsectionPresentation_euler_lift_exp" class="lean_decl">ASection.canonicalAsectionPresentation_euler_lift_exp</a></li>
+          
+          <li><a href="/find/#doc/ASection.canonicalAsectionPresentation_euler_lift_unique" class="lean_decl">ASection.canonicalAsectionPresentation_euler_lift_unique</a></li>
+          
+          <li><a href="/find/#doc/ASection.canonicalAsectionPresentation_euler_level_continuous" class="lean_decl">ASection.canonicalAsectionPresentation_euler_level_continuous</a></li>
+          
+          <li><a href="/find/#doc/ASection.canonicalAsectionPresentation_euler_winding" class="lean_decl">ASection.canonicalAsectionPresentation_euler_winding</a></li>
+          
+          <li><a href="/find/#doc/ASection.canonicalAsectionPresentation_euler_toNorth" class="lean_decl">ASection.canonicalAsectionPresentation_euler_toNorth</a></li>
+          
+          <li><a href="/find/#doc/ASection.projectiveObjectFrame" class="lean_decl">ASection.projectiveObjectFrame</a></li>
+          
+          <li><a href="/find/#doc/ASection.projectiveArrowElement" class="lean_decl">ASection.projectiveArrowElement</a></li>
+          
+          <li><a href="/find/#doc/ASection.projectiveObjectFrame_north" class="lean_decl">ASection.projectiveObjectFrame_north</a></li>
+          
+          <li><a href="/find/#doc/ASection.distinguishedDiskAction_fixes_cayley_zero" class="lean_decl">ASection.distinguishedDiskAction_fixes_cayley_zero</a></li>
+          
+          <li><a href="/find/#doc/ASection.distinguishedDiskAction_fixes_cayley_N" class="lean_decl">ASection.distinguishedDiskAction_fixes_cayley_N</a></li>
+          
+          <li><a href="/find/#doc/ASection.projectiveArrowElement_id" class="lean_decl">ASection.projectiveArrowElement_id</a></li>
+          
+          <li><a href="/find/#doc/ASection.projectiveArrowElement_comp" class="lean_decl">ASection.projectiveArrowElement_comp</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionSlice" class="lean_decl">ASection.AsectionSlice</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionEquivariant" class="lean_decl">ASection.AsectionEquivariant</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionStateInput" class="lean_decl">ASection.AsectionStateInput</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionStateOutput" class="lean_decl">ASection.AsectionStateOutput</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionState_input_then_equivariant" class="lean_decl">ASection.AsectionState_input_then_equivariant</a></li>
+          
+          <li><a href="/find/#doc/ASection.ActionTransportSquare.coordinateTransport_commutes" class="lean_decl">ASection.ActionTransportSquare.coordinateTransport_commutes</a></li>
+          
+          <li><a href="/find/#doc/ASection.ActionTransportSquare.input_commutes" class="lean_decl">ASection.ActionTransportSquare.input_commutes</a></li>
+          
+          <li><a href="/find/#doc/ASection.ActionTransportSquare.output_commutes" class="lean_decl">ASection.ActionTransportSquare.output_commutes</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionActionState" class="lean_decl">ASection.AsectionActionState</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionActionTransport" class="lean_decl">ASection.AsectionActionTransport</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionActionState.ofInput" class="lean_decl">ASection.AsectionActionState.ofInput</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionActionState_ofInput_value" class="lean_decl">ASection.AsectionActionState_ofInput_value</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionActionTransport_obj_input" class="lean_decl">ASection.AsectionActionTransport_obj_input</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionActionTransport_obj_positioned" class="lean_decl">ASection.AsectionActionTransport_obj_positioned</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionActionTransport_obj_value" class="lean_decl">ASection.AsectionActionTransport_obj_value</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionActionTransport_id" class="lean_decl">ASection.AsectionActionTransport_id</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionActionTransport_comp" class="lean_decl">ASection.AsectionActionTransport_comp</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionActionDiagram" class="lean_decl">ASection.AsectionActionDiagram</a></li>
+          
+          <li><a href="/find/#doc/ASection.residueActionState" class="lean_decl">ASection.residueActionState</a></li>
+          
+          <li><a href="/find/#doc/ASection.residueActionState_mem" class="lean_decl">ASection.residueActionState_mem</a></li>
+          
+          <li><a href="/find/#doc/ASection.c4_infinite" class="lean_decl">ASection.c4_infinite</a></li>
+          
+          <li><a href="/find/#doc/ASection.transportLevel" class="lean_decl">ASection.transportLevel</a></li>
+          
+          <li><a href="/find/#doc/ASection.ambientTotalCategory" class="lean_decl">ASection.ambientTotalCategory</a></li>
+          
+          <li><a href="/find/#doc/ASection.ambientTotalGroupoid" class="lean_decl">ASection.ambientTotalGroupoid</a></li>
+          
+          <li><a href="/find/#doc/grothendieckGrpdGroupoid" class="lean_decl">grothendieckGrpdGroupoid</a></li>
+          
+          <li><a href="/find/#doc/CategoryTheory.Grothendieck" class="lean_decl">CategoryTheory.Grothendieck</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   The base is the projective action groupoid </p>
+<div class="displaymath" id="a0000000050">
+  \[  \mathcal B =PGL(2,\mathbb {R})\ltimes \operatorname {OnePoint}(\mathbb {R}).  \]
+</div>
+<p> Its objects are points of the compactified real projective line and its arrows are projective transformations together with their transport equations. </p>
+<p>The matrix construction makes explicit why the analytic object is simultaneously a function and a group element. Let </p>
+<div class="displaymath" id="a0000000051">
+  \[  C=\begin{pmatrix} 1
+
+& -i
+
+\\[2pt]1
+
+& i
+
+\end{pmatrix},\qquad M(z)=\begin{pmatrix} e^z
+
+& 0
+
+\\[2pt]0
+
+& 1
+
+\end{pmatrix}.  \]
+</div>
+<p> The matrix \(C\) is the Cayley map \(w\mapsto (w-i)/(w+i)\), and \(M\) is exponentiation in matrix form: it takes a complex number \(z\) to the diagonal matrix whose entry is \(e^z\). Conjugating an invertible matrix by \(C\) and passing to the projective class is a single further operation, used at every level of what follows; for \(h\in \mathrm{GL}(2,\mathbb {C})\) write </p>
+<div class="displaymath" id="a0000000052">
+  \[  \operatorname {cayleyProjective}(h)=\bigl[C\, h\, C^{-1}\bigr].  \]
+</div>
+<p> The passage from a complex number to a slice Möbius map is therefore two steps, exponentiate then conjugate: </p>
+<div class="displaymath" id="a0000000053">
+  \[  z\; \longmapsto \; M(z)\; \longmapsto \;  D(z)=\operatorname {cayleyProjective}\bigl(M(z)\bigr) \in \operatorname {M\ddot ob}(\mathbb {C}^*).  \]
+</div>
+<p> Conjugation preserves products, so \(\operatorname {cayleyProjective}\) is a homomorphism; every later appearance of it — positioning the distinguished element over the base, and acting by a residual stabilizer factor — is this same map applied to a different matrix. Matrix multiplication and \(e^{z+w}=e^ze^w\) give </p>
+<div class="displaymath" id="a0000000054">
+  \[  M(z+w)=M(z)M(w),\qquad D(z+w)=D(z)D(w).  \]
+</div>
+<p> Thus exponentiation is the homomorphism which turns addition of logarithmic lifts into composition of the actual slice Möbius maps. In the Lean source these are the chain <span class="ttfamily">diagonalGL</span>, <span class="ttfamily">diagonalGLHom</span>, <span class="ttfamily">expUnit</span>, and <span class="ttfamily">diskExpAction</span>, with their multiplication laws. Conditions <span class="upshape">C1–C3</span> select the A-specific logarithm \(\lambda _A\) of the continued nonzero pole factor and hence the one element </p>
+<div class="displaymath" id="a0000000055">
+  \[  D_A=D(\lambda _A)=\operatorname {cayleyProjective}\bigl(M(\lambda _A)\bigr), \qquad M(\lambda _A)=\operatorname {diag}\bigl(e^{\lambda _A},1\bigr) =\operatorname {diag}(u_A,1).  \]
+</div>
+<p> Here \(\lambda _A\) is the logarithm and \(M\) is what undoes it: the entry of \(M(\lambda _A)\) is \(e^{\lambda _A}=u_A\), the multiplier itself, so \(D_A\) is an exponential action and not a logarithmic one. The logarithm is the coordinate in which the tape moves; the element it generates lives one exponential above it. </p>
+<p>Which logarithm \(\lambda _A\) is, and that it is one at all, is supplied by the slice facts of Part&#160;2 rather than chosen here. The slice exponential is slice-preserving and nowhere zero, with \(\lvert \exp q\rvert =e^{\operatorname {Re}q}\) <span class="upshape">(</span>Theorem&#160;<a href="sect0002.html#thm:slice-exp">6.1</a><span class="upshape">)</span>; its logarithm manifold unwraps the multivalued logarithm into a single-valued one, with the branches carried by the manifold and not by the value <span class="upshape">(</span>Theorem&#160;<a href="sect0002.html#thm:log-manifold">6.2</a><span class="upshape">)</span>; and a tame lift along a path is unique once its initial rung is fixed, the ambiguity between branches being exactly a winding rung in \(2\pi i\mathbb {Z}\) <span class="upshape">(</span>Theorem&#160;<a href="sect0002.html#thm:winding-lift">6.5</a>, Proposition&#160;<a href="sect0002.html#prop:winding-signature">6.6</a><span class="upshape">)</span>. </p>
+<p>That ambiguity dies under \(M\). Since \(e^{\lambda _A+2\pi ik}=e^{\lambda _A}\), every branch gives the same \(M(\lambda _A)\) and hence the same \(D_A\): the logarithm carries the winding, and the exponential action it generates does not see it. This is what lets the tape run through the whole base while the distinguished element stays one element, and it is recorded again below as <span class="upshape">(B6)–(B8)</span>. The Euler and Weierstrass expressions are the two presentations of this same multiplier. The function/group-element passage is the commuting dictionary </p>
+<div class="displaymath" id="a0000000056">
+  \[  \text{[commutative diagram -- see the PDF / the master file]} \]
+</div>
+<p>The common Euler–Weierstrass multiplier can be followed directly through this dictionary. Write \(p_A\) for the pole of \(A\) and \(g_A=\texttt{distinguishedPoleFactor\, A}\). On the punctured pole chart, conditions <span class="upshape">C2</span> and <span class="upshape">C3</span> give the two identities </p>
+<div class="displaymath" id="a0000000057">
+  \[  \begin{aligned}  g_A(z) & =(z-p_A) \exp \! \left(\sum _{p\in A.\iota }\ell _p(z)\right),\\[2pt] g_A(z) & =z^{m_A}R_{\mathrm{fac},A}(z)e^{h_A(z)} \prod _{n\geq 0}\mathcal E\bigl(z;q_{A,n}\bigr). \end{aligned}  \]
+</div>
+<p> Condition <span class="upshape">C1</span> continues this same factor through the simple pole and proves \(u_A=g_A(p_A)\neq 0\). Hence \(u_A\in \mathbb {C}^\times \), its logarithm \(\lambda _A=\log u_A\) satisfies \(e^{\lambda _A}=u_A\), and the distinguished element is </p>
+<div class="displaymath" id="a0000000058">
+  \[  D_A=D(\lambda _A) =\operatorname {cayleyProjective}\bigl(\operatorname {diag}(u_A,1)\bigr).  \]
+</div>
+<p> This calculation also gives its two fixed boundary points. In the standard projective chart \(\operatorname {diag}(u_A,1)\) acts as \(w\mapsto u_Aw\), which fixes \(0\) and \(\infty \) and moves everything else. Conjugation carries a fixed point to its Cayley coordinate, so the fixed points of \(D_A\) are those of \(\operatorname {diag}(u_A,1)\) read through \(C\): the projective zero and the shared north point \(N\). Therefore </p>
+<div class="displaymath" id="a0000000059">
+  \[  D_A(0)=0,\qquad D_A(N)=N,  \]
+</div>
+<p> which are the declarations </p>
+<div class="displaymath" id="a0000000060">
+  \[  \begin{gathered} \texttt{ASection.distinguishedDiskAction\_ fixes\_ cayley\_ zero},\\ \texttt{ASection.distinguishedDiskAction\_ fixes\_ cayley\_ N}. \end{gathered}  \]
+</div>
+<p> The Euler expression at \(0\) and the Weierstrass expression at \(N\) are consequently the two boundary readings of this one matrix-built function. </p>
+<p>The GPV lift records how that function varies between its boundary presentations. Let \(X,Y\in \mathcal B\). A projective-base transport from \(X\) to \(Y\) carries three continuous tapes: a compactified domain path \(\delta ^*\), a nonzero value path \(v\), its compactification \(v^*\), and a logarithmic lift \(\Gamma \). Their defining equations are </p>
+<div class="displaymath" id="a0000000061">
+  \[  \begin{aligned}  \delta ^*(0)& =\operatorname {cayleyCoord}(X), & \delta ^*(1)& =\operatorname {cayleyCoord}(Y),\\ v^*(t)& =A^*\bigl(\delta ^*(t)\bigr), & e^{\Gamma (t)}& =v(t),\\ \Gamma (1)-\Gamma (0)& =2\pi i k, & & k\in \mathbb {Z}. \end{aligned}  \]
+</div>
+<p> These are precisely the fields of <span class="ttfamily">ASection.GpvTransport</span>. At each \(t\) the lift equation passes through the matrix dictionary: </p>
+<div class="displaymath" id="a0000000062">
+  \[  \text{[commutative diagram -- see the PDF / the master file]} \]
+</div>
+<p> Thus every point of the lift is already an action of the same kind as \(D_A\). Taking real parts and norms in the lift equation gives </p>
+<div class="displaymath" id="a0000000063">
+  \[  \operatorname {Re}\Gamma (t)=\log \lVert v(t)\rVert .  \]
+</div>
+<p> The right-hand side shows that the real level is continuous and depends only on the value tape. Any second continuous lift with the same initial rung equals \(\Gamma \), while every lift of the same value tape has this same real part. Taking real parts in the winding equation gives </p>
+<div class="displaymath" id="a0000000064">
+  \[  \operatorname {Re}\Gamma (0)=\operatorname {Re}\Gamma (1),  \]
+</div>
+<p> and exponentiating the full equation gives </p>
+<div class="displaymath" id="a0000000065">
+  \[  D(\Gamma (0))=D(\Gamma (1)).  \]
+</div>
+<p> The winding integer therefore records the vertical displacement of the logarithmic rung, and the real level and the endpoint Möbius action remain fixed. </p>
+<p>Condition <span class="upshape">C2</span> now supplies the canonical arithmetic instance of this construction. Along an Euler half-space loop \(\delta \), </p>
+<div class="displaymath" id="a0000000066">
+  \[  \Gamma _A(t)=\sum _{p\in A.\iota }\ell _p(\delta (t)), \qquad e^{\Gamma _A(t)}=A(\delta (t)),  \]
+</div>
+<p> with the prime index retained inside the complete summation. Local normal convergence makes \(\Gamma _A\) continuous, the zero-free half-space makes its value tape lie in \(\mathbb {C}^\times \), and the GPV uniqueness theorem fixes the whole lift once \(\Gamma _A(0)\) is chosen. Since \(\delta (0)= \delta (1)\), the same prime sum occurs at both endpoints, so its checked winding is \(k=0\). At every instant the square <span class="ttfamily">canonicalAsectionPresentation_euler_toNorth</span> carries this complete prime tape to the common north frame. Condition <span class="upshape">C3</span> supplies the Weierstrass boundary presentation there, and condition <span class="upshape">C1</span> identifies both presentations with the continued factor \(g_A\). The prime sum, its value under \(A\), its logarithmic level and winding, and the matrix action it generates are therefore simultaneous coordinates of the distinguished element. </p>
+<p>The projective action is read in the direction-indexed sphere-world groupoid. Its objects are directions \(I\in S^6\) equipped with their compactified slice spheres, and its morphisms carry the direction and Möbius legs. A normalized value state pairs such a direction with a point of its slice. </p>
+<p>We now have to put \(D_A\) at every object of the base, and here the choice of an action groupoid pays for itself: no chart is required. In an action groupoid an arrow <em>is</em> a group element, and two objects are joined exactly when one carries the other. So the base is a single orbit, every object is reached from the north object \(N\) by some element, and whatever \(D_A\) becomes at another object is its image under that element — an element of the orbit of \(D_A\), not a new object needing coordinates to describe. The only freedom is which element does the carrying, and fixing that once removes it. </p>
+<p>Fix, then, the canonical orbit representative \(o_b:N\to b\), one element carrying \(N\) to \(b\), and define the frame at \(b\) to be \(D_A\) carried along it: </p>
+<div class="displaymath" id="a0000000067">
+  \[  a_A(b)=\operatorname {cayleyProjective}(o_b)\, D_A .  \]
+</div>
+<p> At the north object itself the representative is the identity, \(o_N=1\), so </p>
+<div class="displaymath" id="a0000000068">
+  \[  a_A(N)=\operatorname {cayleyProjective}(1)\, D_A=D_A .  \]
+</div>
+<p> The frame at north <em>is</em> the distinguished element, uncarried — which is why every reading taken at \(N\) later in this paper is a reading of \(D_A\) itself, and why the residue condition can be stated there without a chart. </p>
+<p>With the representatives fixed, an arbitrary arrow \(f:x\to y\) factors through \(N\) in exactly one way: go back along \(o_x\), do something that fixes \(N\), and come out along \(o_y\). That middle part is the residual north-stabilizer factor </p>
+<div class="displaymath" id="a0000000069">
+  \[  r_f=o_y^{-1}f\, o_x,\qquad f=o_y r_f o_x^{-1},  \]
+</div>
+<p> and it is the only one, since \(o_x,o_y\) are fixed and invertible: \(f=o_yro_x^{-1}\) determines \(r=o_y^{-1}fo_x\) outright. Uniqueness of the stabilizer part is therefore the invertibility of the representatives, and every later appeal to it — including at the two boundary transports of the comparison in Lemma&#160;<a href="part-stack.html#eq:residue-total-base-arrow">10.6</a> — is this one line <span class="upshape">(</span><span class="ttfamily">GreatCircle.stabilizerPart_unique</span><span class="upshape">)</span>. </p>
+<p>Call this assignment \(a_A\): it gives each object \(b\) the frame \(a_A(b)\) above, and each arrow \(f:x\to y\) the Möbius element \(a_A(f)\) carrying the frame at \(x\) to the frame at \(y\), namely its residual factor conjugated between the two frames. Together, </p>
+<div class="displaymath" id="a0000000070">
+  \[  a_A(b)=\operatorname {cayleyProjective}(o_b)\, D_A,\qquad a_A(f)=a_A(y)\, \operatorname {cayleyProjective}(r_f)\, a_A(x)^{-1}, \tag {OS}\label{eq:orbit-stabilizer}  \]
+</div>
+<p> where \(f\fatsemi g\) denotes composition in diagrammatic order: \(f\) first, then \(g\). Since the representatives are fixed, \(r_{1_x}=1\) and \(r_{f\fatsemi g}=r_g r_f\); since \(\operatorname {cayleyProjective}\) is a homomorphism, those two identities are carried to \(a_A\), which is what makes the identity and composition laws hold. </p>
+<p>Equation <a href="part-stack.html#eq:orbit-stabilizer" class="eqref">9.4</a> is the orbit–stabilizer well-definedness of every functor in this paper, and it is the only device used to obtain one. Each is built the same way: the one element \(D_A\), carried to every object along the fixed representatives, and to every arrow by conjugating its residual factor between the frames at the arrow’s two ends. We refer to <a href="part-stack.html#eq:orbit-stabilizer" class="eqref">9.4</a> by name throughout, and every later positioning statement is an instance of it rather than a new hypothesis. </p>
+<p>The preceding construction gives nine checkable readings on the projective base: </p>
+<ol class="enumerate">
+  <li><p>the C2 Euler and C3 Weierstrass formulas present the one C1-continued factor \(g_A\); </p>
+</li>
+  <li><p>\(u_A=g_A(p_A)\) and \(\lambda _A=\log u_A\) generate the one matrix action \(D_A\); </p>
+</li>
+  <li><p>the diagonal calculation fixes the two boundary points \(0\) and \(N\); </p>
+</li>
+  <li><p>the Euler lift retains the complete prime-indexed sum \(\sum _{p\in A.\iota }\ell _p\); </p>
+</li>
+  <li><p>exponentiation identifies the lift pointwise with the A-value and with its Möbius matrix; </p>
+</li>
+  <li><p>the initial rung determines the unique tame continuous lift; </p>
+</li>
+  <li><p>its real level is \(\log \lVert A\rVert \), continuous and independent of the lift branch; </p>
+</li>
+  <li><p>its winding lies in \(2\pi i\mathbb {Z}\), preserves the endpoint action and real level, and equals zero on the C2 Euler loop; </p>
+</li>
+  <li><p>the unique orbit and stabilizer factors carry every instant of this action through the base, with identity and composition inherited from their factorization laws. </p>
+</li>
+</ol>
+<p> Each line is a consequence of the construction above: <span class="upshape">(B1)–(B3)</span> come from the common pole factor and its matrix, <span class="upshape">(B4)–(B8)</span> from its GPV lift, and <span class="upshape">(B9)</span> from the projective orbit–stabilizer sweep. </p>
+<p>The direction-and-Möbius projection is </p>
+<div class="displaymath" id="a0000000071">
+  \[  A^{\mathrm{slice}}:\mathcal B\longrightarrow \mathrm{SphereWorld},  \]
+</div>
+<p> written <span class="ttfamily">AsectionSlice A</span> in the Lean source. It records the slice sphere and its Möbius transport. The full A-section functor below additionally retains the normalized point and the value produced on that sphere. </p>
+<p>The slice-preserving realization on \(\mathbb {O}^{*}\) is the \(G_2\)-equivariant endofunctor \(A_{\mathbb {O}}:\mathcal H_1\to \mathcal H_1\). </p>
+<p>The states it acts on form the <em>normalized state world</em> \(\operatorname {StateWorld}_A\) <span class="upshape">(</span><span class="ttfamily">AsectionStateWorld A</span><span class="upshape">)</span>: the action groupoid of \(G_2\) on normalized A-section states. An object is a slice direction \(I\in S^6\) together with a normalized coordinate \(u\) in the slice that direction selects — a point of the sphere \(A^{\mathrm{slice}}\) records, now carrying that point and not only the sphere. An arrow is a single element \(\gamma \in G_2\), moving the direction and carrying the coordinate with it. The state world has two functors to \(\mathcal H_1\), reading a state’s coordinate before and after \(A_{\mathbb {O}}\) acts: the input eye \(\operatorname {In}_A\) and the output eye \(\operatorname {Out}_A\). The round trip is the checked triangle </p>
+<div class="displaymath" id="a0000000072">
+  \[  \text{[commutative diagram -- see the PDF / the master file]}\qquad \operatorname {Out}_A=\operatorname {In}_A\fatsemi A_{\mathbb {O}}.  \]
+</div>
+<p> This equality is <span class="ttfamily">AsectionState_input_then_equivariant</span>: it holds on arrows as well as objects, so the normalized input coordinates genuinely drive the realized A-values. </p>
+<p>Positioning this round trip over \(b\in \mathcal B\) forms a constrained graph. An object in the fibre consists of an input state \(x\), the forced positioned state \(a_A(b)\cdot x\), and the forced value \(\operatorname {Out}_A(a_A(b)\cdot x)\). Thus both the positioned point and its value are determined by the input and the action. For \(f:b\to b'\), the two legs of the orbit–stabilizer square transport the input and positioned faces, and its already-proved commuting equation makes the target graph well-defined. Reading that same square through \(\operatorname {In}_A\) and \(\operatorname {Out}_A\) gives the checked input and output naturality squares. Identity and composition of these graph transports are inherited from the unique factorization of \(r_f\). Sweeping the whole constrained graph through the base therefore gives the genuine A-section functor </p>
+<div class="displaymath" id="a0000000073">
+  \[  \mathcal A_A:\mathcal B\longrightarrow \mathbf{Grpd},  \]
+</div>
+<p> written <span class="ttfamily">AsectionActionDiagram A</span> in the Lean source. </p>
+<p>Both its source and its targets are action groupoids. The source \(\mathcal B=\mathrm{PGL}(2,\mathbb {R})\ltimes \mathrm{OnePoint}(\mathbb {R})\) is the projective action groupoid: an object is a point of the compactified real projective line, and an arrow \(f:x\to y\) is a projective transformation together with its transport equation, so it is one element of \(\mathrm{PGL}(2,\mathbb {R})\) carrying \(x\) to \(y\). Each groupoid it produces is an action groupoid of \(G_2\) on states, and the element positioned there is the distinguished one, \(D_A\). </p>
+<p>On a base object \(b\), the groupoid \(\mathcal A_A(b)\) consists of the normalized A-section states carrying \(D_A\) to that object. The carrying is done by the object frame \(a_A(b)=\operatorname {cayleyProjective}(o_b)D_A\), which is \(D_A\) conjugated along the canonical orbit representative \(o_b\) — the same element at every base object, moved into position. An object of \(\mathcal A_A(b)\) is one constrained graph <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a>: a slice direction \(I\in S^6\) and a normalized input coordinate \(u\), together with the positioned coordinate \(a_A(b)\mathbin {\cdot }(I,u)\) that this frame determines and the A-value realized there. An arrow is a single element \(\gamma \in G_2\) acting on the slice direction and carrying the rest of the graph with it, so \(\mathcal A_A(b)\) is the action groupoid of \(G_2\) on those states. </p>
+<p>On a base arrow \(f:x\to y\) — that is, on one projective transformation — the value \(\mathcal A_A(f)\) is transport by the arrow element </p>
+<div class="displaymath" id="a0000000074">
+  \[  a_A(f)=a_A(y)\, \operatorname {cayleyProjective}(r_f)\, a_A(x)^{-1}  \]
+</div>
+<p> of <a href="part-stack.html#eq:orbit-stabilizer" class="eqref">9.4</a>: the distinguished action read at the target frame, composed with the Cayley action of the residual factor \(r_f\) that \(f\) leaves after its orbit part is stripped, composed with the inverse of the distinguished action read at the source frame. On a state this moves the input coordinate by the input leg \(\operatorname {cayleyProjective}(r_f)\) and the positioned coordinate by the positioned leg, the two horizontal legs of the square whose verticals are those two frames. On an arrow it is the identity on \(\gamma \), since \(G_2\) acts on the slice direction while \(a_A(f)\) acts on the coordinate, so the two commute. The identity and composition laws hold because the fixed representatives force \(r_{1_x}=1\) and \(r_{f\fatsemi g}=r_g r_f\), and \(\operatorname {cayleyProjective}(-)\) is a homomorphism. </p>
+<p>The nine base readings <span class="upshape">(B1)–(B9)</span> pass through this constrained graph by the certified projective/GPV action squares. Three further readings are thereby realized in the generated states. First, condition <span class="upshape">C3</span> supplies the populated residue-\(\mathbb {C}\) sphere states, represented by <span class="ttfamily">residueActionState</span> and certified by <span class="ttfamily">residueActionState_mem</span>. Second, condition <span class="upshape">C4</span> makes their population infinite through <span class="ttfamily">c4_infinite</span>. Third, every such state carries its intrinsic real coordinate through <span class="ttfamily">transportLevel</span>. These are the three output readings. Together with <span class="upshape">(B1)–(B9)</span> they form the \(9+3\) partition: nine properties of the one distinguished action on the base, followed functorially by three readings of the A-generated residue states in the total. </p>
+<p>The total value-transport category is </p>
+<div class="displaymath" id="a0000000075">
+  \[  \mathcal T_A=\int _{\mathcal B}\mathcal A_A.  \]
+</div>
+<p> An object is a base position together with a normalized A-section value state in its fibre. A morphism is a base channel together with the compatible A-section transport supplied by \(A\). The populated residue-\(\mathbb {C}\) zero-sphere states are the degenerate-fibre outputs of this completed construction, produced by <span class="upshape">C3–C4</span>. The associated diagram \(\pi _0\circ \mathcal A_A:\mathcal B\to \mathbf{Set}\) is the components diagram required by the Grothendieck/colimit readout (Lemma&#160;<a href="part-stack.html#lem:pi0-grothendieck">10.3</a>). </p>
+
+  </div>
+</div>
+<h1 id="sec:detector">10 The concentricity theorem</h1>
+
+<p>We now have the worlds and the base, so this section defines the class of functions precisely and proves the theorem. Two facts about slice-preserving functions come first: the Weierstrass factorization that gives condition C3 its meaning, and the fact that a residue-\(\mathbb {C}\) zero is a whole \(6\)-sphere, a single connected component of the octonionic world. Then the categorical engine, Riehl’s computation of the components of a Grothendieck construction as a colimit, which sorts the assembled total into the classes linked by the section’s real-value transports. With these in hand we define an A-section by its four conditions C1–C4, state and prove the Concentricity Theorem, and record the corollary that carries its conclusion back into the language of classical zeros. </p>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:weierstrass">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">10.1</span>
+    <span class="proposition_thmtitle">Slice-regular Weierstrass factorization; the content of C3</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#prop:weierstrass">#</a>
+    
+    <a class="icon proof" href="part-stack.html#a0000000076"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:R">Definition 5.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/weierstrassE" class="lean_decl">weierstrassE</a></li>
+          
+          <li><a href="/find/#doc/spherePrimary" class="lean_decl">spherePrimary</a></li>
+          
+          <li><a href="/find/#doc/ASection.c3_multipliable" class="lean_decl">ASection.c3_multipliable</a></li>
+          
+          <li><a href="/find/#doc/ASection.c3_locMajorant" class="lean_decl">ASection.c3_locMajorant</a></li>
+          
+          <li><a href="/find/#doc/ASection.c3_factorization" class="lean_decl">ASection.c3_factorization</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>   Let \(A\in \mathcal R\) have a zero of order \(m\ge 0\) at the origin and no non-real isolated zeros <span class="upshape">(</span>for \(A\in \mathcal R\) the latter is automatic: non-real zeros come in whole spheres, Lemma&#160;<a href="part-stack.html#lem:residue-spheres">10.2</a><span class="upshape">)</span>. Then on \(\mathbb {O}^{*}\setminus \{ N\} \) it factors as </p>
+<div class="displaymath" id="a0000000077">
+  \[  A=q^{m}\, R\, S\, h,  \]
+</div>
+<p> where \(q\) denotes the octonionic coordinate function <span class="upshape">(</span>the identity section, so \(q^m\) carries the order-\(m\) zero at the origin<span class="upshape">)</span>, \(R\) is a slice-preserving factor vanishing exactly at the real zeros of \(A\), \(S\) is a factor vanishing exactly at its spherical <span class="upshape">(</span>residue-\(\mathbb {C}\)<span class="upshape">)</span> zero-spheres, and \(h\) is never vanishing; each of \(R,S\) is the slice-regular Weierstrass product over the corresponding zeros. The factorization holds <em>including the case where either family of zeros is infinite</em>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000076">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>This is the factorization theorem of Altavilla–de Fabritiis <span class="cite">
+	[
+	<a href="part-stack.html#AdFslice" >2</a>
+	, 
+	Prop.
+	
+	3.1, Thm.
+	
+	3.2
+	]
+</span>, whose primary factors are the slice-regular ones of Gentili–Vignozzi <span class="cite">
+	[
+	<a href="part-stack.html#GV" >10</a>
+	]
+</span>; convergence of the infinite products is part of the cited statement. The pair \(R,S\) is the residue split named in <span class="upshape">C3</span>: \(R\) carries the residue-\(\mathbb {R}\) <span class="upshape">(</span>classically trivial<span class="upshape">)</span> zeros and \(S\) the residue-\(\mathbb {C}\) <span class="upshape">(</span>classically nontrivial<span class="upshape">)</span> ones, the latter infinite in number by <span class="upshape">C4</span>. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:residue-spheres">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">10.2</span>
+    <span class="lemma_thmtitle">Residue-\(\mathbb {C}\) zeros are \(6\)-sphere components of \(\mathcal H_1\)</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#lem:residue-spheres">#</a>
+    
+    <a class="icon proof" href="part-stack.html#a0000000078"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="part-stack.html#def:two-worlds">Definition 9.3</a></li>
+          
+          <li><a href="sect0002.html#thm:G2-S6">Theorem 7.5</a></li>
+          
+          <li><a href="sect0002.html#thm:wang">Theorem 5.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/ASection.sphereZero_mem_CResidueZeroLocus" class="lean_decl">ASection.sphereZero_mem_CResidueZeroLocus</a></li>
+          
+          <li><a href="/find/#doc/ASection.mem_CResidueZeroLocus_iff_exists_sphereZero" class="lean_decl">ASection.mem_CResidueZeroLocus_iff_exists_sphereZero</a></li>
+          
+          <li><a href="/find/#doc/G2.exists_smul_eq_of_mem_unitImaginarySphere" class="lean_decl">G2.exists_smul_eq_of_mem_unitImaginarySphere</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   For \(A\in \mathcal R\), the non-real zeros of \(A\) are \(6\)-spheres, each a single connected component of the translation groupoid \(\mathcal H_1\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000078">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(A\) is slice-preserving, so on a sphere \(\sigma +\gamma S^6\) <span class="upshape">(</span>\(\gamma {\gt}0\)<span class="upshape">)</span> it has the form \(A(\sigma +\gamma v)=\alpha (\sigma ,\gamma )+v\, \beta (\sigma ,\gamma )\) with \(\alpha ,\beta \) real (the real stem, <span class="cite">
+	[
+	<a href="part-stack.html#Wang" >16</a>
+	]
+</span>); since \(v\) is an imaginary unit, \(\alpha +v\beta =0\) forces \(\alpha =\beta =0\), independently of \(v\). Hence a non-real zero occurs on a <em>whole</em> sphere \(\sigma +\gamma S^6\) or at none of its points (the spherical-zero structure, <span class="cite">
+	[
+	<a href="part-stack.html#AdF" >1</a>
+	]
+</span>); real zeros are isolated real points (residue field \(\mathbb {R}\)). Each such sphere \(\sigma +\gamma S^6\) is the \(G_2\)-orbit of any of its points (Theorem&#160;<a href="sect0002.html#thm:G2-S6">7.5</a>: \(G_2\) acts transitively on \(S^6\) with stabiliser \(\mathrm{SU}(3)\)), and the connected components of \(\mathcal H_1\) are exactly the \(G_2\)-orbits: in a groupoid two objects share a component iff a morphism joins them, and a morphism \(x\to y\) of \(\mathcal H_1\) is a \(g\in G_2\) with \(g\cdot x=y\). Therefore the residue-\(\mathbb {C}\) zeros, the non-real ones, are exactly the \(6\)-sphere components of \(A^{-1}(0)\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:pi0-grothendieck">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">10.3</span>
+    <span class="lemma_thmtitle">\(\pi _0\) of a Grothendieck construction</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#lem:pi0-grothendieck">#</a>
+    
+    <a class="icon proof" href="part-stack.html#a0000000079"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="part-stack.html#eq:orbit-stabilizer">Definition 9.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/CategoryTheory.Grothendieck" class="lean_decl">CategoryTheory.Grothendieck</a></li>
+          
+          <li><a href="/find/#doc/pi0GrothendieckEquiv" class="lean_decl">pi0GrothendieckEquiv</a></li>
+          
+          <li><a href="/find/#doc/pi0_grothendieck" class="lean_decl">pi0_grothendieck</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   For a functor \(F:\mathcal B\to \mathrm{Grpd}\), the connected-components functor carries the Grothendieck construction to the colimit of the component diagram: </p>
+<div class="displaymath" id="a0000000080">
+  \[  \pi _0\Bigl(\int _{\mathcal B}F\Bigr)\  \cong \  \operatorname *{colim}_{\mathcal B}\, (\pi _0\circ F).  \]
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000079">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>By Riehl’s proof of Lemma&#160;8.3.4, for any \(X:\mathcal C\to \mathbf{Set}\) each arrow of the category of elements imposes exactly the condition that the corresponding elements be identified in every cone, so that \(\pi _0(\operatorname {el}X)\cong \operatorname {colim}_{\mathcal C}X\) <span class="cite">
+	[
+	<a href="part-stack.html#Riehl" >23</a>
+	, 
+	p.
+	
+	102
+	]
+</span>. Taking \(X=\pi _0\circ F\), the colimit performs exactly the identifications generated by the maps of \(F\). In the Lean development this equivalence is <span class="ttfamily">pi0GrothendieckEquiv</span>, built from the canonical cocone <span class="ttfamily">pi0Cocone</span> and <span class="ttfamily">colimit.desc</span> over Mathlib’s <span class="ttfamily">colimit_sound</span> and <span class="ttfamily">colimit_eq</span>. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:A-section">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">10.4</span>
+    <span class="definition_thmtitle">\(A\)-sections</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#def:A-section">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:R">Definition 5.1</a></li>
+          
+          <li><a href="part-stack.html#prop:weierstrass">Proposition 10.1</a></li>
+          
+          <li><a href="part-stack.html#lem:residue-spheres">Lemma 10.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/ASection" class="lean_decl">ASection</a></li>
+          
+          <li><a href="/find/#doc/weierstrassE" class="lean_decl">weierstrassE</a></li>
+          
+          <li><a href="/find/#doc/spherePrimary" class="lean_decl">spherePrimary</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   An <em>\(A\)-section</em> is a section \(A\) of the ring \(\mathcal R\) of slice-preserving slice-regular functions on \(\mathbb {O}^{*}=S^8\) <span class="upshape">(Definition&#160;<a href="sect0002.html#def:R">5.1</a>)</span> with the following four properties. </p>
+<ol class="enumerate">
+  <li><p><em>Meromorphic continuation; single simple pole.</em> \(A\) is meromorphically continued to \(\mathbb {O}^{*}\) with exactly one pole; it is simple, lies at a real point, and its value there is the point at infinity \(\infty =N\). </p>
+</li>
+  <li><p><em>Infinite Euler product.</em> On a slice right half-space \(\Omega _0\subset \mathbb {O}^{*}\), \(A=\exp \! \big(\sum _p\ell _p\big)\) for an <em>infinite</em> family \(\{ \ell _p\} \) of slice-preserving slice-regular functions each zero-free on \(\Omega _0\), the family summable <em>locally normally</em> on \(\Omega _0\) <span class="upshape">(</span>the sense in which the cited Euler products converge; Theorem&#160;<a href="sect0001.html#thm:euler">1.2</a><span class="upshape">)</span>; in particular \(A\) is zero-free on \(\Omega _0\). </p>
+</li>
+  <li><p><em>Infinite Weierstrass factorization.</em> Over the <em>full divisor</em> of \(A\), including the single pole of <span class="upshape">(C1)</span>, at the real point \(p_0\), multiplicity \(-1\), carried by the explicit left factor, on \(\mathbb {O}^{*}\setminus \{ p_0\} \), </p>
+<div class="displaymath" id="a0000000081">
+  \[  (q-p_0)\, A\; =\; q^{m}\, R\; e^{g}\prod _n\mathcal E(\, \cdot \, ;q_n),  \]
+</div>
+<p> where \(q\) is the octonionic coordinate, \(m\ge 0\), \(R\) is the slice-regular Weierstrass product over the <em>nonzero</em> residue-\(\mathbb {R}\) <span class="upshape">(</span>real<span class="upshape">)</span> zeros of \(A\), vanishing only on \(\mathbb {R}\), \(g\) is slice-preserving entire, \(\{ q_n\} \) enumerates the residue-\(\mathbb {C}\) zero-spheres of \(A\), and \(\mathcal E(\, \cdot \, ;q_n)\) is the slice-regular Weierstrass primary factor of \(q_n\) <span class="upshape">(</span>Proposition&#160;<a href="part-stack.html#prop:weierstrass">10.1</a>; <span class="cite">
+	[
+	<a href="part-stack.html#AdFslice" >2</a>
+	, 
+	Prop.
+	
+	3.1, Thm.
+	
+	3.2
+	]
+</span>, <span class="cite">
+	[
+	<a href="part-stack.html#GV" >10</a>
+	]
+</span><span class="upshape">)</span>; the factorization holds with either family infinite, the product converging <em>locally normally</em> on \(\mathbb {O}^{*}\setminus \{ p_0\} \) <span class="upshape">(</span>the convergence of Proposition&#160;<a href="part-stack.html#prop:weierstrass">10.1</a><span class="upshape">)</span>. <span class="upshape">(</span>The left factor makes “full divisor” literal: the divisor of a meromorphic section includes its single pole; classically, Hadamard factors \((s-1)\zeta (s)\).<span class="upshape">)</span> </p>
+</li>
+  <li><p><em>Infinitely many residue-\(\mathbb {C}\) zeros.</em> The index set \(\{ q_n\} \) is infinite. A closed zero of such a section is a real point <span class="upshape">(</span>residue field \(\mathbb {R}\)<span class="upshape">)</span> or a \(6\)-sphere \(S_{(\sigma ,\gamma )}\) <span class="upshape">(</span>residue field \(\mathbb {C}\); <span class="cite">
+	[
+	<a href="part-stack.html#AdFslice" >2</a>
+	]
+</span><span class="upshape">)</span>; residue-\(\mathbb {C}\) names the classically nontrivial zeros <span class="upshape">(</span>Part&#160;2<span class="upshape">)</span>. </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:residue-subdiagram">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">10.5</span>
+    <span class="definition_thmtitle">The residue subdiagram and its inclusion</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#def:residue-subdiagram">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="part-stack.html#eq:orbit-stabilizer">Definition 9.4</a></li>
+          
+          <li><a href="part-stack.html#def:A-section">Definition 10.4</a></li>
+          
+          <li><a href="part-stack.html#lem:residue-spheres">Lemma 10.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/ASection.CResidueZeroLocus" class="lean_decl">ASection.CResidueZeroLocus</a></li>
+          
+          <li><a href="/find/#doc/ASection.IsCResidueInput" class="lean_decl">ASection.IsCResidueInput</a></li>
+          
+          <li><a href="/find/#doc/ASection.CResidueInputWorld" class="lean_decl">ASection.CResidueInputWorld</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionCResidueInputDiagram" class="lean_decl">ASection.AsectionCResidueInputDiagram</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionCResidueDiagram" class="lean_decl">ASection.AsectionCResidueDiagram</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionCResidueInclusion" class="lean_decl">ASection.AsectionCResidueInclusion</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionCResidueInclusionTotal" class="lean_decl">ASection.AsectionCResidueInclusionTotal</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionCResidueInclusionTotal_full" class="lean_decl">ASection.AsectionCResidueInclusionTotal_full</a></li>
+          
+          <li><a href="/find/#doc/ASection.AsectionCResidueInclusionTotal_faithful" class="lean_decl">ASection.AsectionCResidueInclusionTotal_faithful</a></li>
+          
+          <li><a href="/find/#doc/ASection.residueTotalCategory" class="lean_decl">ASection.residueTotalCategory</a></li>
+          
+          <li><a href="/find/#doc/ASection.residueTotalGroupoid" class="lean_decl">ASection.residueTotalGroupoid</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   The <em>residue locus</em> of an A-section is \(\{ z : A(z)=0,\  \operatorname {Im}z{\gt}0\} \) <span class="upshape">(</span><span class="ttfamily">CResidueZeroLocus</span><span class="upshape">)</span>. The <em>residue subdiagram</em> \(\mathcal R_A:\mathcal B\to \mathbf{Grpd}\) <span class="upshape">(</span><span class="ttfamily">AsectionCResidueDiagram</span><span class="upshape">)</span> is the preimage of the states this locus selects at the north frame — a preimage taken in the total action groupoid, not of a set — with the witnessing base arrow carried as data. </p>
+<p>It has the same source as \(\mathcal A_A\), the projective action groupoid \(\mathcal B\), and its values are again action groupoids of \(G_2\) — the selection cuts down which states are present without altering what acts on them. </p>
+<p>On a base object \(X\), the value \(\mathcal R_A(X)\) is the full subgroupoid of \(\mathcal A_A(X)\) on the witnessed states. An object there is a state \(x\) of \(\mathcal A_A(X)\) together with a north residue state \(x_N\) and a base arrow \(g:N\to X\) — one projective transformation carrying the north point to \(X\) — satisfying \(\mathcal A_A(g)(x_N)=x\); the witness travels with the object. An arrow is an arrow of \(\mathcal A_A(X)\) between two such states, so again a single element \(\gamma \in G_2\): the selection is on objects, and \(G_2\) still acts. </p>
+<p>On a base arrow \(f:X\to Y\), the value \(\mathcal R_A(f)\) is the restriction of the ambient transport \(\mathcal A_A(f)\), which is transport by the arrow element \(a_A(f)\) carrying \(D_A\) between the frames at \(X\) and \(Y\). That restriction lands in the subgroupoid because a witnessed state stays witnessed, with the <em>same</em> north state and the composite witness \(g\fatsemi f\): functoriality of \(\mathcal A_A\) gives \(\mathcal A_A(g\fatsemi f)(x_N)=\mathcal A_A(f)\bigl(\mathcal A_A(g)(x_N)\bigr) =\mathcal A_A(f)(x)\). So the north state is what is preserved, and the witnessing projective transformation is what accumulates. Its inclusion \(\iota _A:\mathcal R_A\Rightarrow \mathcal A_A\) <span class="upshape">(</span><span class="ttfamily">AsectionCResidueInclusion</span><span class="upshape">)</span> sends a witnessed object to its ambient state and is the identity on arrows; it is fibrewise fully faithful onto that inverse image, and its naturality squares retain the ambient A-section transport itself. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="eq:residue-total-base-arrow">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">10.6</span>
+    <span class="lemma_thmtitle">Transitivity of the C-residue total</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#eq:residue-total-base-arrow">#</a>
+    
+    <a class="icon proof" href="part-stack.html#a0000000082"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="part-stack.html#def:A-section">Definition 10.4</a></li>
+          
+          <li><a href="part-stack.html#eq:orbit-stabilizer">Definition 9.4</a></li>
+          
+          <li><a href="part-stack.html#def:residue-subdiagram">Definition 10.5</a></li>
+          
+          <li><a href="part-stack.html#prop:weierstrass">Proposition 10.1</a></li>
+          
+          <li><a href="part-stack.html#lem:residue-spheres">Lemma 10.2</a></li>
+          
+          <li><a href="sect0002.html#thm:G2-S6">Theorem 7.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/ASection.CResidueInputActionSquare" class="lean_decl">ASection.CResidueInputActionSquare</a></li>
+          
+          <li><a href="/find/#doc/ASection.CResidueInputFiberHom" class="lean_decl">ASection.CResidueInputFiberHom</a></li>
+          
+          <li><a href="/find/#doc/ASection.CResidueInputTotal_transitive" class="lean_decl">ASection.CResidueInputTotal_transitive</a></li>
+          
+          <li><a href="/find/#doc/ASection.sweepTransitive_on_residueSystem" class="lean_decl">ASection.sweepTransitive_on_residueSystem</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   For an A-section \(A\), the total inverse-image groupoid </p>
+<div class="displaymath" id="a0000000083">
+  \[  \int _{\mathcal B}\mathcal R_A  \]
+</div>
+<p> is transitive: any two of its objects are joined by a morphism. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000082">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Let </p>
+<div class="displaymath" id="a0000000084">
+  \[  P,Q\in \int _{\mathcal B}\mathcal R_A  \]
+</div>
+<p> be arbitrary. By the inverse-image definition, the fibre data of \(P\) and \(Q\) supply north residue states \(x_N,y_N\) together with base arrows </p>
+<div class="displaymath" id="a0000000085">
+  \[  g:N\longrightarrow P.\mathrm{base},\qquad h:N\longrightarrow Q.\mathrm{base},  \]
+</div>
+<p> whose A-section transports recover the two given fibre states. So the arbitrary problem reduces to a north endomorphism \(k:N\to N\) and a fibre morphism </p>
+<div class="displaymath" id="a0000000086">
+  \[  \varphi :\mathcal A_A(k)(x_N)\longrightarrow y_N .  \]
+</div>
+<p> Once these are in hand, functorial transport along \(g^{-1}\fatsemi k\fatsemi h\) gives an ambient Grothendieck morphism \(P\to Q\), and the full inclusion \(\int \iota _A\) returns that morphism to \(\int _{\mathcal B}\mathcal R_A\). It remains only to construct the north comparison. </p>
+<p><em>The state is a triple.</em> At \(N\) the A-section action functor records </p>
+<div class="displaymath" id="a0000000087">
+  \[  (I,u)\longmapsto \bigl(\, \underbrace{(I,u)}_{\text{input}},\;  \underbrace{D_A\mathbin {\cdot }(I,u)}_{\text{positioned}},\;  \underbrace{A_{\mathbb {O}}(D_A\mathbin {\cdot }(I,u))}_{\text{realized value}}\, \bigr). \tag {A}\label{eq:north-graph}  \]
+</div>
+<p> The three entries carry the three things the comparison needs, and they carry them separately. The residue condition of \(\mathcal R_A(N)\) selects on the <em>middle</em> entry: a north residue state is one whose positioned coordinate is an authored C3 coordinate. That is the entry the inverse-image construction is built on. </p>
+<p><em>The two states, and where they differ.</em> Write the two supplied states as evaluations of <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a>: </p>
+<div class="displaymath" id="a0000000088">
+  \[  \begin{aligned}  x_N& =\bigl((I_1,u_1),\; z_1,\; A_{\mathbb {O}}(z_1)\bigr), & z_1& =D_A\mathbin {\cdot }u_1,\\[0.5ex] y_N& =\bigl((I_2,u_2),\; z_2,\; A_{\mathbb {O}}(z_2)\bigr), & z_2& =D_A\mathbin {\cdot }u_2, \end{aligned} \tag {P}\label{eq:north-preimages}  \]
+</div>
+<p> with \(z_1,z_2\) the authored C3 coordinates their residue condition selects and \(I_1,I_2\in S^6\) their slice directions. Since \(D_A\) is invertible, each middle entry has exactly one input behind it, so <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a> determines \(u_1\) and \(u_2\) rather than choosing them. The two states differ in their left entries and in nothing else. </p>
+<p>These inputs sit at \(N\). They are not the input the two runs are read at: that one sits at the source of the tape and is written \(u_\ast \), and the two runs carry it to \(u_1\) and to \(u_2\) respectively. </p>
+<p><em>What they share.</em> Each state is one sweep of the one construction, and each sweep runs the fixed \(0\)-to-\(N\) tape once: </p>
+<div class="displaymath" id="a0000000089">
+  \[  \operatorname {eulerToNorth}_1,\  \operatorname {eulerToNorth}_2 \; :\; 0\longrightarrow N .  \]
+</div>
+<p> Along that tape condition <span class="upshape">C2</span> supplies the arithmetic instance </p>
+<div class="displaymath" id="a0000000090">
+  \[  \Gamma _A(t)=\sum _{p\in A.\iota }\ell _p(\delta (t)), \qquad e^{\Gamma _A(t)}=A(\delta (t)),  \]
+</div>
+<p> with the prime index retained inside the complete summation. Local normal convergence makes \(\Gamma _A\) continuous, the zero-free half-space keeps its value tape in \(\mathbb {C}^\times \), and GPV uniqueness fixes the whole lift once \(\Gamma _A(0)\) is chosen; since \(\delta (0)=\delta (1)\) the same prime sum occurs at both endpoints, so the checked winding is \(k=0\). At every instant the <span class="ttfamily">euler_toNorth</span> square of the canonical presentation carries this complete prime tape to the common north frame, where <span class="upshape">C3</span> supplies the Weierstrass boundary presentation and <span class="upshape">C1</span> identifies both presentations with the continued factor \(g_A\). </p>
+<p>Euler presents at \(0\), and the same presentation arriving at \(N\) <em>is</em> Weierstrass. That identity is what makes the common datum nonzero, \(u_A=g_A(p_A)\neq 0\) <span class="upshape">(</span>Definition&#160;<a href="part-stack.html#eq:orbit-stabilizer">9.4</a><span class="upshape">)</span>, hence \(D_A\) invertible, hence <a href="part-stack.html#eq:orbit-stabilizer" class="eqref">9.4</a> available at every instant of the tape up to and including \(N\). Invertibility at \(N\) is not an assumption imposed on \(D_A\); it is what the continuation delivers at the point where the two presentations agree. </p>
+<p><em>The two sweeps as squares.</em> Write </p>
+<div class="displaymath" id="a0000000091">
+  \[  r_1=\operatorname {stabilizerPart}(\operatorname {eulerToNorth}_1),\qquad r_2=\operatorname {stabilizerPart}(\operatorname {eulerToNorth}_2)  \]
+</div>
+<p> for their residual factors, and write </p>
+<div class="displaymath" id="a0000000092">
+  \[  R_i=\operatorname {cayleyProjective}(r_i)  \]
+</div>
+<p> for the Cayley action each one generates. The \(r_i\) are forced, not chosen: orbit–stabilizer gives </p>
+<div class="displaymath" id="a0000000093">
+  \[  \operatorname {eulerToNorth}_i=o_N\, r_i\, o_0^{-1},  \]
+</div>
+<p> and the fixed representatives determine the stabilizer part of that factorization outright, as shown at <a href="part-stack.html#eq:orbit-stabilizer" class="eqref">9.4</a>. </p>
+<p>Read each sweep as a commuting square. The verticals are the object frames already fixed — \(a_A(0)\) at the source, \(a_A(N)=D_A\) at north. The horizontals are the two legs of <a href="part-stack.html#eq:orbit-stabilizer" class="eqref">9.4</a>: on top the input leg \(R_i\), along the bottom the arrow element \(a_A(\operatorname {eulerToNorth}_i)\). Read at \(x=0\), \(y=N\), <a href="part-stack.html#eq:orbit-stabilizer" class="eqref">9.4</a> says each square commutes: </p>
+<div class="displaymath" id="a0000000094">
+  \[  a_A(\operatorname {eulerToNorth}_i)\, a_A(0)=D_A\, R_i . \tag {S}\label{eq:north-face-squares}  \]
+</div>
+<p> Equation <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a> is <a href="part-stack.html#eq:orbit-stabilizer" class="eqref">9.4</a> read at the base component of each sweep, so it is derived from the positioning already fixed. The two sweeps are therefore </p>
+<div class="displaymath" id="a0000000095">
+  \[  \text{[commutative diagram -- see the PDF / the master file]} \]
+</div>
+<div class="displaymath" id="a0000000096">
+  \[  \text{[commutative diagram -- see the PDF / the master file]} \]
+</div>
+<p> one square apiece, sharing their top-left corner. </p>
+<p><em>Both sweeps read at the one source input.</em> The two runs leave the same source object, so they are read at its normalized input coordinate \(u_\ast \). The C3 boundary readings identify the positioned outputs with the authored coordinates, </p>
+<div class="displaymath" id="a0000000097">
+  \[  a_A(\operatorname {eulerToNorth}_i)\mathbin {\cdot } \bigl(a_A(0)\mathbin {\cdot }u_\ast \bigr)=z_i , \tag {B}\label{eq:north-boundary-readings}  \]
+</div>
+<p> and <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a> rewrites each as \(z_i=D_A\mathbin {\cdot }u_i\). Evaluating <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a> at \(u_\ast \), reading the left side by <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a> and the right by <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a>: </p>
+<div class="displaymath" id="a0000000098">
+  \[  D_A\mathbin {\cdot }\bigl(R_i\mathbin {\cdot }u_\ast \bigr) =a_A(\operatorname {eulerToNorth}_i)\mathbin {\cdot } \bigl(a_A(0)\mathbin {\cdot }u_\ast \bigr) =z_i=D_A\mathbin {\cdot }u_i .  \]
+</div>
+<p> \(D_A\) is invertible, so cancelling it on the left gives the two input equations </p>
+<div class="displaymath" id="a0000000099">
+  \[  R_1\mathbin {\cdot }u_\ast =u_1,\qquad R_2\mathbin {\cdot }u_\ast =u_2 . \tag {I}\label{eq:north-input-readings}  \]
+</div>
+<p> Both sweeps are now read at the one source input, and their difference is exactly the difference of their residual factors. </p>
+<p><em>The coordinate half.</em> Put \(r=r_2r_1^{-1}\), the residual factor of the second sweep relative to the first. Then <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a> gives </p>
+<div class="displaymath" id="a0000000100">
+  \[  \begin{aligned}  \operatorname {cayleyProjective}(r)\mathbin {\cdot }u_1 & =\operatorname {cayleyProjective}(r_2r_1^{-1})\,  R_1\mathbin {\cdot }u_\ast =R_2\mathbin {\cdot }u_\ast =u_2,\\[0.6ex] D_A\, \operatorname {cayleyProjective}(r)\, D_A^{-1}\mathbin {\cdot }z_1 & =D_A\mathbin {\cdot } \bigl(\operatorname {cayleyProjective}(r)\mathbin {\cdot }u_1\bigr) =D_A\mathbin {\cdot }u_2=z_2 . \end{aligned}  \]
+</div>
+<p> The corresponding base loop is </p>
+<div class="displaymath" id="a0000000101">
+  \[  k=\operatorname {eulerToNorth}_1^{-1} \fatsemi \operatorname {eulerToNorth}_2\; :\; N\longrightarrow N,  \]
+</div>
+<p> and since composing stabilizer parts multiplies them in the same order as the action while inversion inverts them, </p>
+<div class="displaymath" id="a0000000102">
+  \[  \operatorname {stabilizerPart}(k)=r_2r_1^{-1}=r . \tag {R}\label{eq:north-relative-stabilizer}  \]
+</div>
+<p> Equivalently, from \(\operatorname {eulerToNorth}_i=o_N\, r_i\, o_0^{-1}\): the first sweep inverted and followed by the second cancels the common \(0\)-frame \(o_0\), and \(o_N=1\) at north. So the input leg of \(\mathcal A_A(k)\) carries \(u_1\) to \(u_2\), and conjugating by \(D_A\) carries \(z_1\) to \(z_2\). </p>
+<p><em>The direction half, and why it is available here.</em> The coordinate half moves the middle entry. The right entry still has to move, and that is the entry the sweep produced. </p>
+<p>What \(\mathcal A_A\) sweeps is the slice, and what indexes the slices is the direction: \(I\) ranges over \(S^6\), the unit imaginary octonions, \(D_A\) positions the coordinate in the slice that \(I\) selects, and \(A_{\mathbb {O}}\) realizes the value there. So the directions carried by \(x_N\) and \(y_N\) are not labels attached afterwards — they are the indices the functor swept over, and every one of them is a unit imaginary octonion because that is what a slice direction is <span class="upshape">(</span>Definition&#160;<a href="part-stack.html#def:carrier">9.1</a><span class="upshape">)</span>. This is exactly the set on which \(G_2\) is transitive <span class="upshape">(</span>Theorem&#160;<a href="sect0002.html#thm:G2-S6">7.5</a><span class="upshape">)</span>, so it supplies \(\gamma \in G_2\) with </p>
+<div class="displaymath" id="a0000000103">
+  \[  \gamma I_1=I_2 .  \]
+</div>
+<p> The ambient total cannot take this step. Its objects are all the states of \(\mathcal A_A\), and \(G_2\) moves a state only within the sphere its direction already lies on. The inverse image, by contrast, is taken over precisely what the sweep produces — the residue states on the C3 zero spheres — so the transitivity of \(G_2\) on the unit imaginary octonions acts on the whole of what \(\int _{\mathcal B}\mathcal R_A\) contains, and on nothing larger. That is why this comparison is available there and not in \(\int _{\mathcal B}\mathcal A_A\). </p>
+<p>The transported coordinate equality and this direction action are the two components of an arrow </p>
+<div class="displaymath" id="a0000000104">
+  \[  \varphi :\mathcal A_A(k)(x_N)\longrightarrow y_N . \tag {$\Phi $}\label{eq:north-fibre-arrow}  \]
+</div>
+<p><em>Return to \(P\) and \(Q\).</em> Their inverse-image data supply the arrows \(g,h\) above together with </p>
+<div class="displaymath" id="a0000000105">
+  \[  \mathcal A_A(g)(x_N)=P.\mathrm{fiber},\qquad \mathcal A_A(h)(y_N)=Q.\mathrm{fiber}, \tag {N}\label{eq:north-witness-readings}  \]
+</div>
+<p> and the base component of the required total arrow is </p>
+<div class="displaymath" id="a0000000106">
+  \[  (g^{-1}\fatsemi k)\fatsemi h: P.\mathrm{base}\longrightarrow Q.\mathrm{base}. \tag {G}\label{eq:residue-total-base-arrow}  \]
+</div>
+<p> A morphism \(P\to Q\) of \(\int _{\mathcal B}\mathcal A_A\) is a base arrow \(f:P.\mathrm{base}\to Q.\mathrm{base}\) together with a fibre arrow \(\mathcal A_A(f)(P.\mathrm{fiber})\to Q.\mathrm{fiber}\). Functoriality gives \(\mathcal A_A\bigl((g^{-1}\fatsemi k)\fatsemi h\bigr) =\mathcal A_A(h)\circ \mathcal A_A(k)\circ \mathcal A_A(g^{-1})\), and \(\mathcal A_A(g^{-1})(P.\mathrm{fiber})=x_N\) by <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a>. So the composite carries \(P.\mathrm{fiber}\) back along \(g^{-1}\) to \(x_N\); then <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a> carries the result along \(k\) to \(y_N\); finally \(\mathcal A_A(h)\) carries that arrow forward to \(Q.\mathrm{fiber}\), with <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a> identifying its two ends. This fibre arrow over <a href="part-stack.html#eq:residue-total-base-arrow" class="eqref">10.6</a> is a morphism from \(P\) to \(Q\) in the ambient Grothendieck construction. Since \(\iota _A\) is full it has a preimage in the residue total \(\int \mathcal R_A\), and faithfulness makes that preimage unique. Hence \(P\) and \(Q\) are joined. Since they were arbitrary, \(\int \mathcal R_A\) is transitive. </p>
+<p>Throughout the calculation \(z_1\) and \(z_2\) are arbitrary C3 coordinates. Their common real value is extracted from the singleton colimit in the next step. The comparison above rests on the relative stabilizer cancellation through the single common source tape and north frame. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:concentricity">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">10.7</span>
+    <span class="theorem_thmtitle">Concentricity</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#thm:concentricity">#</a>
+    
+    <a class="icon proof" href="part-stack.html#a0000000107"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="part-stack.html#def:A-section">Definition 10.4</a></li>
+          
+          <li><a href="part-stack.html#eq:orbit-stabilizer">Definition 9.4</a></li>
+          
+          <li><a href="part-stack.html#def:residue-subdiagram">Definition 10.5</a></li>
+          
+          <li><a href="part-stack.html#eq:residue-total-base-arrow">Lemma 10.6</a></li>
+          
+          <li><a href="part-stack.html#lem:residue-spheres">Lemma 10.2</a></li>
+          
+          <li><a href="part-stack.html#lem:pi0-grothendieck">Lemma 10.3</a></li>
+          
+          <li><a href="sect0002.html#thm:G2-S6">Theorem 7.5</a></li>
+          
+          <li><a href="sect0002.html#thm:winding-lift">Theorem 6.5</a></li>
+          
+          <li><a href="sect0002.html#prop:winding-signature">Proposition 6.6</a></li>
+          
+          <li><a href="sect0002.html#thm:identity">Theorem 3.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/ASection.concentricity" class="lean_decl">ASection.concentricity</a></li>
+          
+          <li><a href="/find/#doc/ASection.residueTotal_isConnected" class="lean_decl">ASection.residueTotal_isConnected</a></li>
+          
+          <li><a href="/find/#doc/ASection.residueTotal_pi0_singleton" class="lean_decl">ASection.residueTotal_pi0_singleton</a></li>
+          
+          <li><a href="/find/#doc/ASection.residueTotal_pi0_colimit_singleton" class="lean_decl">ASection.residueTotal_pi0_colimit_singleton</a></li>
+          
+          <li><a href="/find/#doc/ASection.residueTotal_transportLevel_singleton" class="lean_decl">ASection.residueTotal_transportLevel_singleton</a></li>
+          
+          <li><a href="/find/#doc/ASection.residueInputTotalTransportRead_certified" class="lean_decl">ASection.residueInputTotalTransportRead_certified</a></li>
+          
+          <li><a href="/find/#doc/ASection.transportLevel" class="lean_decl">ASection.transportLevel</a></li>
+          
+          <li><a href="/find/#doc/ASection.residueActionState_mem" class="lean_decl">ASection.residueActionState_mem</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Let \(A\) be an \(A\)-section. The infinitely many C-residue zero \(S^6\) spheres transported by the A-section functor \(\mathcal A_A:\mathcal B\to \mathbf{Grpd}\), from the projective great-circle base \(\mathcal B\) to the A-generated normalized value groupoids, form exactly one colimit/component class, and that singleton class carries one real value </p>
+<div class="displaymath" id="a0000000108">
+  \[  c\in \mathbb {R}.  \]
+</div>
+<p> Consequently every populated residue-\(\mathbb {C}\) zero \(6\)-sphere has centre \(c\), so the infinitely many populated residue-\(\mathbb {C}\) zero spheres are concentric. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000107">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>We consider a slice-preserving section \(A\) of the ring \(\mathcal R\) on the compactified octonions \(\mathbb {O}^{*}\). Slice preservation hands us a coherently identified family of normalized Riemann spheres, naturally organized by a functor. The hypotheses push in the same direction. Specifying the analytic object, the theory suggests exponential equations; and \(\mathbb {O}^{*}\) comes from the Cayley–Dickson construction with only one real axis. The projective great circle that axis compactifies to is framed by \(PGL(2,\mathbb {R})\): a projective coordinate frame in which \(\exp (I\theta )\) lives, and the analytic sections of \(\mathcal R\) themselves transform as Möbius transformations — self-transformations of the slice-preserving section. Frames and transformations compose, invert, and act: they are groupoids. The shape of the ring therefore determines the base \(\mathcal B\) of Definition&#160;<a href="part-stack.html#eq:orbit-stabilizer">9.4</a> <span class="upshape">(</span><span class="ttfamily">GreatCircle.Base</span><span class="upshape">)</span>. </p>
+<p>Conditions C1–C4 now determine the distinguished action of the A-section. The exponential equations lead to the commuting triangle \(\pi \circ E=\exp \) of the logarithm manifold <span class="upshape">(</span>Theorems&#160;<a href="sect0002.html#thm:slice-exp">6.1</a> and&#160;<a href="sect0002.html#thm:log-manifold">6.2</a><span class="upshape">)</span>, giving the unique tame lift of an exponential base <span class="upshape">(</span>Theorem&#160;<a href="sect0002.html#thm:winding-lift">6.5</a>, Proposition&#160;<a href="sect0002.html#prop:winding-signature">6.6</a><span class="upshape">)</span>. In the matrix dictionary of Definition&#160;<a href="part-stack.html#eq:orbit-stabilizer">9.4</a>, every instant of a lift \(\Gamma \) is the actual group element </p>
+<div class="displaymath" id="a0000000109">
+  \[  D(\Gamma (t)) =\left[C \begin{pmatrix} e^{\Gamma (t)}
+
+& 0
+
+\\[2pt]0
+
+& 1
+
+\end{pmatrix} C^{-1}\right].  \]
+</div>
+<p> This element is also the slice function \(w\mapsto D(\Gamma (t))(w)\). Hence the analytic and symbolic readings are two faces of the same object: the exponential equation proves which matrix acts, and matrix multiplication proves how those actions compose. </p>
+<p>Definition&#160;<a href="part-stack.html#eq:orbit-stabilizer">9.4</a> has already constructed the complete prime-indexed GPV tape beside the matrix element it generates, including its exponential square, uniqueness, continuous real level, winding equation, and transport to the north frame. Condition C3 supplies its Weierstrass presentation at \(N\) <span class="upshape">(</span>Proposition&#160;<a href="part-stack.html#prop:weierstrass">10.1</a><span class="upshape">)</span>. C1 continues both presentations to the same nonzero pole factor, whose logarithm selects \(D_A\). Consequently the Euler and Weierstrass faces are the two boundary presentations of the same matrix-built function/group element at its fixed points \(0\) and \(N\). The degenerate fibre of Lemma&#160;<a href="sect0002.html#lem:exp-degenerate">6.3</a>, with its real level and winding heights, is this action’s own bookkeeping. </p>
+<p>Orbit–stabilizer now sweeps the element across the base. The canonical \(o_b\) positions \(D_A\) at each footpoint; the uniquely forced \(r_f=o_y^{-1}fo_x\) supplies the residual north action; and the identity and multiplication laws for \(r_f\) give the functor laws. The \(G_2\)-equivariant realization <span class="upshape">(</span>Theorem&#160;<a href="sect0002.html#thm:G2-equiv">7.4</a><span class="upshape">)</span> applies the same positioned Möbius function to the normalized value states along the continuum of Riemann spheres. The result is the production A-section functor \(\mathcal A_A=\texttt{AsectionActionDiagram\, A}\) of Definition&#160;<a href="part-stack.html#eq:orbit-stabilizer">9.4</a>; its states carry their authored inputs, positioned values, and realized A-outputs, and its arrows are the action’s actual two-legged transports. </p>
+<p>From the functor we form its total Grothendieck construction, \(\mathcal T_A=\int _{\mathcal B}\mathcal A_A\) <span class="upshape">(</span>Definition&#160;<a href="part-stack.html#eq:orbit-stabilizer">9.4</a><span class="upshape">)</span>: an object is a base position together with a normalized value state in its fibre, a morphism is a base channel together with the compatible transport, and the whole is an action groupoid formed from the distinguished element. The residue-\(\mathbb {C}\) zeros occur as states of this total categorical object. The distinguished element fixes \(0\) and \(N\), and between them the upper half-space; at the north frame, where the positioning factor is trivial and the frame is the element itself, the equation \(A=0\) on that half-space selects the residue states, with Euler presenting at one end, Weierstrass at the other. The preimage of this selection under the action — the preimage of the total action groupoid, membership travelling by composition in the base — is the residue subdiagram \(\mathcal R_A\) of Definition&#160;<a href="part-stack.html#def:residue-subdiagram">10.5</a>, included in \(\mathcal A_A\) by \(\iota _A\). The restriction of the total object to this preimage sits over the same base. </p>
+<p>This restriction carries the same unique fixed \(0\)-to-\(N\) tape for every residue zero. At the north object the canonical positioning factor is the identity, so the frame is \(D_A\) itself. The checked north-frame and endpoint-fixation declarations identify its two fixed boundary points. The Euler and Weierstrass expressions are the two endpoint presentations of this one action, and the checked GPV continuation between them is unique once its initial rung is fixed. Moreover every projective arrow has the factorization </p>
+<div class="displaymath" id="a0000000110">
+  \[  f=o_y\, r_f\, o_x^{-1}, \qquad r_f=\operatorname {stabilizerPart}(f),  \]
+</div>
+<p> and <span class="ttfamily">stabilizerPart_unique</span> identifies \(r_f\) as the unique north-stabilizer element in this factorization. Thus the inverse-image witness carries the already determined \(0\)-to-\(N\) tape and its unique residual stabilizer part; a C3 zero index selects a state on that fixed base channel. </p>
+<p><em>The fibrewise inverse image.</em> For each base object \(X\), an object of \(\mathcal R_A(X)\) consists of an ambient state \(x\in \mathcal A_A(X)\) together with a north residue state \(x_N\) and an arrow \(g:N\to X\) satisfying </p>
+<div class="displaymath" id="a0000000111">
+  \[  \mathcal A_A(g)(x_N)=x. \tag {W}  \]
+</div>
+<p> This is the object property <span class="ttfamily">IsCResidueState A X</span>. The fibre \(\mathcal R_A(X)\) is the full subgroupoid of \(\mathcal A_A(X)\) on precisely these objects. Its inclusion </p>
+<div class="displaymath" id="a0000000112">
+  \[  \iota _{A,X}:\mathcal R_A(X)\hookrightarrow \mathcal A_A(X)  \]
+</div>
+<p> sends a witnessed object to its ambient state. For two such objects \(x,y\), the induced map </p>
+<div class="displaymath" id="a0000000113">
+  \[  \operatorname {Hom}_{\mathcal R_A(X)}(x,y) \longrightarrow \operatorname {Hom}_{\mathcal A_A(X)} (\iota _{A,X}x,\iota _{A,X}y) \tag {H}  \]
+</div>
+<p> is a bijection: every ambient arrow between the selected states is already an arrow of the full subgroupoid, and its ambient arrow determines it uniquely. Surjectivity of <span class="upshape">(H)</span> is fullness of \(\iota _{A,X}\); injectivity is faithfulness. </p>
+<p><em>Transport of the inverse image.</em> Let \(f:X\to Y\). If \(x\) has witness <span class="upshape">(W)</span>, then \(\mathcal A_A(f)(x)\) has the same north state \(x_N\) and the composite witness \(g\fatsemi f:N\to Y\), because </p>
+<div class="displaymath" id="a0000000114">
+  \[  \begin{aligned}  \mathcal A_A(g\fatsemi f)(x_N) & =\mathcal A_A(f)\bigl(\mathcal A_A(g)(x_N)\bigr)\\ & =\mathcal A_A(f)(x). \end{aligned} \tag {C}  \]
+</div>
+<p> This is the calculation recorded by <span class="ttfamily">cResidue_lands</span>. It defines the restricted transport </p>
+<div class="displaymath" id="a0000000115">
+  \[  \mathcal R_A(f):\mathcal R_A(X)\longrightarrow \mathcal R_A(Y):  \]
+</div>
+<p> on objects it uses the composite witness in <span class="upshape">(C)</span>, and on arrows it applies the ambient transport \(\mathcal A_A(f)\). Composition in the projective base therefore supplies closure of the inverse-image system under every A-section transport. </p>
+<p><em>The natural inclusion.</em> The fibrewise inclusions assemble over \(\mathcal B\) in the square </p>
+<div class="displaymath" id="a0000000116">
+  \[  \text{[commutative diagram -- see the PDF / the master file]}\tag {Nat}  \]
+</div>
+<p> For an object \(x\), both routes in <span class="upshape">(Nat)</span> have underlying state \(\mathcal A_A(f)(x)\); for an arrow \(\alpha \), both routes have underlying arrow \(\mathcal A_A(f)(\alpha )\). The upper route additionally carries the residue witness \(g\fatsemi f\) established in <span class="upshape">(C)</span>. Hence </p>
+<div class="displaymath" id="a0000000117">
+  \[  \mathcal R_A(f)\fatsemi \iota _{A,Y} =\iota _{A,X}\fatsemi \mathcal A_A(f). \tag {Inc}  \]
+</div>
+<p> and these equations for every \(f\) are the naturality of \(\iota _A:\mathcal R_A\Rightarrow \mathcal A_A\). </p>
+<p>The preimage now assembles over the base into a total of its own. Its objects are the positioned squares of the C-residue image and its morphisms are the value transports of \(\mathcal T_A\) between them. Its inclusion is the total reading of \(\iota _A\), </p>
+<div class="displaymath" id="a0000000118">
+  \[  \text{[commutative diagram -- see the PDF / the master file]} \]
+</div>
+<p> <span class="upshape">(</span><span class="ttfamily">AsectionCResidueInclusionTotal</span> in the Lean source, the Grothendieck functoriality of \(\iota _A\) applied to it<span class="upshape">)</span>. On objects it sends \((X,x)\) to \((X,\iota _{A,X}x)\) and leaves the base position unchanged; on a Grothendieck morphism it leaves the base arrow unchanged and applies the fibre inclusion only to the compatible transport. Consequently equality after inclusion forces equality of the base legs and, by fibrewise faithfulness, equality of the transport legs: the total inclusion is faithful. Conversely, an ambient total morphism between two objects in the image already has a base leg \(f\) and a fibre morphism between selected target states; fibrewise fullness gives its preimage in \(\mathcal R_A\), with the same \(f\). Hence the total inclusion is full <span class="upshape">(</span><span class="ttfamily">AsectionCResidueInclusionTotal_full</span> and <span class="ttfamily">AsectionCResidueInclusionTotal_faithful</span><span class="upshape">)</span>. It is therefore an isomorphism onto its image. The C-residue total is that image itself: it consists exactly of the selected objects together with the fixed tape and all ambient total morphisms between them. </p>
+<p>Lemma&#160;<a href="part-stack.html#eq:residue-total-base-arrow">10.6</a> proves, in this exact inverse-image groupoid, that any two objects are joined by one Grothendieck morphism: the relative orbit–stabilizer face is its base component and the \(G_2\) transport is its fibre component. Thus \(\int _{\mathcal B}\mathcal R_A\) is connected. This is a groupoid-register statement: at this stage the established conclusion is connectedness; equality of real coordinates and the common centre arise from the colimit readout below. </p>
+<p>By Remark&#160;8.3.5 of <span class="cite">
+	[
+	<a href="part-stack.html#Riehl" >23</a>
+	]
+</span>, a category is nonempty and connected if and only if its \(\pi _0\) is the singleton set. Condition C4 supplies nonemptiness — infinitely many residue-\(\mathbb {C}\) zero-sphere states populate the preimage — and connectedness was just established. Therefore, by Lemma&#160;<a href="part-stack.html#lem:pi0-grothendieck">10.3</a> <span class="upshape">(</span><span class="ttfamily">pi0GrothendieckEquiv</span><span class="upshape">)</span>, </p>
+<div class="displaymath" id="a0000000119">
+  \[  \pi _0\Bigl(\int _{\mathcal B}\mathcal R_A\Bigr)\; \cong \; \operatorname *{colim}_{\mathcal B}\, (\pi _0\circ \mathcal R_A)  \]
+</div>
+<p> collapses to a singleton \(\kappa \). Here \(\operatorname {val}\) is exactly the A-specific instantiation of that singleton equality at certified residue representatives. Their real coordinate is definitionally the project’s level read </p>
+<div class="displaymath" id="a0000000120">
+  \[  \operatorname {transportLevel}_A(n) =\operatorname {Re}\bigl(A.\operatorname {sphereZero}(n)\bigr).  \]
+</div>
+<p> Instantiating the singleton equality at the \(n\)-th and \(0\)-th certified representatives is itself the \(\operatorname {val}\) step: </p>
+<div class="displaymath" id="a0000000121">
+  \[  \operatorname {transportLevel}_A(n)=\operatorname {transportLevel}_A(0).  \]
+</div>
+<p> The proof then sets \(c=\operatorname {transportLevel}_A(0)\). Every populated residue-\(\mathbb {C}\) zero \(6\)-sphere has real centre \(c\), so the infinitely many residue-\(\mathbb {C}\) zero spheres of the A-section are concentric. </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:nontrivial">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">10.8</span>
+    <span class="corollary_thmtitle">Translation to the classical framework</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#cor:nontrivial">#</a>
+    
+    <a class="icon proof" href="part-stack.html#a0000000122"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="part-stack.html#thm:concentricity">Theorem 10.7</a></li>
+          
+          <li><a href="sect0002.html#thm:zero-equivalence">Theorem 8.1</a></li>
+          
+          <li><a href="sect0002.html#thm:zero-spheres">Theorem 8.2</a></li>
+          
+          <li><a href="part-stack.html#lem:residue-spheres">Lemma 10.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/ASection.nontrivial_one_centre" class="lean_decl">ASection.nontrivial_one_centre</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p>   Under the residue-\(\mathbb {C}\)/classically-nontrivial-zero identification, the already-proved populated residue-\(\mathbb {C}\) zero spheres are the classically nontrivial zero spheres and retain the common centre \(c\) supplied by Theorem&#160;<a href="part-stack.html#thm:concentricity">10.7</a>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000122">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>This is the translation of the C-residue population through Theorems&#160;<a href="sect0002.html#thm:zero-equivalence">8.1</a> and&#160;<a href="sect0002.html#thm:zero-spheres">8.2</a>. The centre comes directly from Theorem&#160;<a href="part-stack.html#thm:concentricity">10.7</a>, while <span class="upshape">C4</span> and Lemma&#160;<a href="part-stack.html#lem:residue-spheres">10.2</a> supply infinitude and disjointness. </p>
+
+  </div>
+</div>
+<h1 id="sec:verification">11 Corollaries</h1>
+
+<p>Two corollaries close the argument. The first checks that the octonionic zeta is an A-section, verifying its four conditions C1–C4 one by one against the classical facts of Part&#160;1; the Concentricity Theorem then applies to it directly, and its residue-\(\mathbb {C}\) zero-spheres share one real centre \(c\). The second corollary is the Riemann Hypothesis. The functional equation of \(\xi \) now pins that centre: it sends a zero of real part \(c\) to one of real part \(1-c\), and applied to the common centre it forces \(c=1-c\), so \(c=\tfrac 12\). Every nontrivial zero lies on the critical line. </p>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:zeta-section">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">11.1</span>
+    <span class="corollary_thmtitle">\(\zeta _{\mathbb {O}^{*}}\) is an \(A\)-section</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#cor:zeta-section">#</a>
+    
+    <a class="icon proof" href="part-stack.html#a0000000123"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="part-stack.html#def:A-section">Definition 10.4</a></li>
+          
+          <li><a href="sect0002.html#thm:zeta-in-R">Theorem 7.2</a></li>
+          
+          <li><a href="sect0001.html#thm:riemann">Theorem 1.1</a></li>
+          
+          <li><a href="sect0001.html#thm:euler">Theorem 1.2</a></li>
+          
+          <li><a href="sect0001.html#cor:hadamard-infinitude">Corollary 1.4</a></li>
+          
+          <li><a href="part-stack.html#prop:weierstrass">Proposition 10.1</a></li>
+          
+          <li><a href="sect0002.html#thm:zero-spheres">Theorem 8.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zetaSection" class="lean_decl">zetaSection</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p>   \(\zeta _{\mathbb {O}^{*}}\) is an \(A\)-section <span class="upshape">(Definition&#160;<a href="part-stack.html#def:A-section">10.4</a>)</span>: a section of \(\mathcal R\) satisfying <span class="upshape">(C1)–(C4)</span>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000123">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(\zeta _{\mathbb {O}^{*}}\in \mathcal R\) by slice-preservation (Theorem&#160;<a href="sect0002.html#thm:zeta-in-R">7.2</a>). The verification of <span class="upshape">(C1)–(C4)</span> cites the classical facts of the Riemann zeta function (Part&#160;1) and the slice-regular zero-geometry that translates them: </p>
+<ul class="itemize">
+  <li>[leftmargin=2em] </li>
+  <li><p><b class="bfseries">(C1)</b> <em>Meromorphic continuation; simple pole.</em> Classical fact: \(\zeta \) is meromorphically continued with a single simple pole at \(s=1\) (Theorem&#160;<a href="sect0001.html#thm:riemann">1.1</a>); the value of \(\zeta _{\mathbb {O}^{*}}\) there is the point at infinity, \(\zeta _{\mathbb {O}^{*}}(1)=\infty =N\) (Definition&#160;<a href="sect0002.html#def:zeta_O">4.1</a>). </p>
+</li>
+  <li><p><b class="bfseries">(C2)</b> <em>Infinite Euler product.</em> Classical fact: \(\zeta =\prod _p(1-p^{-s})^{-1} =\exp (\sum _p\ell _p)\) on \(\Re s{\gt}1\), the family indexed by the infinitely many primes (Theorem&#160;<a href="sect0001.html#thm:euler">1.2</a>). </p>
+</li>
+  <li><p><b class="bfseries">(C3)</b> <em>Infinite Weierstrass factorization.</em> Supplied by the <em>slice-regular</em> Weierstrass factorization (Proposition&#160;<a href="part-stack.html#prop:weierstrass">10.1</a>; <span class="cite">
+	[
+	<a href="part-stack.html#AdFslice" >2</a>
+	, 
+	Prop.
+	
+	3.1, Thm.
+	
+	3.2
+	]
+</span>, <span class="cite">
+	[
+	<a href="part-stack.html#GV" >10</a>
+	]
+</span>): \((q-1)\, \zeta _{\mathbb {O}^{*}}=q^{m}Re^{g}\prod _n\mathcal E(\cdot ;q_n)\) <span class="upshape">(</span>pole factor at \(p_0=1\); classically, Hadamard factors \((s-1)\zeta (s)\)<span class="upshape">)</span>, where \(m=0\) <span class="upshape">(</span>\(\zeta (0)=-\tfrac 12\neq 0\)<span class="upshape">)</span>, \(R\) is the product over the nonzero residue-\(\mathbb {R}\) zeros, the classically trivial zeros \(-2,-4,\dots \), honest real zeros of \(\zeta _{\mathbb {O}^{*}}\), and \(\{ q_n\} \) enumerates its residue-\(\mathbb {C}\) zero-spheres. </p>
+</li>
+  <li><p><b class="bfseries">(C4)</b> <em>Infinitely many residue-\(\mathbb {C}\) zeros.</em> Classical fact: \(\zeta \) has infinitely many nontrivial zeros (Corollary&#160;<a href="sect0001.html#cor:hadamard-infinitude">1.4</a>; also Hardy, Theorem&#160;<a href="sect0001.html#thm:hardy">1.5</a>). By the residue dictionary below these are exactly the residue-\(\mathbb {C}\) zeros, so \(\{ q_n\} \) is infinite. </p>
+</li>
+</ul>
+<p> After the <span class="upshape">(C1)–(C4)</span> verification, the downstream centre-pinning uses the <em>functional equation</em> \(\xi (s)=\xi (1-s)\), \(\xi (\bar s)=\overline{\xi (s)}\) (Theorem&#160;<a href="sect0001.html#thm:riemann">1.1</a>), used in Corollary&#160;<a href="part-stack.html#cor:rh">11.2</a>. The <em>residue dictionary</em>, a closed zero of \(\zeta _{\mathbb {O}^{*}}\) is a real point (residue field \(\mathbb {R}\), the classically <em>trivial</em> zeros) or a \(6\)-sphere \(S_{(\sigma ,\gamma )}\) (residue field \(\mathbb {C}\), the classically <em>nontrivial</em> zeros), is the slice-regular zero-geometry of Theorem&#160;<a href="sect0002.html#thm:zero-spheres">8.2</a> and <span class="cite">
+	[
+	<a href="part-stack.html#AdF" >1</a>
+	]
+</span>; it is what makes “residue-\(\mathbb {C}\)” and “nontrivial” the same notion. Thus <span class="upshape">(C1)–(C4)</span> hold. </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:rh">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">11.2</span>
+    <span class="corollary_thmtitle">Riemann Hypothesis</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#cor:rh">#</a>
+    
+    <a class="icon proof" href="part-stack.html#a0000000124"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="part-stack.html#cor:zeta-section">Corollary 11.1</a></li>
+          
+          <li><a href="part-stack.html#thm:concentricity">Theorem 10.7</a></li>
+          
+          <li><a href="part-stack.html#cor:nontrivial">Corollary 10.8</a></li>
+          
+          <li><a href="sect0002.html#thm:rh-equiv">Theorem 8.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zeta_riemannHypothesis" class="lean_decl">zeta_riemannHypothesis</a></li>
+          
+          <li><a href="/find/#doc/zeta_criticalLine_zeros_infinite" class="lean_decl">zeta_criticalLine_zeros_infinite</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p>   Every nontrivial zero of the classical Riemann zeta function has real part \(\tfrac 12\); in particular infinitely many zeros lie on the line \(\Re s=\tfrac 12\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000124">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>By Corollary&#160;<a href="part-stack.html#cor:zeta-section">11.1</a>, \(\zeta _{\mathbb {O}^{*}}\) satisfies <span class="upshape">(C1)–(C4)</span>. By Theorem&#160;<a href="part-stack.html#thm:concentricity">10.7</a>, its populated residue-\(\mathbb {C}\) value-transport colimit is the real singleton \(\{ c\} \) and its residue-\(\mathbb {C}\) zero spheres are already concentric about \(c\). By Corollary&#160;<a href="part-stack.html#cor:nontrivial">10.8</a>, these are the classically nontrivial zeros, so every nontrivial zero has real part \(c\). The functional equation \(\xi (s)=\xi (1-s)\) (Theorem&#160;<a href="sect0001.html#thm:riemann">1.1</a>) sends a zero of real part \(c\) to one of real part \(1-c\); applied to the <em>common</em> centre it forces \(c=1-c\), whence \(c=\tfrac 12\) (this is Theorem&#160;<a href="sect0002.html#thm:rh-equiv">8.3</a> read on \(\zeta _{\mathbb {O}^{*}}\)). Therefore every nontrivial zero has real part \(\tfrac 12\), and by <span class="upshape">(C4)</span> infinitely many lie on \(\Re s=\tfrac 12\). </p>
+
+  </div>
+</div>
+<p>A word on why the argument takes the shape it does. No one can hold an \(8\)-dimensional graph in the mind’s eye, or draw the continuum of Riemann spheres the section lives on. The epigraph names the way through: no single viewpoint sees the whole, but when the viewpoints are multiplied and conjugated, a vision appears that none of them held alone. Each slice direction is one such viewpoint; the value-bearing A-section functor gathers all of them over the base, the total object holds them together, and the colimit conjugates them into a single answer. The concentricity we could not picture becomes one component we can compute. </p>
+<div class="remark_thmwrapper theorem-style-remark" id="rmk:image-span">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">11.3</span>
+    <span class="remark_thmtitle">The image span of a fully faithful inclusion</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#rmk:image-span">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> For any fully faithful functor \(F:\mathcal C\to \mathcal D\) there is a canonical roof through the image, </p>
+<div class="displaymath" id="a0000000125">
+  \[  \text{[commutative diagram -- see the PDF / the master file]} \]
+</div>
+<p> the backward leg being an isomorphism of categories onto the image and the forward leg the canonical inclusion. It is a general fact, available here for \(\iota _A\) and for \(\int \iota _A\), and it is the shape a length-two zigzag argument would use. Theorem&#160;<a href="part-stack.html#thm:concentricity">10.7</a> obtains connectedness directly from transitivity at the total, by a single element. The image span records the corresponding length-two alternative. </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="rmk:thomason">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">11.4</span>
+    <span class="remark_thmtitle">Two alternative routes</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="part-stack.html#rmk:thomason">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> Two other proofs of Theorem&#160;<a href="part-stack.html#thm:concentricity">10.7</a> are available. The first runs over the base. The restriction sits over \(\mathcal B\) through its two projections, </p>
+<div class="displaymath" id="a0000000126">
+  \[  \text{[commutative diagram -- see the PDF / the master file]} \]
+</div>
+<p> and one may connect residue states footpoint by footpoint: zigzags in the connected base, lifted through the fibres. That route travels through \(\mathcal B\) and reassembles the value data leg by leg. The second is Thomason’s homotopy colimit theorem <span class="cite">
+	[
+	<a href="part-stack.html#Thomason79" >25</a>
+	]
+</span>: the classifying space of a Grothendieck construction is homotopy equivalent to the homotopy colimit of the classifying spaces of its fibres, and reading connected components through that equivalence yields the same collapse of \(\pi _0\bigl(\int _{\mathcal B}\mathcal R_A\bigr)\). The proof given here stays at the level of categories, where Lemma&#160;<a href="part-stack.html#lem:pi0-grothendieck">10.3</a> suffices: the base route assembles what the action already supplies whole, the Thomason route is the topological shadow of the same computation, and both remain expository routes outside the Lean development. </p>
+
+  </div>
+</div>
+<dl class="bibliography">
+  <dt><a name="AdF">1</a></dt>
+  <dd><p>A.&#160;Altavilla and C.&#160;De Fabritiis, <em>\(\ast \)-logarithm for slice regular functions</em>, Rend. Lincei Mat. Appl. (arXiv:2106.04227); the slice-regular exponential \(\exp _{*}\) (Def.&#160;2.14, and Rem.&#160;2.23 for the slice-preserving formula \(\exp _{*}(f)=e^{f_0}(\cos f_1+I\sin f_1)\)) and the \(\ast \)-logarithm on never-vanishing functions (Def.&#160;2.24, Thm.&#160;6.17). </p>
+</dd>
+  <dt><a name="AdFslice">2</a></dt>
+  <dd><p>A.&#160;Altavilla and C.&#160;De Fabritiis, <em>\(s\)-regular functions which preserve a complex slice</em>, Ann. Mat. Pura Appl. (arXiv:1801.01318); Prop.&#160;3.1 and Thm.&#160;3.2 factor a slice-regular function into a factor carrying exactly its (real and spherical) zeros and a never-vanishing factor, including the case of infinitely many zeros, the citable form of C3. </p>
+</dd>
+  <dt><a name="Baez02">3</a></dt>
+  <dd><p>J.&#160;C.&#160;Baez, <em>The octonions</em>, Bull. Amer. Math. Soc. <b class="bfseries">39</b> (2002), 145–205. </p>
+</dd>
+  <dt><a name="BisiWinkelmann">4</a></dt>
+  <dd><p>C.&#160;Bisi and J.&#160;Winkelmann, <em>Invariants and Automorphisms for slice regular functions: the octonionic case</em>, arXiv:2411.16762 (2024); companion arXiv:2411.15896 in J.&#160;Noncommutative Geometry (EMS). Supplies the \(I\)-independent lift \(\phi _I\circ F=A\circ \phi _I\) (the slice projection) and, in §3.2/§3.7/§14, the axially-symmetric-domain, slice-preserving, and central-divisor notions. </p>
+</dd>
+  <dt><a name="CSS12">5</a></dt>
+  <dd><p>F.&#160;Colombo, I.&#160;Sabadini, and D.&#160;C.&#160;Struppa, <em>Noncommutative Functional Calculus: Theory and Applications of Slice Hyperholomorphic Functions</em>, Progress in Mathematics <b class="bfseries">289</b>, Birkhäuser, 2011. </p>
+</dd>
+  <dt><a name="GP11">6</a></dt>
+  <dd><p>R.&#160;Ghiloni and A.&#160;Perotti, <em>Slice regular functions on real alternative algebras</em>, Adv. Math. <b class="bfseries">226</b> (2011), 1662–1691. </p>
+</dd>
+  <dt><a name="SeriesExp">7</a></dt>
+  <dd><p>R.&#160;Ghiloni, A.&#160;Perotti, and C.&#160;Stoppato, <em>Singularities of slice regular functions over real alternative \(\ast \)-algebras</em>, Adv. Math. <b class="bfseries">305</b> (2017), 1085–1130 (slice-function and stem-function formalism, §1–§2; the slice-preserving \(\Leftrightarrow \) intrinsic \(\Leftrightarrow \) \(\mathbb {R}\)-valued-stem characterization used in Definition&#160;<a href="sect0002.html#def:slice-squares">6.4</a>; §11: slice semiregular functions, Def.&#160;11.1, Thm.&#160;11.3). </p>
+</dd>
+  <dt><a name="GS07">8</a></dt>
+  <dd><p>G.&#160;Gentili and D.&#160;C.&#160;Struppa, <em>A new theory of regular functions of a quaternionic variable</em>, Adv. Math. <b class="bfseries">216</b> (2007), 279–301. </p>
+</dd>
+  <dt><a name="GSS13">9</a></dt>
+  <dd><p>G.&#160;Gentili, C.&#160;Stoppato, and D.&#160;C.&#160;Struppa, <em>Regular Functions of a Quaternionic Variable</em>, Springer Monographs in Mathematics, Springer, 2013. </p>
+</dd>
+  <dt><a name="GV">10</a></dt>
+  <dd><p>G.&#160;Gentili and I.&#160;Vignozzi, <em>The Weierstrass factorization theorem for slice regular functions over the quaternions</em>, Ann. Global Anal. Geom. <b class="bfseries">40</b> (2011), 435–466. </p>
+</dd>
+  <dt><a name="Hardy14">11</a></dt>
+  <dd><p>G.&#160;H.&#160;Hardy, <em>Sur les zéros de la fonction \(\zeta (s)\) de Riemann</em>, C. R. Acad. Sci. Paris <b class="bfseries">158</b> (1914), 1012–1014. </p>
+</dd>
+  <dt><a name="Munkres00">12</a></dt>
+  <dd><p>J.&#160;R.&#160;Munkres, <em>Topology</em>, 2nd ed., Prentice Hall, 2000. </p>
+</dd>
+  <dt><a name="Riemann1859">13</a></dt>
+  <dd><p>B.&#160;Riemann, <em>Über die Anzahl der Primzahlen unter einer gegebenen Grösse</em>, Monatsber. Berlin. Akad. (1859). </p>
+</dd>
+  <dt><a name="Schafer66">14</a></dt>
+  <dd><p>R.&#160;D.&#160;Schafer, <em>An Introduction to Nonassociative Algebras</em>, Academic Press, 1966. </p>
+</dd>
+  <dt><a name="Titchmarsh86">15</a></dt>
+  <dd><p>E.&#160;C.&#160;Titchmarsh (rev. D.&#160;R.&#160;Heath-Brown), <em>The Theory of the Riemann Zeta-Function</em>, 2nd ed., Oxford University Press, 1986. </p>
+</dd>
+  <dt><a name="Wang">16</a></dt>
+  <dd><p>X.&#160;Wang, <em>On geometric aspects of quaternionic and octonionic slice regular functions</em>, arXiv:1512.01414v3. </p>
+</dd>
+  <dt><a name="VS">17</a></dt>
+  <dd><p>G.&#160;Gentili, J.&#160;Prezelj, and F.&#160;Vlacci, <em>Slice conformality and Riemann manifolds on quaternions and octonions</em>, Math. Z. <b class="bfseries">302</b> (2022), 971–994 (arXiv:2107.07892v2). </p>
+</dd>
+  <dt><a name="Stacks">18</a></dt>
+  <dd><p>The Stacks Project Authors, <em>The Stacks Project</em>, <a href="https://stacks.math.columbia.edu">https://stacks.math.columbia.edu</a>, 2024. </p>
+</dd>
+  <dt><a name="Mathlib">19</a></dt>
+  <dd><p>The mathlib Community, <em>The Lean mathematical library</em> (<span class="ttfamily">CategoryTheory.ActionCategory</span>, <span class="ttfamily">CategoryTheory.ConnectedComponents</span>, <span class="ttfamily">CategoryTheory.Comma</span>), <a href="https://leanprover-community.github.io/mathlib4_docs/">https://leanprover-community.github.io/mathlib4_docs/</a>. </p>
+</dd>
+  <dt><a name="GJ">20</a></dt>
+  <dd><p>P.&#160;G.&#160;Goerss and J.&#160;F.&#160;Jardine, <em>Simplicial Homotopy Theory</em>, Modern Birkhäuser Classics, Birkhäuser, 2009 (Ch.&#160;I: simplicial sets and the nerve; Ch.&#160;IV: the bisimplicial engine for homotopy colimits). </p>
+</dd>
+  <dt><a name="GPVwind">21</a></dt>
+  <dd><p>G.&#160;Gentili, J.&#160;Prezelj, and F.&#160;Vlacci, <em>On a continuation of quaternionic and octonionic logarithm along curves and the winding number</em>, J.&#160;Math. Anal. Appl. <b class="bfseries">536</b> (2024), no.&#160;1, Paper No.&#160;128219, DOI 10.1016/j.jmaa.2024.128219 (arXiv:2307.14047) (Rem.&#160;2.1: the direction \(I(q)\) has no continuous extension to \(\mathbb {R}\); Def.&#160;4.7: tame path = unique companion (Def.&#160;4.20 for maps; Def.&#160;5.2: tame/semi-tame at an obstruction parameter); Def.&#160;5.11: the loop lift \(\mathrm{pr}_1\circ \Gamma =\gamma \circ \exp \); Cor.&#160;5.13: a lift of a loop exists iff the signature lies in \(\{ 0,-1\} \) on each obstruction interval, and is then a loop; Cor.&#160;5.21: winding \(=|\sigma ^c|/2\)). </p>
+</dd>
+  <dt><a name="Quillen73">22</a></dt>
+  <dd><p>D.&#160;Quillen, <em>Higher algebraic \(K\)-theory: I</em>, in <em>Algebraic \(K\)-theory, I</em>, Lecture Notes in Math. <b class="bfseries">341</b>, Springer, 1973, 85–147 (Theorem&#160;A: a functor whose comma categories are contractible is final and induces an equivalence of classifying spaces). </p>
+</dd>
+  <dt><a name="Riehl">23</a></dt>
+  <dd><p>E.&#160;Riehl, <em>Categorical Homotopy Theory</em>, New Mathematical Monographs <b class="bfseries">24</b>, Cambridge University Press, 2014 (the nerve, classifying spaces, the two-sided bar construction, and homotopy colimits; Ch.&#160;1, 4–6). </p>
+</dd>
+  <dt><a name="RiehlContext">24</a></dt>
+  <dd><p>E.&#160;Riehl, <em>Category Theory in Context</em>, Aurora: Dover Modern Math Originals, Dover Publications, 2016 (action groupoids and their orbits; Ex.&#160;1.5.19). </p>
+</dd>
+  <dt><a name="Thomason79">25</a></dt>
+  <dd><p>R.&#160;W.&#160;Thomason, <em>Homotopy colimits in the category of small categories</em>, Math. Proc. Cambridge Philos. Soc. <b class="bfseries">85</b> (1979), 91–109 (Thm.&#160;1.2: the classifying space of the Grothendieck construction as a homotopy colimit). </p>
+</dd>
+  <dt><a name="Vistoli">26</a></dt>
+  <dd><p>A.&#160;Vistoli, <em>Notes on Grothendieck topologies, fibered categories and descent theory</em>, in <em>Fundamental Algebraic Geometry</em>, Math. Surveys Monogr. <b class="bfseries">123</b>, AMS, 2005 (arXiv:math/0412512); §3.1 for the Grothendieck construction and categories fibered in groupoids. </p>
+</dd>
+</dl>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0002.html" title="Slice-Preserving Theory, the Ring \(\mathcal R\), and the Equivalence"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Concentric Zero-Spheres of a class of sections of the commutative ring \(\mathcal R\) of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

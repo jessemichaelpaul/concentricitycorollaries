@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Classical Background</title>
+<link rel="next" href="sect0002.html" title="Slice-Preserving Theory, the Ring R, and the Equivalence" />
+<link rel="prev" href="index.html" title="Concentric Zero-Spheres of a class of sections of the commutative ring R of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary" />
+<link rel="up" href="index.html" title="Concentric Zero-Spheres of a class of sections of the commutative ring R of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Concentric Zero-Spheres of a class of sections of the commutative ring \(\mathcal R\) of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="index.html#a0000000004"><span class="toc_ref"></span> <span class="toc_entry">Introduction</span></a>
+ </li>
+<li class=" active current">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Classical Background</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0001.html#a0000000005"><span class="toc_ref">1</span> <span class="toc_entry">The Riemann zeta function</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000011"><span class="toc_ref"></span> <span class="toc_entry">The compactified Riemann zeta on \(\mathbb {C}^{*}\)</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Slice-Preserving Theory, the Ring \(\mathcal R\), and the Equivalence</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000013"><span class="toc_ref">2</span> <span class="toc_entry">Octonions and slices</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000014"><span class="toc_ref">3</span> <span class="toc_entry">Slice-preserving functions</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000015"><span class="toc_ref">4</span> <span class="toc_entry">The octonionic zeta function \(\zeta _{\mathbb {O}^{*}}\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:R-ring"><span class="toc_ref">5</span> <span class="toc_entry">\(\mathcal R\) is a commutative ring</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:toolkit"><span class="toc_ref">6</span> <span class="toc_entry">The slice-preserving analytic toolkit on the compactified octonions</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000016"><span class="toc_ref">7</span> <span class="toc_entry">Slice preservation and symmetries</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000017"><span class="toc_ref">8</span> <span class="toc_entry">Zero geometry and the equivalence</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="part-stack.html"><span class="toc_ref">3</span> <span class="toc_entry">The Categorical Construction and the Concentricity Theorem</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="part-stack.html#sec:tower-stack"><span class="toc_ref">9</span> <span class="toc_entry">The geometric worlds and the categorical construction</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="part-stack.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">The compactified octonions and the point at infinity</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">What a slice-preserving section does</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Two geometric viewpoints</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The base of the degenerate set and the Grothendieck construction</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="part-stack.html#sec:detector"><span class="toc_ref">10</span> <span class="toc_entry">The concentricity theorem</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#sec:verification"><span class="toc_ref">11</span> <span class="toc_entry">Corollaries</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000002">1 Classical Background</h1>
+<h1 id="a0000000005">1 The Riemann zeta function</h1>
+<p>The Riemann zeta function is classical, and we take its basic theory as given. We recall only what the construction uses: the meromorphic continuation and functional equation, the Euler product over the primes, the Hadamard product over the zeros, and Hardy’s theorem. We then read \(\zeta \) in compactified form, as a map to the Riemann sphere, which is the form in which it will extend to the octonions. </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:riemann">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">1.1</span>
+    <span class="theorem_thmtitle">Meromorphic continuation and functional equation; Riemann <span class="cite">
+	[
+	<a href="part-stack.html#Riemann1859" >13</a>
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#thm:riemann">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/riemannZeta_meromorphicOn" class="lean_decl">riemannZeta_meromorphicOn</a></li>
+          
+          <li><a href="/find/#doc/riemannZeta_orderAt_one" class="lean_decl">riemannZeta_orderAt_one</a></li>
+          
+          <li><a href="/find/#doc/riemannZeta_conj" class="lean_decl">riemannZeta_conj</a></li>
+          
+          <li><a href="/find/#doc/riemannZeta_one_sub_zero" class="lean_decl">riemannZeta_one_sub_zero</a></li>
+          
+          <li><a href="/find/#doc/nontrivialZero_re_mem_Ioo" class="lean_decl">nontrivialZero_re_mem_Ioo</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  The Dirichlet series \(\zeta (s)=\sum _{n\ge 1}n^{-s}\), convergent for \(\operatorname{Re}s{\gt}1\), continues to a meromorphic function on \(\mathbb {C}\) with a single simple pole, at \(s=1\); equivalently, a holomorphic map to the Riemann sphere </p>
+<div class="displaymath" id="a0000000006">
+  \[  \zeta :\mathbb {C}^{*}\longrightarrow \mathbb {C}^{*},\qquad \mathbb {C}^{*}=\mathbb {C}\cup \{ \infty \} =S^2,\qquad \zeta (1)=\infty .  \]
+</div>
+<p> The completed function \(\xi (s)=\tfrac 12 s(s-1)\pi ^{-s/2}\Gamma (s/2)\zeta (s)\) is entire and satisfies </p>
+<div class="displaymath" id="a0000000007">
+  \[  \xi (s)=\xi (1-s),\qquad \xi (\bar s)=\overline{\xi (s)} .  \]
+</div>
+<p> Consequently, if \(\rho \) is a nontrivial zero of \(\zeta \) then so are \(\bar\rho \), \(1-\rho \), and \(1-\bar\rho \). The trivial zeros of \(\zeta \) are at \(s=-2,-4,\dots \); the nontrivial zeros lie in the strip \(0{\lt}\operatorname{Re}s{\lt}1\). The Riemann Hypothesis asserts that every nontrivial zero has \(\operatorname{Re}s=\tfrac 12\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:euler">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">1.2</span>
+    <span class="theorem_thmtitle">Infinite Euler product; <span class="cite">
+	[
+	<a href="part-stack.html#Titchmarsh86" >15</a>
+	, 
+	Ch.
+	
+	1
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#thm:euler">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zetaEulerLog" class="lean_decl">zetaEulerLog</a></li>
+          
+          <li><a href="/find/#doc/zetaC2_summable" class="lean_decl">zetaC2_summable</a></li>
+          
+          <li><a href="/find/#doc/zetaC2_zero_free" class="lean_decl">zetaC2_zero_free</a></li>
+          
+          <li><a href="/find/#doc/zetaC2_euler" class="lean_decl">zetaC2_euler</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  For \(\operatorname{Re}s{\gt}1\), </p>
+<div class="displaymath" id="a0000000008">
+  \[  \zeta (s)=\prod _{p\  \mathrm{prime}}\bigl(1-p^{-s}\bigr)^{-1} =\exp \! \Bigl(\sum _{p}\sum _{k\ge 1}\tfrac 1k\, p^{-ks}\Bigr),  \]
+</div>
+<p> the product taken over the infinitely many primes; it converges absolutely and is zero-free on \(\operatorname{Re}s{\gt}1\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hadamard">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">1.3</span>
+    <span class="theorem_thmtitle">Infinite Hadamard product; <span class="cite">
+	[
+	<a href="part-stack.html#Titchmarsh86" >15</a>
+	, 
+	Ch.
+	
+	2
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#thm:hadamard">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/xi_entire" class="lean_decl">xi_entire</a></li>
+          
+          <li><a href="/find/#doc/xi_zeros_eq_nontrivialZeros" class="lean_decl">xi_zeros_eq_nontrivialZeros</a></li>
+          
+          <li><a href="/find/#doc/zeta_hadamard" class="lean_decl">zeta_hadamard</a></li>
+          
+          <li><a href="/find/#doc/riemannZeta_nontrivialZeros_infinite" class="lean_decl">riemannZeta_nontrivialZeros_infinite</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  \(\xi \) is entire of order \(1\) with infinitely many zeros, which are exactly the nontrivial zeros \(\{ \rho \} \) of \(\zeta \), and admits the Hadamard factorization </p>
+<div class="displaymath" id="a0000000009">
+  \[  \xi (s)=\xi (0)\prod _{\rho }\Bigl(1-\tfrac {s}{\rho }\Bigr)e^{s/\rho },  \]
+</div>
+<p> the product taken over the infinitely many nontrivial zeros. </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:hadamard-infinitude">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">1.4</span>
+    <span class="corollary_thmtitle">Infinitude of the nontrivial zeros</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#cor:hadamard-infinitude">#</a>
+    
+    <a class="icon proof" href="sect0001.html#a0000000010"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0001.html#thm:hadamard">Theorem 1.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/riemannZeta_nontrivialZeros_infinite" class="lean_decl">riemannZeta_nontrivialZeros_infinite</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p>   \(\zeta \) has infinitely many nontrivial zeros. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000010">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Immediate from Theorem&#160;<a href="sect0001.html#thm:hadamard">1.3</a>: its zeros are infinitely many and are exactly the nontrivial zeros of \(\zeta \). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hardy">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">1.5</span>
+    <span class="theorem_thmtitle">Hardy <span class="cite">
+	[
+	<a href="part-stack.html#Hardy14" >11</a>
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#thm:hardy">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zeta_criticalLine_zeros_infinite" class="lean_decl">zeta_criticalLine_zeros_infinite</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  Infinitely many nontrivial zeros of \(\zeta \) lie on the line \(\operatorname{Re}s=\tfrac 12\). </p>
+
+  </div>
+</div>
+<h2 id="a0000000011">The compactified Riemann zeta on \(\mathbb {C}^{*}\)</h2>
+<p>For the slice construction, \(\zeta \) is taken in compactified form, with values on the Riemann sphere \(\mathbb {C}^{*}=\mathbb {C}\cup \{ \infty \} =S^2\) (the one-point compactification of \(\mathbb {C}\) <span class="cite">
+	[
+	<a href="part-stack.html#Munkres00" >12</a>
+	]
+</span>). The classical facts above are retained as stated. </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:zeta-Cstar">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">1.6</span>
+    <span class="definition_thmtitle">Compactified classical zeta</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#def:zeta-Cstar">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0001.html#thm:riemann">Theorem 1.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zetaC" class="lean_decl">zetaC</a></li>
+          
+          <li><a href="/find/#doc/zetaC_coe" class="lean_decl">zetaC_coe</a></li>
+          
+          <li><a href="/find/#doc/zetaC_one" class="lean_decl">zetaC_one</a></li>
+          
+          <li><a href="/find/#doc/zetaC_infty" class="lean_decl">zetaC_infty</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   \(\zeta _{\mathbb {C}^{*}}:\mathbb {C}^{*}\to \mathbb {C}^{*}\) is the meromorphic continuation of \(\zeta \) regarded as a map to the Riemann sphere: \(\zeta _{\mathbb {C}^{*}}(s)=\zeta (s)\) for \(s\in \mathbb {C}\setminus \{ 1\} \); \(\zeta _{\mathbb {C}^{*}}(1)=\infty \) (the simple pole, Theorem&#160;<a href="sect0001.html#thm:riemann">1.1</a>); and \(\zeta _{\mathbb {C}^{*}}(\infty )=1\), since \(\zeta (s)\to 1\) as \(\operatorname{Re}(s)\to +\infty \) (the \(p\)-test: only the \(n=1\) term of \(\sum _n n^{-s}\) survives). It is holomorphic into \(\mathbb {C}^{*}\) on \(\mathbb {C}^{*}\setminus \{ 1\} \), its sole pole being \(s=1\). The functional equation, the conjugate symmetry \(\zeta _{\mathbb {C}^{*}}(\bar s)=\overline{\zeta _{\mathbb {C}^{*}}(s)}\), and Hardy’s infinitude (Theorem&#160;<a href="sect0001.html#thm:hardy">1.5</a>) hold verbatim for \(\zeta _{\mathbb {C}^{*}}\), as they concern values on \(\mathbb {C}\setminus \{ 1\} \) where \(\zeta _{\mathbb {C}^{*}}=\zeta \). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:zero-Cstar">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">1.7</span>
+    <span class="lemma_thmtitle">Compactification preserves the zero set</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#lem:zero-Cstar">#</a>
+    
+    <a class="icon proof" href="sect0001.html#a0000000012"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0001.html#def:zeta-Cstar">Definition 1.6</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zetaC_coe_eq_zero_iff" class="lean_decl">zetaC_coe_eq_zero_iff</a></li>
+          
+          <li><a href="/find/#doc/zetaC_zero_iff" class="lean_decl">zetaC_zero_iff</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   \(Z(\zeta _{\mathbb {C}^{*}})=Z(\zeta )\): the zeros of \(\zeta _{\mathbb {C}^{*}}\) in \(\mathbb {C}^{*}\) are exactly the zeros of \(\zeta \) in \(\mathbb {C}\); in particular the nontrivial zeros coincide. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000012">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>On \(\mathbb {C}\setminus \{ 1\} \) the two functions agree, so they share all zeros there. The two adjoined values lie outside the zero set: \(\zeta _{\mathbb {C}^{*}}(1)=\infty \) is a pole and \(\zeta _{\mathbb {C}^{*}}(\infty )=1\). Hence compactification preserves the zero set exactly. </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="index.html" title="Concentric Zero-Spheres of a class of sections of the commutative ring \(\mathcal R\) of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Concentric Zero-Spheres of a class of sections of the commutative ring \(\mathcal R\) of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0002.html" title="Slice-Preserving Theory, the Ring \(\mathcal R\), and the Equivalence"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

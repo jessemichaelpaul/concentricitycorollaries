@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Slice-Preserving Theory, the Ring \(\mathcal R\), and the Equivalence</title>
+<link rel="next" href="part-stack.html" title="The Categorical Construction and the Concentricity Theorem" />
+<link rel="prev" href="sect0001.html" title="Classical Background" />
+<link rel="up" href="index.html" title="Concentric Zero-Spheres of a class of sections of the commutative ring R of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Concentric Zero-Spheres of a class of sections of the commutative ring \(\mathcal R\) of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="index.html#a0000000004"><span class="toc_ref"></span> <span class="toc_entry">Introduction</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Classical Background</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000005"><span class="toc_ref">1</span> <span class="toc_entry">The Riemann zeta function</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000011"><span class="toc_ref"></span> <span class="toc_entry">The compactified Riemann zeta on \(\mathbb {C}^{*}\)</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Slice-Preserving Theory, the Ring \(\mathcal R\), and the Equivalence</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0002.html#a0000000013"><span class="toc_ref">2</span> <span class="toc_entry">Octonions and slices</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000014"><span class="toc_ref">3</span> <span class="toc_entry">Slice-preserving functions</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000015"><span class="toc_ref">4</span> <span class="toc_entry">The octonionic zeta function \(\zeta _{\mathbb {O}^{*}}\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:R-ring"><span class="toc_ref">5</span> <span class="toc_entry">\(\mathcal R\) is a commutative ring</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:toolkit"><span class="toc_ref">6</span> <span class="toc_entry">The slice-preserving analytic toolkit on the compactified octonions</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000016"><span class="toc_ref">7</span> <span class="toc_entry">Slice preservation and symmetries</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000017"><span class="toc_ref">8</span> <span class="toc_entry">Zero geometry and the equivalence</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="part-stack.html"><span class="toc_ref">3</span> <span class="toc_entry">The Categorical Construction and the Concentricity Theorem</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="part-stack.html#sec:tower-stack"><span class="toc_ref">9</span> <span class="toc_entry">The geometric worlds and the categorical construction</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="part-stack.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">The compactified octonions and the point at infinity</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">What a slice-preserving section does</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Two geometric viewpoints</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The base of the degenerate set and the Grothendieck construction</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="part-stack.html#sec:detector"><span class="toc_ref">10</span> <span class="toc_entry">The concentricity theorem</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#sec:verification"><span class="toc_ref">11</span> <span class="toc_entry">Corollaries</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000003">2 Slice-Preserving Theory, the Ring \(\mathcal R\), and the Equivalence</h1>
+<h1 id="a0000000013">2 Octonions and slices</h1>
+<p>The octonions are an \(8\)-dimensional real division algebra, the largest of the normed division algebras. This section fixes what we need from them: the algebra itself; Artin’s theorem, that any two octonions generate an associative subalgebra, so that powers and slicewise complex analysis make sense; and the complex slices \(\mathbb {C}_v\), one for each imaginary direction \(v\in S^6\), together with their compactifications, the slice Riemann spheres. All the slices share the real axis and a single point at infinity, the north pole \(N\); that shared geometry is what the later construction turns around. </p>
+<p>The octonions \(\mathbb {O}\) have basis \(\{ 1,e_1,\dots ,e_7\} \) with each \(e_i^2=-1\). </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:octonions">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.1</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:octonions">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/Octonion" class="lean_decl">Octonion</a></li>
+          
+          <li><a href="/find/#doc/Octonion.normSq_mul" class="lean_decl">Octonion.normSq_mul</a></li>
+          
+          <li><a href="/find/#doc/Octonion.alt_left" class="lean_decl">Octonion.alt_left</a></li>
+          
+          <li><a href="/find/#doc/Octonion.alt_right" class="lean_decl">Octonion.alt_right</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  The octonions are: (i) a <em>division algebra</em>: every nonzero element has a multiplicative inverse; (ii) a <em>normed algebra</em>: \(|ab|=|a||b|\); (iii) <em>non-associative</em>: \((ab)c\neq a(bc)\) in general; (iv) <em>alternative</em>: \((aa)b=a(ab)\) and \(a(bb)=(ab)b\). </p>
+
+  </div>
+</div>
+<p>An octonion \(s\in \mathbb {O}\) decomposes as \(s=\sigma +w\) with \(\sigma =\operatorname{Re}(s)\in \mathbb {R}\) and \(w=\operatorname{Im}(s)\in \operatorname{Im}(\mathbb {O})\cong \mathbb {R}^7\); the unit imaginary octonions form \(S^6\subset \operatorname{Im}(\mathbb {O})\). </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:artin">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.2</span>
+    <span class="theorem_thmtitle">Artin <span class="cite">
+	[
+	<a href="part-stack.html#Schafer66" >14</a>
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:artin">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> In an alternative algebra, the subalgebra generated by any two elements is associative. </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:powers">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">2.3</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#cor:powers">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:artin">Theorem 2.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p>  Powers \(s^n\) are well-defined for any \(s\in \mathbb {O}\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:slices">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.4</span>
+    <span class="definition_thmtitle">Complex slices and slice Riemann spheres</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:slices">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:octonions">Definition 2.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/Octonion.unitImaginarySphere" class="lean_decl">Octonion.unitImaginarySphere</a></li>
+          
+          <li><a href="/find/#doc/Octonion.sliceEmbed" class="lean_decl">Octonion.sliceEmbed</a></li>
+          
+          <li><a href="/find/#doc/Octonion.sliceEmbed_mul" class="lean_decl">Octonion.sliceEmbed_mul</a></li>
+          
+          <li><a href="/find/#doc/Octonion.sliceSphere" class="lean_decl">Octonion.sliceSphere</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   For any unit imaginary octonion \(v\in S^6\), the <em>complex slice</em> is \(\mathbb {C}_v=\{ a+bv:a,b\in \mathbb {R}\} \subset \mathbb {O}\). Since \(v^2=-1\), this is a subalgebra isomorphic to \(\mathbb {C}\) via the \(\mathbb {R}\)-algebra isomorphism \(\varphi _v:\mathbb {C}\to \mathbb {C}_v\), \(i\mapsto v\). All slices share the real axis: \(\mathbb {C}_v\cap \mathbb {C}_w=\mathbb {R}\) for \(v\neq \pm w\). Its one-point compactification is the <em>slice Riemann sphere</em> \(\mathbb {C}_v^{*}:=\mathbb {C}_v\cup \{ \infty \} =S^2_v\), and \(\varphi _v\) extends to an isomorphism of Riemann spheres \(\varphi _v:\mathbb {C}^{*}\xrightarrow {\sim }\mathbb {C}_v^{*}\) with \(\varphi _v(\infty )=\infty \) (GPV <span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	]
+</span>, Prop.&#160;4.1/Thm.&#160;4.2). All slice spheres share the single point at infinity, as well as the real axis. </p>
+
+  </div>
+</div>
+<h1 id="a0000000014">3 Slice-preserving functions</h1>
+<p> The class we use is the <em>slice-preserving</em> slice-regular functions. We first recall slice regularity <span class="cite">
+	[
+	<a href="part-stack.html#GS07" >8</a>
+	, 
+	<a href="part-stack.html#GP11" >6</a>
+	, 
+	<a href="part-stack.html#CSS12" >5</a>
+	, 
+	<a href="part-stack.html#GSS13" >9</a>
+	]
+</span>, holomorphicity on each complex slice separately, as the ambient notion, then isolate the slice-preserving subclass, on which classical complex methods apply slicewise (by Artin’s theorem each slice \(\mathbb {C}_v\) is an associative subalgebra where classical complex analysis applies unchanged). </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:slice-regular">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">3.1</span>
+    <span class="definition_thmtitle">Slice regularity; <span class="cite">
+	[
+	<a href="part-stack.html#CSS12" >5</a>
+	, 
+	Def.
+	
+	5.1.1
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:slice-regular">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:slices">Definition 2.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  Let \(\Omega \subseteq \mathbb {O}\) be open. A function \(f:\Omega \to \mathbb {O}\) is <em>slice regular</em> if for each \(v\in S^6\), \(\varphi _v^{-1}\circ f\circ \varphi _v\) satisfies the Cauchy–Riemann equations on \(\varphi _v^{-1}(\Omega \cap \mathbb {C}_v)\subseteq \mathbb {C}\). A domain \(\Omega \) is <em>axially symmetric</em> if \(\sigma +\gamma v\in \Omega \) implies \(\sigma +\gamma w\in \Omega \) for all \(w\in S^6\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rep-formula">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">3.2</span>
+    <span class="theorem_thmtitle">Representation Formula; <span class="cite">
+	[
+	<a href="part-stack.html#CSS12" >5</a>
+	, 
+	Thm.
+	
+	5.1.7
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:rep-formula">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:slice-regular">Definition 3.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  Let \(f\) be slice regular on an axially symmetric slice domain \(\Omega \). Fix \(v_0\in S^6\) and write \(f(\sigma +\gamma v_0)=\alpha (\sigma ,\gamma )+v_0\cdot \beta (\sigma ,\gamma )\) with \(\alpha ,\beta :\mathbb {R}^2\to \mathbb {R}\). Then for every \(v\in S^6\), \(f(\sigma +\gamma v)=\alpha (\sigma ,\gamma )+v\cdot \beta (\sigma ,\gamma )\), where \(\alpha =\tfrac 12[f(\sigma +\gamma v_0)+f(\sigma -\gamma v_0)]\) and \(\beta =\tfrac 12 v_0^{-1}[f(\sigma -\gamma v_0)-f(\sigma +\gamma v_0)]\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:identity">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">3.3</span>
+    <span class="theorem_thmtitle">Identity Theorem; <span class="cite">
+	[
+	<a href="part-stack.html#CSS12" >5</a>
+	, 
+	Cor.
+	
+	5.1.9
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:identity">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:slice-regular">Definition 3.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/stem_identity" class="lean_decl">stem_identity</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Let \(f\) be slice regular on an axially symmetric slice domain \(\Omega \). If \(f\) vanishes on a subset of a single slice \(\Omega \cap \mathbb {C}_{v_0}\) with an accumulation point in \(\Omega \cap \mathbb {C}_{v_0}\), then \(f\equiv 0\) on all of \(\Omega \). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:extension">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">3.4</span>
+    <span class="theorem_thmtitle">Extension Theorem; <span class="cite">
+	[
+	<a href="part-stack.html#CSS12" >5</a>
+	, 
+	Thm.
+	
+	5.1.5
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:extension">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:slice-regular">Definition 3.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  Let \(U\subseteq \mathbb {C}\) be a domain symmetric under conjugation and \(g:U\to \mathbb {C}\) holomorphic. There is a unique slice regular \(\mathrm{ext}(g):\Omega _U\to \mathbb {O}\) on \(\Omega _U=\{ \sigma +\gamma v:\sigma +i\gamma \in U,\  v\in S^6\} \) with \(\mathrm{ext}(g)|_{\mathbb {C}_{v_0}}=\varphi _{v_0}\circ g\circ \varphi _{v_0}^{-1}\) for every \(v_0\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:slice-preserving">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">3.5</span>
+    <span class="definition_thmtitle">Slice-preserving functions; <span class="cite">
+	[
+	<a href="part-stack.html#AdF" >1</a>
+	, 
+	Def.
+	
+	2.7, Rem.
+	
+	2.8
+	]
+</span>; <span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	, 
+	<a href="part-stack.html#SeriesExp" >7</a>
+	, 
+	<a href="part-stack.html#Wang" >16</a>
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:slice-preserving">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:slice-regular">Definition 3.1</a></li>
+          
+          <li><a href="sect0002.html#thm:rep-formula">Theorem 3.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/IsIntrinsic" class="lean_decl">IsIntrinsic</a></li>
+          
+          <li><a href="/find/#doc/StemRing.isIntrinsic" class="lean_decl">StemRing.isIntrinsic</a></li>
+          
+          <li><a href="/find/#doc/StemRing.real_on_real" class="lean_decl">StemRing.real_on_real</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   A slice-regular function \(f\) on an axially symmetric domain \(\Omega \) is <em>slice preserving</em> if it maps every slice into itself: \(f(\Omega \cap \mathbb {C}_v)\subseteq \mathbb {C}_v\) for all \(v\in S^6\). For octonions (\(\# S^6{\gt}2\)) the following are equivalent characterisations: </p>
+<ol class="enumerate">
+  <li><p>\(f\) is <em>intrinsic</em>: \(f(q^{c})=f(q)^{c}\) for all \(q\in \Omega \), where \(q^{c}\) is octonionic conjugation (on a slice, \(a+bv\mapsto a-bv\)); </p>
+</li>
+  <li><p>its representation-formula components are \(\mathbb {R}\)-valued: writing \(f(\sigma +\gamma v)=\alpha (\sigma ,\gamma )+v\, \beta (\sigma ,\gamma )\) (Theorem&#160;<a href="sect0002.html#thm:rep-formula">3.2</a>), one has \(\alpha ,\beta :\mathbb {R}^2\to \mathbb {R}\), equivalently the inducing stem function \(F=F_1+\iota F_2\) has \(\mathbb {R}\)-valued components \(F_1,F_2\); </p>
+</li>
+  <li><p>\(f\) preserves two distinct slices; equivalently \(f(\Omega \cap \mathbb {R})\subseteq \mathbb {R}\) when \(\Omega \) is a slice domain. </p>
+</li>
+</ol>
+<p> Slice-preserving functions are the more restrictive subclass of slice-regular functions on which classical complex methods apply slicewise. They are precisely the sections of \(\mathcal R\) (Definition&#160;<a href="sect0002.html#def:R">5.1</a>), and on them the regular product is the ordinary pointwise product, so the product is commutative (Theorem&#160;<a href="sect0002.html#thm:wang">5.2</a>; Ghiloni–Perotti– Stoppato <span class="cite">
+	[
+	<a href="part-stack.html#SeriesExp" >7</a>
+	, 
+	Rem.
+	
+	1.8
+	]
+</span>). </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="rmk:slice-pres-compact">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">3.6</span>
+    <span class="remark_thmtitle">Compactified extension</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#rmk:slice-pres-compact">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> Definition&#160;<a href="sect0002.html#def:slices">2.4</a> through Definition&#160;<a href="sect0002.html#def:slice-preserving">3.5</a>, and Theorems&#160;<a href="sect0002.html#thm:rep-formula">3.2</a>–<a href="sect0002.html#thm:extension">3.4</a>, are stated in the literature on uncompactified domains \(\Omega \subseteq \mathbb {O}\) (and \(U\subseteq \mathbb {C}\)). We use them on the compactified \(\mathbb {O}^{*}=S^8\) and on the slice Riemann spheres \(\mathbb {C}_v^{*}=S^2_v\) (GPV’s slice Riemann manifolds <span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	]
+</span>). The passage \(\mathbb {O}\rightsquigarrow \mathbb {O}^{*}\), \(\mathbb {C}_v\rightsquigarrow \mathbb {C}_v^{*}\) adjoins only the shared point \(\infty =N\); it is recorded as a marked extension node (in the Lean development: cite the uncompactified statement and extend through the one-point compactification <span class="ttfamily">OnePoint</span>). </p>
+
+  </div>
+</div>
+<h1 id="a0000000015">4 The octonionic zeta function \(\zeta _{\mathbb {O}^{*}}\)</h1>
+<p>Slice-preserving theory already gives the tools to build the octonionic zeta function. On each slice \(\mathbb {C}_v\) we read the compactified classical \(\zeta \) through the isomorphism \(\varphi _v:\mathbb {C}^{*}\to \mathbb {C}_v^{*}\), and the representation formula glues these slice copies into a single function on all of \(\mathbb {O}^{*}\). The one thing to check is that the two identifications of a slice with \(\mathbb {C}\) agree, so that \(\zeta _{\mathbb {O}^{*}}\) is well-defined; they do, because conjugating the input and reversing the identification cancel. The pole of \(\zeta \) at \(s=1\) is carried to the north pole \(N\). </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:zeta_O">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">4.1</span>
+    <span class="definition_thmtitle">Octonionic zeta</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:zeta_O">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0001.html#def:zeta-Cstar">Definition 1.6</a></li>
+          
+          <li><a href="sect0002.html#def:slices">Definition 2.4</a></li>
+          
+          <li><a href="sect0002.html#thm:extension">Theorem 3.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zetaO" class="lean_decl">zetaO</a></li>
+          
+          <li><a href="/find/#doc/zetaO_infty" class="lean_decl">zetaO_infty</a></li>
+          
+          <li><a href="/find/#doc/zetaO_one" class="lean_decl">zetaO_one</a></li>
+          
+          <li><a href="/find/#doc/zetaO_sliceEmbed" class="lean_decl">zetaO_sliceEmbed</a></li>
+          
+          <li><a href="/find/#doc/zetaO_sliceEmbed_of_im_neg" class="lean_decl">zetaO_sliceEmbed_of_im_neg</a></li>
+          
+          <li><a href="/find/#doc/zetaO_ofReal" class="lean_decl">zetaO_ofReal</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   Here \(N\) denotes the <em>north pole</em> of \(S^8\): the single point at infinity \(\infty \) adjoined in the one-point compactification \(\mathbb {O}^{*}=\mathbb {O}\cup \{ \infty \} \cong S^8\) (inverse stereographic projection; GPV <span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	]
+</span>). It is one point with two names, so \(\infty =N\); it is the only point at infinity, shared by \(\mathbb {O}^{*}\) and by every slice Riemann sphere \(\mathbb {C}_v^{*}=S^2_v\). </p>
+<p>The <em>octonionic zeta function</em> \(\zeta _{\mathbb {O}^{*}}:\mathbb {O}^{*}\to \mathbb {O}^{*}\) is defined slicewise from the compactified classical zeta (Definition&#160;<a href="sect0001.html#def:zeta-Cstar">1.6</a>) through the slice identifications \(\varphi _v:\mathbb {C}^{*}\xrightarrow {\sim }\mathbb {C}_v^{*}=S^2_v\) (the \(\mathbb {R}\)-algebra isomorphism \(\mathbb {C}\to \mathbb {C}_v\) of Definition&#160;<a href="sect0002.html#def:slices">2.4</a>, extended to the Riemann spheres by \(\varphi _v(\infty )=N\); GPV <span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	]
+</span>, Prop.&#160;4.1/Thm.&#160;4.2): </p>
+<ul class="itemize">
+  <li>[leftmargin=2.2em] </li>
+  <li><p>for \(s\in \mathbb {O}\setminus \mathbb {R}\), with \(w=\operatorname{Im}(s)\), \(v=w/|w|\in S^6\), \(\gamma =|w|{\gt}0\), \(\sigma =\operatorname{Re}(s)\), so \(s=\sigma +\gamma v\):&#8195;\(\zeta _{\mathbb {O}^{*}}(s):=\varphi _v(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma ))\); </p>
+</li>
+  <li><p>for \(s\in \mathbb {R}\setminus \{ 1\} \):&#8195;\(\zeta _{\mathbb {O}^{*}}(s):=\zeta _{\mathbb {C}^{*}}(s)=\zeta (s)\in \mathbb {R}\); </p>
+</li>
+  <li><p>for \(s=1\) (the simple pole, Definition&#160;<a href="sect0001.html#def:zeta-Cstar">1.6</a>):&#8195;\(\zeta _{\mathbb {O}^{*}}(1):=\infty =N\); </p>
+</li>
+  <li><p>for \(s=\infty =N\):&#8195;\(\zeta _{\mathbb {O}^{*}}(\infty ):=\zeta _{\mathbb {C}^{*}}(\infty )=1\). </p>
+</li>
+</ul>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:well-defined">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">4.2</span>
+    <span class="proposition_thmtitle">Well-definedness</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#prop:well-defined">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000022"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:zeta_O">Definition 4.1</a></li>
+          
+          <li><a href="sect0001.html#thm:riemann">Theorem 1.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zetaO_sliceEmbed'" class="lean_decl">zetaO_sliceEmbed'</a></li>
+          
+          <li><a href="/find/#doc/riemannZeta_conj" class="lean_decl">riemannZeta_conj</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>   \(\zeta _{\mathbb {O}^{*}}:\mathbb {O}^{*}\to \mathbb {O}^{*}\) is well-defined. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000022">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>For \(s\in \mathbb {O}\setminus \mathbb {R}\) the decomposition \(s=\sigma +\gamma v\) with \(\gamma {\gt}0\), \(v\in S^6\) is forced (\(\gamma =|\operatorname{Im}s|\), \(v=\operatorname{Im}s/|\operatorname{Im}s|\)), so the only ambiguity is the identification of the slice \(\mathbb {C}_v=\mathbb {C}_{-v}\) with \(\mathbb {C}^{*}\). That slice carries two such identifications, \(\varphi _v\) (\(i\mapsto v\)) and \(\varphi _{-v}\) (\(i\mapsto -v\)), under which \(s\) reads as \(\sigma +i\gamma \) resp. \(\sigma -i\gamma \); we must check \(\varphi _v(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma ))=\varphi _{-v}(\zeta _{\mathbb {C}^{*}}(\sigma -i\gamma ))\). By conjugate symmetry \(\zeta _{\mathbb {C}^{*}}(\sigma -i\gamma )=\overline{\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma )}\) (<span class="cite">
+	[
+	<a href="part-stack.html#Titchmarsh86" >15</a>
+	, 
+	Ch.
+	
+	2
+	]
+</span>; Definition&#160;<a href="sect0001.html#def:zeta-Cstar">1.6</a>), writing \(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma )=a+bi\) gives \(\varphi _{-v}(a-bi)=a+(-b)(-v)=a+bv=\varphi _v(a+bi)\): the two sign reversals, one from conjugating the input, one from the reversed identification, cancel. The remaining cases carry no ambiguity: for real \(s\neq 1\), \(\zeta _{\mathbb {O}^{*}}(s)=\zeta (s)\in \mathbb {R}\subseteq \mathbb {C}_v^{*}\) for every \(v\); at \(s=1\) the value is the single point \(\infty =N\); and at \(s=\infty =N\) the value is \(\zeta _{\mathbb {C}^{*}}(\infty )=1\in \mathbb {R}\), again the same for every \(v\) since each \(\varphi _v\) fixes \(\mathbb {R}\) pointwise. </p>
+
+  </div>
+</div>
+<h1 id="sec:R-ring">5 \(\mathcal R\) is a commutative ring</h1>
+
+<p>The slice-preserving sections form a commutative ring \(\mathcal R\), with \(\zeta _{\mathbb {O}^{*}}\) among its elements. Its multiplication is the regular (\(\ast \)) product, which descends from the Cayley–Dickson construction of \(\mathbb {O}\) and from slice regularity; on slice-preserving functions it restricts on each slice to the ordinary pointwise product (Wang), and is therefore commutative. The ring axioms, and the integral-domain property, follow slicewise. </p>
+<p>We work on \(\mathbb {O}^{*}\); write \(\Omega _v:=\mathbb {O}^{*}\cap \mathbb {C}_v=\mathbb {C}_v^{*}=S^2_v\) for the slice Riemann sphere (Definition&#160;<a href="sect0002.html#def:slices">2.4</a>). </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:R">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">5.1</span>
+    <span class="definition_thmtitle">The ring of slice-preserving functions under the regular product</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:R">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:slice-preserving">Definition 3.5</a></li>
+          
+          <li><a href="sect0002.html#def:slices">Definition 2.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/StemRing" class="lean_decl">StemRing</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   \(\mathcal R:=\mathcal O_{\mathbb {O}^{*}}\) is the set of all slice-regular functions \(f:\mathbb {O}^{*}\to \mathbb {O}^{*}\) that are slice preserving (Definition&#160;<a href="sect0002.html#def:slice-preserving">3.5</a>), \(f(\Omega _v)\subseteq \mathbb {C}_v^{*}\) for all \(v\in S^6\), equipped with pointwise addition and the regular (\(\ast \)) product. </p>
+
+  </div>
+</div>
+<p>Commutativity of \(\mathcal R\) rests on a single slice-preserving fact from the literature: on each slice the regular product is ordinary multiplication. </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:wang">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.2</span>
+    <span class="theorem_thmtitle">Regular product on slice-preserving functions; <span class="cite">
+	[
+	<a href="part-stack.html#Wang" >16</a>
+	, 
+	Rem.
+	
+	2.11
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:wang">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:artin">Theorem 2.2</a></li>
+          
+          <li><a href="sect0002.html#def:R">Definition 5.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  For slice-preserving \(f,g\) (with \(f(\Omega _v)\subseteq \mathbb {C}_v\)), the regular product restricts on each slice to the pointwise product, \((f\ast g)|_{\Omega _v}(w)=f(w)\cdot g(w)\in \mathbb {C}_v\), and \(f\ast g=g\ast f\), \((f\ast g)\ast h=f\ast (g\ast h)\) (via Artin, Theorem&#160;<a href="sect0002.html#thm:artin">2.2</a>). </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:R-comm-ring">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">5.3</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#prop:R-comm-ring">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000023"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:wang">Theorem 5.2</a></li>
+          
+          <li><a href="sect0002.html#thm:identity">Theorem 3.3</a></li>
+          
+          <li><a href="sect0002.html#def:R">Definition 5.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/StemRing" class="lean_decl">StemRing</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>   \((\mathcal R,+,\ast )\) is a commutative ring with identity \(1\in \mathcal R\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000023">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Closure under \(+\) is pointwise. For \(\ast \): fixing a slice \(\mathbb {C}_K\), the product reduces to pointwise multiplication on \(\mathbb {C}_K\) by Theorem&#160;<a href="sect0002.html#thm:wang">5.2</a>, which is commutative because \(\mathbb {C}_K\) is a commutative associative subalgebra; associativity and distributivity are inherited slicewise, and a slice-regular function is determined by its restriction to any one slice (Theorem&#160;<a href="sect0002.html#thm:identity">3.3</a>). The constant \(1\) is the identity. </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:R-domain">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">5.4</span>
+    <span class="proposition_thmtitle">\(\mathcal R\) is an integral domain</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#prop:R-domain">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000024"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:wang">Theorem 5.2</a></li>
+          
+          <li><a href="sect0002.html#thm:identity">Theorem 3.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/StemRing.eq_zero_or_eq_zero_of_mul_eq_zero" class="lean_decl">StemRing.eq_zero_or_eq_zero_of_mul_eq_zero</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>   If \(f,g\in \mathcal R\) and \(f\ast g=0\), then \(f=0\) or \(g=0\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000024">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\((f\ast g)|_{\Omega _K}(w)=f(w)\cdot g(w)\) in \(\mathbb {C}_K\cong \mathbb {C}\) (Theorem&#160;<a href="sect0002.html#thm:wang">5.2</a>). The restrictions \(f|_{\Omega _K}\), \(g|_{\Omega _K}\) are holomorphic on the connected slice; by the classical identity principle the pointwise product vanishes identically iff one factor does. By Theorem&#160;<a href="sect0002.html#thm:identity">3.3</a> the corresponding global function vanishes. </p>
+
+  </div>
+</div>
+<h1 id="sec:toolkit">6 The slice-preserving analytic toolkit on the compactified octonions</h1>
+
+<p>We collect the slice-preserving analytic facts used in Part&#160;3 as cited statements: the exponential, its logarithm manifold, its degenerate fibre, the slice/stem square and \(I\)-independent lift, and the winding lift. Each is established in the literature on the uncompactified \(\mathbb {O}\) and used here on \(\mathbb {O}^{*}=S^8\) and the slice Riemann spheres \(\mathbb {C}_v^{*}=S^2_v\) (the passage is recorded in Remark&#160;<a href="sect0002.html#rmk:slice-pres-compact">3.6</a>; the compactified slice-manifold structure itself is GPV’s <span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	]
+</span>). </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:slice-exp">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">6.1</span>
+    <span class="theorem_thmtitle">The slice exponential; <span class="cite">
+	[
+	<a href="part-stack.html#GPVwind" >21</a>
+	, 
+	§
+	3
+	]
+</span>; <span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	, 
+	Prop.
+	
+	5.1
+	]
+</span>; <span class="cite">
+	[
+	<a href="part-stack.html#AdF" >1</a>
+	, 
+	Rem.
+	
+	2.23
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:slice-exp">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:slice-preserving">Definition 3.5</a></li>
+          
+          <li><a href="sect0002.html#cor:powers">Corollary 2.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/Octonion.exp" class="lean_decl">Octonion.exp</a></li>
+          
+          <li><a href="/find/#doc/Octonion.exp_sliceEmbed" class="lean_decl">Octonion.exp_sliceEmbed</a></li>
+          
+          <li><a href="/find/#doc/Octonion.norm_exp" class="lean_decl">Octonion.norm_exp</a></li>
+          
+          <li><a href="/find/#doc/Octonion.exp_ne_zero" class="lean_decl">Octonion.exp_ne_zero</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   The exponential \(\exp :\mathbb {O}\to \mathbb {O}\setminus \{ 0\} \), \(\exp (q)=\sum _{k\ge 0}q^{k}/k!\) (powers well defined by Corollary&#160;<a href="sect0002.html#cor:powers">2.3</a>), is a slice-regular, slice-preserving entire function (Definition&#160;<a href="sect0002.html#def:slice-preserving">3.5</a>), given on each slice by </p>
+<div class="displaymath" id="a0000000025">
+  \[  \exp (x+Iy)=e^{x}(\cos y+I\sin y),\qquad x,y\in \mathbb {R},\  I\in S^6 .  \]
+</div>
+<p> Consequently \(|\exp q|=e^{\operatorname{Re}q}\) depends only on the real part, and \(\exp \) is nowhere zero. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:log-manifold">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">6.2</span>
+    <span class="theorem_thmtitle">The logarithm manifold \(E^{+}_{\mathbb {O}}\); <span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	, 
+	Prop.
+	
+	5.1, Rem.
+	
+	5.2, Def.
+	
+	5.3, Prop.
+	
+	5.4, Def.
+	
+	5.5
+	]
+</span>; <span class="cite">
+	[
+	<a href="part-stack.html#GPVwind" >21</a>
+	, 
+	§
+	3
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:log-manifold">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:slice-exp">Theorem 6.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/Octonion.Eexp" class="lean_decl">Octonion.Eexp</a></li>
+          
+          <li><a href="/find/#doc/Octonion.logManifold" class="lean_decl">Octonion.logManifold</a></li>
+          
+          <li><a href="/find/#doc/Octonion.Llog" class="lean_decl">Octonion.Llog</a></li>
+          
+          <li><a href="/find/#doc/Octonion.Llog_Eexp" class="lean_decl">Octonion.Llog_Eexp</a></li>
+          
+          <li><a href="/find/#doc/Octonion.Eexp_Llog" class="lean_decl">Octonion.Eexp_Llog</a></li>
+          
+          <li><a href="/find/#doc/Octonion.exp_Llog" class="lean_decl">Octonion.exp_Llog</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Let \(T:\mathbb {O}\to \mathbb {O}\times \operatorname{Im}\mathbb {O}\), \(T(x+Iy)=(\sinh x\cos y+I\sinh x\sin y,\  Iy)\), and \(\mathbb {O}^{+}=\{ q:\operatorname{Re}q{\gt}0\} \). The <em>logarithm manifold</em> is \(E^{+}_{\mathbb {O}}:=T(\mathbb {O}^{+})\), the semi-helicoidal hypercomplex \(8\)-manifold; equivalently it is the image of the exponential graph, parametrised by the <em>\(E^{+}_{\mathbb {O}}\)-exponential</em> </p>
+<div class="displaymath" id="a0000000026">
+  \[  E:\mathbb {O}\longrightarrow E^{+}_{\mathbb {O}}\subset \mathbb {O}\times \operatorname{Im}\mathbb {O},\qquad E(x+Iy)=(\exp (x+Iy),\, Iy)=(e^{x}\cos y+Ie^{x}\sin y,\  Iy),  \]
+</div>
+<p> an immersion and a diffeomorphism, with inverse the <em>\(E^{+}_{\mathbb {O}}\)-logarithm</em> \(L:E^{+}_{\mathbb {O}}\to \mathbb {O}\), \(L(q,p)=\log |q|+p\) (here \(p=\mathrm{Arg}(q)\)). Writing \(\pi \) for the projection to the first factor, \(\pi \circ E=\exp \) (Theorem&#160;<a href="sect0002.html#thm:slice-exp">6.1</a>). The manifold \(E^{+}_{\mathbb {O}}\) is an adapted blow-up of \(\mathbb {O}\) along the real axis. Its projection \(\pi :E^{+}_{\mathbb {O}}\to \mathbb {O}\setminus \{ 0\} \) has the degenerate real fibres responsible for the failure of covering and openness. The blow-up unwraps the multivalued logarithm into the single-valued \(L\), and a branch of the hypercomplex logarithm is \(\log _{\mathbb {O}}=L\circ (\pi |_{\Omega })^{-1}\) on any path-connected \(\Omega \subset E^{+}_{\mathbb {O}}\) on which \(\pi |_{\Omega }\) is injective. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:exp-degenerate">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">6.3</span>
+    <span class="lemma_thmtitle">The degenerate set of the exponential; its fibre over a real value</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#lem:exp-degenerate">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:slice-exp">Theorem 6.1</a></li>
+          
+          <li><a href="sect0002.html#thm:log-manifold">Theorem 6.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/Octonion.exp_fibre_neg_real" class="lean_decl">Octonion.exp_fibre_neg_real</a></li>
+          
+          <li><a href="/find/#doc/Octonion.exp_eq_neg_ofReal_iff" class="lean_decl">Octonion.exp_eq_neg_ofReal_iff</a></li>
+          
+          <li><a href="/find/#doc/Octonion.logManifold_fibre_neg_real" class="lean_decl">Octonion.logManifold_fibre_neg_real</a></li>
+          
+          <li><a href="/find/#doc/Octonion.degenerate_level_readout" class="lean_decl">Octonion.degenerate_level_readout</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   <em>Sourced.</em> With \(\pi \) the first-factor projection, \(\pi \circ E=\exp \) <span class="upshape">(<span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	, 
+	Rem.
+	
+	5.2(a)
+	]
+</span>, the commuting triangle)</span>. Its spherical <em>degenerate set</em> makes the projection an adapted blow-up with failures of covering and openness <span class="upshape">(<span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	, 
+	Rem.
+	
+	5.2(b)
+	]
+</span>)</span>. The direction \(I(q)\) becomes singular at every point of \(\mathbb {R}\) <span class="upshape">(<span class="cite">
+	[
+	<a href="part-stack.html#GPVwind" >21</a>
+	, 
+	Rem.
+	
+	2.1
+	]
+</span>)</span>. </p>
+<p><em>Proved from the slice form.</em> For \(r{\gt}0\), </p>
+<div class="displaymath" id="a0000000027">
+  \[  \exp ^{-1}(-r)=\bigl\{ \, \log r+I(2k{+}1)\pi :\  I\in S^6,\  k\in \mathbb {Z}\, \bigr\} :  \]
+</div>
+<p> by Theorem&#160;<a href="sect0002.html#thm:slice-exp">6.1</a>, \(\exp (x+Iy)=e^{x}\cos y+Ie^{x}\sin y=-r\) forces \(e^{x}\sin y=0\), hence \(y\in \pi \mathbb {Z}\); negativity of the value forces \(y=(2k{+}1)\pi \) and \(x=\log r\); the direction \(I\) is unconstrained. The fibre is thus indexed by the single real <em>level</em> \(\log r=\log |{-}r|\) and, within it, by the odd winding indices \(2k{+}1\) carried as band data (the winding lift, Theorem&#160;<a href="sect0002.html#thm:winding-lift">6.5</a>; <span class="cite">
+	[
+	<a href="part-stack.html#GPVwind" >21</a>
+	, 
+	Cor.
+	
+	5.21
+	]
+</span>). The fibre formula itself appears, stated without proof as Preface motivation, in <span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	]
+</span> (p.&#160;972); the slice-form derivation above is the load-bearing statement. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:slice-squares">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">6.4</span>
+    <span class="definition_thmtitle">Slice restriction and the \(I\)-independent lift; <span class="cite">
+	[
+	<a href="part-stack.html#Wang" >16</a>
+	, 
+	Rem.
+	
+	2.11
+	]
+</span>; <span class="cite">
+	[
+	<a href="part-stack.html#BisiWinkelmann" >4</a>
+	, 
+	§
+	3.3,
+	
+	§
+	3.7
+	]
+</span>; <span class="cite">
+	[
+	<a href="part-stack.html#SeriesExp" >7</a>
+	, 
+	Def.
+	
+	2.1, Prop.
+	
+	2.2
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:slice-squares">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/IsIntrinsic" class="lean_decl">IsIntrinsic</a></li>
+          
+          <li><a href="/find/#doc/ASection.realize" class="lean_decl">ASection.realize</a></li>
+          
+          <li><a href="/find/#doc/ASection.realize_mem_sliceSphere" class="lean_decl">ASection.realize_mem_sliceSphere</a></li>
+          
+          <li><a href="/find/#doc/ASection.realize_equivariant" class="lean_decl">ASection.realize_equivariant</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  A slice-preserving section \(A\) carries each slice Riemann sphere into itself, </p>
+<div class="displaymath" id="a0000000028">
+  \[  A(\mathbb {C}_v^{*})\subseteq \mathbb {C}_v^{*}=S^2_v\qquad (v\in S^6),  \]
+</div>
+<p> so its restriction to a slice is a holomorphic self-map of that slice sphere, </p>
+<div class="displaymath" id="a0000000029">
+  \[  A_v:=\varphi _v^{-1}\circ A\circ \varphi _v:\  \mathbb {C}^{*}\longrightarrow \mathbb {C}^{*},  \]
+</div>
+<p> through the identification \(\varphi _v:\mathbb {C}^{*}\xrightarrow {\sim }\mathbb {C}_v^{*}\) of Definition&#160;<a href="sect0002.html#def:slices">2.4</a>. The <em>\(I\)-independent lift</em> is the fact that this holomorphic stem is the <em>same</em> for every \(v\): there is one holomorphic \(A_\circ :\mathbb {C}^{*}\to \mathbb {C}^{*}\) with </p>
+<div class="displaymath" id="a0000000030">
+  \[  A|_{\mathbb {C}_v^{*}}=\varphi _v\circ A_\circ \circ \varphi _v^{-1}\qquad \text{for all }v\in S^6  \]
+</div>
+<p> (Wang <span class="cite">
+	[
+	<a href="part-stack.html#Wang" >16</a>
+	, 
+	Rem.
+	
+	2.11
+	]
+</span>; Bisi–Winkelmann <span class="cite">
+	[
+	<a href="part-stack.html#BisiWinkelmann" >4</a>
+	, 
+	§
+	3.7
+	]
+</span>). Equivalently, \(A\) is <em>intrinsic</em>, \(A(q^c)=A(q)^c\), and is induced (\(A=\mathcal I(F)\)) by a single stem function \(F=F_1+\iota F_2:D\to \mathbb {O}_{\mathbb {C}}\) on the symmetric \(D\subset \mathbb {C}\) whose components \(F_1,F_2\) are \(\mathbb {R}\)-valued (the stem-function formalism, Ghiloni–Perotti <span class="cite">
+	[
+	<a href="part-stack.html#SeriesExp" >7</a>
+	, 
+	Def.
+	
+	2.1, Prop.
+	
+	2.2
+	]
+</span>): </p>
+<div class="displaymath" id="a0000000031">
+  \[  A(x+Iy)=F_1(x+iy)+I\, F_2(x+iy),\qquad F_1,F_2\  \mathbb {R}\text{-valued}.  \]
+</div>
+<p> It is this single \(I\)-independent slice stem that makes a slice-preserving section \(G_2\)-equivariant, hence blind to the \(G_2\)-orbit direction (Definition&#160;<a href="part-stack.html#def:section-map">9.2</a>). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:winding-lift">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">6.5</span>
+    <span class="theorem_thmtitle">The winding lift; <span class="cite">
+	[
+	<a href="part-stack.html#GPVwind" >21</a>
+	, 
+	Def.
+	
+	3.4, Def.
+	
+	4.1, Prop.
+	
+	4.2, Def.
+	
+	5.11
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:winding-lift">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:log-manifold">Theorem 6.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/exists_log_continuation" class="lean_decl">exists_log_continuation</a></li>
+          
+          <li><a href="/find/#doc/winding_lift_unique" class="lean_decl">winding_lift_unique</a></li>
+          
+          <li><a href="/find/#doc/Octonion.lift_iff_continuation" class="lean_decl">Octonion.lift_iff_continuation</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Let \(\gamma :[a,b]\to \mathbb {O}\setminus \{ 0\} \) be a path <span class="upshape">(</span>on each slice \(\mathbb {C}_v\) this is the classical complex continuation<span class="upshape">)</span>. A <em>continuation of the hypercomplex logarithm along \(\gamma \)</em> is a path \(\tilde\gamma :[a,b]\to \mathbb {O}\) with \(\exp \circ \tilde\gamma =\gamma \), and a <em>lift of \(\gamma \)</em> to the logarithm manifold \(E^{+}_{\mathbb {O}}\) <span class="upshape">(</span>Theorem&#160;<a href="sect0002.html#thm:log-manifold">6.2</a><span class="upshape">)</span> is a path \(\Gamma :[a,b]\to E^{+}_{\mathbb {O}}\) with \(\mathrm{pr}_1\circ \Gamma =\gamma \): </p>
+<div class="displaymath" id="a0000000032">
+  \[  \text{[commutative diagram -- see the PDF / the master file]}\qquad \qquad \text{[commutative diagram -- see the PDF / the master file]} \]
+</div>
+<p> The two data are <em>equivalent</em>: a lift \(\Gamma \) exists if and only if a continuation \(\tilde\gamma \) exists, and they correspond by </p>
+<div class="displaymath" id="a0000000033">
+  \[  \tilde\gamma =L\circ \Gamma ,\qquad \Gamma =(\exp \circ \tilde\gamma ,\  \operatorname{Im}\tilde\gamma ),  \]
+</div>
+<p> where \(L\) is the \(E^{+}_{\mathbb {O}}\)-logarithm of Theorem&#160;<a href="sect0002.html#thm:log-manifold">6.2</a> <span class="upshape">(</span><span class="cite">
+	[
+	<a href="part-stack.html#GPVwind" >21</a>
+	, 
+	Prop.
+	
+	4.2
+	]
+</span><span class="upshape">)</span>. For a <em>loop</em> \(\gamma :S^1\to \mathbb {O}\setminus \{ 0\} \) the lift is taken on the universal cover \(\exp :i\mathbb {R}\to S^1\), as a continuous \(\Gamma :i\mathbb {R}\to E^{+}_{\mathbb {O}}\) with \(\mathrm{pr}_1\circ \Gamma =\gamma \circ \exp \) <span class="upshape">(</span><span class="cite">
+	[
+	<a href="part-stack.html#GPVwind" >21</a>
+	, 
+	Def.
+	
+	5.11
+	]
+</span><span class="upshape">)</span>: </p>
+<div class="displaymath" id="a0000000034">
+  \[  \text{[commutative diagram -- see the PDF / the master file]} \]
+</div>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:winding-signature">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">6.6</span>
+    <span class="proposition_thmtitle">Tameness, existence, and the winding number; <span class="cite">
+	[
+	<a href="part-stack.html#GPVwind" >21</a>
+	, 
+	Def.
+	
+	4.20, Cor.
+	
+	5.21, Cor.
+	
+	5.22
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#prop:winding-signature">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:winding-lift">Theorem 6.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/winding_lift_unique" class="lean_decl">winding_lift_unique</a></li>
+          
+          <li><a href="/find/#doc/winding_loop_defect" class="lean_decl">winding_loop_defect</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>   The lift of Theorem&#160;<a href="sect0002.html#thm:winding-lift">6.5</a> is governed by the companion structure of \(\gamma \). </p>
+<ol class="enumerate">
+  <li><p><em>Uniqueness (tameness).</em> \(\gamma \) is <em>tame</em> when it admits a <em>unique</em> companion imaginary-unit field; its lift is then unique <span class="upshape">(</span><span class="cite">
+	[
+	<a href="part-stack.html#GPVwind" >21</a>
+	, 
+	Def.
+	
+	4.20
+	]
+</span><span class="upshape">)</span>. </p>
+</li>
+  <li><p><em>Existence and closure.</em> A lift of a loop \(\gamma \) exists if and only if the signature satisfies \(\sigma (\gamma |_{[\xi _l,\xi _{l+1}]})\in \{ 0,-1\} \) on each obstruction interval; and <em>if it exists, the lift is itself a loop</em> <span class="upshape">(</span><span class="cite">
+	[
+	<a href="part-stack.html#GPVwind" >21</a>
+	, 
+	Cor.
+	
+	5.13
+	]
+</span>; pinned against the arXiv text; the earlier citation to Cor.&#160;5.22 is superseded<span class="upshape">)</span>. </p>
+</li>
+  <li><p><em>Winding number.</em> For an untwisted tame loop with even circular signature \(\sigma ^c\), the winding number is \(\omega =|\sigma ^c|/2\) <span class="upshape">(</span><span class="cite">
+	[
+	<a href="part-stack.html#GPVwind" >21</a>
+	, 
+	Cor.
+	
+	5.21
+	]
+</span><span class="upshape">)</span>. </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<h1 id="a0000000016">7 Slice preservation and symmetries</h1>
+<p>With the ring in hand, we check that \(\zeta _{\mathbb {O}^{*}}\) actually lives in it, and record the symmetry that will organize its zeros. Slice preservation says \(\zeta _{\mathbb {O}^{*}}\) keeps each slice inside itself; together with slice regularity this makes it a section of \(\mathcal R\). The symmetry is the action of the automorphism group \(G_2=\operatorname{Aut}(\mathbb {O})\), which fixes the real axis and rotates the imaginary directions \(S^6\), and \(\zeta _{\mathbb {O}^{*}}\) is equivariant under it. This forces every non-real zero to fill a whole \(6\)-sphere, the geometry the next section reads off. </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:slice-pres">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">7.1</span>
+    <span class="theorem_thmtitle">Slice preservation</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:slice-pres">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000035"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:zeta_O">Definition 4.1</a></li>
+          
+          <li><a href="sect0002.html#def:slice-preserving">Definition 3.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zetaO_mem_sliceSphere" class="lean_decl">zetaO_mem_sliceSphere</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   \(\zeta _{\mathbb {O}^{*}}\) is slice preserving (Definition&#160;<a href="sect0002.html#def:slice-preserving">3.5</a>): \(\zeta _{\mathbb {O}^{*}}(\mathbb {C}_v^{*})\subseteq \mathbb {C}_v^{*}\) for every \(v\in S^6\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000035">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Fix \(v\in S^6\) and \(s\in \mathbb {C}_v^{*}\). If \(s\in \mathbb {C}_v\setminus \mathbb {R}\) then \(s=\sigma \pm \gamma v\) and \(\zeta _{\mathbb {O}^{*}}(s)=\varphi _v(\zeta _{\mathbb {C}^{*}}(\sigma \pm i\gamma ))\in \varphi _v(\mathbb {C}^{*})=\mathbb {C}_v^{*}\) (Definition&#160;<a href="sect0002.html#def:zeta_O">4.1</a>(i)). If \(s\in \mathbb {R}\setminus \{ 1\} \) then \(\zeta _{\mathbb {O}^{*}}(s)=\zeta (s)\in \mathbb {R}\subseteq \mathbb {C}_v^{*}\); while \(\zeta _{\mathbb {O}^{*}}(1)=\infty \in \mathbb {C}_v^{*}\) and \(\zeta _{\mathbb {O}^{*}}(\infty )=1\in \mathbb {C}_v^{*}\). In every case the value remains in \(\mathbb {C}_v^{*}\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:zeta-in-R">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">7.2</span>
+    <span class="theorem_thmtitle">\(\zeta _{\mathbb {O}^{*}}\) is a section of \(\mathcal R\)</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:zeta-in-R">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000036"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:slice-pres">Theorem 7.1</a></li>
+          
+          <li><a href="sect0002.html#thm:extension">Theorem 3.4</a></li>
+          
+          <li><a href="sect0002.html#def:R">Definition 5.1</a></li>
+          
+          <li><a href="sect0002.html#prop:well-defined">Proposition 4.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zetaSection" class="lean_decl">zetaSection</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   \(\zeta _{\mathbb {O}^{*}}\in \mathcal R\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000036">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>On each slice the restriction is the compactified classical zeta read through the isomorphism \(\varphi _v\), namely \(\zeta _{\mathbb {O}^{*}}|_{\mathbb {C}_v^{*}}=\varphi _v\circ \zeta _{\mathbb {C}^{*}}\circ \varphi _v^{-1}\), holomorphic into \(\mathbb {C}_v^{*}\) away from the single pole. Equivalently \(\zeta _{\mathbb {O}^{*}}=\mathrm{ext}(\zeta )\) is the slice-regular extension of the holomorphic, conjugation-symmetric \(\zeta \) on \(\mathbb {C}\setminus \{ 1\} \) (Theorem&#160;<a href="sect0002.html#thm:extension">3.4</a>, <span class="cite">
+	[
+	<a href="part-stack.html#CSS12" >5</a>
+	, 
+	Thm.
+	
+	5.1.5
+	]
+</span>); hence \(\zeta _{\mathbb {O}^{*}}\) is slice regular on \(\mathbb {O}^{*}\setminus \{ 1,\infty \} \) (slice regularity is slicewise holomorphy, Definition&#160;<a href="sect0002.html#def:slice-regular">3.1</a>). By Theorem&#160;<a href="sect0002.html#thm:slice-pres">7.1</a> it is slice preserving, \(\zeta _{\mathbb {O}^{*}}(\mathbb {C}_v^{*})\subseteq \mathbb {C}_v^{*}\). A slice-regular, slice-preserving function \(\mathbb {O}^{*}\to \mathbb {O}^{*}\) is by definition a section of \(\mathcal R=\mathcal O_{\mathbb {O}^{*}}\) (Definition&#160;<a href="sect0002.html#def:R">5.1</a>); the regular product on such sections restricts on each slice to the ordinary product (Theorem&#160;<a href="sect0002.html#thm:wang">5.2</a>, Wang <span class="cite">
+	[
+	<a href="part-stack.html#Wang" >16</a>
+	, 
+	Rem.
+	
+	2.11
+	]
+</span>). Its zeros <span class="upshape">(</span>Theorem&#160;<a href="sect0002.html#thm:zero-spheres">8.2</a><span class="upshape">)</span> make \(\zeta _{\mathbb {O}^{*}}\) a nonunit. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:G2">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">7.3</span>
+    <span class="definition_thmtitle">The automorphism group \(G_2\)</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:G2">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/G2" class="lean_decl">G2</a></li>
+          
+          <li><a href="/find/#doc/G2.smul_one" class="lean_decl">G2.smul_one</a></li>
+          
+          <li><a href="/find/#doc/G2.smul_ofReal" class="lean_decl">G2.smul_ofReal</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  \(G_2=\operatorname{Aut}(\mathbb {O})\) is the \(14\)-dimensional compact, connected, simply connected Lie group of \(\mathbb {R}\)-algebra automorphisms of \(\mathbb {O}\). Each \(g\in G_2\) fixes \(1\), hence the real axis pointwise, and acts on \(\operatorname{Im}\mathbb {O}\cong \mathbb {R}^7\) as an element of \(SO(7)\); thus \(g\cdot (\sigma +\gamma v)=\sigma +\gamma \, g(v)\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:G2-equiv">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">7.4</span>
+    <span class="theorem_thmtitle">\(G_2\)-equivariance</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:G2-equiv">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000037"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:G2">Definition 7.3</a></li>
+          
+          <li><a href="sect0002.html#def:zeta_O">Definition 4.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zetaO_equivariant" class="lean_decl">zetaO_equivariant</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   \(\zeta _{\mathbb {O}^{*}}(g\cdot s)=g\cdot \zeta _{\mathbb {O}^{*}}(s)\) for all \(g\in G_2\), \(s\in \mathbb {O}\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000037">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>For \(s\in \mathbb {R}\), \(g\cdot s=s\) and \(\zeta _{\mathbb {O}^{*}}(s)\in \mathbb {R}\) is fixed, so both sides equal \(\zeta _{\mathbb {O}^{*}}(s)\). For a non-real \(s=\sigma +\gamma v\) (\(v\in S^6\), \(\gamma {\gt}0\)), \(g\) carries the slice \(\mathbb {C}_v\) to the slice \(\mathbb {C}_{g(v)}\) by the isometric relabelling \(\varphi _{g(v)}=g\circ \varphi _v\) (Definition&#160;<a href="sect0002.html#def:G2">7.3</a>). Since \(\zeta _{\mathbb {O}^{*}}\) is defined slicewise by the same \(\zeta _{\mathbb {C}^{*}}\) read through \(\varphi _v\) (Definition&#160;<a href="sect0002.html#def:zeta_O">4.1</a>(i)), </p>
+<div class="displaymath" id="a0000000038">
+  \[  \zeta _{\mathbb {O}^{*}}(g\cdot s)=\varphi _{g(v)}\bigl(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma )\bigr) =g\bigl(\varphi _{v}(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma ))\bigr)=g\cdot \zeta _{\mathbb {O}^{*}}(s).  \]
+</div>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:G2-S6">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">7.5</span>
+    <span class="theorem_thmtitle"><span class="cite">
+	[
+	<a href="part-stack.html#Baez02" >3</a>
+	]
+</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:G2-S6">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/G2.exists_smul_eq_of_mem_unitImaginarySphere" class="lean_decl">G2.exists_smul_eq_of_mem_unitImaginarySphere</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  \(G_2\) acts transitively on \(S^6\) with stabilizer \(\mathrm{SU}(3)\): \(\mathrm{SU}(3)\hookrightarrow G_2\twoheadrightarrow S^6\). </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="rmk:G2-compact">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">7.6</span>
+    <span class="remark_thmtitle">The \(G_2\)-action extends to \(\mathbb {O}^{*}=S^8\)</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#rmk:G2-compact">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:G2">Definition 7.3</a></li>
+          
+          <li><a href="part-stack.html#def:carrier">Definition 9.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>  The action above is stated on \(\mathbb {O}\), but \(\mathcal H_1\) (Part&#160;3) runs on the compactified \(\mathbb {O}^{*}=S^8\). Each \(g\in G_2\) fixes the real axis pointwise (an automorphism fixes \(1\), hence all of \(\mathbb {R}\)) and acts on \(\operatorname{Im}\mathbb {O}=\mathbb {R}^7\) as an element of \(SO(7)\); in particular \(g\) is a linear isometry of \(\mathbb {R}^8=\mathbb {O}\), hence proper, and therefore extends uniquely to a homeomorphism of the one-point compactification \(\mathbb {O}^{*}=\mathbb {O}\cup \{ \infty \} =S^8\) fixing the point at infinity \(\infty =N\) (the one-point compactification is functorial on proper maps; in Lean, <span class="ttfamily">OnePoint</span>). Thus \(G_2\curvearrowright \mathbb {O}^{*}\) fixes the compactified real axis \(\mathbb {R}\cup \{ \infty \} \), a great circle through \(N\), pointwise, and acts on each direction-sphere \(S^6\) exactly as in Theorem&#160;<a href="sect0002.html#thm:G2-S6">7.5</a>. This is the action on which \(\mathcal H_1\) is built, with \(\mathcal R\) its ring of invariants over \(\mathbb {O}^{*}\). </p>
+
+  </div>
+</div>
+<h1 id="a0000000017">8 Zero geometry and the equivalence</h1>
+<p>This section is the bridge the whole paper is built to cross. It shows that the zeros of \(\zeta _{\mathbb {O}^{*}}\) are exactly the classical nontrivial zeros, now spread out: each nontrivial zero \(\rho \) of \(\zeta \) becomes a whole \(6\)-sphere of zeros of \(\zeta _{\mathbb {O}^{*}}\), its residue-\(\mathbb {C}\) zero-sphere, sitting at real part \(\operatorname{Re}\rho \). The Riemann Hypothesis, that every \(\rho \) has real part \(\tfrac 12\), becomes the statement that all these \(6\)-spheres share the same real part, that they are concentric. From here on we work with the spheres. </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:zero-equivalence">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.1</span>
+    <span class="theorem_thmtitle">Zero Equivalence Theorem</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:zero-equivalence">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000039"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:zeta_O">Definition 4.1</a></li>
+          
+          <li><a href="sect0002.html#thm:slice-pres">Theorem 7.1</a></li>
+          
+          <li><a href="sect0001.html#lem:zero-Cstar">Lemma 1.7</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/sliceEmbed_eq_zero_iff" class="lean_decl">sliceEmbed_eq_zero_iff</a></li>
+          
+          <li><a href="/find/#doc/zetaO_zero_iff" class="lean_decl">zetaO_zero_iff</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Let \(\rho =\sigma +i\gamma \in \mathbb {C}^{*}\). For every \(v\in S^6\), </p>
+<div class="displaymath" id="a0000000040">
+  \[  \zeta _{\mathbb {O}^{*}}(\sigma +\gamma v)=0\quad \Longleftrightarrow \quad \zeta _{\mathbb {C}^{*}}(\rho )=0 .  \]
+</div>
+<p> Equivalently: a non-real \(s\in \mathbb {O}^{*}\) is a zero of \(\zeta _{\mathbb {O}^{*}}\) if and only if its slice coordinate \(\varphi _v^{-1}(s)\) is a zero of \(\zeta _{\mathbb {C}^{*}}\); by Lemma&#160;<a href="sect0001.html#lem:zero-Cstar">1.7</a> these are exactly the nontrivial zeros of the classical \(\zeta \). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000039">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>By Definition&#160;<a href="sect0002.html#def:zeta_O">4.1</a>(i), \(\zeta _{\mathbb {O}^{*}}(\sigma +\gamma v)=\varphi _v(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma ))\). The slice identification \(\varphi _v:\mathbb {C}^{*}\to \mathbb {C}_v^{*}=S^2_v\) is an isomorphism of slice Riemann spheres (the \(\mathbb {R}\)-algebra isomorphism \(\mathbb {C}\to \mathbb {C}_v\) of Definition&#160;<a href="sect0002.html#def:slices">2.4</a>, extended by \(\varphi _v(\infty )=N\); GPV <span class="cite">
+	[
+	<a href="part-stack.html#VS" >17</a>
+	]
+</span>). An isomorphism is injective and sends \(0\) to \(0\), so \(\varphi _v(z)=0\iff z=0\); with \(z=\zeta _{\mathbb {C}^{*}}(\rho )\) this gives both implications. (Slice preservation, Theorem&#160;<a href="sect0002.html#thm:slice-pres">7.1</a>, is what places the value in \(\mathbb {C}_v^{*}\) so that \(\varphi _v^{-1}\) applies on the non-real side.) The final clause is Lemma&#160;<a href="sect0001.html#lem:zero-Cstar">1.7</a>. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:zero-spheres">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.2</span>
+    <span class="theorem_thmtitle">Nontrivial zeros are infinitely many disjoint \(6\)-spheres</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:zero-spheres">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000041"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:zero-equivalence">Theorem 8.1</a></li>
+          
+          <li><a href="sect0002.html#thm:G2-S6">Theorem 7.5</a></li>
+          
+          <li><a href="sect0002.html#thm:G2-equiv">Theorem 7.4</a></li>
+          
+          <li><a href="sect0001.html#cor:hadamard-infinitude">Corollary 1.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/zeroSphere" class="lean_decl">zeroSphere</a></li>
+          
+          <li><a href="/find/#doc/zeroSphere_eq_orbit" class="lean_decl">zeroSphere_eq_orbit</a></li>
+          
+          <li><a href="/find/#doc/zeroSphere_zeros" class="lean_decl">zeroSphere_zeros</a></li>
+          
+          <li><a href="/find/#doc/zeroSphere_disjoint" class="lean_decl">zeroSphere_disjoint</a></li>
+          
+          <li><a href="/find/#doc/zeroSpheres_infinite" class="lean_decl">zeroSpheres_infinite</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   For a nontrivial zero \(\rho =\sigma +i\gamma \) of \(\zeta _{\mathbb {C}^{*}}\) (so \(\gamma {\gt}0\)) set </p>
+<div class="displaymath" id="a0000000042">
+  \[  S_\rho =\{ \sigma +\gamma v:v\in S^6\} =\sigma +\gamma \, S^6\subset \mathbb {O}.  \]
+</div>
+<p> Then: </p>
+<ol class="enumerate">
+  <li><p>\(S_\rho \) <em>is</em> a \(6\)-sphere, the round sphere of radius \(\gamma \) centred at the real point \(\sigma \), equivalently the \(G_2\)-orbit of any one of its points \(\sigma +\gamma v_0\) (Theorem&#160;<a href="sect0002.html#thm:G2-equiv">7.4</a>; \(G_2\) acts transitively on \(S^6\) with stabiliser \(\mathrm{SU}(3)\), Theorem&#160;<a href="sect0002.html#thm:G2-S6">7.5</a>, Baez <span class="cite">
+	[
+	<a href="part-stack.html#Baez02" >3</a>
+	]
+</span>). </p>
+</li>
+  <li><p>every point of \(S_\rho \) is a zero of \(\zeta _{\mathbb {O}^{*}}\), and conjugate zeros give the same sphere, \(S_\rho =S_{\bar\rho }\); </p>
+</li>
+  <li><p>the nontrivial-zero set is the disjoint union \(Z^{\mathrm{nt}}_{\mathbb {O}^{*}}=\bigsqcup _{[\rho ]}S_\rho \) over conjugate pairs \([\rho ]=\{ \rho ,\bar\rho \} \), with distinct pairs giving disjoint spheres; </p>
+</li>
+  <li><p>there are infinitely many such spheres (Corollary&#160;<a href="sect0001.html#cor:hadamard-infinitude">1.4</a>; also Hardy <span class="cite">
+	[
+	<a href="part-stack.html#Hardy14" >11</a>
+	]
+</span>, Theorem&#160;<a href="sect0001.html#thm:hardy">1.5</a>). </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000041">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>(i) The map \(v\mapsto \sigma +\gamma v\) is the affine map \(x\mapsto \sigma +\gamma x\) of \(\operatorname{Im}\mathbb {O}\cong \mathbb {R}^7\) restricted to \(S^6\); with \(\gamma {\gt}0\) its image is the round \(6\)-sphere of radius \(\gamma \) centred at \(\sigma \). By \(G_2\)-equivariance (Theorem&#160;<a href="sect0002.html#thm:G2-equiv">7.4</a>) and transitivity of \(G_2\) on \(S^6\) (Theorem&#160;<a href="sect0002.html#thm:G2-S6">7.5</a>), \(G_2\cdot (\sigma +\gamma v_0)=\{ \sigma +\gamma \, g(v_0):g\in G_2\} =S_\rho \). So \(S_\rho \) <em>is</em> \(S^6\), scaled by \(\gamma \), translated to \(\sigma \), realized as a single \(G_2\)-orbit; no embedding or diffeomorphism is invoked. </p>
+<p>(ii) For any \(v\in S^6\), \(\zeta _{\mathbb {O}^{*}}(\sigma +\gamma v)=\varphi _v(\zeta _{\mathbb {C}^{*}}(\rho ))=\varphi _v(0)=0\) by the Zero Equivalence Theorem&#160;<a href="sect0002.html#thm:zero-equivalence">8.1</a>. And \(S_{\bar\rho }=\{ \sigma +\gamma (-v):v\in S^6\} =S_\rho \), since \(v\mapsto -v\) is a bijection of \(S^6\). </p>
+<p>(iii) For “\(\subseteq \)”: a non-real zero \(s=\sigma +\gamma v\) of \(\zeta _{\mathbb {O}^{*}}\) forces \(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma )=0\) by Theorem&#160;<a href="sect0002.html#thm:zero-equivalence">8.1</a>, so \(s\in S_\rho \) with \(\rho =\sigma +i\gamma \) nontrivial (Lemma&#160;<a href="sect0001.html#lem:zero-Cstar">1.7</a>); “\(\supseteq \)” is (ii). Disjointness: if \(\sigma +\gamma v=\sigma '+\gamma 'w\), uniqueness of the real/imaginary parts gives \(\sigma =\sigma '\) and \(\gamma v=\gamma 'w\), whence \(\gamma =\gamma '\) (taking norms, \(|v|=|w|=1\)) and \(\{ \rho ',\bar\rho '\} =\{ \rho ,\bar\rho \} \); so two spheres coincide or are disjoint. </p>
+<p>(iv) There are infinitely many spheres because \(\zeta \) has infinitely many nontrivial zeros (Corollary&#160;<a href="sect0001.html#cor:hadamard-infinitude">1.4</a>; also Hardy, Theorem&#160;<a href="sect0001.html#thm:hardy">1.5</a>). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rh-equiv">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.3</span>
+    <span class="theorem_thmtitle">The equivalence: concentricity \(\Leftrightarrow \) RH</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:rh-equiv">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000043"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:zero-spheres">Theorem 8.2</a></li>
+          
+          <li><a href="sect0001.html#thm:riemann">Theorem 1.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="/find/#doc/riemannHypothesis_iff_concentric" class="lean_decl">riemannHypothesis_iff_concentric</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   The following are equivalent: </p>
+<ol class="enumerate">
+  <li><p>the Riemann Hypothesis; </p>
+</li>
+  <li><p>the nontrivial-zero \(6\)-spheres \(\{ S_\rho \} \) of \(\zeta _{\mathbb {O}^{*}}\) (Theorem&#160;<a href="sect0002.html#thm:zero-spheres">8.2</a>) are <em>concentric</em>: they share a single common centre, necessarily a point of the real axis. </p>
+</li>
+</ol>
+<p> When they hold, the common centre is \(\tfrac 12\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000043">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Each \(S_\rho \) is centred at the real point \(\sigma _\rho \), where \(\rho =\sigma _\rho +i\gamma _\rho \) (Theorem&#160;<a href="sect0002.html#thm:zero-spheres">8.2</a>(i)). </p>
+<p>\((a)\Rightarrow (b)\): under RH every \(\sigma _\rho =\tfrac 12\), so all spheres share the centre \(\tfrac 12\). </p>
+<p>\((b)\Rightarrow (a)\): suppose the spheres share a common centre \(c\in \mathbb {R}\). By the functional equation (Theorem&#160;<a href="sect0001.html#thm:riemann">1.1</a>), if \(\rho \) is a nontrivial zero then so is \(1-\bar\rho =(1-\sigma _\rho )+i\gamma _\rho \), whose sphere \(S_{1-\bar\rho }\) is centred at \(1-\sigma _\rho \). Concentricity forces \(\sigma _\rho =c=1-\sigma _\rho \), hence \(\sigma _\rho =\tfrac 12\); as \(\rho \) was arbitrary this is RH, and the common centre is \(\tfrac 12\). </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0001.html" title="Classical Background"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Concentric Zero-Spheres of a class of sections of the commutative ring \(\mathcal R\) of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="part-stack.html" title="The Categorical Construction and the Concentricity Theorem"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>
