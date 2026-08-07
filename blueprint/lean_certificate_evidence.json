@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-08-07T03:40:15.643406+00:00",
+  "generated_utc": "2026-08-07T03:42:24.042284+00:00",
   "allowed_axioms": [
     "propext",
     "Classical.choice",
@@ -875,7 +875,7 @@
       "identity_hash": "c40234ca004f8f08c9ef264a989d66abf18555f82fbc171c95a062476a352406",
       "typechecked": false,
       "author_confirmed": true,
-      "status": "AUTHOR_BINDING_TARGET_MISMATCH"
+      "status": "BINDING_READY"
     }
   ],
   "binding_identity_hash_sources": {
