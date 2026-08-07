@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-08-07T03:42:24.042284+00:00",
+  "generated_utc": "2026-08-07T03:48:10.411821+00:00",
   "allowed_axioms": [
     "propext",
     "Classical.choice",
@@ -826,58 +826,7 @@
       "status": "BINDING_UNRESOLVED"
     }
   ],
-  "bindings": [
-    {
-      "master": "thm:concentricity",
-      "id": "seat2.transportLevelCollapse",
-      "paper_object": "the post-collapse residue read instantiated at the n-th and 0-th certified representatives",
-      "lean_local": "hkn",
-      "binder": "have",
-      "expected_type": "A.transportLevel n = A.transportLevel 0",
-      "required_master_declarations": [
-        "ASection.residueTotal_pi0_colimit_singleton",
-        "ASection.residueInputTotalTransportRead_certified",
-        "ASection.residueTotal_transportLevel_singleton",
-        "ASection.transportLevel"
-      ],
-      "target_declaration": "ASection.concentricity",
-      "candidate_expression": "A.residueTotal_transportLevel_singleton n 0",
-      "author_binding_confirmed": true,
-      "author_binding_sha256": "223fd0538e1aef8e55edcbed65f04d3e39fd0f5e4ebdb88752a91e9a7ee1ba7c",
-      "author_confirmation_source": "author correction in active provenance task, 2026-08-06",
-      "probe_source": "Concentricity/Theorem.lean",
-      "probe_anchor": "  exact hkn",
-      "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
-      "register_modules": [
-        "Concentricity/Theorem.lean"
-      ],
-      "consumer_module": "Concentricity/Theorem.lean",
-      "consumed_as_binder": true,
-      "object_status": "AUTHOR_BOUND_LEAN_CONFIRMED",
-      "witness_suppliers": [
-        "def:A-section",
-        "def:base",
-        "def:residue-subdiagram",
-        "lem:c-residue-transitive",
-        "lem:residue-spheres",
-        "lem:pi0-grothendieck",
-        "thm:G2-S6",
-        "thm:winding-lift",
-        "prop:winding-signature",
-        "thm:identity"
-      ],
-      "candidate_sha256": "f7931acc7b6140367453100034803d1ec48341fafa2ce2359182090eb1e796ef",
-      "author_binding_digest": "223fd0538e1aef8e55edcbed65f04d3e39fd0f5e4ebdb88752a91e9a7ee1ba7c",
-      "master_targets_linked": true,
-      "target_typed": false,
-      "target_header": "theorem ASection.concentricity (A : ASection) :\n    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by",
-      "exact_expression": "A.residueTotal_transportLevel_singleton n 0",
-      "identity_hash": "c40234ca004f8f08c9ef264a989d66abf18555f82fbc171c95a062476a352406",
-      "typechecked": false,
-      "author_confirmed": true,
-      "status": "BINDING_READY"
-    }
-  ],
+  "bindings": [],
   "binding_identity_hash_sources": {
     "Octonionic_RH_master.tex": "5b533b14bed378b93acacc0e732a8c800c84bae38605d19beffdabd5bc39fb8a",
     "Concentricity/Theorem.lean": "2c11a6501285c9ab7cb5dcd4af89eca72b36e95cd047e7a9e1e254e397821d14"
