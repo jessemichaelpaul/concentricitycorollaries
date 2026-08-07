@@ -1,7 +1,0 @@
-# Provenance project boundary. The repository itself is the workspace root;
-# no additional writable roots are granted.
-sandbox_mode = "workspace-write"
-
-[sandbox_workspace_write]
-network_access = false
-writable_roots = []
