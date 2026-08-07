@@ -350,6 +350,32 @@ theorem residueTotal_morphism_of_northComparison_audit
   · exact hh
 
 /-!
+The live production route is the semantic C-residue inverse-image input
+groupoid.  These receipts consume its exact public declarations: the base
+component moves between the two arbitrary locus inputs, and the fibre
+component is the already-carried `G₂` transport.
+-/
+
+theorem CResidueInputHom_audit (A : ASection)
+    (u v : CResidueInputWorld A) : Nonempty (u ⟶ v) := by
+  exact ⟨CResidueInputHom A u v⟩
+
+theorem CResidueInputFiberHom_audit (A : ASection)
+    {u v : CResidueInputWorld A} (f : u ⟶ v)
+    (x : (IsCResidueStateOverInput A u).FullSubcategory)
+    (y : (IsCResidueStateOverInput A v).FullSubcategory) :
+    Nonempty ((AsectionCResidueInputTransport A f).obj x ⟶ y) := by
+  exact CResidueInputFiberHom A f x y
+
+theorem CResidueInputTotal_transitive_audit (A : ASection) :
+    ∀ P Q : CResidueInputTotalCategory A, Nonempty (P ⟶ Q) := by
+  exact CResidueInputTotal_transitive A
+
+theorem sweepTransitive_on_residueSystem_audit (A : ASection) :
+    ∀ P Q : A.residueTotalCategory, Nonempty (P ⟶ Q) := by
+  exact CResidueInputTotal_transitive A
+
+/-!
 The two immediate consequences are certified conditionally on transitivity
 of this exact C-residue total.  These receipts do not import a generic
 category: every occurrence is definitionally
@@ -358,25 +384,17 @@ category: every occurrence is definitionally
 
 theorem residueTotal_isConnected_of_transitive_audit
     (A : ASection)
-    (htrans : ∀ P Q : Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
-      Nonempty (P ⟶ Q)) :
-    CategoryTheory.IsConnected (Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
-  haveI : Nonempty (Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) :=
-    ⟨⟨projectiveNorth,
-      ⟨residueActionState A projectiveNorth 0 baseWorld,
-        A.residueActionState_mem 0⟩⟩⟩
+    (htrans : ∀ P Q : A.residueTotalCategory, Nonempty (P ⟶ Q)) :
+    CategoryTheory.IsConnected A.residueTotalCategory := by
+  haveI : Nonempty A.residueTotalCategory :=
+    ⟨A.residueInputTotalObject 0 baseWorld⟩
   exact zigzag_isConnected fun P Q =>
     CategoryTheory.Zigzag.of_hom (htrans P Q).some
 
 theorem residueTotal_pi0_singleton_of_connected_audit
     (A : ASection)
-    [CategoryTheory.IsConnected (Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat))] :
-    ∀ P Q : Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+    [CategoryTheory.IsConnected A.residueTotalCategory] :
+    ∀ P Q : A.residueTotalCategory,
       CategoryTheory.ConnectedComponents.mk P =
         CategoryTheory.ConnectedComponents.mk Q := by
   exact fun P Q =>
@@ -397,6 +415,10 @@ theorem residueTotal_pi0_singleton_of_connected_audit
 #check @relativeActionSquare_right_audit
 #check @relativeActionSquare_transport_audit
 #check @residueTotal_morphism_of_northComparison_audit
+#check @CResidueInputHom_audit
+#check @CResidueInputFiberHom_audit
+#check @CResidueInputTotal_transitive_audit
+#check @sweepTransitive_on_residueSystem_audit
 #check @residueTotal_isConnected_of_transitive_audit
 #check @residueTotal_pi0_singleton_of_connected_audit
 
@@ -415,6 +437,10 @@ theorem residueTotal_pi0_singleton_of_connected_audit
 #print axioms relativeActionSquare_right_audit
 #print axioms relativeActionSquare_transport_audit
 #print axioms residueTotal_morphism_of_northComparison_audit
+#print axioms CResidueInputHom_audit
+#print axioms CResidueInputFiberHom_audit
+#print axioms CResidueInputTotal_transitive_audit
+#print axioms sweepTransitive_on_residueSystem_audit
 #print axioms residueTotal_isConnected_of_transitive_audit
 #print axioms residueTotal_pi0_singleton_of_connected_audit
 

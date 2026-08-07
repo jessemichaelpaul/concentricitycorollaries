@@ -1,77 +1,13 @@
 {
   "schema": 1,
-  "generated_utc": "2026-08-07T00:53:07.716334+00:00",
+  "generated_utc": "2026-08-07T01:48:52.217130+00:00",
   "allowed_axioms": [
     "propext",
     "Classical.choice",
     "Quot.sound"
   ],
-  "project_inference_verdict": "NOT_CERTIFIED",
-  "findings": [
-    {
-      "declaration": "ASection.northState_is_residueActionState_audit",
-      "failed_checks": [
-        "master_or_production_identity"
-      ],
-      "failing_command": "python3 scripts/generate_blueprint_lean_table.py",
-      "failing_exit_code": 1,
-      "literal_evidence_file": "blueprint/lean_certificate_probe.txt"
-    },
-    {
-      "declaration": "ASection.residueActionState_north_input_audit",
-      "failed_checks": [
-        "master_or_production_identity"
-      ],
-      "failing_command": "python3 scripts/generate_blueprint_lean_table.py",
-      "failing_exit_code": 1,
-      "literal_evidence_file": "blueprint/lean_certificate_probe.txt"
-    },
-    {
-      "declaration": "ASection.residueActionTransport_north_input_audit",
-      "failed_checks": [
-        "master_or_production_identity"
-      ],
-      "failing_command": "python3 scripts/generate_blueprint_lean_table.py",
-      "failing_exit_code": 1,
-      "literal_evidence_file": "blueprint/lean_certificate_probe.txt"
-    },
-    {
-      "declaration": "ASection.northRelativeLoop_maps_audit",
-      "failed_checks": [
-        "master_or_production_identity"
-      ],
-      "failing_command": "python3 scripts/generate_blueprint_lean_table.py",
-      "failing_exit_code": 1,
-      "literal_evidence_file": "blueprint/lean_certificate_probe.txt"
-    },
-    {
-      "declaration": "ASection.northComparison_of_parallelFaces_audit",
-      "failed_checks": [
-        "master_or_production_identity"
-      ],
-      "failing_command": "python3 scripts/generate_blueprint_lean_table.py",
-      "failing_exit_code": 1,
-      "literal_evidence_file": "blueprint/lean_certificate_probe.txt"
-    },
-    {
-      "declaration": "ASection.relativeActionSquare_transport_audit",
-      "failed_checks": [
-        "master_or_production_identity"
-      ],
-      "failing_command": "python3 scripts/generate_blueprint_lean_table.py",
-      "failing_exit_code": 1,
-      "literal_evidence_file": "blueprint/lean_certificate_probe.txt"
-    },
-    {
-      "declaration": "ASection.residueTotal_morphism_of_northComparison_audit",
-      "failed_checks": [
-        "master_or_production_identity"
-      ],
-      "failing_command": "python3 scripts/generate_blueprint_lean_table.py",
-      "failing_exit_code": 1,
-      "literal_evidence_file": "blueprint/lean_certificate_probe.txt"
-    }
-  ],
+  "project_inference_verdict": "INFERENCE_CERTIFIED",
+  "findings": [],
   "commands": {
     "terminal_build": {
       "exit_code": 0
@@ -96,24 +32,24 @@
     }
   },
   "fingerprints": {
-    "Octonionic_RH_master.tex": "d906ea1494831c4096add3725cdaeedf5cf079ab62bb547e96d19049d3376062",
-    "blueprint/lean_certificate_manifest.json": "dc20b06e89ec6e41f71ee93be56d0f9c159571a849f447c9e8db6806741717d5",
-    "Concentricity/_BlueprintTerminalCertificateProbe.lean": "2e898992124efa19b135e96f87d14813b03809f27f9cc7a69f85fb8d5f257d37",
+    "Octonionic_RH_master.tex": "5b533b14bed378b93acacc0e732a8c800c84bae38605d19beffdabd5bc39fb8a",
+    "blueprint/lean_certificate_manifest.json": "767925e0c35a56b55e0fe1b1cc4b7b2efa2f120e7201d194cc1b98129a810aab",
+    "Concentricity/_BlueprintTerminalCertificateProbe.lean": "aeabd54553ba32bacb31183e3a2eff9f8cba0ca3973f2b518f127cfb249c4f18",
     "Concentricity/Theorem.lean": "2c11a6501285c9ab7cb5dcd4af89eca72b36e95cd047e7a9e1e254e397821d14",
-    "Concentricity/_GateNorthCResidueTransitivityAudit.lean": "07ddbe960df820ab93c25f87f4b963077f058fd3c79b739430a3c5ff6533d99a",
+    "Concentricity/_GateNorthCResidueTransitivityAudit.lean": "efd2bd6d7f5f6437b7d32bae8cbb51299c3724e148386a3b701add58edebeb8a",
     "scripts/build_transitivity_inference_probe.sh": "e0982829e4937b00e01bda1b7b4a4e767c09f3a907ae65393a4590125a686683",
     "Concentricity/_GateCorollaryInferenceAudit.lean": "8bac693ca5c93deae6b9f1511e3f058efab47a8b657c061fc178176fe5636efb",
     "Concentricity/Corollaries.lean": "4866f494cf62579778905d6dd93b912a868a880b827c4456a060bdb08d441248",
     "lean-toolchain": "efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee",
     "lakefile.toml": "361be5c558f10fbc113a616222d2db2c08c9b353ddb12f0cac6d5ad9a0d0287d",
-    "lean_source_tree": "432b81b904b71ec3caad45ab263cda1015811c605806d08963c883faf11f8af9"
+    "lean_source_tree": "846186e593b0e44e121217b21ce185cdc1b6b4a970f4043a0a2011eebe81c4b7"
   },
   "terminal": [
     {
       "master": "thm:G2-S6",
       "semantics": "G₂ supplies the remaining sphere-direction action",
       "declaration": "G2.exists_smul_eq_of_mem_unitImaginarySphere",
-      "master_line": 739,
+      "master_line": 740,
       "semantic_link": true,
       "kernel_green": true,
       "type": "∀ {u v : Octonion},\n  u ∈ Octonion.unitImaginarySphere → v ∈ Octonion.unitImaginarySphere → ∃ g, g • u = v",
@@ -130,7 +66,7 @@
       "master": "def:two-worlds",
       "semantics": "octonionic action world",
       "declaration": "H1",
-      "master_line": 990,
+      "master_line": 991,
       "semantic_link": true,
       "kernel_green": true,
       "type": "Type",
@@ -147,7 +83,7 @@
       "master": "def:two-worlds",
       "semantics": "slice-value world",
       "declaration": "SphereWorld",
-      "master_line": 990,
+      "master_line": 991,
       "semantic_link": true,
       "kernel_green": true,
       "type": "Type",
@@ -164,7 +100,7 @@
       "master": "def:base",
       "semantics": "projective action-groupoid base",
       "declaration": "GreatCircle.Base",
-      "master_line": 1023,
+      "master_line": 1024,
       "semantic_link": true,
       "kernel_green": true,
       "type": "Type",
@@ -181,7 +117,7 @@
       "master": "def:base",
       "semantics": "chosen orbit representative has the required endpoint",
       "declaration": "GreatCircle.orbitRep_spec",
-      "master_line": 1023,
+      "master_line": 1024,
       "semantic_link": true,
       "kernel_green": true,
       "type": "∀ (b : GreatCircle.Point), GreatCircle.orbitRep b • OnePoint.infty = b",
@@ -198,7 +134,7 @@
       "master": "def:base",
       "semantics": "total Grothendieck construction",
       "declaration": "CategoryTheory.Grothendieck",
-      "master_line": 1023,
+      "master_line": 1024,
       "semantic_link": true,
       "kernel_green": true,
       "type": "{C : Type u_1} →\n  [inst : CategoryTheory.Category.{u_2, u_1} C] → CategoryTheory.Functor C CategoryTheory.Cat → Type (max u_1 u_3)",
@@ -215,7 +151,7 @@
       "master": "def:residue-subdiagram",
       "semantics": "C-residue zero locus",
       "declaration": "ASection.CResidueZeroLocus",
-      "master_line": 1574,
+      "master_line": 1575,
       "semantic_link": true,
       "kernel_green": true,
       "type": "ASection → Set ℂ",
@@ -232,7 +168,7 @@
       "master": "def:residue-subdiagram",
       "semantics": "C-residue inverse-image diagram",
       "declaration": "ASection.AsectionCResidueDiagram",
-      "master_line": 1574,
+      "master_line": 1575,
       "semantic_link": true,
       "kernel_green": true,
       "type": "ASection → CategoryTheory.Functor GreatCircle.Base CategoryTheory.Grpd",
@@ -249,7 +185,7 @@
       "master": "def:residue-subdiagram",
       "semantics": "inclusion of the inverse-image diagram in the total action diagram",
       "declaration": "ASection.AsectionCResidueInclusion",
-      "master_line": 1574,
+      "master_line": 1575,
       "semantic_link": true,
       "kernel_green": true,
       "type": "(A : ASection) → A.AsectionCResidueDiagram ⟶ A.AsectionActionDiagram",
@@ -261,186 +197,204 @@
       "axiom_print": "'ASection.AsectionCResidueInclusion' depends on axioms: [propext, Classical.choice, Quot.sound]",
       "axiom_ok": true,
       "status": "TERMINAL_CERTIFIED"
+    },
+    {
+      "master": "def:residue-subdiagram",
+      "semantics": "semantic C-residue inverse-image input locus",
+      "declaration": "ASection.IsCResidueInput",
+      "master_line": 1575,
+      "semantic_link": true,
+      "kernel_green": true,
+      "type": "ASection →\n  CategoryTheory.ObjectProperty (CategoryTheory.ActionCategory (↥Moebius) (OnePoint ℂ))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axiom_print": "'ASection.IsCResidueInput' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_ok": true,
+      "status": "TERMINAL_CERTIFIED"
+    },
+    {
+      "master": "def:residue-subdiagram",
+      "semantics": "semantic C-residue input groupoid",
+      "declaration": "ASection.CResidueInputWorld",
+      "master_line": 1575,
+      "semantic_link": true,
+      "kernel_green": true,
+      "type": "ASection → Type",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axiom_print": "'ASection.CResidueInputWorld' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_ok": true,
+      "status": "TERMINAL_CERTIFIED"
+    },
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "the one distinguished disk action transports a locus arrow",
+      "declaration": "ASection.CResidueInputActionSquare",
+      "master_line": 1621,
+      "semantic_link": true,
+      "kernel_green": true,
+      "type": "(A : ASection) →\n  {u v : A.CResidueInputWorld} →\n    (u ⟶ v) →\n      ASection.ActionTransportSquare (A.projectiveObjectFrame ASection.projectiveNorth)\n        (A.projectiveObjectFrame ASection.projectiveNorth)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axiom_print": "'ASection.CResidueInputActionSquare' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_ok": true,
+      "status": "TERMINAL_CERTIFIED"
+    },
+    {
+      "master": "def:residue-subdiagram",
+      "semantics": "semantic input-locus action diagram",
+      "declaration": "ASection.AsectionCResidueInputDiagram",
+      "master_line": 1575,
+      "semantic_link": true,
+      "kernel_green": true,
+      "type": "(A : ASection) → CategoryTheory.Functor A.CResidueInputWorld CategoryTheory.Grpd",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axiom_print": "'ASection.AsectionCResidueInputDiagram' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_ok": true,
+      "status": "TERMINAL_CERTIFIED"
+    },
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "transitivity of the semantic C-residue Grothendieck total",
+      "declaration": "ASection.CResidueInputTotal_transitive",
+      "master_line": 1621,
+      "semantic_link": true,
+      "kernel_green": true,
+      "type": "∀ (A : ASection) (P Q : A.CResidueInputTotalCategory), Nonempty (P ⟶ Q)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axiom_print": "'ASection.CResidueInputTotal_transitive' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_ok": true,
+      "status": "TERMINAL_CERTIFIED"
+    },
+    {
+      "master": "thm:concentricity",
+      "semantics": "certified representative reads its carried real transport level",
+      "declaration": "ASection.residueInputTotalTransportRead_certified",
+      "master_line": 1908,
+      "semantic_link": true,
+      "kernel_green": true,
+      "type": "∀ (A : ASection) (n : ℕ) (I : SphereWorld),\n  A.residueInputTotalTransportRead (A.residueInputTotalObject n I) = A.transportLevel n",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axiom_print": "'ASection.residueInputTotalTransportRead_certified' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_ok": true,
+      "status": "TERMINAL_CERTIFIED"
     }
   ],
   "inference": [
     {
       "master": "lem:c-residue-transitive",
-      "semantics": "a north C-residue state is the exact C3 residue action state",
-      "master_anchor": "there are C-residue indices $n_1,n_2$",
-      "receipt": "ASection.northState_is_residueActionState_audit",
-      "master_line": 1614,
-      "semantic_link": false,
-      "kernel_green": true,
-      "type": "∀ (A : ASection) (zN : ↑(A.AsectionActionFiber projectiveNorth)),\n  A.IsNorthCResidueState zN → ∃ n I, zN = A.residueActionState projectiveNorth n I",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axiom_print": "'ASection.northState_is_residueActionState_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
-      "axiom_ok": true,
-      "production_identity_ok": true,
-      "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
-      "source_line": 61,
-      "status": "NOT_CERTIFIED"
-    },
-    {
-      "master": "lem:c-residue-transitive",
-      "semantics": "the north input is D_A⁻¹(sphereZero n)",
-      "master_anchor": "u_i=D^{-1}(z_i)",
-      "receipt": "ASection.residueActionState_north_input_audit",
-      "master_line": 1614,
-      "semantic_link": false,
-      "kernel_green": true,
-      "type": "∀ (A : ASection) (n : ℕ) (I : SphereWorld),\n  (ActionCategory.back (A.residueActionState projectiveNorth n I).input).coordinate =\n    ↑A.distinguishedDiskAction⁻¹ ↑(A.sphereZero n)",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axiom_print": "'ASection.residueActionState_north_input_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
-      "axiom_ok": true,
-      "production_identity_ok": true,
-      "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
-      "source_line": 18,
-      "status": "NOT_CERTIFIED"
-    },
-    {
-      "master": "lem:c-residue-transitive",
-      "semantics": "a north loop acts by C(stabilizerPart k) on the stored input",
-      "master_anchor": "the input leg of $F_A(k)$ carries",
-      "receipt": "ASection.residueActionTransport_north_input_audit",
-      "master_line": 1614,
-      "semantic_link": false,
-      "kernel_green": true,
-      "type": "∀ (A : ASection) (n : ℕ) (I : SphereWorld)\n  (k : projectiveNorth ⟶ projectiveNorth),\n  (ActionCategory.back\n        ((A.AsectionActionTransport k).obj (A.residueActionState projectiveNorth n I)).input).coordinate =\n    ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart k)) (↑A.distinguishedDiskAction⁻¹ ↑(A.sphereZero n))",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axiom_print": "'ASection.residueActionTransport_north_input_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
-      "axiom_ok": true,
-      "production_identity_ok": true,
-      "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
-      "source_line": 26,
-      "status": "NOT_CERTIFIED"
-    },
-    {
-      "master": "lem:c-residue-transitive",
-      "semantics": "the common source factor cancels in k_E⁻¹ ≫ k_W",
-      "master_anchor": "cancels the common $0$-frame $o_0$",
-      "receipt": "ASection.northRelativeLoop_stabilizer_audit",
-      "master_line": 1614,
+      "semantics": "the semantic inverse-image locus supplies a base arrow between arbitrary inputs",
+      "master_anchor": "together with base arrows",
+      "receipt": "ASection.CResidueInputHom_audit",
+      "master_line": 1621,
       "semantic_link": true,
       "kernel_green": true,
-      "type": "∀ {X : GreatCircle.Base} (kE kW : X ⟶ projectiveNorth),\n  GreatCircle.stabilizerPart (Groupoid.inv kE ≫ kW) = GreatCircle.stabilizerPart kW * (GreatCircle.stabilizerPart kE)⁻¹",
+      "type": "∀ (A : ASection) (u v : A.CResidueInputWorld), Nonempty (u ⟶ v)",
       "axioms": [
         "propext",
         "Classical.choice",
         "Quot.sound"
       ],
-      "axiom_print": "'ASection.northRelativeLoop_stabilizer_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_print": "'ASection.CResidueInputHom_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
       "axiom_ok": true,
       "production_identity_ok": true,
       "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
-      "source_line": 137,
+      "source_line": 359,
       "status": "INFERENCE_CERTIFIED"
     },
     {
       "master": "lem:c-residue-transitive",
-      "semantics": "the relative loop carries the first certified input to the second",
-      "master_anchor": "C(r_W)(u_\\ast)=u_2",
-      "receipt": "ASection.northRelativeLoop_maps_audit",
-      "master_line": 1614,
-      "semantic_link": false,
+      "semantics": "after base transport G₂ supplies the fibre component",
+      "master_anchor": "transitivity of $G_2$ on the unit imaginary octonions acts",
+      "receipt": "ASection.CResidueInputFiberHom_audit",
+      "master_line": 1621,
+      "semantic_link": true,
       "kernel_green": true,
-      "type": "∀ {X : GreatCircle.Base} (kE kW : X ⟶ projectiveNorth) (uStar u₁ u₂ : OnePoint ℂ),\n  ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kE)) uStar = u₁ →\n    ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kW)) uStar = u₂ →\n      ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart (Groupoid.inv kE ≫ kW))) u₁ = u₂",
+      "type": "∀ (A : ASection) {u v : A.CResidueInputWorld} (f : u ⟶ v)\n  (x : (A.IsCResidueStateOverInput u).FullSubcategory) (y : (A.IsCResidueStateOverInput v).FullSubcategory),\n  Nonempty ((A.AsectionCResidueInputTransport f).obj x ⟶ y)",
       "axioms": [
         "propext",
         "Classical.choice",
         "Quot.sound"
       ],
-      "axiom_print": "'ASection.northRelativeLoop_maps_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_print": "'ASection.CResidueInputFiberHom_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
       "axiom_ok": true,
       "production_identity_ok": true,
       "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
-      "source_line": 165,
-      "status": "NOT_CERTIFIED"
+      "source_line": 363,
+      "status": "INFERENCE_CERTIFIED"
     },
     {
       "master": "lem:c-residue-transitive",
-      "semantics": "the two parallel faces and G₂ package the north-fibre morphism",
-      "master_anchor": "of the $G_2$-action supplies $\\gamma\\in G_2$",
-      "receipt": "ASection.northComparison_of_parallelFaces_audit",
-      "master_line": 1614,
-      "semantic_link": false,
+      "semantics": "the base and fibre components form one Grothendieck morphism between arbitrary objects",
+      "master_anchor": "Hence $P$ and $Q$ are joined.",
+      "receipt": "ASection.CResidueInputTotal_transitive_audit",
+      "master_line": 1621,
+      "semantic_link": true,
       "kernel_green": true,
-      "type": "∀ (A : ASection) {X : GreatCircle.Base} (kE kW : X ⟶ projectiveNorth)\n  (xN yN : ↑(A.AsectionActionFiber projectiveNorth)) (uStar : OnePoint ℂ),\n  ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kE)) uStar = (ActionCategory.back xN.input).coordinate →\n    ↑(GreatCircle.cayleyProjective ↑(GreatCircle.stabilizerPart kW)) uStar = (ActionCategory.back yN.input).coordinate →\n      Nonempty ((A.AsectionActionTransport (Groupoid.inv kE ≫ kW)).obj xN ⟶ yN)",
+      "type": "∀ (A : ASection) (P Q : A.CResidueInputTotalCategory), Nonempty (P ⟶ Q)",
       "axioms": [
         "propext",
         "Classical.choice",
         "Quot.sound"
       ],
-      "axiom_print": "'ASection.northComparison_of_parallelFaces_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_print": "'ASection.CResidueInputTotal_transitive_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
       "axiom_ok": true,
       "production_identity_ok": true,
       "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
-      "source_line": 201,
-      "status": "NOT_CERTIFIED"
+      "source_line": 370,
+      "status": "INFERENCE_CERTIFIED"
     },
     {
       "master": "lem:c-residue-transitive",
-      "semantics": "the same relative calculation holds in the two-legged square functor register",
-      "master_anchor": "conjugation by $D_A$ turns an input leg $C(r)$ into the",
-      "receipt": "ASection.relativeActionSquare_transport_audit",
-      "master_line": 1614,
-      "semantic_link": false,
+      "semantics": "the production transitivity theorem consumes the semantic total directly",
+      "master_anchor": "is transitive: any two of its objects are joined by a morphism.",
+      "receipt": "ASection.sweepTransitive_on_residueSystem_audit",
+      "master_line": 1621,
+      "semantic_link": true,
       "kernel_green": true,
-      "type": "∀ (A : ASection) {source target : ↥Moebius}\n  (E W : ActionTransportSquare source target),\n  (E.inv.comp W).actionStateTransport A = E.inv.actionStateTransport A ⋙ W.actionStateTransport A",
+      "type": "∀ (A : ASection) (P Q : A.residueTotalCategory), Nonempty (P ⟶ Q)",
       "axioms": [
         "propext",
         "Classical.choice",
         "Quot.sound"
       ],
-      "axiom_print": "'ASection.relativeActionSquare_transport_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_print": "'ASection.sweepTransitive_on_residueSystem_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
       "axiom_ok": true,
       "production_identity_ok": true,
       "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
-      "source_line": 286,
-      "status": "NOT_CERTIFIED"
-    },
-    {
-      "master": "lem:c-residue-transitive",
-      "semantics": "g⁻¹ ≫ k ≫ h and fullness produce P ⟶ Q inside ∫R_A",
-      "master_anchor": "preimage in the residue total $\\int\\mathcal R_A$",
-      "receipt": "ASection.residueTotal_morphism_of_northComparison_audit",
-      "master_line": 1614,
-      "semantic_link": false,
-      "kernel_green": true,
-      "type": "∀ (A : ASection)\n  (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)) (xN yN : ↑(A.AsectionActionFiber projectiveNorth))\n  (g : projectiveNorth ⟶ P.base),\n  (A.AsectionActionTransport g).obj xN = P.fiber.obj →\n    ∀ (h : projectiveNorth ⟶ Q.base),\n      (A.AsectionActionTransport h).obj yN = Q.fiber.obj →\n        ∀ (k : projectiveNorth ⟶ projectiveNorth) (φ : (A.AsectionActionTransport k).obj xN ⟶ yN), Nonempty (P ⟶ Q)",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axiom_print": "'ASection.residueTotal_morphism_of_northComparison_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
-      "axiom_ok": true,
-      "production_identity_ok": true,
-      "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
-      "source_line": 293,
-      "status": "NOT_CERTIFIED"
+      "source_line": 374,
+      "status": "INFERENCE_CERTIFIED"
     },
     {
       "master": "thm:concentricity",
       "semantics": "transitivity of the exact ∫R_A implies IsConnected for that exact ∫R_A",
       "master_anchor": "Thus $\\int_{\\mathcal B}\\mathcal R_A$ is connected.",
       "receipt": "ASection.residueTotal_isConnected_of_transitive_audit",
-      "master_line": 1899,
+      "master_line": 1908,
       "semantic_link": true,
       "kernel_green": true,
-      "type": "∀ (A : ASection),\n  (∀ (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)), Nonempty (P ⟶ Q)) →\n    CategoryTheory.IsConnected (Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat))",
+      "type": "∀ (A : ASection),\n  (∀ (P Q : A.residueTotalCategory), Nonempty (P ⟶ Q)) → CategoryTheory.IsConnected A.residueTotalCategory",
       "axioms": [
         "propext",
         "Classical.choice",
@@ -450,7 +404,7 @@
       "axiom_ok": true,
       "production_identity_ok": true,
       "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
-      "source_line": 359,
+      "source_line": 385,
       "status": "INFERENCE_CERTIFIED"
     },
     {
@@ -458,10 +412,10 @@
       "semantics": "connectedness of the exact ∫R_A makes π₀ of that exact ∫R_A a singleton",
       "master_anchor": "$\\pi_0$ is the singleton set",
       "receipt": "ASection.residueTotal_pi0_singleton_of_connected_audit",
-      "master_line": 1899,
+      "master_line": 1908,
       "semantic_link": true,
       "kernel_green": true,
-      "type": "∀ (A : ASection)\n  [CategoryTheory.IsConnected (Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat))]\n  (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),\n  CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q",
+      "type": "∀ (A : ASection) [CategoryTheory.IsConnected A.residueTotalCategory]\n  (P Q : A.residueTotalCategory), CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q",
       "axioms": [
         "propext",
         "Classical.choice",
@@ -471,7 +425,7 @@
       "axiom_ok": true,
       "production_identity_ok": true,
       "source": "Concentricity/_GateNorthCResidueTransitivityAudit.lean",
-      "source_line": 374,
+      "source_line": 394,
       "status": "INFERENCE_CERTIFIED"
     },
     {
@@ -484,7 +438,7 @@
       "upstream_declaration": "ASection.concentricity",
       "production_declaration": "ASection.nontrivial_one_centre",
       "production_exact": "theorem ASection.nontrivial_one_centre (A : ASection) :\n    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c :=\n  A.concentricity",
-      "master_line": 2113,
+      "master_line": 2125,
       "semantic_link": true,
       "kernel_green": true,
       "type": "∀ (A : ASection),\n  (∃ c, ∀ (n : ℕ), (A.sphereZero n).re = c) → ∃ c, ∀ (n : ℕ), (A.sphereZero n).re = c",
@@ -505,7 +459,7 @@
       "master_anchor": "Every nontrivial zero of the classical Riemann zeta function has real part $\\tfrac12$",
       "receipt": "zeta_riemannHypothesis_of_concentricity_audit",
       "source": "Concentricity/_GateCorollaryInferenceAudit.lean",
-      "master_line": 2181,
+      "master_line": 2193,
       "semantic_link": true,
       "kernel_green": true,
       "type": "(∃ c, ∀ (n : ℕ), (zetaSection.sphereZero n).re = c) → RiemannHypothesis",
@@ -526,7 +480,7 @@
       "master_anchor": "infinitely many zeros lie on the line $\\Re s=\\tfrac12$",
       "receipt": "zeta_criticalLine_zeros_infinite_of_RH_audit",
       "source": "Concentricity/_GateCorollaryInferenceAudit.lean",
-      "master_line": 2181,
+      "master_line": 2193,
       "semantic_link": true,
       "kernel_green": true,
       "type": "RiemannHypothesis → {s | riemannZeta s = 0 ∧ s.re = 1 / 2}.Infinite",
@@ -543,6 +497,42 @@
     }
   ],
   "current_source_inference_receipt_health": [
+    {
+      "receipt": "ASection.CResidueInputFiberHom_audit",
+      "kernel_green": true,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axiom_print": "'ASection.CResidueInputFiberHom_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_ok": true,
+      "status": "INFERENCE_CERTIFIED"
+    },
+    {
+      "receipt": "ASection.CResidueInputHom_audit",
+      "kernel_green": true,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axiom_print": "'ASection.CResidueInputHom_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_ok": true,
+      "status": "INFERENCE_CERTIFIED"
+    },
+    {
+      "receipt": "ASection.CResidueInputTotal_transitive_audit",
+      "kernel_green": true,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axiom_print": "'ASection.CResidueInputTotal_transitive_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_ok": true,
+      "status": "INFERENCE_CERTIFIED"
+    },
     {
       "receipt": "ASection.nontrivial_one_centre_of_concentricity_audit",
       "kernel_green": true,
@@ -760,6 +750,18 @@
       "status": "INFERENCE_CERTIFIED"
     },
     {
+      "receipt": "ASection.sweepTransitive_on_residueSystem_audit",
+      "kernel_green": true,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axiom_print": "'ASection.sweepTransitive_on_residueSystem_audit' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "axiom_ok": true,
+      "status": "INFERENCE_CERTIFIED"
+    },
+    {
       "receipt": "zeta_criticalLine_zeros_infinite_of_RH_audit",
       "kernel_green": true,
       "axioms": [
@@ -786,31 +788,17 @@
   ],
   "open": [
     {
-      "master": "lem:c-residue-transitive",
-      "semantics": "the action-groupoid composition in ∫R_A, instantiated at the two semantic inverse-image objects ι_A(x₀) and ι_A(y₀)",
-      "declaration": "ASection.sweepTransitive_on_residueSystem",
-      "source": "Concentricity/Theorem.lean",
-      "diagnostic": "the north comparison inside sweepTransitive_on_residueSystem: ∃ k : projectiveNorth ⟶ projectiveNorth, Nonempty ((AsectionActionTransport A k).obj xN ⟶ yN)",
-      "master_line": 1614,
-      "semantic_link": true,
-      "diagnostic_seen": false,
-      "command": "lake env lean Concentricity/Theorem.lean",
-      "kernel_message": "",
-      "source_line": 940,
-      "status": "UNLOCATED_OPEN_SEAT"
-    },
-    {
       "master": "thm:concentricity",
       "semantics": "the val step: the π₀-class equality instantiated at the n-th and 0-th certified representatives, carried across to the real-valued level equality",
-      "declaration": "ASection.transportLevel_of_pi0_singleton",
+      "declaration": "ASection.residueTotal_transportLevel_singleton",
       "source": "Concentricity/Theorem.lean",
       "diagnostic": "A.transportLevel n = A.transportLevel 0  (carries sorryAx)",
-      "master_line": 1899,
+      "master_line": 1908,
       "semantic_link": true,
       "diagnostic_seen": false,
       "command": "lake env lean Concentricity/Theorem.lean",
       "kernel_message": "",
-      "source_line": 0,
+      "source_line": 990,
       "status": "UNLOCATED_OPEN_SEAT"
     }
   ],
@@ -847,23 +835,25 @@
       "binder": "have",
       "expected_type": "A.transportLevel n = A.transportLevel 0",
       "required_master_declarations": [
-        "ASection.residueTotal_pi0_singleton",
+        "ASection.residueTotal_pi0_colimit_singleton",
+        "ASection.residueInputTotalTransportRead_certified",
+        "ASection.residueTotal_transportLevel_singleton",
         "ASection.transportLevel"
       ],
-      "target_declaration": "ASection.transportLevel",
-      "candidate_expression": "hkn",
+      "target_declaration": "ASection.concentricity",
+      "candidate_expression": "A.residueTotal_transportLevel_singleton n 0",
       "author_binding_confirmed": true,
-      "author_binding_sha256": "2303695ed6012271f74b08d247c9ec6b1646324d5eaa878e83ca59ce31323ccb",
-      "author_confirmation_source": "author correction in active provenance task, 2026-08-02",
+      "author_binding_sha256": "223fd0538e1aef8e55edcbed65f04d3e39fd0f5e4ebdb88752a91e9a7ee1ba7c",
+      "author_confirmation_source": "author correction in active provenance task, 2026-08-06",
       "probe_source": "Concentricity/Theorem.lean",
-      "probe_anchor": "    -- 8.3.5 APPLIED: the singleton k, at the two certified representatives.",
+      "probe_anchor": "  exact hkn",
       "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
       "register_modules": [
         "Concentricity/Theorem.lean"
       ],
       "consumer_module": "Concentricity/Theorem.lean",
-      "consumed_as_binder": false,
-      "object_status": "WITNESS_REQUIRED",
+      "consumed_as_binder": true,
+      "object_status": "AUTHOR_BOUND_LEAN_PENDING",
       "witness_suppliers": [
         "def:A-section",
         "def:base",
@@ -876,20 +866,20 @@
         "prop:winding-signature",
         "thm:identity"
       ],
-      "candidate_sha256": "9ff07acb5512e179812ebf443ace1cf1821ce37eb4b32c367a182a5bd9d4cec3",
-      "author_binding_digest": "2303695ed6012271f74b08d247c9ec6b1646324d5eaa878e83ca59ce31323ccb",
+      "candidate_sha256": "f7931acc7b6140367453100034803d1ec48341fafa2ce2359182090eb1e796ef",
+      "author_binding_digest": "223fd0538e1aef8e55edcbed65f04d3e39fd0f5e4ebdb88752a91e9a7ee1ba7c",
       "master_targets_linked": true,
-      "target_typed": true,
-      "target_header": "    A.transportLevel n = A.transportLevel m := by",
-      "exact_expression": "hkn",
-      "identity_hash": "a2c7cf995fa752490c613c9d86d4f9b1eeb79197c40cec485eb1cc627807f2a5",
+      "target_typed": false,
+      "target_header": "theorem ASection.concentricity (A : ASection) :\n    ∃ c : ℝ, ∀ n : ℕ, (A.sphereZero n).re = c := by",
+      "exact_expression": "A.residueTotal_transportLevel_singleton n 0",
+      "identity_hash": "c40234ca004f8f08c9ef264a989d66abf18555f82fbc171c95a062476a352406",
       "typechecked": false,
       "author_confirmed": true,
-      "status": "LEAN_BINDING_REJECTED"
+      "status": "AUTHOR_BINDING_TARGET_MISMATCH"
     }
   ],
   "binding_identity_hash_sources": {
-    "Octonionic_RH_master.tex": "d906ea1494831c4096add3725cdaeedf5cf079ab62bb547e96d19049d3376062",
+    "Octonionic_RH_master.tex": "5b533b14bed378b93acacc0e732a8c800c84bae38605d19beffdabd5bc39fb8a",
     "Concentricity/Theorem.lean": "2c11a6501285c9ab7cb5dcd4af89eca72b36e95cd047e7a9e1e254e397821d14"
   },
   "exact_attempt_binding_ids": [

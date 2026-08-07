@@ -103,6 +103,7 @@ with the Riemann Hypothesis as a corollary}
 \author{Jesse Michael Paul\\[2pt]
 {\normalsize PhD Candidate, Department of Mathematics \& Statistics}\\
 {\normalsize University of North Carolina at Greensboro}}
+\hypersetup{pdfauthor={Jesse Michael Paul}}
 \date{June 2026}
 
 \begin{document}
@@ -1572,7 +1573,13 @@ four properties.
 \end{definition}
 
 \begin{definition}[The residue subdiagram and its inclusion]\label{def:residue-subdiagram}
-\lean{ASection.CResidueZeroLocus, ASection.AsectionCResidueDiagram, ASection.AsectionCResidueInclusion, ASection.AsectionCResidueInclusionTotal, ASection.AsectionCResidueInclusionTotal_full, ASection.AsectionCResidueInclusionTotal_faithful, ASection.residueTotalCategory, ASection.residueTotalGroupoid}
+\lean{ASection.CResidueZeroLocus, ASection.IsCResidueInput,
+ASection.CResidueInputWorld, ASection.AsectionCResidueInputDiagram,
+ASection.AsectionCResidueDiagram, ASection.AsectionCResidueInclusion,
+ASection.AsectionCResidueInclusionTotal,
+ASection.AsectionCResidueInclusionTotal_full,
+ASection.AsectionCResidueInclusionTotal_faithful,
+ASection.residueTotalCategory, ASection.residueTotalGroupoid}
 \uses{def:base, def:A-section, lem:residue-spheres}
 The \emph{residue locus} of an A-section is $\{z : A(z)=0,\ \operatorname{Im}z>0\}$
 \textup{(}\texttt{CResidueZeroLocus}\textup{)}. The \emph{residue subdiagram}
@@ -1612,8 +1619,10 @@ A-section transport itself.
 \end{definition}
 
 \begin{lemma}[Transitivity of the C-residue total]\label{lem:c-residue-transitive}
-\lean{ASection.sweepTransitive_on_residueSystem,
-ASection.residueTotal_morphism_of_northComparison}
+\lean{ASection.CResidueInputActionSquare,
+ASection.CResidueInputFiberHom,
+ASection.CResidueInputTotal_transitive,
+ASection.sweepTransitive_on_residueSystem}
 \leanok
 \uses{def:A-section, def:base, def:residue-subdiagram, prop:weierstrass,
 lem:residue-spheres, thm:G2-S6}
@@ -1898,8 +1907,11 @@ through the single common source tape and north frame.
 
 \begin{theorem}[Concentricity]\label{thm:concentricity}
 \lean{ASection.concentricity, ASection.residueTotal_isConnected,
-ASection.residueTotal_pi0_singleton, ASection.transportLevel,
-ASection.transportLevel_of_pi0_singleton, ASection.residueActionState_mem}
+ASection.residueTotal_pi0_singleton,
+ASection.residueTotal_pi0_colimit_singleton,
+ASection.residueTotal_transportLevel_singleton,
+ASection.residueInputTotalTransportRead_certified,
+ASection.transportLevel, ASection.residueActionState_mem}
 \leanok
 \uses{def:A-section, def:base, def:residue-subdiagram, lem:c-residue-transitive,
 lem:residue-spheres, lem:pi0-grothendieck,

@@ -37,23 +37,25 @@
       "binder": "have",
       "expected_type": "A.transportLevel n = A.transportLevel 0",
       "required_master_declarations": [
-        "ASection.residueTotal_pi0_singleton",
+        "ASection.residueTotal_pi0_colimit_singleton",
+        "ASection.residueInputTotalTransportRead_certified",
+        "ASection.residueTotal_transportLevel_singleton",
         "ASection.transportLevel"
       ],
-      "target_declaration": "ASection.transportLevel",
-      "candidate_expression": "hkn",
+      "target_declaration": "ASection.concentricity",
+      "candidate_expression": "A.residueTotal_transportLevel_singleton n 0",
       "author_binding_confirmed": true,
-      "author_binding_sha256": "2303695ed6012271f74b08d247c9ec6b1646324d5eaa878e83ca59ce31323ccb",
-      "author_confirmation_source": "author correction in active provenance task, 2026-08-02",
+      "author_binding_sha256": "223fd0538e1aef8e55edcbed65f04d3e39fd0f5e4ebdb88752a91e9a7ee1ba7c",
+      "author_confirmation_source": "author correction in active provenance task, 2026-08-06",
       "probe_source": "Concentricity/Theorem.lean",
-      "probe_anchor": "    -- 8.3.5 APPLIED: the singleton k, at the two certified representatives.",
+      "probe_anchor": "  exact hkn",
       "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
       "register_modules": [
         "Concentricity/Theorem.lean"
       ],
       "consumer_module": "Concentricity/Theorem.lean",
-      "consumed_as_binder": false,
-      "object_status": "WITNESS_REQUIRED",
+      "consumed_as_binder": true,
+      "object_status": "AUTHOR_BOUND_LEAN_PENDING",
       "witness_suppliers": [
         "def:A-section",
         "def:base",
@@ -118,56 +120,62 @@
       "master": "def:residue-subdiagram",
       "semantics": "inclusion of the inverse-image diagram in the total action diagram",
       "declaration": "ASection.AsectionCResidueInclusion"
+    },
+    {
+      "master": "def:residue-subdiagram",
+      "semantics": "semantic C-residue inverse-image input locus",
+      "declaration": "ASection.IsCResidueInput"
+    },
+    {
+      "master": "def:residue-subdiagram",
+      "semantics": "semantic C-residue input groupoid",
+      "declaration": "ASection.CResidueInputWorld"
+    },
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "the one distinguished disk action transports a locus arrow",
+      "declaration": "ASection.CResidueInputActionSquare"
+    },
+    {
+      "master": "def:residue-subdiagram",
+      "semantics": "semantic input-locus action diagram",
+      "declaration": "ASection.AsectionCResidueInputDiagram"
+    },
+    {
+      "master": "lem:c-residue-transitive",
+      "semantics": "transitivity of the semantic C-residue Grothendieck total",
+      "declaration": "ASection.CResidueInputTotal_transitive"
+    },
+    {
+      "master": "thm:concentricity",
+      "semantics": "certified representative reads its carried real transport level",
+      "declaration": "ASection.residueInputTotalTransportRead_certified"
     }
   ],
   "inference": [
     {
       "master": "lem:c-residue-transitive",
-      "semantics": "a north C-residue state is the exact C3 residue action state",
-      "master_anchor": "there are C-residue indices $n_1,n_2$",
-      "receipt": "ASection.northState_is_residueActionState_audit"
+      "semantics": "the semantic inverse-image locus supplies a base arrow between arbitrary inputs",
+      "master_anchor": "together with base arrows",
+      "receipt": "ASection.CResidueInputHom_audit"
     },
     {
       "master": "lem:c-residue-transitive",
-      "semantics": "the north input is D_A⁻¹(sphereZero n)",
-      "master_anchor": "u_i=D^{-1}(z_i)",
-      "receipt": "ASection.residueActionState_north_input_audit"
+      "semantics": "after base transport G₂ supplies the fibre component",
+      "master_anchor": "transitivity of $G_2$ on the unit imaginary octonions acts",
+      "receipt": "ASection.CResidueInputFiberHom_audit"
     },
     {
       "master": "lem:c-residue-transitive",
-      "semantics": "a north loop acts by C(stabilizerPart k) on the stored input",
-      "master_anchor": "the input leg of $F_A(k)$ carries",
-      "receipt": "ASection.residueActionTransport_north_input_audit"
+      "semantics": "the base and fibre components form one Grothendieck morphism between arbitrary objects",
+      "master_anchor": "Hence $P$ and $Q$ are joined.",
+      "receipt": "ASection.CResidueInputTotal_transitive_audit"
     },
     {
       "master": "lem:c-residue-transitive",
-      "semantics": "the common source factor cancels in k_E⁻¹ ≫ k_W",
-      "master_anchor": "cancels the common $0$-frame $o_0$",
-      "receipt": "ASection.northRelativeLoop_stabilizer_audit"
-    },
-    {
-      "master": "lem:c-residue-transitive",
-      "semantics": "the relative loop carries the first certified input to the second",
-      "master_anchor": "C(r_W)(u_\\ast)=u_2",
-      "receipt": "ASection.northRelativeLoop_maps_audit"
-    },
-    {
-      "master": "lem:c-residue-transitive",
-      "semantics": "the two parallel faces and G₂ package the north-fibre morphism",
-      "master_anchor": "of the $G_2$-action supplies $\\gamma\\in G_2$",
-      "receipt": "ASection.northComparison_of_parallelFaces_audit"
-    },
-    {
-      "master": "lem:c-residue-transitive",
-      "semantics": "the same relative calculation holds in the two-legged square functor register",
-      "master_anchor": "conjugation by $D_A$ turns an input leg $C(r)$ into the",
-      "receipt": "ASection.relativeActionSquare_transport_audit"
-    },
-    {
-      "master": "lem:c-residue-transitive",
-      "semantics": "g⁻¹ ≫ k ≫ h and fullness produce P ⟶ Q inside ∫R_A",
-      "master_anchor": "preimage in the residue total $\\int\\mathcal R_A$",
-      "receipt": "ASection.residueTotal_morphism_of_northComparison_audit"
+      "semantics": "the production transitivity theorem consumes the semantic total directly",
+      "master_anchor": "is transitive: any two of its objects are joined by a morphism.",
+      "receipt": "ASection.sweepTransitive_on_residueSystem_audit"
     },
     {
       "master": "thm:concentricity",
@@ -209,16 +217,9 @@
   ],
   "open": [
     {
-      "master": "lem:c-residue-transitive",
-      "semantics": "the action-groupoid composition in ∫R_A, instantiated at the two semantic inverse-image objects ι_A(x₀) and ι_A(y₀)",
-      "declaration": "ASection.sweepTransitive_on_residueSystem",
-      "source": "Concentricity/Theorem.lean",
-      "diagnostic": "the north comparison inside sweepTransitive_on_residueSystem: ∃ k : projectiveNorth ⟶ projectiveNorth, Nonempty ((AsectionActionTransport A k).obj xN ⟶ yN)"
-    },
-    {
       "master": "thm:concentricity",
       "semantics": "the val step: the π₀-class equality instantiated at the n-th and 0-th certified representatives, carried across to the real-valued level equality",
-      "declaration": "ASection.transportLevel_of_pi0_singleton",
+      "declaration": "ASection.residueTotal_transportLevel_singleton",
       "source": "Concentricity/Theorem.lean",
       "diagnostic": "A.transportLevel n = A.transportLevel 0  (carries sorryAx)"
     }

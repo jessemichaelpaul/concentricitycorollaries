@@ -52,6 +52,18 @@ GreatCircle.orbitRep_spec : ∀ (b : GreatCircle.Point), GreatCircle.orbitRep b 
 ASection.CResidueZeroLocus : ASection → Set ℂ
 ASection.AsectionCResidueDiagram : ASection → CategoryTheory.Functor GreatCircle.Base CategoryTheory.Grpd
 ASection.AsectionCResidueInclusion : (A : ASection) → A.AsectionCResidueDiagram ⟶ A.AsectionActionDiagram
+ASection.IsCResidueInput : ASection →
+  CategoryTheory.ObjectProperty (CategoryTheory.ActionCategory (↥Moebius) (OnePoint ℂ))
+ASection.CResidueInputWorld : ASection → Type
+ASection.CResidueInputActionSquare : (A : ASection) →
+  {u v : A.CResidueInputWorld} →
+    (u ⟶ v) →
+      ASection.ActionTransportSquare (A.projectiveObjectFrame ASection.projectiveNorth)
+        (A.projectiveObjectFrame ASection.projectiveNorth)
+ASection.AsectionCResidueInputDiagram : (A : ASection) → CategoryTheory.Functor A.CResidueInputWorld CategoryTheory.Grpd
+ASection.CResidueInputTotal_transitive : ∀ (A : ASection) (P Q : A.CResidueInputTotalCategory), Nonempty (P ⟶ Q)
+ASection.residueInputTotalTransportRead_certified : ∀ (A : ASection) (n : ℕ) (I : SphereWorld),
+  A.residueInputTotalTransportRead (A.residueInputTotalObject n I) = A.transportLevel n
 'G2.exists_smul_eq_of_mem_unitImaginarySphere' depends on axioms: [propext, Classical.choice, Quot.sound]
 'H1' depends on axioms: [propext, Classical.choice, Quot.sound]
 'SphereWorld' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -61,6 +73,12 @@ ASection.AsectionCResidueInclusion : (A : ASection) → A.AsectionCResidueDiagra
 'ASection.CResidueZeroLocus' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.AsectionCResidueDiagram' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.AsectionCResidueInclusion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ASection.IsCResidueInput' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ASection.CResidueInputWorld' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ASection.CResidueInputActionSquare' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ASection.AsectionCResidueInputDiagram' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ASection.CResidueInputTotal_transitive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ASection.residueInputTotalTransportRead_certified' depends on axioms: [propext, Classical.choice, Quot.sound]
 
 
 ===== TRANSITIVITY INFERENCE PROBE =====
@@ -165,13 +183,16 @@ residueTotal_morphism_of_northComparison_audit : ∀ (A : ASection)
     ∀ (h : projectiveNorth ⟶ Q.base),
       (A.AsectionActionTransport h).obj yN = Q.fiber.obj →
         ∀ (k : projectiveNorth ⟶ projectiveNorth) (φ : (A.AsectionActionTransport k).obj xN ⟶ yN), Nonempty (P ⟶ Q)
+CResidueInputHom_audit : ∀ (A : ASection) (u v : A.CResidueInputWorld), Nonempty (u ⟶ v)
+CResidueInputFiberHom_audit : ∀ (A : ASection) {u v : A.CResidueInputWorld} (f : u ⟶ v)
+  (x : (A.IsCResidueStateOverInput u).FullSubcategory) (y : (A.IsCResidueStateOverInput v).FullSubcategory),
+  Nonempty ((A.AsectionCResidueInputTransport f).obj x ⟶ y)
+CResidueInputTotal_transitive_audit : ∀ (A : ASection) (P Q : A.CResidueInputTotalCategory), Nonempty (P ⟶ Q)
+sweepTransitive_on_residueSystem_audit : ∀ (A : ASection) (P Q : A.residueTotalCategory), Nonempty (P ⟶ Q)
 residueTotal_isConnected_of_transitive_audit : ∀ (A : ASection),
-  (∀ (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)), Nonempty (P ⟶ Q)) →
-    CategoryTheory.IsConnected (Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat))
-residueTotal_pi0_singleton_of_connected_audit : ∀ (A : ASection)
-  [CategoryTheory.IsConnected (Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat))]
-  (P Q : Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)),
-  CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q
+  (∀ (P Q : A.residueTotalCategory), Nonempty (P ⟶ Q)) → CategoryTheory.IsConnected A.residueTotalCategory
+residueTotal_pi0_singleton_of_connected_audit : ∀ (A : ASection) [CategoryTheory.IsConnected A.residueTotalCategory]
+  (P Q : A.residueTotalCategory), CategoryTheory.ConnectedComponents.mk P = CategoryTheory.ConnectedComponents.mk Q
 'ASection.residueActionState_north_input_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.residueActionTransport_north_input_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.northFiberHom_of_coordinate_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -187,6 +208,10 @@ residueTotal_pi0_singleton_of_connected_audit : ∀ (A : ASection)
 'ASection.relativeActionSquare_right_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.relativeActionSquare_transport_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.residueTotal_morphism_of_northComparison_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ASection.CResidueInputHom_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ASection.CResidueInputFiberHom_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ASection.CResidueInputTotal_transitive_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ASection.sweepTransitive_on_residueSystem_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.residueTotal_isConnected_of_transitive_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ASection.residueTotal_pi0_singleton_of_connected_audit' depends on axioms: [propext, Classical.choice, Quot.sound]
 

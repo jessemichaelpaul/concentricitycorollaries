@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "master": "Octonionic_RH_master.tex",
-  "master_sha256": "2af455a80c111536cf748b9e6b169440ed1e73a33460f48148edb24fa2e7d0c2",
+  "master_sha256": "5b533b14bed378b93acacc0e732a8c800c84bae38605d19beffdabd5bc39fb8a",
   "bindings": [
     {
       "id": "seat1.kE",
@@ -99,15 +99,20 @@
       "paper_object": "the post-collapse residue read instantiated at the n-th and 0-th certified representatives",
       "expected_type": "A.transportLevel n = A.transportLevel 0",
       "required_master_declarations": [
-        "ASection.residueTotal_pi0_singleton",
+        "ASection.residueTotal_pi0_colimit_singleton",
+        "ASection.residueInputTotalTransportRead_certified",
+        "ASection.residueTotal_transportLevel_singleton",
         "ASection.transportLevel"
       ],
-      "target_declaration": "ASection.transportLevel",
+      "target_declaration": "ASection.concentricity",
       "lean_local": "hkn",
       "probe_source": "Concentricity/Theorem.lean",
-      "probe_anchor": "    -- 8.3.5 APPLIED: the singleton k, at the two certified representatives.",
+      "probe_anchor": "  exact hkn",
       "probe_template": "have {lean_local} : {expected_type} := {exact_expression}",
-      "exact_expression": "",
+      "exact_expression": "A.residueTotal_transportLevel_singleton n 0",
+      "register_modules": [
+        "Concentricity/Theorem.lean"
+      ],
       "author_confirmed": true
     }
   ]

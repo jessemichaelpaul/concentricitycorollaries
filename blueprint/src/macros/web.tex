@@ -3,3 +3,7 @@
 % version in macros/print.tex.
 % Typically the printed version could have more fancy decorations.
 % This will probably be a very short file.
+
+% PDF metadata is carried by the master through \hypersetup.  The web renderer
+% has no PDF metadata channel, so consume that command without output.
+\providecommand{\hypersetup}[1]{}

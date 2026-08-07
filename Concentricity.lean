@@ -24,7 +24,5 @@ import Concentricity.NormalizedBase
 import Concentricity.ProjectiveSection
 import Concentricity.ProjectiveCone
 import Concentricity.ProjectiveTransport
-import Concentricity.ASectionGenerated
-import Concentricity.ASectionAction
 import Concentricity.ASectionActionDiagram
 import Concentricity.Corollaries
