@@ -1,0 +1,79 @@
+CONCENTRICITY — AUTHORSHIP MANIFEST
+Work : The Concentricity Theorem over the Octonions (master document + Lean 4 formalization)
+Author : Jesse Paul <jmpaul@uncg.edu>
+Snapshot : 2026-07-03 18:21:25 UTC
+Git HEAD : 0704fa94bf35696fed1ad654942ca657c5b2a58b  (branch main)
+
+Stage : INTERIM priority marker (Stage 1). The DEFINITIVE lock (Stage 2) is
+        regenerated after the prose pass to include the final compiled PDF,
+        re-stamped and tagged as the release.
+
+The git HEAD commit hash above anchors the COMPLETE versioned tree at this
+snapshot (private GitHub, server-side timestamps under the author's identity).
+The SHA-256 list below is a human-readable supplement over the core authored
+content; ots-stamping this file binds the snapshot to a point in time.
+
+SHA-256 of every authored file at this snapshot:
+-------------------------------------------------------------------------------
+42aed2481a1e5c137210da70ed5314e6e4ee594e3e3dad4a61aad1399be05338  CLAUDE.md
+19b9680a234fb70d05c16cdfd302e86dcd6d4552adef98df230e028a8938bca5  Concentricity.lean
+149af9e8140e607df88f430a4538023d1d0da2605b4c96a33492c7e6b3d571c3  Concentricity/ASection.lean
+328026dd105fcceedd02905dd42db4a69a4906f6bf861436658e9e3f09813df0  Concentricity/Base.lean
+a88fef4d3efa63c9f9f5c948dd5ba1de3ea09d828ce8388ee83fa3d039e734a4  Concentricity/Basic.lean
+335f031b1cc39114ea144a7ba2924e87f92a4e1f105e917f25e373dd38832369  Concentricity/G2.lean
+8687a1824615cd9a70e345b7fd3159fbdb5f6a3f20274720c138c2fcce81bbd5  Concentricity/Octonion.lean
+045753dae193d192ae4afce322858711a864cc47774eb027889a58fe32749041  Concentricity/OctonionForm.lean
+0681177ba8da7bd39a59a67cf5cb871681a521ba0aa10254d3f50db9f008f829  Concentricity/Slice.lean
+686d460849766395727fbbd838f9e0bf8b34dc72685cb245afe8ca167ca57957  Concentricity/Spine.lean
+2a98affc39155647f61e900c2ecdae0b0b9463058a18ed886cf286bd63e58620  Concentricity/StemRing.lean
+06d899d3d2e7f24f1ded6fa93c5186813f8c00f7b0edb1b261f60ec2981b4f94  Concentricity/Theorem.lean
+3f23c0f3f9a85516f49ae0ca35c42f13366c3fce318797b393dfa2f6c8de2ed0  Concentricity/TwoWorlds.lean
+92e3ab4d9a5c7a2f268626485f4224ff1fce986f6f702309e98ed113d46bc746  Concentricity/ZetaInfinitude.lean
+0c5ce85efc84ab0ab483d2daed93459b375725af01d351fd0d06171f2960db85  DEPENDENCY_TABULATION.md
+cfca886df41fb4689aee870107c2a0453cba8cf81f321e3e28a7a08fd9a64034  HANDOFF.md
+b26776638b1d6dc56e3c1d6b1c05f928e7d43f8141a5d3a8793c14b4db28e7c6  Octonionic_RH_master.tex
+50707db29ef5adea8e5079c62fdddb09951f7f374ed946af3fdf4e282c875e75  PHASE4_PLAN.md
+150757917513c72c16a99ee52c124e694853b23be011188d06f55d15e0733783  PROOF_PLAN_zeta_infinitude.md
+643c835b9f9a3ac59a892b6f11b25b656e78390d302662a576c5c0bf9c895af1  README.md
+9bc24fbcea0b3742b0b64fe6460c4edca23521aee5da9a7c50147a45d05e72d7  RECON_MATHLIB.md
+0b56bc964d43e9fc3e63dce355987de8d6267a3241f6c920a99e59f014096ffa  SOURCES/AdF.md
+5c71f67d716a7db1b602e3a06dd232dea3c22fd2b03602b0b9fb7bdadab3d1d6  SOURCES/AdFslice.md
+0a877fdf02d7fa1676c7d93c81e869892c6e9d4662c90cfb86c22cc932ffce7f  SOURCES/Baez02.md
+6fbcbfbcafbe666ec56b94d009b880401e613dc950e1b66ddb59c308307402a2  SOURCES/BisiWinkelmann.md
+794ce141c3607ac92aa11a59ebdbd58216734ef7b03e10a0e481c30f219e216b  SOURCES/GJ.md
+b2e5ffd7984cc3b3721d27c363abc66a0a34e27d6982fc8f7e7332d65c2ebea9  SOURCES/GPS.md
+98a0db183dbf7410e36d5c43345c38b673599cdb0c035905cff227c1200ad904  SOURCES/GPVwind.md
+15d756801df578228280287c6abe291d67f356b37a6cdd1cc1f6be60e54e1cf7  SOURCES/Quillen73.md
+42dde5683d5f2f710479cda51aee53274182b743f1d61363182edaea191fd75b  SOURCES/Riehl.md
+3b2723ad2aee064fd25521efc7c41ecc30ea939d197ba08d86214931e8f51721  SOURCES/Thomason79.md
+76c5482e4622e27892d1494058b210b1a502bf39615b38249f77858b30ed4277  SOURCES/VS.md
+8c7d90acd241a4a1c774a8af617d05fa529930422cd187e002e8d5821571ab85  SOURCES/Wang.md
+6b01ac2c207294e48be2c400048c537d73ded888184ba608876d1f4a9f9c7874  blueprint/src/content.tex
+f4b52bdd76eb802abf6aed31e0879b725920ae6168bda8d03e9044c43606e421  blueprint/src/macros/common.tex
+f393dbc9b3a6f10db2266b402e80b537d7bd3ce13842d06d47b2a40b37576ed8  blueprint/src/macros/print.tex
+c6d21f5c89b64284f0508286215a7e7f0b4ab3e343910ce8e51b18e2fc7ba219  blueprint/src/macros/web.tex
+d4a8ff5cadda54141371e5a206d0ef6bd084240ea8da28632e1446450d46bf4b  blueprint/src/masterdefs.tex
+8f62cdc1893f00b38cd9fca8f27e76531c4ed4c1b71c6c06f1cfc9ed04e6a5de  blueprint/src/print.tex
+9d5ca0fb5d2fb549ac4216748eba3c930e31f023733b7d8c64a832d508178785  blueprint/src/web.tex
+361be5c558f10fbc113a616222d2db2c08c9b353ddb12f0cac6d5ad9a0d0287d  lakefile.toml
+efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee  lean-toolchain
+-------------------------------------------------------------------------------
+Count : 42 authored files
+  (13 Lean, master.tex, 7 rulebook/plan/audit docs, 12 SOURCES excerpts,
+   7 blueprint/src TeX, lakefile.toml, lean-toolchain).
+New since the a6eceb4 snapshot: Concentricity/OctonionForm.lean, SOURCES/GPS.md.
+The final compiled PDF is intentionally deferred to the Stage-2 definitive lock.
+
+HOW TO LOCK THIS IN (independent, free, non-forgeable):
+  1. Commit this file + tag the release:
+       git add AUTHORSHIP_MANIFEST.txt && git commit -m 'Authorship snapshot manifest'
+       git tag -a v0.1-preprint -m 'Concentricity preprint snapshot' && git push --tags
+  2. Cryptographic timestamp (anchors this file's hash to the Bitcoin blockchain):
+       pip install opentimestamps-client
+       ots stamp AUTHORSHIP_MANIFEST.txt      # -> AUTHORSHIP_MANIFEST.txt.ots
+       ots verify AUTHORSHIP_MANIFEST.txt.ots # (later, to prove the date)
+  3. Optional: email this file to yourself, and/or cut a Zenodo release for a DOI.
+
+Any file above can be re-verified: recompute its sha256sum and compare to this list.
+From the repo root:
+    grep -E '^[0-9a-f]{64}  ' AUTHORSHIP_MANIFEST.txt | sha256sum -c -

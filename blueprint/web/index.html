@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concentric Zero-Spheres of a class of sections of the commutative ring \(\mathcal R\) of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary</title>
+<link rel="next" href="sect0001.html" title="Classical Background" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="index.html#a0000000004"><span class="toc_ref"></span> <span class="toc_entry">Introduction</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Classical Background</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000005"><span class="toc_ref">1</span> <span class="toc_entry">The Riemann zeta function</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000011"><span class="toc_ref"></span> <span class="toc_entry">The compactified Riemann zeta on \(\mathbb {C}^{*}\)</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Slice-Preserving Theory, the Ring \(\mathcal R\), and the Equivalence</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000013"><span class="toc_ref">2</span> <span class="toc_entry">Octonions and slices</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000014"><span class="toc_ref">3</span> <span class="toc_entry">Slice-preserving functions</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000015"><span class="toc_ref">4</span> <span class="toc_entry">The octonionic zeta function \(\zeta _{\mathbb {O}^{*}}\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:R-ring"><span class="toc_ref">5</span> <span class="toc_entry">\(\mathcal R\) is a commutative ring</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:toolkit"><span class="toc_ref">6</span> <span class="toc_entry">The slice-preserving analytic toolkit on the compactified octonions</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000016"><span class="toc_ref">7</span> <span class="toc_entry">Slice preservation and symmetries</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000017"><span class="toc_ref">8</span> <span class="toc_entry">Zero geometry and the equivalence</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="part-stack.html"><span class="toc_ref">3</span> <span class="toc_entry">The Categorical Construction and the Concentricity Theorem</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="part-stack.html#sec:tower-stack"><span class="toc_ref">9</span> <span class="toc_entry">The geometric worlds and the categorical construction</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="part-stack.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">The compactified octonions and the point at infinity</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">What a slice-preserving section does</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Two geometric viewpoints</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The base of the degenerate set and the Grothendieck construction</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="part-stack.html#sec:detector"><span class="toc_ref">10</span> <span class="toc_entry">The concentricity theorem</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#sec:verification"><span class="toc_ref">11</span> <span class="toc_entry">Corollaries</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<div class="titlepage">
+<h1>Concentric Zero-Spheres of a class of sections of the commutative ring \(\mathcal R\) of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary</h1>
+<p class="authors">
+<span class="author">Jesse Michael Paul<br /> <span class="normalsize">PhD Candidate, Department of Mathematics &amp; Statistics</span><br /><span class="normalsize">University of North Carolina at Greensboro</span></span>
+<span class="author">Jesse Michael Paul</span>
+</p>
+<p class="date">June 2026</p>
+</div>
+<blockquote class="quote"><small class="small"><i class="itshape">“…a ‘viewpoint’ by itself remains fragmentary. It reveals to us one of the aspects of a scenery or panorama, among a multiplicity of others which are equally valuable, equally ‘real’. It is when complementary viewpoints of a common reality are conjugated, that is, when our ‘eyes’ are multiplied, that the gaze is able to penetrate further ahead in the reckoning of things. …it also happens, sometimes, that a sheaf of viewpoints converging to a unique and vast scenery gives rise to a novel thing; a thing which transcends each of the partial perspectives, in the same way that a living being transcends each of its limbs and organs. This new thing could be called a vision.” <div class="flushright"><span class="upshape">— A. Grothendieck, <em>Récoltes et Semailles</em></span></div> </i></small></blockquote>
+<div class="abstract"><p> Let \(\mathcal R\) be the commutative ring of slice-preserving slice-regular functions on the compactified octonions \(\mathbb {O}^{*}=S^8\), under the regular (\(\ast \)) product. Part&#160;1 gathers the classical facts about the Riemann zeta function. Part&#160;2 develops the slice-preserving theory, builds \(\mathcal R\), places the octonionic zeta \(\zeta _{\mathbb {O}^{*}}\) inside it, and proves the zero and equivalence theorems: the classically nontrivial zeros of \(\zeta \) are residue-\(\mathbb {C}\) zero \(6\)-spheres, and the Riemann Hypothesis holds exactly when those spheres are concentric, sharing a single real centre. </p>
+<p>Part&#160;3 proves the main result, the <em>Concentricity Theorem</em>, for a section \(A\in \mathcal R\) satisfying four conditions: <span class="upshape">(C1)</span> meromorphic continuation with a single simple pole carried to \(\infty =N\); <span class="upshape">(C2)</span> an infinite Euler product; <span class="upshape">(C3)</span> an infinite slice-regular Weierstrass factorization whose spherical factors are the residue-\(\mathbb {C}\) zeros; and <span class="upshape">(C4)</span> infinitely many such zeros. The theorem says the residue-\(\mathbb {C}\) zero \(6\)-spheres of any such \(A\) are concentric. </p>
+<p>The proof builds a concentricity detector from the section itself, out of groupoids, orbit–stabilizer, and categorical homotopy theory. Conditions <span class="upshape">(C1)–(C3)</span> determine one distinguished exponential Möbius action on the projective base \(\mathcal B=PGL(2,\mathbb {R})\ltimes \operatorname {OnePoint}(\mathbb {R})\): a logarithmic coordinate \(z\) is exponentiated in the diagonal matrix \(\operatorname {diag}(e^z,1)\) and conjugated into the Cayley disk chart, with the Euler product presenting the action at \(0\) and the Weierstrass product at \(N\). The slice-preserving normalization is \(G_2\)-equivariant on \(\mathbb {O}^{*}\), and orbit–stabilizer carries this whole point-valued action across the base. Its sphere-world projection records the directions and Möbius legs, while the genuine A-section functor \(\mathcal A_A:\mathcal B\to \mathbf{Grpd}\) has the resulting normalized A-value states and their transports as its fibres. Its Grothendieck construction is \(\mathcal T_A=\int _{\mathcal B}\mathcal A_A\). </p>
+<p>The C-residue system is the inverse-image action groupoid \(\mathcal R_A\) selected inside \(\mathcal A_A\), with fully faithful inclusion \(\iota _A:\mathcal R_A\Rightarrow \mathcal A_A\), and hence a fully faithful inclusion of totals \(\int \iota _A:\int _{\mathcal B}\mathcal R_A\hookrightarrow \mathcal T_A\). The relative orbit–stabilizer comparison makes this inverse-image total transitive, therefore connected. Its component colimit is consequently a singleton. Instantiated at any two certified residue representatives, that singleton equality is already equality of their A-specific real-level reads; hence all of them have one real value \(c\in \mathbb {R}\). Thus every populated residue-\(\mathbb {C}\) zero \(6\)-sphere has centre \(c\). The theorem asserts the shared centre; naming the number is the task of the corollaries. </p>
+<p>Downstream corollaries translate residue-\(\mathbb {C}\) zeros to classically nontrivial zeros and, for \(\zeta _{\mathbb {O}^{*}}\), use its functional equation to identify \(c=\tfrac 12\): the Riemann Hypothesis. </p>
+</div>
+
+<h1 id="a0000000004">Introduction</h1>
+<p> The Riemann Hypothesis is usually met head-on, as a question about where the zeros of a single complex function fall along a line. This paper approaches it from the side. It asks instead whether a family of geometric objects, sitting a few dimensions up in the octonions, share a common centre, and shows that they must. The Riemann Hypothesis then follows, not as the thing we set out to prove, but as the shadow this larger fact casts back down onto the complex plane. </p>
+<p>A nontrivial zero of the zeta function, seen from the complex line alone, is a lone point in a strip. Seen from the compactified octonions, that same zero opens into a six-dimensional sphere, and the critical-line question becomes a question of arrangement: are these spheres concentric, or scattered into different hyperplanes? It takes the whole continuum of imaginary directions in the octonions, read together, to see whether the alignment holds. </p>
+<p>The paper is built to make that convergence visible and, at every step, checkable. Part 1 recalls the classical facts about the Riemann zeta function we will lean on. Part 2 develops the slice-preserving theory of functions on the octonions, builds the commutative ring \(\mathcal R\) in which the octonionic zeta lives, and proves the reframing at the centre of everything: the classically nontrivial zeros are exactly the residue-\(\mathbb {C}\) zero six-spheres, and the Riemann Hypothesis holds precisely when those spheres are concentric. Part 3 proves the main result, the Concentricity Theorem, with a small piece of machinery I think of as a concentricity detector. From the section itself we build one distinguished action on a projective base, carry it across a continuum of Riemann spheres by orbit and stabilizer, and read off, through categorical homotopy theory, whether the zero-spheres land in a single connected piece. They do; and for the octonionic zeta, that is the Riemann Hypothesis. </p>
+<p>No one can picture an eight-dimensional graph in their head, but tools from categorical homotopy theory, like the total-object Grothendieck construction and standard colimit arguments, let us probe this structure and reason about it. The argument is also formalized in Lean, so that each step can be checked; the reader can not only verify the steps but, I hope, come to understand for themselves why the Concentricity Theorem is true and why the Riemann Hypothesis follows. </p>
+
+</div> <!--main-text -->
+<nav class=local_toc>
+<ul>
+  <li>	
+  <a href="index.html#a0000000004"><span class="toc_ref"></span> <span class="toc_entry">Introduction</span></a>
+  </li>
+  <li>	
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Classical Background</span></a>
+	<ul>
+		   <li>	
+  <a href="sect0001.html#a0000000005"><span class="toc_ref">1</span> <span class="toc_entry">The Riemann zeta function</span></a>
+	<ul>
+		   <li>	
+  <a href="sect0001.html#a0000000011"><span class="toc_ref"></span> <span class="toc_entry">The compactified Riemann zeta on \(\mathbb {C}^{*}\)</span></a>
+  </li>
+
+	</ul>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Slice-Preserving Theory, the Ring \(\mathcal R\), and the Equivalence</span></a>
+	<ul>
+		   <li>	
+  <a href="sect0002.html#a0000000013"><span class="toc_ref">2</span> <span class="toc_entry">Octonions and slices</span></a>
+  </li>
+  <li>	
+  <a href="sect0002.html#a0000000014"><span class="toc_ref">3</span> <span class="toc_entry">Slice-preserving functions</span></a>
+  </li>
+  <li>	
+  <a href="sect0002.html#a0000000015"><span class="toc_ref">4</span> <span class="toc_entry">The octonionic zeta function \(\zeta _{\mathbb {O}^{*}}\)</span></a>
+  </li>
+  <li>	
+  <a href="sect0002.html#sec:R-ring"><span class="toc_ref">5</span> <span class="toc_entry">\(\mathcal R\) is a commutative ring</span></a>
+  </li>
+  <li>	
+  <a href="sect0002.html#sec:toolkit"><span class="toc_ref">6</span> <span class="toc_entry">The slice-preserving analytic toolkit on the compactified octonions</span></a>
+  </li>
+  <li>	
+  <a href="sect0002.html#a0000000016"><span class="toc_ref">7</span> <span class="toc_entry">Slice preservation and symmetries</span></a>
+  </li>
+  <li>	
+  <a href="sect0002.html#a0000000017"><span class="toc_ref">8</span> <span class="toc_entry">Zero geometry and the equivalence</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="part-stack.html"><span class="toc_ref">3</span> <span class="toc_entry">The Categorical Construction and the Concentricity Theorem</span></a>
+	<ul>
+		   <li>	
+  <a href="part-stack.html#sec:tower-stack"><span class="toc_ref">9</span> <span class="toc_entry">The geometric worlds and the categorical construction</span></a>
+	<ul>
+		   <li>	
+  <a href="part-stack.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">The compactified octonions and the point at infinity</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">What a slice-preserving section does</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Two geometric viewpoints</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The base of the degenerate set and the Grothendieck construction</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="part-stack.html#sec:detector"><span class="toc_ref">10</span> <span class="toc_entry">The concentricity theorem</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#sec:verification"><span class="toc_ref">11</span> <span class="toc_entry">Corollaries</span></a>
+  </li>
+
+	</ul>
+  </li>
+</ul>
+</nav>
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0001.html" title="Classical Background"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>
