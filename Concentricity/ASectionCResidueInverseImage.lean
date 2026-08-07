@@ -40,6 +40,115 @@ open CategoryTheory
 
 namespace ASection
 
+/-! ## The semantic input groupoid locus
+
+The residue equation selects the positioned coordinate `D_A(u)`, but the
+object which the action transports is its input `u`.  The base of the residue
+total is therefore the inverse-image **groupoid locus** of those inputs, not
+the projective object at which the equation happened to be read.
+-/
+
+/-- Input coordinates whose image under the one distinguished
+Euler--Weierstrass disk action is an authored semantic C-residue coordinate. -/
+def IsCResidueInput (A : ASection) :
+    ObjectProperty (CategoryTheory.ActionCategory Moebius (OnePoint ℂ)) :=
+  fun u =>
+    ∃ z : ℂ, z ∈ A.CResidueZeroLocus ∧
+      A.distinguishedDiskAction.val
+        (CategoryTheory.ActionCategory.back u) = (z : OnePoint ℂ)
+
+/-- The semantic C-residue inverse-image groupoid locus.  Its arrows are the
+native Möbius input transports; the distinguished disk action transports those
+arrows by conjugation on the positioned face. -/
+abbrev CResidueInputWorld (A : ASection) :=
+  (IsCResidueInput A).FullSubcategory
+
+instance (A : ASection) : Groupoid (CResidueInputWorld A) :=
+  inferInstanceAs
+    (Groupoid
+      (InducedCategory
+        (CategoryTheory.ActionCategory Moebius (OnePoint ℂ))
+        ObjectProperty.FullSubcategory.obj))
+
+namespace CResidueInputBase
+
+/-- A complex projective representative carrying a finite input to the
+compactified point at infinity. -/
+def toInfinityGL (z : ℂ) : GL (Fin 2) ℂ :=
+  Matrix.GeneralLinearGroup.mkOfDetNeZero !![0, 1; 1, -z] (by
+    rw [Matrix.det_fin_two_of]
+    norm_num)
+
+@[simp] theorem toInfinityGL_val (z : ℂ) :
+    (toInfinityGL z).val = !![0, 1; 1, -z] := rfl
+
+theorem toInfinityGL_smul (z : ℂ) :
+    toInfinityGL z • (z : OnePoint ℂ) = OnePoint.infty := by
+  rw [OnePoint.smul_some_eq_ite]
+  simp [toInfinityGL_val]
+
+/-- A complex projective representative carrying infinity to a finite
+input. -/
+def fromInfinityGL (z : ℂ) : GL (Fin 2) ℂ :=
+  Matrix.GeneralLinearGroup.mkOfDetNeZero !![z, -1; 1, 0] (by
+    rw [Matrix.det_fin_two_of]
+    norm_num)
+
+@[simp] theorem fromInfinityGL_val (z : ℂ) :
+    (fromInfinityGL z).val = !![z, -1; 1, 0] := rfl
+
+theorem fromInfinityGL_smul (z : ℂ) :
+    fromInfinityGL z • (OnePoint.infty : OnePoint ℂ) = (z : OnePoint ℂ) := by
+  rw [OnePoint.smul_infty_eq_ite]
+  simp [fromInfinityGL_val]
+
+/-- The native Möbius representative carrying an arbitrary input to
+infinity. -/
+def toInfinity : OnePoint ℂ → Moebius :=
+  OnePoint.rec 1 (fun z => Moebius.of (toInfinityGL z))
+
+theorem toInfinity_spec (u : OnePoint ℂ) :
+    (toInfinity u).val u = OnePoint.infty := by
+  induction u using OnePoint.rec with
+  | infty => rfl
+  | coe z =>
+      change toInfinityGL z • (z : OnePoint ℂ) = OnePoint.infty
+      exact toInfinityGL_smul z
+
+/-- The native Möbius representative carrying infinity to an arbitrary
+input. -/
+def fromInfinity : OnePoint ℂ → Moebius :=
+  OnePoint.rec 1 (fun z => Moebius.of (fromInfinityGL z))
+
+theorem fromInfinity_spec (u : OnePoint ℂ) :
+    (fromInfinity u).val OnePoint.infty = u := by
+  induction u using OnePoint.rec with
+  | infty => rfl
+  | coe z =>
+      change fromInfinityGL z • (OnePoint.infty : OnePoint ℂ) =
+        (z : OnePoint ℂ)
+      exact fromInfinityGL_smul z
+
+/-- The native Möbius arrow between two arbitrary compactified complex
+inputs. -/
+def transport (u v : OnePoint ℂ) : Moebius :=
+  fromInfinity v * toInfinity u
+
+theorem transport_spec (u v : OnePoint ℂ) :
+    (transport u v).val u = v := by
+  change (fromInfinity v).val ((toInfinity u).val u) = v
+  rw [toInfinity_spec, fromInfinity_spec]
+
+end CResidueInputBase
+
+/-- The base morphism between two arbitrary objects of the semantic
+C-residue inverse-image groupoid locus. -/
+def CResidueInputHom (A : ASection) (u v : CResidueInputWorld A) : u ⟶ v :=
+  ObjectProperty.homMk
+    (show u.obj ⟶ v.obj from
+      ⟨CResidueInputBase.transport u.obj.back v.obj.back,
+        CResidueInputBase.transport_spec u.obj.back v.obj.back⟩)
+
 /-- The semantic C-residue objects in the fibre over `projectiveNorth` — the
 frame at which `projectiveObjectFrame A` *is* `distinguishedDiskAction A`,
 holding both fixed faces, so this fibre carries the whole `0`-to-`N` core

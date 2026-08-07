@@ -150,33 +150,6 @@ theorem pi0_grothendieck {B : Type u} [SmallCategory B] (F : B ⥤ Grpd.{u, u}) 
       ≃ Limits.colimit ((F ⋙ Grpd.forgetToCat) ⋙ pi0Functor)) :=
   ⟨pi0GrothendieckEquiv F⟩
 
-/-- RE-BADGED 2026-07-05 (PLAN_reencode_concentricity_2026-07-05.md §5):
-translation-layer row — the level read that the STATIC readout consumes.
-The master label `thm:concentricity` was briefly re-badged onto
-`ASection.concentricity_transport` (Concentricity/TransportObject.lean —
-that file was later retired; no such declaration remains in the tree, and
-the label lives on `ASection.concentricity` below).
-
-The **transport level** of the n-th residue-ℂ zero-sphere: the level of
-the fibre point over the n-th zero-sphere, read in the vocabulary of
-`lem:exp-degenerate` (`Octonion.exp_fibre_neg_real`,
-Concentricity/Toolkit.lean) — a degenerate-fibre point
-φ_v(log r + (2k+1)πi) carries its level log r as its real part: "The fibre
-is thus indexed by the single real level log r = log|−r| and, within it, by
-the odd winding indices 2k+1 carried as band data" (master
-`lem:exp-degenerate`); "GPV's log|·| is a label on objects, never an
-operation" (master `def:base`).
-
-DERIVED (R10; Brief-6 binding condition (1)): computed from the existing
-`def:A-section` data alone — the C3 enumeration `sphereZero` of the
-residue-ℂ zero-spheres by their upper-half-plane stem representatives —
-through the Step-A cone nodes' level reading; NEVER a new structure field,
-never a strengthening of `def:A-section`. The winding height (the imaginary
-part, odd multiples of π under the placement) stays band data, never an
-object label (master `def:base`). -/
-def ASection.transportLevel (A : ASection) (n : ℕ) : ℝ :=
-  (A.sphereZero n).re
-
 /- RE-BADGED 2026-07-05 (PLAN_reencode §5), SUPERSEDED 2026-07-06 by the
 author's ruling (a): the master label and endpoint now live on
 `ASection.concentricity` below; this record is kept as the placement
@@ -392,11 +365,15 @@ wherever it occurred, so no declaration could be stated *at* it. -/
 abbrev ASection.ambientTotalCategory (A : ASection) : Type :=
   Grothendieck (A.AsectionActionDiagram ⋙ Grpd.forgetToCat)
 
-/-- **`∫𝓡_A`** — the C-residue total of master `def:residue-subdiagram`: the
-inverse-image subdiagram under the Grothendieck construction, into which `ι_A`
-includes fully and faithfully. -/
-abbrev ASection.residueTotalCategory (A : ASection) : Type :=
+/-- The earlier projective-frame presentation, retained for the already-built
+componentwise inclusion certificates below. -/
+abbrev ASection.projectiveResidueTotalCategory (A : ASection) : Type :=
   Grothendieck (A.AsectionCResidueDiagram ⋙ Grpd.forgetToCat)
+
+/-- The C-residue total over its actual semantic inverse-image input-groupoid
+locus. -/
+abbrev ASection.residueTotalCategory (A : ASection) : Type :=
+  A.CResidueInputTotalCategory
 
 /-- **`ι_A` AT THE TOTAL** (the author, 2026-07-29): *"it is a natural
 transformation OF THE TOTAL GROTHENDIECK CONSTRUCTION — an inverse image OF
@@ -404,7 +381,7 @@ the total `F_A(X)`."*  This is that reading in Lean: the inclusion of the
 inverse image `∫𝓡_A` in the total `T_A`.  *"`∫𝓡_A` isn't parallel to `T_A`,
 it is INSIDE IT."* -/
 noncomputable def ASection.AsectionCResidueInclusionTotal (A : ASection) :
-    A.residueTotalCategory ⥤
+    A.projectiveResidueTotalCategory ⥤
     A.ambientTotalCategory :=
   Grothendieck.map
     (Functor.whiskerRight (AsectionCResidueInclusion A) Grpd.forgetToCat)
@@ -697,7 +674,7 @@ noncomputable instance ASection.ambientTotalGroupoid (A : ASection) :
 sub-action-groupoid `ι_A` includes fully and faithfully. -/
 noncomputable instance ASection.residueTotalGroupoid (A : ASection) :
     CategoryTheory.Groupoid A.residueTotalCategory :=
-  grothendieckGrpdGroupoid A.AsectionCResidueDiagram
+  grothendieckGrpdGroupoid A.AsectionCResidueInputDiagram
 
 /-- **STEP 2 OF THE ACTION-GROUPOID ARGUMENT, master (P).**  A north
 C-residue state IS the enumerated residue action state at its own zero index
@@ -935,16 +912,11 @@ generic category.  C4 supplies nonemptiness.  Imported from the certified
 receipt `residueTotal_isConnected_of_transitive_audit`. -/
 theorem ASection.residueTotal_isConnected_of_transitive
     (A : ASection)
-    (htrans : ∀ P Q : Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+    (htrans : ∀ P Q : A.residueTotalCategory,
       Nonempty (P ⟶ Q)) :
-    CategoryTheory.IsConnected (Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) := by
-  haveI : Nonempty (Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) :=
-    ⟨⟨projectiveNorth,
-      ⟨residueActionState A projectiveNorth 0 baseWorld,
-        A.residueActionState_mem 0⟩⟩⟩
+    CategoryTheory.IsConnected A.residueTotalCategory := by
+  haveI : Nonempty A.residueTotalCategory :=
+    ⟨A.residueInputTotalObject 0 baseWorld⟩
   exact zigzag_isConnected fun P Q =>
     CategoryTheory.Zigzag.of_hom (htrans P Q).some
 
@@ -952,40 +924,30 @@ theorem ASection.residueTotal_isConnected_of_transitive
 Imported from `residueTotal_pi0_singleton_of_connected_audit`. -/
 theorem ASection.residueTotal_pi0_singleton_of_connected
     (A : ASection)
-    [CategoryTheory.IsConnected (Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat))] :
-    ∀ P Q : Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+    [CategoryTheory.IsConnected A.residueTotalCategory] :
+    ∀ P Q : A.residueTotalCategory,
       CategoryTheory.ConnectedComponents.mk P =
         CategoryTheory.ConnectedComponents.mk Q :=
   fun P Q => _root_.Quotient.sound (CategoryTheory.isPreconnected_zigzag P Q)
 
 /-- **THE RESULT** — Two arbitrary members of the C-residue system are connected
-by a morphism of `∫𝓡_A`.  Nothing is solved for and no coordinate is compared:
-each object's inverse-image dossier IS a morphism from its north producer — base
-leg the witness arrow, transport leg the identification the dossier carries —
-`∫𝓡_A` is a groupoid (`residueTotalGroupoid`), so the first inverts, and the
-three compose.  Orbit--stabilizer is the composition law throughout. -/
+by a morphism of `∫𝓡_A`.  Their stored input coordinates are arbitrary objects
+of the semantic C-residue inverse-image groupoid locus.  Its base arrow moves
+the first input to the second; the one existing disk action transports that
+arrow, with its winding already inside `D_A`; then `G₂` supplies the remaining
+direction morphism in the target fibre.  No equality of the two input
+coordinates and no identity north transport is asserted. -/
 theorem ASection.sweepTransitive_on_residueSystem (A : ASection) :
     ∀ P Q : A.residueTotalCategory,
       Nonempty (P ⟶ Q) := by
-  intro P Q
-  obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property
-  obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property
-  obtain ⟨k, ⟨φ⟩⟩ :
-      ∃ k : projectiveNorth ⟶ projectiveNorth,
-        Nonempty ((AsectionActionTransport A k).obj xN ⟶ yN) := by
-    sorry
-  exact A.residueTotal_morphism_of_northComparison
-    P Q xN yN g hg h hh k φ
+  exact A.CResidueInputTotal_transitive
 
 /-- **DECLARATION 2** (the author's, verbatim): `∫𝓡_A` — `ι_A`'s total —
 IS CONNECTED, immediately, because `ι_A` is a *proper* inclusion and a
 natural isomorphism onto its image (certified, `57384ae`; naturality
 `rfl`).  Consumes THE RESULT — closes on contact, no proof of its own. -/
 instance ASection.residueTotal_isConnected (A : ASection) :
-    CategoryTheory.IsConnected (Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat)) :=
+    CategoryTheory.IsConnected A.residueTotalCategory :=
   A.residueTotal_isConnected_of_transitive A.sweepTransitive_on_residueSystem
 
 /-- **THE DECLARATION**: `π₀(∫𝓡_A)` IS A SINGLETON — CHT Remark 8.3.5 on
@@ -993,33 +955,59 @@ the connected action groupoid: nonempty and connected, so one class.
 Instantiates the certified receipt
 `residueTotal_pi0_singleton_of_connected`. -/
 theorem ASection.residueTotal_pi0_singleton (A : ASection) :
-    ∀ P Q : Grothendieck
-      (AsectionCResidueDiagram A ⋙ Grpd.forgetToCat),
+    ∀ P Q : A.residueTotalCategory,
       CategoryTheory.ConnectedComponents.mk P =
         CategoryTheory.ConnectedComponents.mk Q := by
   letI := A.residueTotal_isConnected
   exact A.residueTotal_pi0_singleton_of_connected
 
-/-- **THE VAL STEP — THE SECOND UNFORMALIZED INPUT** (master
-`thm:concentricity`, the readout paragraph).  The singleton `κ` is reached;
-what remains is the master's sentence *"instantiating the singleton equality at
-the n-th and 0-th certified representatives is itself the val step"*, carried
-across the register boundary: `hkn` is an equality of π₀ classes, the target is
-an equality in `ℝ`.  Hoisted out of the endpoint so the open input is a named
-declaration with an exact type rather than a hole inside `concentricity`;
-`sorry` marks UNFORMALIZED, never UNSOUND (R8). -/
-theorem ASection.transportLevel_of_pi0_singleton (A : ASection) (n : ℕ)
-    (hmem : ∀ m : ℕ, ASection.IsCResidueState A ASection.projectiveNorth
-      (ASection.residueActionState A ASection.projectiveNorth m baseWorld))
-    (hkn : CategoryTheory.ConnectedComponents.mk
-        (⟨ASection.projectiveNorth,
-          ⟨A.residueActionState ASection.projectiveNorth n baseWorld, hmem n⟩⟩ :
-          Grothendieck (ASection.AsectionCResidueDiagram A ⋙ Grpd.forgetToCat))
-      = CategoryTheory.ConnectedComponents.mk
-        ⟨ASection.projectiveNorth,
-          ⟨A.residueActionState ASection.projectiveNorth 0 baseWorld, hmem 0⟩⟩) :
-    A.transportLevel n = A.transportLevel 0 := by
-  sorry
+/-- The A-specific instance of the Grothendieck component-colimit
+equivalence, on the semantic C-residue input-groupoid diagram itself. -/
+noncomputable def ASection.residueTotalPi0ColimitEquiv (A : ASection) :
+    CategoryTheory.ConnectedComponents A.residueTotalCategory ≃
+      Limits.colimit
+        ((A.AsectionCResidueInputDiagram ⋙ Grpd.forgetToCat) ⋙ pi0Functor) :=
+  pi0GrothendieckEquiv A.AsectionCResidueInputDiagram
+
+/-- The component colimit of the connected semantic C-residue total is a
+singleton. -/
+theorem ASection.residueTotal_pi0_colimit_singleton (A : ASection) :
+    ∀ κ₁ κ₂ : Limits.colimit
+      ((A.AsectionCResidueInputDiagram ⋙ Grpd.forgetToCat) ⋙ pi0Functor),
+      κ₁ = κ₂ := by
+  intro κ₁ κ₂
+  let e := A.residueTotalPi0ColimitEquiv
+  rw [← e.apply_symm_apply κ₁, ← e.apply_symm_apply κ₂]
+  apply congrArg e
+  exact _root_.Quotient.inductionOn₂ (e.symm κ₁) (e.symm κ₂)
+    (fun P Q => A.residueTotal_pi0_singleton P Q)
+
+/-- **THE A-SPECIFIC TRANSPORT-RESIDUE SINGLETON READOUT.**  The component
+colimit singleton is instantiated at two certified transport-residue
+transport-residue representatives.  Its theorem-level result is already the
+real equality `hkn`; the master consumes its pairwise statement at the actual
+certified `0`-th representative. -/
+theorem ASection.residueTotal_transportLevel_singleton
+    (A : ASection) (n m : ℕ) :
+    A.transportLevel n = A.transportLevel m := by
+  have hcolim := A.residueTotal_pi0_colimit_singleton
+    (toColimitObj A.AsectionCResidueInputDiagram
+      (A.residueInputTotalObject n baseWorld))
+    (toColimitObj A.AsectionCResidueInputDiagram
+      (A.residueInputTotalObject m baseWorld))
+  have hn :
+      A.residueInputTotalTransportRead
+          (A.residueInputTotalObject n baseWorld) =
+        A.transportLevel n := by
+    exact A.residueInputTotalTransportRead_certified n baseWorld
+  have hm :
+      A.residueInputTotalTransportRead
+          (A.residueInputTotalObject m baseWorld) =
+        A.transportLevel m := by
+    exact A.residueInputTotalTransportRead_certified m baseWorld
+  have hkn : A.transportLevel n = A.transportLevel m := by
+    sorry
+  exact hkn
 
 /-- **THE CONCENTRICITY THEOREM** (master `thm:concentricity`): the
 infinitely many residue-ℂ zero-spheres of an A-section are concentric —
@@ -1040,31 +1028,12 @@ theorem ASection.concentricity (A : ASection) :
   -- infinitely many residue-ℂ zero-spheres of the A-section share the one
   -- real value c: they are CONCENTRIC.
   --
-  -- The certified representatives of the n-th and 0-th residue spheres:
-  -- members of the ι_A-included square at the north frame, where the frame
-  -- IS the element; the membership dossier is the `x.property` of the
-  -- template.
-  have hmem : ∀ m : ℕ,
-      ASection.IsCResidueState A ASection.projectiveNorth
-        (ASection.residueActionState A ASection.projectiveNorth m baseWorld) := by
-    intro m
-    refine ⟨ASection.residueActionState A ASection.projectiveNorth m baseWorld,
-      ?_, 𝟙 ASection.projectiveNorth, ?_⟩
-    · show (ASection.residueActionState A ASection.projectiveNorth m
-          baseWorld).positioned.back.coordinate ∈
-        (fun z : ℂ => (z : OnePoint ℂ)) '' A.CResidueZeroLocus
-      rw [ASection.residueActionState_positioned]
-      exact ⟨A.sphereZero m, A.sphereZero_mem_CResidueZeroLocus m, rfl⟩
-    · rw [ASection.AsectionActionTransport_id]
-      rfl
   -- The theorem consumes the author's declarations: ∫𝓡_A is a connected
   -- action groupoid (residueTotal_isConnected, the immediacy clause), hence
   -- π₀ is the singleton (residueTotal_pi0_singleton, CHT Rem. 8.3.5).
   -- val(k) = c: the level read on the one class, at the certified
-  -- representatives supplied by hmem — 8.3.5 applied, then the readout.
-  exact A.transportLevel_of_pi0_singleton n hmem
-    (A.residueTotal_pi0_singleton
-      ⟨ASection.projectiveNorth,
-        ⟨A.residueActionState ASection.projectiveNorth n baseWorld, hmem n⟩⟩
-      ⟨ASection.projectiveNorth,
-        ⟨A.residueActionState ASection.projectiveNorth 0 baseWorld, hmem 0⟩⟩)
+  -- transport representatives — 8.3.5 applied, then the readout.
+  rw [← A.transportLevel_eq_sphereZero_re n]
+  have hkn : A.transportLevel n = A.transportLevel 0 :=
+    A.residueTotal_transportLevel_singleton n 0
+  exact hkn

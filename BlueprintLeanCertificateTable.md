@@ -4,7 +4,7 @@ Generated mechanically from the current master, current Lean sources, and the pi
 The manifest is the single human-ratified mapping from a master clause to a Lean declaration; the generator verifies the exact master anchor, exact Lean type, fresh kernel run, axiom surface, and source fingerprints.
 Regenerate with `scripts/generate_blueprint_lean_table.py`. The generator reads and probes `Concentricity/Theorem.lean`; it does not edit either production seat.
 
-Current count: 9 terminal certificates; 6 inference certificates; 0 unpacked dossier bindings ready; 6 author bindings confirmed; 0 confirmed bindings awaiting Lean spelling; 0 production seats open.
+Current count: 9 terminal certificates; 6 inference certificates; 0 unpacked dossier bindings ready; 1 author bindings confirmed; 0 confirmed bindings awaiting Lean spelling; 0 production seats open.
 
 Certificate meanings:
 
@@ -52,28 +52,23 @@ The first table records the project-specific objects already unpacked from the t
 
 | Exact project-specific locals | Provenance | Source exact | Kernel reached consumer | Status |
 |---|---|---:|---:|---|
-| `xN, hxN, g, hg` | the inverse-image dossier carried by the arbitrary object P; `obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property` | ✓ | ✗ | `BINDING_UNRESOLVED` |
-| `yN, hyN, h, hh` | the inverse-image dossier carried by the arbitrary object Q; `obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property` | ✓ | ✗ | `BINDING_UNRESOLVED` |
+| `xN, hxN, g, hg` | the inverse-image dossier carried by the arbitrary object P; `obtain ⟨xN, hxN, g, hg⟩ := P.fiber.property` | ✗ | ✗ | `BINDING_UNRESOLVED` |
+| `yN, hyN, h, hh` | the inverse-image dossier carried by the arbitrary object Q; `obtain ⟨yN, hyN, h, hh⟩ := Q.fiber.property` | ✗ | ✗ | `BINDING_UNRESOLVED` |
 
 | Paper object | Lean local | Expected type | Author binding | Master link and target | Candidate expression | Lean elaboration | Status |
 |---|---|---|---|---:|---|---:|---|
-| the base component k_E of F_A(E_N) | `kE` | `GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth` | ✓ confirmed | ✓ | `GreatCircle.toNHom 0` | — | `LEAN_BINDING_REJECTED` |
-| the base component k_W of F_A(W_N) | `kW` | `GreatCircle.pointObj ((0 : ℝ) : GreatCircle.Point) ⟶ projectiveNorth` | ✓ confirmed | ✓ | `GreatCircle.toNHom 0` | — | `LEAN_BINDING_REJECTED` |
-| the common reference input u_* of the fixed tape | `uStar` | `OnePoint ℂ` | ✓ confirmed | ✓ | `(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kE).1).val.symm ((A.distinguishedDiskAction⁻¹).val (A.sphereZero n₁ : OnePoint ℂ))` | — | `LEAN_BINDING_REJECTED` |
-| the instantiated boundary equation C(r_E)(u_*) = u_1 | `hE` | `(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kE).1).val uStar = (residueActionState A projectiveNorth n₁ I₁).input.back.coordinate` | ✓ confirmed | ✓ | `by simp [uStar, residueActionState, AsectionActionState.ofInput, residueState, projectiveNorth, projectiveObjectFrame_north]` | — | `LEAN_BINDING_REJECTED` |
-| the instantiated boundary equation C(r_W)(u_*) = u_2 | `hW` | `(GreatCircle.cayleyProjective (GreatCircle.stabilizerPart kW).1).val uStar = (residueActionState A projectiveNorth n₂ I₂).input.back.coordinate` | ✓ confirmed | ✓ | `by simp [uStar, residueActionState, AsectionActionState.ofInput, residueState, projectiveNorth, projectiveObjectFrame_north]` | — | `LEAN_BINDING_REJECTED` |
 | the post-collapse residue read instantiated at the n-th and 0-th certified representatives | `hkn` | `A.transportLevel n = A.transportLevel 0` | ✓ confirmed | ✓ | `hkn` | — | `LEAN_BINDING_REJECTED` |
 
 ### Exact seat attempts
 
-Lean was contacted with the exact candidate expression for: `seat1.hE`, `seat1.hW`, `seat1.kE`, `seat1.kW`, `seat1.uStar`, `seat2.transportLevelCollapse`. Each remaining row stays mandatory transcription work.
+Lean was contacted with the exact candidate expression for: `seat2.transportLevelCollapse`. Each remaining row stays mandatory transcription work.
 
 ## Current production boundary
 
 | Master result | Exact remaining role | Production declaration | Lean contact | Status |
 |---|---|---|---:|---|
-| `lem:c-residue-transitive` | the action-groupoid composition in ∫R_A, instantiated at the two semantic inverse-image objects ι_A(x₀) and ι_A(y₀) | `ASection.northProducersConnected` (Concentricity/Theorem.lean:1058) | — | `UNLOCATED_OPEN_SEAT` |
-| `thm:concentricity` | the val step: the π₀-class equality instantiated at the n-th and 0-th certified representatives, carried across to the real-valued level equality | `ASection.transportLevel_of_pi0_singleton` (Concentricity/Theorem.lean:1150) | — | `UNLOCATED_OPEN_SEAT` |
+| `lem:c-residue-transitive` | the action-groupoid composition in ∫R_A, instantiated at the two semantic inverse-image objects ι_A(x₀) and ι_A(y₀) | `ASection.sweepTransitive_on_residueSystem` (Concentricity/Theorem.lean:940) | — | `UNLOCATED_OPEN_SEAT` |
+| `thm:concentricity` | the val step: the π₀-class equality instantiated at the n-th and 0-th certified representatives, carried across to the real-valued level equality | `ASection.transportLevel_of_pi0_singleton` (downstream) | — | `UNLOCATED_OPEN_SEAT` |
 
 The current production run reaches exactly two errors: the north existential in `sweepTransitive_on_residueSystem` and the real-valued equality in `concentricity`. The inference table above is independently green against the exact current source prefix; the open seats do not downgrade those receipts.
 
@@ -246,17 +241,17 @@ zeta_criticalLine_zeros_infinite_of_RH_audit : RiemannHypothesis → {s | rieman
 
 | Source | SHA-256 |
 |---|---|
-| `Octonionic_RH_master.tex` | `7c003e360b1b107ece4d42eed582b2da5405a46c2d0cced85e0b31b9f1bef39b` |
-| `blueprint/lean_certificate_manifest.json` | `b372ae0c20ab57f66e4ab928b7866efca69c8272becd95f11d5b8b1f01a384fe` |
+| `Octonionic_RH_master.tex` | `d906ea1494831c4096add3725cdaeedf5cf079ab62bb547e96d19049d3376062` |
+| `blueprint/lean_certificate_manifest.json` | `dc20b06e89ec6e41f71ee93be56d0f9c159571a849f447c9e8db6806741717d5` |
 | `Concentricity/_BlueprintTerminalCertificateProbe.lean` | `2e898992124efa19b135e96f87d14813b03809f27f9cc7a69f85fb8d5f257d37` |
-| `Concentricity/Theorem.lean` | `591e5be0488f2b782901296413142eccaa3380c9bd415ecfba38d2161fcd89cb` |
+| `Concentricity/Theorem.lean` | `2c11a6501285c9ab7cb5dcd4af89eca72b36e95cd047e7a9e1e254e397821d14` |
 | `Concentricity/_GateNorthCResidueTransitivityAudit.lean` | `07ddbe960df820ab93c25f87f4b963077f058fd3c79b739430a3c5ff6533d99a` |
 | `scripts/build_transitivity_inference_probe.sh` | `e0982829e4937b00e01bda1b7b4a4e767c09f3a907ae65393a4590125a686683` |
 | `Concentricity/_GateCorollaryInferenceAudit.lean` | `8bac693ca5c93deae6b9f1511e3f058efab47a8b657c061fc178176fe5636efb` |
 | `Concentricity/Corollaries.lean` | `4866f494cf62579778905d6dd93b912a868a880b827c4456a060bdb08d441248` |
 | `lean-toolchain` | `efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee` |
 | `lakefile.toml` | `361be5c558f10fbc113a616222d2db2c08c9b353ddb12f0cac6d5ad9a0d0287d` |
-| `lean_source_tree` | `deaa5061da811c097e4ff76abd168f516b65927d2cced98ef06ba57786250ee7` |
+| `lean_source_tree` | `432b81b904b71ec3caad45ab263cda1015811c605806d08963c883faf11f8af9` |
 
 Raw kernel output: `blueprint/lean_certificate_probe.txt`.
 Machine-readable evidence: `blueprint/lean_certificate_evidence.json`.
