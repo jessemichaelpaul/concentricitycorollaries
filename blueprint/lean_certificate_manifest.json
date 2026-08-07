@@ -55,7 +55,7 @@
       ],
       "consumer_module": "Concentricity/Theorem.lean",
       "consumed_as_binder": true,
-      "object_status": "AUTHOR_BOUND_LEAN_PENDING",
+      "object_status": "AUTHOR_BOUND_LEAN_CONFIRMED",
       "witness_suppliers": [
         "def:A-section",
         "def:base",
