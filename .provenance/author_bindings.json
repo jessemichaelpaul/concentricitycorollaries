@@ -115,7 +115,8 @@
       ],
       "author_confirmed": true,
       "author_binding_confirmed": true,
-      "author_binding_sha256": "223fd0538e1aef8e55edcbed65f04d3e39fd0f5e4ebdb88752a91e9a7ee1ba7c"
+      "author_binding_sha256": "223fd0538e1aef8e55edcbed65f04d3e39fd0f5e4ebdb88752a91e9a7ee1ba7c",
+      "status": "BINDING_READY"
     }
   ]
 }
