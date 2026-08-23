@@ -95,10 +95,37 @@
   <a href="part-stack.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">What a slice-preserving section does</span></a>
  </li>
 <li class="">
-  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Two geometric viewpoints</span></a>
+  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">The octonionic slice-preserving action groupoids</span></a>
  </li>
 <li class="">
-  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The base of the degenerate set and the Grothendieck construction</span></a>
+  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The projective base</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000022"><span class="toc_ref"></span> <span class="toc_entry">The sphere world</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000023"><span class="toc_ref"></span> <span class="toc_entry">The disk action: a general slice-preserving action from the base to the sphere world</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000024"><span class="toc_ref"></span> <span class="toc_entry">The A-section hypotheses</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000025"><span class="toc_ref"></span> <span class="toc_entry">The slice projection \(A^{\mathrm{slice}}:\mathcal B\to \mathrm{SphereWorld}\)</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000026"><span class="toc_ref"></span> <span class="toc_entry">The GPV transport</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000027"><span class="toc_ref"></span> <span class="toc_entry">The equivariant realization \(A_{\mathbb {O}}:\mathcal H_1\to \mathcal H_1\)</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">The functor for the total Grothendieck construction: \(\mathcal A_A:\mathcal B\to \mathbf{Grpd}\)</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000029"><span class="toc_ref"></span> <span class="toc_entry">The total \(\mathcal T_A=\int _{\mathcal B}\mathcal A_A\)</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000030"><span class="toc_ref"></span> <span class="toc_entry">Orbit stabilizer</span></a>
  </li>
 
   </ul>
@@ -174,11 +201,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>  The Dirichlet series \(\zeta (s)=\sum _{n\ge 1}n^{-s}\), convergent for \(\operatorname{Re}s{\gt}1\), continues to a meromorphic function on \(\mathbb {C}\) with a single simple pole, at \(s=1\); equivalently, a holomorphic map to the Riemann sphere </p>
+  <p>  The Dirichlet series \(\zeta (s)=\sum _{n\ge 1}n^{-s}\), convergent for \(\operatorname{Re}s{\gt}1\), continues to a meromorphic function on \(\mathbb {C}\): holomorphic as a \(\mathbb {C}\)-valued function on \(\mathbb {C}\setminus \{ 1\} \), with a single simple pole at \(s=1\). Equivalently, read into the Riemann sphere, the same function is a holomorphic map on the whole complex plane, </p>
 <div class="displaymath" id="a0000000006">
-  \[  \zeta :\mathbb {C}^{*}\longrightarrow \mathbb {C}^{*},\qquad \mathbb {C}^{*}=\mathbb {C}\cup \{ \infty \} =S^2,\qquad \zeta (1)=\infty .  \]
+  \[  \zeta :\mathbb {C}\longrightarrow \mathbb {C}^{*},\qquad \mathbb {C}^{*}=\mathbb {C}\cup \{ \infty \} =S^2,\qquad \zeta (1)=\infty ,  \]
 </div>
-<p> The completed function \(\xi (s)=\tfrac 12 s(s-1)\pi ^{-s/2}\Gamma (s/2)\zeta (s)\) is entire and satisfies </p>
+<p> the pole becoming the regular value \(\infty \). Holomorphy is on the domain \(\mathbb {C}\) in both readings: with infinitely many zeros, \(\zeta \) is not rational, so the domain point \(\infty \) carries an essential singularity. (The later extension of the <em>domain</em> to \(\mathbb {C}^{*}\) assigns a marked value at \(\infty \), Definition&#160;<a href="sect0001.html#def:zeta-Cstar">1.6</a> with Remark&#160;<a href="sect0001.html#rmk:infty-marked">1.7</a>: an assignment of geometry and value, made where the classical statement ends.) The completed function \(\xi (s)=\tfrac 12 s(s-1)\pi ^{-s/2}\Gamma (s/2)\zeta (s)\) is entire and satisfies </p>
 <div class="displaymath" id="a0000000007">
   \[  \xi (s)=\xi (1-s),\qquad \xi (\bar s)=\overline{\xi (s)} .  \]
 </div>
@@ -499,7 +526,50 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p>   \(\zeta _{\mathbb {C}^{*}}:\mathbb {C}^{*}\to \mathbb {C}^{*}\) is the meromorphic continuation of \(\zeta \) regarded as a map to the Riemann sphere: \(\zeta _{\mathbb {C}^{*}}(s)=\zeta (s)\) for \(s\in \mathbb {C}\setminus \{ 1\} \); \(\zeta _{\mathbb {C}^{*}}(1)=\infty \) (the simple pole, Theorem&#160;<a href="sect0001.html#thm:riemann">1.1</a>); and \(\zeta _{\mathbb {C}^{*}}(\infty )=1\), since \(\zeta (s)\to 1\) as \(\operatorname{Re}(s)\to +\infty \) (the \(p\)-test: only the \(n=1\) term of \(\sum _n n^{-s}\) survives). It is holomorphic into \(\mathbb {C}^{*}\) on \(\mathbb {C}^{*}\setminus \{ 1\} \), its sole pole being \(s=1\). The functional equation, the conjugate symmetry \(\zeta _{\mathbb {C}^{*}}(\bar s)=\overline{\zeta _{\mathbb {C}^{*}}(s)}\), and Hardy’s infinitude (Theorem&#160;<a href="sect0001.html#thm:hardy">1.5</a>) hold verbatim for \(\zeta _{\mathbb {C}^{*}}\), as they concern values on \(\mathbb {C}\setminus \{ 1\} \) where \(\zeta _{\mathbb {C}^{*}}=\zeta \). </p>
+  <p>   \(\zeta _{\mathbb {C}^{*}}:\mathbb {C}^{*}\to \mathbb {C}^{*}\) is the meromorphic continuation of \(\zeta \) regarded as a map to the Riemann sphere: \(\zeta _{\mathbb {C}^{*}}(s)=\zeta (s)\) for \(s\in \mathbb {C}\setminus \{ 1\} \); \(\zeta _{\mathbb {C}^{*}}(1)=\infty \) (the simple pole, Theorem&#160;<a href="sect0001.html#thm:riemann">1.1</a>); and \(\zeta _{\mathbb {C}^{*}}(\infty ):=1\), an assigned marked value (Remark&#160;<a href="sect0001.html#rmk:infty-marked">1.7</a>), selected by the one genuine limit \(\zeta (s)\to 1\) as \(\operatorname{Re}(s)\to +\infty \) (the \(p\)-test: only the \(n=1\) term of \(\sum _n n^{-s}\) survives). It is holomorphic into \(\mathbb {C}^{*}\) on \(\mathbb {C}\setminus \{ 1\} \), its sole pole being \(s=1\); at the domain point \(\infty \) no analytic claim is made. The functional equation, the conjugate symmetry \(\zeta _{\mathbb {C}^{*}}(\bar s)=\overline{\zeta _{\mathbb {C}^{*}}(s)}\), and Hardy’s infinitude (Theorem&#160;<a href="sect0001.html#thm:hardy">1.5</a>) hold verbatim for \(\zeta _{\mathbb {C}^{*}}\), as they concern values on \(\mathbb {C}\setminus \{ 1\} \) where \(\zeta _{\mathbb {C}^{*}}=\zeta \). </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="rmk:infty-marked">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">1.7</span>
+    <span class="remark_thmtitle">The value at infinity is a marked point, not an extension</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#rmk:infty-marked">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0001.html#def:zeta-Cstar">Definition 1.6</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>  No analytic claim is made, or could be made, at the domain point \(\infty \). A function holomorphic on the whole Riemann sphere is rational, and \(\zeta \) is not: it has an essential singularity at \(\infty \), tending to \(1\) as \(\operatorname{Re}s\to +\infty \) while passing through the trivial zeros along the negative real axis, so no assigned value makes \(\zeta _{\mathbb {C}^{*}}\) so much as continuous there. Definition&#160;<a href="sect0001.html#def:zeta-Cstar">1.6</a> therefore performs two distinct acts, and only the first is analytic. Regarding the meromorphic \(\zeta \) as a holomorphic map into the target sphere, with \(\zeta _{\mathbb {C}^{*}}(1)=\infty \), is the classical sphere-valued reading of a meromorphic function. Assigning \(\zeta _{\mathbb {C}^{*}}(\infty ):=1\) supplies the value the compactified setting consumes as data: the point \(\infty =N\) is shared by every slice Riemann sphere (Definition&#160;<a href="sect0002.html#def:slices">2.4</a>), it is where the pole’s value lands, and it is an object of the projective base the transport machinery of Part&#160;3 runs on (Definition&#160;<a href="part-stack.html#eq:orbit-stabilizer">9.4</a>), so compactified value paths are read at it. The assignment is not free. Slice preservation forces the value to lie in every slice sphere at once, and the intersection of the slice spheres is \(\mathbb {R}\cup \{ N\} \); the limit along the one region through which the construction approaches \(\infty \) — the right half-plane, where \(\zeta \to 1\) genuinely — then selects \(1\). The essential singularity is visible only along directions the construction never travels. What is consumed downstream is the value, never smoothness: no statement in this paper uses continuity or differentiability of \(\zeta _{\mathbb {C}^{*}}\) at \(\infty \). The same discipline governs the whole class of Part&#160;3: an A-section has infinitely many zeros, hence is not rational, hence has an essential singularity at \(N\); accordingly every analytic hypothesis of Definition&#160;<a href="part-stack.html#def:A-section">10.4</a> is stated at finite points, and the value at \(N\) is carried as bare data (in the Lean development, the field <span class="ttfamily">valueAtInfinity</span>). This is the marked-extension device of Remark&#160;<a href="sect0002.html#rmk:slice-pres-compact">3.6</a>: the compactification supplies geometry — the pole’s value becomes a point of the target sphere, and all slice spheres share the single point \(N\) — never an extension. A companion distinction completes the picture. At \(N\), Part&#160;3 positions a group action carrying analytic content: the slice-preserving content the hypotheses supply over the octonions. There \(N\) serves as an object of the projective base, as the point of each value sphere at which the distinguished Möbius element arrives in Weierstrass form, and as the shared point of the slice spheres. The analysis that produces the element read there happens at the finite pole — continuation through the simple pole — and its output is positioned at \(N\) by the orbit representative. No step of the construction evaluates the section analytically at the domain point \(\infty \): the position and the marked point are one geometric point playing two roles, as a group element’s position and as a function’s domain point, and only the first is ever active in the construction. </p>
 
   </div>
 </div>
@@ -508,7 +578,7 @@
     <span class="lemma_thmcaption">
     Lemma
     </span>
-    <span class="lemma_thmlabel">1.7</span>
+    <span class="lemma_thmlabel">1.8</span>
     <span class="lemma_thmtitle">Compactification preserves the zero set</span>
     <div class="thm_header_extras">
 
