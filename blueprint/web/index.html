@@ -92,10 +92,37 @@
   <a href="part-stack.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">What a slice-preserving section does</span></a>
  </li>
 <li class="">
-  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Two geometric viewpoints</span></a>
+  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">The octonionic slice-preserving action groupoids</span></a>
  </li>
 <li class="">
-  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The base of the degenerate set and the Grothendieck construction</span></a>
+  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The projective base</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000022"><span class="toc_ref"></span> <span class="toc_entry">The sphere world</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000023"><span class="toc_ref"></span> <span class="toc_entry">The disk action: a general slice-preserving action from the base to the sphere world</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000024"><span class="toc_ref"></span> <span class="toc_entry">The A-section hypotheses</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000025"><span class="toc_ref"></span> <span class="toc_entry">The slice projection \(A^{\mathrm{slice}}:\mathcal B\to \mathrm{SphereWorld}\)</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000026"><span class="toc_ref"></span> <span class="toc_entry">The GPV transport</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000027"><span class="toc_ref"></span> <span class="toc_entry">The equivariant realization \(A_{\mathbb {O}}:\mathcal H_1\to \mathcal H_1\)</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">The unique GPV real fibre</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000029"><span class="toc_ref"></span> <span class="toc_entry">The functor for the total Grothendieck construction: \(\mathcal A_A:\mathcal B\to \mathbf{Grpd}\)</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000030"><span class="toc_ref"></span> <span class="toc_entry">The total \(\mathcal T_A=\int _{\mathcal B}\mathcal A_A\)</span></a>
  </li>
 
   </ul>
@@ -127,17 +154,18 @@
 <p class="date">June 2026</p>
 </div>
 <blockquote class="quote"><small class="small"><i class="itshape">“…a ‘viewpoint’ by itself remains fragmentary. It reveals to us one of the aspects of a scenery or panorama, among a multiplicity of others which are equally valuable, equally ‘real’. It is when complementary viewpoints of a common reality are conjugated, that is, when our ‘eyes’ are multiplied, that the gaze is able to penetrate further ahead in the reckoning of things. …it also happens, sometimes, that a sheaf of viewpoints converging to a unique and vast scenery gives rise to a novel thing; a thing which transcends each of the partial perspectives, in the same way that a living being transcends each of its limbs and organs. This new thing could be called a vision.” <div class="flushright"><span class="upshape">— A. Grothendieck, <em>Récoltes et Semailles</em></span></div> </i></small></blockquote>
+<blockquote class="quote"><small class="small"><i class="itshape">“The measure of our success is whether what we do enables people to understand and think more clearly and effectively about mathematics.” <div class="flushright"><span class="upshape">— W. Thurston, <em>On Proof and Progress in Mathematics</em></span></div> </i></small></blockquote>
 <div class="abstract"><p> Let \(\mathcal R\) be the commutative ring of slice-preserving slice-regular functions on the compactified octonions \(\mathbb {O}^{*}=S^8\), under the regular (\(\ast \)) product. Part&#160;1 gathers the classical facts about the Riemann zeta function. Part&#160;2 develops the slice-preserving theory, builds \(\mathcal R\), places the octonionic zeta \(\zeta _{\mathbb {O}^{*}}\) inside it, and proves the zero and equivalence theorems: the classically nontrivial zeros of \(\zeta \) are residue-\(\mathbb {C}\) zero \(6\)-spheres, and the Riemann Hypothesis holds exactly when those spheres are concentric, sharing a single real centre. </p>
-<p>Part&#160;3 proves the main result, the <em>Concentricity Theorem</em>, for a section \(A\in \mathcal R\) satisfying four conditions: <span class="upshape">(C1)</span> meromorphic continuation with a single simple pole carried to \(\infty =N\); <span class="upshape">(C2)</span> an infinite Euler product; <span class="upshape">(C3)</span> an infinite slice-regular Weierstrass factorization whose spherical factors are the residue-\(\mathbb {C}\) zeros; and <span class="upshape">(C4)</span> infinitely many such zeros. The theorem says the residue-\(\mathbb {C}\) zero \(6\)-spheres of any such \(A\) are concentric. </p>
-<p>The proof builds a concentricity detector from the section itself, out of groupoids, orbit–stabilizer, and categorical homotopy theory. Conditions <span class="upshape">(C1)–(C3)</span> determine one distinguished exponential Möbius action on the projective base \(\mathcal B=PGL(2,\mathbb {R})\ltimes \operatorname {OnePoint}(\mathbb {R})\): a logarithmic coordinate \(z\) is exponentiated in the diagonal matrix \(\operatorname {diag}(e^z,1)\) and conjugated into the Cayley disk chart, with the Euler product presenting the action at \(0\) and the Weierstrass product at \(N\). The slice-preserving normalization is \(G_2\)-equivariant on \(\mathbb {O}^{*}\), and orbit–stabilizer carries this whole point-valued action across the base. Its sphere-world projection records the directions and Möbius legs, while the genuine A-section functor \(\mathcal A_A:\mathcal B\to \mathbf{Grpd}\) has the resulting normalized A-value states and their transports as its fibres. Its Grothendieck construction is \(\mathcal T_A=\int _{\mathcal B}\mathcal A_A\). </p>
-<p>The C-residue system is the inverse-image action groupoid \(\mathcal R_A\) selected inside \(\mathcal A_A\), with fully faithful inclusion \(\iota _A:\mathcal R_A\Rightarrow \mathcal A_A\), and hence a fully faithful inclusion of totals \(\int \iota _A:\int _{\mathcal B}\mathcal R_A\hookrightarrow \mathcal T_A\). The relative orbit–stabilizer comparison makes this inverse-image total transitive, therefore connected. Its component colimit is consequently a singleton. Instantiated at any two certified residue representatives, that singleton equality is already equality of their A-specific real-level reads; hence all of them have one real value \(c\in \mathbb {R}\). Thus every populated residue-\(\mathbb {C}\) zero \(6\)-sphere has centre \(c\). The theorem asserts the shared centre; naming the number is the task of the corollaries. </p>
+<p>Part&#160;3 proves the main result, the <em>Concentricity Theorem</em>, for a section \(A\in \mathcal R\) satisfying four conditions: <span class="upshape">(C1)</span> meromorphic continuation with a single simple pole, whose pole-cancelled factor continues to a finite nonzero value at \(p_A\); <span class="upshape">(C2)</span> an infinite Euler product; <span class="upshape">(C3)</span> an infinite slice-regular Weierstrass factorization whose spherical factors are the residue-\(\mathbb {C}\) zeros; and <span class="upshape">(C4)</span> infinitely many such zeros. The theorem says the residue-\(\mathbb {C}\) zero \(6\)-spheres of any such \(A\) are concentric. </p>
+<p>The proof builds a concentricity detector from the section itself, out of action groupoids, matrix actions, and categorical homotopy theory. Conditions <span class="upshape">(C1)–(C3)</span> construct one distinguished exponential Möbius action on the projective base \(\mathcal B=PGL(2,\mathbb {R})\ltimes \operatorname {OnePoint}(\mathbb {R})\): the continued pole factor’s logarithm \(\lambda _A\) is exponentiated in the diagonal matrix \(\operatorname {diag}(e^{\lambda _A},1)\) and conjugated into the slice Möbius group. The Euler product presents the action on the half-space; condition <span class="upshape">(C1)</span> continues the pole-cancelled factor through the finite pole \(p_A\), and the Weierstrass product presents that same continued factor there. The slice-preserving normalization is \(G_2\)-equivariant on \(\mathbb {O}^{*}\), and orbit–stabilizer proves that its object and arrow assignments define the sphere-world functor. From then on that functor itself records the directions and concrete Möbius matrix actions, while the A-section functor \(\mathcal A_A:\mathcal B\to \mathbf{Grpd}\) has the resulting normalized A-value states and their transports as its fibres. Its Grothendieck construction is \(\mathcal T_A=\int _{\mathcal B}\mathcal A_A\). </p>
+<p>The residue-\(\mathbb {C}\) system is the inverse-image action groupoid \(\mathcal R_A\) selected inside \(\mathcal A_A\), with fully faithful inclusion \(\iota _A:\mathcal R_A\Rightarrow \mathcal A_A\), and hence a fully faithful inclusion of totals \(\int \iota _A:\int _{\mathcal B}\mathcal R_A\hookrightarrow \mathcal T_A\). For two arbitrary objects of the inverse-image total, the A-specific projective/Möbius transport compares their positioned coordinates and the \(G_2\) fibre arrow compares their slice directions. Hence this inverse-image total is transitive, therefore connected. Its component colimit is consequently a singleton. Applying \(\pi _0\) fibrewise to \(\mathcal R_A\), the intrinsic real face of the same bound action descends to a natural transformation \(\pi _0\circ \mathcal R_A\Rightarrow \Delta (\mathbb {R})\). Its induced colimit map, evaluated on the constructed zero-sphere representatives, reads one real value \(c\in \mathbb {R}\) across the singleton component colimit. Thus every residue-\(\mathbb {C}\) zero \(6\)-sphere has centre \(c\). The theorem asserts the shared centre; naming the number is the task of the corollaries. </p>
 <p>Downstream corollaries translate residue-\(\mathbb {C}\) zeros to classically nontrivial zeros and, for \(\zeta _{\mathbb {O}^{*}}\), use its functional equation to identify \(c=\tfrac 12\): the Riemann Hypothesis. </p>
 </div>
 
 <h1 id="a0000000004">Introduction</h1>
 <p> The Riemann Hypothesis is usually met head-on, as a question about where the zeros of a single complex function fall along a line. This paper approaches it from the side. It asks instead whether a family of geometric objects, sitting a few dimensions up in the octonions, share a common centre, and shows that they must. The Riemann Hypothesis then follows, not as the thing we set out to prove, but as the shadow this larger fact casts back down onto the complex plane. </p>
 <p>A nontrivial zero of the zeta function, seen from the complex line alone, is a lone point in a strip. Seen from the compactified octonions, that same zero opens into a six-dimensional sphere, and the critical-line question becomes a question of arrangement: are these spheres concentric, or scattered into different hyperplanes? It takes the whole continuum of imaginary directions in the octonions, read together, to see whether the alignment holds. </p>
-<p>The paper is built to make that convergence visible and, at every step, checkable. Part 1 recalls the classical facts about the Riemann zeta function we will lean on. Part 2 develops the slice-preserving theory of functions on the octonions, builds the commutative ring \(\mathcal R\) in which the octonionic zeta lives, and proves the reframing at the centre of everything: the classically nontrivial zeros are exactly the residue-\(\mathbb {C}\) zero six-spheres, and the Riemann Hypothesis holds precisely when those spheres are concentric. Part 3 proves the main result, the Concentricity Theorem, with a small piece of machinery I think of as a concentricity detector. From the section itself we build one distinguished action on a projective base, carry it across a continuum of Riemann spheres by orbit and stabilizer, and read off, through categorical homotopy theory, whether the zero-spheres land in a single connected piece. They do; and for the octonionic zeta, that is the Riemann Hypothesis. </p>
+<p>The paper is built to make that convergence visible and, at every step, checkable. Part 1 recalls the classical facts about the Riemann zeta function we will lean on. Part 2 develops the slice-preserving theory of functions on the octonions, builds the commutative ring \(\mathcal R\) in which the octonionic zeta lives, and proves the reframing at the centre of everything: the classically nontrivial zeros are exactly the residue-\(\mathbb {C}\) zero six-spheres, and the Riemann Hypothesis holds precisely when those spheres are concentric. Part 3 proves the main result, the Concentricity Theorem, with a small piece of machinery I think of as a concentricity detector. From the section itself we build one distinguished action on a projective base; orbit–stabilizer proves its slice functor well defined, and the resulting concrete matrix actions let us read off, through categorical homotopy theory, whether the zero-spheres land in a single connected piece. They do; and for the octonionic zeta, that is the Riemann Hypothesis. </p>
 <p>No one can picture an eight-dimensional graph in their head, but tools from categorical homotopy theory, like the total-object Grothendieck construction and standard colimit arguments, let us probe this structure and reason about it. The argument is also formalized in Lean, so that each step can be checked; the reader can not only verify the steps but, I hope, come to understand for themselves why the Concentricity Theorem is true and why the Riemann Hypothesis follows. </p>
 
 </div> <!--main-text -->
@@ -201,10 +229,37 @@
   <a href="part-stack.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">What a slice-preserving section does</span></a>
   </li>
   <li>	
-  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Two geometric viewpoints</span></a>
+  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">The octonionic slice-preserving action groupoids</span></a>
   </li>
   <li>	
-  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The base of the degenerate set and the Grothendieck construction</span></a>
+  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The projective base</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000022"><span class="toc_ref"></span> <span class="toc_entry">The sphere world</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000023"><span class="toc_ref"></span> <span class="toc_entry">The disk action: a general slice-preserving action from the base to the sphere world</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000024"><span class="toc_ref"></span> <span class="toc_entry">The A-section hypotheses</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000025"><span class="toc_ref"></span> <span class="toc_entry">The slice projection \(A^{\mathrm{slice}}:\mathcal B\to \mathrm{SphereWorld}\)</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000026"><span class="toc_ref"></span> <span class="toc_entry">The GPV transport</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000027"><span class="toc_ref"></span> <span class="toc_entry">The equivariant realization \(A_{\mathbb {O}}:\mathcal H_1\to \mathcal H_1\)</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">The unique GPV real fibre</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000029"><span class="toc_ref"></span> <span class="toc_entry">The functor for the total Grothendieck construction: \(\mathcal A_A:\mathcal B\to \mathbf{Grpd}\)</span></a>
+  </li>
+  <li>	
+  <a href="part-stack.html#a0000000030"><span class="toc_ref"></span> <span class="toc_entry">The total \(\mathcal T_A=\int _{\mathcal B}\mathcal A_A\)</span></a>
   </li>
 
 	</ul>

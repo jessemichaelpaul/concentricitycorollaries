@@ -7,3 +7,7 @@
 % PDF metadata is carried by the master through \hypersetup.  The web renderer
 % has no PDF metadata channel, so consume that command without output.
 \providecommand{\hypersetup}[1]{}
+
+% stmaryrd supplies \fatsemi in the PDF build; give MathJax the matching
+% diagrammatic-composition notation in the web build.
+\providecommand{\fatsemi}{\mathbin{;}}

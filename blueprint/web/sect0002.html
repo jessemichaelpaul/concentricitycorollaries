@@ -95,10 +95,37 @@
   <a href="part-stack.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">What a slice-preserving section does</span></a>
  </li>
 <li class="">
-  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Two geometric viewpoints</span></a>
+  <a href="part-stack.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">The octonionic slice-preserving action groupoids</span></a>
  </li>
 <li class="">
-  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The base of the degenerate set and the Grothendieck construction</span></a>
+  <a href="part-stack.html#a0000000021"><span class="toc_ref"></span> <span class="toc_entry">The projective base</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000022"><span class="toc_ref"></span> <span class="toc_entry">The sphere world</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000023"><span class="toc_ref"></span> <span class="toc_entry">The disk action: a general slice-preserving action from the base to the sphere world</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000024"><span class="toc_ref"></span> <span class="toc_entry">The A-section hypotheses</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000025"><span class="toc_ref"></span> <span class="toc_entry">The slice projection \(A^{\mathrm{slice}}:\mathcal B\to \mathrm{SphereWorld}\)</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000026"><span class="toc_ref"></span> <span class="toc_entry">The GPV transport</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000027"><span class="toc_ref"></span> <span class="toc_entry">The equivariant realization \(A_{\mathbb {O}}:\mathcal H_1\to \mathcal H_1\)</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">The unique GPV real fibre</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000029"><span class="toc_ref"></span> <span class="toc_entry">The functor for the total Grothendieck construction: \(\mathcal A_A:\mathcal B\to \mathbf{Grpd}\)</span></a>
+ </li>
+<li class="">
+  <a href="part-stack.html#a0000000030"><span class="toc_ref"></span> <span class="toc_entry">The total \(\mathcal T_A=\int _{\mathcal B}\mathcal A_A\)</span></a>
  </li>
 
   </ul>
@@ -680,7 +707,7 @@
   </div>
 </div>
 <h1 id="a0000000015">4 The octonionic zeta function \(\zeta _{\mathbb {O}^{*}}\)</h1>
-<p>Slice-preserving theory already gives the tools to build the octonionic zeta function. On each slice \(\mathbb {C}_v\) we read the compactified classical \(\zeta \) through the isomorphism \(\varphi _v:\mathbb {C}^{*}\to \mathbb {C}_v^{*}\), and the representation formula glues these slice copies into a single function on all of \(\mathbb {O}^{*}\). The one thing to check is that the two identifications of a slice with \(\mathbb {C}\) agree, so that \(\zeta _{\mathbb {O}^{*}}\) is well-defined; they do, because conjugating the input and reversing the identification cancel. The pole of \(\zeta \) at \(s=1\) is carried to the north pole \(N\). </p>
+<p>Slice-preserving theory already gives the tools to build the octonionic zeta function. On each slice \(\mathbb {C}_v\) we read the compactified classical \(\zeta \) through the isomorphism \(\varphi _v:\mathbb {C}^{*}\to \mathbb {C}_v^{*}\), and the representation formula glues these slice copies into a single function on all of \(\mathbb {O}^{*}\). The one thing to check is that the two identifications of a slice with \(\mathbb {C}\) agree, so that \(\zeta _{\mathbb {O}^{*}}\) is well-defined; they do, because conjugating the input and reversing the identification cancel. The pole of \(\zeta \) at \(s=1\) is carried to the north pole \(N\). At the shared point \(N\) itself the function and the geometry are defined but nothing more is claimed: the value there is the assigned marked value \(1\) of Remark&#160;<a href="sect0001.html#rmk:infty-marked">1.7</a> — as real \(s\to +\infty \), \(\zeta (s)\to 1\), the one genuine limit — and neither continuity nor differentiability at \(N\) is asserted or used by the argument. </p>
 <div class="definition_thmwrapper theorem-style-definition" id="def:zeta_O">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
@@ -771,7 +798,7 @@
 </li>
   <li><p>for \(s=1\) (the simple pole, Definition&#160;<a href="sect0001.html#def:zeta-Cstar">1.6</a>):&#8195;\(\zeta _{\mathbb {O}^{*}}(1):=\infty =N\); </p>
 </li>
-  <li><p>for \(s=\infty =N\):&#8195;\(\zeta _{\mathbb {O}^{*}}(\infty ):=\zeta _{\mathbb {C}^{*}}(\infty )=1\). </p>
+  <li><p>for \(s=\infty =N\):&#8195;\(\zeta _{\mathbb {O}^{*}}(\infty ):=\zeta _{\mathbb {C}^{*}}(\infty )=1\), the assigned marked value of Remark&#160;<a href="sect0001.html#rmk:infty-marked">1.7</a>: as real \(s\to +\infty \), \(\zeta (s)\to 1\), and the definition asserts the value only — neither continuity nor differentiability of \(\zeta _{\mathbb {O}^{*}}\) at \(N\) is claimed here or used anywhere in the argument. </p>
 </li>
 </ul>
 
@@ -791,7 +818,7 @@
 
     <a class="icon proof" href="sect0002.html#prop:well-defined">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000022"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0002.html#a0000000031"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -846,7 +873,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000022">
+<div class="proof_wrapper" id="a0000000031">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -862,7 +889,7 @@
 	
 	2
 	]
-</span>; Definition&#160;<a href="sect0001.html#def:zeta-Cstar">1.6</a>), writing \(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma )=a+bi\) gives \(\varphi _{-v}(a-bi)=a+(-b)(-v)=a+bv=\varphi _v(a+bi)\): the two sign reversals, one from conjugating the input, one from the reversed identification, cancel. The remaining cases carry no ambiguity: for real \(s\neq 1\), \(\zeta _{\mathbb {O}^{*}}(s)=\zeta (s)\in \mathbb {R}\subseteq \mathbb {C}_v^{*}\) for every \(v\); at \(s=1\) the value is the single point \(\infty =N\); and at \(s=\infty =N\) the value is \(\zeta _{\mathbb {C}^{*}}(\infty )=1\in \mathbb {R}\), again the same for every \(v\) since each \(\varphi _v\) fixes \(\mathbb {R}\) pointwise. </p>
+</span>; Definition&#160;<a href="sect0001.html#def:zeta-Cstar">1.6</a>), writing \(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma )=a+bi\) gives \(\varphi _{-v}(a-bi)=a+(-b)(-v)=a+bv=\varphi _v(a+bi)\): the two sign reversals, one from conjugating the input, one from the reversed identification, cancel. The remaining cases carry no ambiguity: for real \(s\neq 1\), \(\zeta _{\mathbb {O}^{*}}(s)=\zeta (s)\in \mathbb {R}\subseteq \mathbb {C}_v^{*}\) for every \(v\); at \(s=1\) the value is the single point \(\infty =N\); and at \(s=\infty =N\) the value is \(\zeta _{\mathbb {C}^{*}}(\infty )=1\in \mathbb {R}\), again the same for every \(v\) since each \(\varphi _v\) fixes \(\mathbb {R}\) pointwise. Well-definedness at \(N\) is a statement about the value, not about regularity: the assigned marked value \(1\) lies in \(\mathbb {R}\), which every slice sphere contains, so it is unambiguous across all slices, and the function and the geometry are thereby defined at \(N\) while continuity and differentiability there are neither claimed nor used (Remark&#160;<a href="sect0001.html#rmk:infty-marked">1.7</a>). </p>
 
   </div>
 </div>
@@ -930,7 +957,7 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p>   \(\mathcal R:=\mathcal O_{\mathbb {O}^{*}}\) is the set of all slice-regular functions \(f:\mathbb {O}^{*}\to \mathbb {O}^{*}\) that are slice preserving (Definition&#160;<a href="sect0002.html#def:slice-preserving">3.5</a>), \(f(\Omega _v)\subseteq \mathbb {C}_v^{*}\) for all \(v\in S^6\), equipped with pointwise addition and the regular (\(\ast \)) product. </p>
+  <p>   \(\mathcal R:=\mathcal O_{\mathbb {O}^{*}}\) is the set of all slice-preserving functions \(f:\mathbb {O}^{*}\to \mathbb {O}^{*}\) (Definition&#160;<a href="sect0002.html#def:slice-preserving">3.5</a>), \(f(\Omega _v)\subseteq \mathbb {C}_v^{*}\) for all \(v\in S^6\), slice regular away from their marked points — the poles, where the value is \(\infty \), and the shared point \(N\) (Remark&#160;<a href="sect0001.html#rmk:infty-marked">1.7</a>) — equipped with pointwise addition and the regular (\(\ast \)) product. </p>
 
   </div>
 </div>
@@ -1001,7 +1028,7 @@
 
     <a class="icon proof" href="sect0002.html#prop:R-comm-ring">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000023"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0002.html#a0000000032"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1056,7 +1083,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000023">
+<div class="proof_wrapper" id="a0000000032">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1082,7 +1109,7 @@
 
     <a class="icon proof" href="sect0002.html#prop:R-domain">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000024"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0002.html#a0000000033"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1135,7 +1162,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000024">
+<div class="proof_wrapper" id="a0000000033">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1244,7 +1271,7 @@
   </div>
   <div class="theorem_thmcontent">
   <p>   The exponential \(\exp :\mathbb {O}\to \mathbb {O}\setminus \{ 0\} \), \(\exp (q)=\sum _{k\ge 0}q^{k}/k!\) (powers well defined by Corollary&#160;<a href="sect0002.html#cor:powers">2.3</a>), is a slice-regular, slice-preserving entire function (Definition&#160;<a href="sect0002.html#def:slice-preserving">3.5</a>), given on each slice by </p>
-<div class="displaymath" id="a0000000025">
+<div class="displaymath" id="a0000000034">
   \[  \exp (x+Iy)=e^{x}(\cos y+I\sin y),\qquad x,y\in \mathbb {R},\  I\in S^6 .  \]
 </div>
 <p> Consequently \(|\exp q|=e^{\operatorname{Re}q}\) depends only on the real part, and \(\exp \) is nowhere zero. </p>
@@ -1343,7 +1370,7 @@
   </div>
   <div class="theorem_thmcontent">
   <p>   Let \(T:\mathbb {O}\to \mathbb {O}\times \operatorname{Im}\mathbb {O}\), \(T(x+Iy)=(\sinh x\cos y+I\sinh x\sin y,\  Iy)\), and \(\mathbb {O}^{+}=\{ q:\operatorname{Re}q{\gt}0\} \). The <em>logarithm manifold</em> is \(E^{+}_{\mathbb {O}}:=T(\mathbb {O}^{+})\), the semi-helicoidal hypercomplex \(8\)-manifold; equivalently it is the image of the exponential graph, parametrised by the <em>\(E^{+}_{\mathbb {O}}\)-exponential</em> </p>
-<div class="displaymath" id="a0000000026">
+<div class="displaymath" id="a0000000035">
   \[  E:\mathbb {O}\longrightarrow E^{+}_{\mathbb {O}}\subset \mathbb {O}\times \operatorname{Im}\mathbb {O},\qquad E(x+Iy)=(\exp (x+Iy),\, Iy)=(e^{x}\cos y+Ie^{x}\sin y,\  Iy),  \]
 </div>
 <p> an immersion and a diffeomorphism, with inverse the <em>\(E^{+}_{\mathbb {O}}\)-logarithm</em> \(L:E^{+}_{\mathbb {O}}\to \mathbb {O}\), \(L(q,p)=\log |q|+p\) (here \(p=\mathrm{Arg}(q)\)). Writing \(\pi \) for the projection to the first factor, \(\pi \circ E=\exp \) (Theorem&#160;<a href="sect0002.html#thm:slice-exp">6.1</a>). The manifold \(E^{+}_{\mathbb {O}}\) is an adapted blow-up of \(\mathbb {O}\) along the real axis. Its projection \(\pi :E^{+}_{\mathbb {O}}\to \mathbb {O}\setminus \{ 0\} \) has the degenerate real fibres responsible for the failure of covering and openness. The blow-up unwraps the multivalued logarithm into the single-valued \(L\), and a branch of the hypercomplex logarithm is \(\log _{\mathbb {O}}=L\circ (\pi |_{\Omega })^{-1}\) on any path-connected \(\Omega \subset E^{+}_{\mathbb {O}}\) on which \(\pi |_{\Omega }\) is injective. </p>
@@ -1416,7 +1443,7 @@
         </div>
   </div>
   <div class="lemma_thmcontent">
-  <p>   <em>Sourced.</em> With \(\pi \) the first-factor projection, \(\pi \circ E=\exp \) <span class="upshape">(<span class="cite">
+  <p>   With \(\pi \) the first-factor projection, \(\pi \circ E=\exp \) <span class="upshape">(<span class="cite">
 	[
 	<a href="part-stack.html#VS" >17</a>
 	, 
@@ -1442,7 +1469,7 @@
 	]
 </span>)</span>. </p>
 <p><em>Proved from the slice form.</em> For \(r{\gt}0\), </p>
-<div class="displaymath" id="a0000000027">
+<div class="displaymath" id="a0000000036">
   \[  \exp ^{-1}(-r)=\bigl\{ \, \log r+I(2k{+}1)\pi :\  I\in S^6,\  k\in \mathbb {Z}\, \bigr\} :  \]
 </div>
 <p> by Theorem&#160;<a href="sect0002.html#thm:slice-exp">6.1</a>, \(\exp (x+Iy)=e^{x}\cos y+Ie^{x}\sin y=-r\) forces \(e^{x}\sin y=0\), hence \(y\in \pi \mathbb {Z}\); negativity of the value forces \(y=(2k{+}1)\pi \) and \(x=\log r\); the direction \(I\) is unconstrained. The fibre is thus indexed by the single real <em>level</em> \(\log r=\log |{-}r|\) and, within it, by the odd winding indices \(2k{+}1\) carried as band data (the winding lift, Theorem&#160;<a href="sect0002.html#thm:winding-lift">6.5</a>; <span class="cite">
@@ -1453,11 +1480,11 @@
 	
 	5.21
 	]
-</span>). The fibre formula itself appears, stated without proof as Preface motivation, in <span class="cite">
+</span>). The fibre formula also appears as Preface motivation in <span class="cite">
 	[
 	<a href="part-stack.html#VS" >17</a>
 	]
-</span> (p.&#160;972); the slice-form derivation above is the load-bearing statement. </p>
+</span> (p.&#160;972); the slice-form derivation above proves it. </p>
 
   </div>
 </div>
@@ -1534,15 +1561,15 @@
   </div>
   <div class="definition_thmcontent">
   <p>  A slice-preserving section \(A\) carries each slice Riemann sphere into itself, </p>
-<div class="displaymath" id="a0000000028">
+<div class="displaymath" id="a0000000037">
   \[  A(\mathbb {C}_v^{*})\subseteq \mathbb {C}_v^{*}=S^2_v\qquad (v\in S^6),  \]
 </div>
 <p> so its restriction to a slice is a holomorphic self-map of that slice sphere, </p>
-<div class="displaymath" id="a0000000029">
+<div class="displaymath" id="a0000000038">
   \[  A_v:=\varphi _v^{-1}\circ A\circ \varphi _v:\  \mathbb {C}^{*}\longrightarrow \mathbb {C}^{*},  \]
 </div>
 <p> through the identification \(\varphi _v:\mathbb {C}^{*}\xrightarrow {\sim }\mathbb {C}_v^{*}\) of Definition&#160;<a href="sect0002.html#def:slices">2.4</a>. The <em>\(I\)-independent lift</em> is the fact that this holomorphic stem is the <em>same</em> for every \(v\): there is one holomorphic \(A_\circ :\mathbb {C}^{*}\to \mathbb {C}^{*}\) with </p>
-<div class="displaymath" id="a0000000030">
+<div class="displaymath" id="a0000000039">
   \[  A|_{\mathbb {C}_v^{*}}=\varphi _v\circ A_\circ \circ \varphi _v^{-1}\qquad \text{for all }v\in S^6  \]
 </div>
 <p> (Wang <span class="cite">
@@ -1571,7 +1598,7 @@
 	2.2
 	]
 </span>): </p>
-<div class="displaymath" id="a0000000031">
+<div class="displaymath" id="a0000000040">
   \[  A(x+Iy)=F_1(x+iy)+I\, F_2(x+iy),\qquad F_1,F_2\  \mathbb {R}\text{-valued}.  \]
 </div>
 <p> It is this single \(I\)-independent slice stem that makes a slice-preserving section \(G_2\)-equivariant, hence blind to the \(G_2\)-orbit direction (Definition&#160;<a href="part-stack.html#def:section-map">9.2</a>). </p>
@@ -1655,11 +1682,11 @@
   </div>
   <div class="theorem_thmcontent">
   <p>   Let \(\gamma :[a,b]\to \mathbb {O}\setminus \{ 0\} \) be a path <span class="upshape">(</span>on each slice \(\mathbb {C}_v\) this is the classical complex continuation<span class="upshape">)</span>. A <em>continuation of the hypercomplex logarithm along \(\gamma \)</em> is a path \(\tilde\gamma :[a,b]\to \mathbb {O}\) with \(\exp \circ \tilde\gamma =\gamma \), and a <em>lift of \(\gamma \)</em> to the logarithm manifold \(E^{+}_{\mathbb {O}}\) <span class="upshape">(</span>Theorem&#160;<a href="sect0002.html#thm:log-manifold">6.2</a><span class="upshape">)</span> is a path \(\Gamma :[a,b]\to E^{+}_{\mathbb {O}}\) with \(\mathrm{pr}_1\circ \Gamma =\gamma \): </p>
-<div class="displaymath" id="a0000000032">
+<div class="displaymath" id="a0000000041">
   \[  \text{[commutative diagram -- see the PDF / the master file]}\qquad \qquad \text{[commutative diagram -- see the PDF / the master file]} \]
 </div>
 <p> The two data are <em>equivalent</em>: a lift \(\Gamma \) exists if and only if a continuation \(\tilde\gamma \) exists, and they correspond by </p>
-<div class="displaymath" id="a0000000033">
+<div class="displaymath" id="a0000000042">
   \[  \tilde\gamma =L\circ \Gamma ,\qquad \Gamma =(\exp \circ \tilde\gamma ,\  \operatorname{Im}\tilde\gamma ),  \]
 </div>
 <p> where \(L\) is the \(E^{+}_{\mathbb {O}}\)-logarithm of Theorem&#160;<a href="sect0002.html#thm:log-manifold">6.2</a> <span class="upshape">(</span><span class="cite">
@@ -1679,7 +1706,7 @@
 	5.11
 	]
 </span><span class="upshape">)</span>: </p>
-<div class="displaymath" id="a0000000034">
+<div class="displaymath" id="a0000000043">
   \[  \text{[commutative diagram -- see the PDF / the master file]} \]
 </div>
 
@@ -1809,7 +1836,7 @@
 
     <a class="icon proof" href="sect0002.html#thm:slice-pres">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000035"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0002.html#a0000000044"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1862,7 +1889,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000035">
+<div class="proof_wrapper" id="a0000000044">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1888,7 +1915,7 @@
 
     <a class="icon proof" href="sect0002.html#thm:zeta-in-R">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000036"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0002.html#a0000000045"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1945,7 +1972,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000036">
+<div class="proof_wrapper" id="a0000000045">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -2033,7 +2060,7 @@
 
     <a class="icon proof" href="sect0002.html#thm:G2-equiv">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000037"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0002.html#a0000000046"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -2086,7 +2113,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000037">
+<div class="proof_wrapper" id="a0000000046">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -2095,7 +2122,7 @@
   </div>
   <div class="proof_content">
   <p>For \(s\in \mathbb {R}\), \(g\cdot s=s\) and \(\zeta _{\mathbb {O}^{*}}(s)\in \mathbb {R}\) is fixed, so both sides equal \(\zeta _{\mathbb {O}^{*}}(s)\). For a non-real \(s=\sigma +\gamma v\) (\(v\in S^6\), \(\gamma {\gt}0\)), \(g\) carries the slice \(\mathbb {C}_v\) to the slice \(\mathbb {C}_{g(v)}\) by the isometric relabelling \(\varphi _{g(v)}=g\circ \varphi _v\) (Definition&#160;<a href="sect0002.html#def:G2">7.3</a>). Since \(\zeta _{\mathbb {O}^{*}}\) is defined slicewise by the same \(\zeta _{\mathbb {C}^{*}}\) read through \(\varphi _v\) (Definition&#160;<a href="sect0002.html#def:zeta_O">4.1</a>(i)), </p>
-<div class="displaymath" id="a0000000038">
+<div class="displaymath" id="a0000000047">
   \[  \zeta _{\mathbb {O}^{*}}(g\cdot s)=\varphi _{g(v)}\bigl(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma )\bigr) =g\bigl(\varphi _{v}(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma ))\bigr)=g\cdot \zeta _{\mathbb {O}^{*}}(s).  \]
 </div>
 
@@ -2208,7 +2235,7 @@
 
     <a class="icon proof" href="sect0002.html#thm:zero-equivalence">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000039"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0002.html#a0000000048"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -2228,7 +2255,7 @@
           
           <li><a href="sect0002.html#thm:slice-pres">Theorem 7.1</a></li>
           
-          <li><a href="sect0001.html#lem:zero-Cstar">Lemma 1.7</a></li>
+          <li><a href="sect0001.html#lem:zero-Cstar">Lemma 1.8</a></li>
           
         </ul>
     
@@ -2262,14 +2289,14 @@
   </div>
   <div class="theorem_thmcontent">
   <p>   Let \(\rho =\sigma +i\gamma \in \mathbb {C}^{*}\). For every \(v\in S^6\), </p>
-<div class="displaymath" id="a0000000040">
+<div class="displaymath" id="a0000000049">
   \[  \zeta _{\mathbb {O}^{*}}(\sigma +\gamma v)=0\quad \Longleftrightarrow \quad \zeta _{\mathbb {C}^{*}}(\rho )=0 .  \]
 </div>
-<p> Equivalently: a non-real \(s\in \mathbb {O}^{*}\) is a zero of \(\zeta _{\mathbb {O}^{*}}\) if and only if its slice coordinate \(\varphi _v^{-1}(s)\) is a zero of \(\zeta _{\mathbb {C}^{*}}\); by Lemma&#160;<a href="sect0001.html#lem:zero-Cstar">1.7</a> these are exactly the nontrivial zeros of the classical \(\zeta \). </p>
+<p> Equivalently: a non-real \(s\in \mathbb {O}^{*}\) is a zero of \(\zeta _{\mathbb {O}^{*}}\) if and only if its slice coordinate \(\varphi _v^{-1}(s)\) is a zero of \(\zeta _{\mathbb {C}^{*}}\); by Lemma&#160;<a href="sect0001.html#lem:zero-Cstar">1.8</a> these are exactly the nontrivial zeros of the classical \(\zeta \). </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000039">
+<div class="proof_wrapper" id="a0000000048">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -2281,7 +2308,7 @@
 	[
 	<a href="part-stack.html#VS" >17</a>
 	]
-</span>). An isomorphism is injective and sends \(0\) to \(0\), so \(\varphi _v(z)=0\iff z=0\); with \(z=\zeta _{\mathbb {C}^{*}}(\rho )\) this gives both implications. (Slice preservation, Theorem&#160;<a href="sect0002.html#thm:slice-pres">7.1</a>, is what places the value in \(\mathbb {C}_v^{*}\) so that \(\varphi _v^{-1}\) applies on the non-real side.) The final clause is Lemma&#160;<a href="sect0001.html#lem:zero-Cstar">1.7</a>. </p>
+</span>). An isomorphism is injective and sends \(0\) to \(0\), so \(\varphi _v(z)=0\iff z=0\); with \(z=\zeta _{\mathbb {C}^{*}}(\rho )\) this gives both implications. (Slice preservation, Theorem&#160;<a href="sect0002.html#thm:slice-pres">7.1</a>, is what places the value in \(\mathbb {C}_v^{*}\) so that \(\varphi _v^{-1}\) applies on the non-real side.) The final clause is Lemma&#160;<a href="sect0001.html#lem:zero-Cstar">1.8</a>. </p>
 
   </div>
 </div>
@@ -2299,7 +2326,7 @@
 
     <a class="icon proof" href="sect0002.html#thm:zero-spheres">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000041"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0002.html#a0000000050"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -2361,7 +2388,7 @@
   </div>
   <div class="theorem_thmcontent">
   <p>   For a nontrivial zero \(\rho =\sigma +i\gamma \) of \(\zeta _{\mathbb {C}^{*}}\) (so \(\gamma {\gt}0\)) set </p>
-<div class="displaymath" id="a0000000042">
+<div class="displaymath" id="a0000000051">
   \[  S_\rho =\{ \sigma +\gamma v:v\in S^6\} =\sigma +\gamma \, S^6\subset \mathbb {O}.  \]
 </div>
 <p> Then: </p>
@@ -2386,7 +2413,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000041">
+<div class="proof_wrapper" id="a0000000050">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -2396,7 +2423,7 @@
   <div class="proof_content">
   <p>(i) The map \(v\mapsto \sigma +\gamma v\) is the affine map \(x\mapsto \sigma +\gamma x\) of \(\operatorname{Im}\mathbb {O}\cong \mathbb {R}^7\) restricted to \(S^6\); with \(\gamma {\gt}0\) its image is the round \(6\)-sphere of radius \(\gamma \) centred at \(\sigma \). By \(G_2\)-equivariance (Theorem&#160;<a href="sect0002.html#thm:G2-equiv">7.4</a>) and transitivity of \(G_2\) on \(S^6\) (Theorem&#160;<a href="sect0002.html#thm:G2-S6">7.5</a>), \(G_2\cdot (\sigma +\gamma v_0)=\{ \sigma +\gamma \, g(v_0):g\in G_2\} =S_\rho \). So \(S_\rho \) <em>is</em> \(S^6\), scaled by \(\gamma \), translated to \(\sigma \), realized as a single \(G_2\)-orbit; no embedding or diffeomorphism is invoked. </p>
 <p>(ii) For any \(v\in S^6\), \(\zeta _{\mathbb {O}^{*}}(\sigma +\gamma v)=\varphi _v(\zeta _{\mathbb {C}^{*}}(\rho ))=\varphi _v(0)=0\) by the Zero Equivalence Theorem&#160;<a href="sect0002.html#thm:zero-equivalence">8.1</a>. And \(S_{\bar\rho }=\{ \sigma +\gamma (-v):v\in S^6\} =S_\rho \), since \(v\mapsto -v\) is a bijection of \(S^6\). </p>
-<p>(iii) For “\(\subseteq \)”: a non-real zero \(s=\sigma +\gamma v\) of \(\zeta _{\mathbb {O}^{*}}\) forces \(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma )=0\) by Theorem&#160;<a href="sect0002.html#thm:zero-equivalence">8.1</a>, so \(s\in S_\rho \) with \(\rho =\sigma +i\gamma \) nontrivial (Lemma&#160;<a href="sect0001.html#lem:zero-Cstar">1.7</a>); “\(\supseteq \)” is (ii). Disjointness: if \(\sigma +\gamma v=\sigma '+\gamma 'w\), uniqueness of the real/imaginary parts gives \(\sigma =\sigma '\) and \(\gamma v=\gamma 'w\), whence \(\gamma =\gamma '\) (taking norms, \(|v|=|w|=1\)) and \(\{ \rho ',\bar\rho '\} =\{ \rho ,\bar\rho \} \); so two spheres coincide or are disjoint. </p>
+<p>(iii) For “\(\subseteq \)”: a non-real zero \(s=\sigma +\gamma v\) of \(\zeta _{\mathbb {O}^{*}}\) forces \(\zeta _{\mathbb {C}^{*}}(\sigma +i\gamma )=0\) by Theorem&#160;<a href="sect0002.html#thm:zero-equivalence">8.1</a>, so \(s\in S_\rho \) with \(\rho =\sigma +i\gamma \) nontrivial (Lemma&#160;<a href="sect0001.html#lem:zero-Cstar">1.8</a>); “\(\supseteq \)” is (ii). Disjointness: if \(\sigma +\gamma v=\sigma '+\gamma 'w\), uniqueness of the real/imaginary parts gives \(\sigma =\sigma '\) and \(\gamma v=\gamma 'w\), whence \(\gamma =\gamma '\) (taking norms, \(|v|=|w|=1\)) and \(\{ \rho ',\bar\rho '\} =\{ \rho ,\bar\rho \} \); so two spheres coincide or are disjoint. </p>
 <p>(iv) There are infinitely many spheres because \(\zeta \) has infinitely many nontrivial zeros (Corollary&#160;<a href="sect0001.html#cor:hadamard-infinitude">1.4</a>; also Hardy, Theorem&#160;<a href="sect0001.html#thm:hardy">1.5</a>). </p>
 
   </div>
@@ -2415,7 +2442,7 @@
 
     <a class="icon proof" href="sect0002.html#thm:rh-equiv">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000043"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0002.html#a0000000052"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -2475,7 +2502,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000043">
+<div class="proof_wrapper" id="a0000000052">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
