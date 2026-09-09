@@ -1,0 +1,98 @@
+%% AUTO-GENERATED from ../../Octonionic_RH_master.tex -- DO NOT EDIT.
+%% Edit the master file, then re-run scripts/extract_blueprint_content.py
+%% (rebuild.sh does this for you).
+%=====================================================================
+%  CONCENTRICITY OVER THE OCTONIONS -- MASTER
+%  Part 1: classical zeta facts (continuation, functional equation,
+%          infinite Euler product, infinite Hadamard product) -- cited.
+%  Part 2: slice-preserving theory, the ring R under the *-product, and the
+%          equivalence/translation theorems (concentric zero-spheres <=> RH).
+%  Part 3: the Concentricity Theorem. The base is
+%          B = PGL(2,R) \ltimes OnePoint(R) and the sphere world SphereWorld.
+%          Conditions C1--C3 determine one distinguished Mobius/exponential
+%          element; orbit--stabilizer carries its whole O*-valued action
+%          across the base. Its sphere projection is AsectionSlice, while
+%          the value-bearing AsectionFunctor A : B -> Grpd has normalized
+%          A-value states as fibres. Then T_A = Int_B A_A is formed. The
+%          readout is pi_0(Int_B R_A) = colim_B(pi_0 . R_A). The colimit performs the
+%          transport-generated identifications and yields one residue-C
+%          real-value singleton {c}, c in R. Hence the residue-C
+%          zero 6-spheres have common centre c and are concentric. Classical
+%          translation and the numerical identification c=1/2 are downstream.
+%=====================================================================
+
+
+
+% Vertical spacing.  Without \raggedbottom, a page that cannot fit an
+% unbreakable display or tikzcd stretches the glue between its paragraphs to
+% fill the height, which reads as a gap in the middle of the text.  This sends
+% the slack to the foot of the page instead.
+\raggedbottom
+% Let displays sit closer to a page break before being pushed to the next page.
+\predisplaypenalty=0
+\postdisplaypenalty=0
+
+%---------------------------------------------------------------------
+%  Macros
+%---------------------------------------------------------------------
+\newcommand{\OO}{\mathbb{O}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\Ostar}{\OO^{*}}
+\newcommand{\Cstar}{\CC^{*}}
+\newcommand{\zetaO}{\zeta_{\Ostar}}
+\newcommand{\zetaC}{\zeta_{\Cstar}}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\providecommand{\Gtwo}{G_2}
+
+% Conspicuous markers (visible in compiled output):
+\newcommand{\TODO}[1]{\medskip\noindent\textcolor{red}{\textbf{[TODO:} #1\textbf{]}}\medskip}
+\newcommand{\PROGRAM}[1]{\medskip\noindent\textcolor{red}{\textbf{[PROGRAM:} #1\textbf{]}}\medskip}
+\newcommand{\SOURCE}[1]{\textcolor{purple}{\small$\langle$source: #1$\rangle$}}
+\newcommand{\stag}[1]{\href{https://stacks.math.columbia.edu/tag/#1}{\texttt{#1}}}
+\providecommand{\Grpd}{\mathrm{Grpd}}
+\providecommand{\SphereWorld}{\mathrm{SphereWorld}}
+
+% Lean blueprint macros: no-ops when this file is compiled standalone; the
+% leanblueprint package redefines them when the dependency graph and the Lean
+% linkage are built. Keeping them here lets every statement carry its Lean
+% declaration and its dependencies without any Lean names appearing in the prose.
+\providecommand{\authorobject}[2]{}
+
+%---------------------------------------------------------------------
+%  Theorem environments (document-wide numbering)
+%---------------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{condition}[theorem]{Condition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\ifplastex
+\title{Concentric Zero-Spheres of a class of sections of the commutative ring $\mathcal R$ of slice preserving functions over the compactified Octonions with the Riemann Hypothesis as a corollary}
+\else
+\title{Concentric Zero-Spheres of a class of sections of the commutative ring $\mathcal R$\\ of slice preserving functions
+over the compactified Octonions\\[0.4em]
+\large
+with the Riemann Hypothesis as a corollary}
+\fi
+\author{Jesse Michael Paul\\[2pt]
+{\normalsize PhD Candidate, Department of Mathematics \& Statistics}\\
+{\normalsize University of North Carolina at Greensboro}}
+\hypersetup{pdfauthor={Jesse Michael Paul}}
+\date{June 2026}
+

@@ -1,111 +1,6 @@
-%=====================================================================
-%  CONCENTRICITY OVER THE OCTONIONS -- MASTER
-%  Part 1: classical zeta facts (continuation, functional equation,
-%          infinite Euler product, infinite Hadamard product) -- cited.
-%  Part 2: slice-preserving theory, the ring R under the *-product, and the
-%          equivalence/translation theorems (concentric zero-spheres <=> RH).
-%  Part 3: the Concentricity Theorem. The base is
-%          B = PGL(2,R) \ltimes OnePoint(R) and the sphere world SphereWorld.
-%          Conditions C1--C3 determine one distinguished Mobius/exponential
-%          element; orbit--stabilizer carries its whole O*-valued action
-%          across the base. Its sphere projection is AsectionSlice, while
-%          the value-bearing AsectionFunctor A : B -> Grpd has normalized
-%          A-value states as fibres. Then T_A = Int_B A_A is formed. The
-%          readout is pi_0(Int_B R_A) = colim_B(pi_0 . R_A). The colimit performs the
-%          transport-generated identifications and yields one residue-C
-%          real-value singleton {c}, c in R. Hence the residue-C
-%          zero 6-spheres have common centre c and are concentric. Classical
-%          translation and the numerical identification c=1/2 are downstream.
-%=====================================================================
-
-\documentclass[11pt]{article}
-
-\usepackage[utf8]{inputenc}
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{stmaryrd}   % \fatsemi — diagrammatic composition
-\usepackage{amscd}
-\usepackage{tikz-cd}
-\usepackage{enumitem}
-\usepackage{xcolor}
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
-
-% Vertical spacing.  Without \raggedbottom, a page that cannot fit an
-% unbreakable display or tikzcd stretches the glue between its paragraphs to
-% fill the height, which reads as a gap in the middle of the text.  This sends
-% the slack to the foot of the page instead.
-\raggedbottom
-% Let displays sit closer to a page break before being pushed to the next page.
-\predisplaypenalty=0
-\postdisplaypenalty=0
-
-%---------------------------------------------------------------------
-%  Macros
-%---------------------------------------------------------------------
-\newcommand{\OO}{\mathbb{O}}
-\newcommand{\CC}{\mathbb{C}}
-\newcommand{\RR}{\mathbb{R}}
-\newcommand{\HH}{\mathbb{H}}
-\newcommand{\ZZ}{\mathbb{Z}}
-\newcommand{\QQ}{\mathbb{Q}}
-\newcommand{\NN}{\mathbb{N}}
-\newcommand{\Ostar}{\OO^{*}}
-\newcommand{\Cstar}{\CC^{*}}
-\newcommand{\zetaO}{\zeta_{\Ostar}}
-\newcommand{\zetaC}{\zeta_{\Cstar}}
-\DeclareMathOperator{\Spec}{Spec}
-\DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\Aut}{Aut}
-\DeclareMathOperator{\re}{Re}
-\DeclareMathOperator{\im}{Im}
-\providecommand{\Gtwo}{G_2}
-
-% Conspicuous markers (visible in compiled output):
-\newcommand{\TODO}[1]{\medskip\noindent\textcolor{red}{\textbf{[TODO:} #1\textbf{]}}\medskip}
-\newcommand{\PROGRAM}[1]{\medskip\noindent\textcolor{red}{\textbf{[PROGRAM:} #1\textbf{]}}\medskip}
-\newcommand{\SOURCE}[1]{\textcolor{purple}{\small$\langle$source: #1$\rangle$}}
-\newcommand{\stag}[1]{\href{https://stacks.math.columbia.edu/tag/#1}{\texttt{#1}}}
-\providecommand{\Grpd}{\mathrm{Grpd}}
-\providecommand{\SphereWorld}{\mathrm{SphereWorld}}
-
-% Lean blueprint macros: no-ops when this file is compiled standalone; the
-% leanblueprint package redefines them when the dependency graph and the Lean
-% linkage are built. Keeping them here lets every statement carry its Lean
-% declaration and its dependencies without any Lean names appearing in the prose.
-\providecommand{\lean}[1]{}
-\providecommand{\leanok}{}
-\providecommand{\authorobject}[2]{}
-\providecommand{\notready}{}
-\providecommand{\mathlibok}{}
-\providecommand{\uses}[1]{}
-\providecommand{\proves}[1]{}
-
-%---------------------------------------------------------------------
-%  Theorem environments (document-wide numbering)
-%---------------------------------------------------------------------
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{condition}[theorem]{Condition}
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{example}[theorem]{Example}
-
-\title{Concentric Zero-Spheres of a class of sections of the commutative ring $\mathcal R$\\ of slice preserving functions
-over the compactified Octonions\\[0.4em]
-\large
-with the Riemann Hypothesis as a corollary}
-\author{Jesse Michael Paul\\[2pt]
-{\normalsize PhD Candidate, Department of Mathematics \& Statistics}\\
-{\normalsize University of North Carolina at Greensboro}}
-\hypersetup{pdfauthor={Jesse Michael Paul}}
-\date{June 2026}
-
-\begin{document}
+%% AUTO-GENERATED from ../../Octonionic_RH_master.tex -- DO NOT EDIT.
+%% Edit the master file, then re-run scripts/extract_blueprint_content.py
+%% (rebuild.sh does this for you).
 \maketitle
 
 \begin{quote}\small\itshape
@@ -729,15 +624,15 @@ $\gamma$} is a path $\tilde\gamma:[a,b]\to\OO$ with $\exp\circ\tilde\gamma=\gamm
 of $\gamma$} to the logarithm manifold $E^{+}_{\OO}$ \textup{(}Theorem~\ref{thm:log-manifold}\textup{)}
 is a path $\Gamma:[a,b]\to E^{+}_{\OO}$ with $\mathrm{pr}_1\circ\Gamma=\gamma$:
 \[
-\begin{tikzcd}[row sep=1.6em, column sep=2.6em]
+\ifplastex\text{[commutative diagram -- see the PDF / the master file]}\else \begin{tikzcd}[row sep=1.6em, column sep=2.6em]
 & \OO\\
 {[a,b]} \arrow[ur,"\tilde\gamma"] \arrow[r,"\gamma"'] & \OO\setminus\{0\} \arrow[u,"\exp"']
-\end{tikzcd}
+\end{tikzcd} \fi
 \qquad\qquad
-\begin{tikzcd}[row sep=1.6em, column sep=2.6em]
+\ifplastex\text{[commutative diagram -- see the PDF / the master file]}\else \begin{tikzcd}[row sep=1.6em, column sep=2.6em]
 & E^{+}_{\OO} \arrow[d,"\mathrm{pr}_1"]\\
 {[a,b]} \arrow[ur,"\Gamma"] \arrow[r,"\gamma"'] & \OO\setminus\{0\}
-\end{tikzcd}
+\end{tikzcd} \fi
 \]
 The two data are \emph{equivalent}: a lift $\Gamma$ exists if and only if a continuation
 $\tilde\gamma$ exists, and they correspond by
@@ -749,10 +644,10 @@ where $L$ is the $E^{+}_{\OO}$-logarithm of Theorem~\ref{thm:log-manifold}
 lift is taken on the universal cover $\exp:i\RR\to S^1$, as a continuous $\Gamma:i\RR\to E^{+}_{\OO}$
 with $\mathrm{pr}_1\circ\Gamma=\gamma\circ\exp$ \textup{(}\cite[Def.~5.11]{GPVwind}\textup{)}:
 \[
-\begin{tikzcd}[row sep=1.6em, column sep=2.6em]
+\ifplastex\text{[commutative diagram -- see the PDF / the master file]}\else \begin{tikzcd}[row sep=1.6em, column sep=2.6em]
 i\RR \arrow[r,"\Gamma"] \arrow[d,"\exp"'] & E^{+}_{\OO} \arrow[d,"\mathrm{pr}_1"]\\
 S^1 \arrow[r,"\gamma"'] & \OO\setminus\{0\}
-\end{tikzcd}
+\end{tikzcd} \fi
 \]
 \end{theorem}
 
@@ -1464,13 +1359,13 @@ factor, is this same map applied to a different matrix. Thus
 exponentiation is the homomorphism turning addition of logarithmic lifts into composition
 of the actual slice M\"obius maps --- recorded once, because every GPV lift below inhabits it:
 \[
-\begin{tikzcd}[column sep=huge]
+\ifplastex\text{[commutative diagram -- see the PDF / the master file]}\else \begin{tikzcd}[column sep=huge]
 \Gamma(t) \arrow[r,"\exp"] \arrow[d,"D"'] &
   v(t)\in\CC^{\times}
   \arrow[d,"u\mapsto\operatorname{cayleyProjective}(\operatorname{diag}(u{,}1))"] \\
 D(\Gamma(t)) \arrow[r,equal] &
   \operatorname{cayleyProjective}\big(\operatorname{diag}(v(t){,}1)\big)
-\end{tikzcd}
+\end{tikzcd} \fi
 \]
 The top row is the logarithmic lift; the bottom row is the M\"obius map it generates; the
 square commutes at every instant, and adding a winding $2\pi ik$ moves only the top row,
@@ -1504,11 +1399,11 @@ order. First the commuting triangle of Theorem~\ref{thm:log-manifold}, the
 GPV logarithm manifold: the $E^{+}_{\OO}$-exponential $E$ and the
 first-factor projection $\pi$ close over the exponential,
 \[
-\begin{tikzcd}[column sep=large,row sep=large]
+\ifplastex\text{[commutative diagram -- see the PDF / the master file]}\else \begin{tikzcd}[column sep=large,row sep=large]
 \OO \arrow[r,"E"] \arrow[dr,"\exp"'] &
 E^{+}_{\OO} \arrow[d,"\pi"]\\
 & \OO\setminus\{0\},
-\end{tikzcd}
+\end{tikzcd} \fi
 \qquad \pi\circ E=\exp.
 \]
 The target is $\OO\setminus\{0\}$ because the exponential is nowhere
@@ -1644,13 +1539,13 @@ when the source and target values agree, and $k$ is its winding integer. These a
 At each $t$ the lift equation
 passes through the matrix square:
 \[
-\begin{tikzcd}[column sep=huge,row sep=large]
+\ifplastex\text{[commutative diagram -- see the PDF / the master file]}\else \begin{tikzcd}[column sep=huge,row sep=large]
 \Gamma(t) \arrow[r,"\exp"] \arrow[d,"D"'] &
 v(t)\in\CC^\times
   \arrow[d,"{u\mapsto\operatorname{cayleyProjective}(\operatorname{diag}(u,1))}"]\\
 D(\Gamma(t)) \arrow[r,equal] &
 \operatorname{cayleyProjective}\bigl(\operatorname{diag}(v(t),1)\bigr).
-\end{tikzcd}
+\end{tikzcd} \fi
 \]
 Thus every point of the lift is already an action of the same kind as $D_A$.
 
@@ -1748,12 +1643,12 @@ evaluated. Its logarithms form the exponential fibre
 $\exp^{-1}(u_A)=\{\lambda_A+2\pi ik:\ k\in\ZZ\}$, and the function/group-element passage
 is the commuting square
 \[
-\begin{tikzcd}[column sep=large,row sep=large]
+\ifplastex\text{[commutative diagram -- see the PDF / the master file]}\else \begin{tikzcd}[column sep=large,row sep=large]
 z \arrow[r,"\exp"] \arrow[d,mapsto] & e^z\in\CC^\times \arrow[d,mapsto]\\
 M(z)=\operatorname{diag}(e^z,1)
   \arrow[r,"\operatorname{cayleyProjective}"'] &
 D(z)\in\operatorname{M\ddot ob}(\CC^*).
-\end{tikzcd}
+\end{tikzcd} \fi
 \]
 through which $M$ collapses the fibre to the one matrix
 \[
@@ -2962,11 +2857,11 @@ Applying it to $\Lambda_b$ gives $\lambda_b$. Equation
 \eqref{eq:fibre-read-naturality-hyp} says that for every $h:a\to b$ the
 square
 \[
-\begin{tikzcd}[column sep=huge,row sep=large]
+\ifplastex\text{[commutative diagram -- see the PDF / the master file]}\else \begin{tikzcd}[column sep=huge,row sep=large]
 \pi_0(F(a)) \arrow[r,"{\pi_0(F(h))}"] \arrow[d,"{\lambda_a}"'] &
 \pi_0(F(b)) \arrow[d,"{\lambda_b}"] \\
 X \arrow[r,"1_X"'] & X
-\end{tikzcd}
+\end{tikzcd} \fi
 \]
 commutes. These are precisely the naturality squares for
 \eqref{eq:general-component-read}.
@@ -3331,11 +3226,11 @@ Because the operations in $\mathcal R_A(a)$ are those of $\mathcal A_A(a)$,
 these two assignments preserve identities and composition and hence define
 a functor.  For a base arrow $h_2:a\to b$, the naturality square is
 \[
-\begin{tikzcd}[column sep=huge,row sep=large]
+\ifplastex\text{[commutative diagram -- see the PDF / the master file]}\else \begin{tikzcd}[column sep=huge,row sep=large]
 \mathcal R_A(a) \arrow[r,"\mathcal R_A(h_2)"] \arrow[d,hook,"\iota_{A,a}"'] &
 \mathcal R_A(b) \arrow[d,hook,"\iota_{A,b}"]\\
 \mathcal A_A(a) \arrow[r,"\mathcal A_A(h_2)"'] & \mathcal A_A(b),
-\end{tikzcd}
+\end{tikzcd} \fi
 \]
 Evaluated at an object, this square is equation
 \eqref{eq:residue-object-restriction}; evaluated at an arrow, it is equation
@@ -3371,9 +3266,9 @@ $\iota_{A,a}$ are full and faithful and assemble into the natural
 inclusion $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$, and the total
 inclusion
 \[
-\begin{tikzcd}[column sep=huge]
+\ifplastex\text{[commutative diagram -- see the PDF / the master file]}\else \begin{tikzcd}[column sep=huge]
 \int_{\mathcal B}\mathcal R_A \arrow[r, hook, "\int\iota_A"] & \int_{\mathcal B}\mathcal A_A=\mathcal T_A
-\end{tikzcd}
+\end{tikzcd} \fi
 \]
 is full and faithful: an isomorphism onto its image, which consists exactly of the
 selected residue states together with the same projective/M\"obius transports and
@@ -3811,10 +3706,10 @@ becomes the common real read of one component.
 For any fully faithful functor $F:\mathcal C\to\mathcal D$ there is a canonical roof through
 the image,
 \[
-\begin{tikzcd}[column sep=large]
+\ifplastex\text{[commutative diagram -- see the PDF / the master file]}\else \begin{tikzcd}[column sep=large]
 & \operatorname{Im}(F) \arrow[dl, "F^{-1}"'] \arrow[dr, hook, "j"] & \\
 \mathcal C & & \mathcal D
-\end{tikzcd}
+\end{tikzcd} \fi
 \]
 the backward leg being an isomorphism of categories onto the image and the forward leg the
 canonical inclusion. It is a general fact, available here for $\iota_A$ and for
@@ -3935,4 +3830,3 @@ theory}, in \emph{Fundamental Algebraic Geometry}, Math.\ Surveys Monogr.\ \text
 (arXiv:math/0412512); \S3.1 for the Grothendieck construction and categories fibered in groupoids.
 \end{thebibliography}
 
-\end{document}
