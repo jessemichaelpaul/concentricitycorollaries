@@ -171,6 +171,178 @@ theorem stabilizerPart_comp {X Y Z : GreatCircle.Base}
           orbitRep (CategoryTheory.ActionCategory.back X))
   group
 
+/-- Every north-stabilizer class occurs as the residual factor of an arrow
+in every hom-set of the base: the arrow with element `o_Y · s · o_X⁻¹`, the
+orbit--stabilizer factorization read backward.  This is the availability of
+the residual Cayley factor consumed by the choice (M) of master
+`lem:c-residue-transitive`. -/
+theorem stabilizerPart_realized (X Y : GreatCircle.Base)
+    (s : GreatCircle.NorthStabilizer) :
+    ∃ f : X ⟶ Y, GreatCircle.stabilizerPart f = s := by
+  have haction :
+      (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back Y) * s.1 *
+        (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back X))⁻¹) •
+        CategoryTheory.ActionCategory.back X =
+      CategoryTheory.ActionCategory.back Y := by
+    have hX : (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back X))⁻¹ •
+        CategoryTheory.ActionCategory.back X =
+        (OnePoint.infty : GreatCircle.Point) := by
+      rw [inv_smul_eq_iff]
+      exact (GreatCircle.orbitRep_spec _).symm
+    have hs' : (s : GreatCircle.Aut) •
+        (OnePoint.infty : GreatCircle.Point) = OnePoint.infty := by
+      have hmem := s.2
+      rwa [MulAction.mem_stabilizer_iff] at hmem
+    rw [mul_smul, mul_smul, hX, hs']
+    exact GreatCircle.orbitRep_spec _
+  refine ⟨⟨GreatCircle.orbitRep (CategoryTheory.ActionCategory.back Y) * s.1 *
+    (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back X))⁻¹,
+    haction⟩, ?_⟩
+  exact (GreatCircle.stabilizerPart_unique _ s (by group)).symm
+
+/-! ## Transitivity of the base action (master `lem:projective-base-transitive`)
+
+The master's proof displays one class per pair of objects, each value
+computed by the action rules.  The witnesses are the standing matrices
+`toNGL` and `orbitGL` together with the displayed translation class. -/
+
+/-- The translation class of the master's display: it carries `a` to
+`a + t` on the real line. -/
+def translationGL (t : ℝ) : GL (Fin 2) ℝ :=
+  Matrix.GeneralLinearGroup.mkOfDetNeZero !![1, t; 0, 1] (by
+    rw [Matrix.det_fin_two_of]
+    norm_num)
+
+@[simp] theorem translationGL_val (t : ℝ) :
+    (translationGL t).val = !![1, t; 0, 1] := rfl
+
+theorem translationGL_smul (a t : ℝ) :
+    translationGL t • ((a : ℝ) : GreatCircle.Point) =
+      ((a + t : ℝ) : GreatCircle.Point) := by
+  rw [OnePoint.smul_some_eq_ite]
+  simp [translationGL_val, add_comm]
+
+/-- The master's third displayed class: it carries the point at infinity
+to `b`, its value read by the rule at infinity. -/
+def fromInftyGL (b : ℝ) : GL (Fin 2) ℝ :=
+  Matrix.GeneralLinearGroup.mkOfDetNeZero !![b, 1; 1, 0] (by
+    rw [Matrix.det_fin_two_of]
+    norm_num)
+
+@[simp] theorem fromInftyGL_val (b : ℝ) :
+    (fromInftyGL b).val = !![b, 1; 1, 0] := rfl
+
+theorem fromInftyGL_smul_infty (b : ℝ) :
+    fromInftyGL b • (OnePoint.infty : GreatCircle.Point) =
+      ((b : ℝ) : GreatCircle.Point) := by
+  rw [OnePoint.smul_infty_eq_ite]
+  simp [fromInftyGL_val]
+
+/-- The base action is transitive: one displayed class joins each pair of
+points --- the master's four computed cases. -/
+instance : MulAction.IsPretransitive GreatCircle.Aut GreatCircle.Point where
+  exists_smul_eq x y := by
+    induction x using OnePoint.rec with
+    | infty =>
+        induction y using OnePoint.rec with
+        | infty => exact ⟨1, one_smul _ _⟩
+        | coe b =>
+            refine ⟨Matrix.ProjGenLinGroup.mk (fromInftyGL b), ?_⟩
+            rw [GreatCircle.mk_smul]
+            exact fromInftyGL_smul_infty b
+    | coe a =>
+        induction y using OnePoint.rec with
+        | infty =>
+            refine ⟨Matrix.ProjGenLinGroup.mk (toNGL a), ?_⟩
+            rw [GreatCircle.mk_smul]
+            exact toNGL_smul a
+        | coe b =>
+            refine ⟨Matrix.ProjGenLinGroup.mk (translationGL (b - a)), ?_⟩
+            rw [GreatCircle.mk_smul, translationGL_smul]
+            norm_num
+
+/-- master `lem:projective-base-transitive`: the projective base is a
+transitive groupoid --- the hom-set between any two objects is nonempty. -/
+theorem base_transitive (X Y : GreatCircle.Base) : Nonempty (X ⟶ Y) := by
+  obtain ⟨g, hg⟩ := MulAction.exists_smul_eq GreatCircle.Aut
+    (CategoryTheory.ActionCategory.back X)
+    (CategoryTheory.ActionCategory.back Y)
+  exact ⟨⟨g, hg⟩⟩
+
+/-! ## Transitivity of each slice M\"obius groupoid (master `lem:mobius-transitive`)
+
+The same four computed cases on the fixed slice sphere, with the master's
+displayed complex matrices. -/
+
+/-- The complex translation class of the master's display. -/
+def translationGLC (t : ℂ) : GL (Fin 2) ℂ :=
+  Matrix.GeneralLinearGroup.mkOfDetNeZero !![1, t; 0, 1] (by
+    rw [Matrix.det_fin_two_of]
+    norm_num)
+
+@[simp] theorem translationGLC_val (t : ℂ) :
+    (translationGLC t).val = !![1, t; 0, 1] := rfl
+
+theorem translationGLC_smul (u t : ℂ) :
+    translationGLC t • ((u : ℂ) : OnePoint ℂ) =
+      ((u + t : ℂ) : OnePoint ℂ) := by
+  rw [OnePoint.smul_some_eq_ite]
+  simp [translationGLC_val, add_comm]
+
+/-- The master's second displayed class: it carries `u` to the point at
+infinity, its denominator vanishing exactly at `u`. -/
+def toInftyGLC (u : ℂ) : GL (Fin 2) ℂ :=
+  Matrix.GeneralLinearGroup.mkOfDetNeZero !![0, 1; 1, -u] (by
+    rw [Matrix.det_fin_two_of]
+    norm_num)
+
+@[simp] theorem toInftyGLC_val (u : ℂ) :
+    (toInftyGLC u).val = !![0, 1; 1, -u] := rfl
+
+theorem toInftyGLC_smul (u : ℂ) :
+    toInftyGLC u • ((u : ℂ) : OnePoint ℂ) = OnePoint.infty := by
+  rw [OnePoint.smul_some_eq_ite]
+  simp [toInftyGLC_val]
+
+/-- The master's third displayed class: it carries the point at infinity
+to `v`, its value read by the rule at infinity. -/
+def fromInftyGLC (v : ℂ) : GL (Fin 2) ℂ :=
+  Matrix.GeneralLinearGroup.mkOfDetNeZero !![v, 1; 1, 0] (by
+    rw [Matrix.det_fin_two_of]
+    norm_num)
+
+@[simp] theorem fromInftyGLC_val (v : ℂ) :
+    (fromInftyGLC v).val = !![v, 1; 1, 0] := rfl
+
+theorem fromInftyGLC_smul_infty (v : ℂ) :
+    fromInftyGLC v • (OnePoint.infty : OnePoint ℂ) = ((v : ℂ) : OnePoint ℂ) := by
+  rw [OnePoint.smul_infty_eq_ite]
+  simp [fromInftyGLC_val]
+
+/-- master `lem:mobius-transitive`: any two points of a slice Riemann
+sphere are joined by an arrow of its M\"obius action groupoid --- one
+displayed class per pair, the master's four computed cases. -/
+theorem moebius_transitive (u v : OnePoint ℂ) :
+    ∃ m : Moebius, m.val u = v := by
+  induction u using OnePoint.rec with
+  | infty =>
+      induction v using OnePoint.rec with
+      | infty => exact ⟨1, rfl⟩
+      | coe b =>
+          refine ⟨Moebius.of (fromInftyGLC b), ?_⟩
+          rw [Moebius.of_apply]
+          exact fromInftyGLC_smul_infty b
+  | coe a =>
+      induction v using OnePoint.rec with
+      | infty =>
+          refine ⟨Moebius.of (toInftyGLC a), ?_⟩
+          rw [Moebius.of_apply]
+          exact toInftyGLC_smul a
+      | coe b =>
+          refine ⟨Moebius.of (translationGLC (b - a)), ?_⟩
+          rw [Moebius.of_apply, translationGLC_smul]
+          norm_num
+
 end GreatCircle
 
 namespace ASection
@@ -237,110 +409,95 @@ element, not two actions requiring a comparison theorem. -/
   exact GreatCircle.diskDiagonalMoebiusHom_fixes_cayley_zero
     A.distinguishedPoleUnit
 
-/-- The A-positioned frame over a projective-base object.  The orbit
-representative moves the common witness N to the object's footpoint, while
-the one C1/C2/C3 element supplies A's action in that frame. -/
-def projectiveObjectFrame (A : ASection) (X : GreatCircle.Base) : Moebius :=
+/-- The Cayley-projective orbit position over a base object: the
+representative `o_b` of master `def:orbit-reps`, Cayley conjugated.  It
+serves the presentation layer of `ASectionFunctor`; the frames of
+`A^slice` below are the A-specific actions themselves. -/
+def projectiveOrbitPosition (X : GreatCircle.Base) : Moebius :=
   GreatCircle.cayleyProjective
-      (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back X)) *
-    A.distinguishedDiskAction
+    (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back X))
 
-/-- The object-side action at a base footpoint.  The orbit representative
-positions A's one distinguished Euler–Weierstrass element at `X`; applying
-the already-proved Möbius action gives its simultaneous action on the whole
-`SphereWorld` continuum.  Its object map fixes each world because the
-distinguished element moves inside each Riemann sphere rather than relabelling
-the slice direction. -/
+/-- Position one disk action over a projective-base object by the orbit
+representative. -/
+def projectiveTapeFrame (X : GreatCircle.Base) (d : Moebius) : Moebius :=
+  projectiveOrbitPosition X * d
+
+/-- The pole-cancelled factor `g_A` at a base point, as a unit of `ℂ`
+(master `def:DA`): at a finite point where the factor is nonzero it is that
+value, the multiplier the A-specific action exponentiates there; at the
+pole it is `u_A`.  At the point at infinity and at the real zeros of the
+factor, which no A-specific transport reaches, the unit is `1`. -/
+noncomputable def poleFactorUnit (A : ASection) (X : GreatCircle.Base) : ℂˣ :=
+  OnePoint.rec (C := fun _ => ℂˣ) 1
+    (fun x : ℝ =>
+      if h : A.distinguishedPoleFactor (x : ℂ) = 0 then 1
+      else Units.mk0 (A.distinguishedPoleFactor (x : ℂ)) h)
+    (CategoryTheory.ActionCategory.back X)
+
+/-- At a finite base point where the pole-cancelled factor is nonzero, the
+unit is that value. -/
+theorem poleFactorUnit_coe (A : ASection) (x : ℝ)
+    (hx : A.distinguishedPoleFactor (x : ℂ) ≠ 0) :
+    A.poleFactorUnit ((x : GreatCircle.Point) : GreatCircle.Base) =
+      Units.mk0 (A.distinguishedPoleFactor (x : ℂ)) hx := by
+  show (if h : A.distinguishedPoleFactor (x : ℂ) = 0 then (1 : ℂˣ)
+    else Units.mk0 (A.distinguishedPoleFactor (x : ℂ)) h) = _
+  rw [dif_neg hx]
+
+/-- At the pole the unit is the multiplier `u_A`. -/
+theorem poleFactorUnit_pole (A : ASection) :
+    A.poleFactorUnit (projectivePole A) = A.distinguishedPoleUnit := by
+  apply Units.ext
+  rw [projectivePole, poleFactorUnit_coe A A.pole A.distinguishedPoleFactor_ne_zero]
+  rfl
+
+/-- master `def:aslice`, the object assignment: `A^slice(b)` is the
+A-specific disk action at the base point `b`, the value of the pole-cancelled
+factor there exponentiated in the diagonal matrix and Cayley conjugated
+(`def:cayley-disk`, `def:DA`).  At the pole it is `D_A`
+(`projectiveObjectFrame_pole`). -/
+noncomputable def projectiveObjectFrame (A : ASection) (X : GreatCircle.Base) : Moebius :=
+  GreatCircle.diskDiagonalMoebiusHom (A.poleFactorUnit X)
+
+/-- The object-side action at a base point: the A-specific disk action there,
+acting on the whole `SphereWorld` continuum at once.  Its object map fixes
+each world because the disk action moves inside each Riemann sphere rather
+than relabelling the slice direction. -/
 def projectiveObjectAction (A : ASection) (X : GreatCircle.Base) :
     SphereWorld ⥤ SphereWorld :=
   distinguishedWorldAction (projectiveObjectFrame A X)
 
-/-- At the north object the orbit representative is the identity, so the
-object frame is exactly A's distinguished Euler–Weierstrass element. -/
-@[simp] theorem projectiveObjectFrame_north (A : ASection) :
-    projectiveObjectFrame A
-        (GreatCircle.pointObj (OnePoint.infty : GreatCircle.Point)) =
-      A.distinguishedDiskAction := by
-  unfold projectiveObjectFrame
-  change GreatCircle.cayleyProjective
-      (GreatCircle.orbitRep (OnePoint.infty : GreatCircle.Point)) *
-        A.distinguishedDiskAction = A.distinguishedDiskAction
-  rw [GreatCircle.orbitRep_infty, map_one, one_mul]
+/-- master `lem:finite-pole-arrival` at the object assignment: at the pole
+the frame of `A^slice` is the distinguished disk action `D_A`. -/
+@[simp] theorem projectiveObjectFrame_pole (A : ASection) :
+    projectiveObjectFrame A (projectivePole A) = A.distinguishedDiskAction := by
+  rw [projectiveObjectFrame, poleFactorUnit_pole,
+    A.distinguishedDiskAction_eq_fullMultiplier]
 
-/-- Every A-positioned object frame carries the one projective north point to
-that object's footpoint in the common Cayley disk chart. -/
-theorem projectiveObjectFrame_maps_N (A : ASection)
-    (X : GreatCircle.Base) :
-    (projectiveObjectFrame A X).val
-        (GreatCircle.cayleyCoord
-          (OnePoint.infty : GreatCircle.Point)) =
-      GreatCircle.cayleyCoord
-        (CategoryTheory.ActionCategory.back X) := by
-  unfold projectiveObjectFrame
-  change (GreatCircle.cayleyProjective
-      (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back X))).val
-    (A.distinguishedDiskAction.val
-      (GreatCircle.cayleyCoord
-        (OnePoint.infty : GreatCircle.Point))) =
-    GreatCircle.cayleyCoord (CategoryTheory.ActionCategory.back X)
-  rw [A.distinguishedDiskAction_fixes_cayley_N,
-    GreatCircle.cayleyCoord_equivariant, GreatCircle.orbitRep_spec]
-
-/-- The full orbit–stabilizer transition between the A-positioned source and
-target frames.  This is a_A(Y) * stab(f) * a_A(X)⁻¹; hence the object
-frames and the arrow transition are two faces of the same group action. -/
+/-- master `def:aslice`, the arrow assignment as displayed:
+`P(b) · cayleyProjective(h) · P(a)⁻¹` — the positioned disk action at the
+target, the base arrow, the inverse of the positioned disk action at the
+source.  Read from right to left, `P(a)⁻¹` removes the positioned action at
+the source, `cayleyProjective(h)` applies the base arrow, and `P(b)`
+restores the positioned action at the target. -/
 def projectiveArrowElement (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) : Moebius :=
   projectiveObjectFrame A Y *
-    GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
+    GreatCircle.cayleyProjective f.val *
     (projectiveObjectFrame A X)⁻¹
 
-/-- Every full framed arrow carries its source projective footpoint to its
-target projective footpoint in the common Cayley disk chart. -/
-theorem projectiveArrowElement_maps_footpoint (A : ASection)
-    {X Y : GreatCircle.Base} (f : X ⟶ Y) :
-    (projectiveArrowElement A f).val
-        (GreatCircle.cayleyCoord
-          (CategoryTheory.ActionCategory.back X)) =
-      GreatCircle.cayleyCoord
-        (CategoryTheory.ActionCategory.back Y) := by
-  rw [← projectiveObjectFrame_maps_N A X]
-  unfold projectiveArrowElement
-  change (projectiveObjectFrame A Y).val
-    ((GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1).val
-      (((projectiveObjectFrame A X)⁻¹).val
-        ((projectiveObjectFrame A X).val
-          (GreatCircle.cayleyCoord
-            (OnePoint.infty : GreatCircle.Point))))) =
-    GreatCircle.cayleyCoord (CategoryTheory.ActionCategory.back Y)
-  have hframe : ((projectiveObjectFrame A X)⁻¹).val
-      ((projectiveObjectFrame A X).val
-        (GreatCircle.cayleyCoord
-          (OnePoint.infty : GreatCircle.Point))) =
-      GreatCircle.cayleyCoord
-        (OnePoint.infty : GreatCircle.Point) := by
-    exact (projectiveObjectFrame A X).val.symm_apply_apply _
-  rw [hframe, GreatCircle.cayleyCoord_equivariant]
-  have hstab := (GreatCircle.stabilizerPart f).2
-  change (GreatCircle.stabilizerPart f).1 •
-      (OnePoint.infty : GreatCircle.Point) =
-    (OnePoint.infty : GreatCircle.Point) at hstab
-  rw [hstab, projectiveObjectFrame_maps_N]
-
-/-- The arrow-side action obtained from the source object frame, the
-residual action at `N`, and the target object frame.  This is the
-orbit–stabilizer construction itself at functor level: object frames and
-arrow transport are consumed together, rather than defining `map` from an
-unframed raw base arrow. -/
+/-- The arrow-side action obtained from the source object frame, the base
+arrow, and the target object frame: the positioning pattern of master
+`def:aslice` at functor level, object frames and arrow transport consumed
+together. -/
 def projectiveTransition (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) : SphereWorld ⥤ SphereWorld :=
   distinguishedWorldAction ((projectiveObjectFrame A X)⁻¹) ⋙
-    distinguishedWorldAction
-      (GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1) ⋙
+    distinguishedWorldAction (GreatCircle.cayleyProjective f.val) ⋙
     projectiveObjectAction A Y
 
-/-- The framed transition is exactly conjugation by the full
-orbit–stabilizer element `a_A(Y) · stab(f) · a_A(X)⁻¹`. -/
+/-- The framed transition is exactly conjugation by the arrow element
+`P(Y) · cayleyProjective(f) · P(X)⁻¹`. -/
 theorem projectiveTransition_eq (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     projectiveTransition A f =
@@ -359,27 +516,30 @@ theorem projectiveArrowElement_base_factor
         (GreatCircle.orbitRep (CategoryTheory.ActionCategory.back X))⁻¹ :=
   GreatCircle.orbit_stabilizer_factor f
 
+/-- master `prop:aslice-functor`, the identity: `P(a)·cayleyProjective(1)·P(a)⁻¹ = 1`. -/
 @[simp] theorem projectiveArrowElement_id (A : ASection)
     (X : GreatCircle.Base) :
     projectiveArrowElement A (𝟙 X) = 1 := by
   unfold projectiveArrowElement
-  rw [GreatCircle.stabilizerPart_id]
-  simp only [Subgroup.coe_one, map_one]
+  change projectiveObjectFrame A X * GreatCircle.cayleyProjective 1 *
+    (projectiveObjectFrame A X)⁻¹ = 1
+  rw [map_one]
   group
 
+/-- master `prop:aslice-functor`, composition: the interior `P(b)⁻¹P(b)`
+cancels and the two base factors multiply to the composite, by the
+homomorphism law of `cayleyProjective`. -/
 theorem projectiveArrowElement_comp (A : ASection)
     {X Y Z : GreatCircle.Base} (f : X ⟶ Y) (g : Y ⟶ Z) :
     projectiveArrowElement A (f ≫ g) =
       projectiveArrowElement A g * projectiveArrowElement A f := by
   unfold projectiveArrowElement
-  rw [GreatCircle.stabilizerPart_comp]
-  simp only [Subgroup.coe_mul, map_mul]
+  change projectiveObjectFrame A Z *
+      GreatCircle.cayleyProjective ((show GreatCircle.Aut from g.val) *
+        (show GreatCircle.Aut from f.val)) *
+      (projectiveObjectFrame A X)⁻¹ = _
+  rw [map_mul]
   group
-
-/-- The C2/C3 north-pole action of `A`, obtained by specializing the
-already-built distinguished Möbius action at A's pole element. -/
-def northPoleAction (A : ASection) : SphereWorld ⥤ SphereWorld :=
-  distinguishedWorldAction A.distinguishedDiskAction
 
 /-- The genuine sphere-world arrow between the A-positioned source and target
 objects.  Its Möbius leg is the full orbit--stabilizer transition, so both
@@ -436,68 +596,21 @@ by an independently selected bundled fibre. -/
     (sectionFunctor A).obj X =
       (projectiveObjectAction A X).obj baseWorld := rfl
 
-/-- At the shared north object, the functor's object action is precisely A's
-north-pole action. -/
-theorem sectionFunctor_obj_north (A : ASection) :
-    (sectionFunctor A).obj
-        (GreatCircle.pointObj (OnePoint.infty : GreatCircle.Point)) =
-      (northPoleAction A).obj baseWorld := by
-  rw [sectionFunctor_obj]
-  unfold projectiveObjectAction northPoleAction
-  rw [projectiveObjectFrame_north]
-
-/-- Expanded form of the genuine transition between the two A-positioned
-object frames.  Both orbit legs are present. -/
-theorem projectiveArrowElement_eq_full_factorization (A : ASection)
-    {X Y : GreatCircle.Base} (f : X ⟶ Y) :
-    projectiveArrowElement A f =
-      GreatCircle.cayleyProjective
-          (GreatCircle.orbitRep
-            (CategoryTheory.ActionCategory.back Y)) *
-        A.distinguishedDiskAction *
-        GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
-        A.distinguishedDiskAction⁻¹ *
-        (GreatCircle.cayleyProjective
-          (GreatCircle.orbitRep
-            (CategoryTheory.ActionCategory.back X)))⁻¹ := by
-  rfl
-
-/-- The transition carries the source A-frame to the target A-frame with
-exactly the residual stabilizer action.  This is the object/arrow
-compatibility supplied by the one orbit--stabilizer construction. -/
+/-- The arrow element carries the source frame to the target frame with
+exactly the base arrow between them:
+`A^slice(f) · P(X) = P(Y) · cayleyProjective(f)`. -/
 theorem projectiveArrowElement_frame_compat (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     projectiveArrowElement A f * projectiveObjectFrame A X =
-      projectiveObjectFrame A Y *
-        GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 := by
+      projectiveObjectFrame A Y * GreatCircle.cayleyProjective f.val := by
   unfold projectiveArrowElement
   group
 
-/-- The Möbius leg of every genuine A-transport is the full
-orbit--stabilizer transition generated from its source and target frames. -/
+/-- The Möbius leg of every arrow of `A^slice` is the arrow element
+`P(Y) · cayleyProjective(f) · P(X)⁻¹`. -/
 @[simp] theorem sectionFunctor_map_mob (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     ((sectionFunctor A).map f).mob = projectiveArrowElement A f := rfl
-
-/-- The direct sphere-world arrow displays A's diagonal Euler--Weierstrass
-element, both orbit representatives, and the residual stabilizer. -/
-theorem sectionFunctor_map_full (A : ASection)
-    {X Y : GreatCircle.Base} (f : X ⟶ Y) :
-    (sectionFunctor A).map f =
-      ⟨1, one_smul G2 baseWorld.val,
-          GreatCircle.cayleyProjective
-            (GreatCircle.orbitRep
-              (CategoryTheory.ActionCategory.back Y)) *
-          A.distinguishedDiskAction *
-          GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
-          A.distinguishedDiskAction⁻¹ *
-          (GreatCircle.cayleyProjective
-            (GreatCircle.orbitRep
-              (CategoryTheory.ActionCategory.back X)))⁻¹⟩ := by
-  apply SphereHom.ext
-  · rfl
-  · rw [sectionFunctor_map_mob,
-        projectiveArrowElement_eq_full_factorization]
 
 /-- On the represented slice spheres, the direct A-transport is exactly its
 Möbius leg acting in the source and target charts. -/
@@ -508,16 +621,5 @@ theorem sectionFunctor_map_realize (A : ASection)
       spherePt ((sectionFunctor A).obj Y).val
         ((projectiveArrowElement A f).val z) := by
   rw [SphereHom.realize_sphereChartPoint, sectionFunctor_map_mob]
-
-/-- At the projective north object, A's object frame sends the common north
-pole to itself: the authored `N ↦ N` gate. -/
-theorem sectionFunctor_north_frame_fixes_N (A : ASection) :
-    (projectiveObjectFrame A
-        (GreatCircle.pointObj (OnePoint.infty : GreatCircle.Point))).val
-          (GreatCircle.cayleyCoord
-            (OnePoint.infty : GreatCircle.Point)) =
-        GreatCircle.cayleyCoord
-          (OnePoint.infty : GreatCircle.Point) :=
-  projectiveObjectFrame_maps_N A _
 
 end ASection

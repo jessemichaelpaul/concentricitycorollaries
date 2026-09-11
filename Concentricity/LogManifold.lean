@@ -1091,7 +1091,7 @@ tends to the SAME point ∞ along the pole (levels → +∞,
 → −∞, `zero_passage_level_atBot`): the +∞ end and the −∞ end of the
 level line are one point of the circle. The pole and the zeros are the
 two ends of the level line, meeting through the one N — the compactified
-reading of C1's cone (`rmk:collapse-cone`; the c3_atN register note:
+reading of C1's cone (`rmk:collapse-cone`; the c3_zeroDensity register note:
 "Every mirror circle closes through the one N"). REGISTER (R10): a
 statement about the VALUE-side tape; no placement claim rides on it.
 PROVED. -/

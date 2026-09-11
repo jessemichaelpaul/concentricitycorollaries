@@ -1,12 +1,11 @@
 #!/bin/sh
-# Build the master and put the fresh PDF where you actually click it.
+# Build the master and put a fresh local PDF at the repository root.
 #
 #   scripts/master.sh
 #
 # latexmk writes to output/pdf/.  The copy at the repo root is the one that
-# opens from the Finder window, so it is refreshed here on every build; that is
-# why it used to go stale.  Requires the authoring phase only if the .tex is
-# being edited -- building alone is fine in either phase.
+# opens from the Finder window, so it is refreshed here on every build. Both
+# generated copies are ignored; `Octonionic_RH_master.tex` is the public source.
 set -e
 cd "$(dirname "$0")/.."
 

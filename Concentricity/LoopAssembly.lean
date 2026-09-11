@@ -292,11 +292,10 @@ theorem shared_ladder_encounters (A : ASection) (n m : ℕ) :
       have h2 := min_le_right ηn ηm
       linarith)
 
-/-! ## §D — the two draft renders (dual curation; lake's verdicts recorded) -/
+/-! ## §D — retained analytic support -/
 
--- (removed 2026-07-10: `concentric_articulation` — a dead terminal theorem over
--- the old `TotalTransport` base, consumed by nothing. The concentric readout is
--- the cocartesian `readout` on `functorA`/`TotalA`, ConcentricityReadout.lean.)
+-- The former terminal theorem over `TotalTransport` and its obsolete
+-- pre-component readout were removed. Neither is a production dependency.
 
 /-! ## The re-encoded corollary chain (author's ruling, 2026-07-06:
 "Pin 3 is now completely irrelevant. All infinitely many ℂ-residue zero

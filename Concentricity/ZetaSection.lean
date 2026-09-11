@@ -446,6 +446,24 @@ noncomputable def zetaSection : ASection where
   c2_summable := zetaC2_summable
   c2_euler := zetaC2_euler
   c2_locMajorant := zetaC2_locMajorant
+  eulerPrime := fun p => (p : ℕ)
+  eulerPrime_prime := fun p => p.prop
+  eulerPrime_injective := fun _ _ h => Subtype.ext h
+  eulerCoeff := fun _ _ => 1
+  eulerCoeff_bounded := ⟨1, fun _ _ => by norm_num⟩
+  c2_form := by
+    intro p z hz
+    have hz0 : 0 < z.re := by linarith
+    have hx : ‖((p : ℕ) : ℂ) ^ (-z)‖ < 1 := norm_prime_cpow_neg_lt_one p hz0
+    have hs := Complex.hasSum_taylorSeries_neg_log hx
+    have hs1 : HasSum
+        (fun n : ℕ => (((p : ℕ) : ℂ) ^ (-z)) ^ (n + 1) / (n + 1))
+        (-Complex.log (1 - ((p : ℕ) : ℂ) ^ (-z))) := by
+      have h := (hasSum_nat_add_iff'
+        (f := fun n : ℕ => (((p : ℕ) : ℂ) ^ (-z)) ^ n / n) 1).mpr hs
+      simpa using h
+    rw [zetaEulerLog_eq_of_re_pos p hz0, ← hs1.tsum_eq]
+    exact tsum_congr fun k => by push_cast; ring
   m := 0
   Rfac := zetaRfac
   gfac := zetaGfac
@@ -465,7 +483,6 @@ noncomputable def zetaSection : ASection where
     have him := zetaSphereZero_im_pos k
     obtain ⟨htriv, hone⟩ := nontrivial_of_im_ne_zero (ne_of_gt him)
     exact (nontrivialZero_re_mem_Ioo hz htriv hone).1.le
-  c3_atN := zetaSphereZero_density
   c3_factorization := zetaC3_factorization
   c4_infinite := zetaSphereZero_range_infinite
   valueAtInfinity := ((1 : ℂ) : OnePoint ℂ)
@@ -474,3 +491,7 @@ noncomputable def zetaSection : ASection where
     have h1 : (1 : ℂ) = z := OnePoint.coe_eq_coe.mp hz
     rw [← h1]
     exact Complex.one_im
+  valueAtInfinity_one := rfl
+
+instance : ASection.ZeroDensity zetaSection where
+  summable := zetaSphereZero_density

@@ -3,8 +3,8 @@ Concentricity/ZetaDensity.lean
 
 The D0 summability obligation, ζ-member payoff row. The density itself
 (Jensen + dyadic shells) lives in ZetaDensityCore.lean, below ZetaSection,
-where it discharges the `c3_atN` field (C3 THROUGH N). With the class row
-`ASection.liSum_summable` closed from `c3_atN`, this file's payoff row is
+where it discharges the separate `c3_zeroDensity` field. With the class row
+`ASection.liSum_summable` closed from `c3_zeroDensity`, this file's payoff row is
 the specialization to `zetaSection` — kept as the named D0-for-ζ receipt.
 
 `sorry` marks UNFORMALIZED, never UNSOUND (R8). This file carries ZERO
@@ -20,7 +20,7 @@ noncomputable section
 
 /-- **D0 for ζ** (the obligation of DESIGN §D0, member face): the paired
 kernel sums of `zetaSection` converge — the class row
-`ASection.liSum_summable`, closed from `c3_atN` (C3 THROUGH N) through the
+`ASection.liSum_summable`, closed from `c3_zeroDensity` through the
 PROVED reduction `liSum_summable_of_density_at`, read at the member. With
 this, the BL ladder's D0 rung is green for the member that `cor:rh`
 consumes — and for the class, by the same clause. PROVED. -/

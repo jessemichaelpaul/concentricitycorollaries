@@ -5,7 +5,7 @@ Authors: Jesse Michael Paul
 -/
 import Concentricity.ASectionEquivariant
 import Concentricity.NormalizedBase
-import Concentricity.ProjectiveSection
+import Concentricity.ASectionGpvSliceAction
 import Mathlib.CategoryTheory.Groupoid
 import Mathlib.CategoryTheory.Groupoid.Discrete
 import Mathlib.CategoryTheory.Groupoid.Grpd.Basic
@@ -36,6 +36,12 @@ open CategoryTheory
 
 namespace ASection
 
+/-- `C⁻¹` undoes `C` on every point of the slice sphere. -/
+@[simp] theorem cayleyMoebius_inv_apply_cayley (z : OnePoint ℂ) :
+    (GreatCircle.cayleyMoebius⁻¹).val (GreatCircle.cayleyMoebius.val z) = z := by
+  rw [show (GreatCircle.cayleyMoebius⁻¹).val = (GreatCircle.cayleyMoebius.val)⁻¹ from rfl,
+    Equiv.Perm.inv_def, Equiv.symm_apply_apply]
+
 /-- A normalized A-section state: a point in a chosen member of the
 continuum of slice spheres. Its canonical function value is read by
 `AsectionState.output`. -/
@@ -45,9 +51,12 @@ structure AsectionState (A : ASection) where
 
 namespace AsectionState
 
-/-- The actual normalized octonionic input represented by a state. -/
+/-- The actual normalized octonionic input represented by a state.  The
+state's coordinate is a positioned value on its slice sphere, `w = C·w₀`
+(master `def:cayley-disk`); the octonionic point is `σ + γ·v` of the point
+`w₀ = C⁻¹·w` it positions. -/
 def input {A : ASection} (x : AsectionState A) : OnePoint Octonion :=
-  spherePt x.world.val x.coordinate
+  spherePt x.world.val ((GreatCircle.cayleyMoebius⁻¹).val x.coordinate)
 
 /-- The canonical output of the one A-section function: `A.realize input`. -/
 def output {A : ASection} (x : AsectionState A) : OnePoint Octonion :=
@@ -83,7 +92,8 @@ instance (A : ASection) : MulAction G2 (AsectionState A) where
 /-- The normalized input realization is `G₂`-equivariant. -/
 theorem input_equivariant (A : ASection) (g : G2) (x : AsectionState A) :
     (g • x).input = g • x.input := by
-  exact (smul_spherePt g x.world.val x.coordinate).symm
+  exact (smul_spherePt g x.world.val
+    ((GreatCircle.cayleyMoebius⁻¹).val x.coordinate)).symm
 
 /-- The A-generated output is transported by the same `G₂` action. -/
 theorem output_equivariant (A : ASection) (g : G2) (x : AsectionState A) :
@@ -191,21 +201,24 @@ def ActionTransportSquare.inv {a b : Moebius}
       _ = f.left⁻¹ * (f.left * a) * f.right⁻¹ := by rw [f.commutes]
       _ = a * f.right⁻¹ := by group
 
-/-- Orbit--stabilizer supplies the horizontal naturality square of A's
-positioned action at every projective-base arrow. -/
+/-- The horizontal naturality square of A's positioned action at every
+projective-base arrow.  Its normalized leg is stored in the master's direct
+form `A^slice(Y)⁻¹ · A^slice(f) · A^slice(X)`; orbit--stabilizer has already
+done its one job of constructing the object frames and arrow element. -/
 def orbitStabilizerActionSquare (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) :
     ActionTransportSquare (projectiveObjectFrame A X)
       (projectiveObjectFrame A Y) where
   left := projectiveArrowElement A f
-  right := GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1
-  commutes := projectiveArrowElement_frame_compat A f
+  right := (projectiveObjectFrame A Y)⁻¹ *
+    projectiveArrowElement A f * projectiveObjectFrame A X
+  commutes := by group
 
-/-- GPV winding supplies the vertical naturality square: the two endpoints
-are the same exponential action, because winding changes only the lift
-rung. -/
-def GpvTransport.actionSquare {A : ASection}
-    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k) :
+/-- The winding of a circuit changes only the lift rung: the two endpoints
+of a circuit are the same exponential action, so the circuit supplies the
+identity square between them. -/
+def GpvCircuit.actionSquare {A : ASection}
+    {X Y : GreatCircle.Base} {k : ℤ} (h : GpvCircuit A X Y k) :
     ActionTransportSquare
       (GreatCircle.diskExpAction (h.lift 0))
       (GreatCircle.diskExpAction (h.lift 1)) where
@@ -214,69 +227,115 @@ def GpvTransport.actionSquare {A : ASection}
   commutes := by
     simpa using h.diskExpAction_endpoint_eq
 
-/-- The GPV exponential action positioned in the orbit--stabilizer frame
-over a projective-base object.  Both factors are readings of A's one
-geometric action: the frame supplies the projective position and the GPV
-factor supplies the value/lift register. -/
-def positionedGpvAction (A : ASection) (X : GreatCircle.Base)
-    {Y : GreatCircle.Base} {k : ℤ} (h : GpvTransport A X Y k)
-    (t : unitInterval) : Moebius :=
-  projectiveObjectFrame A X * GreatCircle.diskExpAction (h.lift t)
+/-- master `def:base`: the action a transport arrives from is the frame of
+`A^slice` at its source object.  The transport's value at the source is the
+pole-cancelled factor at the point of that object, and the frame is that
+value exponentiated in the diagonal matrix and Cayley conjugated. -/
+theorem GpvTransport.diskExpAction_zero {A : ASection}
+    {X Y : GreatCircle.Base} (h : GpvTransport A X Y) :
+    GreatCircle.diskExpAction (h.lift 0) = projectiveObjectFrame A X := by
+  obtain ⟨x, hX, hx⟩ := h.exists_source_point
+  have hne : A.distinguishedPoleFactor (x : ℂ) ≠ 0 := by
+    rw [← hx, ← h.value_eq 0]
+    exact h.value_ne_zero 0
+  have hframe : projectiveObjectFrame A X =
+      GreatCircle.diskDiagonalMoebiusHom
+        (Units.mk0 (A.distinguishedPoleFactor (x : ℂ)) hne) := by
+    unfold projectiveObjectFrame poleFactorUnit
+    rw [hX]
+    change GreatCircle.diskDiagonalMoebiusHom
+      (if h : A.distinguishedPoleFactor (x : ℂ) = 0 then (1 : ℂˣ)
+        else Units.mk0 (A.distinguishedPoleFactor (x : ℂ)) h) = _
+    rw [dif_neg hne]
+  rw [h.diskExpAction_eq_value 0, hframe]
+  apply congrArg GreatCircle.diskDiagonalMoebiusHom
+  apply Units.ext
+  show h.value 0 = A.distinguishedPoleFactor (x : ℂ)
+  rw [h.value_eq 0, hx]
 
-/-- The complete domain/codomain square obtained by putting the GPV endpoint
-square inside the unique orbit--stabilizer square.
+/-- master `def:base`: the action a transport arrives at is the frame of
+`A^slice` at its target object. -/
+theorem GpvTransport.diskExpAction_one {A : ASection}
+    {X Y : GreatCircle.Base} (h : GpvTransport A X Y) :
+    GreatCircle.diskExpAction (h.lift 1) = projectiveObjectFrame A Y := by
+  obtain ⟨y, hY, hy⟩ := h.exists_target_point
+  have hne : A.distinguishedPoleFactor (y : ℂ) ≠ 0 := by
+    rw [← hy, ← h.value_eq 1]
+    exact h.value_ne_zero 1
+  have hframe : projectiveObjectFrame A Y =
+      GreatCircle.diskDiagonalMoebiusHom
+        (Units.mk0 (A.distinguishedPoleFactor (y : ℂ)) hne) := by
+    unfold projectiveObjectFrame poleFactorUnit
+    rw [hY]
+    change GreatCircle.diskDiagonalMoebiusHom
+      (if h : A.distinguishedPoleFactor (y : ℂ) = 0 then (1 : ℂˣ)
+        else Units.mk0 (A.distinguishedPoleFactor (y : ℂ)) h) = _
+    rw [dif_neg hne]
+  rw [h.diskExpAction_eq_value 1, hframe]
+  apply congrArg GreatCircle.diskDiagonalMoebiusHom
+  apply Units.ext
+  show h.value 1 = A.distinguishedPoleFactor (y : ℂ)
+  rw [h.value_eq 1, hy]
 
-The left leg is the genuine framed projective transition.  The right leg is
-the north-stabilizer factor conjugated by the GPV exponential action.  The
-square commutes because `projectiveArrowElement_frame_compat` is the
-orbit--stabilizer square and `diskExpAction_endpoint_eq` is the GPV square.
-Thus naturality is a property of the already-built geometric action, not an
-extra compatibility assumption. -/
+/-- master `lem:exp-degenerate`: the full octonionic fibre generates the
+source action of this GPV transport, with one real level for every direction
+and winding branch. -/
+theorem GpvTransport.source_degenerate_fibre_action
+    {A : ASection} {X Y : GreatCircle.Base} (τ : GpvTransport A X Y)
+    {r : ℝ} (hr : 0 < r) (hvalue : τ.value 0 = -(r : ℂ)) (q : Octonion) :
+    Octonion.exp q = Octonion.ofReal (-r) ↔
+      ∃ I : SphereWorld, ∃ k : ℤ,
+        q = Octonion.sliceEmbed I.val
+          ⟨Real.log r, ((2 * k + 1 : ℤ) : ℝ) * Real.pi⟩ ∧
+        GreatCircle.diskExpAction
+          ⟨Real.log r, ((2 * k + 1 : ℤ) : ℝ) * Real.pi⟩ =
+            projectiveObjectFrame A X ∧
+        Octonion.re q = Real.log r := by
+  simpa only [τ.diskExpAction_zero] using τ.degenerate_fibre_action 0 hr hvalue q
+
+/-- master `def:base`, "transport by the Möbius transformation assigned by
+the already-proved functor `A^slice` and the A-specific GPV transport": the
+square along a base arrow `f` whose source and target actions are the
+endpoint actions of a transport along `f`, its left leg the arrow element
+`A^slice(f)` and its right leg the base arrow itself.  Its endpoints are the
+frames of `A^slice` (`GpvTransport.diskExpAction_zero`,
+`GpvTransport.diskExpAction_one`), so it is the orbit--stabilizer square
+`orbitStabilizerActionSquare A f` read on the transport's own tape. -/
 def projectiveGpvActionSquare (A : ASection)
-    {X Y : GreatCircle.Base} (f : X ⟶ Y) {k : ℤ}
-    (h : GpvTransport A X Y k) :
+    {X Y : GreatCircle.Base} (f : X ⟶ Y) (h : GpvTransport A X Y) :
     ActionTransportSquare
-      (positionedGpvAction A X h 0)
-      (projectiveObjectFrame A Y *
-        GreatCircle.diskExpAction (h.lift 1)) where
+      (GreatCircle.diskExpAction (h.lift 0))
+      (GreatCircle.diskExpAction (h.lift 1)) where
   left := projectiveArrowElement A f
-  right :=
-    (GreatCircle.diskExpAction (h.lift 0))⁻¹ *
-      GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
-        GreatCircle.diskExpAction (h.lift 0)
+  right := GreatCircle.cayleyProjective f.val
   commutes := by
-    have hgpv :
-        GreatCircle.diskExpAction (h.lift 0) =
-          GreatCircle.diskExpAction (h.lift 1) :=
-      h.diskExpAction_endpoint_eq
-    unfold positionedGpvAction
-    rw [← hgpv]
-    calc
-      projectiveArrowElement A f *
-          (projectiveObjectFrame A X *
-            GreatCircle.diskExpAction (h.lift 0)) =
-          (projectiveArrowElement A f * projectiveObjectFrame A X) *
-            GreatCircle.diskExpAction (h.lift 0) := by group
-      _ = (projectiveObjectFrame A Y *
-            GreatCircle.cayleyProjective
-              (GreatCircle.stabilizerPart f).1) *
-            GreatCircle.diskExpAction (h.lift 0) := by
-          rw [projectiveArrowElement_frame_compat]
-      _ = (projectiveObjectFrame A Y *
-              GreatCircle.diskExpAction (h.lift 0)) *
-            ((GreatCircle.diskExpAction (h.lift 0))⁻¹ *
-              GreatCircle.cayleyProjective
-                (GreatCircle.stabilizerPart f).1 *
-              GreatCircle.diskExpAction (h.lift 0)) := by group
+    rw [h.diskExpAction_zero, h.diskExpAction_one]
+    unfold projectiveArrowElement
+    group
 
-/-- The real output register carried by the complete projective/GPV square
-is unchanged between its two endpoints.  This is the level face of the same
-square, not a downstream descent condition. -/
-theorem projectiveGpvActionSquare_level (A : ASection)
-    {X Y : GreatCircle.Base} (_f : X ⟶ Y) {k : ℤ}
-    (h : GpvTransport A X Y k) :
-    (h.lift 0).re = (h.lift 1).re := by
-  exact h.lift_endpoint_re_eq
+@[simp] theorem projectiveGpvActionSquare_left (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y) (h : GpvTransport A X Y) :
+    (projectiveGpvActionSquare A f h).left = projectiveArrowElement A f := rfl
+
+@[simp] theorem projectiveGpvActionSquare_right (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y) (h : GpvTransport A X Y) :
+    (projectiveGpvActionSquare A f h).right =
+      GreatCircle.cayleyProjective f.val := rfl
+
+/-- The square along `f` read on a transport has the legs of the
+orbit--stabilizer square of `f`. -/
+theorem projectiveGpvActionSquare_legs (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y) (h : GpvTransport A X Y) :
+    (projectiveGpvActionSquare A f h).left =
+        (orbitStabilizerActionSquare A f).left ∧
+      (projectiveGpvActionSquare A f h).right =
+        (orbitStabilizerActionSquare A f).right := by
+  refine ⟨rfl, ?_⟩
+  change GreatCircle.cayleyProjective f.val =
+    (projectiveObjectFrame A Y)⁻¹ * projectiveArrowElement A f *
+      projectiveObjectFrame A X
+  unfold projectiveArrowElement
+  group
 
 /-- Identity base transport gives the identity action square. -/
 theorem orbitStabilizerActionSquare_id (A : ASection)
@@ -285,10 +344,7 @@ theorem orbitStabilizerActionSquare_id (A : ASection)
       ActionTransportSquare.id (projectiveObjectFrame A X) := by
   apply ActionTransportSquare.ext
   · exact projectiveArrowElement_id A X
-  · change GreatCircle.cayleyProjective
-        (GreatCircle.stabilizerPart (𝟙 X)).1 = 1
-    rw [GreatCircle.stabilizerPart_id]
-    exact map_one GreatCircle.cayleyProjective
+  · simp [orbitStabilizerActionSquare, ActionTransportSquare.id]
 
 /-- Composition of base arrows is composition of their action-level
 naturality squares. -/
@@ -299,12 +355,45 @@ theorem orbitStabilizerActionSquare_comp (A : ASection)
         (orbitStabilizerActionSquare A g) := by
   apply ActionTransportSquare.ext
   · exact projectiveArrowElement_comp A f g
-  · change GreatCircle.cayleyProjective
-        (GreatCircle.stabilizerPart (f ≫ g)).1 =
-      GreatCircle.cayleyProjective (GreatCircle.stabilizerPart g).1 *
-        GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1
-    rw [GreatCircle.stabilizerPart_comp]
-    exact map_mul GreatCircle.cayleyProjective _ _
+  · simp only [orbitStabilizerActionSquare, ActionTransportSquare.comp]
+    rw [projectiveArrowElement_comp]
+    group
+
+/-- master `def:transport`, the normalized-coordinate display, in the
+author's frame-conjugation form: on the normalized coordinate the three
+assigned actions act as one composition,
+`A^slice(b)⁻¹ · A^slice(h) · A^slice(a)`.  The square's right leg is that
+composition — the direct formula and the stabilizer factorization are the
+same element of the Möbius group, by the two frame cancellations. -/
+theorem orbitStabilizerActionSquare_right_eq_frame_conjugation
+    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
+    (orbitStabilizerActionSquare A f).right =
+      (projectiveObjectFrame A Y)⁻¹ * projectiveArrowElement A f *
+        projectiveObjectFrame A X := by
+  rfl
+
+/-- The normalized leg of the transport along `f` is the base arrow itself,
+Cayley conjugated: the two frame cancellations of `def:transport`
+leave `cayleyProjective(f)`. -/
+theorem orbitStabilizerActionSquare_right_eq_cayley
+    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
+    (orbitStabilizerActionSquare A f).right =
+      GreatCircle.cayleyProjective f.val := by
+  change (projectiveObjectFrame A Y)⁻¹ * projectiveArrowElement A f *
+      projectiveObjectFrame A X =
+    GreatCircle.cayleyProjective f.val
+  unfold projectiveArrowElement
+  group
+
+/-- master `def:transport`, the normalized entry along `f`: the displayed
+conjugation `A^slice(Y)⁻¹ · A^slice(f) · A^slice(X)` is `cayleyProjective(f)`. -/
+theorem normalizedLeg_eq_cayley (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y) :
+    (projectiveObjectFrame A Y)⁻¹ * projectiveArrowElement A f *
+        projectiveObjectFrame A X =
+      GreatCircle.cayleyProjective f.val :=
+  (orbitStabilizerActionSquare_right_eq_frame_conjugation A f).symm.trans
+    (orbitStabilizerActionSquare_right_eq_cayley A f)
 
 /-- The normalized value-state groupoid.  Objects retain the actual
 normalized sphere point; their A-output is `AsectionState.output`.
@@ -461,37 +550,31 @@ theorem orbitStabilizerActionSquare_output_commutes (A : ASection)
         AsectionStateOutput A :=
   (orbitStabilizerActionSquare A f).output_commutes A
 
-/-- The combined projective/GPV square transports the canonical normalized
-input. -/
+/-- The square along `f` read on a transport carries the canonical
+normalized input. -/
 theorem projectiveGpvActionSquare_input_commutes (A : ASection)
-    {X Y : GreatCircle.Base} (f : X ⟶ Y) {k : ℤ}
-    (h : GpvTransport A X Y k) :
-    (coordinateTransport A (positionedGpvAction A X h 0) ⋙
+    {X Y : GreatCircle.Base} (f : X ⟶ Y) (h : GpvTransport A X Y) :
+    (coordinateTransport A (GreatCircle.diskExpAction (h.lift 0)) ⋙
         coordinateTransport A
           (projectiveGpvActionSquare A f h).left) ⋙
         AsectionStateInput A =
       (coordinateTransport A
           (projectiveGpvActionSquare A f h).right ⋙
-        coordinateTransport A
-          (projectiveObjectFrame A Y *
-            GreatCircle.diskExpAction (h.lift 1))) ⋙
+        coordinateTransport A (GreatCircle.diskExpAction (h.lift 1))) ⋙
         AsectionStateInput A :=
   (projectiveGpvActionSquare A f h).input_commutes A
 
-/-- The combined projective/GPV square transports the canonical A-section
-output without introducing a second round-trip functor. -/
+/-- The square along `f` read on a transport carries the canonical
+A-section output. -/
 theorem projectiveGpvActionSquare_output_commutes (A : ASection)
-    {X Y : GreatCircle.Base} (f : X ⟶ Y) {k : ℤ}
-    (h : GpvTransport A X Y k) :
-    (coordinateTransport A (positionedGpvAction A X h 0) ⋙
+    {X Y : GreatCircle.Base} (f : X ⟶ Y) (h : GpvTransport A X Y) :
+    (coordinateTransport A (GreatCircle.diskExpAction (h.lift 0)) ⋙
         coordinateTransport A
           (projectiveGpvActionSquare A f h).left) ⋙
         AsectionStateOutput A =
       (coordinateTransport A
           (projectiveGpvActionSquare A f h).right ⋙
-        coordinateTransport A
-          (projectiveObjectFrame A Y *
-            GreatCircle.diskExpAction (h.lift 1))) ⋙
+        coordinateTransport A (GreatCircle.diskExpAction (h.lift 1))) ⋙
         AsectionStateOutput A :=
   (projectiveGpvActionSquare A f h).output_commutes A
 
@@ -509,18 +592,28 @@ def AsectionPointProjection (A : ASection) : GreatCircle.Base ⥤ Grpd where
     rw [projectiveArrowElement_comp]
     exact (coordinateTransport_mul A _ _).symm
 
-/-- The normalized residue-`ℂ` sphere point is an object of every full
-A-section fibre.  Its A-value is still computed by the same action. -/
+/-- The `n`-th residue-`ℂ` zero sphere as a state of every full A-section
+fibre: the zero `z_n` positioned on its slice sphere through `C`, like every
+coordinate of the base (master `def:cayley-disk`, `(Z)`).  Its A-value is
+computed by the same action at the zero itself. -/
 def residueState (A : ASection) (n : ℕ) (I : SphereWorld) :
     AsectionState A where
   world := I
-  coordinate := (A.sphereZero n : OnePoint ℂ)
+  coordinate := GreatCircle.cayleyMoebius.val (A.sphereZero n : OnePoint ℂ)
+
+@[simp] theorem residueState_coordinate (A : ASection) (n : ℕ) (I : SphereWorld) :
+    (A.residueState n I).coordinate =
+      GreatCircle.cayleyMoebius.val (A.sphereZero n : OnePoint ℂ) := rfl
 
 @[simp] theorem residueState_input (A : ASection) (n : ℕ) (I : SphereWorld) :
-    (A.residueState n I).input = A.normalizedZeroPoint n I := rfl
+    (A.residueState n I).input = A.normalizedZeroPoint n I := by
+  rw [AsectionState.input, residueState_coordinate, cayleyMoebius_inv_apply_cayley]
+  rfl
 
 @[simp] theorem residueState_output (A : ASection) (n : ℕ) (I : SphereWorld) :
-    (A.residueState n I).output = A.normalizedSectionPoint n I := rfl
+    (A.residueState n I).output = A.normalizedSectionPoint n I := by
+  rw [AsectionState.output, residueState_input]
+  rfl
 
 @[simp] theorem residueState_input_re (A : ASection) (n : ℕ)
     (I : SphereWorld) :
@@ -626,50 +719,58 @@ def positionedLiftAction (A : ASection) (X : GreatCircle.Base)
     {hp : ∀ t, δ t ≠ (A.pole : ℂ)}
     {hne : ∀ t, A.F (δ t) ≠ 0}
     (L : AsectionGpvLift A δ hp hne) (t : unitInterval) : Moebius :=
-  projectiveObjectFrame A X * GreatCircle.diskExpAction (L.lift t)
+  projectiveTapeFrame X (GreatCircle.diskExpAction (L.lift t))
 
-/-- Orbit--stabilizer transports a complete exponential action at one
-instant of the GPV tape.  Its right leg is the stabilizer conjugated by the
-actual multiplier at that instant; hence phase/winding stays in the
-stabilizer while the whole action is moved horizontally. -/
+/-- Orbit--stabilizer transports the one complete exponential action at one
+instant of the GPV tape.  The tape multiplier occupies the positioned frame;
+it is not appended to an already-distinguished frame. -/
 def positionedOrbitSquare (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y) (d : Moebius) :
     ActionTransportSquare
-      (projectiveObjectFrame A X * d)
-      (projectiveObjectFrame A Y * d) where
-  left := projectiveArrowElement A f
-  right :=
-    d⁻¹ * GreatCircle.cayleyProjective
-      (GreatCircle.stabilizerPart f).1 * d
-  commutes := by
-    calc
-      projectiveArrowElement A f * (projectiveObjectFrame A X * d) =
-          (projectiveArrowElement A f * projectiveObjectFrame A X) * d := by
-            group
-      _ = (projectiveObjectFrame A Y *
-            GreatCircle.cayleyProjective
-              (GreatCircle.stabilizerPart f).1) * d := by
-            rw [projectiveArrowElement_frame_compat]
-      _ = (projectiveObjectFrame A Y * d) *
-            (d⁻¹ * GreatCircle.cayleyProjective
-              (GreatCircle.stabilizerPart f).1 * d) := by
-            group
+      (projectiveTapeFrame X d)
+      (projectiveTapeFrame Y d) where
+  left := projectiveTapeFrame Y d *
+    GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
+      (projectiveTapeFrame X d)⁻¹
+  right := GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1
+  commutes := by group
+
+/-- The authored Euler/GPV boundary after C1 regularization, positioned over
+one projective-base arrow.  Its action is obtained from the nonzero
+regularized pole value, not by evaluating `A.F` at the pole. -/
+noncomputable def eulerWeierstrassNorthBoundarySquare (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y) :
+    ActionTransportSquare
+      (projectiveObjectFrame A X) (projectiveObjectFrame A Y) :=
+  A.orbitStabilizerActionSquare f
+
+/-- Physical-projection binding: after evaluating the regularized boundary
+at the pole, its positioned square is exactly the native square used by the
+fixed-A action diagram. -/
+theorem eulerWeierstrassNorthBoundarySquare_eq_orbitStabilizer
+    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
+    A.eulerWeierstrassNorthBoundarySquare f =
+      A.orbitStabilizerActionSquare f := by
+  rfl
 
 /-- Identity and composition of the positioned squares are inherited from
 the unique orbit--stabilizer factorization. -/
 theorem positionedOrbitSquare_id (A : ASection)
     (X : GreatCircle.Base) (d : Moebius) :
     positionedOrbitSquare A (𝟙 X) d =
-      ActionTransportSquare.id (projectiveObjectFrame A X * d) := by
+      ActionTransportSquare.id (projectiveTapeFrame X d) := by
   apply ActionTransportSquare.ext
-  · exact projectiveArrowElement_id A X
-  · change d⁻¹ *
-      GreatCircle.cayleyProjective
-        (GreatCircle.stabilizerPart (𝟙 X)).1 * d = 1
-    rw [GreatCircle.stabilizerPart_id]
-    change d⁻¹ * GreatCircle.cayleyProjective (1 : GreatCircle.Aut) * d = 1
+  · simp only [positionedOrbitSquare, ActionTransportSquare.id,
+      GreatCircle.stabilizerPart_id]
+    change projectiveTapeFrame X d *
+      GreatCircle.cayleyProjective (1 : GreatCircle.Aut) *
+        (projectiveTapeFrame X d)⁻¹ = 1
     rw [map_one]
     group
+  · simp only [positionedOrbitSquare, ActionTransportSquare.id,
+      GreatCircle.stabilizerPart_id]
+    change GreatCircle.cayleyProjective (1 : GreatCircle.Aut) = 1
+    rw [map_one]
 
 theorem positionedOrbitSquare_comp (A : ASection)
     {X Y Z : GreatCircle.Base} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -678,25 +779,11 @@ theorem positionedOrbitSquare_comp (A : ASection)
       (positionedOrbitSquare A f d).comp
         (positionedOrbitSquare A g d) := by
   apply ActionTransportSquare.ext
-  · exact projectiveArrowElement_comp A f g
-  · change
-      d⁻¹ * GreatCircle.cayleyProjective
-          (GreatCircle.stabilizerPart (f ≫ g)).1 * d =
-        (d⁻¹ * GreatCircle.cayleyProjective
-            (GreatCircle.stabilizerPart g).1 * d) *
-          (d⁻¹ * GreatCircle.cayleyProjective
-            (GreatCircle.stabilizerPart f).1 * d)
-    rw [GreatCircle.stabilizerPart_comp]
-    change
-      d⁻¹ * GreatCircle.cayleyProjective
-          ((GreatCircle.stabilizerPart g).1 *
-            (GreatCircle.stabilizerPart f).1) * d =
-        (d⁻¹ * GreatCircle.cayleyProjective
-            (GreatCircle.stabilizerPart g).1 * d) *
-          (d⁻¹ * GreatCircle.cayleyProjective
-            (GreatCircle.stabilizerPart f).1 * d)
-    rw [map_mul]
+  · simp only [positionedOrbitSquare, ActionTransportSquare.comp,
+      GreatCircle.stabilizerPart_comp, Subgroup.coe_mul, map_mul]
     group
+  · simp only [positionedOrbitSquare, ActionTransportSquare.comp,
+      GreatCircle.stabilizerPart_comp, Subgroup.coe_mul, map_mul]
 
 /-- An A-specific presentation over `X`.
 
@@ -717,12 +804,11 @@ structure AsectionPresentation (A : ASection) (X : GreatCircle.Base) where
     ∀ (B : GreatCircle.Base)
       (δ : C(unitInterval, ℂ))
       (hstart : ((δ 0 : ℂ) : OnePoint ℂ) =
-        GreatCircle.cayleyCoord
+        GreatCircle.complexPoint
           (CategoryTheory.ActionCategory.back B))
       (hloop : δ 0 = δ 1)
-      (hpole : ∀ t, δ t ≠ (A.pole : ℂ))
       (hhalf : ∀ t, A.Ω₀ < (δ t).re),
-      GpvTransport A B B 0
+      GpvCircuit A B B 0
   toNorth :
     ∀ (δ : C(unitInterval, ℂ))
       (hp : ∀ t, δ t ≠ (A.pole : ℂ))
@@ -737,8 +823,8 @@ noncomputable def canonicalAsectionPresentation (A : ASection)
     (X : GreatCircle.Base) :
     AsectionPresentation A X :=
   { gpv := fun δ hp hne => canonicalAsectionGpvLift A δ hp hne
-    euler_gpv := fun B δ hstart hloop hpole hhalf =>
-      GpvTransport.ofEulerHalfSpaceLoop A B δ hstart hloop hpole hhalf
+    euler_gpv := fun B δ hstart hloop hhalf =>
+      GpvCircuit.ofEulerHalfSpaceLoop A B δ hstart hloop hhalf
     toNorth := fun δ hp hne t =>
       positionedOrbitSquare A (orbitHomToNorth X)
         (GreatCircle.diskExpAction
@@ -958,8 +1044,8 @@ def AsectionFiberOutput (A : ASection) {X : GreatCircle.Base}
     (reindexAsectionPresentation A f p).gpv δ hp hne =
       p.gpv δ hp hne := rfl
 
-/-- Both native legs of the certified orbit--stabilizer square occur at
-every instant of every GPV tape used by a base-arrow reindexing. -/
+/-- Both legs of the tape-positioned orbit--stabilizer square occur at every
+instant of every GPV tape used by a base-arrow reindexing. -/
 theorem AsectionFunctor_map_uses_two_legs (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y)
     (p : AsectionPresentation A X)
@@ -969,10 +1055,12 @@ theorem AsectionFunctor_map_uses_two_legs (A : ASection)
     (t : unitInterval) :
     let d := GreatCircle.diskExpAction ((p.gpv δ hp hne).lift t)
     ((positionedOrbitSquare A f d).left =
-        projectiveArrowElement A f) ∧
+        projectiveTapeFrame Y d *
+          GreatCircle.cayleyProjective (GreatCircle.stabilizerPart f).1 *
+            (projectiveTapeFrame X d)⁻¹) ∧
       ((positionedOrbitSquare A f d).right =
-        d⁻¹ * GreatCircle.cayleyProjective
-          (GreatCircle.stabilizerPart f).1 * d) :=
+        GreatCircle.cayleyProjective
+          (GreatCircle.stabilizerPart f).1) :=
   ⟨rfl, rfl⟩
 
 /-- Every C-residue sphere produced by A is a physical object of every full
@@ -998,21 +1086,21 @@ noncomputable def residueFiberState (A : ASection) (X : GreatCircle.Base)
 end JuxtapositionPreflight
 
 /-- The infinite Euler prime stack is a literal full tape in every
-canonical presentation.  Its lift at every instant is definitionally the
-`tsum` over `p : A.ι`; the prime index never becomes an external parameter
-of the A-section functor. -/
+canonical presentation: the lift at every instant is the logarithm of the
+pole factor plus the `tsum` over `p : A.ι`, the Euler presentation
+`g_A = (z - p_A) exp(∑ ℓ_p)` of master `def:DA`; the prime index never
+becomes an external parameter of the A-section functor. -/
 theorem canonicalAsectionPresentation_euler_prime_stack (A : ASection)
     (X B : GreatCircle.Base)
     (δ : C(unitInterval, ℂ))
     (hstart : ((δ 0 : ℂ) : OnePoint ℂ) =
-      GreatCircle.cayleyCoord (CategoryTheory.ActionCategory.back B))
+      GreatCircle.complexPoint (CategoryTheory.ActionCategory.back B))
     (hloop : δ 0 = δ 1)
-    (hpole : ∀ t, δ t ≠ (A.pole : ℂ))
     (hhalf : ∀ t, A.Ω₀ < (δ t).re)
     (t : unitInterval) :
     ((canonicalAsectionPresentation A X).euler_gpv
-        B δ hstart hloop hpole hhalf).lift t =
-      ∑' p : A.ι, A.ℓ p (δ t) :=
+        B δ hstart hloop hhalf).lift t =
+      Complex.log (δ t - (A.pole : ℂ)) + ∑' p : A.ι, A.ℓ p (δ t) :=
   rfl
 
 /-- The prime-sum tape commutes pointwise with `exp`; this is the literal
@@ -1021,17 +1109,16 @@ theorem canonicalAsectionPresentation_euler_lift_exp (A : ASection)
     (X B : GreatCircle.Base)
     (δ : C(unitInterval, ℂ))
     (hstart : ((δ 0 : ℂ) : OnePoint ℂ) =
-      GreatCircle.cayleyCoord (CategoryTheory.ActionCategory.back B))
+      GreatCircle.complexPoint (CategoryTheory.ActionCategory.back B))
     (hloop : δ 0 = δ 1)
-    (hpole : ∀ t, δ t ≠ (A.pole : ℂ))
     (hhalf : ∀ t, A.Ω₀ < (δ t).re)
     (t : unitInterval) :
     let tape :=
       (canonicalAsectionPresentation A X).euler_gpv
-        B δ hstart hloop hpole hhalf
+        B δ hstart hloop hhalf
     Complex.exp (tape.lift t) = tape.value t :=
   ((canonicalAsectionPresentation A X).euler_gpv
-    B δ hstart hloop hpole hhalf).lift_exp t
+    B δ hstart hloop hhalf).lift_exp t
 
 /-- The full Euler prime lift is tame/unique after its initial rung is
 fixed. -/
@@ -1039,24 +1126,23 @@ theorem canonicalAsectionPresentation_euler_lift_unique (A : ASection)
     (X B : GreatCircle.Base)
     (δ : C(unitInterval, ℂ))
     (hstart : ((δ 0 : ℂ) : OnePoint ℂ) =
-      GreatCircle.cayleyCoord (CategoryTheory.ActionCategory.back B))
+      GreatCircle.complexPoint (CategoryTheory.ActionCategory.back B))
     (hloop : δ 0 = δ 1)
-    (hpole : ∀ t, δ t ≠ (A.pole : ℂ))
     (hhalf : ∀ t, A.Ω₀ < (δ t).re)
     (lift' : C(unitInterval, ℂ))
     (hlift' :
       ∀ t, Complex.exp (lift' t) =
         ((canonicalAsectionPresentation A X).euler_gpv
-          B δ hstart hloop hpole hhalf).value t)
+          B δ hstart hloop hhalf).value t)
     (hzero :
       lift' 0 =
         ((canonicalAsectionPresentation A X).euler_gpv
-          B δ hstart hloop hpole hhalf).lift 0) :
+          B δ hstart hloop hhalf).lift 0) :
     lift' =
       ((canonicalAsectionPresentation A X).euler_gpv
-        B δ hstart hloop hpole hhalf).lift :=
+        B δ hstart hloop hhalf).lift :=
   ((canonicalAsectionPresentation A X).euler_gpv
-    B δ hstart hloop hpole hhalf).lift_unique lift' hlift' hzero
+    B δ hstart hloop hhalf).lift_unique lift' hlift' hzero
 
 /-- The real level of the full prime lift is continuous all the way along
 the tape. -/
@@ -1064,15 +1150,14 @@ theorem canonicalAsectionPresentation_euler_level_continuous (A : ASection)
     (X B : GreatCircle.Base)
     (δ : C(unitInterval, ℂ))
     (hstart : ((δ 0 : ℂ) : OnePoint ℂ) =
-      GreatCircle.cayleyCoord (CategoryTheory.ActionCategory.back B))
+      GreatCircle.complexPoint (CategoryTheory.ActionCategory.back B))
     (hloop : δ 0 = δ 1)
-    (hpole : ∀ t, δ t ≠ (A.pole : ℂ))
     (hhalf : ∀ t, A.Ω₀ < (δ t).re) :
     Continuous fun t =>
       (((canonicalAsectionPresentation A X).euler_gpv
-        B δ hstart hloop hpole hhalf).lift t).re :=
+        B δ hstart hloop hhalf).lift t).re :=
   ((canonicalAsectionPresentation A X).euler_gpv
-    B δ hstart hloop hpole hhalf).continuous_level
+    B δ hstart hloop hhalf).continuous_level
 
 /-- The Euler tape retains its complete winding equation.  On a loop inside
 C2's half-space the whole prime-sum lift closes at winding zero. -/
@@ -1080,17 +1165,16 @@ theorem canonicalAsectionPresentation_euler_winding (A : ASection)
     (X B : GreatCircle.Base)
     (δ : C(unitInterval, ℂ))
     (hstart : ((δ 0 : ℂ) : OnePoint ℂ) =
-      GreatCircle.cayleyCoord (CategoryTheory.ActionCategory.back B))
+      GreatCircle.complexPoint (CategoryTheory.ActionCategory.back B))
     (hloop : δ 0 = δ 1)
-    (hpole : ∀ t, δ t ≠ (A.pole : ℂ))
     (hhalf : ∀ t, A.Ω₀ < (δ t).re) :
     let tape :=
       (canonicalAsectionPresentation A X).euler_gpv
-        B δ hstart hloop hpole hhalf
+        B δ hstart hloop hhalf
     tape.lift 1 - tape.lift 0 =
       2 * Real.pi * Complex.I * ((0 : ℤ) : ℂ) :=
   ((canonicalAsectionPresentation A X).euler_gpv
-    B δ hstart hloop hpole hhalf).winding
+    B δ hstart hloop hhalf).winding
 
 /-- The complete Euler prime tape also passes through the same
 orbit--stabilizer triangle to `N` at every instant. -/
@@ -1098,23 +1182,22 @@ def canonicalAsectionPresentation_euler_toNorth (A : ASection)
     (X B : GreatCircle.Base)
     (δ : C(unitInterval, ℂ))
     (hstart : ((δ 0 : ℂ) : OnePoint ℂ) =
-      GreatCircle.cayleyCoord (CategoryTheory.ActionCategory.back B))
+      GreatCircle.complexPoint (CategoryTheory.ActionCategory.back B))
     (hloop : δ 0 = δ 1)
-    (hpole : ∀ t, δ t ≠ (A.pole : ℂ))
     (hhalf : ∀ t, A.Ω₀ < (δ t).re)
     (t : unitInterval) :
     let tape :=
       (canonicalAsectionPresentation A X).euler_gpv
-        B δ hstart hloop hpole hhalf
+        B δ hstart hloop hhalf
     ActionTransportSquare
-      (projectiveObjectFrame A X *
-        GreatCircle.diskExpAction (tape.lift t))
-      (projectiveObjectFrame A projectiveNorth *
-        GreatCircle.diskExpAction (tape.lift t)) :=
+      (projectiveTapeFrame X
+        (GreatCircle.diskExpAction (tape.lift t)))
+      (projectiveTapeFrame projectiveNorth
+        (GreatCircle.diskExpAction (tape.lift t))) :=
   positionedOrbitSquare A (orbitHomToNorth X)
     (GreatCircle.diskExpAction
       (((canonicalAsectionPresentation A X).euler_gpv
-        B δ hstart hloop hpole hhalf).lift t))
+        B δ hstart hloop hhalf).lift t))
 
 /-- Every point of every canonical GPV lift satisfies the exponential
 commuting triangle of the A-generated action. -/

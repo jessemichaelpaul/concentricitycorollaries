@@ -16,7 +16,7 @@ sorries.
 -/
 import Concentricity.ZetaSection
 import Concentricity.ZetaDivisor
-import Concentricity.ConcentricityReadout
+import Concentricity.Theorem
 
 noncomputable section
 

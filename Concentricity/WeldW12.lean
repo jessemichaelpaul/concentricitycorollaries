@@ -953,9 +953,10 @@ theorem stemWinding_rectLoop_sub_interior {x₁ x₂ y₁ y₂ : ℝ} {w : ℂ}
 namespace ASection
 
 /-- The head finsets exist for rectangles: the open rectangle is bounded,
-so `c3_atN`'s quadratic point-density traps finitely many indices
+so `c3_zeroDensity` traps finitely many indices
 (`indices_in_closedBall_finite`, PairingE2.lean). Serves W2(d). PROVED. -/
-theorem exists_rect_head_finset (A : ASection) (x₁ x₂ y₁ y₂ : ℝ) :
+theorem exists_rect_head_finset (A : ASection) [A.ZeroDensity]
+    (x₁ x₂ y₁ y₂ : ℝ) :
     ∃ s : Finset ℕ, ∀ k, k ∈ s ↔ A.sphereZero k ∈ openRect x₁ x₂ y₁ y₂ := by
   have hsub : {k : ℕ | A.sphereZero k ∈ openRect x₁ x₂ y₁ y₂}
       ⊆ {k : ℕ | A.sphereZero k ∈ Metric.closedBall 0 (|x₁| + |x₂| + |y₁| + |y₂|)} := by
@@ -1227,7 +1228,7 @@ count to the RIGHT count, because for every admissible rectangle the
 The missing producer is the same seam as E3's receipt and E1's audit: the
 cross-contour constraint `eq:placement-set` ≡ ∃β two-sided
 (`auditE1_target_iff_two_sided`). PROVED (the row itself). -/
-theorem counting_pair_of_two_levels (A : ASection) {n m : ℕ}
+theorem counting_pair_of_two_levels (A : ASection) [A.ZeroDensity] {n m : ℕ}
     (hsep : (A.sphereZero n).re < (A.sphereZero m).re) :
     ∃ β : ℝ, (A.sphereZero n).re < β ∧ β < (A.sphereZero m).re ∧
     ∃ xn₁ xn₂ yn₁ yn₂ xm₁ xm₂ ym₁ ym₂ : ℝ,

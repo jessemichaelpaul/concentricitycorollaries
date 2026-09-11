@@ -2,7 +2,7 @@
 Concentricity/ZetaDensityCore.lean
 
 Brick-2 runway item (1) (author "Execute!", 2026-07-06): ζ's QUADRATIC
-POINT-DENSITY — the discharge of `c3_atN` (C3 THROUGH N) for the ζ member:
+POINT-DENSITY — the discharge of `c3_zeroDensity` for the ζ member:
 
     Summable (fun k => 1 / (1 + ‖zetaSphereZero k‖ ^ 2)).
 
@@ -15,7 +15,7 @@ ball-counts into ξ-divisor sums; the dyadic-shell comparison closes
 through `summable_of_sum_range_le`.
 
 Jensen + growth is ζ's member-private ROUTE to the fact; the fact itself
-is C3's own convergence clause through N (`ASection.c3_atN`, author's
+is the separate quadratic density field (`ASection.c3_zeroDensity`,
 register 2026-07-06). This file sits BELOW ZetaSection so the instance
 can consume `zetaSphereZero_density`; the D0 payoff row lives in
 ZetaDensity.lean.
@@ -423,4 +423,3 @@ theorem zetaSphereZero_density :
                 (zeta_shell_count_bound hC₁ hgrow j)
           _ = g j := by rw [hg_def]
     _ ≤ ∑' j, g j := hg.sum_le_tsum _ fun j _ => hgnn j
-

@@ -11,9 +11,10 @@
 %          across the base. Its sphere projection is AsectionSlice, while
 %          the value-bearing AsectionFunctor A : B -> Grpd has normalized
 %          A-value states as fibres. Then T_A = Int_B A_A is formed. The
-%          readout is pi_0(Int_B R_A) = colim_B(pi_0 . R_A). The colimit performs the
-%          transport-generated identifications and yields one residue-C
-%          real-value singleton {c}, c in R. Hence the residue-C
+%          readout first takes pi_0(Int_B R_A). Transitivity consumes the
+%          transport-generated identifications and makes this set the singleton
+%          {kappa}; only then is the inherited read \bar L_A applied to kappa,
+%          producing c in R. Hence the residue-C
 %          zero 6-spheres have common centre c and are concentric. Classical
 %          translation and the numerical identification c=1/2 are downstream.
 %=====================================================================
@@ -169,13 +170,15 @@ objects of the inverse-image total, the A-specific projective/M\"obius transport
 positioned coordinates and the $G_2$ fibre arrow compares their slice directions. Hence this
 inverse-image total is transitive, therefore connected.
 The construction carries the real structure of the residue outputs into
-this total. Its read is a functor
-$L_A:\int_{\mathcal B}\mathcal R_A\to\operatorname{Disc}(\RR)$.
-Transitivity makes the connected-components set a singleton; applying
-$L_A$ to a connecting morphism gives equality of the two real reads.
-Thus the singleton has one real read $c$, and every residue-$\CC$ zero
-$6$-sphere has centre $c$. This is the direct readout of a connected value
-system; the component colimit need not be computed. The theorem asserts
+this total. Transitivity is applied first: connected components consume all
+morphism identifications and give
+$\pi_0(\int_{\mathcal B}\mathcal R_A)=\{\kappa\}$. Only after this collapse is
+the inherited component read
+$\overline L_A:\pi_0(\int_{\mathcal B}\mathcal R_A)\to\RR$ applied to the sole
+class $\kappa$. Writing $c=\overline L_A(\kappa)$, its certified evaluation on
+the residue states says that every residue-$\CC$ zero $6$-sphere has centre
+$c$. Thus the readout has the exact order
+$J_A\to\pi_0(J_A)=\{\kappa\}\to\RR$. The theorem asserts
 the shared centre; naming the number is the task of the corollaries.
 
 Downstream corollaries translate residue-$\CC$ zeros to classically nontrivial zeros and, for
@@ -205,14 +208,15 @@ that construction, and $\mathcal A_A$ carries its consequences into the output
 states and their morphisms. Their total is $\mathcal T_A$; its residue system is
 $\mathcal R_A$.
 
-The final categorical step is short. The residue total is transitive, so its
-connected-components set is a singleton. Its inherited real output read is a
-functor to $\operatorname{Disc}(\RR)$; applied to a morphism connecting two
-objects, that functor gives equality of their real reads. Hence all the residue
-zero spheres have one real centre. The work lies in constructing the actual
-output system and its transports from the hypotheses, before applying this
-connectedness argument. The Grothendieck construction assembles the fibres;
-no further colimit computation is required for the readout.
+The final categorical step is short. The residue total is transitive, so
+$\pi_0$ first consumes its morphisms and produces the singleton $\{\kappa\}$.
+The inherited map $\overline L_A$ is then applied to that sole class, giving
+$c=\overline L_A(\kappa)\in\RR$. Its evaluation on the semantic residue states
+identifies $c$ with every sphere centre. The work lies in constructing the
+actual output system, its transports, and that post-component evaluation from
+the hypotheses before applying this connectedness argument. The Grothendieck
+construction assembles the fibres; no further colimit computation is required
+for the readout.
 
 
 %=====================================================================
@@ -995,8 +999,9 @@ value-transport into one total object. The zero-sphere system is the inverse-ima
 $\mathcal R_A$, included by $\iota_A:\mathcal R_A\Rightarrow\mathcal A_A$; its action morphisms,
 the concrete projective/M\"obius matrices in the base and the $G_2$ automorphisms in the fibres, make
 $\int_{\mathcal B}\mathcal R_A$ transitive and hence connected.
-Its connected-components set is therefore a singleton. The inherited real output
-functor reads that singleton as one centre $c\in\RR$. The concentricity proof takes place in this residue-$\CC$ inverse-image
+Its connected-components set is therefore a singleton $\{\kappa\}$. The
+inherited post-component map $\overline L_A$ then reads $\kappa$ as one centre
+$c\in\RR$. The concentricity proof takes place in this residue-$\CC$ inverse-image
 system inside the ambient total.
 
 \section{The geometric worlds and the categorical construction}\label{sec:tower-stack}
@@ -1040,17 +1045,16 @@ functors is the tools they unlock: the total Grothendieck construction is
 what this proof uses, and other tools of action-groupoid theory and
 categorical homotopy stand ready. Thomason's theorem \cite{Thomason79}
 places the Grothendieck construction in its homotopy-colimit context. The
-proof developed here runs through ordinary connected components: the hypotheses assemble the
-A-section-specific slice-preserving total, its inverse residue-$\CC$ system is
-transitive, transitivity makes it connected, connectedness makes $\pi_0$ a
-singleton. Applying the Grothendieck-components theorem to the constructed
-functor $\mathcal R_A$ identifies that singleton with
-$\operatorname*{colim}_{\mathcal B}(\pi_0\circ\mathcal R_A)$. The
-unique real GPV fibre supplies the branch-independent real face under which
-the decoded centre-coordinate read of the positioned residue-zero states
-descends through the fibrewise components to a natural transformation
-$\pi_0\circ\mathcal R_A\Rightarrow\Delta(\RR)$, whose induced map from that
-singleton colimit reads the one real number.
+proof developed here runs through ordinary connected components: the
+hypotheses assemble the A-section-specific slice-preserving total, its inverse
+residue-$\CC$ system is transitive, transitivity makes it connected, and
+connectedness makes $\pi_0$ the singleton $\{\kappa\}$. This collapse occurs
+before the real read. The unique real GPV face supplies the inherited map
+$\overline L_A:\pi_0(\int_{\mathcal B}\mathcal R_A)\to\RR$ and its evaluation
+on the represented residue states; applying it to $\kappa$ reads the one real
+number. The Grothendieck-components theorem still identifies this singleton
+with $\operatorname*{colim}_{\mathcal B}(\pi_0\circ\mathcal R_A)$, but that
+colimit presentation is background rather than the route of the final readout.
 
 What would the graph of a slice-preserving section look like? For an ordinary function one
 draws the set of pairs (input, value). Here input and value both live on the compactified
@@ -2597,19 +2601,19 @@ $A^{\mathrm{slice}}$; and every value entry is the equivariant realization
 computed at the transported positioned point. The total is the A-section's graph made one category: what
 moves from fibre to fibre is the A-specific Euler--Weierstrass/GPV action, and the residue-$\CC$
 zero-sphere states are the degenerate-fibre outputs of this completed construction,
-produced by \textup{C3--C4}. The total is read in two ways, and both are
-functors it comes with. The projection to the base, $(b,x)\mapsto b$ and
+produced by \textup{C3--C4}. The total has its canonical projection to the
+base, $(b,x)\mapsto b$ and
 $(h,\gamma)\mapsto h$, forgets the state
 \textup{(}\texttt{CategoryTheory.Grothendieck.forget}\textup{)}; over it
 the total holds one fibre per point of the real great circle. This
 projection never moves a state into the pole fibre: passage between fibres,
 including passage to or from $p_A$, is always an actual base morphism acted
-on by the A-specific transport functor. And the
-components diagram $\pi_0\circ\mathcal A_A:\mathcal B\to\mathbf{Set}$ sends
-each base object to the set of components of its fibre; its colimit enters
-the readout through Lemma~\ref{lem:pi0-grothendieck} --- $\pi_0$ of the
-total is the colimit of the fibrewise components, which is how the next
-section turns connectedness into one real number.
+on by the A-specific transport functor. The components diagram
+$\pi_0\circ\mathcal A_A:\mathcal B\to\mathbf{Set}$ sends each base object to
+the set of components of its fibre. Lemma~\ref{lem:pi0-grothendieck}
+identifies its colimit with $\pi_0$ of the total. This is useful categorical
+background; the theorem itself first collapses the residue total to its sole
+component and only then applies its inherited real read.
 
 \begin{definition}[The projective base, the A-section functor, and the total category]\label{def:base}
 \lean{GreatCircle.Base, GreatCircle.cayleyGL, GreatCircle.diagonalGL,
@@ -2673,10 +2677,11 @@ $\mathcal T_A=\int_{\mathcal B}\mathcal A_A$.
 We now have defined our groupoids and functors, so this section defines the class of functions
 precisely and proves the theorem. Two facts about slice-preserving functions come first: the Weierstrass
 factorization that gives condition C3 its meaning, and the fact that a residue-$\CC$ zero is a whole
-$6$-sphere, a single connected component of the octonionic world. The categorical readout is
-Corollary~\ref{cor:direct-connected-readout}: a functor from the connected residue
-total to $\operatorname{Disc}(\RR)$ has one common value. The component-colimit
-lemmas are retained as general background. With these in hand
+$6$-sphere, a single connected component of the octonionic world. The
+categorical readout is Corollary~\ref{cor:direct-connected-readout}: first
+$\pi_0$ collapses the connected residue total to $\{\kappa\}$, and then its
+inherited map to $\RR$ is evaluated at $\kappa$. The component-colimit lemmas
+are retained as general background. With these in hand
 we define an A-section by its four conditions C1--C4, state and prove the Concentricity Theorem, and
 record the corollary that carries its conclusion back into the language of classical zeros.
 
@@ -2989,22 +2994,25 @@ last assertion.
 \end{proof}
 
 \begin{corollary}[Direct readout of a connected value system]\label{cor:direct-connected-readout}
-\lean{CategoryTheory.any_functor_const_on_obj}
-Let $J$ be a nonempty connected category, let $X$ be a set, and let
-$L:J\to\operatorname{Disc}(X)$ be a functor. There is a unique $c\in X$
-such that $L(P)=c$ for every object $P$ of $J$, identifying objects of
-$\operatorname{Disc}(X)$ with elements of $X$. Equivalently, the induced
-function $\pi_0(J)\to X$ reads the sole component as $c$.
-In particular, for $X=\RR$, a connected real value system with its
-real-valued read functor has one common real read.
+Let $J$ be a nonempty connected category and let $X$ be a set. Then there is
+a unique class $\kappa\in\pi_0(J)$ and, for every map
+$\overline L:\pi_0(J)\to X$, there is a unique $c\in X$ such that
+$\overline L(\xi)=c$ for every $\xi\in\pi_0(J)$; namely
+$c=\overline L(\kappa)$. Thus the order of the direct readout is
+\[
+  J\xrightarrow{\ \pi_0\ }\pi_0(J)=\{\kappa\}
+    \xrightarrow{\ \overline L\ }X.
+\]
+The first arrow consumes the morphism-generated identifications. The second
+arrow is applied only to the resulting sole component.
 \end{corollary}
 \begin{proof}
-A morphism in a discrete category has equal source and target. Applying
-$L$ to a zigzag between $P$ and $Q$ therefore gives $L(P)=L(Q)$.
-Nonemptiness supplies an object $P_0$; take $c=L(P_0)$. Evaluation at
-$P_0$ also proves uniqueness. This is the connected-components adjunction
-of \cite[\S8.3, Rem.~8.3.5]{Riehl}; its direct Mathlib form is
-\texttt{CategoryTheory.any\_functor\_const\_on\_obj} \cite{Mathlib}.
+By the connected-components criterion of \cite[\S8.3,
+Rem.~8.3.5]{Riehl}, nonemptiness and connectedness say exactly that
+$\pi_0(J)$ is a singleton. Let $\kappa$ be its sole element. Every
+$\xi\in\pi_0(J)$ is therefore $\kappa$, so every value of $\overline L$ is
+$\overline L(\kappa)$. Taking $c=\overline L(\kappa)$ proves existence, and
+evaluation at $\kappa$ proves uniqueness.
 \end{proof}
 
 \begin{remark}[Application to the output value system]\label{rmk:direct-output-readout}
@@ -3012,9 +3020,10 @@ The hypotheses construct the exponential matrix action from its unique
 GPV fibre. The A-section functor assembles the resulting output states,
 carrying their real structure into the residue total
 $J_A=\int_{\mathcal B}\mathcal R_A$. Transitivity makes this total
-connected, so $\pi_0(J_A)$ is a singleton. The induced real-valued function
-assigns that single component one value, shared by all the residue-zero
-spheres represented in the system.
+connected, so $\pi_0(J_A)=\{\kappa\}$. Only after that collapse, the inherited
+map $\overline L_A:\pi_0(J_A)\to\RR$ is applied to $\kappa$. Its evaluation
+on each represented semantic residue state identifies
+$\overline L_A(\kappa)$ with that sphere's centre.
 
 Lemmas~\ref{lem:pi0-grothendieck} and~\ref{lem:connected-readout} retain the
 general component-colimit presentation as background for the direct proof below.
@@ -3148,8 +3157,9 @@ real face is carried by the A-specific action square
 (Remark~\ref{rmk:gpv-real-fibre}).  It is not a projective base object and it
 is not yet the centre of a zero sphere.  These analytic facts belong to the
 construction of $A^{\mathrm{slice}}$ and $\mathcal A_A$; their real output
-compatibility is established in that construction and consumed by the
-direct readout after residue-total transitivity.  The residue restriction begins with the semantic
+structure supplies the post-component map and its state-evaluation theorem.
+After residue-total transitivity, $\pi_0$ is taken first and that map is
+evaluated on its sole class. The residue restriction begins with the semantic
 zero-sphere states that these functors already contain.
 
 The residue subdiagram is defined by two data, both already standing: the
@@ -3183,8 +3193,8 @@ By Lemma~\ref{lem:residue-spheres}, each point of
 \eqref{eq:semantic-c-residue-locus} determines its whole $6$-sphere as the
 $G_2$-orbit of its slice direction. Condition \textup{C3} constructs these
 zero-sphere states, and condition \textup{C4} says that their family is
-infinite.  At the pole the seed condition is the following one statement:
-after decoding the positioned action coordinate,
+infinite.  In the fibre at $p_A$, a C-residue zero-sphere state satisfies
+the following condition: its decoded positioned action coordinate
 \[
  C^{-1}\mathbin{\cdot}
    \bigl(A^{\mathrm{slice}}(p_A)\mathbin{\cdot}u\bigr)
@@ -3192,7 +3202,7 @@ after decoding the positioned action coordinate,
 belongs to the analytic locus
 \eqref{eq:semantic-c-residue-locus}. Its determined realization by
 $A_{\OO}$ is the third entry of the same triple.  A general object of the
-residue diagram is an A-specific transport of such a seed.  The
+residue diagram is an A-specific transport of such a state.  The
 positive-imaginary condition chooses one analytic representative of the
 zero sphere; transport need not preserve that choice of sign, but it
 preserves the off-Cayley-base orbit and the realized zero-sphere state.
@@ -3207,16 +3217,17 @@ and a base morphism $h_1:p_A\to a$ satisfy the concrete action-image equation
   \mathcal A_A(h_1)(x_0)=x.                       \tag{W}\label{eq:residue-action-image}
 \]
 The fibre at $p_A$ is where the hypotheses seat these states in the action:
-if $z_n$ belongs to \eqref{eq:semantic-c-residue-locus}, the pole-fibre seed
-has positioned action coordinate $C\cdot z_n$, so decoding presents the
-original analytic zero $z_n$ to $A_{\OO}$.  Condition \textup{C1} continues
+if $z_n$ belongs to \eqref{eq:semantic-c-residue-locus}, the zero-sphere state
+in the fibre at $p_A$ has positioned action coordinate $C\cdot z_n$, so
+decoding presents the original analytic zero $z_n$ to $A_{\OO}$.
+Condition \textup{C1} continues
 the factor through the pole and \textup{C3} presents it there in Weierstrass
 form. The morphism $h_1$ is evaluated by the already constructed functor
 $\mathcal A_A(h_1)$, so its projective/M\"obius action is the A-specific one
 already present in $\mathcal T_A$. This is the action-category inverse image:
 the semantic residue condition supplies the Cayley-registered zero-sphere
-seeds at the pole, and the action of $\mathcal A_A$ supplies all of their
-images over the projective base.
+states in the fibre at $p_A$, and the action of $\mathcal A_A$ supplies
+all of their images over the projective base.
 
 \emph{The objects of the residue fibre.}
 Fix a base object $a$.  The action-image equation \textup{(W)} gives the
@@ -3497,7 +3508,7 @@ x_0=\Bigl((I_1,u_1),\
  \bigl(I_1,A^{\mathrm{slice}}(p_A)\mathbin{\cdot}u_1\bigr),\
  A_{\OO}\bigl(I_1,C^{-1}\mathbin{\cdot}
    (A^{\mathrm{slice}}(p_A)\mathbin{\cdot}u_1)\bigr)\Bigr).
-                                      \tag{R}\label{eq:residue-seed-triples}
+                                      \tag{R}\label{eq:residue-pole-fibre-triple}
 \]
 Its middle entry is the positioned state of a member of the already
 constructed C-residue zero-sphere family: $I_1\in S^6$, and for some
@@ -3509,7 +3520,8 @@ Thus the stored middle coordinate is in the Cayley action register, while
 its decoded physical input is the original analytic zero $z_n$.
 
 Use also the membership data of $Q$: it is the A-specific transport of a
-pole-fibre seed with analytic zero coordinate $z_m$ in
+C-residue zero-sphere state in the fibre at $p_A$, with analytic zero
+coordinate $z_m$ in
 \eqref{eq:semantic-c-residue-locus}.  Since $\operatorname{Im}z_n>0$ and
 $\operatorname{Im}z_m>0$, their Cayley action coordinates lie off the
 Cayley image of the compactified real base.  The inverse pole frame and
@@ -3520,14 +3532,16 @@ $u_1$ and $u_Q$ lie in that same off-base orbit.
 
 This orbit comparison is already a real projective calculation.  Write
 $u_1=C\cdot w_1$ and $u_Q=C\cdot w_Q$, with
-$\operatorname{Im}w_1\ne0$ and $\operatorname{Im}w_Q\ne0$.  The real affine
-projective matrix
+$\operatorname{Im}w_1\ne0$ and $\operatorname{Im}w_Q\ne0$.  The upper-triangular
+real projective matrix
 \[
  \begin{pmatrix}\alpha&\beta\\0&1\end{pmatrix},\qquad
  \alpha=\frac{\operatorname{Im}w_Q}{\operatorname{Im}w_1},\qquad
  \beta=\operatorname{Re}w_Q-\alpha\operatorname{Re}w_1,
 \]
-is invertible and sends $w_1$ to $w_Q$.  Its Cayley conjugate therefore
+has determinant $\alpha\ne0$, so it represents an element of
+$\mathrm{PGL}(2,\RR)$. Its action $w\mapsto\alpha w+\beta$ sends
+$w_1$ to $w_Q$.  Its Cayley conjugate therefore
 sends $u_1$ to $u_Q$.  Seat this residual real projective class in a base
 arrow, using the normalized entry of the transport displayed at
 Definition~\ref{def:transport}, and choose
@@ -3652,9 +3666,10 @@ and every member of that fibre has the same real part
 $\operatorname{Re}\lambda_A$ (Remark~\ref{rmk:gpv-real-fibre}). Thus the
 Euler--Weierstrass continuation and multiplier have already been consumed in
 $A^{\mathrm{slice}}$, $\mathcal A_A$, and $\mathcal T_A$ before the residue
-restriction is made.  The unique GPV fibre and its real structure belong to those
-constructions. The final readout uses the real output functor they supply,
-after transitivity of the residue total.
+restriction is made. The unique GPV fibre and its real structure belong to
+those constructions. They supply the inherited component map and its
+evaluation on residue states. The final readout uses that map only after
+transitivity has collapsed the residue total under $\pi_0$.
 
 Condition \textup{C3} supplies the semantic C-residue zero-sphere states,
 and condition \textup{C4} makes their family infinite.
@@ -3691,22 +3706,18 @@ supplies objects, so transitivity gives
   \pi_0(J_A)=\{\kappa\}.
                                                         \tag{$\pi$}\label{eq:residue-total-singleton}
 \]
-The constructed functor is
+At this point the morphisms have already been consumed by $\pi_0$. The
+inherited read has the component set as its domain:
 \[
-  L_A:J_A\longrightarrow\operatorname{Disc}(\RR).
-                                                        \tag{L}\label{eq:residue-total-read}
-\]
-For the constructed functor $L_A:J_A\to\operatorname{Disc}(\RR)$, the
-connected-components theorem applies: since $J_A$ is nonempty and
-connected, its induced function on $\pi_0(J_A)$ has a singleton image
-$\{c\}\subseteq\RR$.
-\[
-  J_A\longrightarrow\pi_0(J_A)=\{\kappa\}
+  J_A\xrightarrow{\ \pi_0\ }\pi_0(J_A)=\{\kappa\}
        \xrightarrow{\ \overline L_A\ }\RR.
                                                         \tag{Read}\label{eq:residue-readout-chain}
 \]
-This unique real value $c$ is the common centre of all the residue-$\CC$
-zero spheres. Condition \textup{C4} supplies infinitely many such spheres.
+Set $c=\overline L_A(\kappa)$. Every semantic residue-zero state represents
+$\kappa$, and the state-evaluation property of the inherited GPV real face
+identifies its sphere centre with $\overline L_A(\kappa)$. Thus $c$ is the
+common centre of all the residue-$\CC$ zero spheres. Condition \textup{C4}
+supplies infinitely many such spheres.
 The numerical identification for $\zetaO$ belongs to the corollaries.
 \end{proof}
 

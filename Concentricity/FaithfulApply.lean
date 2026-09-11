@@ -429,7 +429,7 @@ DRIVE E — the author's constructive read, c := the top level, split at
   the PROVED attainment dichotomy (`supLevel_attained_or_escape`):
   attained horn ⊢ (A.sphereZero n).re = (A.sphereZero k₀).re (the
   pairwise face, with the §3 fibre join of n and k₀ fed); escape horn
-  ⊢ (A.sphereZero n).re = A.supLevel (with `c3_atN` — the one field the
+  ⊢ (A.sphereZero n).re = A.supLevel (with `c3_zeroDensity` — the one field the
   author flags as NOT level-blind — the divisor's march to N
   (`sphereZero_im_tendsto_atTop`, InboxWire) and the pole-side §3 join
   fed). Machine verdicts: "`exact?` could not close the goal", both
@@ -583,7 +583,7 @@ theorem concentricity_via_faithfulApply (A : ASection) :
   have h7 := A.zero_encounters_joined_concentric
   have h7' := @A.pole_encounters_joined_concentric
   -- the class fields at N; the complete enumeration; the strip
-  have h8 := A.c3_atN
+  have h8 := A.zeroDensity
   have h8' := A.c3_lowerEdge
   have h8'' := @A.sphereZero_complete
   have h8''' := @A.re_le_upperEdge

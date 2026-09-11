@@ -28,6 +28,7 @@ Statement-layer renderings (flagged for the author's skim, R6):
 import Concentricity.StemRing
 import Mathlib.Analysis.Meromorphic.Order
 import Mathlib.Analysis.Complex.Exponential
+import Mathlib.Analysis.SpecialFunctions.Pow.Complex
 import Mathlib.Topology.Compactification.OnePoint.Basic
 
 noncomputable section
@@ -99,6 +100,29 @@ structure ASection where
   semiregular typing (def:R) and is deliberately not duplicated here. -/
   c2_locMajorant : ∀ z : ℂ, Ω₀ < z.re → ∃ r > 0, ∃ u : ι → ℝ, Summable u ∧
     ∀ p, ∀ w ∈ Metric.ball z r, ‖ℓ p w‖ ≤ u p
+  /-- C2 data (the author-ruled wording repair of 2026-08-10, forced by the
+  padding counterexample: the family is "made of the primes, not merely
+  indexed by them"): each Euler index carries its own rational prime. -/
+  eulerPrime : ι → ℕ
+  /-- C2: each carried prime is prime. -/
+  eulerPrime_prime : ∀ p, Nat.Prime (eulerPrime p)
+  /-- C2: distinct indices carry distinct primes — one factor per prime. -/
+  eulerPrime_injective : Function.Injective eulerPrime
+  /-- C2 data: the prime-power coefficients — the master's `a_{p,k}`,
+  ℕ-indexed at stem level (`eulerCoeff p k` is the paper's `a_{p,k+1}`).
+  ζ instantiates with every coefficient 1. -/
+  eulerCoeff : ι → ℕ → ℝ
+  /-- C2: "with real coefficients `a_{p,k}` bounded uniformly in p and k". -/
+  eulerCoeff_bounded : ∃ C : ℝ, ∀ p k, |eulerCoeff p k| ≤ C
+  /-- C2, the prime-power logarithmic form (master: "ℓ_p(q) =
+  ∑_{k≥1} (a_{p,k}/k)·p^{-kq}"; "the prime indexes its term through its own
+  powers, not as a label"): on the half-space each ℓ_p is a power series in
+  the one base number `p^{-q}` — its own prime's inverse power. This is the
+  clause that makes an Euler product an Euler product; a family whose terms
+  are not such power series is not of this form, whatever its subscripts. -/
+  c2_form : ∀ p, ∀ z : ℂ, Ω₀ < z.re →
+    ℓ p z = ∑' k : ℕ, ((eulerCoeff p k : ℂ) / (k + 1)) *
+      ((eulerPrime p : ℂ) ^ (-z)) ^ (k + 1)
   /-- C3 data: "q is the octonionic coordinate, m ≥ 0" — the order of the
   zero at the origin. -/
   m : ℕ
@@ -152,28 +176,6 @@ structure ASection where
   Lane B's opening task; master wording waits for γ's verdict either way.
   ζ instantiates with its classical strip (member-private, legitimate). -/
   c3_lowerEdge : ∃ βlo : ℝ, ∀ k : ℕ, βlo ≤ (sphereZero k).re
-  /-- **C3 THROUGH N** (§4α transcription, third instance of the pattern after
-  `c2_locMajorant`/`c3_locMajorant`; author-ruled register, 2026-07-06). The
-  master's C3 asserts the through-the-pole product "converging locally normally
-  on 𝕆* ∖ {p₀}" (`def:A-section` C3; `prop:weierstrass` — "convergence of the
-  infinite products is part of the cited statement") — a domain that INCLUDES N,
-  where the divisor accumulates (SCAN §7(iv): C4 + compactness of S⁸ + C1's
-  cone). Read at N in the chart `def:R`'s slice-sphere typing provides
-  (f(Ω_v) ⊆ ℂ_v*; `rmk:compactify` — the section functor is the natural round
-  trip from the domain 𝕆* through the continuum of slice Riemann spheres back
-  into 𝕆*), the clause's divisor-side content is the summability of the
-  zero-spheres' squared chart-norms at N — stated totally as the quadratic
-  point-density at 0. REGISTER (author): this clause is NOT level-blind — it
-  directly ATTACHES all the levels; that is what makes an A-section special
-  where the general ring over the base 𝓑 is not. Every mirror circle closes
-  through the one N (the kernel's unit circle is the great circle; the kernel
-  of the unit imaginary octonions is degenerate exp — band and circle
-  inseparable), so this single clause serves every anchor pair: it is the D0
-  rung of the ladder that closes Island P. NOT a new hypothesis: the reading
-  of a printed clause of `def:A-section` at one point of its stated domain.
-  ζ discharges it by `zetaSphereZero_density` (Jensen + dyadic shells,
-  ZetaDensityCore.lean). -/
-  c3_atN : Summable fun n => 1 / (1 + ‖sphereZero n‖ ^ 2)
   /-- C3: "On 𝕆* ∖ {pole}, A = qᵐ · R · e^g · ∏ₙ 𝓔(·; qₙ)" — over the **full
   divisor**, which includes the pole with multiplicity −1 (PLAN §8, author-ruled
   transcription repair 2026-07-04: classically Hadamard factors (s−1)ζ(s); the
@@ -199,8 +201,27 @@ structure ASection where
   slice preservation of values; carried here as a field of the compactified
   data, per `rmk:compactify`.) -/
   valueAtInfinity_real : ∀ z : ℂ, valueAtInfinity = (z : OnePoint ℂ) → z.im = 0
+  /-- The marked value at `N` is the number the corrected C2 selects: every
+  prime-power term decays as `re q → +∞`, so the section tends to `1` along
+  the half-space, and the assigned marked value agrees with that one genuine
+  limit (the master's `rmk:infty-marked`).  No continuity at `N` is asserted
+  --- a limit along the one approach the construction travels, nothing
+  more. -/
+  valueAtInfinity_one : valueAtInfinity = ((1 : ℂ) : OnePoint ℂ)
 
 namespace ASection
+
+/-- An optional quadratic-density hypothesis on the enumerated nonreal
+zeros.  It is deliberately separate from `ASection`: it is neither an
+evaluation of C3 at the domain compactification point nor part of the
+finite-pole Euler--Weierstrass continuation.  Auxiliary analytic arguments
+that need it must request it explicitly. -/
+class ZeroDensity (A : ASection) : Prop where
+  summable : Summable fun n => 1 / (1 + ‖A.sphereZero n‖ ^ 2)
+
+theorem zeroDensity (A : ASection) [ZeroDensity A] :
+    Summable fun n => 1 / (1 + ‖A.sphereZero n‖ ^ 2) :=
+  ZeroDensity.summable
 
 /-- C2's closing clause, DERIVED (R10): "in particular A is zero-free on
 Ω₀" — the exponential never vanishes. -/

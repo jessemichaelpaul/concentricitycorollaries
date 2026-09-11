@@ -102,7 +102,7 @@ DISJOINT with exactly additive cardinality (`openRect_disjoint_of_le` +
 [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 missing joint must kill, it is not the kill. PROVED. -/
-theorem two_center_disjoint_counts (A : ASection) {n m : ℕ}
+theorem two_center_disjoint_counts (A : ASection) [A.ZeroDensity] {n m : ℕ}
     (hsep : (A.sphereZero n).re < (A.sphereZero m).re) :
     ∃ β : ℝ, (A.sphereZero n).re < β ∧ β < (A.sphereZero m).re ∧
     ∃ xn₁ xn₂ yn₁ yn₂ xm₁ xm₂ ym₁ ym₂ : ℝ,

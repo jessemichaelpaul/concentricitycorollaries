@@ -153,7 +153,7 @@ theorem normalizedZeroLift_norm (A : ASection) (n : ℕ) (I : SphereWorld) :
 author's clause, 2026-07-11): past every ball, every world's realization of
 every sufficiently high zero — the spheres crowd the one compactified
 witness together. Rides the green march `sphereZero_norm_tendsto_atTop`. -/
-theorem normalizedZero_collapse_at_N (A : ASection) (R : ℝ) :
+theorem normalizedZero_collapse_at_N (A : ASection) [A.ZeroDensity] (R : ℝ) :
     ∀ᶠ n in Filter.atTop, ∀ I : SphereWorld,
       R < Octonion.norm (A.normalizedZeroLift n I) := by
   filter_upwards [A.sphereZero_norm_tendsto_atTop.eventually_gt_atTop R] with n hn I

@@ -373,7 +373,7 @@ theorem finite_BL (S : Multiset ℂ) (β : ℝ) (hS : ∀ z ∈ S, z.im ≠ 0) :
 
 /- D2 — the class reduction — its reduction stock is proved at the end of
 this file: `liSum_summable`, `re_le_upperEdge`, the strip rows, and the
-`c3_atN` density — the same end-of-file pattern as D0 and D3. -/
+`c3_zeroDensity` — the same end-of-file pattern as D0 and D3. -/
 
 /- D3 — the first side — is PROVED at the end of this file
 (`ASection.liSum_first_side`, after the reduction stock it consumes:
@@ -707,17 +707,19 @@ vindicates): convergence is a possession of the class — C3's divisor
 control with C1 closing the divisor through the pole is exactly the
 density that makes the paired kernel sums converge; the sorry that stood
 here was "a debt of transcription, not of belief" (R8). DEBT PAID
-(2026-07-06): the transcription is `c3_atN` — C3's own convergence clause
+(2026-07-06): the quadratic-density input is `c3_zeroDensity`; it is not an
+evaluation of C3 at the domain compactification point
 through N, the point where the divisor accumulates and every mirror
 circle closes — consumed through the PROVED reduction
 `liSum_summable_of_density_at` at c₀ = 0 (center-shift + the strip +
 the Sekatskii-(ii) bridge + the paired binomial comparison). One clause,
 every anchor pair, every n: the attachment of all the levels is the
 section's own possession. Burn-order fence LIFTED: D3/D2 may land. -/
-theorem ASection.liSum_summable (A : ASection) (a β : ℝ) (n : ℕ) :
+theorem ASection.liSum_summable (A : ASection) [A.ZeroDensity]
+    (a β : ℝ) (n : ℕ) :
     Summable fun k => 2 * (liKernel n a β (A.sphereZero k)).re := by
   refine A.liSum_summable_of_density_at (c₀ := 0) ?_ a β n
-  exact A.c3_atN.congr fun k => by rw [Complex.ofReal_zero, sub_zero]
+  exact A.zeroDensity.congr fun k => by rw [Complex.ofReal_zero, sub_zero]
 
 /-- **D3 — the first side, PROVED** (ladder L1; from
 `zero_free_on_halfSpace` (C2) — every level is bounded above by the
@@ -1124,12 +1126,13 @@ the tail's deviation base `1 + |d|/X₀` sits strictly under the wrong-sided
 ratio modulus `r`; the head — every zero within the threshold, plus the
 wrong-sided one — goes to the slack-carrying return engine, whose `rⁿ`
 dominates head cardinality AND the tail majorant
-`4(n·|d|·Mst + X₀²·(1+|d|/X₀)ⁿ)·E` (`E` the `c3_atN` density, center-shifted
+`4(n·|d|·Mst + X₀²·(1+|d|/X₀)ⁿ)·E` (`E` the `c3_zeroDensity`, center-shifted
 to the mirror anchor; the strip `c3_lowerEdge` + `re_le_upperEdge` bounds the
 `j = 1` binomial term). Junk-tsum hygiene (header rider): the split is
 performed on the summable sum itself, so the negativity is about a genuine
 limit, never the divergent-tsum branch. PROVED. -/
-private theorem ASection.exists_liSum_neg (A : ASection) {a β : ℝ} (k₀ : ℕ)
+private theorem ASection.exists_liSum_neg (A : ASection) [A.ZeroDensity]
+    {a β : ℝ} (k₀ : ℕ)
     (hwrong : 0 < (β - a) * ((A.sphereZero k₀).re - β)) :
     ∃ n : ℕ, 1 ≤ n ∧ A.liSum a β n < 0 := by
   classical
@@ -1169,7 +1172,7 @@ private theorem ASection.exists_liSum_neg (A : ASection) {a β : ℝ} (k₀ : �
   -- the density at the mirror anchor, and its tail threshold
   have hdc : Summable fun k => 1 / (1 + ‖A.sphereZero k - (c : ℂ)‖ ^ 2) := by
     have h0 : Summable fun k => 1 / (1 + ‖A.sphereZero k - ((0 : ℝ) : ℂ)‖ ^ 2) :=
-      A.c3_atN.congr fun k => by rw [Complex.ofReal_zero, sub_zero]
+      A.zeroDensity.congr fun k => by rw [Complex.ofReal_zero, sub_zero]
     exact summable_inv_one_add_norm_sq_center_shift h0 c
   have hev : ∀ᶠ k in Filter.atTop, X₀ ≤ ‖A.sphereZero k - (c : ℂ)‖ := by
     have h0 : ∀ᶠ k in Filter.atTop,
@@ -1323,4 +1326,3 @@ theorem ASection.liSum_second_side (A : ASection) :
     rw [liKernel_eq_ratio, Complex.sub_re, Complex.one_re]
     linarith
   linarith
-

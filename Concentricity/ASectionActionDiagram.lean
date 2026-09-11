@@ -255,6 +255,41 @@ theorem AsectionActionOutput_eq
     AsectionActionOutput A X =
       AsectionActionPositioned A X ⋙ AsectionStateOutput A := rfl
 
+/-- The value eye of the positioned action graph is the input eye followed
+by the equivariant realization of this same fixed A-section.  This is the
+explicit in/out triangle for the accepted action fibre; no ambient Cayley
+value functor and no independently chosen output enters the graph. -/
+theorem AsectionActionOutput_eq_input_then_equivariant
+    (A : ASection) (X : GreatCircle.Base) :
+    AsectionActionOutput A X =
+      (AsectionActionPositioned A X ⋙ AsectionStateInput A) ⋙
+        A.AsectionEquivariant := by
+  calc
+    AsectionActionOutput A X =
+        AsectionActionPositioned A X ⋙ AsectionStateOutput A := rfl
+    _ = AsectionActionPositioned A X ⋙
+        (AsectionStateInput A ⋙ A.AsectionEquivariant) :=
+      congrArg (fun F => AsectionActionPositioned A X ⋙ F)
+        (AsectionState_input_then_equivariant A).symm
+    _ = (AsectionActionPositioned A X ⋙ AsectionStateInput A) ⋙
+        A.AsectionEquivariant := rfl
+
+/-- Objectwise reading of the same fixed-A triangle: the stored value is
+exactly `AsectionEquivariant A` evaluated on the positioned input eye. -/
+theorem AsectionActionState_value_eq_equivariant_input
+    (A : ASection) {X : GreatCircle.Base}
+    (x : AsectionActionFiber A X) :
+    x.value =
+      (A.AsectionEquivariant).obj
+        ((AsectionStateInput A).obj x.positioned) := by
+  calc
+    x.value = (AsectionStateOutput A).obj x.positioned := x.value_realized
+    _ = (AsectionStateInput A ⋙ A.AsectionEquivariant).obj x.positioned :=
+      congrArg (fun F : AsectionStateWorld A ⥤ H1 => F.obj x.positioned)
+        (AsectionState_input_then_equivariant A).symm
+    _ = (A.AsectionEquivariant).obj
+        ((AsectionStateInput A).obj x.positioned) := rfl
+
 @[simp] theorem AsectionActionState_ofInput_input
     (A : ASection) (X : GreatCircle.Base)
     (x : AsectionStateWorld A) :
@@ -281,6 +316,156 @@ def AsectionActionTransport (A : ASection)
     AsectionActionFiber A X ⟶ AsectionActionFiber A Y :=
   (orbitStabilizerActionSquare A f).actionStateTransport A
 
+/-- master `def:gpv-transport`, `def:transport`: the GPV action square on
+the actual source and target fibres. The endpoint identifications are
+proved from the continued factor, before constructing the state transport. -/
+def GpvTransport.stateActionSquare {A : ASection}
+    {X Y : GreatCircle.Base} (τ : GpvTransport A X Y) (f : X ⟶ Y) :
+    ActionTransportSquare (projectiveObjectFrame A X)
+      (projectiveObjectFrame A Y) where
+  left := (projectiveGpvActionSquare A f τ).left
+  right := (orbitStabilizerActionSquare A f).right
+  commutes := by
+    rw [← (projectiveGpvActionSquare_legs A f τ).2]
+    simpa only [τ.diskExpAction_zero, τ.diskExpAction_one] using
+      (projectiveGpvActionSquare A f τ).commutes
+
+/-- The GPV square and the production square are equal as whole squares,
+including their input leg, rather than only their positioned matrix. -/
+theorem GpvTransport.stateActionSquare_eq {A : ASection}
+    {X Y : GreatCircle.Base} (τ : GpvTransport A X Y) (f : X ⟶ Y) :
+    τ.stateActionSquare f = orbitStabilizerActionSquare A f := by
+  apply ActionTransportSquare.ext
+  · exact (projectiveGpvActionSquare_legs A f τ).1
+  · rfl
+
+/-- master `def:transport`: apply the GPV square to the complete graph of
+the A-section's equivariant realization. -/
+def GpvTransport.stateTransport {A : ASection}
+    {X Y : GreatCircle.Base} (τ : GpvTransport A X Y) (f : X ⟶ Y) :
+    AsectionActionFiber A X ⥤ AsectionActionFiber A Y :=
+  (τ.stateActionSquare f).actionStateTransport A
+
+/-- Equality of the complete functors identifies GPV transport with the
+transport in `A_A`, including its positioned state, value, and G₂ arrows. -/
+theorem GpvTransport.stateTransport_eq {A : ASection}
+    {X Y : GreatCircle.Base} (τ : GpvTransport A X Y) (f : X ⟶ Y) :
+    τ.stateTransport f = AsectionActionTransport A f := by
+  unfold GpvTransport.stateTransport
+  rw [τ.stateActionSquare_eq]
+  rfl
+
+/-- The choice of GPV run or logarithmic lift does not change the complete
+state functor assigned to the given projective arrow. -/
+theorem GpvTransport.stateTransport_independent {A : ASection}
+    {X Y : GreatCircle.Base} (τ σ : GpvTransport A X Y) (f : X ⟶ Y) :
+    τ.stateTransport f = σ.stateTransport f := by
+  rw [τ.stateTransport_eq, σ.stateTransport_eq]
+
+/-- master `lem:exp-degenerate`, `def:states`: all directions and winding
+branches of the negative-real source fibre give the same actual source
+groupoid of `A_A`. This applies the full octonionic fibre theorem. -/
+theorem GpvTransport.degenerate_source_state_fibre {A : ASection}
+    {X Y : GreatCircle.Base} (τ : GpvTransport A X Y)
+    {r : ℝ} (hr : 0 < r) (hv : τ.value 0 = -(r : ℂ))
+    (q : Octonion) (hq : Octonion.exp q = Octonion.ofReal (-r)) :
+    ∃ I : SphereWorld, ∃ k : ℤ,
+      q = Octonion.sliceEmbed I.val
+        ⟨Real.log r, ((2 * k + 1 : ℤ) : ℝ) * Real.pi⟩ ∧
+      Octonion.re q = Real.log r ∧
+      AsectionActionStateFiber A (GreatCircle.diskExpAction
+        ⟨Real.log r, ((2 * k + 1 : ℤ) : ℝ) * Real.pi⟩) =
+          AsectionActionFiber A X := by
+  obtain ⟨I, k, hq', hm, hreal⟩ :=
+    (τ.source_degenerate_fibre_action hr hv q).mp hq
+  exact ⟨I, k, hq', hreal, congrArg (AsectionActionStateFiber A) hm⟩
+
+/-- master `rmk:gpv-real-fibre`, `def:states`: every logarithm in the
+source exponential fibre gives the same state groupoid and real level.
+This has no sign restriction on the continued multiplier. -/
+theorem GpvTransport.source_fibre_state_and_level {A : ASection}
+    {X Y : GreatCircle.Base} (τ : GpvTransport A X Y)
+    (w : ℂ) (hw : Complex.exp w = τ.value 0) :
+    AsectionActionStateFiber A (GreatCircle.diskExpAction w) =
+      AsectionActionFiber A X ∧ w.re = (τ.lift 0).re := by
+  have he : Complex.exp w = Complex.exp (τ.lift 0) :=
+    hw.trans (τ.lift_exp 0).symm
+  have hm : GreatCircle.diskExpAction w =
+      GreatCircle.diskExpAction (τ.lift 0) := by
+    apply congrArg GreatCircle.diskDiagonalMoebiusHom
+    exact Units.ext he
+  constructor
+  · rw [hm, τ.diskExpAction_zero]
+  · have hn := congrArg (fun z : ℂ => ‖z‖) he
+    simp only [Complex.norm_exp] at hn
+    exact Real.exp_injective hn
+
+/-- The target version of the same GPV fibre statement. -/
+theorem GpvTransport.target_fibre_state_and_level {A : ASection}
+    {X Y : GreatCircle.Base} (τ : GpvTransport A X Y)
+    (w : ℂ) (hw : Complex.exp w = τ.value 1) :
+    AsectionActionStateFiber A (GreatCircle.diskExpAction w) =
+      AsectionActionFiber A Y ∧ w.re = (τ.lift 1).re := by
+  have he : Complex.exp w = Complex.exp (τ.lift 1) :=
+    hw.trans (τ.lift_exp 1).symm
+  have hm : GreatCircle.diskExpAction w =
+      GreatCircle.diskExpAction (τ.lift 1) := by
+    apply congrArg GreatCircle.diskDiagonalMoebiusHom
+    exact Units.ext he
+  constructor
+  · rw [hm, τ.diskExpAction_one]
+  · have hn := congrArg (fun z : ℂ => ‖z‖) he
+    simp only [Complex.norm_exp] at hn
+    exact Real.exp_injective hn
+
+/-- master `def:DA`, `def:states`: the C1-regularized multiplier generates
+the state groupoid at the pole. -/
+theorem regularizedPoleChart_state_fibre (A : ASection) :
+    AsectionActionStateFiber A
+      (A.regularizedPoleChartAction (A.pole : ℂ)
+        A.distinguishedPoleFactor_ne_zero) =
+      AsectionActionFiber A (projectivePole A) := by
+  rw [A.regularizedPoleChartAction_at_pole]
+  change AsectionActionStateFiber A A.distinguishedDiskAction =
+    AsectionActionStateFiber A (projectiveObjectFrame A (projectivePole A))
+  rw [projectiveObjectFrame_pole]
+
+/-- master `def:DA`, `def:states`: the already-proved Euler and
+Weierstrass matrix identities identify the complete generated state
+groupoids on the punctured pole chart. -/
+theorem euler_weierstrass_state_fibres (A : ASection) :
+    ∀ᶠ z in nhdsWithin (A.pole : ℂ) {(A.pole : ℂ)}ᶜ,
+      ∃ (hg : A.distinguishedPoleFactor z ≠ 0)
+        (hp : z - (A.pole : ℂ) ≠ 0)
+        (hw : z ^ A.m * A.Rfac z * Complex.exp (A.gfac z) *
+          ∏' n, spherePrimary (A.genus n) (A.sphereZero n) z ≠ 0),
+        (A.Ω₀ < z.re →
+          AsectionActionStateFiber A (A.regularizedPoleChartAction z hg) =
+            AsectionActionStateFiber A
+              (GreatCircle.diskDiagonalMoebiusHom
+                (Units.mk0 (z - (A.pole : ℂ)) hp) * A.eulerDiskAction z)) ∧
+        AsectionActionStateFiber A (A.regularizedPoleChartAction z hg) =
+          AsectionActionStateFiber A
+            (GreatCircle.diskDiagonalMoebiusHom
+              (Units.mk0 (z ^ A.m * A.Rfac z * Complex.exp (A.gfac z) *
+                ∏' n, spherePrimary (A.genus n) (A.sphereZero n) z) hw)) := by
+  filter_upwards [A.distinguished_euler_weierstrass_one_action]
+    with z hz
+  obtain ⟨hg, hp, hw, he, hw'⟩ := hz
+  exact ⟨hg, hp, hw,
+    fun hhalf => congrArg (AsectionActionStateFiber A) (he hhalf),
+    congrArg (AsectionActionStateFiber A) hw'⟩
+
+/-- The regularized Euler/GPV boundary acts on the constrained physical
+states by exactly the transport used in `AsectionActionDiagram`.  This is
+the functor-level face of the boundary-square binding. -/
+theorem eulerWeierstrassNorthBoundary_actionStateTransport
+    (A : ASection) {X Y : GreatCircle.Base} (f : X ⟶ Y) :
+    (A.eulerWeierstrassNorthBoundarySquare f).actionStateTransport A =
+      AsectionActionTransport A f := by
+  rw [A.eulerWeierstrassNorthBoundarySquare_eq_orbitStabilizer]
+  rfl
+
 @[simp] theorem AsectionActionTransport_obj_input (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y)
     (x : AsectionActionFiber A X) :
@@ -294,6 +479,30 @@ def AsectionActionTransport (A : ASection)
     ((AsectionActionTransport A f).obj x).positioned =
       (coordinateTransport A
         (orbitStabilizerActionSquare A f).left).obj x.positioned := rfl
+
+/-- master `def:transport`, the normalized-input entry read directly: the
+transported input is the source input acted on by the one composition
+`A^slice(b)⁻¹ · A^slice(h) · A^slice(a)` the master displays — equal to the
+square's right leg by
+`orbitStabilizerActionSquare_right_eq_frame_conjugation`. -/
+theorem AsectionActionTransport_obj_input_frame_conjugation (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y)
+    (x : AsectionActionFiber A X) :
+    ((AsectionActionTransport A f).obj x).input =
+      (coordinateTransport A
+        ((projectiveObjectFrame A Y)⁻¹ * projectiveArrowElement A f *
+          projectiveObjectFrame A X)).obj x.input := by
+  rw [AsectionActionTransport_obj_input,
+    orbitStabilizerActionSquare_right_eq_frame_conjugation]
+
+/-- master `def:transport`, the middle entry: the positioned state moves by
+the assigned action `A^slice(h)` itself. -/
+theorem AsectionActionTransport_obj_positioned_arrowElement (A : ASection)
+    {X Y : GreatCircle.Base} (f : X ⟶ Y)
+    (x : AsectionActionFiber A X) :
+    ((AsectionActionTransport A f).obj x).positioned =
+      (coordinateTransport A
+        (projectiveArrowElement A f)).obj x.positioned := rfl
 
 @[simp] theorem AsectionActionTransport_obj_value (A : ASection)
     {X Y : GreatCircle.Base} (f : X ⟶ Y)

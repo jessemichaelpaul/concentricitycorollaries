@@ -368,18 +368,18 @@ theorem offReal_value_loop_closes (A : ASection) (z : unitInterval → ℂ)
 end ASection
 
 /-! ## §D — the divisor marches to N (the factorization's convergence
-content at N, wired from `c3_atN`)
+quadratic zero-density input, wired from `c3_zeroDensity`)
 
 Master `def:A-section` C3 asserts the product "converging locally
 normally on 𝕆* ∖ {p₀}" — read at N as the quadratic point-density
-`c3_atN` (the field's docstring, author-ruled 2026-07-06). The printed
+`c3_zeroDensity` (the field's corrected finite-domain register). The printed
 anchor in the inbox factorization paper is the divisor-discreteness
 clause consumed by AdFslice Prop 3.1's proof ([INBOX], proof of case (ii),
 citing the GSS book Theorem 3.12: "every closed ball of radius < 1
 contains only finitely many real and spherical zeroes", with |bₙ| → 1,
 |cₙ| → 1) — for the A-section's one-pole class the balls exhaust 𝕆* ∖ {N}
 and the march is to N. The finite-in-every-ball row is already PROVED
-(`indices_in_closedBall_finite`, PairingE2, from `c3_atN`); wired here is
+(`indices_in_closedBall_finite`, PairingE2, from `c3_zeroDensity`); wired here is
 the march itself, and — jointly with C2's wall and C3's lower edge — its
 direction: UP the strip. -/
 
@@ -389,12 +389,12 @@ namespace ASection
 A-section analogue of [INBOX] AdFslice Prop 3.1(ii)'s "|bₙ| → 1, |cₙ| → 1"
 (GSS Thm 3.12 through the exhaustion — there the boundary is |q| = 1, here
 it is the one point N of `rmk:compactify`): C3's convergence through N
-forces the enumeration to march to N. Fed by `c3_atN` through the PROVED
+forces the enumeration to leave every bounded set. Fed by `c3_zeroDensity` through the PROVED
 `indices_in_closedBall_finite`. WHY-WIRE: C4 gives infinitely many
 zero-spheres, C3-through-N herds all but finitely many of them out of
 every chart ball — the degenerate fibre of the transport accumulates at
 the cone's tip alone (SCAN §7(iv), now quantitative). PROVED. -/
-theorem sphereZero_norm_tendsto_atTop (A : ASection) :
+theorem sphereZero_norm_tendsto_atTop (A : ASection) [A.ZeroDensity] :
     Filter.Tendsto (fun n => ‖A.sphereZero n‖) Filter.atTop Filter.atTop := by
   rw [← Nat.cofinite_eq_atTop]
   refine Filter.tendsto_atTop.mpr fun R => ?_
@@ -407,7 +407,7 @@ theorem sphereZero_norm_tendsto_atTop (A : ASection) :
 
 /-- **The divisor climbs the strip to N**: Im ρₙ → +∞ — the march of
 `sphereZero_norm_tendsto_atTop` REDIRECTED by the two walls. Jointly
-consumed: `c3_atN` (the march, through `indices_in_closedBall_finite`),
+consumed: `c3_zeroDensity` (the escape from bounded sets, through `indices_in_closedBall_finite`),
 `c3_lowerEdge` (the left wall), `c2_zero_free` at the divisor (the right
 wall, through the PROVED `re_le_upperEdge` — C2's "each zero-free on Ω₀"
 read at C3's enumeration), and `c3_sphere_nonreal` (the upper-half
@@ -418,7 +418,7 @@ class-wide form of the classical zeros-march-up-the-critical-strip
 picture, for EVERY A-section. WHY-WIRE: connects the divisor's POSITIONS
 to the N-passage geometry that C1's cone owns; the counting rows of
 WeldW12 (`stemWinding_F_stripRect`) count exactly these climbers. PROVED. -/
-theorem sphereZero_im_tendsto_atTop (A : ASection) :
+theorem sphereZero_im_tendsto_atTop (A : ASection) [A.ZeroDensity] :
     Filter.Tendsto (fun n => (A.sphereZero n).im) Filter.atTop Filter.atTop := by
   obtain ⟨βlo, hlo⟩ := A.c3_lowerEdge
   have hkey : ∀ n, ‖A.sphereZero n‖ + -(max |βlo| |A.Ω₀|) ≤ (A.sphereZero n).im := by
@@ -443,7 +443,7 @@ only finitely many enumerated zero-spheres — the strip walls
 (`c3_lowerEdge` left, `c2_zero_free`-at-the-divisor right through
 `re_le_upperEdge`) close the half-infinite band {Im ≤ T} of upper-half
 representatives (`c3_sphere_nonreal`) into a bounded region, and
-`c3_atN`'s point-density (`indices_in_closedBall_finite`, PairingE2,
+`c3_zeroDensity` (`indices_in_closedBall_finite`, PairingE2,
 PROVED) traps it. The [INBOX] AdFslice Prop 3.1(ii)/GSS Thm 3.12
 finiteness clause in the vocabulary of WeldW12's counting rows: the
 trapped-count of `stemWinding_F_stripRect` stabilizes in T — the
@@ -452,7 +452,7 @@ EVERY A-section. WHY-WIRE: priority (ii)-(iii) joint — the divisor's
 POSITIONS are countable-by-height exactly because C2, C3 and
 C3-through-N hold together; the winding ledger counts finite totals.
 PROVED. -/
-theorem indices_below_height_finite (A : ASection) (T : ℝ) :
+theorem indices_below_height_finite (A : ASection) [A.ZeroDensity] (T : ℝ) :
     {n : ℕ | (A.sphereZero n).im ≤ T}.Finite := by
   obtain ⟨βlo, hlo⟩ := A.c3_lowerEdge
   refine (A.indices_in_closedBall_finite 0 (max |βlo| |A.Ω₀| + |T|)).subset

@@ -195,10 +195,11 @@ the pin: the K-weighted circle pairing of `logDeriv F` reads off the
 trapped zeros with weight `2πi·K` each — B2.1's residue ledger in its
 summed, integral form, an argument-principle instance for the A-section. -/
 
-/-- Any closed disk holds finitely many enumeration indices: `c3_atN`'s
+/-- Any closed disk holds finitely many enumeration indices: `c3_zeroDensity`'s
 quadratic point-density sends the terms `1/(1 + ‖ρₖ‖²)` to zero, while
 indices with `ρₖ` in a bounded set keep them bounded below. PROVED. -/
-theorem indices_in_closedBall_finite (A : ASection) (c : ℂ) (R : ℝ) :
+theorem indices_in_closedBall_finite (A : ASection) [A.ZeroDensity]
+    (c : ℂ) (R : ℝ) :
     {k : ℕ | A.sphereZero k ∈ Metric.closedBall c R}.Finite := by
   by_contra hinf
   rw [Set.not_finite] at hinf
@@ -219,7 +220,7 @@ theorem indices_in_closedBall_finite (A : ASection) (c : ℂ) (R : ℝ) :
     gcongr
   have hev : ∀ᶠ k in Filter.atTop,
       1 / (1 + ‖A.sphereZero k‖ ^ 2) < 1 / (1 + (‖c‖ + R) ^ 2) := by
-    have h := A.c3_atN.tendsto_cofinite_zero.eventually_lt_const
+    have h := A.zeroDensity.tendsto_cofinite_zero.eventually_lt_const
       (show (0 : ℝ) < 1 / (1 + (‖c‖ + R) ^ 2) by positivity)
     rwa [Nat.cofinite_eq_atTop] at h
   obtain ⟨M, hM⟩ := Filter.eventually_atTop.mp hev
@@ -607,7 +608,7 @@ theorem circleIntegral_mul_logDeriv (A : ASection) {c : ℂ} {R : ℝ}
 
 /-- The head finsets exist: the canonical finset of indices a disk traps.
 PROVED from `indices_in_closedBall_finite`. -/
-theorem exists_head_finset (A : ASection) (c : ℂ) (R : ℝ) :
+theorem exists_head_finset (A : ASection) [A.ZeroDensity] (c : ℂ) (R : ℝ) :
     ∃ s : Finset ℕ, ∀ k, k ∈ s ↔ A.sphereZero k ∈ Metric.ball c R := by
   have hfin : {k : ℕ | A.sphereZero k ∈ Metric.ball c R}.Finite :=
     (A.indices_in_closedBall_finite c R).subset fun k hk =>
@@ -690,7 +691,8 @@ horocycle-style disks centered on the imaginary axis. -/
 /-- Head sums along any eventually-covering finset sequence tend to the
 full kernel sum — `liSum_summable` (D0) read through the `HasSum` filter.
 PROVED. -/
-theorem tendsto_head_sums_liSum (A : ASection) (a β : ℝ) (n : ℕ)
+theorem tendsto_head_sums_liSum (A : ASection) [A.ZeroDensity]
+    (a β : ℝ) (n : ℕ)
     {s : ℕ → Finset ℕ} (hcover : ∀ k, ∀ᶠ j in Filter.atTop, k ∈ s j) :
     Filter.Tendsto
       (fun j => ∑ k ∈ s j, 2 * (liKernel n a β (A.sphereZero k)).re)
@@ -735,7 +737,8 @@ family of admissible upper-half disks, the normalized K-weighted circle
 pairings of the continued log-derivative converge to the BL ladder's
 kernel sum. Everything on the domain side of D2's iff is hereby expressed
 in the VALUE register — contour integrals of `K · F′/F`. PROVED. -/
-theorem liSum_eq_lim_circleIntegral_re (A : ASection) (a β : ℝ) (n : ℕ)
+theorem liSum_eq_lim_circleIntegral_re (A : ASection) [A.ZeroDensity]
+    (a β : ℝ) (n : ℕ)
     {c : ℕ → ℂ} {R : ℕ → ℝ} (hR : ∀ j, 0 < R j)
     (hup : ∀ j, ∀ z ∈ Metric.closedBall (c j) (R j), 0 < z.im)
     (hsph : ∀ j k, A.sphereZero k ∉ Metric.sphere (c j) (R j))
@@ -873,7 +876,8 @@ upper-half disks along which the normalized `K`-weighted circle pairings of
 `logDeriv F` converge to `liSum a β n`. The D2 sentence's every summand now
 reads in the VALUE register. PROVED (`exists_exhausting_disks` +
 `liSum_eq_lim_circleIntegral_re`). -/
-theorem exists_liSum_contour_representation (A : ASection) (a β : ℝ) (n : ℕ) :
+theorem exists_liSum_contour_representation (A : ASection) [A.ZeroDensity]
+    (a β : ℝ) (n : ℕ) :
     ∃ (c : ℕ → ℂ) (R : ℕ → ℝ), (∀ j, 0 < R j) ∧
       (∀ j, ∀ z ∈ Metric.closedBall (c j) (R j), 0 < z.im) ∧
       Filter.Tendsto

@@ -52,7 +52,7 @@ connected `{pole}ᶜ`) against C2's zero-freeness
 (`supLevel_attained_or_escape`): the top level is attained, OR the
 level-maximizing zeros escape to N in norm
 (`tendsto_norm_atTop_of_levels_tendsto_supLevel`) — the configuration
-`c3_atN` (C3 read at N) is about. Neither horn closes the node: both are
+`c3_zeroDensity` is about. Neither horn closes the node: both are
 [scrubbed 2026-07-07, author's ruling: the formalization follows the author's argument with no counter-model assumptions]
 
 THE EXACT RESISTING GOAL (R6, the honest pin — recorded, not sorried):
