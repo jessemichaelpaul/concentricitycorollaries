@@ -415,6 +415,7 @@ loadContext root = do
         , context
         , contract
         , anchors
+        , "A known open sorry or frame dependency is the assigned implementation work, not a qualification of Jesse's argument. At the active node, carry the GPV-derived matrix action into the production diagram. Treat a Lean type mismatch as an exact interface repair; do not repeat the known gap as a stopping reason."
         , "If Lean exposes an interface mismatch, classify it as an implementation issue. Do not redesign Jesse's mathematics. If the sources genuinely conflict, pause production and enter one-question author explain-back."
         ]
     )

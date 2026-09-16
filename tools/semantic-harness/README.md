@@ -28,6 +28,14 @@ the intended production dependency path. A manifest can claim a build or
 review receipt, but the current public CLI cannot mint a trusted receipt or
 promote that claim to a release certificate.
 
+A known open goal is work to implement, not evidence against the authored
+argument. The `known-open-goal`, `interface-mismatch`, and
+`missing-lean-implementation` routes point to the next edit on the live
+production path. A failed Lean term calls for its exact expected and actual
+types and a concrete interface repair. The optional adapter injects this
+instruction into local task context; it does not inspect assistant prose or
+add a new pause gate.
+
 ## Files
 
 - `SemanticHarness.hs`, `Main.hs`, `Spec.hs`: policy library, CLI, and tests.
@@ -64,6 +72,7 @@ The command line program accepts:
 
 ```text
 semantic-harness policy
+semantic-harness route known-open-goal
 semantic-harness route <signal>
 semantic-harness lint <candidate.manifest>
 semantic-harness assess <candidate.manifest>

@@ -195,6 +195,7 @@ data Signal
   | GovernanceEditProposed
   | CleanupOrRevertProposed
   | StopRequested
+  | KnownOpenGoal
   | IdentifierMissing
   | InterfaceMismatch
   | MissingLeanImplementation
@@ -693,6 +694,9 @@ routeSignal signal = case signal of
       (allCapabilities `Set.difference` Set.singleton StopAllWork)
       "Stop is monotone: cancel in-flight agents and processes, then perform no new writes, cleanup, repair, or status mutation."
       "No artifact; only cancellation and a factual read-only audit if the user asks for one"
+  KnownOpenGoal ->
+    productionRepairRoute
+      "The assigned open goal and its known dependency gap are the implementation work. Their continued presence does not qualify the authored argument or reopen its construction. Make the next production edit."
   AuthorCorrectionArrived ->
     RouteDecision
       SemanticRefiner
@@ -711,8 +715,12 @@ routeSignal signal = case signal of
       )
       "A failed name search is a retrieval problem, not evidence of missing mathematics."
       "Exact accessible declarations, signatures, imports, and a focused probe"
-  InterfaceMismatch -> proofRoute "Connect existing authored objects in Lean; do not reopen their mathematical meaning from a type error."
-  MissingLeanImplementation -> proofRoute "Implement the recorded mathematical step with local helpers and focused kernel feedback."
+  InterfaceMismatch ->
+    productionRepairRoute
+      "Keep the authored group actions and repair the exact Lean interface. A type mismatch does not change their mathematical meaning or justify another author question."
+  MissingLeanImplementation ->
+    productionRepairRoute
+      "Implement the recorded mathematical step at the active production node with focused kernel feedback."
   ProofSearchStalled ->
     RouteDecision
       ScratchExplorer
@@ -785,6 +793,12 @@ routeSignal signal = case signal of
         )
         why
         "A local proof patch or an exact interface diagnostic"
+    productionRepairRoute why =
+      (proofRoute why)
+        { routeRole = ProductionIntegrator
+        , routeNextArtifact =
+            "The next edit on the live production dependency path and its focused Lean result; if it fails, the exact expected and actual types and the next repair"
+        }
 
 parseCandidate :: String -> Either String Candidate
 parseCandidate input = do
@@ -885,6 +899,7 @@ parseSignal raw = lookupKey "signal" raw [(signalKey signal, signal) | signal <-
       , GovernanceEditProposed
       , CleanupOrRevertProposed
       , StopRequested
+      , KnownOpenGoal
       , IdentifierMissing
       , InterfaceMismatch
       , MissingLeanImplementation
@@ -943,6 +958,7 @@ signalKey signal = case signal of
   GovernanceEditProposed -> "governance-edit-proposed"
   CleanupOrRevertProposed -> "cleanup-or-revert-proposed"
   StopRequested -> "stop-requested"
+  KnownOpenGoal -> "known-open-goal"
   IdentifierMissing -> "identifier-missing"
   InterfaceMismatch -> "interface-mismatch"
   MissingLeanImplementation -> "missing-lean-implementation"
