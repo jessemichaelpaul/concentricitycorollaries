@@ -1,28 +1,21 @@
 # Concentricity over the Octonions
 
-This repository contains Jesse Michael Paul’s Lean 4 formalization of the
-Concentricity Theorem for slice-preserving functions over the octonions,
-together with its mathematical master document,
-`Octonionic_RH_master.tex`.
+This repository contains Jesse Michael Paul’s mathematical master,
+`Octonionic_RH_master.tex`, and its Lean 4 formalization in `Concentricity/`.
+The Lean library starts at `Concentricity.lean`.
+
+It also contains Jesse’s [semantic harness](tools/semantic-harness/README.md),
+a Haskell program developed for formalizing novel mathematics. The program
+records the intended mathematical construction, checks whether a proposed
+proof step follows it, and distinguishes a successful local build from a
+dependency path that reaches the theorem. Its optional lifecycle adapter
+uses the same policy during a local coding session.
 
 The mathematical definitions, arguments, theorem statements, and exposition
-are the sole work of Jesse Michael Paul. AI systems are used as interactive
-proof-engineering tools under the author’s direction; they are not coauthors.
+are Jesse Michael Paul’s work. AI systems have assisted with proof engineering
+and editing under his direction; they are not authors of the mathematics.
 
-The Lean library is rooted at `Concentricity.lean`, with production sources in
-`Concentricity/`. The LaTeX master is the authority for the intended
-mathematics, while Lean’s kernel determines whether the formal proof terms are
-accepted.
-
-The public repository is intentionally source-centered: Lean sources and the
-small amount of build and verification metadata they require,
-`Octonionic_RH_master.tex`, this README, and `PROVENANCE.md`. Generated PDFs and
-websites, historical plans, agent instructions, audit transcripts, and private
-working material are not publication content.
-
-`PROVENANCE.md` describes Jesse Michael Paul’s lightweight workflow for
-preserving semantic fidelity while retaining freedom in proof engineering. It
-is included for researchers formalizing arguments that may be unfamiliar to
-the assisting model or poorly represented in its training context, especially
-when the reputation of a downstream consequence can distort how an upstream
-theorem is approached.
+To check the sources locally, run `lake build Concentricity` for Lean and
+`bash scripts/master.sh` for the manuscript. The Haskell guide gives its
+separate build and test commands. A successful Lean build may still contain
+unfinished proofs; the theorem’s axiom report is the final formal check.

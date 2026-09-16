@@ -1,0 +1,18 @@
+# Receipts here are illustrative.  In production an evidence adapter must mint
+# them from fixed, re-executed checks rather than accepting hand-authored text.
+name=frame-free slice-action integration
+stage=slice-action
+path=c2-global-package,slice-action
+source-fingerprint=demo-source-v1
+policy-revision=A-2026-09-14-043/gpv-orbit-author-route-v1
+plan-revision=CONCENTRICITY_EXECUTION_PLAN/checkpoints-1-5/A-2026-09-14-043
+technique=full-c2-gpv-package
+technique=actual-sphere-input
+technique=direct-slice-action
+technique=matrix-as-action-data
+technique=orbit-stabilizer-functoriality
+technique=gpv-uniqueness-well-definedness
+technique=impl:local-rewrite
+receipt=focused-kernel-build|demo-source-v1|A-2026-09-14-043/gpv-orbit-author-route-v1|CONCENTRICITY_EXECUTION_PLAN/checkpoints-1-5/A-2026-09-14-043
+receipt=semantic-fidelity-review|demo-source-v1|A-2026-09-14-043/gpv-orbit-author-route-v1|CONCENTRICITY_EXECUTION_PLAN/checkpoints-1-5/A-2026-09-14-043
+receipt=production-reachability-audit|demo-source-v1|A-2026-09-14-043/gpv-orbit-author-route-v1|CONCENTRICITY_EXECUTION_PLAN/checkpoints-1-5/A-2026-09-14-043

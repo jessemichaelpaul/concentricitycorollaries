@@ -1,0 +1,72 @@
+cabal-version:      3.0
+name:               semantic-harness
+version:            0.2.0.0
+build-type:         Simple
+license:            NONE
+
+library
+  exposed-modules:
+      CodexHook
+    , MiniJson
+    , SemanticHarness
+  hs-source-dirs:     .
+  build-depends:
+      base >=4.20 && <5
+    , containers >=0.7 && <0.8
+    , directory
+    , filepath
+  default-language:   GHC2021
+  ghc-options:        -Wall
+
+executable semantic-harness
+  main-is:            Main.hs
+  hs-source-dirs:     .
+  other-modules:      SemanticHarness
+  build-depends:
+      base >=4.20 && <5
+    , semantic-harness
+  default-language:   GHC2021
+  ghc-options:        -Wall
+
+executable semantic-harness-hook
+  main-is:            HookMain.hs
+  hs-source-dirs:     .
+  other-modules:
+      CodexHook
+    , MiniJson
+  build-depends:
+      base >=4.20 && <5
+    , containers >=0.7 && <0.8
+    , directory
+    , filepath
+    , semantic-harness
+  default-language:   GHC2021
+  ghc-options:        -Wall
+
+test-suite semantic-harness-spec
+  type:               exitcode-stdio-1.0
+  main-is:            Spec.hs
+  hs-source-dirs:     .
+  other-modules:      SemanticHarness
+  build-depends:
+      base >=4.20 && <5
+    , containers >=0.7 && <0.8
+    , semantic-harness
+  default-language:   GHC2021
+  ghc-options:        -Wall
+
+test-suite semantic-harness-hook-spec
+  type:               exitcode-stdio-1.0
+  main-is:            HookSpec.hs
+  hs-source-dirs:     .
+  other-modules:
+      CodexHook
+    , MiniJson
+  build-depends:
+      base >=4.20 && <5
+    , containers >=0.7 && <0.8
+    , directory
+    , filepath
+    , semantic-harness
+  default-language:   GHC2021
+  ghc-options:        -Wall

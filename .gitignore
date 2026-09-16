@@ -28,12 +28,11 @@
 retired/
 /tmp/
 
-# Public Markdown policy: the repository publishes only the project overview
-# and the reusable provenance workflow. Agent instructions and working plans
-# remain local files even though they are present in the workspace.
+# Public Markdown policy: the project overview and the Haskell program guide.
+# Local plans, transcripts, and agent instructions are not publication files.
 *.md
 !/README.md
-!/PROVENANCE.md
+!/tools/semantic-harness/README.md
 
 # Reading-room and personal working material stays local.
 /inbox/
